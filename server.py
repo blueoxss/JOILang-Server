@@ -14,12 +14,17 @@
 #Email Address	빈칸 또는 example@snu.ac.kr
 
 
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Request, Body
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Request, Body, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import asyncio
 import json
+import os
+from pathlib import Path
+from datetime import datetime, timezone
+import hashlib
+import hmac
 
 # 서버 실행 시 자동으로 실행
 from contextlib import asynccontextmanager
@@ -30,6 +35,9 @@ from difflib import SequenceMatcher
 import socket
 import requests
 import time
+from dotenv import load_dotenv
+
+load_dotenv()
 
 MAX_CONNECTIONS = 10  # 최대 연결 수 제한
 # TIMEOUT_SECONDS: 120 #디바이스 리턴 에러는 3분으로 여유있게 모델 자체가 1분이 넘기면 error 관련 메시지 보냄
@@ -66,6 +74,87 @@ device_response_done: dict[str, bool] = {}
 # 디바이스 응답 저장
 device_responses: dict[str, str] = {}
 device_request_times: dict[str, float] = {}
+
+ADMIN_LOG_DIR = Path("admin_logs/slack")
+SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN", "")
+SLACK_SIGNING_SECRET = os.getenv("SLACK_SIGNING_SECRET", "")
+
+
+def ensure_admin_log_dir() -> None:
+    ADMIN_LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def verify_slack_request_signature(headers: dict, raw_body: bytes) -> bool:
+    """
+    Slack Event API 서명 검증.
+    SLACK_SIGNING_SECRET가 없으면 개발환경 호환을 위해 통과시킴.
+    """
+    if not SLACK_SIGNING_SECRET:
+        return True
+
+    slack_signature = headers.get("x-slack-signature", "")
+    slack_timestamp = headers.get("x-slack-request-timestamp", "")
+    if not slack_signature or not slack_timestamp:
+        return False
+
+    base_string = f"v0:{slack_timestamp}:{raw_body.decode('utf-8')}"
+    signature = "v0=" + hmac.new(
+        SLACK_SIGNING_SECRET.encode("utf-8"),
+        base_string.encode("utf-8"),
+        hashlib.sha256,
+    ).hexdigest()
+    return hmac.compare_digest(signature, slack_signature)
+
+
+def get_slack_user_profile(user_id: str) -> dict:
+    if not SLACK_BOT_TOKEN:
+        return {}
+
+    try:
+        response = requests.get(
+            "https://slack.com/api/users.info",
+            headers={"Authorization": f"Bearer {SLACK_BOT_TOKEN}"},
+            params={"user": user_id},
+            timeout=5,
+        )
+        payload = response.json()
+        if payload.get("ok"):
+            return payload.get("user", {})
+    except Exception:
+        return {}
+    return {}
+
+
+def append_slack_dm_log(event: dict) -> dict:
+    ensure_admin_log_dir()
+    now_utc = datetime.now(timezone.utc)
+    date_key = now_utc.strftime("%Y-%m-%d")
+    log_file = ADMIN_LOG_DIR / f"{date_key}.jsonl"
+
+    slack_user_id = event.get("user", "unknown")
+    user_profile = get_slack_user_profile(slack_user_id)
+    profile = user_profile.get("profile", {})
+
+    record = {
+        "saved_at_utc": now_utc.isoformat(),
+        "event_ts": event.get("ts"),
+        "channel": event.get("channel"),
+        "slack_user_id": slack_user_id,
+        "slack_user_name": user_profile.get("name"),
+        "slack_real_name": profile.get("real_name"),
+        "text": event.get("text", ""),
+        "raw_event": event,
+    }
+
+    with log_file.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+    return {
+        "date": date_key,
+        "file": str(log_file),
+        "slack_user_id": slack_user_id,
+        "text_preview": record["text"][:120],
+    }
 
 
 @asynccontextmanager
@@ -274,6 +363,53 @@ async def compute_similarity(payload: dict = Body(...)):
 
     return {"similarity": similarity_percent}
 
+
+@app.post("/api/slack/events")
+async def slack_events(request: Request):
+    raw_body = await request.body()
+    headers = {k.lower(): v for k, v in request.headers.items()}
+    if not verify_slack_request_signature(headers, raw_body):
+        raise HTTPException(status_code=401, detail="Invalid Slack signature")
+
+    payload = await request.json()
+
+    # Slack URL 검증 챌린지 응답
+    if payload.get("type") == "url_verification":
+        return {"challenge": payload.get("challenge")}
+
+    event = payload.get("event", {})
+    if (
+        payload.get("type") == "event_callback"
+        and event.get("type") == "message"
+        and event.get("channel_type") == "im"
+        and not event.get("bot_id")
+        and not event.get("subtype")
+    ):
+        logged = append_slack_dm_log(event)
+        return {"ok": True, "logged": logged}
+
+    return {"ok": True, "skipped": True}
+
+
+@app.get("/api/admin/slack/dm_logs")
+async def get_admin_slack_dm_logs(date: str | None = None):
+    ensure_admin_log_dir()
+    target_date = date or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    log_file = ADMIN_LOG_DIR / f"{target_date}.jsonl"
+
+    if not log_file.exists():
+        return {"date": target_date, "count": 0, "logs": []}
+
+    logs = []
+    with log_file.open("r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            logs.append(json.loads(line))
+
+    return {"date": target_date, "count": len(logs), "logs": logs}
+
 async def get_script_gpt_async(prompt: str, model='version0_3'):
     result = get_script_gpt(prompt, model)
     result['device_name'] = 'Server'
@@ -290,4 +426,3 @@ if __name__ == "__main__":
     uvicorn.run("server:app", host="0.0.0.0", port=8000)
 #    uvicorn.run("server:app", host="0.0.0.0", port=8000, 
 #                ssl_keyfile="./key.pem", ssl_certfile="./cert.pem")  # 프로덕션에
-

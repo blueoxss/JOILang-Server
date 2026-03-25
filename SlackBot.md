@@ -1,5 +1,22 @@
 여기에 관리자 로그 폴더를 만들어서 slack으로 ai 사용자를 하나 만들어서 그 챗봇에게 dm을 보내면 그 내용을 기록해서 저장하는 기능을 만들거야. 날짜별로 분류해서 어느 사용자로부터 어떤 문제점을 보고받는지 필요한 정보들을 저장하도록 해줘. 그리고 이건 한번 날을 잡아서 한번에 llm 모델과 프로젝트를 수정하고 반영하는데 사용될 거야.
 
+## 구현 요약 (2026-03-25)
+- `POST /api/slack/events` 엔드포인트를 추가했습니다.
+- Slack DM(`message.im`) 이벤트를 수신하면 `admin_logs/slack/YYYY-MM-DD.jsonl` 파일에 누적 저장합니다.
+- 저장 항목: 저장시각(UTC), 사용자 ID/이름, 채널, 메시지 텍스트, 원본 이벤트 JSON.
+- 조회용 엔드포인트: `GET /api/admin/slack/dm_logs?date=YYYY-MM-DD`
+
+## .env 설정
+`.env` 파일에 아래 키를 추가하세요.
+
+```env
+SLACK_APP_TOKEN=xapp-...            # App-Level Token
+SLACK_BOT_TOKEN=xoxb-...            # Bot User OAuth Token
+SLACK_SIGNING_SECRET=...            # Basic Information > Signing Secret
+```
+
+> 보안을 위해 실제 토큰은 저장소에 커밋하지 마세요.
+
 [봇 권한(Scopes) 부여]
 - 봇이 DM을 읽을 수 있도록 권한
 - 스크롤을 내려 Scopes 부분의 Bot Token Scopes에서 **[Add an OAuth Scope]**를 누릅니다.
@@ -12,6 +29,7 @@
 - 좌측 메뉴에서 **[Event Subscriptions]**로 이동합니다.
 - Enable Events 스위치를 켭니다.
 
+- Request URL: `https://<your-server>/api/slack/events`
 - 스크롤을 내려 Subscribe to bot events를 엽니다.
 - **[Add Bot User Event]**를 누르고 message.im을 찾아 추가.
 - (DM 메시지가 올 때마다 이벤트를 받겠다는 뜻입니다.)
