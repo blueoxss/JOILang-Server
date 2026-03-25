@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LLM Test Web</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 0 20px;
+            background-color: #f7f9fb;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        h2 {
+            margin-top: 30px;
+            color: #34495e;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 180px);
+            padding: 8px 12px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 12px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 2px;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        /* 버튼 컨테이너 스타일 수정 */
+        .button-container {
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: middle;
+            width: 155px; /* 버튼 컨테이너 너비 조정 (125px + 25px + 5px) */
+        }
+
+        /* 상단 버튼 컨테이너 스타일 */
+        .top-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .top-buttons button {
+            width: 125px; /* Convert 버튼 기본 너비 */
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* 특정 버튼 스타일 */
+        #recordBtn {
+            width: 25px; /* "누르고 말하세요" 버튼 너비 조정 */
+            background-color: #e74c3c;
+        }
+
+        #recordBtn:hover {
+            background-color: #c0392b;
+        }
+
+        #similarityBtn {
+            width: 155px; /* 상단 버튼 두 개의 총 너비와 동일하게 (125px + 25px + 5px) */
+            background-color: #2ecc71;
+            font-weight: bold; /* Similarity 버튼 글씨 굵게 */
+        }
+
+        #similarityBtn:hover {
+            background-color: #27ae60;
+        }
+
+        #convertBtn {
+            width: 140px;
+            font-weight: bold; /* Convert 버튼 글씨 굵게 */
+        }
+
+        pre {
+            background-color: #eef1f4;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .log-section {
+            background-color: #fafafa;
+            border-left: 4px solid #ccc;
+            padding: 10px 16px;
+            margin-top: 20px;
+        }
+
+        .log-label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 10px;
+        }
+        .spinner {
+            margin-left: 8px;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #fff;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            display: inline-block;
+            animation: spin 0.8s linear infinite;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #deviceList label { display: block; margin: 5px 0; }
+        pre {
+            background: #eef1f4;
+            padding: 12px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+        }
+        .status-ready { color: green; }
+        .status-waiting { color: orange; }
+        .status-timeout { color: red; }
+        /* 입력 그룹 스타일 추가 */
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin: 12px 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>LLM Test Web</h1>
+
+    <h2>Convert Sentence to Scenario</h2>
+    <div class="input-group">
+        <input type="text" id="sentenceInput" placeholder="Enter a sentence" />
+        <div class="button-container">
+            <div class="top-buttons">
+                <button id="convertBtn" onclick="convertToScenario()">
+                    <span id="btnText">Convert</span>
+                    <span id="btnSpinner" class="spinner" style="display: none;"></span>
+                </button>
+                <button id="recordBtn">🎤</button>
+            </div>
+        </div>
+    </div>
+    <p id="recordingStatus"></p>
+
+    <div class="input-group">
+        <input type="text" id="sentenceOutput" placeholder="Enter converted or expected sentence" />
+        <div class="button-container">
+            <button id="similarityBtn" onclick="compareSimilarity()">🔍 Similarity</button>
+            <span id="similarityResult" style="margin-left: 10px; font-weight: bold;"></span>
+        </div>
+    </div>
+
+    <h2>Connected Devices</h2>
+    <div id="deviceList" class="device-list"></div>
+
+    <h2>Hypothetical Scenario Devices</h2>
+    <div id="hypotheticalButtons">
+    <button onclick="addHypotheticalDevice('토양센서')">+토양센서</button>
+    <button onclick="addHypotheticalDevice('조도센서')">+조도센서</button>
+    <button onclick="addHypotheticalDevice('관수')">+관수</button>
+    <button onclick="addHypotheticalDevice('조명')">+조명</button>
+    <button onclick="addHypotheticalDevice('가습기')">+가습기</button>
+    </div>
+
+    <div id="hypotheticalBox" style="margin-top: 10px; padding: 10px; border: 1px solid #ccc;">
+        <strong>선택된 장치:</strong>
+    </div>
+
+    <h2>Device Responses</h2>
+    <pre id="deviceResponses">Waiting for results...</pre>
+  
+    <h2>Generated Code</h2>
+    <pre id="fastestResult">Code will appear here...</pre>
+
+    <h2>Processing Details</h2>
+    <div class="log-section">
+        <div class="log-label">Logs</div>
+        <pre id="stepLogOutput">Each step result and time will appear here...</pre>
+    </div>
+
+    <script>
+        const deviceListDiv = document.getElementById("deviceList");
+        document.getElementById("sentenceInput").addEventListener("keyup", function(event) {
+            const btn = document.getElementById("convertBtn");
+            if (event.key === "Enter" && !btn.disabled) {
+                convertToScenario();
+            }
+        });
+
+        async function loadDevices() {
+            const res = await fetch("/api/devices");
+            const data = await res.json();
+            deviceListDiv.innerHTML = "";
+            data.devices.forEach(id => {
+                const label = document.createElement("label");
+                label.innerHTML = `<input type="checkbox" value="${id}" checked> ${id}`;
+                deviceListDiv.appendChild(label);
+            });
+        }
+
+        async function loadResponses() {
+            const res = await fetch("/api/device_responses");
+            const data = await res.json();
+            const lines = Object.entries(data).map(([id, val]) => {
+                if (val.best_code) {
+                    return `[${id}: ${data.device_name}] ✅\n`;
+                } else if (val.error) {
+                return `[${id}: ${data.device_name}] ⛔ <span class='status-timeout'>${val.error}</span>`;
+                } else if (val.status) {
+                return `[${id}: ${data.device_name}] ⏳ <span class='status-waiting'>${val.status}</span>`;
+                } else {
+                return `[${id}: ${data.device_name}] ❓ Unknown response`;
+                }
+            });
+            document.getElementById("deviceResponses").innerHTML = lines.join("\n\n");
+        }
+
+        function getSelectedDeviceIds() {
+            return Array.from(document.querySelectorAll('#deviceList input:checked')).map(cb => cb.value);
+        }
+
+        async function convertToScenario() {
+            console.log("1. 함수 시작");
+            const btn = document.getElementById("convertBtn");
+            const btnText = document.getElementById("btnText");
+            const btnSpinner = document.getElementById("btnSpinner");
+
+            // 상태 변경
+            btn.disabled = true;
+            btnText.innerText = "Converting...";
+            btnSpinner.style.display = "inline-block";
+            const sentence = document.getElementById("sentenceInput").value;
+            const deviceIds = getSelectedDeviceIds();
+
+            console.log("2. 서버 요청 시작");
+            try {
+                const response = await fetch('/api/sentence_to_scenario', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sentence, device_ids: deviceIds })
+                });
+
+                // 디바이스 응답 기다리기
+                let allHandled = false;
+                const checkInterval = 1000;
+                const maxWaitTime = 125000;
+                const startTime = Date.now();
+
+                while (!allHandled && Date.now() - startTime < maxWaitTime) {
+                    const res = await fetch("/api/device_responses");
+                    const responses = await res.json();
+                    allHandled = Object.values(responses).every(r => r.best_code || r.error);
+                    if (!allHandled) await new Promise(r => setTimeout(r, checkInterval));
+                }
+
+                console.log("3. 서버 응답 받음");
+                const result = await response.json();
+                console.log("4. JSON 파싱 완료:", result);
+
+                const res2 = await fetch("/api/device_responses");
+                const responses2 = await res2.json();
+
+                console.log("5. best_code 처리 시작");
+                let bestCode = null;
+                let sts = null;
+                let bestRst = null;
+                for (const val of Object.values(responses2)) {
+                    if (val.best_code) {
+                        bestRst = val;
+                        bestCode = val.best_code;
+                        sts = val.reconverted;
+                        break;
+                    }
+                }
+                
+                if (bestCode) {
+                    document.getElementById("fastestResult").innerText = bestCode;
+                    console.log("6. best_code 처리 완료");
+                    if (sts) {
+                        document.getElementById("sentenceOutput").value = sts;
+                    }
+                    try {
+                        console.log("7. 로그 처리 시작");
+                        const logs = `
+<Translated Sentence>
+${bestRst.translated_sentence || 'N/A'}
+
+<Mapped Devices>
+${bestRst.mapped_devices || 'N/A'}
+
+<Step Times>
+Total Response Time: ${bestRst.response_time || 'N/A'}
+Step 1 (Translation): ${bestRst.step1_time || 'N/A'}
+Step 2 (Device Mapping): ${bestRst.step2_time || 'N/A'}
+Step 3 (Generate Code): ${bestRst.step3_time || 'N/A'}
+Step 4 (Fix Code): ${bestRst.step4_time || 'N/A'}
+                        `;
+                        document.getElementById("stepLogOutput").innerText = logs.trim();
+                        console.log("8. 로그 처리 완료");
+                    } catch (err) {
+                        console.error("로그 처리 중 에러:", err);
+                    }
+                } else {
+                    console.log("6. best_code 없음");
+                    document.getElementById("fastestResult").innerText = "Waiting for device response...";
+                }
+            } catch (err) {
+                console.error("서버 통신 중 에러:", err);
+            } finally {
+                console.log("9. 함수 종료");
+                btn.disabled = false;
+                btnText.innerText = "Convert";
+                btnSpinner.style.display = "none";
+            }
+        }
+
+        async function compareSimilarity() {
+            const input = document.getElementById("sentenceInput").value.trim();
+            const output = document.getElementById("sentenceOutput").value.trim();
+            const resultSpan = document.getElementById("similarityResult");
+
+            if (!input || !output) {
+                alert("Both input and output sentences must be filled in.");
+                return;
+            }
+
+            try {
+                const res = await fetch("/api/similarity", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ sentence1: input, sentence2: output })
+                });
+                const data = await res.json();
+                if (data.similarity !== undefined) {
+                    resultSpan.textContent = `Similarity: ${data.similarity}%`;
+                } else {
+                    resultSpan.textContent = "Error calculating similarity.";
+                }
+            } catch (err) {
+                console.error(err);
+                resultSpan.textContent = "Server error.";
+            }
+        }
+
+        const hypotheticalBox = document.getElementById("hypotheticalBox");
+        function addHypotheticalDevice(name) {
+            const deviceDiv = document.createElement("div");
+            deviceDiv.style.marginBottom = "5px";
+            deviceDiv.innerHTML = `
+                ${name} 
+                <input type="checkbox" value="#1">#1 
+                <input type="checkbox" value="#2">#2 
+                <input type="checkbox" value="#3">#3 
+                <input type="checkbox" value="#upper">#upper 
+                <input type="checkbox" value="#middle">#middle 
+                <input type="checkbox" value="#lower">#lower
+            `;
+            hypotheticalBox.appendChild(deviceDiv);
+        }
+
+        loadDevices();
+        setInterval(loadDevices, 5000); // 5초마다 디바이스 목록 갱신
+        setInterval(loadResponses, 5000);
+    </script>
+</body>
+</html>

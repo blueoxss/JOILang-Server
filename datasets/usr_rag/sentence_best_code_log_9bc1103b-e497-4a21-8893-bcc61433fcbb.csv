@@ -1,0 +1,4 @@
+﻿sentence,best_code
+임의의 에어컨 온도를 18도로 설정한다.,"[{'name': '에어컨온도18도설정', 'cron': '', 'period': -1, 'code': '(#AirConditioner).airConditionerMode_setTemperature(18)'}]"
+모든 조명을 꺼라.,"[{'name': '모든조명꺼기', 'cron': '', 'period': -1, 'code': 'all(#Light).switch_off()'}]"
+"먼저 임의의 에어컨을 켜고, 그 다음 냉방 모드로 설정하며, 이후 온도를 16도로 맞춘다.","[{'name': '에어컨최강세기설정', 'cron': '', 'period': -1, 'code': '(#AirConditioner).switch_on()\n(#AirConditioner).airConditionerMode_setAirConditionerMode(""cool"")\n(#AirConditioner).airConditionerMode_setTemperature(16.0)'}]"

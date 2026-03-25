@@ -1,0 +1,25 @@
+{
+  "model_name": "Joi_cap",
+  "device_id": "cloud1-gpt4o",
+  "model_version": "0.3.0",
+  "model_description": "This version is designed for basic IoT control using SoPLang language. It includes strict syntax rules and core services.",
+  "model_create": "2025-06-13",
+  "author": {
+    "first_name": "Whisoo",
+    "last_name": "Chung"
+  },
+  "model_input": {
+    "model": "gpt-4.1-mini",
+    "temperature": 0.2,
+    "messages": [
+      {
+        "role": "system",
+        "content": "system_prompt"
+      },
+      {
+        "role": "user",
+        "content": "sentence"
+      }
+    ]
+  }
+}

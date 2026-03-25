@@ -1,0 +1,184 @@
+- command: "5초마다 토양 습도를 측정해서 30% 이하이면 급수기를 켜 줘. 만약 그 때 온도가 35도 이상이면 급수기를 끄고 반복도 종료해 줘."
+  command_translated: "Measure soil moisture every 5 seconds, and if it is below 30%, turn on the irrigator. If the temperature is above 35 degrees at that time, turn off the irrigator and stop the loop."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 5000
+    code: |
+      soil = (#SoilMoistureSensor).soilHumidityMeasurement_soilHumidity
+      temp = (#TemperatureSensor).temperatureMeasurement_temperature
+      if (soil <= 30.0) {
+        (#Irrigator).switch_on()
+        if (temp >= 35.0) {
+            (#Irrigator).switch_off()
+            break
+        }
+      }
+  devices:
+  - Irrigator
+  - TemperatureSensor
+  - SoilMoistureSensor
+- command: "3초 간격으로 조명을 10번 깜빡여 줘. 깜빡일 때마다 확인해서 비 감지 센서가 비를 감지하는 순간 반복을 중단해 줘."
+  command_translated: "Blink the light 10 times in 3-second intervals. Check after each blink and stop the loop the moment the rain sensor detects rain."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 3000
+    code: |
+      count := 0
+
+      if (count >= 10) {
+        break
+      }
+      (#Light).switch_toggle()
+      rain = (#WeatherProvider).weatherProvider_weather
+      if (rain == "rain") {
+        break
+      }
+      count = count + 1
+  devices:
+  - Light
+  - WeatherProvider
+- command: "1초마다 선풍기의 전원을 켜고 끄는 토글 동작을 반복해 줘. 매번 동작 직전에 습도를 확인해서 80% 이상이면 반복을 즉시 중단해 줘."
+  command_translated: "Repeat the toggle action of powering the fan on and off every second. Check the humidity just before each action and stop the loop immediately if it's above 80%."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 1000
+    code: |
+      humidity = (#AirQualityDetector).relativeHumidityMeasurement_humidity
+      if (humidity >= 80.0) {
+        break
+      }
+      (#Fan).switch_toggle()
+  devices:
+  - Fan
+  - AirQualityDetector
+- command: "5초마다 블라인드를 10퍼센트씩 닫아줘. 더 이상 못 내릴 때까지."
+  command_translated: "Close the blinds by 10 percent every 5 seconds. Until you can't lower them anymore."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 5000
+    code: |
+      current_level = (#Blind).blindLevel_blindLevel
+      if (current_level <= 10) {
+        (#Blind).blindLevel_setBlindLevel(0)
+        break
+      }
+      next_level = current_level - 10
+      (#Blind).blindLevel_setBlindLevel(next_level)
+  devices:
+  - Blind
+- command: "10초마다 관개기를 켰다가 5초 뒤에 꺼 줘. 관개기를 끌 때, 켤 때 모두 확인해서 일조량이 500룩스 이상이면 관개기를 끄고 반복을 종료해 줘."
+  command_translated: "Turn on the irrigator every 10 seconds and turn it off after 5 seconds. Check the irrigator both on and off, and if the sunlight is above 500 lux, turn off the irrigator and stop the loop."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 10000
+    code: |
+      lux = (#LightSensor).lightLevel_light
+      if (lux >= 500.0) {
+        (#Irrigator).switch_off()
+        break
+      }
+      (#Irrigator).switch_on()
+      (#Clock).clock_delay(5000)
+      lux = (#LightSensor).lightLevel_light
+      if (lux >= 500.0) {
+        (#Irrigator).switch_off()
+        break
+      }
+      (#Irrigator).switch_off()
+  devices:
+  - Clock
+  - Irrigator
+  - LightSensor
+- command: "2초마다 거실 조명을 켰다 껐다 반복해 줘. 조명을 끌 때마다 확인해서 창문이 열려 있는 게 감지되면 반복을 즉시 중단해 줘."
+  command_translated: "Turn the living room light on and off every two seconds. Check each time it turns off the light and stop the loop immediately if it detects that a window is open."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 2000
+    code: |
+      (#Light).switch_toggle()
+      light_state = (#Light).switch_switch
+      if (light_state == "off") {
+        window_state = (#Window).windowControl_window
+        if (window_state == "open") {
+            break
+        }
+      }
+  devices:
+  - Light
+  - Window
+- command: "3초마다 텔레비전의 볼륨을 1씩 증가시켜서 5단계가 되면 초기값으로 되돌리는 동작을 반복해 줘. 초기값으로 되돌릴 때 확인해서 움직임이 감지되면 반복을 중단해 줘."
+  command_translated: "Every 3 seconds, increase the television volume by 1 level. When it reaches level 5, reset it to the initial value. Repeat this cycle. If motion is detected at the moment of reset, stop the repetition."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 3000
+    code: |
+      volume := 0
+
+      if (volume >= 5) {
+        motion = (#MotionSensor).motionSensor_motion
+        if (motion == "active") {
+            break
+        }
+        volume = 0
+      } else {
+        volume = volume + 1
+      }
+      (#Television).audioVolume_setVolume(volume)
+  devices:
+  - MotionSensor
+  - Television
+- command: "10초마다 블라인드를 완전히 닫아 줘. 그 때마다 확인해서 TV가 켜져 있으면 즉시 반복을 종료해."
+  command_translated: "Every 10 seconds, close the blinds completely. Check each time and end the loop immediately if the TV is on."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 10000
+    code: |
+      (#Blind).blind_close()
+      tv = (#Television).switch_switch
+      if (tv == "on") {
+        break
+      }
+  devices:
+  - Blind
+  - Television
+- command: "2초마다 알람의 사이렌을 1초간 울렸다 꺼지게 하고, 알람의 사이렌을 울릴 때마다 창문이 닫혀 있는지 확인해서 닫혀 있으면 반복을 중단해 줘."
+  command_translated: "Every two seconds, turn the alarm siren on for 1 second, then turn it off, and every time it turn on the siren, make sure the window is closed and stop the loop if it is."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 2000
+    code: |
+      (#Alarm).alarm_siren()
+      state = (#Window).windowControl_window
+      (#Clock).clock_delay(1000)
+      (#Alarm).alarm_off()
+      if (state == "closed") {
+        break
+      }
+  devices:
+  - Clock
+  - Alarm
+  - Window
+- command: "5초마다 실내 공기청정기를 ‘자동’ 모드로 전환해 줘. 그 때마다 확인해서 창문이 열려 있으면 모든 반복을 종료해 줘."
+  command_translated: "Every 5 seconds, switch the room air purifier to 'auto' mode. Check each time and stop the loop if a window is open."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 5000
+    code: |
+      (#AirPurifier).airPurifierFanMode_setAirPurifierFanMode("auto")
+      state = (#Window).windowControl_window
+      if (state == "open") {
+        break
+      }
+  devices:
+  - Window
+  - AirPurifier

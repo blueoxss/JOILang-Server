@@ -1,0 +1,193 @@
+- command: "매일 오전 7시에 관개 장치가 꺼져 있고 창문이 닫혀 있으면 관개 장치를 켜고 창문을 열어 줘. 이후 관개 장치가 켜지면 블라인드를 닫아 줘."
+  command_translated: "Every morning at 7 am, if the irrigation is off and the windows are closed, turn on the irrigation and open the windows. Then, when the irrigation turns on, close the blinds."
+  code:
+  - name: "Scenario1"
+    cron: "0 7 * * *"
+    period: 100
+    code: |
+      name = "Scenario1"
+      cron = "0 7 * * *"
+      period = -1
+      if ((#Irrigator).switch_switch == "off" and (#Window).windowControl_window == "closed") {
+        (#Irrigator).switch_on()
+        (#Window).windowControl_open()
+        wait until((#Irrigator).switch_switch == "on")
+        (#Blind).blind_close()
+      }
+  devices:
+  - Blind
+  - Window
+  - Irrigator
+- command: "실시간으로 확인하여 5초마다 토양 습도 센서의 값이 20 퍼센트 이하이면 관개 장치를 켜고, 60 퍼센트 이상이면 관개 장치를 꺼 줘."
+  command_translated: "Check in real time and turn on the irrigation every 5 seconds if the soil moisture sensor reads 20 percent or less, and turn off the irrigation if it reads 60 percent or more."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 5000
+    code: |
+      soil_humidity = (#SoilMoistureSensor).soilHumidityMeasurement_soilHumidity
+      if (soil_humidity <= 20.0) {
+        (#Irrigator).switch_on()
+      } else if (soil_humidity >= 60.0) {
+        (#Irrigator).switch_off()
+      }
+  devices:
+  - Irrigator
+  - SoilMoistureSensor
+- command: "실시간으로 확인하여 온도가 28도 이상이면 선풍기를 켜고, 습도가 80% 이상이면 제습기를 켜 줘."
+  command_translated: "Check in real time, turn on the fan if the temperature is above 28 degrees; and turn on the dehumidifier if the humidity is above 80%."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      temperature = (#TemperatureSensor).temperatureMeasurement_temperature
+      humidity = (#HumiditySensor).relativeHumidityMeasurement_humidity
+      if (temperature >= 28.0) {
+        (#Fan).switch_on()
+      }
+      if (humidity >= 80.0) {
+        (#Dehumidifier).switch_on()
+      }
+  devices:
+  - TemperatureSensor
+  - Dehumidifier
+  - Fan
+  - HumiditySensor
+- command: "실시간으로 확인하여 조명이 켜져 있을 때마다 블라인드를 닫고, 꺼져 있으면 블라인드를 열어 줘."
+  command_translated: "Check in real-time to close the blinds whenever the lights are on and open the blinds when they're off."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      light_status = (#Light).switch_switch
+      if (light_status == "on") {
+        (#Blind).blind_close()
+      } else if (light_status == "off") {
+        (#Blind).blind_open()
+      }
+  devices:
+  - Light
+  - Blind
+- command: "주말에는 5초마다 펌프가 꺼져 있으면 켜고, 켜져 있으면 꺼 주고, 선풍기 속도를 10으로 설정해 줘."
+  command_translated: "On weekends, every 5 seconds, turn the pump on if it's off, off if it's on, and set the fan speed to 10."
+  code:
+  - name: "Scenario1"
+    cron: "0 0 * * 6,7"
+    period: 5000
+    code: |
+      weekday = (#Clock).clock_weekday
+      if ((weekday != "saturday") and (weekday != "sunday")) {
+        break
+      }
+      (#Fan).fanControl_setFanSpeed(10)
+      (#Pump).switch_toggle()
+  devices:
+  - Clock
+  - Fan
+  - Pump
+- command: "실시간으로 확인하여 움직임이 감지될 때마다 조명을 켜고, 선풍기 속도를 10 높여 줘."
+  command_translated: "Check in real-time to turn on lights and increase fan speed by 10 whenever motion is detected."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      motion = (#MotionSensor).motionSensor_motion
+      if (motion == "active") {
+        (#Light).switch_on()
+        current_speed = (#Fan).fanControl_fanSpeed
+        new_speed = current_speed + 10
+        (#Fan).fanControl_setFanSpeed(new_speed)
+      }
+  devices:
+  - Light
+  - Fan
+  - MotionSensor
+- command: "실시간으로 확인하여 창문이 열려 있으면 블라인드를 닫고, 창문이 닫혀 있으면 커튼을 열어 줘. 또한 실시간으로 확인하여 알람의 사이렌이 울리고 있지 않다면 즉시 알람의 사이렌을 울려 줘."
+  command_translated: "Check in real time. if the window is open, close the blinds. if it is closed, open the curtains. Also, if the alarm's siren is not sounding, sound it immediately."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      window_status = (#Window).windowControl_window
+      if (window_status == "open") {
+        (#Blind).blind_close()
+      } else if (window_status == "closed") {
+        (#Curtain).curtain_open()
+      }
+      alarm_status = (#Alarm).alarm_alarm
+      if ((alarm_status != "siren") and (alarm_status != "both")) {
+        (#Alarm).alarm_siren()
+      }
+  devices:
+  - Curtain
+  - Blind
+  - Window
+  - Alarm
+- command: "매주 금요일 오후 6시에 조명이 켜져 있으면 밝기를 30으로 낮추고, TV가 꺼져 있으면 TV를 켜 줘. 선풍기가 꺼져 있으면 선풍기도 켜 줘."
+  command_translated: "Every Friday at 6pm, if the lights are on, turn them down to 30, and if the TV is off, turn it on. If the fan is off, turn it on."
+  code:
+  - name: "Scenario1"
+    cron: "0 18 * * 5"
+    period: 0
+    code: |
+      if ((#Light).switch_switch == "on") {
+        (#Light).switchLevel_setLevel(30, 0)
+      }
+      if ((#Television).switch_switch == "off") {
+        (#Television).switch_on()
+      }
+      if ((#Fan).switch_switch == "off") {
+        (#Fan).switch_on()
+      }
+  devices:
+  - Light
+  - Fan
+  - Television
+- command: "창문이 닫혔을 때부터 5초마다 블라인드를 열었다 닫았다 반복해 줘."
+  command_translated: "Open, close, and repeat the blinds every 5 seconds from the time when the window is closed."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 5000
+    code: |
+      triggered := False
+      state := 0
+      if (triggered == False) {
+        wait until((#Window).windowControl_window == "closed")
+        triggered = True
+      }
+      if (triggered == True) {
+        if (state == 0) {
+            (#Blind).blind_open()
+            state = 1
+        } else if (state == 1) {
+            (#Blind).blind_close()
+            state = 0
+        }
+      }
+  devices:
+  - Blind
+  - Window
+- command: "매일 아침 8시에 스피커가 꺼져 있으면 스피커를 켜고 ‘오늘 날씨입니다’라고 말해 줘. 이후 조명이 꺼져 있으면 켜고 블라인드를 열어 줘."
+  command_translated: "Every morning at 8am, if the speaker is off, turn it on and announce 'This is the weather today' via the speaker. Then, if the lights are off, turn them on and open the blinds."
+  code:
+  - name: "Scenario1"
+    cron: "0 8 * * *"
+    period: 0
+    code: |
+      if ((#Speaker).switch_switch == "off") {
+        (#Speaker).switch_on()
+        (#Speaker).mediaPlayback_speak("This is the weather today")
+        if ((#Light).switch_switch == "off") {
+          (#Light).switch_on()
+          (#Blind).blind_open()
+        }
+      }
+  devices:
+  - Light
+  - Blind
+  - Speaker

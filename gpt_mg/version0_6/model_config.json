@@ -1,0 +1,25 @@
+{
+  "model_name": "SoPLang ver1.5.6",
+  "device_name": "cloud1-gpt4.1-mini",
+  "model_version": "1.5.6",
+  "model_description": "This version is designed for basic IoT control using JoILang language. It includes strict syntax rules and core services.",
+  "model_create": "2025-08-01",
+  "author": {
+    "first_name": "Mingi",
+    "last_name": "Jeong"
+  },
+  "model_input": {
+    "model": "gpt-4.1-mini", 
+    "temperature": 0.3,
+    "messages": [
+      {
+        "role": "system",
+        "content": "system_prompt"
+      },
+      {
+        "role": "user",
+        "content": "sentence"
+      }
+    ]
+  }
+}

@@ -1,0 +1,3 @@
+﻿sentence,best_code
+"먼저 바깥 온도를 확인하고, 14.9도로 에어컨 온도를 설정한다.","[{'name': '사용자방온도샌프란시스코동기화', 'cron': '', 'period': -1, 'code': 'temp = (#WeatherProvider).weatherProvider_temperatureWeather\nadjustedTemp = 14.9\n(#AirConditioner).airConditionerMode_setTemperature(adjustedTemp)'}]"
+"먼저 바깥 온도를 확인하고, 14.9도로 에어컨 온도를 설정한다.","[{'name': '사용자방온도샌프란시스코기준설정', 'cron': '', 'period': -1, 'code': 'temp = (#WeatherProvider).weatherProvider_temperatureWeather\nadjustedTemp = 14.9\n(#AirConditioner).airConditionerMode_setTemperature(adjustedTemp)'}]"

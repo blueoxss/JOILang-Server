@@ -1,0 +1,2 @@
+﻿sentence,best_code
+"먼저 모든 스위치를 끄고, 그 다음 임의의 스피커가 ""모든 불을 소등합니다.""라고 알린다.","[{'name': '집안모든스위치끄고스피커알림', 'cron': '', 'period': -1, 'code': 'all(#Switch).off()\n(#Speaker).speak(""모든 불을 소등합니다."")'}]"

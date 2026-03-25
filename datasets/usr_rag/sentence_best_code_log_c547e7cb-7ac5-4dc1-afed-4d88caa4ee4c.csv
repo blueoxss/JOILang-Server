@@ -1,0 +1,3 @@
+﻿sentence,best_code
+모든 사무실 조명을 끈다.,"[{'name': '사무실조명끄기', 'cron': '', 'period': -1, 'code': 'all(#Light #Office).switch_off()'}]"
+"먼저 ""사무실 태그를 찾을 수 없습니다. 모든 조명을 켭니다.""라고 안내한 후, 모든 조명을 켠다.","[{'name': '사무실조명켜기', 'cron': '', 'period': -1, 'code': '(#Speaker).mediaPlayback_speak(""Office tag not found. Turning on all lights."")\nall(#Light).switch_on()'}]"

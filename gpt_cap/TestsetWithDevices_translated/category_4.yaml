@@ -1,0 +1,142 @@
+- command: "창문이 열리면 알람의 사이렌을 울려 줘."
+  command_translated: "Sound the alarm's siren when the window opens."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#Window).windowControl_window == "open")
+      (#Alarm).alarm_siren()
+  devices:
+  - Window
+  - Alarm
+- command: "토양 수분이 20% 이상이었다가 이하가 되면 관개 장치를 작동시켜 줘."
+  command_translated: "Turn on irrigation when soil moisture is above and below 20%."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#SoilMoistureSensor).soilHumidityMeasurement_soilHumidity >= 20.0)
+      wait until((#SoilMoistureSensor).soilHumidityMeasurement_soilHumidity < 20.0)
+      (#Irrigator).switch_on()
+  devices:
+  - Irrigator
+  - SoilMoistureSensor
+- command: "움직임이 감지되면 최대 3번까지 조명을 켜 줘."
+  command_translated: "Turn on the light up to 3 times when motion is detected."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      motion_count := 0
+      prev_motion := "inactive"
+      current = (#MotionSensor).motionSensor_motion
+      if (current == "active") and (prev_motion == "inactive") {
+        if (motion_count < 3) {
+          (#Light).switch_on()
+          motion_count = motion_count + 1
+        }
+      }
+      prev_motion = current
+  devices:
+  - Light
+  - MotionSensor
+- command: "온도가 35도 이상이 되면 에어컨을 켜 줘."
+  command_translated: "Turn on the air conditioner when the temperature is above 35 degrees."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#TemperatureSensor).temperatureMeasurement_temperature >= 35.0)
+      (#AirConditioner).switch_on()
+  devices:
+  - TemperatureSensor
+  - AirConditioner
+- command: "습도가 80% 이상이 되면 블라인드를 내려 줘."
+  command_translated: "Lower the blinds when the humidity is above 80%."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#HumiditySensor).relativeHumidityMeasurement_humidity >= 80.0)
+      (#Blind).blind_close()
+  devices:
+  - Blind
+  - HumiditySensor
+- command: "블라인드가 닫히면 ‘블라인드가 닫혔습니다’라고 말해 줘."
+  command_translated: "When the blinds are closed, say 'Blinds are closed'."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#Blind).blind_blind == "closed")
+      (#Speaker).mediaPlayback_speak("Blinds are closed")
+  devices:
+  - Blind
+  - Speaker
+- command: "TV가 꺼지면 스피커를 꺼 줘."
+  command_translated: "Turn off the speakers when the TV is turned off."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#Television).switch_switch == "off")
+      (#Speaker).switch_off()
+  devices:
+  - Television
+  - Speaker
+- command: "커튼이 3번 열렸다 닫히면 조명을 꺼 줘."
+  command_translated: "Turn off the light when the curtain opens and closes 3 times."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      close_count := 0
+      prev_state := "closed"
+      opened := false
+      curr = (#Curtain).curtain_curtain
+      if (curr == "open") and (prev_state == "closed") {
+        opened = true
+      }
+      if (curr == "closed") and (prev_state == "open") and (opened == true) {
+        close_count = close_count + 1
+        opened = false
+      }
+      prev_state = curr
+      if (close_count >= 3) {
+        (#Light).switch_off()
+        break
+      }
+  devices:
+  - Curtain
+  - Light
+- command: "제습기가 꺼지면 다시 켜 줘."
+  command_translated: "Turn the dehumidifier back on when it turns off."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#Dehumidifier).switch_switch == "off")
+      (#Dehumidifier).switch_on()
+  devices:
+  - Dehumidifier
+- command: "재실 센서에서 더 이상 감지가 안 되면 ‘문이 열렸습니다’라고 말해 줘."
+  command_translated: "When the occupancy sensor no longer detects it, say 'Door is open'."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#PresenceSensor).presenceSensor_presence == "not present")
+      (#Speaker).mediaPlayback_speak("Door is open")
+  devices:
+  - PresenceSensor
+  - Speaker

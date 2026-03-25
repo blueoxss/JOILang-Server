@@ -1,0 +1,264 @@
+# 매일 오전 7시에 블라인드를 열어줘
+wait until (7 HOUR)
+{
+     (#blind).open()
+}
+
+# 밤 10시에 자동으로 조명을 꺼줘
+wait until (10 HOUR)
+{
+    (#light).turn_off()
+}
+
+# 매주 월요일 오전 9시에 공기청정기를 켜줘
+wait until (9 HOUR)
+{
+    if ((#clock).day == 1)
+    {
+        (#air_purifier).turn_on()
+    }
+}
+
+# 오후 3시부터 5시까지 음악을 틀어줘
+wait until (3 HOUR);
+#music_player.play();
+wait until (5 HOUR);
+#music_player.stop();
+
+# 새벽 1시마다 창문을 잠가줘
+loop (1 HOUR)
+{
+   if ( (#clock).hour == 1 )
+   {
+      (#window).lock()
+   }
+}
+
+# 움직임이 감지되면 알람을 울려줘
+loop (1 SEC)
+{
+    if ((#movement).detected == 1) 
+    {
+        (#alarm).ring()
+    }
+}
+
+# 방 안이 어두우면 조명을 켜줘
+loop (1 SEC)
+{
+    if ( (#room).brightness < 50 )
+    {
+        (#room #light).turn_on()
+    } 
+}
+
+# 습도가 60% 이상이면 제습기를 켜줘
+if ((#humidity).value >= 60)
+{
+    (#dehumidifier).turn_on()
+}
+
+# 온도가 25도 이상이면 에어컨을 켜줘
+loop (1 SEC)
+{
+  if ((#temperature).value >= 25)
+  {
+    (#air_conditioner).turn_on()
+  }
+}
+
+# 연기 센서가 감지되면 경고음을 울려줘
+```SoPLang
+loop (1 SEC) 
+{
+    if ((#smoke_sensor).detected == 1)
+    {
+        (#alarm).sound("경고음")
+    }
+}
+```
+
+# 5초마다 움직임을 감지해서 불을 켜줘
+loop (5 SEC)
+{
+    if ((#movement).detected == 1)
+    {
+        (#light).turn_on()
+    }
+}
+
+# 매 10초마다 문이 열려 있는지 확인하고 닫아줘
+loop (10 SEC)
+{
+    if ( (#door).is_open() == 1 )
+    {
+        (#door).close()
+    }
+}
+
+# 1분마다 공기질을 확인해서 안 좋으면 환기시켜줘
+loop (1 MIN)
+{
+    air_quality = (#air_sensor).check_quality()
+    if (air_quality == "bad")
+    {
+        (#air_purifier).ventilate()
+    }
+}
+
+# 30초마다 강아지에게 사료를 줘
+loop (30 SEC)
+{
+    (#dog #food).give_feed()
+}
+
+# 2초마다 움직임이 있으면 메일로 알려줘
+loop (2 SEC)
+{
+        if ( (#anywhere #movement).detected == 1 )
+        {
+                (#util).send_email("myemail@example.com", "움직임 감지", "움직임이 감지되었습니다.")
+        }
+}
+
+# 습도는 높고 온도는 낮을 때 히터를 켜줘
+loop (1 SEC)
+{
+        if ( (#humidity).value > 50 and (#temperature).value < 20 )
+        {
+                (#heater).turn_on()
+        }
+}
+
+# 움직임이 없고 조명이 꺼져 있으면 조명을 켜줘
+loop (1 SEC)
+{
+    if ((#movement).detected == 0 and (#light).turned_on == 0)
+    {
+        (#light).turn_on()
+    }
+}
+
+# 비가 오거나 바람이 많이 불면 창문을 닫아줘
+loop (1 SEC)
+{
+    if ((#weather).condition == "rain" or (#weather).wind > 50 )
+    {
+        (#window).close()
+    }
+}
+
+# 소음이 크지 않으면 음악을 틀어줘
+if ( (#sound).level <= 30 )
+{
+    (#speaker #music).play()
+}
+
+# 움직임이 감지되지 않으면 청소기를 작동시켜줘
+loop (1 SEC)
+{
+        if ( (#motion).detected == 0 )
+        {
+                (#cleaner).start_cleaning()
+        }
+}
+
+# 누군가 들어오면 이메일로 알려줘
+loop (1 SEC)
+{
+        if ((#door #movement).detected == 1)
+        {
+                (#util).send_email("ikess@gmail.com", "누군가 들어왔어요")
+        }
+}
+
+# 비가 오면 스피커로 “우산 챙기세요”라고 말해줘
+loop (1 SEC)
+{
+        x = (#util).get_weather()
+        if (x == "rainy")
+        {
+                (#speaker).tts("우산 챙기세요")
+        }
+}
+
+# 온도가 낮으면 “난방을 켜주세요”라는 메시지를 전송해줘
+loop (1 SEC)
+{
+  if ((#temperature).value < 15)
+  {
+    (#message).send("난방을 켜주세요");
+  }
+}
+
+# 소음이 70dB 이상이면 알람을 울리고 메일을 보내줘
+```SoPLang
+loop (1 SEC)
+{
+    if ( (#sound).db >= 70 )
+    {
+        (#alarm).turn_on()
+        (#mail).send("Alarm triggered due to high noise level.")
+    }
+}
+```
+
+# 방문이 열리면 “방문 열림 감지” 메일을 전송해줘
+loop (1 SEC)
+{
+    if ((#door).is_opened == 1)
+    {
+        (#util).send_mail("방문 열림 감지")
+    }
+}
+
+# 매일 9시와 18시에 날씨 정보를 받아서 출력해줘
+loop (1 SEC)
+{
+        if ( (#clock).hour == 9 or (#clock).hour == 18 )
+        {
+                x = (#util).get_weather()
+                (#speaker).tts(x)
+        }
+}
+
+# 사람이 있을 때만 불을 켜고, 없으면 꺼줘
+loop (1 SEC)
+{
+    if ( (#person).detected == 1 )
+    {
+        (#light).turn_on()
+    }
+    else
+    {
+        (#light).turn_off()
+    }
+}
+
+# 물 샘이 감지되면 경고음과 메일을 동시에 보내줘
+loop (1 SEC)
+{
+    if ((#spring).detected == 1)
+    { 
+        (#speaker).beep();
+        (#mail).send("Water spring detected");
+    }
+}
+
+# 에어컨이 꺼져 있으면 켜고, 이미 켜져 있으면 유지해줘
+loop (1 SEC)
+{
+        if ((#air_conditioner).is_on == 0)
+        {
+                (#air_conditioner).turn_on()
+        }
+}
+
+# 창문이 열려 있고 비가 오면 닫아줘
+loop (1 SEC)
+{
+    if ((#window).opened == 1 and (#util).get_weather() == "rainy")
+    {
+        (#window).close()
+    }
+}

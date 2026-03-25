@@ -1,0 +1,7 @@
+fastapi==0.115.13
+pydantic==2.11.7
+pyyaml==6.0.2
+uvicorn==0.27.1
+z3-solver==4.15.1.0
+ply==3.11
+openai==1.91.0

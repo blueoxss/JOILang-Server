@@ -1,0 +1,2 @@
+﻿sentence,best_code
+모든 조명의 색상을 흰색으로 변경한다.,"[{'name': '모든조명하얀색변경', 'cron': '', 'period': -1, 'code': 'all(#Light).colorControl_setColor(""255|255|255"")'}]"

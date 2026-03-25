@@ -1,0 +1,1254 @@
+{
+  "AirConditioner": {
+    "airConditionerMode_airConditionerMode": {
+      "return_descriptor": "Current mode of the air conditioner"
+    },
+    "airConditionerMode_targetTemperature": {
+      "return_descriptor": "Current temperature status of the air conditioner"
+    },
+    "airConditionerMode_supportedAcModes": {
+      "return_descriptor": "Supported states for this air conditioner to be in"
+    },
+    "airConditionerMode_setAirConditionerMode": {
+      "argument_descriptor": "Set the air conditioner mode"
+    },
+    "airConditionerMode_setTemperature": {
+      "argument_descriptor": "Set the air conditioner temperature"
+    },
+    "switch_switch": {
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "argument_descriptor": "Toggle a switch"
+    }
+  },
+  "AirPurifier": {
+    "airPurifierFanMode_airPurifierFanMode": {
+      "descriptor": "Maintains and sets the state of an air purifier's fan",
+      "return_descriptor": "The current mode of the air purifier fan, an enum of auto, low, medium, high, sleep, quiet or windFree"
+    },
+    "airPurifierFanMode_supportedAirPurifierFanModes": {
+      "descriptor": "Maintains and sets the state of an air purifier's fan",
+      "return_descriptor": "Supported states for this air purifier fan to be in"
+    },
+    "airPurifierFanMode_setAirPurifierFanMode": {
+      "descriptor": "Maintains and sets the state of an air purifier's fan",
+      "argument_descriptor": "Set the air purifier fan's mode"
+    },
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    }
+  },
+  "AirQualityDetector": {
+    "carbonDioxideMeasurement_carbonDioxide": {
+      "descriptor": "Measure carbon dioxide levels",
+      "return_descriptor": "The level of carbon dioxide detected"
+    },
+    "dustSensor_dustLevel": {
+      "descriptor": "Gets the reading of the dust sensor.",
+      "return_descriptor": "Current dust level -- also refered to as PM10, measured in micrograms per cubic meter"
+    },
+    "dustSensor_fineDustLevel": {
+      "descriptor": "Gets the reading of the dust sensor.",
+      "return_descriptor": "Current level of fine dust -- also refered to as PM2.5, measured in micrograms per cubic meter"
+    },
+    "dustSensor_veryFineDustLevel": {
+      "descriptor": "Gets the reading of the dust sensor.",
+      "return_descriptor": "Current level of fine dust -- also refered to as PM1.0, measured in micrograms per cubic meter"
+    },
+    "temperatureMeasurement_temperature": {
+      "descriptor": "Get the temperature from a Device that reports current temperature",
+      "return_descriptor": "A number that usually represents the current temperature"
+    },
+    "temperatureMeasurement_temperatureRange": {
+      "descriptor": "Get the temperature from a Device that reports current temperature",
+      "return_descriptor": "Constraints on the temperature value"
+    },
+    "tvocMeasurement_tvocLevel": {
+      "descriptor": "Measure total volatile organic compound levels",
+      "return_descriptor": "The level of total volatile organic compounds detected"
+    },
+    "relativeHumidityMeasurement_humidity": {
+      "descriptor": "Allow reading the relative humidity from devices that support it",
+      "return_descriptor": "A numerical representation of the relative humidity measurement taken by the device"
+    }
+  },
+  "Alarm": {
+    "battery_battery": {
+      "descriptor": "Defines that the device has a battery",
+      "return_descriptor": "An indication of the status of the battery"
+    },
+    "alarm_alarm": {
+      "descriptor": "The Alarm skill allows for interacting with devices that serve as alarms",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "alarm_alarmVolume": {
+      "descriptor": "The Alarm skill allows for interacting with devices that serve as alarms",
+      "return_descriptor": "A string representation of the volume of the alarm"
+    },
+    "alarm_both": {
+      "descriptor": "The Alarm skill allows for interacting with devices that serve as alarms",
+      "argument_descriptor": "Strobe and sound the alarm"
+    },
+    "alarm_off": {
+      "descriptor": "The Alarm skill allows for interacting with devices that serve as alarms",
+      "argument_descriptor": "Turn the alarm (siren and strobe) off"
+    },
+    "alarm_siren": {
+      "descriptor": "The Alarm skill allows for interacting with devices that serve as alarms",
+      "argument_descriptor": "Sound the siren on the alarm"
+    },
+    "alarm_strobe": {
+      "descriptor": "The Alarm skill allows for interacting with devices that serve as alarms",
+      "argument_descriptor": "Strobe the alarm"
+    },
+    "alarm_setAlarmVolume": {
+      "descriptor": "The Alarm skill allows for interacting with devices that serve as alarms",
+      "argument_descriptor": "Set the volume of the alarm"
+    }
+  },
+  "Blind": {
+    "blindLevel_blindLevel": {
+      "descriptor": "Allows for the control of the level of a blind.",
+      "return_descriptor": "A number that represents the current level as a function of being open, ``0-100`` in percent; 0 representing completely closed, and 100 representing completely open."
+    },
+    "blindLevel_setBlindLevel": {
+      "descriptor": "Allows for the control of the level of a blind.",
+      "argument_descriptor": "Set the blind level to the given value."
+    },
+    "blind_blind": {
+      "descriptor": "Allows for the control of the blind.",
+      "return_descriptor": "A string representation of whether the blind is open or closed"
+    },
+    "blind_open": {
+      "descriptor": "Allows for the control of the blind.",
+      "argument_descriptor": "Open the blind"
+    },
+    "blind_close": {
+      "descriptor": "Allows for the control of the blind.",
+      "argument_descriptor": "Close the blind"
+    },
+    "blind_pause": {
+      "descriptor": "Allows for the control of the blind.",
+      "argument_descriptor": "Pause opening or closing the blind"
+    }
+  },
+  "Button": {
+    "button_button": {
+      "descriptor": "A device with one or more buttons",
+      "return_descriptor": "The state of the buttons"
+    },
+    "button_numberOfButtons": {
+      "descriptor": "A device with one or more buttons",
+      "return_descriptor": "The number of buttons on the device"
+    },
+    "button_supportedButtonValues": {
+      "descriptor": "A device with one or more buttons",
+      "return_descriptor": "List of valid button attribute values"
+    }
+  },
+  "Buttonx4": {
+    "buttonx4_button1": {
+      "descriptor": "A device with four buttons",
+      "return_descriptor": "The state of the button1"
+    },
+    "buttonx4_button2": {
+      "descriptor": "A device with four buttons",
+      "return_descriptor": "The state of the button2"
+    },
+    "buttonx4_button3": {
+      "descriptor": "A device with four buttons",
+      "return_descriptor": "The state of the button3"
+    },
+    "buttonx4_button4": {
+      "descriptor": "A device with four buttons",
+      "return_descriptor": "The state of the button4"
+    },
+    "buttonx4_numberOfButtons": {
+      "descriptor": "A device with four buttons",
+      "return_descriptor": "The number of buttons on the device"
+    },
+    "buttonx4_supportedButtonValues": {
+      "descriptor": "A device with four buttons",
+      "return_descriptor": "List of valid button attribute values"
+    }
+  },
+  "Calculator": {
+    "calculator_add": {
+      "descriptor": "Provides calculation services",
+      "argument_descriptor": "Add two numbers"
+    },
+    "calculator_sub": {
+      "descriptor": "Provides calculation services",
+      "argument_descriptor": "Subtract two numbers"
+    },
+    "calculator_mul": {
+      "descriptor": "Provides calculation services",
+      "argument_descriptor": "Multiply two numbers"
+    },
+    "calculator_div": {
+      "descriptor": "Provides calculation services",
+      "argument_descriptor": "Divide two numbers"
+    },
+    "calculator_mod": {
+      "descriptor": "Provides calculation services",
+      "argument_descriptor": "Modulo two numbers"
+    }
+  },
+  "Camera": {
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    },
+    "camera_image": {
+      "descriptor": "Allows for the control of a camera device",
+      "return_descriptor": "The latest image captured by the camera"
+    },
+    "camera_video": {
+      "descriptor": "Allows for the control of a camera device",
+      "return_descriptor": "The latest video captured by the camera"
+    },
+    "camera_take": {
+      "descriptor": "Allows for the control of a camera device",
+      "argument_descriptor": "Take a picture with the camera - Return the image as binary data"
+    },
+    "camera_takeTimelapse": {
+      "descriptor": "Allows for the control of a camera device",
+      "argument_descriptor": "Take a picture with the camera - Return the video as binary data"
+    }
+  },
+  "Charger": {
+    "chargingState_chargingState": {
+      "descriptor": "The current status of battery charging",
+      "return_descriptor": "The current charging state of the device"
+    },
+    "chargingState_supportedChargingStates": {
+      "descriptor": "The current status of battery charging",
+      "return_descriptor": "The list of charging states that the device supports. Optional, defaults to all states if not set."
+    },
+    "currentMeasurement_current": {
+      "descriptor": "Get the value of electrical current measured from a device.",
+      "return_descriptor": "A number representing the current measured."
+    },
+    "voltageMeasurement_voltage": {
+      "descriptor": "Get the value of voltage measured from devices that support it",
+      "return_descriptor": "A number representing the current voltage measured"
+    }
+  },
+  "Clock": {
+    "clock_year": {
+      "descriptor": "Provide current date and time",
+      "return_descriptor": "Current year"
+    },
+    "clock_month": {
+      "descriptor": "Provide current date and time",
+      "return_descriptor": "Current month"
+    },
+    "clock_day": {
+      "descriptor": "Provide current date and time",
+      "return_descriptor": "Current day"
+    },
+    "clock_weekday": {
+      "descriptor": "Provide current date and time",
+      "return_descriptor": "Current weekday"
+    },
+    "clock_hour": {
+      "descriptor": "Provide current date and time",
+      "return_descriptor": "Current hour"
+    },
+    "clock_minute": {
+      "descriptor": "Provide current date and time",
+      "return_descriptor": "Current minute"
+    },
+    "clock_second": {
+      "descriptor": "Provide current date and time",
+      "return_descriptor": "Current second"
+    },
+    "clock_timestamp": {
+      "descriptor": "Provide current date and time",
+      "return_descriptor": "Current timestamp (return current unix time - unit: seconds with floating point)"
+    },
+    "clock_datetime": {
+      "descriptor": "Provide current date and time",
+      "return_descriptor": "Current date and time as double number - format: YYYYMMddhhmm"
+    },
+    "clock_date": {
+      "descriptor": "Provide current date and time",
+      "return_descriptor": "Current date as double number - format: YYYYMMdd"
+    },
+    "clock_time": {
+      "descriptor": "Provide current date and time",
+      "return_descriptor": "Current time as double number - format: hhmm"
+    },
+    "clock_isHoliday": {
+      "descriptor": "Provide current date and time",
+      "return_descriptor": "today is holiday or not"
+    },
+    "clock_delay": {
+      "descriptor": "Provide current date and time",
+      "argument_descriptor": "delay for a given amount of time"
+    }
+  },
+  "ContactSensor": {
+    "contactSensor_contact": {
+      "descriptor": "Allows reading the value of a contact sensor device",
+      "return_descriptor": "The current state of the contact sensor"
+    }
+  },
+  "Curtain": {
+    "curtain_curtain": {
+      "descriptor": "Allows for the control of the curtain.",
+      "return_descriptor": "A string representation of whether the curtain is open or closed"
+    },
+    "curtain_supportedCurtainCommands": {
+      "descriptor": "Allows for the control of the curtain.",
+      "return_descriptor": "Curtain commands supported by this instance of Curtain"
+    },
+    "curtain_open": {
+      "descriptor": "Allows for the control of the curtain.",
+      "argument_descriptor": "Open the curtain"
+    },
+    "curtain_close": {
+      "descriptor": "Allows for the control of the curtain.",
+      "argument_descriptor": "Close the curtain"
+    },
+    "curtain_pause": {
+      "descriptor": "Allows for the control of the curtain.",
+      "argument_descriptor": "Pause opening or closing the curtain"
+    }
+  },
+  "Dehumidifier": {
+    "dehumidifierMode_dehumidifierMode": {
+      "descriptor": "Allows for the control of the dehumidifier mode.",
+      "return_descriptor": "Current mode of the dehumidifier"
+    },
+    "dehumidifierMode_setDehumidifierMode": {
+      "descriptor": "Allows for the control of the dehumidifier mode.",
+      "argument_descriptor": "Set the dehumidifier mode"
+    },
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    }
+  },
+  "Dishwasher": {
+    "dishwasherMode_dishwasherMode": {
+      "descriptor": "Allows for the control of the dishwasher mode.",
+      "return_descriptor": "Current mode of the dishwasher"
+    },
+    "dishwasherMode_setDishwasherMode": {
+      "descriptor": "Allows for the control of the dishwasher mode.",
+      "argument_descriptor": "Set the dishwasher mode"
+    },
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    }
+  },
+  "DoorLock": {
+    "doorControl_door": {
+      "descriptor": "Allow for the control of a door",
+      "return_descriptor": "The current state of the door"
+    },
+    "doorControl_open": {
+      "descriptor": "Allow for the control of a door",
+      "argument_descriptor": "Open the door"
+    },
+    "doorControl_close": {
+      "descriptor": "Allow for the control of a door",
+      "argument_descriptor": "Close the door"
+    }
+  },
+  "EmailProvider": {
+    "emailProvider_sendMail": {
+      "descriptor": "Provides email services",
+      "argument_descriptor": "Send an email"
+    },
+    "emailProvider_sendMailWithFile": {
+      "descriptor": "Provides email services",
+      "argument_descriptor": "Send an email with an attachment"
+    }
+  },
+  "Fan": {
+    "fanControl_fanSpeed": {
+      "descriptor": "Allows for the control of the fan.",
+      "return_descriptor": "The current fan speed represented as a integer value. - unit: RPM"
+    },
+    "fanControl_percent": {
+      "descriptor": "Allows for the control of the fan.",
+      "return_descriptor": "The current fan speed represented as a percent value."
+    },
+    "fanControl_setFanSpeed": {
+      "descriptor": "Allows for the control of the fan.",
+      "argument_descriptor": "Set the fan speed"
+    },
+    "fanControl_setPercent": {
+      "descriptor": "Allows for the control of the fan.",
+      "argument_descriptor": "Set the fan speed percent."
+    },
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    }
+  },
+  "Feeder": {
+    "feederOperatingState_feederOperatingState": {
+      "descriptor": "Allows for the control of a feeder device.",
+      "return_descriptor": "The current state of the feeder."
+    },
+    "feederOperatingState_startFeeding": {
+      "descriptor": "Allows for the control of a feeder device.",
+      "argument_descriptor": "Begin the feeding process."
+    },
+    "feederPortion_feedPortion": {
+      "descriptor": "Allows for the portion control of a feeder device.",
+      "return_descriptor": "A number that represents the portion (in grams, pounds, ounces, or servings) that will dispense."
+    },
+    "feederPortion_setFeedPortion": {
+      "descriptor": "Allows for the portion control of a feeder device.",
+      "argument_descriptor": "Set the portion (in grams, pounds, ounces, or servings) that the feeder will dispense."
+    },
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    }
+  },
+  "GasMeter": {
+    "gasMeter_gasMeter": {
+      "descriptor": "Read the gas consumption of an energy metering device",
+      "return_descriptor": "the gas energy reported by the metering device. unit: kWh"
+    },
+    "gasMeter_gasMeterCalorific": {
+      "descriptor": "Read the gas consumption of an energy metering device",
+      "return_descriptor": "a measure of the available heat energy, used as part of the calculation to convert gas volume to gas energy. - unit: kcal"
+    },
+    "gasMeter_gasMeterTime": {
+      "descriptor": "Read the gas consumption of an energy metering device",
+      "return_descriptor": "The cumulative gas use time reported by the metering device. - unit: seconds"
+    },
+    "gasMeter_gasMeterVolume": {
+      "descriptor": "Read the gas consumption of an energy metering device",
+      "return_descriptor": "the cumulative gas volume reported by the metering device. - unit: cubic meters"
+    }
+  },
+  "GasValve": {
+    "gasMeter_gasMeter": {
+      "descriptor": "Read the gas consumption of an energy metering device",
+      "return_descriptor": "the gas energy reported by the metering device. unit: kWh"
+    },
+    "gasMeter_gasMeterCalorific": {
+      "descriptor": "Read the gas consumption of an energy metering device",
+      "return_descriptor": "a measure of the available heat energy, used as part of the calculation to convert gas volume to gas energy. - unit: kcal"
+    },
+    "gasMeter_gasMeterTime": {
+      "descriptor": "Read the gas consumption of an energy metering device",
+      "return_descriptor": "The cumulative gas use time reported by the metering device. - unit: seconds"
+    },
+    "gasMeter_gasMeterVolume": {
+      "descriptor": "Read the gas consumption of an energy metering device",
+      "return_descriptor": "the cumulative gas volume reported by the metering device. - unit: cubic meters"
+    },
+    "valve_valve": {
+      "descriptor": "Allows for the control of a valve device",
+      "return_descriptor": "A string representation of whether the valve is open or closed"
+    },
+    "valve_open": {
+      "descriptor": "Allows for the control of a valve device",
+      "argument_descriptor": "Open the valve"
+    },
+    "valve_close": {
+      "descriptor": "Allows for the control of a valve device",
+      "argument_descriptor": "Close the valve"
+    }
+  },
+  "Humidifier": {
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    },
+    "humidifierMode_humidifierMode": {
+      "descriptor": "Maintains and sets the state of an humidifier",
+      "return_descriptor": "Current mode of the humidifier"
+    },
+    "humidifierMode_setHumidifierMode": {
+      "descriptor": "Maintains and sets the state of an humidifier",
+      "argument_descriptor": "Set the humidifier mode"
+    }
+  },
+  "HumiditySensor": {
+    "relativeHumidityMeasurement_humidity": {
+      "descriptor": "Allow reading the relative humidity from devices that support it",
+      "return_descriptor": "A numerical representation of the relative humidity measurement taken by the device"
+    }
+  },
+  "Irrigator": {
+    "irrigatorOperatingState_irrigatorOperatingState": {
+      "descriptor": "Allows for the control of a irrigator device.",
+      "return_descriptor": "The current state of the irrigator."
+    },
+    "irrigatorOperatingState_startWatering": {
+      "descriptor": "Allows for the control of a irrigator device.",
+      "argument_descriptor": "Begin the watering process."
+    },
+    "irrigatorPortion_waterPortion": {
+      "descriptor": "Allows for the portion control of a irrigator device.",
+      "return_descriptor": "A number that represents the portion (in liters, milliliters, gallons, or ounces) that will dispense."
+    },
+    "irrigatorPortion_setWaterPortion": {
+      "descriptor": "Allows for the portion control of a irrigator device.",
+      "argument_descriptor": "Set the portion (in liters, milliliters, gallons, or ounces) that the irrigator will dispense."
+    },
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    }
+  },
+  "LeakSensor": {
+    "leakSensor_leakage": {
+      "descriptor": "A Device that senses water leakage",
+      "return_descriptor": "Whether or not water leakage was detected by the Device"
+    }
+  },
+  "Light": {
+    "colorControl_color": {
+      "descriptor": "Allows for control of a color changing device by setting its hue, saturation, and color values",
+      "return_descriptor": "``{\"hue\":\"0-100 (percent)\", \"saturation\":\"0-100 (percent)\"}``"
+    },
+    "colorControl_hue": {
+      "descriptor": "Allows for control of a color changing device by setting its hue, saturation, and color values",
+      "return_descriptor": "``0-100`` (percent)"
+    },
+    "colorControl_saturation": {
+      "descriptor": "Allows for control of a color changing device by setting its hue, saturation, and color values",
+      "return_descriptor": "``0-100`` (percent)"
+    },
+    "colorControl_setColor": {
+      "descriptor": "Allows for control of a color changing device by setting its hue, saturation, and color values",
+      "argument_descriptor": "Sets the color based on the values passed in with the given map"
+    },
+    "colorControl_setHue": {
+      "descriptor": "Allows for control of a color changing device by setting its hue, saturation, and color values",
+      "argument_descriptor": "Set the hue value of the color"
+    },
+    "colorControl_setSaturation": {
+      "descriptor": "Allows for control of a color changing device by setting its hue, saturation, and color values",
+      "argument_descriptor": "Set the saturation value of the color"
+    },
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    },
+    "switchLevel_level": {
+      "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch.",
+      "return_descriptor": "A number that represents the current level, usually ``0-100`` in percent"
+    },
+    "switchLevel_levelRange": {
+      "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch.",
+      "return_descriptor": "Constraints on the level value"
+    },
+    "switchLevel_setLevel": {
+      "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch.",
+      "argument_descriptor": "Set the level to the given value. If the device supports being turned on and off then it will be turned on if ``level`` is greater than 0 and turned off if ``level`` is equal to 0."
+    },
+    "switchLevel_alert": {
+      "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch.",
+      "argument_descriptor": "Alert with dimming"
+    }
+  },
+  "LightSensor": {
+    "lightLevel_light": {
+      "descriptor": "A numerical representation of the brightness intensity",
+      "return_descriptor": "brightness intensity (Unit: lux)"
+    }
+  },
+  "MenuProvider": {
+    "menuProvider_menu": {
+      "descriptor": "Provides menu information services",
+      "argument_descriptor": "Get the menu - Return the menu list"
+    },
+    "menuProvider_todayMenu": {
+      "descriptor": "Provides menu information services",
+      "argument_descriptor": "Get today's menu randomly - Return the menu list"
+    },
+    "menuProvider_todayPlace": {
+      "descriptor": "Provides menu information services",
+      "argument_descriptor": "Get today's restaurant randomly - Return the restaurant name"
+    }
+  },
+  "MotionSensor": {
+    "motionSensor_motion": {
+      "descriptor": [
+        "• active - The value when motion is detected",
+        "• inactive - The value when no motion is detected"
+      ],
+      "return_descriptor": "The current state of the motion sensor"
+    }
+  },
+  "PresenceSensor": {
+    "presenceSensor_presence": {
+      "descriptor": "The ability to see the current status of a presence sensor device",
+      "return_descriptor": "The current state of the presence sensor"
+    }
+  },
+  "Pump": {
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    },
+    "pump_pump": {
+      "descriptor": "Allows for the control of a pump device",
+      "return_descriptor": "A string representation of whether the pump is open or closed"
+    },
+    "pump_open": {
+      "descriptor": "Allows for the control of a pump device",
+      "argument_descriptor": "Open the pump"
+    },
+    "pump_close": {
+      "descriptor": "Allows for the control of a pump device",
+      "argument_descriptor": "Close the pump"
+    },
+    "pumpOperationMode_currentOperationMode": {
+      "descriptor": "Allows for setting the operation mode on a pump.",
+      "return_descriptor": "The current effective operation mode of the pump"
+    },
+    "pumpOperationMode_operationMode": {
+      "descriptor": "Allows for setting the operation mode on a pump.",
+      "return_descriptor": "The operation mode of the pump"
+    },
+    "pumpOperationMode_supportedOperationModes": {
+      "descriptor": "Allows for setting the operation mode on a pump.",
+      "return_descriptor": "Supported operation modes for this device to be in"
+    },
+    "pumpOperationMode_setOperationMode": {
+      "descriptor": "Allows for setting the operation mode on a pump.",
+      "argument_descriptor": "Set the operation mode"
+    }
+  },
+  "Refrigerator": {
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    },
+    "refrigeration_defrost": {
+      "descriptor": "Allows for the control of the refrigeration.",
+      "return_descriptor": "Status of the defrost"
+    },
+    "refrigeration_rapidCooling": {
+      "descriptor": "Allows for the control of the refrigeration.",
+      "return_descriptor": "Status of the rapid cooling"
+    },
+    "refrigeration_rapidFreezing": {
+      "descriptor": "Allows for the control of the refrigeration.",
+      "return_descriptor": "Status of the rapid freezing"
+    },
+    "refrigeration_setDefrost": {
+      "descriptor": "Allows for the control of the refrigeration.",
+      "argument_descriptor": "Sets the defrost on or off"
+    },
+    "refrigeration_setRapidCooling": {
+      "descriptor": "Allows for the control of the refrigeration.",
+      "argument_descriptor": "Sets the rapid cooling on or off"
+    },
+    "refrigeration_setRapidFreezing": {
+      "descriptor": "Allows for the control of the refrigeration.",
+      "argument_descriptor": "Sets the rapid freezing on or off"
+    }
+  },
+  "RobotCleaner": {
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    },
+    "robotCleanerCleaningMode_robotCleanerCleaningMode": {
+      "descriptor": "Allows for the control of the robot cleaner cleaning mode.",
+      "return_descriptor": "Current status of the robot cleaner cleaning mode"
+    },
+    "robotCleanerCleaningMode_setRobotCleanerCleaningMode": {
+      "descriptor": "Allows for the control of the robot cleaner cleaning mode.",
+      "argument_descriptor": "Set the robot cleaner cleaning mode"
+    }
+  },
+  "Shade": {
+    "windowShadeLevel_shadeLevel": {
+      "descriptor": "Allows for the control of the level of a window shade.",
+      "return_descriptor": "A number that represents the current level as a function of being open, ``0-100`` in percent; 0 representing completely closed, and 100 representing completely open."
+    },
+    "windowShadeLevel_setShadeLevel": {
+      "descriptor": "Allows for the control of the level of a window shade.",
+      "argument_descriptor": "Set the shade level to the given value."
+    },
+    "windowShade_windowShade": {
+      "descriptor": "Allows for the control of the window shade.",
+      "return_descriptor": "A string representation of whether the window shade is open or closed"
+    },
+    "windowShade_supportedWindowShadeCommands": {
+      "descriptor": "Allows for the control of the window shade.",
+      "return_descriptor": "Window shade commands supported by this instance of Window Shade"
+    },
+    "windowShade_open": {
+      "descriptor": "Allows for the control of the window shade.",
+      "argument_descriptor": "Open the window shade"
+    },
+    "windowShade_close": {
+      "descriptor": "Allows for the control of the window shade.",
+      "argument_descriptor": "Close the window shade"
+    },
+    "windowShade_pause": {
+      "descriptor": "Allows for the control of the window shade.",
+      "argument_descriptor": "Pause opening or closing the window shade"
+    }
+  },
+  "Siren": {
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    },
+    "sirenMode_sirenMode": {
+      "descriptor": "Allows for the control of the siren.",
+      "return_descriptor": "Current mode of the siren"
+    },
+    "sirenMode_setSirenMode": {
+      "descriptor": "Allows for the control of the siren.",
+      "argument_descriptor": "Set the siren mode"
+    }
+  },
+  "SmartPlug": {
+    "currentMeasurement_current": {
+      "descriptor": "Get the value of electrical current measured from a device.",
+      "return_descriptor": "A number representing the current measured."
+    },
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    },
+    "voltageMeasurement_voltage": {
+      "descriptor": "Get the value of voltage measured from devices that support it",
+      "return_descriptor": "A number representing the current voltage measured"
+    },
+    "powerMeter_power": {
+      "descriptor": "Allows for reading the power consumption from devices that report it",
+      "return_descriptor": "A number representing the current power consumption. Check the device documentation for how this value is reported - unit: Watts"
+    },
+    "powerMeter_powerConsumption": {
+      "descriptor": "Allows for reading the power consumption from devices that report it",
+      "return_descriptor": "energy and power consumption during specific time period - unit: Wh"
+    }
+  },
+  "SmokeDetector": {
+    "smokeDetector_smoke": {
+      "descriptor": "A device that detects the presence or absence of smoke.",
+      "return_descriptor": "The state of the smoke detection device"
+    }
+  },
+  "SoilMoistureSensor": {
+    "soilHumidityMeasurement_soilHumidity": {
+      "descriptor": "Allow reading the soil humidity from devices that support it",
+      "return_descriptor": "A numerical representation of the soil humidity measurement taken by the device"
+    }
+  },
+  "SoundSensor": {
+    "soundSensor_sound": {
+      "descriptor": "A Device that senses sound",
+      "return_descriptor": "Whether or not sound was detected by the Device"
+    },
+    "soundPressureLevel_soundPressureLevel": {
+      "descriptor": "Gets the value of the sound pressure level.",
+      "return_descriptor": "Level of the sound pressure"
+    }
+  },
+  "Speaker": {
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    },
+    "mediaPlayback_playbackStatus": {
+      "descriptor": "Allows for the control of the media playback.",
+      "return_descriptor": "Status of the media playback"
+    },
+    "mediaPlayback_supportedPlaybackCommands": {
+      "descriptor": "Allows for the control of the media playback.",
+      "return_descriptor": "Media playback commands which are supported"
+    },
+    "mediaPlayback_play": {
+      "descriptor": "Allows for the control of the media playback.",
+      "argument_descriptor": "Play the media playback"
+    },
+    "mediaPlayback_stop": {
+      "descriptor": "Allows for the control of the media playback.",
+      "argument_descriptor": "Stop the media playback"
+    },
+    "mediaPlayback_pause": {
+      "descriptor": "Allows for the control of the media playback.",
+      "argument_descriptor": "Pause the media playback"
+    },
+    "mediaPlayback_fastForward": {
+      "descriptor": "Allows for the control of the media playback.",
+      "argument_descriptor": "Fast forward the media playback"
+    },
+    "mediaPlayback_rewind": {
+      "descriptor": "Allows for the control of the media playback.",
+      "argument_descriptor": "Rewind the media playback"
+    },
+    "mediaPlayback_setPlaybackStatus": {
+      "descriptor": "Allows for the control of the media playback.",
+      "argument_descriptor": "Set the playback status"
+    },
+    "mediaPlayback_speak": {
+      "descriptor": "Allows for the control of the media playback.",
+      "argument_descriptor": "TTS feature"
+    }
+  },
+  "Recorder": {
+    "audioRecord_recordStatus": {
+      "descriptor": "Record audio",
+      "return_descriptor": "The current status of the audio recorder"
+    },
+    "audioRecord_record": {
+      "descriptor": "Record audio",
+      "argument_descriptor": "Record audio"
+    },
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    }
+  },
+  "Switch": {
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    }
+  },
+  "Television": {
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    },
+    "tvChannel_tvChannel": {
+      "descriptor": "Allows for the control of the TV channel.",
+      "return_descriptor": "Current status of the TV channel"
+    },
+    "tvChannel_tvChannelName": {
+      "descriptor": "Allows for the control of the TV channel.",
+      "return_descriptor": "Current status of the TV channel name"
+    },
+    "tvChannel_channelUp": {
+      "descriptor": "Allows for the control of the TV channel.",
+      "argument_descriptor": "Move the TV channel up"
+    },
+    "tvChannel_channelDown": {
+      "descriptor": "Allows for the control of the TV channel.",
+      "argument_descriptor": "Move the TV channel down"
+    },
+    "tvChannel_setTvChannel": {
+      "descriptor": "Allows for the control of the TV channel.",
+      "argument_descriptor": "Set the TV channel"
+    },
+    "tvChannel_setTvChannelName": {
+      "descriptor": "Allows for the control of the TV channel.",
+      "argument_descriptor": "Set the TV channel Name"
+    },
+    "audioMute_muteStatus": {
+      "descriptor": "Allows for the control of audio mute.",
+      "return_descriptor": "Current status of the audio mute"
+    },
+    "audioMute_mute": {
+      "descriptor": "Allows for the control of audio mute.",
+      "argument_descriptor": "Set the audio to mute state"
+    },
+    "audioMute_unmute": {
+      "descriptor": "Allows for the control of audio mute.",
+      "argument_descriptor": "Set the audio to unmute state"
+    },
+    "audioMute_setMute": {
+      "descriptor": "Allows for the control of audio mute.",
+      "argument_descriptor": "Set the state of the audio mute"
+    },
+    "audioVolume_volume": {
+      "descriptor": "Allows for the control of audio volume.",
+      "return_descriptor": "The current volume setting of the audio"
+    },
+    "audioVolume_setVolume": {
+      "descriptor": "Allows for the control of audio volume.",
+      "argument_descriptor": "Set the audio volume level"
+    },
+    "audioVolume_volumeUp": {
+      "descriptor": "Allows for the control of audio volume.",
+      "argument_descriptor": "Turn the audio volume up"
+    },
+    "audioVolume_volumeDown": {
+      "descriptor": "Allows for the control of audio volume.",
+      "argument_descriptor": "Turn the audio volume down"
+    }
+  },
+  "TemperatureSensor": {
+    "temperatureMeasurement_temperature": {
+      "descriptor": "Get the temperature from a Device that reports current temperature",
+      "return_descriptor": "A number that usually represents the current temperature"
+    },
+    "temperatureMeasurement_temperatureRange": {
+      "descriptor": "Get the temperature from a Device that reports current temperature",
+      "return_descriptor": "Constraints on the temperature value"
+    }
+  },
+  "TestDevice": {
+    "testSkill_testSkillValue": {
+      "descriptor": "testSkill",
+      "return_descriptor": "testSkillValue"
+    },
+    "testSkill_testSkillFunction": {
+      "descriptor": "testSkill",
+      "argument_descriptor": "testSkillFunction"
+    }
+  },
+  "Valve": {
+    "valve_valve": {
+      "descriptor": "Allows for the control of a valve device",
+      "return_descriptor": "A string representation of whether the valve is open or closed"
+    },
+    "valve_open": {
+      "descriptor": "Allows for the control of a valve device",
+      "argument_descriptor": "Open the valve"
+    },
+    "valve_close": {
+      "descriptor": "Allows for the control of a valve device",
+      "argument_descriptor": "Close the valve"
+    }
+  },
+  "WeatherProvider": {
+    "weatherProvider_temperatureWeather": {
+      "descriptor": "Provides weather information",
+      "return_descriptor": "Current temperature level"
+    },
+    "weatherProvider_humidityWeather": {
+      "descriptor": "Provides weather information",
+      "return_descriptor": "Current humidity level"
+    },
+    "weatherProvider_pressureWeather": {
+      "descriptor": "Provides weather information",
+      "return_descriptor": "Current pressure level"
+    },
+    "weatherProvider_pm25Weather": {
+      "descriptor": "Provides weather information",
+      "return_descriptor": "Current pm25 level"
+    },
+    "weatherProvider_pm10Weather": {
+      "descriptor": "Provides weather information",
+      "return_descriptor": "Current pm10 level"
+    },
+    "weatherProvider_weather": {
+      "descriptor": "Provides weather information",
+      "return_descriptor": "Current weather condition"
+    },
+    "weatherProvider_getWeatherInfo": {
+      "descriptor": "Provides weather information",
+      "argument_descriptor": "Get the current weather information - Return whole weather information, format: \"temperature, humidity, pressure, pm25, pm10, weather, weather_string, icon_id, location\""
+    }
+  },
+  "Window": {
+    "windowControl_window": {
+      "descriptor": "Allows for the control of the window shade.",
+      "return_descriptor": "A string representation of whether the window is open or closed"
+    },
+    "windowControl_open": {
+      "descriptor": "Allows for the control of the window shade.",
+      "argument_descriptor": "Open the window"
+    },
+    "windowControl_close": {
+      "descriptor": "Allows for the control of the window shade.",
+      "argument_descriptor": "Close the window"
+    }
+  },
+  "FallDetector": {
+    "fallDetection_fall": {
+      "descriptor": "Detects if a fall has occurred",
+      "return_descriptor": "Whether or not a fall was detected"
+    }
+  },
+  "OccupancySensor": {
+    "presenceSensor_presence": {
+      "descriptor": "The ability to see the current status of a presence sensor device",
+      "return_descriptor": "The current state of the presence sensor"
+    }
+  },
+  "Relay": {
+    "switch_switch": {
+      "descriptor": "Allows for the control of a switch device",
+      "return_descriptor": "A string representation of whether the switch is on or off"
+    },
+    "switch_on": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch on"
+    },
+    "switch_off": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Turn a switch off"
+    },
+    "switch_toggle": {
+      "descriptor": "Allows for the control of a switch device",
+      "argument_descriptor": "Toggle a switch"
+    }
+  },
+  "Timer": {
+    "timer_add": {
+      "descriptor": "The Timer allows for interacting with devices that serve as timers",
+      "argument_descriptor": "Add a timer"
+    },
+    "timer_set": {
+      "descriptor": "The Timer allows for interacting with devices that serve as timers",
+      "argument_descriptor": "Set a timer"
+    },
+    "timer_start": {
+      "descriptor": "The Timer allows for interacting with devices that serve as timers",
+      "argument_descriptor": "Start a timer"
+    },
+    "timer_reset": {
+      "descriptor": "The Timer allows for interacting with devices that serve as timers",
+      "argument_descriptor": "Reset a timer"
+    },
+    "timer_isSet": {
+      "descriptor": "The Timer allows for interacting with devices that serve as timers",
+      "argument_descriptor": "Check if a timer is set"
+    },
+    "timer_isExist": {
+      "descriptor": "The Timer allows for interacting with devices that serve as timers",
+      "argument_descriptor": "Check if a timer is exist"
+    }
+  },
+  "ManagerThing": {
+    "manager_discover": {
+      "descriptor": "Allow Manager Thing's features",
+      "argument_descriptor": "Discover local devices - Return device list with json format"
+    },
+    "manager_add_thing": {
+      "descriptor": "Allow Manager Thing's features",
+      "argument_descriptor": "Add staff thing - Return error string"
+    },
+    "manager_delete_thing": {
+      "descriptor": "Allow Manager Thing's features",
+      "argument_descriptor": "Delete staff thing - Return error string"
+    }
+  }
+}

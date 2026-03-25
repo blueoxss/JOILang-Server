@@ -1,0 +1,100 @@
+- command: "내 생일이 되면 \"생일 축하합니다\" 노래를 불러 줘."
+  command_translated: "Sing \"Happy Birthday\" on my birthday."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      (#Speaker).mediaPlayback_speak("No information is available to determine the date of your birthday.")
+  devices:
+  - Speaker
+- command: "날 우울하게 만드는 뉴스를 감지하면 위로의 말을 해 줘."
+  command_translated: "If you detects news that makes me depressed, say something uplifting."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      (#Speaker).mediaPlayback_speak("I don"t have the ability to understand or analyze the news, and I don"t know what to say to comfort them.")
+  devices:
+  - Speaker
+- command: "고양이가 기분이 좋을 때마다 박수를 쳐 줘."
+  command_translated: "Clap whenever your cat is in a good mood."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      (#Speaker).mediaPlayback_speak("No ability to detect a cat"s mood. No ability to clap.")
+  devices:
+  - Speaker
+- command: "지금 내 기분에 맞춰 조명을 감성적으로 조절해 줘."
+  command_translated: "Emotionally adjust the light to match my mood right now."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      (#Speaker).mediaPlayback_speak("I don"t know the user"s current mood state. I can"t set emotional lighting.")
+  devices:
+  - Speaker
+- command: "집이 외로워 보이면 음악을 틀어 줘."
+  command_translated: "If the house seems lonely, play some music."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      (#Speaker).mediaPlayback_speak("There is no ability to determine if a home looks lonely.")
+  devices:
+  - Speaker
+- command: "밖이 위험해 보이면 자동으로 경찰에 전화해 줘."
+  command_translated: "Automatically call the police if it looks dangerous outside."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      (#Speaker).mediaPlayback_speak("No ability to determine if it"s dangerous outside or call the police.")
+  devices:
+  - Speaker
+- command: "스마트폰 배터리가 20% 이하가 되면 커튼을 닫아 줘."
+  command_translated: "Close the curtains when your smartphone's battery drops below 20%."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      (#Speaker).mediaPlayback_speak("There is no way to know the battery status of your smartphone.")
+  devices:
+  - Speaker
+- command: "오늘 중요한 발표가 있으면 행운을 빌어 줘."
+  command_translated: "If there is a big announcement today, wish me luck."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      (#Speaker).mediaPlayback_speak("I don"t know if there"s an important announcement today, there"s no good luck feature.")
+  devices:
+  - Speaker
+- command: "로봇청소기에게 커피 한 잔 타 달라고 부탁해 줘."
+  command_translated: "Ask your robot vacuum cleaner to make you a cup of coffee."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      (#Speaker).mediaPlayback_speak("I can"t ask a robot vacuum cleaner to make you a cup of coffee.")
+  devices:
+  - Speaker
+- command: "기분 좋게 춤춰 줘."
+  command_translated: "Do a happy dance."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      (#Speaker).mediaPlayback_speak("There"s no device to make you feel good about dancing.")
+  devices:
+  - Speaker

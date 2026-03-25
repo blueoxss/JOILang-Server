@@ -1,0 +1,552 @@
+[
+  {
+    "command": "로비의 온도가 26도 이상이면 로비의 에어컨을 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#lobby #TemperatureSensor).temperatureMeasurement_temperature >= 26) {\n      (#lobby #AirConditioner).switch_on()\n    }"
+      }
+    ]
+  },
+  {
+    "command": "회의실에 사람이 들어오면 회의실 조명을 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until(#meeting_room #OccupancySensor).presenceSensor_presence == 'not present')\n    wait until(#meeting_room #OccupancySensor).presenceSensor_presence == 'present')\n    (#meeting_room #Light).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "사무실의 습도가 70% 이상이면 사무실 제습기를 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#office #HumiditySensor).relativeHumidityMeasurement_humidity >= 70)\n      (#office #Dehumidifier).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "휴게실에 아무도 없으면 로봇청소기를 자동모드로 작동시켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#lounge #OccupancySensor).presenceSensor_presence == 'not present') {\n      (#lounge #RobotCleaner).robotCleanerCleaningMode_setRobotCleanerCleaningMode('auto')\n    }"
+      }
+    ]
+  },
+  {
+    "command": "조도가 20이하이고 사람이 없으면 조명을 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#LightSensor).lightLevel_light <= 20 and (#OccupancySensor).presenceSensor_presence == 'not present')\n      (#Light).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "출입구의 창문이 열려있으면 출입구 창문을 닫아줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#entrance #Window).windowControl_window == 'open') {\n      (#entrance #Window).windowControl_close()\n    }"
+      }
+    ]
+  },
+  {
+    "command": "임원실에서 소음이 80dB이 이상이면 스피커로 '조용히 해주세요'라고 말해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#manager_room #SoundSensor).soundPressureLevel_soundPressureLevel >= 80)\n      (#manager_room #Speaker).mediaPlayback_speak('조용히 해주세요')"
+      }
+    ]
+  },
+  {
+    "command": "회의실의 현재 온도가 30도 이상이면 알람의 사이렌을 울려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#manager_room #TemperatureSensor).temperatureMeasurement_temperature >= 30)\n      (#manager_room #Alarm).alarm_siren()"
+      }
+    ]
+  },
+  {
+    "command": "연기가 감지되면 알람의 사이렌을 울려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#SmokeDetector).smokeDetector_smoke == 'not detected')\n    wait until((#SmokeDetector).smokeDetector_smoke == 'detected')\n    (#Alarm).alarm_siren()"
+      }
+    ]
+  },
+  {
+    "command": "임원실의 에어컨이 꺼져있으면 에어컨을 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#manager_room #AirConditioner).switch_switch == 'off') {\n      (#manager_room #AirConditioner).switch_on()\n    }"
+      }
+    ]
+  },
+  {
+    "command": "로비의 온도가 10도 이상이고 20도 이하면 에어컨을 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#lobby #TemperatureSensor).temperatureMeasurement_temperature >= 10 and (#lobby #TemperatureSensor).temperatureMeasurement_temperature <= 20)\n      (#lobby #TemperatureSensor).switch_off()\n    }"
+      }
+    ]
+  },
+  {
+    "command": "회의실 커튼을 닫고 10분 뒤 에어컨을 25도로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#meetingRoom #Curtain).curtain_close()\n    (#clock).delay(0|10|0)\n    (#meetingRoom #AirConditioner).airConditionerMode_setTemperature(25)"
+      }
+    ]
+  },
+  {
+    "command": "회의실 온도가 28도 이상이면 에어컨을 쿨 모드로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#meeting_room #TemperatureSensor).temperatureMeasurement_temperature >= 28)\n      (#meeting_room #AirConditioner).airConditionerMode_setAirConditionerMode('cool')"
+      }
+    ]
+  },
+  {
+    "command": "로비에서 스피커로 인사하고 5초 후 로비의 조명을 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#lobby #Speaker).mediaPlayback_speak('환영합니다')\n      (#clock).clock_delay(0|0|5)\n      (#lobby #Light).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "오전 9시마다 사무실 조명을 켜고 10초 뒤 공기청정기를 자동모드로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#office #Light).switch_on()\n    (#clock).clock_delay(0|0|10)\n    (#office #AirPurifier).airPurifierFanMode_setAirPurifierFanMode('auto')"
+      }
+    ]
+  },
+  {
+    "command": "휴게실 습도가 70% 이상이면 제습기를 켜고 아니면 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#lounge #HumiditySensor).relativeHumidityMeasurement_humidity >= 70) {\n      (#lounge #Dehumidifier).switch_on()\n    }\n    else {\n      (#lounge #Dehumidifier).switch_off()\n    }"
+      }
+    ]
+  },
+  {
+    "command": "임원실의 블라인드를 닫고 3초 뒤 조명을 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#executive_office #Blind).blind_close()\n    (#clock).clock_delay(0|0|3)\n    (#executive_office #Light).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "문이 열림 상태이면 카메라로 사진을 찍고 알람으로 사이렌을 울려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#DoorLock).doorControl_door == 'open')\n      (#Camera).camera_take()\n      (#Alarm).alarm_siren()"
+      }
+    ]
+  },
+  {
+    "command": "오전 8시마다 로비 커튼을 열고 5초 뒤에 공기청정기를 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#lobby #Curtain).curtain_open()\n    (#clock).clock_delay(0|0|5)\n    (#lobby #AirPurifier).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "임원실 CO2 농도가 1000ppm 이상이면 창문을 열고 팬을 최대 속도로 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#manager_room #AirQualityDetector).carbonDioxideMeasurement_carbonDioxide >= 1000)\n      (#meeting_room #Window).windowControl_open()\n      (#meeting_room #Fan).fanControl_setFanSpeed(100)"
+      }
+    ]
+  },
+  {
+    "command": "비가 오면 창문을 닫아줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#WeatherProvider).weatherProvider_temperatureWeather != 'rain')\n    wait until((#WeatherProvider).weatherProvider_temperatureWeather == 'rain')\n    (#Window).windowControl_close()"
+      }
+    ]
+  },
+  {
+    "command": "회의실의 조명이 켜지면 스피커로 인사해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#meetingRoom #Light).switch_switch == 'off')\n    wait until((#meetingRoom #Light).switch_switch == 'on')\n    (#Speaker).mediaPlayback_speak('Hi')"
+      }
+    ]
+  },
+  {
+    "command": "임원실의 불이 꺼지고 나서 임원실의 온도가 20도 이하로 떨어지면 온도를 25도로 맞춰줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#manager_room #Light).switch_switch == 'on')\n    wait until((#manager_room #Light).switch_switch == 'off')\n    wait until((#manager_room #TemperatureSensor).temperatureMeasurement_temperature <= 20)\n    (#manager_room #AirConditioner).airConditionerMode_setTemperature(25)"
+      }
+    ]
+  },
+  {
+    "command": "실시간으로 확인하여 출입구의 문이 열릴 때마다 조명을 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": 100,
+        "code": "last_state := 'closed'\n    door_state = (#entrance #DoorLock).doorControl_door\n    if (door_state != last_state) {\n      if (door_state == 'open') {\n        (#entrance #Light).switch_on()\n      }\n      last_state = door_state\n    }"
+      }
+    ]
+  },
+  {
+    "command": "회의실의 제습기가 꺼지면 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#meeting_room #Dehumidifier).switch_switch == 'on')\n    wait until((#meeting_room #Dehumidifier).switch_switch == 'off')\n    (meeting_room #Dehumidifier).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "회의실의 현재 이산화탄소 농도가 1000ppm을 넘으면 공기청정기를 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if (#meeting_room #AirQualityDetector).carbonDioxideMeasurement_carbonDioxide > 1000) {\n      (#meeting_room #AirPurifier).switch_on()\n    }"
+      }
+    ]
+  },
+  {
+    "command": "로비에 사람이 나가면 조명을 꺼",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#lobby #PresenceSensor).presenceSensor_presence == 'present')\n    wait until((#lobby #PresenceSensor).presenceSensor_presence == 'not present')\n    (#lobby #Light).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "사무실의 미세먼지가 50을 초과하면 공기청정기를 강풍으로 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until(#office #AirQualityDetector).dustSensor_dustLevel <= 50)\n    wait until(#office #AirQualityDetector).dustSensor_dustLevel > 50)\n    (#office #AirPurifier).airPurifierFanMode_setAirPurifierFanMode('high')"
+      }
+    ]
+  },
+  {
+    "command": "휴게실의 조도가 100룩스 이하이면 조명을 켜",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if (#lounge #LightSensor).lightLevel_light <= 100) {\n      (#lounge #Light).switch_on()\n    }"
+      }
+    ]
+  },
+  {
+    "command": "사무실 문이 열리면 알람으로 사이렌을 울려",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#office #DoorLock).doorControl_door == 'closed')\n    wait until((#office #DoorLock).doorControl_door == 'open')\n    (#office #Alarm).alarm_siren()"
+      }
+    ]
+  },
+  {
+    "command": "임원실의 현재 온도가 28도 이상이면 에어컨을 냉방으로 작동시켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if (#manager_room #TemperatureSensor).temperatureMeasurement_temperature >= 28) {\n      (#manager_room #AirConditioner).airConditionerMode_setAirConditionerMode('cool')\n    }"
+      }
+    ]
+  },
+  {
+    "command": "화장실에서 물이 감지되면 누수 경고 알람을 울려",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#restroom #LeakSensor).leakSensor_leakage == 'not detected')\n    wait until((#restroom #LeakSensor).leakSensor_leakage == 'detected')\n    (#restroom #Alarm).alarm_both()"
+      }
+    ]
+  },
+  {
+    "command": "로비의 습도가 80%를 넘으면 제습기를 작동시켜",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#lobby #AirQualityDetector).relativeHumidityMeasurement_humidity <= 80)\n    wait until((#lobby #AirQualityDetector).relativeHumidityMeasurement_humidity > 80)\n    (#lobby #Dehumidifier).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "입구에 사람이 감지되면 조명을 켜",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#entrance #PresenceSensor).presenceSensor_presence == 'not present')\n    wait until((#entrance #PresenceSensor).presenceSensor_presence == 'present')\n    (#entrance #Light).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "임원실의 문이 열리면 카메라로 사진을 찍고 알림을 울려",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#manager_room #DoorLock).doorControl_door == 'closed')\n    wait until((#manager_room #DoorLock).doorControl_door == 'open')\n    (#manager_room #Camera).camera_take()\n    (#manager_room #Alarm).alarm_both()"
+      }
+    ]
+  },
+  {
+    "command": "사무실의 팬 속도를 80으로 설정하고 10초 후 조명을 켜줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#office #Fan).fanControl_setFanSpeed(80)\n      (#clock).clock_delay(0|0|10)\n      (#office #Light).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "회의실 블라인드를 열고 5초 후 조명을 켜줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#meeting_room #Blind).blind_open()\n      (#clock).clock_delay(0|0|5)\n      (#meeting_room #Light).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "입구에서 소리가 감지되면 알람을 울리고 카메라로 영상 촬영을 시작해",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#entrance #SoundSensor).soundSensor_sound == 'not detected')\n      wait until((#entrance #SoundSensor).soundSensor_sound == 'detected')\n      (#entrance #Alarm).alarm_both()\n      (#entrance #Camera).camera_takeTimelapse(10|1)"
+      }
+    ]
+  },
+  {
+    "command": "휴게실의 커튼을 닫고 조명을 끄고 3초 후 환풍기를 켜줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#lounge #Curtain).curtain_close()\n    (#lounge #Light).switch_off()\n    (#clock).clock_delay(0|0|3)\n    (#lounge #Fan).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "임원실의 팬이 꺼지면 다시 켜줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#manager_room #Fan).switch_switch == 'off')\n    wait until((#manager_room #Fan).switch_switch == 'on')\n    (#manager_room #Fan).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "회의실의 습도가 60% 이하로 떨어지면 가습기를 켜줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#meeting_room #HumiditySensor).relativeHumidityMeasurement_humidity >= 61)\n    wait until((#meeting_room #HumiditySensor).relativeHumidityMeasurement_humidity <= 60)\n    (#meeting_room #Humidifier).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "화장실의 소음이 70dB을 초과하면 스피커로 소음이 너무 큽니다 라고 말해줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#restroom #SoundSensor).soundPressureLevel_soundPressureLevel <= 70)\n    wait until((#restroom #SoundSensor).soundPressureLevel_soundPressureLevel > 70)\n    (#restroom #Speaker).mediaPlayback_speak('소음이 너무 큽니다')\n    }"
+      }
+    ]
+  },
+  {
+    "command": "회의실의 조도가 30lux 이하로 떨어지면 커튼을 열어줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#meeting_room #LightSensor).lightLevel_light > 30)\n    wait until((#meeting_room #LightSensor).lightLevel_light <= 30)\n    (#meeting_room #Curtain).curtain_open()"
+      }
+    ]
+  },
+  {
+    "command": "출입구의 문이 닫히면 팬을 꺼줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#entrance #DoorLock).doorControl_door == 'open')\n    wait until((#entrance #DoorLock).doorControl_door == 'closed')\n    (#entrance #Fan).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "사무실에 사람이 들어오면 조명을 켜고 환풍기를 켜줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#office #PresenceSensor).presenceSensor_presence == 'not present')\n    wait until((#office #PresenceSensor).presenceSensor_presence == 'present')\n    (#office #Light).switch_on()\n    (#office #Fan).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "로비에 연기가 감지되면 사이렌을 울리고 커튼을 열어줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#lobby #SmokeDetector).smokeDetector_smoke == 'not detected')\n    wait until((#lobby #SmokeDetector).smokeDetector_smoke == 'detected')\n    (#lobby #Alarm).alarm_siren()\n    (#lobby #Curtain).curtain_open()"
+      }
+    ]
+  },
+  {
+    "command": "임원실의 현재 온도가 18도 이하이면 난방 모드로 설정해줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#manager_room #TemperatureSensor).temperatureMeasurement_temperature <= 18) {\n      (#manager_room #AirConditioner).airConditionerMode_setAirConditionerMode('heat')\n    }"
+      }
+    ]
+  },
+  {
+    "command": "로비에서 사람이 감지되면 스피커로 어서오세요 라고 인사해줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#lobby #PresenceSensor).presenceSensor_presence == 'not present')\n    wait until((#lobby #PresenceSensor).presenceSensor_presence == 'present')\n    (#lobby #Speaker).mediaPlayback_speak('어서 오세요')"
+      }
+    ]
+  },
+  {
+    "command": "사무실의 현재 이산화탄소 농도가 900ppm 이상이면 팬을 켜줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "if ((#office #AirQualityDetector).carbonDioxideMeasurement_carbonDioxide >= 900) {\n      (#office #Fan).switch_on()\n    }"
+      }
+    ]
+  },
+  {
+    "command": "회의실 조명이 켜지면 3초 후 커튼을 닫아줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "wait until((#meeting_room #Light).switch_switch == 'off')\n    wait until((#meeting_room #Light).switch_switch == 'on')\n    (#clock).clock_delay(0|0|3)\n    (#meeting_room #Curtain).curtain_close()"
+      }
+    ]
+  }
+]

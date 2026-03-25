@@ -1,0 +1,1808 @@
+[
+  {
+    "device": "AirConditioner",
+    "service": "setAirConditionerMode",
+    "descriptor": "Allows for the control of the air conditioner.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the air conditioner mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the air conditioner mode",
+    "enums_descriptor": [
+      "• auto - auto",
+      "• cool - cool",
+      "• heat - heat"
+    ]
+  },
+  {
+    "device": "AirConditioner",
+    "service": "setTemperature",
+    "descriptor": "Allows for the control of the air conditioner.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the air conditioner temperature",
+    "argument_type": "DOUBLE",
+    "argument_bounds": "Set the air conditioner temperature",
+    "enums_descriptor": [
+      "• auto - auto",
+      "• cool - cool",
+      "• heat - heat"
+    ]
+  },
+  {
+    "device": "AirConditioner",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "AirConditioner",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "AirConditioner",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "AirPurifier",
+    "service": "setAirPurifierFanMode",
+    "descriptor": "Maintains and sets the state of an air purifier's fan",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the air purifier fan's mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the air purifier fan's mode",
+    "enums_descriptor": [
+      "• auto - The fan is on auto",
+      "• sleep - The fan is in sleep mode to reduce noise",
+      "• low - The fan is on low",
+      "• medium - The fan is on medium",
+      "• high - The fan is on high",
+      "• quiet - The fan is on quiet mode to reduce noise",
+      "• windFree - The fan is on wind free mode to reduce the feeling of cold air",
+      "• off - The fan is off"
+    ]
+  },
+  {
+    "device": "AirPurifier",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "AirPurifier",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "AirPurifier",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Alarm",
+    "service": "both",
+    "descriptor": "The Alarm skill allows for interacting with devices that serve as alarms",
+    "return_type": "VOID",
+    "argument_descriptor": "Strobe and sound the alarm",
+    "enums_descriptor": [
+      "# alarm",
+      "• both - if the alarm is strobing and sounding the alarm",
+      "• off - if the alarm is turned off",
+      "• siren - if the alarm is sounding the siren",
+      "• strobe - if the alarm is strobing",
+      "",
+      "# alarmVolume",
+      "• mute - ",
+      "• low - ",
+      "• medium - ",
+      "• high -"
+    ]
+  },
+  {
+    "device": "Alarm",
+    "service": "off",
+    "descriptor": "The Alarm skill allows for interacting with devices that serve as alarms",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn the alarm (siren and strobe) off",
+    "enums_descriptor": [
+      "# alarm",
+      "• both - if the alarm is strobing and sounding the alarm",
+      "• off - if the alarm is turned off",
+      "• siren - if the alarm is sounding the siren",
+      "• strobe - if the alarm is strobing",
+      "",
+      "# alarmVolume",
+      "• mute - ",
+      "• low - ",
+      "• medium - ",
+      "• high -"
+    ]
+  },
+  {
+    "device": "Alarm",
+    "service": "siren",
+    "descriptor": "The Alarm skill allows for interacting with devices that serve as alarms",
+    "return_type": "VOID",
+    "argument_descriptor": "Sound the siren on the alarm",
+    "enums_descriptor": [
+      "# alarm",
+      "• both - if the alarm is strobing and sounding the alarm",
+      "• off - if the alarm is turned off",
+      "• siren - if the alarm is sounding the siren",
+      "• strobe - if the alarm is strobing",
+      "",
+      "# alarmVolume",
+      "• mute - ",
+      "• low - ",
+      "• medium - ",
+      "• high -"
+    ]
+  },
+  {
+    "device": "Alarm",
+    "service": "strobe",
+    "descriptor": "The Alarm skill allows for interacting with devices that serve as alarms",
+    "return_type": "VOID",
+    "argument_descriptor": "Strobe the alarm",
+    "enums_descriptor": [
+      "# alarm",
+      "• both - if the alarm is strobing and sounding the alarm",
+      "• off - if the alarm is turned off",
+      "• siren - if the alarm is sounding the siren",
+      "• strobe - if the alarm is strobing",
+      "",
+      "# alarmVolume",
+      "• mute - ",
+      "• low - ",
+      "• medium - ",
+      "• high -"
+    ]
+  },
+  {
+    "device": "Alarm",
+    "service": "setAlarmVolume",
+    "descriptor": "The Alarm skill allows for interacting with devices that serve as alarms",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the volume of the alarm",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the volume of the alarm to \"mute\", \"low\", \"medium\", or \"high\"",
+    "enums_descriptor": [
+      "# alarm",
+      "• both - if the alarm is strobing and sounding the alarm",
+      "• off - if the alarm is turned off",
+      "• siren - if the alarm is sounding the siren",
+      "• strobe - if the alarm is strobing",
+      "",
+      "# alarmVolume",
+      "• mute - ",
+      "• low - ",
+      "• medium - ",
+      "• high -"
+    ]
+  },
+  {
+    "device": "Blind",
+    "service": "setBlindLevel",
+    "descriptor": "Allows for the control of the level of a blind.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the blind level to the given value.",
+    "argument_type": "INTEGER",
+    "argument_bounds": "The level to which the blind should be set, ``0-100`` in percent; 0 representing completely closed, and 100 representing completely open."
+  },
+  {
+    "device": "Blind",
+    "service": "open",
+    "descriptor": "Allows for the control of the blind.",
+    "return_type": "VOID",
+    "argument_descriptor": "Open the blind",
+    "enums_descriptor": [
+      "• closed - closed",
+      "• closing - closing…",
+      "• open - open",
+      "• opening - opening…",
+      "• partially open - partially open",
+      "• paused -",
+      "• unknown - unknown"
+    ]
+  },
+  {
+    "device": "Blind",
+    "service": "close",
+    "descriptor": "Allows for the control of the blind.",
+    "return_type": "VOID",
+    "argument_descriptor": "Close the blind",
+    "enums_descriptor": [
+      "• closed - closed",
+      "• closing - closing…",
+      "• open - open",
+      "• opening - opening…",
+      "• partially open - partially open",
+      "• paused -",
+      "• unknown - unknown"
+    ]
+  },
+  {
+    "device": "Blind",
+    "service": "pause",
+    "descriptor": "Allows for the control of the blind.",
+    "return_type": "VOID",
+    "argument_descriptor": "Pause opening or closing the blind",
+    "enums_descriptor": [
+      "• closed - closed",
+      "• closing - closing…",
+      "• open - open",
+      "• opening - opening…",
+      "• partially open - partially open",
+      "• paused -",
+      "• unknown - unknown"
+    ]
+  },
+  {
+    "device": "Calculator",
+    "service": "add",
+    "descriptor": "Provides calculation services",
+    "return_type": "VOID",
+    "argument_descriptor": "Add two numbers",
+    "argument_type": "DOUBLE , DOUBLE",
+    "argument_format": " , ",
+    "argument_bounds": "The first number to add , The second number to add"
+  },
+  {
+    "device": "Calculator",
+    "service": "sub",
+    "descriptor": "Provides calculation services",
+    "return_type": "VOID",
+    "argument_descriptor": "Subtract two numbers",
+    "argument_type": "DOUBLE , DOUBLE",
+    "argument_format": " , ",
+    "argument_bounds": "The first number to subtract , The second number to subtract"
+  },
+  {
+    "device": "Calculator",
+    "service": "mul",
+    "descriptor": "Provides calculation services",
+    "return_type": "VOID",
+    "argument_descriptor": "Multiply two numbers",
+    "argument_type": "DOUBLE , DOUBLE",
+    "argument_format": " , ",
+    "argument_bounds": "The first number to multiply , The second number to multiply"
+  },
+  {
+    "device": "Calculator",
+    "service": "div",
+    "descriptor": "Provides calculation services",
+    "return_type": "VOID",
+    "argument_descriptor": "Divide two numbers",
+    "argument_type": "DOUBLE , DOUBLE",
+    "argument_format": " , ",
+    "argument_bounds": "The first number to divide , The second number to divide"
+  },
+  {
+    "device": "Calculator",
+    "service": "mod",
+    "descriptor": "Provides calculation services",
+    "return_type": "VOID",
+    "argument_descriptor": "Modulo two numbers",
+    "argument_type": "DOUBLE , DOUBLE",
+    "argument_format": " , ",
+    "argument_bounds": "The first number to modulo , The second number to modulo"
+  },
+  {
+    "device": "Camera",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Camera",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Camera",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Camera",
+    "service": "take",
+    "descriptor": "Allows for the control of a camera device",
+    "return_type": "VOID",
+    "argument_descriptor": "Take a picture with the camera - Return the image as binary data"
+  },
+  {
+    "device": "Camera",
+    "service": "takeTimelapse",
+    "descriptor": "Allows for the control of a camera device",
+    "return_type": "VOID",
+    "argument_descriptor": "Take a picture with the camera - Return the video as binary data",
+    "argument_type": "DOUBLE,DOUBLE",
+    "argument_format": ",",
+    "argument_bounds": "The duration of the timelapse in seconds , The speed of the timelapse"
+  },
+  {
+    "device": "Clock",
+    "service": "delay",
+    "descriptor": "Provide current date and time",
+    "return_type": "VOID",
+    "argument_descriptor": "delay for a given amount of time",
+    "argument_type": "INTEGER",
+    "argument_format": "",
+    "argument_bounds": "millisecond",
+    "enums_descriptor": []
+  },
+  {
+    "device": "Curtain",
+    "service": "open",
+    "descriptor": "Allows for the control of the curtain.",
+    "return_type": "VOID",
+    "argument_descriptor": "Open the curtain",
+    "enums_descriptor": [
+      "• closed - closed",
+      "• closing - closing…",
+      "• open - open",
+      "• opening - opening…",
+      "• partially open - partially open",
+      "• paused -",
+      "• unknown - unknown"
+    ]
+  },
+  {
+    "device": "Curtain",
+    "service": "close",
+    "descriptor": "Allows for the control of the curtain.",
+    "return_type": "VOID",
+    "argument_descriptor": "Close the curtain",
+    "enums_descriptor": [
+      "• closed - closed",
+      "• closing - closing…",
+      "• open - open",
+      "• opening - opening…",
+      "• partially open - partially open",
+      "• paused -",
+      "• unknown - unknown"
+    ]
+  },
+  {
+    "device": "Curtain",
+    "service": "pause",
+    "descriptor": "Allows for the control of the curtain.",
+    "return_type": "VOID",
+    "argument_descriptor": "Pause opening or closing the curtain",
+    "enums_descriptor": [
+      "• closed - closed",
+      "• closing - closing…",
+      "• open - open",
+      "• opening - opening…",
+      "• partially open - partially open",
+      "• paused -",
+      "• unknown - unknown"
+    ]
+  },
+  {
+    "device": "Dehumidifier",
+    "service": "setDehumidifierMode",
+    "descriptor": "Allows for the control of the dehumidifier mode.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the dehumidifier mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the dehumidifier mode",
+    "enums_descriptor": [
+      "• cooling",
+      "• delayWash",
+      "• drying",
+      "• finished",
+      "• refreshing",
+      "• weightSensing",
+      "• wrinklePrevent",
+      "• dehumidifying",
+      "• AIDrying",
+      "• sanitizing",
+      "• internalCare",
+      "• freezeProtection",
+      "• continuousDehumidifying",
+      "• thawingFrozenInside"
+    ]
+  },
+  {
+    "device": "Dehumidifier",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Dehumidifier",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Dehumidifier",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Dishwasher",
+    "service": "setDishwasherMode",
+    "descriptor": "Allows for the control of the dishwasher mode.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the dishwasher mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the dishwasher mode to \"eco\", \"intense\", \"auto\", \"quick\", \"rinse\", or \"dry\" mode",
+    "enums_descriptor": [
+      "• eco - The dishwasher is in \"eco\" mode",
+      "• intense - The dishwasher is in \"intense\" mode",
+      "• auto - The dishwasher is in \"auto\" mode",
+      "• quick - The dishwasher is in \"quick\" mode",
+      "• rinse - The dishwasher is in \"rinse\" mode",
+      "• dry - The dishwasher is in \"dry\" mode"
+    ]
+  },
+  {
+    "device": "Dishwasher",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Dishwasher",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Dishwasher",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "DoorLock",
+    "service": "open",
+    "descriptor": "Allow for the control of a door",
+    "return_type": "VOID",
+    "argument_descriptor": "Open the door",
+    "enums_descriptor": [
+      "• closed - The door is closed",
+      "• closing - The door is closing",
+      "• open - The door is open",
+      "• opening - The door is opening",
+      "• unknown - The current state of the door is unknown"
+    ]
+  },
+  {
+    "device": "DoorLock",
+    "service": "close",
+    "descriptor": "Allow for the control of a door",
+    "return_type": "VOID",
+    "argument_descriptor": "Close the door",
+    "enums_descriptor": [
+      "• closed - The door is closed",
+      "• closing - The door is closing",
+      "• open - The door is open",
+      "• opening - The door is opening",
+      "• unknown - The current state of the door is unknown"
+    ]
+  },
+  {
+    "device": "EmailProvider",
+    "service": "sendMail",
+    "descriptor": "Provides email services",
+    "return_type": "VOID",
+    "argument_descriptor": "Send an email",
+    "argument_type": "STRING,STRING,STRING",
+    "argument_format": " ,  , ",
+    "argument_bounds": "The email address of the recipient , The title of the email , The text of the email"
+  },
+  {
+    "device": "EmailProvider",
+    "service": "sendMailWithFile",
+    "descriptor": "Provides email services",
+    "return_type": "VOID",
+    "argument_descriptor": "Send an email with an attachment",
+    "argument_type": "STRING,STRING,STRING,BINARY",
+    "argument_format": " ,  ,  , ",
+    "argument_bounds": "The email address of the recipient , The title of the email , The text of the email , The path to the file to be attached"
+  },
+  {
+    "device": "Fan",
+    "service": "setFanSpeed",
+    "descriptor": "Allows for the control of the fan.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the fan speed",
+    "argument_type": "INTEGER",
+    "argument_bounds": "Set the fan to this speed"
+  },
+  {
+    "device": "Fan",
+    "service": "setPercent",
+    "descriptor": "Allows for the control of the fan.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the fan speed percent.",
+    "argument_type": "INTEGER",
+    "argument_bounds": "The percent value to set the fan speed to."
+  },
+  {
+    "device": "Fan",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Fan",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Fan",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Feeder",
+    "service": "startFeeding",
+    "descriptor": "Allows for the control of a feeder device.",
+    "return_type": "VOID",
+    "argument_descriptor": "Begin the feeding process.",
+    "enums_descriptor": [
+      "• idle - idle",
+      "• feeding - feeding",
+      "• error - error"
+    ]
+  },
+  {
+    "device": "Feeder",
+    "service": "setFeedPortion",
+    "descriptor": "Allows for the portion control of a feeder device.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the portion (in grams, pounds, ounces, or servings) that the feeder will dispense.",
+    "argument_type": "DOUBLE | ENUM",
+    "argument_format": " | ",
+    "argument_bounds": "The portion (in grams, pounds, ounces, or servings) to dispense. | ",
+    "enums_descriptor": [
+      "• grams",
+      "• pounds",
+      "• ounces",
+      "• servings"
+    ]
+  },
+  {
+    "device": "Feeder",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Feeder",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Feeder",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "GasValve",
+    "service": "open",
+    "descriptor": "Allows for the control of a valve device",
+    "return_type": "VOID",
+    "argument_descriptor": "Open the valve",
+    "enums_descriptor": [
+      "• closed - The value of the ``valve`` attribute if the valve is closed",
+      "• open - The value of the ``valve`` attribute if the valve is open"
+    ]
+  },
+  {
+    "device": "GasValve",
+    "service": "close",
+    "descriptor": "Allows for the control of a valve device",
+    "return_type": "VOID",
+    "argument_descriptor": "Close the valve",
+    "enums_descriptor": [
+      "• closed - The value of the ``valve`` attribute if the valve is closed",
+      "• open - The value of the ``valve`` attribute if the valve is open"
+    ]
+  },
+  {
+    "device": "Humidifier",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Humidifier",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Humidifier",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Humidifier",
+    "service": "setHumidifierMode",
+    "descriptor": "Maintains and sets the state of an humidifier",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the humidifier mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the humidifier mode to \"auto\", \"low\", \"medium\", or \"high\" mode",
+    "enums_descriptor": [
+      "• auto -",
+      "• low -",
+      "• medium -",
+      "• high -"
+    ]
+  },
+  {
+    "device": "Irrigator",
+    "service": "startWatering",
+    "descriptor": "Allows for the control of a irrigator device.",
+    "return_type": "VOID",
+    "argument_descriptor": "Begin the watering process.",
+    "enums_descriptor": [
+      "• idle - idle",
+      "• watering - watering",
+      "• error - error"
+    ]
+  },
+  {
+    "device": "Irrigator",
+    "service": "setWaterPortion",
+    "descriptor": "Allows for the portion control of a irrigator device.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the portion (in liters, milliliters, gallons, or ounces) that the irrigator will dispense.",
+    "argument_type": "DOUBLE | ENUM",
+    "argument_format": " | ",
+    "argument_bounds": "The portion (in grams, pounds, ounces, or servings) to dispense. | ",
+    "enums_descriptor": [
+      "• liters",
+      "• milliliters",
+      "• gallons",
+      "• ounces"
+    ]
+  },
+  {
+    "device": "Irrigator",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Irrigator",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Irrigator",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Light",
+    "service": "setColor",
+    "descriptor": "Allows for control of a color changing device by setting its hue, saturation, and color values",
+    "return_type": "VOID",
+    "argument_descriptor": "Sets the color based on the values passed in with the given map",
+    "argument_type": "DICT",
+    "argument_bounds": "The color map supports the following key/value pairs:\"RED|GREEN|BLUE\", example:\"255|255|255\""
+  },
+  {
+    "device": "Light",
+    "service": "setHue",
+    "descriptor": "Allows for control of a color changing device by setting its hue, saturation, and color values",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the hue value of the color",
+    "argument_type": "DOUBLE",
+    "argument_bounds": "A number in the range ``0-100`` representing the hue as a value of percent"
+  },
+  {
+    "device": "Light",
+    "service": "setSaturation",
+    "descriptor": "Allows for control of a color changing device by setting its hue, saturation, and color values",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the saturation value of the color",
+    "argument_type": "DOUBLE",
+    "argument_bounds": "A number in the range ``0-100`` representing the saturation as a value of percent"
+  },
+  {
+    "device": "Light",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Light",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Light",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Light",
+    "service": "setLevel",
+    "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the level to the given value. If the device supports being turned on and off then it will be turned on if ``level`` is greater than 0 and turned off if ``level`` is equal to 0.",
+    "argument_type": "INTEGER , INTEGER",
+    "argument_format": " , ",
+    "argument_bounds": "The level value, usually ``0-100`` in percent , The rate at which to change the level"
+  },
+  {
+    "device": "Light",
+    "service": "alert",
+    "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch.",
+    "return_type": "VOID",
+    "argument_descriptor": "Alert with dimming"
+  },
+  {
+    "device": "MenuProvider",
+    "service": "menu",
+    "descriptor": "Provides menu information services",
+    "return_type": "VOID",
+    "argument_descriptor": "Get the menu - Return the menu list",
+    "argument_type": "STRING",
+    "argument_bounds": "The command to get the menu - format: [오늘|내일] [학생식당|수의대식당|전망대(3식당)|예술계식당(아름드리)|기숙사식당|아워홈|동원관식당(113동)|웰스토리(220동)|투굿(공대간이식당)|자하연식당|301동식당] [아침|점심|저녁]"
+  },
+  {
+    "device": "MenuProvider",
+    "service": "todayMenu",
+    "descriptor": "Provides menu information services",
+    "return_type": "VOID",
+    "argument_descriptor": "Get today's menu randomly - Return the menu list"
+  },
+  {
+    "device": "MenuProvider",
+    "service": "todayPlace",
+    "descriptor": "Provides menu information services",
+    "return_type": "VOID",
+    "argument_descriptor": "Get today's restaurant randomly - Return the restaurant name"
+  },
+  {
+    "device": "Pump",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Pump",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Pump",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Pump",
+    "service": "open",
+    "descriptor": "Allows for the control of a pump device",
+    "return_type": "VOID",
+    "argument_descriptor": "Open the pump",
+    "enums_descriptor": [
+      "• closed - The value of the ``pump`` attribute if the pump is closed",
+      "• open - The value of the ``pump`` attribute if the pump is open"
+    ]
+  },
+  {
+    "device": "Pump",
+    "service": "close",
+    "descriptor": "Allows for the control of a pump device",
+    "return_type": "VOID",
+    "argument_descriptor": "Close the pump",
+    "enums_descriptor": [
+      "• closed - The value of the ``pump`` attribute if the pump is closed",
+      "• open - The value of the ``pump`` attribute if the pump is open"
+    ]
+  },
+  {
+    "device": "Pump",
+    "service": "setOperationMode",
+    "descriptor": "Allows for setting the operation mode on a pump.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the operation mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "The operation mode to set the device to",
+    "enums_descriptor": [
+      "• normal - The pump is controlled by a setpoint.",
+      "• minimum - This value sets the pump to run at the minimum possible speed it can without being stopped.",
+      "• maximum - This value sets the pump to run at its maximum possible speed.",
+      "• localSetting - This value sets the pump to run with the local settings of the pump."
+    ]
+  },
+  {
+    "device": "Refrigerator",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Refrigerator",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Refrigerator",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Refrigerator",
+    "service": "setDefrost",
+    "descriptor": "Allows for the control of the refrigeration.",
+    "return_type": "VOID",
+    "argument_descriptor": "Sets the defrost on or off",
+    "argument_type": "ENUM",
+    "argument_bounds": "The on or off value for the defrost",
+    "enums_descriptor": [
+      "• on - The value of the ``defrost``, ``rapidCooling``, ``rapidFreezing`` attribute if the defrost, rapidCooling, rapidFreezing is on",
+      "• off - The value of the ``defrost``, ``rapidCooling``, ``rapidFreezing`` attribute if the defrost, rapidCooling, rapidFreezing is off"
+    ]
+  },
+  {
+    "device": "Refrigerator",
+    "service": "setRapidCooling",
+    "descriptor": "Allows for the control of the refrigeration.",
+    "return_type": "VOID",
+    "argument_descriptor": "Sets the rapid cooling on or off",
+    "argument_type": "ENUM",
+    "argument_bounds": "The on or off value for the rapid cooling",
+    "enums_descriptor": [
+      "• on - The value of the ``defrost``, ``rapidCooling``, ``rapidFreezing`` attribute if the defrost, rapidCooling, rapidFreezing is on",
+      "• off - The value of the ``defrost``, ``rapidCooling``, ``rapidFreezing`` attribute if the defrost, rapidCooling, rapidFreezing is off"
+    ]
+  },
+  {
+    "device": "Refrigerator",
+    "service": "setRapidFreezing",
+    "descriptor": "Allows for the control of the refrigeration.",
+    "return_type": "VOID",
+    "argument_descriptor": "Sets the rapid freezing on or off",
+    "argument_type": "ENUM",
+    "argument_bounds": "The on or off value for the rapid freezing",
+    "enums_descriptor": [
+      "• on - The value of the ``defrost``, ``rapidCooling``, ``rapidFreezing`` attribute if the defrost, rapidCooling, rapidFreezing is on",
+      "• off - The value of the ``defrost``, ``rapidCooling``, ``rapidFreezing`` attribute if the defrost, rapidCooling, rapidFreezing is off"
+    ]
+  },
+  {
+    "device": "RobotCleaner",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "RobotCleaner",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "RobotCleaner",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "RobotCleaner",
+    "service": "setRobotCleanerCleaningMode",
+    "descriptor": "Allows for the control of the robot cleaner cleaning mode.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the robot cleaner cleaning mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the robot cleaner cleaning mode, to \"auto\", \"part\", \"repeat\", \"manual\" or \"stop\" modes",
+    "enums_descriptor": [
+      "• auto - The robot cleaner cleaning mode is in \"auto\" mode",
+      "• part - The robot cleaner cleaning mode is in \"part\" mode",
+      "• repeat - The robot cleaner cleaning mode is in \"repeat\" mode",
+      "• manual - The robot cleaner cleaning mode is in \"manual\" mode",
+      "• stop - The robot cleaner cleaning mode is in \"stop\" mode",
+      "• map - The robot cleaner cleaning mode is in \"map\" mode"
+    ]
+  },
+  {
+    "device": "Shade",
+    "service": "setShadeLevel",
+    "descriptor": "Allows for the control of the level of a window shade.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the shade level to the given value.",
+    "argument_type": "INTEGER",
+    "argument_bounds": "The level to which the shade should be set, ``0-100`` in percent; 0 representing completely closed, and 100 representing completely open."
+  },
+  {
+    "device": "Shade",
+    "service": "open",
+    "descriptor": "Allows for the control of the window shade.",
+    "return_type": "VOID",
+    "argument_descriptor": "Open the window shade",
+    "enums_descriptor": [
+      "• closed - closed",
+      "• closing - closing…",
+      "• open - open",
+      "• opening - opening…",
+      "• partially open - partially open",
+      "• paused -",
+      "• unknown - unknown"
+    ]
+  },
+  {
+    "device": "Shade",
+    "service": "close",
+    "descriptor": "Allows for the control of the window shade.",
+    "return_type": "VOID",
+    "argument_descriptor": "Close the window shade",
+    "enums_descriptor": [
+      "• closed - closed",
+      "• closing - closing…",
+      "• open - open",
+      "• opening - opening…",
+      "• partially open - partially open",
+      "• paused -",
+      "• unknown - unknown"
+    ]
+  },
+  {
+    "device": "Shade",
+    "service": "pause",
+    "descriptor": "Allows for the control of the window shade.",
+    "return_type": "VOID",
+    "argument_descriptor": "Pause opening or closing the window shade",
+    "enums_descriptor": [
+      "• closed - closed",
+      "• closing - closing…",
+      "• open - open",
+      "• opening - opening…",
+      "• partially open - partially open",
+      "• paused -",
+      "• unknown - unknown"
+    ]
+  },
+  {
+    "device": "Siren",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Siren",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Siren",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Siren",
+    "service": "setSirenMode",
+    "descriptor": "Allows for the control of the siren.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the siren mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the siren mode",
+    "enums_descriptor": [
+      "• both - ",
+      "• off - ",
+      "• siren - ",
+      "• strobe -"
+    ]
+  },
+  {
+    "device": "SmartPlug",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "SmartPlug",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "SmartPlug",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Speaker",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Speaker",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Speaker",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Speaker",
+    "service": "play",
+    "descriptor": "Allows for the control of the media playback.",
+    "return_type": "VOID",
+    "argument_descriptor": "Play the media playback",
+    "argument_type": "STRING",
+    "argument_bounds": "The source of the media playback",
+    "enums_descriptor": [
+      "• paused - Media playback is in a \"paused\" state",
+      "• playing - Media playback is in a \"playing\" state",
+      "• stopped - Media playback is in a \"stopped\" state",
+      "• fast forwarding - Media playback is in a \"fast forwarding\" state",
+      "• rewinding - Media playback is in a \"rewinding\" state",
+      "• buffering - Media playback is in a \"buffering\" state"
+    ]
+  },
+  {
+    "device": "Speaker",
+    "service": "stop",
+    "descriptor": "Allows for the control of the media playback.",
+    "return_type": "VOID",
+    "argument_descriptor": "Stop the media playback",
+    "enums_descriptor": [
+      "• paused - Media playback is in a \"paused\" state",
+      "• playing - Media playback is in a \"playing\" state",
+      "• stopped - Media playback is in a \"stopped\" state",
+      "• fast forwarding - Media playback is in a \"fast forwarding\" state",
+      "• rewinding - Media playback is in a \"rewinding\" state",
+      "• buffering - Media playback is in a \"buffering\" state"
+    ]
+  },
+  {
+    "device": "Speaker",
+    "service": "pause",
+    "descriptor": "Allows for the control of the media playback.",
+    "return_type": "VOID",
+    "argument_descriptor": "Pause the media playback",
+    "enums_descriptor": [
+      "• paused - Media playback is in a \"paused\" state",
+      "• playing - Media playback is in a \"playing\" state",
+      "• stopped - Media playback is in a \"stopped\" state",
+      "• fast forwarding - Media playback is in a \"fast forwarding\" state",
+      "• rewinding - Media playback is in a \"rewinding\" state",
+      "• buffering - Media playback is in a \"buffering\" state"
+    ]
+  },
+  {
+    "device": "Speaker",
+    "service": "fastForward",
+    "descriptor": "Allows for the control of the media playback.",
+    "return_type": "VOID",
+    "argument_descriptor": "Fast forward the media playback",
+    "enums_descriptor": [
+      "• paused - Media playback is in a \"paused\" state",
+      "• playing - Media playback is in a \"playing\" state",
+      "• stopped - Media playback is in a \"stopped\" state",
+      "• fast forwarding - Media playback is in a \"fast forwarding\" state",
+      "• rewinding - Media playback is in a \"rewinding\" state",
+      "• buffering - Media playback is in a \"buffering\" state"
+    ]
+  },
+  {
+    "device": "Speaker",
+    "service": "rewind",
+    "descriptor": "Allows for the control of the media playback.",
+    "return_type": "VOID",
+    "argument_descriptor": "Rewind the media playback",
+    "enums_descriptor": [
+      "• paused - Media playback is in a \"paused\" state",
+      "• playing - Media playback is in a \"playing\" state",
+      "• stopped - Media playback is in a \"stopped\" state",
+      "• fast forwarding - Media playback is in a \"fast forwarding\" state",
+      "• rewinding - Media playback is in a \"rewinding\" state",
+      "• buffering - Media playback is in a \"buffering\" state"
+    ]
+  },
+  {
+    "device": "Speaker",
+    "service": "setPlaybackStatus",
+    "descriptor": "Allows for the control of the media playback.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the playback status",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the playback status to \"paused\", \"playing\", \"stopped\", \"fast forwarding\" or \"rewinding\" state.",
+    "enums_descriptor": [
+      "• paused - Media playback is in a \"paused\" state",
+      "• playing - Media playback is in a \"playing\" state",
+      "• stopped - Media playback is in a \"stopped\" state",
+      "• fast forwarding - Media playback is in a \"fast forwarding\" state",
+      "• rewinding - Media playback is in a \"rewinding\" state",
+      "• buffering - Media playback is in a \"buffering\" state"
+    ]
+  },
+  {
+    "device": "Speaker",
+    "service": "speak",
+    "descriptor": "Allows for the control of the media playback.",
+    "return_type": "VOID",
+    "argument_descriptor": "TTS feature",
+    "argument_type": "STRING",
+    "argument_bounds": "The text to be spoken",
+    "enums_descriptor": [
+      "• paused - Media playback is in a \"paused\" state",
+      "• playing - Media playback is in a \"playing\" state",
+      "• stopped - Media playback is in a \"stopped\" state",
+      "• fast forwarding - Media playback is in a \"fast forwarding\" state",
+      "• rewinding - Media playback is in a \"rewinding\" state",
+      "• buffering - Media playback is in a \"buffering\" state"
+    ]
+  },
+  {
+    "device": "Recorder",
+    "service": "record",
+    "descriptor": "Record audio",
+    "return_type": "VOID",
+    "argument_descriptor": "Record audio",
+    "argument_type": "STRING,DOUBLE",
+    "argument_format": ",",
+    "argument_bounds": "The file to record to , The duration to record for",
+    "enums_descriptor": [
+      "• idle - The audio recorder is idle",
+      "• recording - The audio recorder is recording"
+    ]
+  },
+  {
+    "device": "Recorder",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Recorder",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Recorder",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Switch",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Switch",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Switch",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Television",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Television",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Television",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Television",
+    "service": "channelUp",
+    "descriptor": "Allows for the control of the TV channel.",
+    "return_type": "VOID",
+    "argument_descriptor": "Move the TV channel up"
+  },
+  {
+    "device": "Television",
+    "service": "channelDown",
+    "descriptor": "Allows for the control of the TV channel.",
+    "return_type": "VOID",
+    "argument_descriptor": "Move the TV channel down"
+  },
+  {
+    "device": "Television",
+    "service": "setTvChannel",
+    "descriptor": "Allows for the control of the TV channel.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the TV channel",
+    "argument_type": "INTEGER"
+  },
+  {
+    "device": "Television",
+    "service": "setTvChannelName",
+    "descriptor": "Allows for the control of the TV channel.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the TV channel Name",
+    "argument_type": "STRING"
+  },
+  {
+    "device": "Television",
+    "service": "mute",
+    "descriptor": "Allows for the control of audio mute.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the audio to mute state",
+    "enums_descriptor": [
+      "• muted - The audio is in \"muted\" state",
+      "• unmuted - The audio is in \"unmuted\" state"
+    ]
+  },
+  {
+    "device": "Television",
+    "service": "unmute",
+    "descriptor": "Allows for the control of audio mute.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the audio to unmute state",
+    "enums_descriptor": [
+      "• muted - The audio is in \"muted\" state",
+      "• unmuted - The audio is in \"unmuted\" state"
+    ]
+  },
+  {
+    "device": "Television",
+    "service": "setMute",
+    "descriptor": "Allows for the control of audio mute.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the state of the audio mute",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the audio mute state to \"muted\" or \"unmuted\"",
+    "enums_descriptor": [
+      "• muted - The audio is in \"muted\" state",
+      "• unmuted - The audio is in \"unmuted\" state"
+    ]
+  },
+  {
+    "device": "Television",
+    "service": "setVolume",
+    "descriptor": "Allows for the control of audio volume.",
+    "return_type": "VOID",
+    "argument_descriptor": "Set the audio volume level",
+    "argument_type": "INTEGER",
+    "argument_bounds": "A value to which the audio volume level should be set"
+  },
+  {
+    "device": "Television",
+    "service": "volumeUp",
+    "descriptor": "Allows for the control of audio volume.",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn the audio volume up"
+  },
+  {
+    "device": "Television",
+    "service": "volumeDown",
+    "descriptor": "Allows for the control of audio volume.",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn the audio volume down"
+  },
+  {
+    "device": "TestDevice",
+    "service": "testSkillFunction",
+    "descriptor": "testSkill",
+    "return_type": "VOID",
+    "argument_descriptor": "testSkillFunction",
+    "argument_type": "STRING",
+    "argument_bounds": "testArgument",
+    "enums_descriptor": [
+      "testSkill Enums"
+    ]
+  },
+  {
+    "device": "Valve",
+    "service": "open",
+    "descriptor": "Allows for the control of a valve device",
+    "return_type": "VOID",
+    "argument_descriptor": "Open the valve",
+    "enums_descriptor": [
+      "• closed - The value of the ``valve`` attribute if the valve is closed",
+      "• open - The value of the ``valve`` attribute if the valve is open"
+    ]
+  },
+  {
+    "device": "Valve",
+    "service": "close",
+    "descriptor": "Allows for the control of a valve device",
+    "return_type": "VOID",
+    "argument_descriptor": "Close the valve",
+    "enums_descriptor": [
+      "• closed - The value of the ``valve`` attribute if the valve is closed",
+      "• open - The value of the ``valve`` attribute if the valve is open"
+    ]
+  },
+  {
+    "device": "WeatherProvider",
+    "service": "getWeatherInfo",
+    "descriptor": "Provides weather information",
+    "return_type": "VOID",
+    "argument_descriptor": "Get the current weather information - Return whole weather information, format: \"temperature, humidity, pressure, pm25, pm10, weather, weather_string, icon_id, location\"",
+    "argument_type": "DOUBLE,DOUBLE",
+    "argument_format": ",",
+    "argument_bounds": "The latitude of the location , The longitude of the location",
+    "enums_descriptor": [
+      "• thunderstorm - thunderstorm",
+      "• drizzle - drizzle",
+      "• rain - rain",
+      "• snow - snow",
+      "• mist - mist",
+      "• smoke - smoke",
+      "• haze - haze",
+      "• dust - dust",
+      "• fog - fog",
+      "• sand - sand",
+      "• ash - ash",
+      "• squall - squall",
+      "• tornado - tornado",
+      "• clear - clear",
+      "• clouds - clouds"
+    ]
+  },
+  {
+    "device": "Window",
+    "service": "open",
+    "descriptor": "Allows for the control of the window shade.",
+    "return_type": "VOID",
+    "argument_descriptor": "Open the window",
+    "enums_descriptor": [
+      "• closed - closed",
+      "• open - open",
+      "• unknown - unknown"
+    ]
+  },
+  {
+    "device": "Window",
+    "service": "close",
+    "descriptor": "Allows for the control of the window shade.",
+    "return_type": "VOID",
+    "argument_descriptor": "Close the window",
+    "enums_descriptor": [
+      "• closed - closed",
+      "• open - open",
+      "• unknown - unknown"
+    ]
+  },
+  {
+    "device": "Relay",
+    "service": "on",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch on",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Relay",
+    "service": "off",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Turn a switch off",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Relay",
+    "service": "toggle",
+    "descriptor": "Allows for the control of a switch device",
+    "return_type": "VOID",
+    "argument_descriptor": "Toggle a switch",
+    "enums_descriptor": [
+      "• on - The value of the ``switch`` attribute if the switch is on",
+      "• off - The value of the ``switch`` attribute if the switch is off"
+    ]
+  },
+  {
+    "device": "Timer",
+    "service": "add",
+    "descriptor": "The Timer allows for interacting with devices that serve as timers",
+    "return_type": "VOID",
+    "argument_descriptor": "Add a timer",
+    "argument_type": "STRING,DOUBLE",
+    "argument_format": ", ",
+    "argument_bounds": "The time name , The time at which the timer should expire"
+  },
+  {
+    "device": "Timer",
+    "service": "set",
+    "descriptor": "The Timer allows for interacting with devices that serve as timers",
+    "return_type": "VOID",
+    "argument_descriptor": "Set a timer",
+    "argument_type": "STRING,DOUBLE",
+    "argument_format": ",",
+    "argument_bounds": "The time name , The time at which the timer should expire"
+  },
+  {
+    "device": "Timer",
+    "service": "start",
+    "descriptor": "The Timer allows for interacting with devices that serve as timers",
+    "return_type": "VOID",
+    "argument_descriptor": "Start a timer",
+    "argument_type": "STRING",
+    "argument_bounds": "The time name"
+  },
+  {
+    "device": "Timer",
+    "service": "reset",
+    "descriptor": "The Timer allows for interacting with devices that serve as timers",
+    "return_type": "VOID",
+    "argument_descriptor": "Reset a timer",
+    "argument_type": "STRING",
+    "argument_bounds": "The time name"
+  },
+  {
+    "device": "Timer",
+    "service": "isSet",
+    "descriptor": "The Timer allows for interacting with devices that serve as timers",
+    "return_type": "VOID",
+    "argument_descriptor": "Check if a timer is set",
+    "argument_type": "STRING",
+    "argument_bounds": "The time name"
+  },
+  {
+    "device": "Timer",
+    "service": "isExist",
+    "descriptor": "The Timer allows for interacting with devices that serve as timers",
+    "return_type": "VOID",
+    "argument_descriptor": "Check if a timer is exist",
+    "argument_type": "STRING",
+    "argument_bounds": "The time name"
+  },
+  {
+    "device": "ManagerThing",
+    "service": "discover",
+    "descriptor": "Allow Manager Thing's features",
+    "return_type": "VOID",
+    "argument_descriptor": "Discover local devices - Return device list with json format"
+  },
+  {
+    "device": "ManagerThing",
+    "service": "thing",
+    "descriptor": "Allow Manager Thing's features",
+    "return_type": "VOID",
+    "argument_descriptor": "Add staff thing - Return error string",
+    "argument_type": "STRING,STRING,STRING",
+    "argument_format": " ,  , ",
+    "argument_bounds": "Staff thing's parameter , Requester's client id , Staff thing's name"
+  },
+  {
+    "device": "ManagerThing",
+    "service": "thing",
+    "descriptor": "Allow Manager Thing's features",
+    "return_type": "VOID",
+    "argument_descriptor": "Delete staff thing - Return error string",
+    "argument_type": "STRING,STRING",
+    "argument_format": " , ",
+    "argument_bounds": "Staff thing's name , Requester's client id"
+  }
+]

@@ -1,0 +1,2 @@
+﻿sentence,best_code
+모든 스위치를 끈다.,"[{'name': '스위치모두끄기', 'cron': '', 'period': -1, 'code': 'all(#Switch).off()'}]"

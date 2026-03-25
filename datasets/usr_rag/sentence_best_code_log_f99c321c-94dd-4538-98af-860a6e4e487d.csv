@@ -1,0 +1,2 @@
+﻿sentence,best_code
+임의의 조명을 켠다.,"[{'name': '임의조명켜기', 'cron': '', 'period': -1, 'code': '(#Light).on()'}]"

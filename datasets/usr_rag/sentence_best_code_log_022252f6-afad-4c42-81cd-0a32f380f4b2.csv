@@ -1,0 +1,2 @@
+﻿sentence,best_code
+모든 조명을 켠다.,"[{'name': '집안모든조명켜기', 'cron': '', 'period': -1, 'code': 'all(#Light).on()'}]"

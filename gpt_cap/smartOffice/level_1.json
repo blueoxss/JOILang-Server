@@ -1,0 +1,2268 @@
+[
+  {
+    "command": "에어컨의 현재 모드를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current mode of the air conditioner is ' + (#AirConditioner).airConditionerMode_airConditionerMode\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "에어컨의 목표온도를 24도로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#AirConditioner).airConditionerMode_targetTemperature(24)"
+      }
+    ]
+  },
+  {
+    "command": "에어컨에 지원되는 모드 목록을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The supported mode of the air conditioner are ' + (#AirConditioner).airConditionerMode_supportedAcModes\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "로비의 에어컨을 자동 모드로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#lobby #AirConditioner).airConditionerMode_setAirConditionerMode('auto')"
+      }
+    ]
+  },
+  {
+    "command": "로비의 에어컨 온도를 24도로 맞춰줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#lobby #AirConditioner).airConditionerMode_setTemperature(24)"
+      }
+    ]
+  },
+  {
+    "command": "에어컨의 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#AirConditioner).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "로비에서 에어컨을 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#lobby #AirConditioner).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "에어컨을 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#AirConditioner).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "로비의 에어컨을 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#lobby #AirConditioner).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "공기청정기의 팬 모드를 자동으로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#AirPurifier).airPurifierFanMode_airPurifierFanMode('auto')"
+      }
+    ]
+  },
+  {
+    "command": "로비에 있는 공기청정기의 팬 모드를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#lobby #Speaker).mediaPlayback_speak((#lobby #AirPurifier).airPurifierFanMode_supportedAirPurifierFanModes)"
+      }
+    ]
+  },
+  {
+    "command": "로비에서는 공기청정기의 팬 모드를 자동으로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#lobby #AirPurifier).airPurifierFanMode_setAirPurifierFanMode('auto')"
+      }
+    ]
+  },
+  {
+    "command": "공기청정기의 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "#Speaker).mediaPlayback_speak((#AirPurifier).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "로비에서 공기청정기를 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#lobby #AirPurifier).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "로비의 공기청정기를 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#AirPurifier).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "공기 청정기 스위치를 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#lobby #AirPurifier).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "로비의 이산화탄소 수치를 측정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#lobby #Speaker).mediaPlayback_speak((#lobby #AirQualityDetector).carbonDioxideMeasurement_carbonDioxide)"
+      }
+    ]
+  },
+  {
+    "command": "로비의 현재 먼지 수준을 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current dust level in the meeting room is ' + (#lobby #AirQualityDetector).dustSensor_dustLevel + ' micrograms per cubic meter.'\n    (#lobby #Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 미세먼지 농도는 어느 정도인지 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#DustSensor).dustSensor_fineDustLevel)"
+      }
+    ]
+  },
+  {
+    "command": "매우 미세한 먼지 수준을 측정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#DustSensor).dustSensor_veryFineDustLevel)"
+      }
+    ]
+  },
+  {
+    "command": "온도를 측정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#TemperatureSensor).temperatureMeasurement_temperature)"
+      }
+    ]
+  },
+  {
+    "command": "온도 범위를 측정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#TemperatureSensor).temperatureMeasurement_temperatureRange)"
+      }
+    ]
+  },
+  {
+    "command": "총 휘발성 유기 화합물 수준을 측정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#AirQualityDetector).tvocMeasurement_tvocLevel)"
+      }
+    ]
+  },
+  {
+    "command": "현재 상대 습도를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#HumiditySensor).relativeHumidityMeasurement_humidity)"
+      }
+    ]
+  },
+  {
+    "command": "블라인드의 레벨을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Blind).blindLevel_blindLevel)"
+      }
+    ]
+  },
+  {
+    "command": "블라인드를 50%로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Blind).blindLevel_setBlindLevel(50)"
+      }
+    ]
+  },
+  {
+    "command": "블라인드의 상태를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Blind).blind_blind)"
+      }
+    ]
+  },
+  {
+    "command": "블라인드를 열어줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Blind).blind_open()"
+      }
+    ]
+  },
+  {
+    "command": "블라인드를 닫아줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Blind).blind_close()"
+      }
+    ]
+  },
+  {
+    "command": "블라인드를 일시 정지해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Blind).blind_pause()"
+      }
+    ]
+  },
+  {
+    "command": "카메라 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Camera).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "카메라 스위치를 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Camera).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "카메라를 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Camera).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "카메라 스위치를 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Camera).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "카메라로 촬영한 최신 이미지를 받아줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Camera).camera_image()"
+      }
+    ]
+  },
+  {
+    "command": "카메라로 촬영한 최신 영상을 받아줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Camera).camera_video()"
+      }
+    ]
+  },
+  {
+    "command": "카메라로 사진을 찍어줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Camera).camera_take()"
+      }
+    ]
+  },
+  {
+    "command": "2배 속도로 10초간 타임랩스를 촬영해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Camera).camera_takeTimelapse(10, 2)"
+      }
+    ]
+  },
+  {
+    "command": "충전기 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Charger).chargingState_chargingState)"
+      }
+    ]
+  },
+  {
+    "command": "충전기의 지원되는 충전 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Charger).chargingState_supportedChargingStates)"
+      }
+    ]
+  },
+  {
+    "command": "충전기의 현재 측정값을 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current measurement of the charger is ' + (#Charger).currentMeasurement_current\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "충전기의 전압 측정을 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current voltage is ' + (#Charger).voltageMeasurement_voltage\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "올해를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current year is ' + (#Clock).clock_year\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 달을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current month is ' + (#Clock).clock_month\n    (#Speaker).speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "날짜를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'Today is ' + (#Clock).clock_day\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 요일을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'Today is ' + (#Clock).clock_weekday\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 시간을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current hour is ' + (#Clock).clock_hour\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 분을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current minute is ' + (#Clock).clock_minute\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 초를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "speka = 'The current second is ' + (#Clock).clock_second\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 타임스탬프를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current timestamp is ' + (#Clock).clock_timestamp\n    (#lobby.Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 날짜와 시간을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current date and time is ' + (#Clock).clock_datetime\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "오늘 날짜를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'Today's date is ' + (#Clock).clock_date\n    (#Speaker).speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 시간을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current time is ' + (#Clock).clock_time\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "오늘이 공휴일인지 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Clock).clock_isHoliday)"
+      }
+    ]
+  },
+  {
+    "command": "1시간 30분 45초 동안 기다려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Clock).clock_delay(1,30,45)"
+      }
+    ]
+  },
+  {
+    "command": "접촉 센서의 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#ContactSensor).contactSensor_contact)"
+      }
+    ]
+  },
+  {
+    "command": "회의실 커튼 상태를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The meeting room curtain is ' + (#meeting_room #Curtain).curtain_curtain\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "커튼에 지원되는 명령 목록을 표시해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'Supported commands for the curtain are ' + (#Curtain).curtain_supportedCurtainCommands\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "커튼을 열어줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Curtain).curtain_open()"
+      }
+    ]
+  },
+  {
+    "command": "회의실 커튼을 닫아줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#meeting_room #Curtain).curtain_close()"
+      }
+    ]
+  },
+  {
+    "command": "커튼을 잠시 멈춰줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Curtain).curtain_pause()"
+      }
+    ]
+  },
+  {
+    "command": "제습기의 현재 모드를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Dehumidifier).dehumidifierMode_dehumidifierMode)"
+      }
+    ]
+  },
+  {
+    "command": "제습기를 냉방 모드로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Dehumidifier).dehumidifierMode_setDehumidifierMode('cooling')"
+      }
+    ]
+  },
+  {
+    "command": "화장실의 제습기 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#restroom #Dehumidifier).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "화장실의 제습기를 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#restroom #Dehumidifier).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "화장실의 제습기를 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#restroom #Dehumidifier).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "화장실의 제습기를 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#restroom #Dehumidifier).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "회의실 문 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#meeting_room #DoorLock).doorControl_door)"
+      }
+    ]
+  },
+  {
+    "command": "문을 열어.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Door).doorControl_open()"
+      }
+    ]
+  },
+  {
+    "command": "문을 닫아줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#DoorLock).doorControl_close()"
+      }
+    ]
+  },
+  {
+    "command": "제목을 \"안녕해줘\"로 하고 본문을 \"테스트 이메일입니다\"로 하여 \"[example@example.com](mailto:example@example.com)\"으로 이메일을 보내줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#EmailProvider).emailProvider_sendMail('example@example.com', 'Hello', 'This is a test email.')"
+      }
+    ]
+  },
+  {
+    "command": "제목을 \"중요 문서\"로 하고 본문을 \"안녕해줘, 첨부 문서를 확인해줘.\"로 하고 파일 \"C:/Documents/important.pdf\"를 포함하여 \"[test@example.com](mailto:test@example.com)\"으로 이메일을 보내줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#EmailProvider).emailProvider_sendMailWithFile('test@example.com', 'Important Document', 'Hello, please check the attached document.', 'C:/Documents/important.pdf')"
+      }
+    ]
+  },
+  {
+    "command": "팬 속도를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Fan).fanControl_fanSpeed)"
+      }
+    ]
+  },
+  {
+    "command": "팬 속도 백분율을 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Fan).fanControl_percent)"
+      }
+    ]
+  },
+  {
+    "command": "팬 속도를 3으로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Fan).fanControl_setFanSpeed(3)"
+      }
+    ]
+  },
+  {
+    "command": "팬 속도를 50%로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Fan).fanControl_setPercent(50)"
+      }
+    ]
+  },
+  {
+    "command": "팬 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Fan).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "선풍기를 돌려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Fan).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "선풍기를 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Fan).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "팬을 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Fan).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "가습기 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Humidifier).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "가습기를 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Humidifier).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "가습기를 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Humidifier).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "가습기를 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Humidifier).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "가습기 모드를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Humidifier).humidifierMode_humidifierMode)"
+      }
+    ]
+  },
+  {
+    "command": "가습기를 자동 모드로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Humidifier).humidifierMode_setHumidifierMode('auto')"
+      }
+    ]
+  },
+  {
+    "command": "현재 상대 습도를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#HumiditySensor).relativeHumidityMeasurement_humidity)"
+      }
+    ]
+  },
+  {
+    "command": "밝은 색상을 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Light).colorControl_color)"
+      }
+    ]
+  },
+  {
+    "command": "빛의 색상을 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The hue of the light is ' + (#Light).colorControl_hue\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "조명 채도를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The staturation of the light is ' + (#Light).colorControl_saturation\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "회의실 조명 색상을 빨간색으로 설정해줘. (색상: 0. 채도: 100)",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#meeting_room #Light).colorControl_setColor('0|100')"
+      }
+    ]
+  },
+  {
+    "command": "밝은 색상을 75%로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Light).colorControl_setHue(75)"
+      }
+    ]
+  },
+  {
+    "command": "조명의 채도를 75로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Light).colorControl_setSaturation(75)"
+      }
+    ]
+  },
+  {
+    "command": "회의실 조명 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#meeting_room #Light).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "불을 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Light).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "불을 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Light).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "불을 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Light).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "조도를 75로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Light).switchLevel_level(75)"
+      }
+    ]
+  },
+  {
+    "command": "조명 스위치 레벨 범위를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The light level range is ' + (#Light).switchLevel_levelRange\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "회의실 조명의 밝기를 75로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#meeting_room #Light).switchLevel_setLevel(75)"
+      }
+    ]
+  },
+  {
+    "command": "조명을 경고 모드로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Light).switchLevel_alert()"
+      }
+    ]
+  },
+  {
+    "command": "조도 센서에서 밝기 레벨을 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current brightness level is ' + (#LightSensor).lightLevel_light + ' lux.'\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "오늘 학생 식당의 점심 메뉴를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "menu = (#MenuProvider).menuProvider_menu('오늘 학생식당 점심')\n    script ='Today\\\\'s lunch menu at the student cafeteria is ' + menu\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "오늘의 메뉴를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "todayMenu = (#MenuProvider).menuProvider_todayMenu()\n    script ='Today\\\\'s menu is ' + todayMenu\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "오늘의 식당을 무작위로 추천해 줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "place = (#MenuProvider).menuProvider_todayPlace()\n    script ='Today\\\\'s recommended restaurant is ' + place\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "회의실의 모션 센서 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The motion sensor status in the meeting room is ' + (#meeting_room #MotionSensor).motionSensor_motion\n    (#meeting_room #Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "회의실의 존재감 센서 상태를 확인해줘",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The presence sensor status in the meeting room is ' + (#meeting_room #PresenceSensor).presenceSensor_presence\n    (#meeting_room #Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "냉장고 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Refrigerator).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "냉장고를 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Refrigerator).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "냉장고를 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Refrigerator).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "냉장고 스위치를 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Refrigerator).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "냉장고의 해동 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The status of the defrost is ' + (#Refrigerator).refrigeration_defrost\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "냉장고의 급속냉각 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The status of the rapid cooling is ' + (#Refrigerator).refrigeration_rapidCooling\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "냉장고의 급속냉동 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The status of the rapid freezing is ' + (#Refrigerator).refrigeration_rapidFreezing\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "냉장고의 제상 기능을 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Refrigerator).refrigeration_setDefrost('on')"
+      }
+    ]
+  },
+  {
+    "command": "냉장고의 급속냉각 기능을 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Refrigerator).refrigeration_setRapidCooling('on')"
+      }
+    ]
+  },
+  {
+    "command": "급속 냉동 기능을 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Refrigerator).refrigeration_setRapidFreezing('on')"
+      }
+    ]
+  },
+  {
+    "command": "로봇 청소기 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#RobotCleaner).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "로봇 청소기를 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#RobotCleaner).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "로봇 청소기를 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#RobotCleaner).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "로봇 청소기의 스위치를 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#RobotCleaner).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "로봇 청소기 모드를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current robot cleaner cleaning mode is ' + (#RobotCleaner).robotCleanerCleaningMode_robotCleanerCleaningMode + ' mode.'\n\t\t(#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "로봇 청소기를 자동 모드로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#RobotCleaner).robotCleanerCleaningMode_setRobotCleanerCleaningMode('auto')"
+      }
+    ]
+  },
+  {
+    "command": "회의실의 그늘 수준을 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current shade level is ' + (#meeting_room #Shade).windowShadeLevel_shadeLevel\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "회의실 창문 블라인드를 50%로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#meeting_room #Shade).windowShadeLevel_setShadeLevel(50)"
+      }
+    ]
+  },
+  {
+    "command": "회의실 창문 블라인드 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current shade state is ' + (#meeting_room #Shade).windowShade_windowShade\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "회의실 창 블라인드에 지원되는 명령어 목록을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#meeting_room #Shade).windowShade_supportedWindowShadeCommands)"
+      }
+    ]
+  },
+  {
+    "command": "창문 블라인드를 열어줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Shade).windowShade_open()"
+      }
+    ]
+  },
+  {
+    "command": "회의실의 창문 블라인드를 내려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#meeting_room #Shade).windowShade_close()"
+      }
+    ]
+  },
+  {
+    "command": "창문 블라인드를 잠시 내려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Shade).windowShade_pause()"
+      }
+    ]
+  },
+  {
+    "command": "사이렌 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Siren).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "사이렌을 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Siren).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "사이렌을 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Siren).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "사이렌을 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Siren).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "사이렌 모드를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current siren mode is ' + (#Siren).sirenMode_sirenMode \n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "사이렌을 사이렌 모드로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Siren).sirenMode_setSirenMode('siren')"
+      }
+    ]
+  },
+  {
+    "command": "스마트 플러그의 전류를 측정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current measured from the smart plug is ' + (#SmartPlug).currentMeasurement_current + ' amperes.'\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "스마트플러그 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#SmartPlug).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "스마트 플러그를 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#SmartPlug).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "스마트 플러그를 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#SmartPlug).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "스피커를 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#SmartPlug).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "스마트 플러그의 전압을 측정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current voltage is ' + (#SmartPlug).voltageMeasurement_voltage + ' volts.'\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 전력 소비량을 알려줘.(와트)",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current power consumption is ' + (#SmartPlug).powerMeter_power + ' watts.'\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "총 전력 소비량(Wh)",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The power consumption of the smart plug is ' + (#SmartPlug).powerMeter_powerConsumption + ' Wh.'\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "연기 감지기로 연기를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#SmokeDetector).smokeDetector_smoke)"
+      }
+    ]
+  },
+  {
+    "command": "소리가 감지되는지 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#SoundSensor).soundSensor_sound)"
+      }
+    ]
+  },
+  {
+    "command": "사운드 센서의 음압 레벨을 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The sound pressure level is ' + (#SoundSensor).soundPressureLevel_soundPressureLevel\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "스피커 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Speaker).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "스피커를 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "스피커를 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "스피커를 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "스피커의 미디어 재생 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The media playback status is ' + (#Speaker).mediaPlayback_playbackStatus\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "스피커에서 지원되는 미디어 재생 명령을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Speaker).mediaPlayback_supportedPlaybackCommands)"
+      }
+    ]
+  },
+  {
+    "command": "스피커로 음악을 재생해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_play('The source of the media playback')"
+      }
+    ]
+  },
+  {
+    "command": "스피커에서 미디어 재생을 중지해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_stop()"
+      }
+    ]
+  },
+  {
+    "command": "스피커에서 미디어 재생을 일시 중지해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_pause()"
+      }
+    ]
+  },
+  {
+    "command": "스피커에서 미디어 재생을 빠르게 전달해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_fastForward()"
+      }
+    ]
+  },
+  {
+    "command": "스피커에서 미디어 재생을 되감습니다.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_rewind()"
+      }
+    ]
+  },
+  {
+    "command": "스피커의 재생 상태를 일시 정지로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_setPlaybackStatus('paused')"
+      }
+    ]
+  },
+  {
+    "command": "화자에게 \"안녕해줘, 오늘 날씨는 맑습니다.\"라고 말하라고 해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak('Hello, today's weather is clear.')"
+      }
+    ]
+  },
+  {
+    "command": "오디오 녹음기의 현재 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current status of the audio recorder is ' + (#Recorder).audioRecord_recordStatus\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "5분 동안 'recording.wav'에 오디오를 녹음해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Recorder).audioRecord_record('recording.wav', 300)"
+      }
+    ]
+  },
+  {
+    "command": "레코더 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Recorder).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "녹음기를 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Recorder).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "녹음기를 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Recorder).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "녹음기를 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Recorder).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "스위치 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Switch).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "스위치를 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Switch).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "스위치를 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Switch).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "스위치를 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Switch).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "텔레비전 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Television).switch_switch)"
+      }
+    ]
+  },
+  {
+    "command": "텔레비전을 켜줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).switch_on()"
+      }
+    ]
+  },
+  {
+    "command": "텔레비전을 꺼줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).switch_off()"
+      }
+    ]
+  },
+  {
+    "command": "텔레비전을 토글해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).switch_toggle()"
+      }
+    ]
+  },
+  {
+    "command": "TV 채널을 5로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).tvChannel_tvChannel(5)"
+      }
+    ]
+  },
+  {
+    "command": "TV 채널 이름을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#Television).tvChannel_tvChannelName)"
+      }
+    ]
+  },
+  {
+    "command": "TV 채널을 하나 위로 올려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).tvChannel_channelUp()"
+      }
+    ]
+  },
+  {
+    "command": "TV 채널을 1단계 아래로 내려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).tvChannel_channelDown()"
+      }
+    ]
+  },
+  {
+    "command": "TV 채널을 5로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).tvChannel_setTvChannel(5)"
+      }
+    ]
+  },
+  {
+    "command": "TV 채널을 \"KBS\"로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).tvChannel_setTvChannelName('KBS')"
+      }
+    ]
+  },
+  {
+    "command": "TV의 음소거 상태를 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The television is currently ' + (#Television).audioMute_muteStatus\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "TV를 음소거로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).audioMute_mute()"
+      }
+    ]
+  },
+  {
+    "command": "TV 음소거를 해제해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).audioMute_unmute()"
+      }
+    ]
+  },
+  {
+    "command": "TV의 오디오 음소거 상태를 '음소거'로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).audioMute_setMute('muted')"
+      }
+    ]
+  },
+  {
+    "command": "TV의 현재 볼륨을 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current volume of the TV is ' + (#Television).audioVolume_volume\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "TV 볼륨을 15로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).audioVolume_setVolume(15)"
+      }
+    ]
+  },
+  {
+    "command": "TV 볼륨을 1만큼 높여줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).audioVolume_volumeUp()"
+      }
+    ]
+  },
+  {
+    "command": "TV 볼륨을 1단계 낮춰줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Television).audioVolume_volumeDown()"
+      }
+    ]
+  },
+  {
+    "command": "온도 센서로부터 현재 온도를 측정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current temperature is ' + (#TemperatureSensor).temperatureMeasurement_temperature\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "온도 범위(DICT 유형)",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current temperature range is ' + (#TemperatureSensor).temperatureMeasurement_temperatureRange\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 기온을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current temperature is ' + (#WeatherProvider).weatherProvider_temperatureWeather\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 압력 수준을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current pressure level is ' + (#WeatherProvider).weatherProvider_pressureWeather\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 PM2.5 수준을 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current PM2.5 level is ' + (#WeatherProvider).weatherProvider_pm25Weather\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 PM10 수치를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current PM10 level is ' + pm10_(#WeatherProvider).weatherProvider_pm10Weatherlevel\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 날씨를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "script = 'The current weather is ' + (#WeatherProvider).weatherProvider_weather\n    (#Speaker).mediaPlayback_speak(script)"
+      }
+    ]
+  },
+  {
+    "command": "현재 위치의 최신 날씨 정보를 알려줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_getWeatherInfo)"
+      }
+    ]
+  },
+  {
+    "command": "창문이 닫혀 있는지 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak( (#Window).windowControl_window)"
+      }
+    ]
+  },
+  {
+    "command": "창문을 열어줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Window).windowControl_open()"
+      }
+    ]
+  },
+  {
+    "command": "창을 닫아줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Window).windowControl_close()"
+      }
+    ]
+  },
+  {
+    "command": "넘어짐이 발생했는지 감지해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Speaker).mediaPlayback_speak((#fallDetector).fallDetection_fall)"
+      }
+    ]
+  },
+  {
+    "command": "로비에 누군가 있는지 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#lobby #Speaker).mediaPlayback_speak((#lobby #OccupancySensor).presenceSensor_presence)"
+      }
+    ]
+  },
+  {
+    "command": "30분 후에 만료되는 타이머를 'timer1'이라는 이름으로 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Timer).timer_add('timer1', 30 MIN)"
+      }
+    ]
+  },
+  {
+    "command": "'아침운동'이라는 이름의 타이머를 5분 후에 만료되도록 설정해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Timer).timer_set('Morning Exercise', 5 MIN)"
+      }
+    ]
+  },
+  {
+    "command": "'아침 운동'이라는 이름으로 타이머를 시작해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "(#Timer).timer_start('Morning Exercise')"
+      }
+    ]
+  },
+  {
+    "command": "'저녁 운동'이라는 이름의 타이머가 설정되어 있는지 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "status = (#Timer).timer_isSet('Evening Exercise’)\n  (#Speaker).mediaPlayback_speak(status)"
+      }
+    ]
+  },
+  {
+    "command": "'저녁 운동'이라는 이름의 타이머가 있는지 확인해줘.",
+    "code": [
+      {
+        "name": "Scenario1",
+        "cron": "",
+        "period": -1,
+        "code": "status = (#Timer).timer_isExist('Evening Exercise')\n    (#Speaker).mediaPlayback_speak(status)"
+      }
+    ]
+  }
+]

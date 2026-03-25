@@ -1,0 +1,335 @@
+- command: "1초마다 확인하여 관개 장치가 꺼졌다 켜진 횟수가 4번을 초과하고 펌프가 2번 이상 작동했으면 블라인드를 닫고 커튼을 내려 줘."
+  command_translated: "Check every second and close the blinds and lower the curtains if the number of times the irrigation has turned off and on exceeds 4 and the pump has run more than 2 times."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 1000
+    code: |
+      prev_irrigator_state := (#Irrigator).switch_switch
+      irrigator_off_to_on_count := 0
+      prev_pump_state := (#Pump).switch_switch
+      pump_on_count := 0
+      irrigator_state = (#Irrigator).switch_switch
+      pump_state = (#Pump).switch_switch
+      if ((prev_irrigator_state == "off") and (irrigator_state == "on")) {
+        irrigator_off_to_on_count = irrigator_off_to_on_count + 1
+      }
+      prev_irrigator_state = irrigator_state
+      if ((pump_state == "on") and (prev_pump_state != "on")) {
+        pump_on_count = pump_on_count + 1
+      }
+      prev_pump_state = pump_state
+      if ((irrigator_off_to_on_count > 4) and (pump_on_count >= 2)) {
+        (#Blind).blind_close()
+        (#Curtain).curtain_close()
+        break
+      }
+  devices:
+  - Curtain
+  - Blind
+  - Pump
+  - Irrigator
+- command: "실시간으로 검사해서 창문이 열렸다 닫힌 횟수가 3번 이상이고, 그 사이 선풍기가 한 번도 꺼지지 않았으면 선풍기를 꺼 주고 블라인드를 닫아 줘."
+  command_translated: "If the real-time check shows that the window has been opened and closed more than three times, and the fan hasn't turned off in between, turn off the fan and close the blinds."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      prev_window_state := (#Window).windowControl_window
+      window_open_to_close_count := 0
+      fan_off_detected := False
+      window_state = (#Window).windowControl_window
+      fan_state = (#Fan).switch_switch
+      if ((prev_window_state == "open") and (window_state == "closed")) {
+        window_open_to_close_count = window_open_to_close_count + 1
+      }
+      prev_window_state = window_state
+      if (fan_state == "off") {
+        fan_off_detected = True
+      }
+      if ((window_open_to_close_count >= 3) and (fan_off_detected == False)) {
+        (#Fan).switch_off()
+        (#Blind).blind_close()
+        break
+      }
+  devices:
+  - Blind
+  - Window
+  - Fan
+- command: "2초마다 체크해서 매일 오전 6시부터 9시 사이에 조명이 켜져 있는 누적 시간이 10분 이상이고, 관개 장치가 세 번 이상 꺼졌다 켜졌으면 스피커로 '관수 완료되었습니다'라고 말해 줘."
+  command_translated: "Check every two seconds, and if the cumulative time the lights are on between 6 a.m. and 9 a.m. each day is 10 minutes or more, and the irrigator has been turned off and on three or more times during that same period, announce \"Watering complete\" via the speaker."
+  code:
+  - name: "Scenario1"
+    cron: "0 6 * * *"
+    period: 2000
+    code: |
+      light_on_duration := 0
+      irrigator_toggle_count := 0
+      prev_irrigator := ""
+
+      if ((#Clock).clock_hour < 9) {
+        if ((#Light).switch_switch == "on") {
+          light_on_duration = light_on_duration + 2000
+        }
+
+        current_irrigator = (#Irrigator).switch_switch
+        if ((prev_irrigator == "on") and (current_irrigator == "off")) {
+          irrigator_toggle_count = irrigator_toggle_count + 1
+        }
+        prev_irrigator = current_irrigator
+
+        if ((light_on_duration >= 600000) and (irrigator_toggle_count >= 3)) {
+          (#Speaker).mediaPlayback_speak("Watering complete")
+          break
+        }
+      } else {
+        break
+      }
+  devices:
+  - Clock
+  - Irrigator
+  - Light
+  - Speaker
+- command: "실시간으로 확인하여 토양 습도 센서 값이 연속으로 3회 15 이하를 기록하고 그 중 두 번째 값이 가장 낮았다면 관개 장치를 켜고 블라인드를 닫아 줘. 단, 3월은 제외하고."
+  command_translated: "Check in real time, and if the soil moisture sensor value is below 15 three times in a row, and the second value is the lowest, turn on the irrigation device and close the blinds. However, this does not apply to March."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      h1 := 100
+      h2 := 100
+      h3 := 100
+
+      if ((#Clock).clock_month != 3) {
+        h1 = h2
+        h2 = h3
+        h3 = (#SoilMoistureSensor).soilHumidityMeasurement_soilHumidity
+
+        if ((h1 <= 15) and (h2 <= 15) and (h3 <= 15) and (h2 < h1) and (h2 < h3)) {
+          (#Irrigator).switch_on()
+          (#Blind).blind_close()
+        }
+      }
+  devices:
+  - Clock
+  - SoilMoistureSensor
+  - Irrigator
+  - Blind
+- command: "매시간 0분부터 30분까지, 3초마다 확인해서 제습기가 켜졌다 꺼진 횟수가 4번 이상이고, 그 때 습도가 65% 이상이면 사이렌을 1초간, 3초 간격으로 두 번 울리고 그 후 커튼을 닫아 줘."
+  command_translated: "Check every hour from 0 to 30 minutes, every 3 seconds, and if the dehumidifier has turned on and off more than 4 times and the humidity is above 65%, sound the siren twice at 3-second intervals, each time for 1 second, then close the curtains."
+  code:
+  - name: "Scenario1"
+    cron: "0 * * * *"
+    period: 3000
+    code: |
+      prev_state := (#Dehumidifier).switch_switch
+      toggle_count := 0
+      minute = (#Clock).clock_minute
+      if (minute <= 30) {
+        current_state = (#Dehumidifier).switch_switch
+        humidity = (#HumiditySensor).relativeHumidityMeasurement_humidity
+        if ((prev_state == "off") and (current_state == "on")) {
+            toggle_count = toggle_count + 1
+        }
+        prev_state = current_state
+        if ((toggle_count >= 4) and (humidity >= 65.0)) {
+            (#Alarm).alarm_siren()
+            (#Clock).clock_delay(1000)
+            (#Alarm).alarm_off()
+            (#Clock).clock_delay(3000)
+            (#Alarm).alarm_siren()
+            (#Clock).clock_delay(1000)
+            (#Alarm).alarm_off()
+            (#Curtain).curtain_close()
+            toggle_count = 0
+            break
+        }
+      } else {
+        break
+      }
+  devices:
+  - Curtain
+  - Alarm
+  - HumiditySensor
+  - Clock
+  - Dehumidifier
+- command: "10분마다 확인하여 온도가 5도 이상 연속으로 세 번 상승하고 에어컨이 꺼져 있으면 에어컨을 키고 냉방 모드로 설정해줘"
+  command_translated: "Check every 10 minutes and if the temperature rises by more than 5 degrees three times in a row and the air conditioner is off, turn on the air conditioner and set it to cooling mode."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 600000
+    code: |
+      temp_1 := -999.0
+      temp_2 := -999.0
+      temp_3 := -999.0
+      current_temp = (#TemperatureSensor).temperatureMeasurement_temperature
+      temp_1 = temp_2
+      temp_2 = temp_3
+      temp_3 = current_temp
+      if ((temp_1 != -999.0) and (temp_2 != -999.0) and (temp_3 != -999.0)) {
+        rise_1 = temp_2 - temp_1
+        rise_2 = temp_3 - temp_2
+        if ((rise_1 > 5.0) and (rise_2 > 5.0)) {
+            if ((#AirConditioner).switch_switch == "off") {
+                (#AirConditioner).switch_on()
+                (#AirConditioner).airConditionerMode_setAirConditionerMode("cool")
+                break
+            }
+        }
+      }
+  devices:
+  - TemperatureSensor
+  - AirConditioner
+- command: "시각 상관없이 항상, 5초마다 체크해서 TV가 10분 동안 꺼져 있었다가 켜지는 이벤트가 두 번 이상 발생했으면, 스피커를 켜고 조명을 60으로 맞춰 줘. 단, 수요일에는 빼고"
+  command_translated: "Always, regardless of the time of day, check every 5 seconds and if there are two or more events where the TV has been off for 10 minutes and then turned on, turn on the speakers and set the lights to 60. Except on Wednesdays"
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 5000
+    code: |
+      prev_state := (#Television).switch_switch
+      off_start_time := -1.0
+      off_to_on_count := 0
+      weekday = (#Clock).clock_weekday
+      if (weekday != "wednesday") {
+        current_state = (#Television).switch_switch
+        current_time = (#Clock).clock_timestamp
+        if (current_state == "off") {
+            if (off_start_time == -1.0) {
+                off_start_time = current_time
+            }
+        } else if ((prev_state == "off") and (off_start_time != -1.0)) {
+            duration = current_time - off_start_time
+            if (duration >= 600.0) {
+                off_to_on_count = off_to_on_count + 1
+            }
+            off_start_time = -1.0
+        }
+        prev_state = current_state
+        if (off_to_on_count >= 2) {
+            (#Speaker).switch_on()
+            (#Light).switchLevel_setLevel(60, 0)
+            break
+        }
+      }
+  devices:
+  - Clock
+  - Light
+  - Television
+  - Speaker
+- command: "3초마다 확인해서 조명이 꺼진 상태에서 3분 이상 유지되다가 다시 켜지는 일이 2번 연속 발생하면 블라인드를 모두 닫아 줘."
+  command_translated: "Check every 3 seconds and close all blinds if the lights stay off for more than 3 minutes and then come back on twice in a row."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 3000
+    code: |
+      prev_state := (#Light).switch_switch
+      off_start_time := -1.0
+      off_to_on_count := 0
+      current_state = (#Light).switch_switch
+      current_time = (#Clock).clock_timestamp
+      if (current_state == "off") {
+        if (off_start_time == -1.0) {
+            off_start_time = current_time
+        }
+      } else if ((prev_state == "off") and (off_start_time != -1.0)) {
+        duration = current_time - off_start_time
+        if (duration >= 180.0) {
+            off_to_on_count = off_to_on_count + 1
+        }
+        off_start_time = -1.0
+      }
+      prev_state = current_state
+      if (off_to_on_count >= 2) {
+        all(#Blind).blind_close()
+        break
+      }
+  devices:
+  - Light
+  - Blind
+  - Clock
+- command: "월요일 오후에, 1초마다 확인하여 창문이 열렸을 때부터 닫힐 때까지 걸린 시간이 15초 이상인 경우가 3회 연속 발생했으면 알람의 사이렌을 1초간, 3초 간격으로 세 번 울려 줘."
+  command_translated: "On Monday afternoon, check every second and if there are three consecutive occasions where the time from window opening to window closing is 15 seconds or more, sound the alarm's siren three times, each for 1 second, at 3-second intervals."
+  code:
+  - name: "Scenario1"
+    cron: "0 12 * * 1"
+    period: 1000
+    code: |
+      prev_state := (#Window).windowControl_window
+      open_start_time := -1.0
+      long_open_count := 0
+      current_state = (#Window).windowControl_window
+      current_time = (#Clock).clock_timestamp
+      if (current_state == "open") {
+        if (open_start_time == -1.0) {
+            open_start_time = current_time
+        }
+      } else if ((prev_state == "open") and (open_start_time != -1.0)) {
+        duration = current_time - open_start_time
+        if (duration >= 15.0) {
+            long_open_count = long_open_count + 1
+        } else {
+            long_open_count = 0
+        }
+        open_start_time = -1.0
+      }
+      prev_state = current_state
+      if (long_open_count >= 3) {
+        (#Alarm).alarm_siren()
+        (#Clock).clock_delay(1000)
+        (#Alarm).alarm_off()
+        (#Clock).clock_delay(3000)
+        (#Alarm).alarm_siren()
+        (#Clock).clock_delay(1000)
+        (#Alarm).alarm_off()
+        (#Clock).clock_delay(3000)
+        (#Alarm).alarm_siren()
+        (#Clock).clock_delay(1000)
+        (#Alarm).alarm_off()
+        long_open_count = 0
+        break
+      }
+  devices:
+  - Clock
+  - Window
+  - Alarm
+- command: "실시간으로 확인하여 움직임이 감지됐을 때 창문이 열려 있던 비율이 50%를 넘으면, 이후 조명이 켜질 때마다 창문도 함께 열어 줘."
+  command_translated: "Check in real time. If the percentage of windows that are open when motion is detected is greater than 50%, then open the windows whenever the lights are turned on afterward."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      motion_detected_count := 0
+      motion_with_window_open_count := 0
+      enable_window_open := False
+      prev_light_state := (#Light).switch_switch
+      motion = (#MotionSensor).motionSensor_motion
+      window_state = (#Window).windowControl_window
+      light_state = (#Light).switch_switch
+      if (motion == "active") {
+        motion_detected_count = motion_detected_count + 1
+        if (window_state == "open") {
+            motion_with_window_open_count = motion_with_window_open_count + 1
+        }
+        if (motion_detected_count > 0) {
+            ratio = motion_with_window_open_count * 1.0 / (motion_detected_count * 1.0)
+            if (ratio > 0.5) {
+                enable_window_open = True
+            }
+        }
+      }
+      if (enable_window_open) {
+        if ((prev_light_state == "off") and (light_state == "on")) {
+            (#Window).windowControl_open()
+        }
+      }
+      prev_light_state = light_state
+  devices:
+  - Light
+  - Window
+  - MotionSensor

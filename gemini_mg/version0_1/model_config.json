@@ -1,0 +1,25 @@
+{
+  "model_name": "SoPLang ver1.5.3.1",
+  "device_name": "cloud1-gemini-2.5-flash-preview",
+  "model_version": "1.5.3.1",
+  "model_description": "This version is designed for basic IoT control using SoPLang language. It includes strict syntax rules and core services.",
+  "model_create": "2025-05-21",
+  "author": {
+    "first_name": "Mingi",
+    "last_name": "Jeong"
+  },
+  "model_input": {
+    "model": "gemini-2.5-flash-preview-04-17",
+    "reasoning_effort": "low",
+    "messages": [
+      {
+        "role": "system",
+        "content": "system_prompt"
+      },
+      {
+        "role": "user",
+        "content": "sentence"
+      }
+    ]
+  }
+}

@@ -1,0 +1,999 @@
+```
+(#Light).on()
+```
+
+```
+(#Light).on()
+```
+
+```
+(#WaterValve).close()
+```
+
+```
+(#Speaker).alarm()
+```
+
+```
+(#Light).off()
+```
+
+```
+(#AirConditioner).on()
+```
+
+``` 
+loop (24 HOUR)
+{
+    wait until((#clock).hour == 7)
+    (#Shade).on()
+    
+    wait until((#clock).hour == 19)
+    (#Shade).off()
+}
+```
+
+```
+loop (1 SEC)
+{
+    if ((#HumiditySensor).humidity >= 70)
+    {
+        (#Dehumidifier).on()
+    }
+    if ((#TempSensor).temperature >= 25)
+    {
+        (#AirConditioner).on()
+    }
+}
+```
+
+``` 
+loop (1 DAY)
+{
+	wait until ((#clock).weekday != "Saturday" and (#clock).weekday != "Sunday" and (#clock).hour == 8)
+	{
+		(#Light).on()
+	}
+	wait until ((#clock).weekday != "Saturday" and (#clock).weekday != "Sunday" and (#clock).hour == 18)
+	{
+		(#Light).off()
+	}
+}
+```
+
+``` 
+loop (1 SEC)
+{
+    x = (#weather_builtin_big_thing).weather()
+    if (x == "rainy")
+    {
+        (#window).close()
+    }
+    if ((#TempSensor).temperature < 20)
+    {
+        (#Heater).on()
+    }
+}
+```
+
+``` 
+loop (1 SEC)
+{
+	if ( (#clock).HOUR >= 22 and (#movement).detected == 1)
+	{
+		(#security #alarm).trigger()
+	}
+}
+```
+
+```sop
+loop (1 SEC)
+{
+    // 평일 오전 9시에 조명을 켜고, 오후 7시에 끄는 설정
+    if ((#clock).weekday != "Saturday" and (#clock).weekday != "Sunday")
+    {
+        if ((#clock).hour == 9 and (#clock).minute == 0)
+        {
+            (#Light).on();
+        }
+        else if ((#clock).hour == 19 and (#clock).minute == 0)
+        {
+            (#Light).off();
+        }
+    }
+
+    // 주말에는 자동으로 커튼을 열고 닫도록 설정
+    if ((#clock).weekday == "Saturday" or (#clock).weekday == "Sunday")
+    {
+        if ((#clock).hour == 9 and (#clock).minute == 0)
+        {
+            (#Shade).open();
+        }
+        else if ((#clock).hour == 19 and (#clock).minute == 0)
+        {
+            (#Shade).close();
+        }
+    }
+
+    // 실내 온도가 23도 이하로 떨어지면 히터를 켜고, 28도 이상이면 에어컨을 켜는 설정
+    if ((#TempSensor).temperature <= 23)
+    {
+        (#Heater).on();
+    }
+    else if ((#TempSensor).temperature >= 28)
+    {
+        (#AirConditioner).on();
+    }
+
+    // 습도가 60% 이상일 경우 제습기를 작동시키는 설정
+    if ((#HumiditySensor).humidity >= 60)
+    {
+        (#Dehumidifier).on();
+    }
+
+    // 공기질이 나쁠 경우에는 공기청정기를 자동으로 켜는 설정
+    if ((#AirQualitySensor).quality == "bad")
+    {
+        (#AirPurifier).on();
+    }
+}
+```
+
+``` 
+loop (1 SEC)
+{
+    // Check for snow on Tuesday, Thursday, and Friday at 2 PM
+    if ((#clock).weekday == "Tuesday" or (#clock).weekday == "Thursday" or (#clock).weekday == "Friday")
+    {
+        if ((#clock).hour == 14)
+        {
+            x = (#weather_builtin_big_thing).weather()
+            if (x == "snow")
+            {
+                (#AirConditioner).setAirConditionerMode("heat")
+            }
+        }
+    }
+
+    // Maintain indoor temperature at 23 degrees on weekends
+    if ((#clock).weekday == "Saturday" or (#clock).weekday == "Sunday")
+    {
+        if ((#TempSensor).temperature != 23)
+        {
+            if ((#TempSensor).temperature < 23)
+            {
+                (#AirConditioner).setAirConditionerMode("heat")
+            }
+            else
+            {
+                (#AirConditioner).setAirConditionerMode("cool")
+            }
+        }
+    }
+
+    // Open windows for ventilation at 6 AM
+    if ((#clock).hour == 6 and (#clock).minute == 0)
+    {
+        (#WaterValve).open()
+    }
+
+    // Close windows and draw curtains at 10 PM
+    if ((#clock).hour == 22 and (#clock).minute == 0)
+    {
+        (#WaterValve).close()
+        (#Shade).setShadeLevel(0)
+    }
+
+    // Monitor humidity and noise levels
+    humidity = (#HumiditySensor).humidity
+    sound = (#SoundSensor).sound
+}
+```
+
+```sop
+loop (24 HOUR)
+{
+    wait until ((#clock).HOUR == 8 or (#clock).HOUR == 12 or (#clock).HOUR == 18)
+    {
+        (#dog_feeder).dispense_food()
+        if ((#dog_feeder).food_level < 20)
+        {
+            (#alarm).sound_warning()
+            (#smartphone).send_notification("Food level is low!")
+        }
+    }
+    
+    if ((#dog #movement_sensor).movement == 0)
+    {
+        (#dog_room #light).setLevel(20)
+    }
+}
+```
+
+```sop
+loop (1 SEC)
+{
+    // Close the window if it rains or if the wind is strong
+    x = (#weather_builtin_big_thing).weather_info(0.0, 0.0)
+    if (x == "rainy" or x == "windy")
+    {
+        (#Shade).off()
+    }
+
+    // Adjust the light based on brightness sensor
+    if ((#LightSensor).light < 50)
+    {
+        (#Light).on()
+    }
+    else
+    {
+        (#Light).off()
+    }
+
+    // Turn on the light if movement is detected, otherwise turn it off
+    if ((#MotionSensor).motion == "active")
+    {
+        (#Light).on()
+    }
+    else
+    {
+        (#Light).off()
+    }
+
+    // Air conditioner and heater settings
+    if ((#TempSensor).temperature <= 18)
+    {
+        (#AirConditioner).off()
+        (#Heater).on()
+    }
+    else if ((#TempSensor).temperature >= 26)
+    {
+        (#AirConditioner).on()
+        (#Heater).off()
+    }
+    else
+    {
+        (#AirConditioner).off()
+        (#Heater).off()
+    }
+
+    // Humidifier and dehumidifier settings
+    if ((#HumiditySensor).humidity < 30)
+    {
+        (#Humidifier).on()
+        (#Dehumidifier).off()
+    }
+    else if ((#HumiditySensor).humidity > 70)
+    {
+        (#Humidifier).off()
+        (#Dehumidifier).on()
+    }
+    else
+    {
+        (#Humidifier).off()
+        (#Dehumidifier).off()
+    }
+}
+```
+
+To implement this scenario in SoPLang, we need to create a script that differentiates between weekdays and weekends, opens the curtains and provides weather notifications with clothing recommendations on weekdays, and only turns on the lights on weekends. Here's how you can write this script:
+
+```sop
+loop (24 HOUR)
+{
+    wait until ((#clock).hour == 9)
+
+    // Check if it's a weekday (Monday to Friday)
+    if ((#clock).weekday != "Saturday" and (#clock).weekday != "Sunday")
+    {
+        // Open the curtains
+        (#Shade).on()
+
+        // Get weather information
+        temp = (#weather_builtin_big_thing).temp()
+        humid = (#weather_builtin_big_thing).humid()
+        air_quality = (#AirPurifier).airPurifierFanMode()
+
+        // Prepare weather notification and clothing recommendation
+        if (temp < 10)
+        {
+            clothing = "It's cold outside. Wear a warm coat."
+        }
+        else if (temp >= 10 and temp < 20)
+        {
+            clothing = "It's cool outside. A jacket should be enough."
+        }
+        else
+        {
+            clothing = "The weather is warm. Light clothing is fine."
+        }
+
+        if (humid > 70)
+        {
+            clothing = clothing + " It's quite humid, consider breathable fabrics."
+        }
+
+        if (air_quality == "high")
+        {
+            clothing = clothing + " The air quality is poor, consider wearing a mask."
+        }
+
+        // Output notification
+        (#Speaker).tts("Good morning! " + clothing)
+    }
+    else
+    {
+        // On weekends, just turn on the lights
+        (#Light).on()
+    }
+}
+```
+
+This script will:
+- Run every 24 hours.
+- Wait until 9 AM.
+- Check if it's a weekday or weekend.
+- On weekdays, it opens the curtains, retrieves weather data, and provides clothing recommendations based on temperature, humidity, and air quality.
+- On weekends, it simply turns on the lights without providing any notifications.
+
+```
+(#Light).on()
+```
+
+```
+(#WaterValve).close()
+```
+
+```
+(#Light).on()
+```
+
+```
+(#WaterValve).close()
+```
+
+```
+(#Light).on()
+```
+
+```
+(#WaterValve).close()
+```
+
+```
+(#Light).on()
+```
+
+```
+(#WaterValve).close()
+```
+
+```sop
+(#speaker).alarm()
+```
+
+```
+(#Light).off()
+```
+
+```
+(#AirConditioner).on()
+```
+
+``` 
+loop (24 HOUR)
+{
+	wait until ( (#clock).hour == 7 )
+	(#Shade).on()
+
+	wait until ( (#clock).hour == 19 )
+	(#Shade).off()
+}
+```
+
+``` 
+loop (1 SEC)
+{
+	if ((#HumiditySensor).humidity >= 70)
+	{
+		(#Dehumidifier).on()
+	}
+	if ((#TempSensor).temperature >= 25)
+	{
+		(#AirConditioner).on()
+	}
+}
+```
+
+``` 
+loop (24 HOUR)
+{
+	wait until ((#clock).hour == 8 and (#clock).weekday != "Saturday" and (#clock).weekday != "Sunday")
+	{
+		(#Light).on()
+	}
+	wait until ((#clock).hour == 18 and (#clock).weekday != "Saturday" and (#clock).weekday != "Sunday")
+	{
+		(#Light).off()
+	}
+}
+```
+
+``` 
+loop (1 SEC)
+{
+    x = (#weather_builtin_big_thing).weather()
+    if (x == "rainy")
+    {
+        (#window).close()
+    }
+    if ((#TempSensor).temperature < 20)
+    {
+        (#AirConditioner).setAirConditionerMode("heat")
+    }
+}
+```
+
+``` 
+loop (1 SEC)
+{
+    if ((#clock).HOUR >= 22 and (#movement).detected == 1)
+    {
+        (#security #alarm).trigger()
+    }
+}
+```
+
+```sop
+loop (1 SEC)
+{
+    // 평일 오전 9시에 조명을 켜고, 오후 7시에 끄는 설정
+    if ((#clock).weekday != "Saturday" and (#clock).weekday != "Sunday")
+    {
+        if ((#clock).hour == 9 and (#clock).minute == 0)
+        {
+            (#Light).on();
+        }
+        else if ((#clock).hour == 19 and (#clock).minute == 0)
+        {
+            (#Light).off();
+        }
+    }
+
+    // 주말에는 자동으로 커튼을 열고 닫도록 설정
+    if ((#clock).weekday == "Saturday" or (#clock).weekday == "Sunday")
+    {
+        if ((#clock).hour == 9 and (#clock).minute == 0)
+        {
+            (#Shade).on();
+        }
+        else if ((#clock).hour == 19 and (#clock).minute == 0)
+        {
+            (#Shade).off();
+        }
+    }
+
+    // 실내 온도가 23도 이하로 떨어지면 히터를 켜고, 28도 이상이면 에어컨을 켜기
+    if ((#TempSensor).temperature <= 23)
+    {
+        (#Heater).on();
+    }
+    else if ((#TempSensor).temperature >= 28)
+    {
+        (#AirConditioner).on();
+    }
+
+    // 습도가 60% 이상일 경우 제습기를 작동
+    if ((#HumiditySensor).humidity >= 60)
+    {
+        (#Dehumidifier).on();
+    }
+
+    // 공기질이 나쁠 경우에는 공기청정기를 자동으로 켜기
+    if ((#AirQualitySensor).quality == "bad")
+    {
+        (#AirPurifier).on();
+    }
+}
+```
+
+``` 
+loop (1 SEC)
+{
+    // Check for snow on Tuesday, Thursday, and Friday at 2 PM
+    if ((#clock).weekday == "Tuesday" or (#clock).weekday == "Thursday" or (#clock).weekday == "Friday")
+    {
+        if ((#clock).hour == 14)
+        {
+            x = (#weather_builtin_big_thing).weather()
+            if (x == "snowy")
+            {
+                (#AirConditioner).setAirConditionerMode("heat")
+            }
+        }
+    }
+
+    // Maintain indoor temperature at 23 degrees on weekends
+    if ((#clock).weekday == "Saturday" or (#clock).weekday == "Sunday")
+    {
+        if ((#TempSensor).temperature != 23)
+        {
+            if ((#TempSensor).temperature < 23)
+            {
+                (#AirConditioner).setAirConditionerMode("heat")
+            }
+            else
+            {
+                (#AirConditioner).setAirConditionerMode("cool")
+            }
+        }
+    }
+
+    // Open windows at 6 AM for ventilation
+    if ((#clock).hour == 6)
+    {
+        (#Window).open()
+    }
+
+    // Close windows and draw curtains at 10 PM
+    if ((#clock).hour == 22)
+    {
+        (#Window).close()
+        (#Shade).setShadeLevel(0)
+    }
+
+    // Monitor humidity and noise levels
+    x = (#HumiditySensor).humidity()
+    y = (#SoundSensor).sound()
+}
+```
+
+``` 
+loop (24 HOUR)
+{
+    wait until ((#clock).HOUR == 8 or (#clock).HOUR == 12 or (#clock).HOUR == 18)
+    {
+        (#feeder).dispense_food()
+        if ((#feeder).food_level < 10)
+        {
+            (#speaker).play_warning_sound()
+            (#smartphone).send_notification("Food level is low!")
+        }
+    }
+    
+    if ((#dog).movement == 0)
+    {
+        (#light).setLevel(10)
+    }
+}
+```
+
+```sop
+loop (1 SEC)
+{
+    // Close windows if it rains or the wind is strong
+    x = (#weather_builtin_big_thing).weather_info(37.5665, 126.9780) // Example coordinates for Seoul
+    if (x == "rainy" or x == "windy")
+    {
+        (#Shade).off()
+    }
+
+    // Adjust lighting based on brightness sensor
+    if ((#LightSensor).light < 300)
+    {
+        (#Light).on()
+        (#Light).setLevel(100)
+    }
+    else
+    {
+        (#Light).off()
+    }
+
+    // Turn on lights if movement is detected, otherwise turn off
+    if ((#MotionSensor).motion == "active")
+    {
+        (#Light).on()
+    }
+    else
+    {
+        (#Light).off()
+    }
+
+    // Air conditioner, heater, humidifier, and dehumidifier settings
+    if ((#TempSensor).temperature < 20)
+    {
+        (#AirConditioner).off()
+        (#Heater).on()
+    }
+    else if ((#TempSensor).temperature > 25)
+    {
+        (#AirConditioner).on()
+        (#Heater).off()
+    }
+
+    if ((#HumiditySensor).humidity < 30)
+    {
+        (#Humidifier).on()
+        (#Dehumidifier).off()
+    }
+    else if ((#HumiditySensor).humidity > 60)
+    {
+        (#Humidifier).off()
+        (#Dehumidifier).on()
+    }
+}
+```
+
+```sop
+loop (24 HOUR)
+{
+    wait until ((#clock).hour == 9)
+    if ((#clock).weekday != "Saturday" and (#clock).weekday != "Sunday")
+    {
+        (#Shade).on()
+        x = (#weather_builtin_big_thing).temp()
+        y = (#weather_builtin_big_thing).humid()
+        z = (#AirPurifier).airPurifierFanMode
+
+        if (x < 10)
+        {
+            (#Speaker).tts("오늘은 추운 날씨입니다. 따뜻한 옷을 입으세요.")
+        }
+        else if (x >= 10 and x < 20)
+        {
+            (#Speaker).tts("오늘은 쌀쌀한 날씨입니다. 가벼운 외투를 추천합니다.")
+        }
+        else
+        {
+            (#Speaker).tts("오늘은 따뜻한 날씨입니다. 가벼운 옷차림으로 외출하세요.")
+        }
+
+        if (y > 70)
+        {
+            (#Speaker).tts("습도가 높습니다. 쾌적한 옷차림을 추천합니다.")
+        }
+
+        if (z == "high")
+        {
+            (#Speaker).tts("대기질이 좋지 않습니다. 마스크를 착용하세요.")
+        }
+    }
+    else
+    {
+        (#Light).on()
+    }
+}
+```
+
+```
+(#Light).on()
+```
+
+```
+(#WaterValve).close()
+```
+
+```sop
+(#speaker).alarm()
+```
+
+```
+(#Light).off()
+```
+
+```
+(#AirConditioner).on();
+```
+
+``` 
+loop (24 HOUR)
+{
+    wait until((#clock).hour == 7)
+    (#Shade).open()
+
+    wait until((#clock).hour == 19)
+    (#Shade).close()
+}
+```
+
+``` 
+loop (1 SEC)
+{
+    if ((#HumiditySensor).humidity >= 70)
+    {
+        (#Dehumidifier).on()
+    }
+    if ((#TempSensor).temperature >= 25)
+    {
+        (#AirConditioner).on()
+    }
+}
+```
+
+```sop
+loop (24 HOUR)
+{
+    wait until ((#clock).weekday != "Saturday" and (#clock).weekday != "Sunday" and (#clock).hour == 8)
+    {
+        (#light).on()
+    }
+    wait until ((#clock).weekday != "Saturday" and (#clock).weekday != "Sunday" and (#clock).hour == 18)
+    {
+        (#light).off()
+    }
+}
+```
+
+``` 
+loop (1 SEC)
+{
+    x = (#weather_builtin_big_thing).weather()
+    if (x == "rainy")
+    {
+        (#WaterValve).close()
+    }
+
+    if ((#TempSensor).temperature < 20)
+    {
+        (#AirConditioner).setAirConditionerMode("heat")
+    }
+}
+```
+
+``` 
+loop (1 SEC)
+{
+    if ((#clock).hour >= 22 and (#movement).detected == 1)
+    {
+        (#security #alarm).trigger()
+    }
+}
+```
+
+```sop
+loop (1 SEC)
+{
+    // 평일 오전 9시에 조명을 켜고, 오후 7시에 끄기
+    if ((#clock).weekday != "Saturday" and (#clock).weekday != "Sunday")
+    {
+        if ((#clock).hour == 9 and (#clock).minute == 0)
+        {
+            (#Light).on();
+        }
+        else if ((#clock).hour == 19 and (#clock).minute == 0)
+        {
+            (#Light).off();
+        }
+    }
+
+    // 주말에는 자동으로 커튼을 열고 닫기
+    if ((#clock).weekday == "Saturday" or (#clock).weekday == "Sunday")
+    {
+        if ((#clock).hour == 9 and (#clock).minute == 0)
+        {
+            (#Shade).on();
+        }
+        else if ((#clock).hour == 19 and (#clock).minute == 0)
+        {
+            (#Shade).off();
+        }
+    }
+
+    // 실내 온도가 23도 이하로 떨어지면 히터를 켜고, 28도 이상이면 에어컨을 켜기
+    if ((#TempSensor).temperature <= 23)
+    {
+        (#Heater).on();
+    }
+    else if ((#TempSensor).temperature >= 28)
+    {
+        (#AirConditioner).on();
+    }
+
+    // 습도가 60% 이상일 경우 제습기를 작동시키기
+    if ((#HumiditySensor).humidity >= 60)
+    {
+        (#Dehumidifier).on();
+    }
+
+    // 공기질이 나쁠 경우에는 공기청정기를 자동으로 켜기
+    if ((#AirQualitySensor).quality == "bad")
+    {
+        (#AirPurifier).on();
+    }
+}
+```
+
+``` 
+loop (1 SEC)
+{
+    // Check if it's Tuesday, Thursday, or Friday at 2 PM and it's snowing
+    if ((#clock).weekday == "Tuesday" or (#clock).weekday == "Thursday" or (#clock).weekday == "Friday")
+    {
+        if ((#clock).hour == 14)
+        {
+            x = (#weather_builtin_big_thing).weather()
+            if (x == "snow")
+            {
+                (#AirConditioner).setAirConditionerMode("heat")
+            }
+        }
+    }
+
+    // Maintain indoor temperature at 23 degrees on weekends
+    if ((#clock).weekday == "Saturday" or (#clock).weekday == "Sunday")
+    {
+        if ((#TempSensor).temperature != 23)
+        {
+            if ((#TempSensor).temperature < 23)
+            {
+                (#AirConditioner).setAirConditionerMode("heat")
+            }
+            else
+            {
+                (#AirConditioner).setAirConditionerMode("cool")
+            }
+        }
+    }
+
+    // Open windows at 6 AM for ventilation
+    if ((#clock).hour == 6)
+    {
+        (#Shade).open()
+    }
+
+    // Close windows and draw curtains at 10 PM
+    if ((#clock).hour == 22)
+    {
+        (#Shade).close()
+    }
+
+    // Monitor humidity and noise levels
+    x = (#weather_builtin_big_thing).humid()
+    y = (#SoundSensor).sound()
+}
+```
+
+``` 
+loop (24 HOUR)
+{
+    wait until ((#clock).hour == 8 or (#clock).hour == 12 or (#clock).hour == 18)
+    {
+        (#dog_feeder).dispense_food()
+        if ((#dog_feeder).food_level < 20)
+        {
+            (#speaker).play_warning_sound()
+            (#smartphone).send_notification("Food is running low!")
+        }
+    }
+
+    if ((#dog_movement_sensor).movement == 0)
+    {
+        (#lights).dim()
+    }
+}
+```
+
+```sop
+loop (1 SEC)
+{
+    // Close the window if it rains or if the wind is strong
+    x = (#weather_builtin_big_thing).weather()
+    if (x == "rainy" or x == "windy")
+    {
+        (#window).close()
+    }
+
+    // Adjust lighting based on brightness sensor
+    brightness = (#LightSensor).light
+    if (brightness < 50)
+    {
+        (#Light).setLevel(100)
+    }
+    else if (brightness >= 50 and brightness < 200)
+    {
+        (#Light).setLevel(50)
+    }
+    else
+    {
+        (#Light).setLevel(0)
+    }
+
+    // Turn on the lights if movement is detected, otherwise turn them off
+    if ((#MotionSensor).motion == "active")
+    {
+        (#Light).on()
+    }
+    else
+    {
+        (#Light).off()
+    }
+
+    // Air conditioner, heater, humidifier, and dehumidifier settings
+    temperature = (#TempSensor).temperature
+    humidity = (#HumiditySensor).humidity
+
+    if (temperature < 18)
+    {
+        (#Heater).on()
+        (#AirConditioner).off()
+    }
+    else if (temperature > 25)
+    {
+        (#AirConditioner).on()
+        (#Heater).off()
+    }
+    else
+    {
+        (#AirConditioner).off()
+        (#Heater).off()
+    }
+
+    if (humidity < 30)
+    {
+        (#Humidifier).on()
+        (#Dehumidifier).off()
+    }
+    else if (humidity > 70)
+    {
+        (#Dehumidifier).on()
+        (#Humidifier).off()
+    }
+    else
+    {
+        (#Humidifier).off()
+        (#Dehumidifier).off()
+    }
+}
+```
+
+To achieve the described scenario using SoPLang, we will set up a loop that runs every day, checking the time and day of the week to perform different actions on weekdays and weekends. Here's the SoPLang script:
+
+```soplang
+loop (1 MIN)
+{
+    wait until ((#clock).hour == 9 and (#clock).minute == 0);
+
+    if ((#clock).weekday != "Saturday" and (#clock).weekday != "Sunday")
+    {
+        // Weekday actions
+        (#Shade).on(); // Open the curtains
+
+        // Get weather data
+        temperature = (#TempSensor).temperature;
+        humidity = (#HumiditySensor).humidity;
+        air_quality = (#AirPurifier).airPurifierFanMode;
+
+        // Notify based on weather conditions
+        if (temperature < 10)
+        {
+            (#Speaker).tts("It's cold outside. Wear warm clothes.");
+        }
+        else if (temperature >= 10 and temperature < 20)
+        {
+            (#Speaker).tts("It's cool outside. A light jacket should be fine.");
+        }
+        else
+        {
+            (#Speaker).tts("It's warm outside. Dress comfortably.");
+        }
+
+        if (humidity > 70)
+        {
+            (#Speaker).tts("It's quite humid. Consider wearing breathable fabrics.");
+        }
+
+        if (air_quality == "high")
+        {
+            (#Speaker).tts("The air quality is poor. Consider wearing a mask.");
+        }
+    }
+    else
+    {
+        // Weekend actions
+        (#Light).on(); // Turn on the lights
+    }
+}
+```
+
+This script checks the current time and day of the week. On weekdays, it opens the curtains and provides weather-based notifications for dressing appropriately. On weekends, it simply turns on the lights without any notifications.
+

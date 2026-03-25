@@ -1,0 +1,228 @@
+- command: "실시간으로 확인하여 토양 습도 센서의 값이 30% 이하가 되면 관개 장치를 켜 줘, 또한 1초마다 체크해서 온도가 25도를 넘으면 펌프를 꺼 줘."
+  command_translated: "Check in real-time to turn on the irrigation when the soil moisture sensor reads 30% or less. Also, check every second to turn off the pump when the temperature exceeds 25 degrees."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#SoilMoistureSensor).soilHumidityMeasurement_soilHumidity <= 30.0)
+      (#Irrigator).switch_on()
+  - name: "Scenario2"
+    cron: ""
+    period: 1000
+    code: |
+      wait until((#TemperatureSensor).temperatureMeasurement_temperature > 25.0)
+      (#Pump).switch_off()
+      break
+  devices:
+  - TemperatureSensor
+  - Irrigator
+  - Pump
+  - SoilMoistureSensor
+- command: "펌프가 꺼지면 스피커를 켜고, 토양 습도 센서의 값이 20% 이하가 되면 관개 장치를 켜 줘."
+  command_translated: "Turn on the speaker when the pump turns off, and turn on the irrigation when the soil moisture sensor reads 20% or less."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#Pump).switch_switch == "off")
+      (#Speaker).switch_on()
+  - name: "Scenario2"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#SoilMoistureSensor).soilHumidityMeasurement_soilHumidity <= 20.0)
+      (#Irrigator).switch_on()
+  devices:
+  - SoilMoistureSensor
+  - Speaker
+  - Pump
+  - Irrigator
+- command: "토양 습도 센서의 값이 25% 이하로 떨어진 후 10초 동안 값이 변하지 않으면 알람의 사이렌을 울려 줘. 그리고 조명은 그냥 꺼 줘."
+  command_translated: "When the soil moisture sensor's reading drops below 25% and doesn't change for 10 seconds, sound the alarm's siren. And just turn off the lights."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      stable_count := 0
+      last_value := -1.0
+      triggered := false
+      if (triggered == false) {
+        wait until((#SoilMoistureSensor).soilHumidityMeasurement_soilHumidity <= 25.0)
+        triggered = true
+      }
+
+      if (triggered == true) {
+        soil_humidity = (#SoilMoistureSensor).soilHumidityMeasurement_soilHumidity
+        if (last_value == -1.0) {
+          last_value = soil_humidity
+          stable_count = 0
+        } else if (soil_humidity == last_value) {
+          stable_count = stable_count + 1
+        } else {
+          break
+        }
+        if (stable_count >= 100) {
+          (#Alarm).alarm_siren()
+          break
+        }
+      }
+  - name: "Scenario2"
+    cron: ""
+    period: -1
+    code: |
+      (#Light).switch_off()
+  devices:
+  - Light
+  - Alarm
+  - SoilMoistureSensor
+- command: "실시간으로 확인하여 조명이 켜지면 펌프를 켜 줘, 토양 습도 센서의 값이 30% 이하로 떨어지면 블라인드를 닫아 줘."
+  command_translated: "Check in real-time to turn on the pump when the lights come on, and close the blinds when the soil moisture sensor drops below 30%."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#Light).switch_switch == "on")
+      (#Pump).switch_on()
+  - name: "Scenario2"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#SoilMoistureSensor).soilHumidityMeasurement_soilHumidity <= 30.0)
+      (#Blind).blind_close()
+  devices:
+  - Light
+  - Blind
+  - Pump
+  - SoilMoistureSensor
+- command: "관개 장치가 꺼지고 나서 토양 습도 센서의 값이 20% 이하로 떨어지면 사이렌과 경광등을 켜 줘. 커튼이 닫혀 있으면 열어 줘."
+  command_translated: "Turn on the siren and strobes if the soil moisture sensor drops below 20% after the irrigation is turned off. Open the curtains if they are closed."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#Irrigator).switch_switch == "off")
+      wait until((#SoilMoistureSensor).soilHumidityMeasurement_soilHumidity <= 20.0)
+      (#Alarm).alarm_both()
+  - name: "Scenario2"
+    cron: ""
+    period: -1
+    code: |
+      if ((#Curtain).curtain_curtain == "closed") {
+        (#Curtain).curtain_open()
+      }
+  devices:
+  - Curtain
+  - SoilMoistureSensor
+  - Alarm
+  - Irrigator
+- command: "실시간으로 확인하여 문이 열릴 때마다 조명을 켜 줘, TV가 꺼지면 스피커를 끄고 블라인드를 닫아 줘."
+  command_translated: "Check in real-time to turn on the lights whenever the door opens. And turn off the speakers when the TV is turned off, and close the blinds."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      triggered := false
+      if ((#DoorLock).doorControl_door == "open") {
+        if (triggered == false) {
+          (#Light).switch_on()
+          triggered = true
+        }
+      } else {
+        triggered = false
+      }
+  - name: "Scenario2"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#Television).switch_switch == "off")
+      (#Speaker).switch_off()
+      (#Blind).blind_close()
+  devices:
+  - Blind
+  - DoorLock
+  - Television
+  - Speaker
+  - Light
+- command: "제습기가 꺼지면 켜 줘, 조명이 꺼져 있으면 밝기를 50퍼센트로 설정해 줘."
+  command_translated: "When the dehumidifier turns off, turn it on. If the lights are off, set the brightness to 50 percent."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#Dehumidifier).switch_switch == "off")
+      (#Dehumidifier).switch_on()
+  - name: "Scenario2"
+    cron: ""
+    period: -1
+    code: |
+      if ((#Light).switch_switch == "off") {
+        (#Light).switchLevel_setLevel(50, 0)
+      }
+  devices:
+  - Light
+  - Dehumidifier
+- command: "창문이 열리면 블라인드를 닫고, 조명이 꺼지면 선풍기를 켜 줘."
+  command_translated: "Close the blinds when the window opens, turn on the fan when the lights turns off."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#Window).windowControl_window == "open")
+      (#Blind).blind_close()
+  - name: "Scenario2"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#Light).switch_switch == "off")
+      (#Fan).switch_on()
+  devices:
+  - Light
+  - Blind
+  - Window
+  - Fan
+- command: "실시간으로 확인하여 움직임이 감지되면 커튼을 닫고, 지금 알람의 사이렌을 울려 줘."
+  command_translated: "Check in real-time, close the curtains when motion is detected, and sound the siren of alarm immediately."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#MotionSensor).motionSensor_motion == "active")
+      (#Curtain).curtain_close()
+  - name: "Scenario2"
+    cron: ""
+    period: -1
+    code: |
+      (#Alarm).alarm_siren()
+  devices:
+  - Curtain
+  - Alarm
+  - MotionSensor
+- command: "창문이 열리면 10초 후 커튼을 열어 줘. 창문과 상관없이, 5초마다 조명을 켰다 꺼 줘."
+  command_translated: "when the window opens, open the curtains after 10 seconds. Turn the lights on and off every 5 seconds, regardless of the window."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: -1
+    code: |
+      wait until((#Window).windowControl_window == "open")
+      (#Clock).clock_delay(10000)
+      (#Curtain).curtain_open()
+  - name: "Scenario2"
+    cron: ""
+    period: 5000
+    code: |
+      (#Light).switch_toggle()
+  devices:
+  - Curtain
+  - Clock
+  - Light
+  - Window

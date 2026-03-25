@@ -1,0 +1,2270 @@
+{
+    "services": [
+      {
+        "middleware": "MySSIX-MW-Lv1-0_D45D64A628DB",
+        "hierarchy": "local",
+        "things": [
+          {
+            "name": "weather_builtin_big_thing",
+            "nick_name": "weather_builtin_big_thing",
+            "category": "Undefined",
+            "description": "A device designed to gather and report data on various weather conditions, including humidity, pressure, and temperature.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [],
+            "functions": [
+              {
+                "name": "humid",
+                "category": "undefined",
+                "description": "Retrieves the current humidity level as a percentage.",
+                "return_type": "double",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 5000,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "weather"
+                  },
+                  {
+                    "name": "weather_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "pressure",
+                "category": "undefined",
+                "description": "Measures the current atmospheric pressure in millibars.",
+                "return_type": "double",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 5000,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "weather"
+                  },
+                  {
+                    "name": "weather_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "temp",
+                "category": "undefined",
+                "description": "Reports the current temperature in degrees Celsius.",
+                "return_type": "double",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 5000,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "weather"
+                  },
+                  {
+                    "name": "weather_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "weather",
+                "category": "undefined",
+                "description": "Provides a brief textual summary of current weather conditions.",
+                "return_type": "string",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 5000,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "weather"
+                  },
+                  {
+                    "name": "weather_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "weather_info",
+                "category": "undefined",
+                "description": "Gives detailed weather information based on specified latitude and longitude.",
+                "return_type": "string",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 5000,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "weather"
+                  },
+                  {
+                    "name": "weather_builtin_big_thing"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "lat",
+                    "order": 0,
+                    "type": "double",
+                    "bound": {
+                      "min_value": "0.00",
+                      "max_value": "10000.00"
+                    }
+                  },
+                  {
+                    "name": "lon",
+                    "order": 1,
+                    "type": "double",
+                    "bound": {
+                      "min_value": "0.00",
+                      "max_value": "10000.00"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "operation_builtin_big_thing",
+            "nick_name": "operation_builtin_big_thing",
+            "category": "Undefined",
+            "description": "A generic computational device capable of performing basic arithmetic operations and string concatenation.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [],
+            "functions": [
+              {
+                "name": "add",
+                "category": "undefined",
+                "description": "Performs addition between two numbers and returns the result.",
+                "return_type": "double",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 10,
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "operation"
+                  },
+                  {
+                    "name": "operation_builtin_big_thing"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "a",
+                    "order": 0,
+                    "type": "double",
+                    "bound": {
+                      "min_value": "-9223372036854775808.00",
+                      "max_value": "9223372036854775808.00"
+                    }
+                  },
+                  {
+                    "name": "b",
+                    "order": 1,
+                    "type": "double",
+                    "bound": {
+                      "min_value": "-9223372036854775808.00",
+                      "max_value": "9223372036854775808.00"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "concat",
+                "category": "undefined",
+                "description": "Concatenates two strings and returns the combined result.",
+                "return_type": "string",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 10,
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "operation"
+                  },
+                  {
+                    "name": "operation_builtin_big_thing"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "a",
+                    "order": 0,
+                    "type": "string",
+                    "bound": {
+                      "min_value": "-2147483648",
+                      "max_value": "0"
+                    }
+                  },
+                  {
+                    "name": "b",
+                    "order": 1,
+                    "type": "string",
+                    "bound": {
+                      "min_value": "-2147483648",
+                      "max_value": "0"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "div",
+                "category": "undefined",
+                "description": "Divides the first number by the second and returns the quotient.",
+                "return_type": "double",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 10,
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "operation"
+                  },
+                  {
+                    "name": "operation_builtin_big_thing"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "a",
+                    "order": 0,
+                    "type": "double",
+                    "bound": {
+                      "min_value": "-9223372036854775808.00",
+                      "max_value": "9223372036854775808.00"
+                    }
+                  },
+                  {
+                    "name": "b",
+                    "order": 1,
+                    "type": "double",
+                    "bound": {
+                      "min_value": "-9223372036854775808.00",
+                      "max_value": "9223372036854775808.00"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "mod",
+                "category": "undefined",
+                "description": "Calculates the remainder of the division of the first number by the second.",
+                "return_type": "double",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 10,
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "operation"
+                  },
+                  {
+                    "name": "operation_builtin_big_thing"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "a",
+                    "order": 0,
+                    "type": "double",
+                    "bound": {
+                      "min_value": "-9223372036854775808.00",
+                      "max_value": "9223372036854775808.00"
+                    }
+                  },
+                  {
+                    "name": "b",
+                    "order": 1,
+                    "type": "double",
+                    "bound": {
+                      "min_value": "-9223372036854775808.00",
+                      "max_value": "9223372036854775808.00"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "mul",
+                "category": "undefined",
+                "description": "Multiplies two numbers and returns the product.",
+                "return_type": "double",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 10,
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "operation"
+                  },
+                  {
+                    "name": "operation_builtin_big_thing"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "a",
+                    "order": 0,
+                    "type": "double",
+                    "bound": {
+                      "min_value": "-9223372036854775808.00",
+                      "max_value": "9223372036854775808.00"
+                    }
+                  },
+                  {
+                    "name": "b",
+                    "order": 1,
+                    "type": "double",
+                    "bound": {
+                      "min_value": "-9223372036854775808.00",
+                      "max_value": "9223372036854775808.00"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "sub",
+                "category": "undefined",
+                "description": "Subtracts the second number from the first and returns the difference.",
+                "return_type": "double",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 10,
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "operation"
+                  },
+                  {
+                    "name": "operation_builtin_big_thing"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "a",
+                    "order": 0,
+                    "type": "double",
+                    "bound": {
+                      "min_value": "-9223372036854775808.00",
+                      "max_value": "9223372036854775808.00"
+                    }
+                  },
+                  {
+                    "name": "b",
+                    "order": 1,
+                    "type": "double",
+                    "bound": {
+                      "min_value": "-9223372036854775808.00",
+                      "max_value": "9223372036854775808.00"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "clock_builtin_big_thing",
+            "nick_name": "clock_builtin_big_thing",
+            "category": "Undefined",
+            "description": "Provides various time-related data, such as current date, time, and Unix time.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "date_double",
+                "description": "Represents the current date in a double format YYYYMMDD.",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 999999999999
+                },
+                "type": "double",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "20240322.00",
+                "updated_on": "2024-03-22 14:54:17.256",
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "clock"
+                  },
+                  {
+                    "name": "clock_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "datetime",
+                "description": "Shows the current date in a string format YYYY/MM/DD.",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 100
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "2024/03/22",
+                "updated_on": "2024-03-22 14:54:16.299",
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "clock"
+                  },
+                  {
+                    "name": "clock_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "datetime_double",
+                "description": "Displays the current date and time in a double format YYYYMMDDHHMM.",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 999999999999
+                },
+                "type": "double",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "202403221454.00",
+                "updated_on": "2024-03-22 14:54:16.400",
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "clock"
+                  },
+                  {
+                    "name": "clock_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "day",
+                "description": "Indicates the current day of the month.",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 100
+                },
+                "type": "int",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "22",
+                "updated_on": "2024-03-22 14:54:16.413",
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "clock"
+                  },
+                  {
+                    "name": "clock_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "hour",
+                "description": "Shows the current hour of the day in a 24-hour format.",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 100
+                },
+                "type": "int",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "14",
+                "updated_on": "2024-03-22 14:54:16.513",
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "clock"
+                  },
+                  {
+                    "name": "clock_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "minute",
+                "description": "Displays the current minute of the hour.",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 100
+                },
+                "type": "int",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "54",
+                "updated_on": "2024-03-22 14:54:16.681",
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "clock"
+                  },
+                  {
+                    "name": "clock_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "month",
+                "description": "Represents the current month as an integer.",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 100
+                },
+                "type": "int",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "3",
+                "updated_on": "2024-03-22 14:54:16.693",
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "clock"
+                  },
+                  {
+                    "name": "clock_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "second",
+                "description": "Shows the current second of the minute.",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 100
+                },
+                "type": "int",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "16",
+                "updated_on": "2024-03-22 14:54:16.709",
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "clock"
+                  },
+                  {
+                    "name": "clock_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "time",
+                "description": "Provides the current time in a string format HH:MM:SS.",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 100
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "14:54:16",
+                "updated_on": "2024-03-22 14:54:16.731",
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "clock"
+                  },
+                  {
+                    "name": "clock_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "time_double",
+                "description": "Shows the current time in a double format HHMM.",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 999999999999
+                },
+                "type": "double",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "1454.00",
+                "updated_on": "2024-03-22 14:54:16.752",
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "clock"
+                  },
+                  {
+                    "name": "clock_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "unix_time",
+                "description": "The number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap seconds (in POSIX time).",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 999999999999
+                },
+                "type": "double",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "1711086856.42",
+                "updated_on": "2024-03-22 14:54:16.424",
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "clock"
+                  },
+                  {
+                    "name": "clock_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "weekday",
+                "description": "Returns the day of the week as a string.",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 100
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "Friday",
+                "updated_on": "2024-03-22 14:54:16.720",
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "clock"
+                  },
+                  {
+                    "name": "clock_builtin_big_thing"
+                  }
+                ]
+              },
+              {
+                "name": "year",
+                "description": "Displays the current year as an integer.",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9999
+                },
+                "type": "int",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "2024",
+                "updated_on": "2024-03-22 14:54:16.763",
+                "tags": [
+                  {
+                    "name": "big_thing"
+                  },
+                  {
+                    "name": "clock"
+                  },
+                  {
+                    "name": "clock_builtin_big_thing"
+                  }
+                ]
+              }
+            ],
+            "functions": []
+          },
+          {
+            "name": "ContactSensor",
+            "nick_name": "ContactSensor",
+            "category": "ContactSensor",
+            "description": "A sensor designed to detect and report the open or closed status of a contact point, typically used for doors or windows.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "contact",
+                "description": "Indicates whether the contact point is open or closed.",
+                "category": "contact",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 1000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "closed",
+                "updated_on": "2024-03-22 14:54:16.742",
+                "tags": [
+                  {
+                    "name": "ContactSensor"
+                  }
+                ]
+              }
+            ],
+            "functions": []
+          },
+          {
+            "name": "AirConditioner",
+            "nick_name": "AirConditioner",
+            "category": "AirConditioner",
+            "description": "A smart air conditioning unit that can be controlled to adjust room temperature, switch on/off, and set operational modes.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "airConditionerMode",
+                "description": "Specifies the current operational mode of the air conditioner, such as 'heat', 'cool', or 'auto'.",
+                "category": "airConditionerMode",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "heat",
+                "updated_on": "2024-03-22 14:54:12.619",
+                "tags": [
+                  {
+                    "name": "AirConditioner"
+                  }
+                ]
+              },
+              {
+                "name": "switch",
+                "description": "Controls the power state of the air conditioner, allowing it to be turned on or off.",
+                "category": "switch",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "on",
+                "updated_on": "2024-03-22 14:54:12.652",
+                "tags": [
+                  {
+                    "name": "AirConditioner"
+                  }
+                ]
+              }
+            ],
+            "functions": [
+              {
+                "name": "off",
+                "category": "off",
+                "description": "Turns off the air conditioner.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "AirConditioner"
+                  }
+                ]
+              },
+              {
+                "name": "on",
+                "category": "on",
+                "description": "Turns on the air conditioner.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "AirConditioner"
+                  }
+                ]
+              },
+              {
+                "name": "setAirConditionerMode",
+                "category": "setAirConditionerMode",
+                "description": "Sets the operational mode of the air conditioner to a specified mode such as 'heat', 'cool', or 'auto'.",
+                "return_type": "void",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "AirConditioner"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "mode",
+                    "order": 0,
+                    "type": "string",
+                    "bound": {
+                      "min_value": "0",
+                      "max_value": "0"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "HumiditySensor",
+            "nick_name": "HumiditySensor",
+            "category": "HumiditySensor",
+            "description": "A sensor that measures and reports the relative humidity in the air, providing data essential for various climate control systems.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "humidity",
+                "description": "Reports the current relative humidity as a percentage.",
+                "category": "humidity",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 100
+                },
+                "type": "double",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "55.55",
+                "updated_on": "2024-03-22 14:54:16.639",
+                "tags": [
+                  {
+                    "name": "HumiditySensor"
+                  }
+                ]
+              }
+            ],
+            "functions": []
+          },
+          {
+            "name": "Pump",
+            "nick_name": "Pump",
+            "category": "Pump",
+            "description": "A device capable of controlling fluid flow, equipped with features for turning on/off and adjusting operational modes.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "operationMode",
+                "description": "Determines the pump's current operational mode, such as 'minimum', 'maximum', or 'auto'.",
+                "category": "operationMode",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "minimum",
+                "updated_on": "2024-03-22 14:54:16.352",
+                "tags": [
+                  {
+                    "name": "Pump"
+                  }
+                ]
+              },
+              {
+                "name": "switch",
+                "description": "Controls the power state of the pump, allowing it to be turned on or off.",
+                "category": "switch",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "on",
+                "updated_on": "2024-03-22 14:54:16.363",
+                "tags": [
+                  {
+                    "name": "Pump"
+                  }
+                ]
+              }
+            ],
+            "functions": [
+              {
+                "name": "off",
+                "category": "off",
+                "description": "Turns off the pump.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Pump"
+                  }
+                ]
+              },
+              {
+                "name": "on",
+                "category": "on",
+                "description": "Turns on the pump.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Pump"
+                  }
+                ]
+              },
+              {
+                "name": "setOperationMode",
+                "category": "setOperationMode",
+                "description": "Sets the operational mode of the pump to a specified mode such as 'minimum', 'maximum', or 'auto'.",
+                "return_type": "void",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Pump"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "operationMode",
+                    "order": 0,
+                    "type": "string",
+                    "bound": {
+                      "min_value": "0",
+                      "max_value": "0"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Button",
+            "nick_name": "Button",
+            "category": "Button",
+            "description": "A simple input device designed to detect physical presses, commonly used to trigger actions or commands in a system.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "button",
+                "description": "Represents the current state of the button, such as 'pressed' or 'released'.",
+                "category": "button",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "up",
+                "updated_on": "2024-03-22 14:54:16.773",
+                "tags": [
+                  {
+                    "name": "Button"
+                  }
+                ]
+              }
+            ],
+            "functions": []
+          },
+          {
+            "name": "Light",
+            "nick_name": "Light",
+            "category": "Light",
+            "description": "A smart lighting device that can adjust its state, color, and brightness levels, offering customizable lighting conditions.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "color",
+                "description": "Specifies the current color of the light in RGB format.",
+                "category": "color",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "0.0000|0.0000|0.0000",
+                "updated_on": "2024-03-22 14:54:16.533",
+                "tags": [
+                  {
+                    "name": "Light"
+                  }
+                ]
+              },
+              {
+                "name": "level",
+                "description": "Controls the brightness level of the light, with values ranging from 0 (off) to 100 (full brightness).",
+                "category": "level",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "0",
+                "updated_on": "2024-03-22 14:54:16.544",
+                "tags": [
+                  {
+                    "name": "Light"
+                  }
+                ]
+              },
+              {
+                "name": "switch",
+                "description": "Indicates whether the light is turned on or off.",
+                "category": "switch",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "on",
+                "updated_on": "2024-03-22 14:54:16.564",
+                "tags": [
+                  {
+                    "name": "Light"
+                  }
+                ]
+              }
+            ],
+            "functions": [
+              {
+                "name": "off",
+                "category": "off",
+                "description": "Turns the light off.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Light"
+                  }
+                ]
+              },
+              {
+                "name": "on",
+                "category": "on",
+                "description": "Turns the light on.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Light"
+                  }
+                ]
+              },
+              {
+                "name": "setColor",
+                "category": "setColor",
+                "description": "Changes the color of the light to a specified RGB value.",
+                "return_type": "void",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Light"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "color",
+                    "order": 0,
+                    "type": "string",
+                    "bound": {
+                      "min_value": "0",
+                      "max_value": "0"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "setLevel",
+                "category": "setLevel",
+                "description": "Adjusts the brightness level of the light from 0 (off) to 100 (full brightness).",
+                "return_type": "void",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Light"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "level",
+                    "order": 0,
+                    "type": "int",
+                    "bound": {
+                      "min_value": "0",
+                      "max_value": "100"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "SoundSensor",
+            "nick_name": "SoundSensor",
+            "category": "SoundSensor",
+            "description": "A device that detects sound levels in the environment, typically used for security or noise monitoring applications.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "sound",
+                "description": "Indicates the presence of sound, with possible values like 'detected' or 'not detected'.",
+                "category": "sound",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 1000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "detected",
+                "updated_on": "2024-03-22 14:54:17.025",
+                "tags": [
+                  {
+                    "name": "SoundSensor"
+                  }
+                ]
+              }
+            ],
+            "functions": []
+          },
+          {
+            "name": "MotionSensor",
+            "nick_name": "MotionSensor",
+            "category": "MotionSensor",
+            "description": "A sensor that detects physical movement within its vicinity, commonly used in security and automation systems.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "motion",
+                "description": "Reports the detection of motion, with values such as 'active' or 'inactive'.",
+                "category": "motion",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 1000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "active",
+                "updated_on": "2024-03-22 14:54:17.047",
+                "tags": [
+                  {
+                    "name": "MotionSensor"
+                  }
+                ]
+              }
+            ],
+            "functions": []
+          },
+          {
+            "name": "Camera",
+            "nick_name": "Camera",
+            "category": "Camera",
+            "description": "A smart camera device capable of capturing and streaming video, equipped with features for remote control and image capture.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "image",
+                "description": "Stores the last captured image or video frame.",
+                "category": "image",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "binary",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "0",
+                "updated_on": "2024-03-22 14:54:16.620",
+                "format": "",
+                "tags": [
+                  {
+                    "name": "Camera"
+                  }
+                ]
+              },
+              {
+                "name": "switch",
+                "description": "Controls the power state of the camera, allowing it to be turned on or off for privacy or power saving.",
+                "category": "switch",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "on",
+                "updated_on": "2024-03-22 14:54:12.936",
+                "tags": [
+                  {
+                    "name": "Camera"
+                  }
+                ]
+              }
+            ],
+            "functions": [
+              {
+                "name": "off",
+                "category": "off",
+                "description": "Turns off the camera.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Camera"
+                  }
+                ]
+              },
+              {
+                "name": "on",
+                "category": "on",
+                "description": "Turns on the camera.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Camera"
+                  }
+                ]
+              },
+              {
+                "name": "take",
+                "category": "take",
+                "description": "Captures an image or video frame and stores it.",
+                "return_type": "binary",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Camera"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "LightSensor",
+            "nick_name": "LightSensor",
+            "category": "LightSensor",
+            "description": "A sensor that measures the intensity of ambient light. Commonly used in systems that require adaptive lighting conditions.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "light",
+                "description": "Reports the measured light intensity in lux.",
+                "category": "light",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 1000000
+                },
+                "type": "double",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "77.77",
+                "updated_on": "2024-03-22 14:54:17.004",
+                "tags": [
+                  {
+                    "name": "LightSensor"
+                  }
+                ]
+              }
+            ],
+            "functions": []
+          },
+          {
+            "name": "PresenceSensor",
+            "nick_name": "PresenceSensor",
+            "category": "PresenceSensor",
+            "description": "Detects the presence of individuals in an area, used for security, automation, and energy management applications.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "presence",
+                "description": "Indicates whether someone is present in the sensor's vicinity, with values like 'present' or 'absent'.",
+                "category": "presence",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 1000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "present",
+                "updated_on": "2024-03-22 14:54:17.218",
+                "tags": [
+                  {
+                    "name": "PresenceSensor"
+                  }
+                ]
+              }
+            ],
+            "functions": []
+          },
+          {
+            "name": "Shade",
+            "nick_name": "Shade",
+            "category": "Shade",
+            "description": "A device used to control window shades, adjusting the amount of light entering a room.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "shadeLevel",
+                "description": "Controls the position of the shade, with 0 representing fully closed and 100 fully open.",
+                "category": "shadeLevel",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "int",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "40",
+                "updated_on": "2024-03-22 14:54:16.312",
+                "tags": [
+                  {
+                    "name": "Shade"
+                  }
+                ]
+              },
+              {
+                "name": "switch",
+                "description": "Indicates whether the shade is enabled or disabled.",
+                "category": "switch",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "on",
+                "updated_on": "2024-03-22 14:54:12.744",
+                "tags": [
+                  {
+                    "name": "Shade"
+                  }
+                ]
+              }
+            ],
+            "functions": [
+              {
+                "name": "off",
+                "category": "off",
+                "description": "Disables the shade, preventing it from being adjusted.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Shade"
+                  }
+                ]
+              },
+              {
+                "name": "on",
+                "category": "on",
+                "description": "Enables the shade, allowing it to be adjusted.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Shade"
+                  }
+                ]
+              },
+              {
+                "name": "setShadeLevel",
+                "category": "setShadeLevel",
+                "description": "Sets the position of the shade to a specified level, with 0 being fully closed and 100 fully open.",
+                "return_type": "void",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Shade"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "shadeLevel",
+                    "order": 0,
+                    "type": "int",
+                    "bound": {
+                      "min_value": "0",
+                      "max_value": "100"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "AirPurifier",
+            "nick_name": "AirPurifier",
+            "category": "AirPurifier",
+            "description": "An IoT device designed to improve indoor air quality by removing contaminants and allergens from the air.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "airPurifierFanMode",
+                "description": "Specifies the fan speed of the air purifier, such as 'low', 'medium', 'high', or 'auto'.",
+                "category": "airPurifierFanMode",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 10000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "high",
+                "updated_on": "2024-03-22 14:54:16.444",
+                "tags": [
+                  {
+                    "name": "AirPurifier"
+                  }
+                ]
+              },
+              {
+                "name": "switch",
+                "description": "Controls the power state of the air purifier, allowing it to be turned on or off.",
+                "category": "switch",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 10000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "on",
+                "updated_on": "2024-03-22 14:54:16.455",
+                "tags": [
+                  {
+                    "name": "AirPurifier"
+                  }
+                ]
+              }
+            ],
+            "functions": [
+              {
+                "name": "off",
+                "category": "off",
+                "description": "Turns off the air purifier.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "AirPurifier"
+                  }
+                ]
+              },
+              {
+                "name": "on",
+                "category": "on",
+                "description": "Turns on the air purifier.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "AirPurifier"
+                  }
+                ]
+              },
+              {
+                "name": "setAirPurifierFanMode",
+                "category": "setAirPurifierFanMode",
+                "description": "Adjusts the fan speed of the air purifier to a specified mode such as 'low', 'medium', 'high', or 'auto'.",
+                "return_type": "void",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "AirPurifier"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "mode",
+                    "order": 0,
+                    "type": "string",
+                    "bound": {
+                      "min_value": "0",
+                      "max_value": "0"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "WaterValve",
+            "nick_name": "WaterValve",
+            "category": "WaterValve",
+            "description": "Controls the flow of water through a valve, allowing for automated management of irrigation systems or water supply.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "switch",
+                "description": "Indicates the operational state of the valve, either 'on' for open or 'off' for closed, controlling water flow.",
+                "category": "switch",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "on",
+                "updated_on": "2024-03-22 14:54:13.017",
+                "tags": [
+                  {
+                    "name": "WaterValve"
+                  }
+                ]
+              },
+              {
+                "name": "valve",
+                "description": "Provides the current status of the valve, 'open' allowing water to pass through or 'closed' to stop the flow.",
+                "category": "valve",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "open",
+                "updated_on": "2024-03-22 14:54:17.064",
+                "tags": [
+                  {
+                    "name": "WaterValve"
+                  }
+                ]
+              }
+            ],
+            "functions": [
+              {
+                "name": "close",
+                "category": "close",
+                "description": "Closes the valve, stopping water flow.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "WaterValve"
+                  }
+                ]
+              },
+              {
+                "name": "off",
+                "category": "off",
+                "description": "Turns off the valve, effectively closing it if it was open.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "WaterValve"
+                  }
+                ]
+              },
+              {
+                "name": "on",
+                "category": "on",
+                "description": "Turns on the valve, allowing water to flow through.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "WaterValve"
+                  }
+                ]
+              },
+              {
+                "name": "open",
+                "category": "open",
+                "description": "Opens the valve to start water flow.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "WaterValve"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Television",
+            "nick_name": "Television",
+            "category": "Television",
+            "description": "A smart TV device that supports various channels and volume adjustments, along with mute and power controls.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "channel",
+                "description": "Represents the current channel number the TV is tuned to.",
+                "category": "channel",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "int",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "1",
+                "updated_on": "2024-03-22 14:54:17.191",
+                "tags": [
+                  {
+                    "name": "Television"
+                  }
+                ]
+              },
+              {
+                "name": "mute",
+                "description": "Indicates whether the TV's sound is muted.",
+                "category": "undefined",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "muted",
+                "updated_on": "2024-03-22 14:54:17.201",
+                "tags": [
+                  {
+                    "name": "Television"
+                  }
+                ]
+              },
+              {
+                "name": "switch",
+                "description": "Controls the power state of the TV, allowing it to be turned on or off.",
+                "category": "switch",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "string",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "on",
+                "updated_on": "2024-03-22 14:54:17.229",
+                "tags": [
+                  {
+                    "name": "Television"
+                  }
+                ]
+              },
+              {
+                "name": "volume",
+                "description": "Adjusts the TV's volume level, with 0 being silent and increasing values for louder audio.",
+                "category": "volume",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 9223372036854776000
+                },
+                "type": "int",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "10",
+                "updated_on": "2024-03-22 14:54:17.246",
+                "tags": [
+                  {
+                    "name": "Television"
+                  }
+                ]
+              }
+            ],
+            "functions": [
+              {
+                "name": "channelDown",
+                "category": "channelDown",
+                "description": "Decreases the TV channel by one.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Television"
+                  }
+                ]
+              },
+              {
+                "name": "channelUp",
+                "category": "channelUp",
+                "description": "Increases the TV channel by one.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Television"
+                  }
+                ]
+              },
+              {
+                "name": "mute",
+                "category": "mute",
+                "description": "Toggles the mute state of the TV, muting or unmuting the sound.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Television"
+                  }
+                ]
+              },
+              {
+                "name": "off",
+                "category": "off",
+                "description": "Turns off the TV, powering it down.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Television"
+                  }
+                ]
+              },
+              {
+                "name": "on",
+                "category": "on",
+                "description": "Turns on the TV, powering it up.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Television"
+                  }
+                ]
+              },
+              {
+                "name": "setTvChannel",
+                "category": "setTvChannel",
+                "description": "Sets the TV to a specific channel.",
+                "return_type": "void",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Television"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "tvChannel",
+                    "order": 0,
+                    "type": "int",
+                    "bound": {
+                      "min_value": "0",
+                      "max_value": "2147483647"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "setVolume",
+                "category": "setVolume",
+                "description": "Adjusts the TV's volume to a specified level.",
+                "return_type": "void",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Television"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "volume",
+                    "order": 0,
+                    "type": "int",
+                    "bound": {
+                      "min_value": "0",
+                      "max_value": "100"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "volumeDown",
+                "category": "volumeDown",
+                "description": "Decreases the TV's volume by a small increment.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Television"
+                  }
+                ]
+              },
+              {
+                "name": "volumeUp",
+                "category": "volumeUp",
+                "description": "Increases the TV's volume by a small increment.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Television"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "TempSensor",
+            "nick_name": "TempSensor",
+            "category": "TempSensor",
+            "description": "Measures and reports the ambient temperature of its environment, useful for climate control and monitoring applications.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "temperature",
+                "description": "The current temperature reading from the sensor, measured in degrees Celsius.",
+                "category": "temperature",
+                "bound": {
+                  "min_value": -460,
+                  "max_value": 10000
+                },
+                "type": "double",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "88.88",
+                "updated_on": "2024-03-22 14:54:17.142",
+                "tags": [
+                  {
+                    "name": "TempSensor"
+                  }
+                ]
+              }
+            ],
+            "functions": []
+          },
+          {
+            "name": "Speaker",
+            "nick_name": "Speaker",
+            "category": "Speaker",
+            "description": "A smart speaker device capable of playing audio content, with features for volume control and audio source selection.",
+            "version": "0.4.2.0",
+            "is_alive": 1,
+            "is_super": 0,
+            "is_parallel": 1,
+            "is_manager": 0,
+            "is_matter": 0,
+            "alive_cycle": 60,
+            "values": [
+              {
+                "name": "volume",
+                "description": "Adjusts the speaker's volume level, with 0 being silent and increasing values for louder audio.",
+                "category": "volume",
+                "bound": {
+                  "min_value": 0,
+                  "max_value": 100
+                },
+                "type": "int",
+                "is_private": 0,
+                "is_opened": 0,
+                "latest_val": "30",
+                "updated_on": "2024-03-22 14:54:17.167",
+                "tags": [
+                  {
+                    "name": "Speaker"
+                  }
+                ]
+              }
+            ],
+            "functions": [
+              {
+                "name": "decreaseVolume",
+                "category": "decreaseVolume",
+                "description": "Lowers the speaker's volume by a set increment.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Speaker"
+                  }
+                ]
+              },
+              {
+                "name": "increaseVolume",
+                "category": "increaseVolume",
+                "description": "Raises the speaker's volume by a set increment.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Speaker"
+                  }
+                ]
+              },
+              {
+                "name": "mute",
+                "category": "mute",
+                "description": "Mutes the speaker, stopping all audio output.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Speaker"
+                  }
+                ]
+              },
+              {
+                "name": "setVolume",
+                "category": "setVolume",
+                "description": "Sets the speaker's volume to a specified level.",
+                "return_type": "void",
+                "use_arg": 1,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Speaker"
+                  }
+                ],
+                "arguments": [
+                  {
+                    "name": "volume",
+                    "order": 0,
+                    "type": "int",
+                    "bound": {
+                      "min_value": "0",
+                      "max_value": "100"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "unmute",
+                "category": "unmute",
+                "description": "Unmutes the speaker, resuming audio output.",
+                "return_type": "void",
+                "use_arg": 0,
+                "is_private": 0,
+                "is_opened": 0,
+                "exec_time": 0,
+                "energy": 0,
+                "tags": [
+                  {
+                    "name": "Speaker"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }

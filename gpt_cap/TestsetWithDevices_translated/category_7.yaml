@@ -1,0 +1,196 @@
+- command: "실시간으로 확인해서 토양 습도가 25% 이하로 떨어질 때마다 급수기를 켜고 '급수 시작'이라고 스피커로 출력해줘."
+  command_translated: "Check in real-time and turn on the irrigator whenever the soil humidity drops below 25% and announce \"Start watering\" via the speaker."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      triggered := false
+      if ((#SoilMoistureSensor).soilHumidityMeasurement_soilHumidity <= 25.0) {
+        if (triggered == false) {
+          (#Irrigator).switch_on()
+          (#Speaker).mediaPlayback_speak("Start watering")
+          triggered = true
+        }
+      } else {
+        triggered = false
+      }
+  devices:
+  - Irrigator
+  - Speaker
+  - SoilMoistureSensor
+- command: "1초마다 상태를 확인해서 온도가 35도를 초과할 때마다 환풍기를 켜 줘."
+  command_translated: "Check the status every 1 second and turn on the fan whenever the temperature exceeds 35 degrees."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 1000
+    code: |
+      triggered := false
+      if ((#TemperatureSensor).temperatureMeasurement_temperature > 35.0) {
+        if (triggered == false) {
+          (#Fan).switch_on()
+          triggered = true
+        }
+      } else {
+        triggered = false
+      }
+  devices:
+  - TemperatureSensor
+  - Fan
+- command: "3초마다 일조량을 확인해서 200룩스 이하로 떨어지면 조명을 켜 줘."
+  command_translated: "Check the sunlight every 3 seconds and turn on the lights if it drops below 200 lux."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 3000
+    code: |
+      triggered := false
+      if ((#LightSensor).lightLevel_light <= 200.0) {
+        if (triggered == false) {
+          (#Light).switch_on()
+          triggered = true
+        }
+      } else {
+        triggered = false
+      }
+  devices:
+  - Light
+  - LightSensor
+- command: "문이 열릴 때마다 경광등과 조명을 켜 줘. 실시간으로 확인해서 상태를 계속 검사해서 반응해 줘."
+  command_translated: "Turn on sirens and lights whenever a door is opened. Check in real time and react by constantly checking the status."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      triggered := false
+      if ((#DoorLock).doorControl_door == "open") {
+        if (triggered == false) {
+          (#Siren).sirenMode_setSirenMode("strobe")
+          (#Light).switch_on()
+          triggered = true
+        }
+      } else {
+        triggered = false
+      }
+  devices:
+  - Light
+  - DoorLock
+  - Siren
+- command: "현재 날씨에서 비가 감지될 때마다 관개 장치를 꺼 주고 '비가 감지되었습니다'라고 스피커로 출력해줘. 감지는 1분에 한번씩만 하자."
+  command_translated: "Whenever rain is detected in the current weather, turn off the irrigator and announce \"Rain detected\" via the speaker. Let's detect only once a minutae."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 60000
+    code: |
+      triggered := false
+      if ((#WeatherProvider).weatherProvider_weather == "rain") {
+        if (triggered == false) {
+          (#Irrigator).switch_off()
+          (#Speaker).mediaPlayback_speak("Rain detected")
+          triggered = true
+        }
+      } else {
+        triggered = false
+      }
+  devices:
+  - WeatherProvider
+  - Speaker
+  - Irrigator
+- command: "실시간으로 확인해서 거실 창문이 열릴 때마다 블라인드를 닫아 줘."
+  command_translated: "Check in real-time and close the blinds whenever the living room window opens."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      triggered := false
+      if ((#Window).windowControl_window == "open") {
+        if (triggered == false) {
+          (#Blind).blind_close()
+          triggered = true
+        }
+      } else {
+        triggered = false
+      }
+  devices:
+  - Blind
+  - Window
+- command: "조명이 켜질 때마다 커튼을 동시에 열어 줘. 실시간으로 조명을 체크해야 해."
+  command_translated: "Open the curtains at the same time whenever the lights come on. Check the lights in real time."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      triggered := false
+      if ((#Light).switch_switch == "on") {
+        if (triggered == false) {
+          (#Curtain).curtain_open()
+          triggered = true
+        }
+      } else {
+        triggered = false
+      }
+  devices:
+  - Curtain
+  - Light
+- command: "2초마다 상태를 확인해서 TV가 켜질 때마다 스피커도 켜 줘."
+  command_translated: "Check status every 2 seconds and turn on the speakers whenever the TV turns on."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 2000
+    code: |
+      triggered := false
+      if ((#Television).switch_switch == "on") {
+        if (triggered == false) {
+          (#Speaker).switch_on()
+          triggered = true
+        }
+      } else {
+        triggered = false
+      }
+  devices:
+  - Television
+  - Speaker
+- command: "현관 문이 열릴 때마다 즉시 알람의 경광등을 켜 줘. 확인은 실시간으로 하구."
+  command_translated: "Instantly turn on the alarm's light whenever the front door is opened. Check in real time."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 100
+    code: |
+      triggered := false
+      if ((#DoorLock).doorControl_door == "open") {
+        if (triggered == false) {
+          (#Alarm).alarm_strobe()
+          triggered = true
+        }
+      } else {
+        triggered = false
+      }
+  devices:
+  - DoorLock
+  - Alarm
+- command: "1초마다 공기청정기 상태를 확인해서 꺼지면 자동 모드로 다시 켜 줘."
+  command_translated: "Check the status of the air purifier every 1 second and turn it back on and set to auto mode if it turns off."
+  code:
+  - name: "Scenario1"
+    cron: ""
+    period: 1000
+    code: |
+      triggered := false
+      if ((#AirPurifier).switch_switch == "off") {
+        if (triggered == false) {
+          (#AirPurifier).switch_on()
+          (#AirPurifier).airPurifierFanMode_setAirPurifierFanMode("auto")
+          triggered = true
+        }
+      } else {
+        triggered = false
+      }
+  devices:
+  - AirPurifier

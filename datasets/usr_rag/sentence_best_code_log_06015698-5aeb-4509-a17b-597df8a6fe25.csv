@@ -1,0 +1,3 @@
+﻿sentence,best_code
+모든 스위치를 꺼라.,"[{'name': '사무실스위치끄기', 'cron': '', 'period': -1, 'code': 'all(#Switch).off()'}]"
+모든 사무실 조명을 켠다.,"[{'name': '사무실조명켜기', 'cron': '', 'period': -1, 'code': 'all(#Light #Office).on()'}]"

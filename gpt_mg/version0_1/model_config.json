@@ -1,0 +1,25 @@
+{
+  "model_name": "SoPLang ver1.5.0",
+  "device_name": "cloud1",
+  "model_version": "1.5.0",
+  "model_description": "This version is designed for basic IoT control using SoPLang language. It includes strict syntax rules and core services.",
+  "model_create": "2025-03-15",
+  "author": {
+    "first_name": "Mingi",
+    "last_name": "Jeong"
+  },
+  "model_input": {
+    "model": "gpt-4o",
+    "temperature": 0.3,
+    "messages": [
+      {
+        "role": "system",
+        "content": "system_prompt"
+      },
+      {
+        "role": "user",
+        "content": "sentence"
+      }
+    ]
+  }
+}

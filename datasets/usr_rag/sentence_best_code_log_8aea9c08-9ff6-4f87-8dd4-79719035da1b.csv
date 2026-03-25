@@ -1,0 +1,2 @@
+﻿sentence,best_code
+모든 스위치를 켜라.,"[{'name': '사용자모든스위치켜기', 'cron': '', 'period': -1, 'code': 'all(#Switch).on()'}]"

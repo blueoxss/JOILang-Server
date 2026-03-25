@@ -1,0 +1,1500 @@
+﻿Index: 0,Service Name,Korean,English,Script,Command_O,Similarity
+0,AirConditioner.airConditionerMode_airConditionerMode,에어컨의 현재 모드를 확인해줘.,Check the current mode of the air conditioner.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current mode of the air conditioner is ' + (#AirConditioner).airConditionerMode_airConditionerMode
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",에어컨의 현재 모드를 알려줘.,1.0
+1,AirConditioner.airConditionerMode_targetTemperature,에어컨의 목표온도를 24도로 설정해줘.,Set the target temperature of the air conditioner to 24 degrees.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#AirConditioner).airConditionerMode_targetTemperature(24)
+  ""
+}",에어컨 온도를 24도로 설정해줘.,1.0
+2,AirConditioner.airConditionerMode_supportedAcModes,에어컨에 지원되는 모드 목록을 알려줘.,Tell me the list of supported modes for the air conditioner.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The supported mode of the air conditioner are ' + (#AirConditioner).airConditionerMode_supportedAcModes
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",에어컨의 지원되는 모드를 알려줘.,1.0
+3,AirConditioner.airConditionerMode_setAirConditionerMode,로비의 에어컨을 자동 모드로 설정해줘.,Set the lobby air conditioner to auto mode in the lobby.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#lobby #AirConditioner).airConditionerMode_setAirConditionerMode('auto')
+  ""
+}",로비 에어컨을 자동 모드로 설정해줘.,1.0
+4,AirConditioner.airConditionerMode_setTemperature,로비의 에어컨 온도를 24도로 맞춰줘.,Set the air conditioner temperature to 24 degrees in the lobby.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#lobby #AirConditioner).airConditionerMode_setTemperature(24)
+  ""
+}",로비의 에어컨 온도를 24도로 설정해줘.,1.0
+5,AirConditioner.switch_switch,에어컨의 상태를 확인해줘.,Check the status of the air conditioner.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""    
+    (#Speaker).mediaPlayback_speak((#AirConditioner).switch_switch)
+  ""
+}",에어컨이 켜져 있는지 알려줘.,0.9
+6,AirConditioner.switch_on,로비에서 에어컨을 켜줘.,Turn on the air conditioner in the lobby.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#lobby #AirConditioner).switch_on()
+  ""
+}",로비 에어컨 켜줘.,1.0
+7,AirConditioner.switch_off,에어컨을 꺼줘.,Turn off the air conditioner.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#AirConditioner).switch_off()
+  ""
+}",에어컨 꺼줘.,1.0
+8,AirConditioner.switch_toggle,로비의 에어컨을 토글해줘.,Toggle the air conditioner switch in the lobby.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#lobby #AirConditioner).switch_toggle()
+  ""
+}",로비의 에어컨을 토글해줘.,1.0
+9,AirPurifier.airPurifierFanMode_airPurifierFanMode,공기청정기의 팬 모드를 자동으로 설정해줘.,Set the air purifier's fan mode to auto.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#AirPurifier).airPurifierFanMode_airPurifierFanMode('auto')
+  ""
+}",공기청정기의 팬 모드를 자동으로 설정해줘.,1.0
+10,AirPurifier.airPurifierFanMode_supportedAirPurifierFanModes,로비에 있는 공기청정기의 팬 모드를 확인해줘.,Check the fan modes of the air purifier in the lobby.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+		(#lobby #Speaker).mediaPlayback_speak((#lobby #AirPurifier).airPurifierFanMode_supportedAirPurifierFanModes)
+  ""
+}",로비의 공기청정기가 지원하는 팬 모드를 알려줘.,0.9
+11,AirPurifier.airPurifierFanMode_setAirPurifierFanMode,로비에서는 공기청정기의 팬 모드를 자동으로 설정해줘.,Set the air purifier's fan mode to auto in the lobby.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#lobby #AirPurifier).airPurifierFanMode_setAirPurifierFanMode('auto')
+  ""
+}",로비의 공기청정기 팬 모드를 자동으로 설정해줘.,1.0
+12,AirPurifier.switch_switch,공기청정기의 상태를 확인해줘.,Check the status of the air purifier.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    #Speaker).mediaPlayback_speak((#AirPurifier).switch_switch)
+  ""
+}",공기청정기의 전원 상태를 알려줘.,0.9
+13,AirPurifier.switch_on,로비에서 공기청정기를 켜줘.,Turn on the air purifier in the lobby.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#lobby #AirPurifier).switch_on()
+  ""
+}",로비에 있는 공기청정기를 켜줘.,1.0
+14,AirPurifier.switch_off,로비의 공기청정기를 꺼줘.,Turn off the air purifier in the lobby.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#AirPurifier).switch_off()
+  ""
+}",공기청정기를 꺼줘.,0.75
+15,AirPurifier.switch_toggle,공기 청정기 스위치를 토글해줘.,Toggle the air purifier switch.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#lobby #AirPurifier).switch_toggle()
+  ""
+}",로비에 있는 공기청정기를 토글해줘.,0.65
+16,AirQualityDetector.carbonDioxideMeasurement_carbonDioxide,로비의 이산화탄소 수치를 측정해줘.,Measure the carbon dioxide levels in the lobby.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""    
+		(#lobby #Speaker).mediaPlayback_speak((#lobby #AirQualityDetector).carbonDioxideMeasurement_carbonDioxide)
+  ""
+}",로비의 이산화탄소 농도를 알려줘.,1.0
+17,AirQualityDetector.dustSensor_dustLevel,로비의 현재 먼지 수준을 확인해줘.,Check the current dust level in the lobby.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""    
+    script ='The current dust level in the meeting room is ' + (#lobby #AirQualityDetector).dustSensor_dustLevel + ' micrograms per cubic meter.'
+    (#lobby #Speaker).mediaPlayback_speak(script)
+  ""
+}",회의실의 현재 먼지 농도를 알고 싶어.,0.5
+18,AirQualityDetector.dustSensor_fineDustLevel,현재 미세먼지 농도는 어느 정도인지 알려줘.,Tell me the current level of fine dust.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+		(#Speaker).mediaPlayback_speak((#DustSensor).dustSensor_fineDustLevel)
+  ""
+}",미세먼지 농도를 알려줘.,1.0
+19,AirQualityDetector.dustSensor_veryFineDustLevel,매우 미세한 먼지 수준을 측정해줘.,Measure the very fine dust level.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+	  (#Speaker).mediaPlayback_speak((#DustSensor).dustSensor_veryFineDustLevel)
+  ""
+}",미세먼지 농도가 어떻게 되는지 알려줘.,0.5
+20,AirQualityDetector.temperatureMeasurement_temperature,온도를 측정해줘.,Measure the temperature.,"{
+  ""cron"": """",
+  ""period"": 1000,
+  ""script"": ""
+	  (#Speaker).mediaPlayback_speak((#TemperatureSensor).temperatureMeasurement_temperature)
+  ""
+}",온도 알려줘.,0.8
+21,AirQualityDetector.temperatureMeasurement_temperatureRange,온도 범위를 측정해줘.,Measure the temperature range.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+		(#Speaker).mediaPlayback_speak((#TemperatureSensor).temperatureMeasurement_temperatureRange)
+  ""
+}",온도 범위를 알려줘.,0.9
+22,AirQualityDetector.tvocMeasurement_tvocLevel,총 휘발성 유기 화합물 수준을 측정해줘.,Measure the total volatile organic compound levels.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+		(#Speaker).mediaPlayback_speak((#AirQualityDetector).tvocMeasurement_tvocLevel)
+  ""
+}",TVOC 수치를 알려줘.,0.5
+23,AirQualityDetector.relativeHumidityMeasurement_humidity,현재 상대 습도를 알려줘.,Tell me the current relative humidity.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""    
+		(#Speaker).mediaPlayback_speak((#HumiditySensor).relativeHumidityMeasurement_humidity)
+  ""
+}",습도를 알려줘.,0.8
+24,Blind.blindLevel_blindLevel,블라인드의 레벨을 알려줘.,Tell me the level of the blind.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+		(#Speaker).mediaPlayback_speak((#Blind).blindLevel_blindLevel)      
+  ""
+}",블라인드의 레벨을 알려줘.,1.0
+25,Blind.blindLevel_setBlindLevel,블라인드를 50%로 설정해줘.,Set the blind to 50%.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+      (#Blind).blindLevel_setBlindLevel(50)
+  ""
+}",블라인드의 높이를 50으로 설정해줘.,5.0
+26,Blind.blind_blind,블라인드의 상태를 알려줘.,Tell me the status of the blind.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Blind).blind_blind) 
+  ""
+}",블라인드의 상태를 얄려줘.,1.0
+27,Blind.blind_open,블라인드를 열어줘.,Open the blind.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Blind).blind_open()
+  ""
+}",블라인드를 열어줘.,1.0
+28,Blind.blind_close,블라인드를 닫아줘.,Close the blind.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Blind).blind_close()
+  ""
+}",블라인드를 닫아줘.,1.0
+29,Blind.blind_pause,블라인드를 일시 정지해줘.,Pause the blind.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Blind).blind_pause()
+  ""
+}",블라인드를 일시 정지해줘.,1.0
+30,Camera.switch_switch,카메라 상태를 확인해줘.,Check the status of camera.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""    
+    (#Speaker).mediaPlayback_speak((#Camera).switch_switch)
+  ""
+}",카메라의 상태를 알려줘.,1.0
+31,Camera.switch_on,카메라 스위치를 켜줘.,Turn on the camera switch.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Camera).switch_on()
+  ""
+}",카메라를 켜줘.,1.0
+32,Camera.switch_off,카메라를 꺼줘.,Turn off the camera.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Camera).switch_off()
+  ""
+}",카메라를 꺼줘.,1.0
+33,Camera.switch_toggle,카메라 스위치를 토글해줘.,Toggle the camera switch.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Camera).switch_toggle()
+  ""
+}",카메라를 토글해줘.,0.9
+34,Camera.camera_image,카메라로 촬영한 최신 이미지를 받아줘.,Get the latest image captured by the camera.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Camera).camera_image()
+  ""
+}",카메라로 사진을 찍어줘.,0.8
+35,Camera.camera_video,카메라로 촬영한 최신 영상을 받아줘.,Get the latest video captured by the camera.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Camera).camera_video()
+  ""
+}",카메라로 비디오 촬영해줘.,0.5
+36,Camera.camera_take,카메라로 사진을 찍어줘.,Take a picture with the camera.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Camera).camera_take()
+  ""
+}",카메라로 사진 찍어줘.,1.0
+37,Camera.camera_takeTimelapse,2배 속도로 10초간 타임랩스를 촬영해줘.,Take a timelapse for 10 seconds at 2x speed.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Camera).camera_takeTimelapse(10, 2)
+  ""
+}",10초 간격으로 타임랩스를 촬영해줘.,0.42
+38,Charger.chargingState_chargingState,충전기 상태를 확인해줘.,Check the charger state.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Charger).chargingState_chargingState)
+  ""
+}",충전 상태를 알려줘.,0.9
+39,Charger.chargingState_supportedChargingStates,충전기의 지원되는 충전 상태를 확인해줘.,Check the supported charging states of the charger.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Charger).chargingState_supportedChargingStates)
+  ""
+}",충전기의 지원되는 충전 상태를 알려줘.,1.0
+40,Charger.currentMeasurement_current,충전기의 현재 측정값을 확인해줘.,Check the current measurement of the charger.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current measurement of the charger is ' + (#Charger).currentMeasurement_current
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",충전기의 전류 측정을 알려줘.,0.9
+41,Charger.voltageMeasurement_voltage,충전기의 전압 측정을 확인해줘.,Check the voltage measurement of the charger.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current voltage is ' + (#Charger).voltageMeasurement_voltage
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 전압이 얼마인지 알려줘.,0.5
+42,Clock.clock_year,올해를 알려줘.,Tell me the current year.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current year is ' + (#Clock).clock_year
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 연도가 몇 년인지 알려줘.,1.0
+43,Clock.clock_month,현재 달을 알려줘.,Tell me the current month.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current month is ' + (#Clock).clock_month
+    (#Speaker).speak(script)
+  ""
+}",현재 달이 무엇인지 알려줘.,1.0
+44,Clock.clock_day,날짜를 알려줘.,Tell me the day.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='Today is ' + (#Clock).clock_day
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",오늘이 무슨 요일인지 알려줘.,0.5
+45,Clock.clock_weekday,현재 요일을 알려줘.,Tell me the current weekday.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='Today is ' + (#Clock).clock_weekday
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",오늘 무슨 요일인지 알려줘.,1.0
+46,Clock.clock_hour,현재 시간을 알려줘.,Tell me the current hour.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current hour is ' + (#Clock).clock_hour
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 시간이 몇 시인지 알려줘.,1.0
+47,Clock.clock_minute,현재 분을 알려줘.,Tell me the current minute.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current minute is ' + (#Clock).clock_minute
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 몇 분인지 알려줘.,1.0
+48,Clock.clock_second,현재 초를 알려줘.,Tell me the current second.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    speka = 'The current second is ' + (#Clock).clock_second
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 초를 알려줘.,1.0
+49,Clock.clock_timestamp,현재 타임스탬프를 알려줘.,Tell me the current timestamp.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current timestamp is ' + (#Clock).clock_timestamp
+    (#lobby.Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 시간을 알려줘.,1.0
+50,Clock.clock_datetime,현재 날짜와 시간을 알려줘.,Tell me the current date and time.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current date and time is ' + (#Clock).clock_datetime
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 날짜와 시간을 알려줘.,1.0
+51,Clock.clock_date,오늘 날짜를 알려줘.,Tell me today's date.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='Today's date is ' + (#Clock).clock_date
+    (#Speaker).speak(script)
+  ""
+}",오늘 날짜가 어떻게 되는지 알려줘.,1.0
+52,Clock.clock_time,현재 시간을 알려줘.,Tell me the current time.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current time is ' + (#Clock).clock_time
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 시간을 알려줘.,1.0
+53,Clock.clock_isHoliday,오늘이 공휴일인지 확인해줘.,Check if today is a holiday.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Clock).clock_isHoliday)
+  ""
+}",오늘이 공휴일인지 알려줘.,1.0
+54,Clock.clock_delay,1시간 30분 45초 동안 기다려줘.,"Wait for 1 hour, 30 minutes, and 45 seconds.","{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Clock).clock_delay(1,30,45)
+  ""
+}",1시간 30분 45초 후에 알람을 맞춰줘.,0.5
+55,ContactSensor.contactSensor_contact,접촉 센서의 상태를 확인해줘.,Check the status of the contact sensor.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#ContactSensor).contactSensor_contact)
+  ""
+}",연결 센서의 상태를 알려줘.,0.9
+56,Curtain.curtain_curtain,회의실 커튼 상태를 알려줘.,Tell me the status of the meeting room curtain.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The meeting room curtain is ' + (#meeting_room #Curtain).curtain_curtain
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",회의실 커튼 상태를 알려줘.,1.0
+57,Curtain.curtain_supportedCurtainCommands,커튼에 지원되는 명령 목록을 표시해줘.,Show the list of supported commands for the curtain.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script = 'Supported commands for the curtain are ' + (#Curtain).curtain_supportedCurtainCommands
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",커튼의 지원되는 명령어를 알려줘.,1.0
+58,Curtain.curtain_open,커튼을 열어줘.,Open the curtain.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Curtain).curtain_open()
+  ""
+}",커튼을 열어줘.,1.0
+59,Curtain.curtain_close,회의실 커튼을 닫아줘.,Close the meeting room curtain.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#meeting_room #Curtain).curtain_close()
+  ""
+}",회의실 커튼 닫아줘.,1.0
+60,Curtain.curtain_pause,커튼을 잠시 멈춰줘.,Pause the curtain.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Curtain).curtain_pause()
+  ""
+}",커튼을 멈춰줘.,0.85
+61,Dehumidifier.dehumidifierMode_dehumidifierMode,제습기의 현재 모드를 확인해줘.,Check the current mode of the dehumidifier.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Dehumidifier).dehumidifierMode_dehumidifierMode)
+  ""
+}",제습기의 모드를 알려줘.,0.9
+62,Dehumidifier.dehumidifierMode_setDehumidifierMode,제습기를 냉방 모드로 설정해줘.,Set the dehumidifier to cooling mode.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Dehumidifier).dehumidifierMode_setDehumidifierMode('cooling')
+  ""
+}",제습기를 냉방 모드로 설정해줘.,1.0
+63,Dehumidifier.switch_switch,화장실의 제습기 상태를 확인해줘.,Check the status of dehumidifier in the restroom.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#restroom #Dehumidifier).switch_switch)
+  ""
+}",화장실 제습기가 켜져 있는지 알려줘.,0.9
+64,Dehumidifier.switch_on,화장실의 제습기를 켜줘.,Turn on the dehumidifier in the restroom.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#restroom #Dehumidifier).switch_on()
+  ""
+}",화장실 제습기를 켜줘.,1.0
+65,Dehumidifier.switch_off,화장실의 제습기를 꺼줘.,Turn off the dehumidifier in the restroom.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#restroom #Dehumidifier).switch_off()
+  ""
+}",화장실 제습기를 꺼줘.,1.0
+66,Dehumidifier.switch_toggle,화장실의 제습기를 토글해줘.,Toggle the dehumidifier in the restroom.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#restroom #Dehumidifier).switch_toggle()
+  ""
+}",화장실 제습기를 토글해줘.,1.0
+67,DoorLock.doorControl_door,회의실 문 상태를 확인해줘.,Check the status of the door in the meeting room.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#meeting_room #DoorLock).doorControl_door)
+  ""
+}",회의실 문이 잠겼는지 상태를 알려줘.,1.0
+68,DoorLock.doorControl_open,문을 열어.,Open the door.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Door).doorControl_open()
+  ""
+}",문을 열어줘.,1.0
+69,DoorLock.doorControl_close,문을 닫아줘.,Close the door.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#DoorLock).doorControl_close()
+  ""
+}",문을 닫아줘.,1.0
+70,EmailProvider.emailProvider_sendMail,"제목을 ""안녕해줘""로 하고 본문을 ""테스트 이메일입니다""로 하여 ""[example@example.com](mailto:example@example.com)""으로 이메일을 보내줘.","Send an email to ""[example@example.com](mailto:example@example.com)"" with the subject ""Hello"" and the body ""This is a test email.""","{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#EmailProvider).emailProvider_sendMail('example@example.com', 'Hello', 'This is a test email.')
+  ""
+}","이메일을 example@example.com으로 보내줘. 제목은 'Hello'이고, 내용은 'This is a test email.'이야.",0.5
+71,EmailProvider.emailProvider_sendMailWithFile,"제목을 ""중요 문서""로 하고 본문을 ""안녕해줘, 첨부 문서를 확인해줘.""로 하고 파일 ""C:/Documents/important.pdf""를 포함하여 ""[test@example.com](mailto:test@example.com)""으로 이메일을 보내줘.","Send an email to ""[test@example.com](mailto:test@example.com)"" with the subject ""Important Document"" and the body ""Hello, please check the attached document."" including the file ""C:/Documents/important.pdf"".","{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#EmailProvider).emailProvider_sendMailWithFile('test@example.com', 'Important Document', 'Hello, please check the attached document.', 'C:/Documents/important.pdf')
+  ""
+}",중요한 문서를 'test@example.com' 이메일로 보내줘.,0.8
+72,Fan.fanControl_fanSpeed,팬 속도를 확인해줘.,Check the fan speed.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Fan).fanControl_fanSpeed)
+  ""
+}",선풍기 속도를 알려줘.,0.7
+73,Fan.fanControl_percent,팬 속도 백분율을 확인해줘.,Check the fan speed percent.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Fan).fanControl_percent)
+  ""
+}",선풍기의 현재 속도를 알려줘.,0.5
+74,Fan.fanControl_setFanSpeed,팬 속도를 3으로 설정해줘.,Set the fan speed to 3.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Fan).fanControl_setFanSpeed(3)
+  ""
+}",선풍기 속도를 3으로 설정해줘.,0.9
+75,Fan.fanControl_setPercent,팬 속도를 50%로 설정해줘.,Set the fan speed to 50%.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Fan).fanControl_setPercent(50)
+  ""
+}",선풍기 세기를 50%로 설정해줘.,0.9
+76,Fan.switch_switch,팬 상태를 확인해줘.,Check the fan status.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Fan).switch_switch)
+  ""
+}",선풍기가 켜져 있는지 알려줘.,0.6
+77,Fan.switch_on,선풍기를 돌려줘.,Turn  the fan.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Fan).switch_on()
+  ""
+}",선풍기 켜줘.,0.9
+78,Fan.switch_off,선풍기를 꺼줘.,Turn off the fan.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Fan).switch_off()
+  ""
+}",선풍기를 꺼줘.,1.0
+79,Fan.switch_toggle,팬을 토글해줘.,Toggle the fan on or off.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Fan).switch_toggle()
+  ""
+}",선풍기를 토글해줘.,0.9
+80,Humidifier.switch_switch,가습기 상태를 확인해줘.,Check the humidifier status.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Humidifier).switch_switch)
+  ""
+}",가습기 상태를 알려줘.,1.0
+81,Humidifier.switch_on,가습기를 켜줘.,Turn on the humidifier.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Humidifier).switch_on()
+  ""
+}",가습기를 켜줘.,1.0
+82,Humidifier.switch_off,가습기를 꺼줘.,Turn off the humidifier.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Humidifier).switch_off()
+  ""
+}",가습기를 꺼줘.,1.0
+83,Humidifier.switch_toggle,가습기를 토글해줘.,Toggle the humidifier.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Humidifier).switch_toggle()
+  ""
+}",가습기를 토글해줘.,1.0
+84,Humidifier.humidifierMode_humidifierMode,가습기 모드를 확인해줘.,Check the humidifier mode.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Humidifier).humidifierMode_humidifierMode)
+  ""
+}",가습기의 모드를 알려줘.,1.0
+85,Humidifier.humidifierMode_setHumidifierMode,가습기를 자동 모드로 설정해줘.,Set the humidifier to auto mode.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Humidifier).humidifierMode_setHumidifierMode('auto')
+  ""
+}",가습기를 자동 모드로 설정해줘.,1.0
+86,HumiditySensor.relativeHumidityMeasurement_humidity,현재 상대 습도를 알려줘.,Tell me the current relative humidity.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+		(#Speaker).mediaPlayback_speak((#HumiditySensor).relativeHumidityMeasurement_humidity)
+  ""
+}",습도가 어떻게 되는지 알려줘.,0.9
+87,Light.colorControl_color,밝은 색상을 확인해줘.,Check the light color.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Light).colorControl_color)
+  ""
+}",조명의 색을 알려줘.,0.5
+88,Light.colorControl_hue,빛의 색상을 확인해줘.,Check the light hue.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The hue of the light is ' + (#Light).colorControl_hue
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",전등의 색조를 알려줘.,0.9
+89,Light.colorControl_saturation,조명 채도를 확인해줘.,Check the light saturation.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The staturation of the light is ' + (#Light).colorControl_saturation
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",조명의 채도를 알려줘.,1.0
+90,Light.colorControl_setColor,회의실 조명 색상을 빨간색으로 설정해줘. (색상: 0. 채도: 100),Set the meeting room light color to red. (hue:0. saturation:100),"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#meeting_room #Light).colorControl_setColor('0|100')
+  ""
+}",회의실 조명의 색상을 빨간색으로 바꿔줘.,1.0
+91,Light.colorControl_setHue,밝은 색상을 75%로 설정해줘.,Set the light color to 75%.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Light).colorControl_setHue(75)
+  ""
+}",불빛의 색조를 75로 설정해줘.,0.9
+92,Light.colorControl_setSaturation,조명의 채도를 75로 설정해줘.,Set the saturation of the light to 75.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Light).colorControl_setSaturation(75)
+  ""
+}",조명의 채도를 75로 설정해줘.,1.0
+93,Light.switch_switch,회의실 조명 상태를 확인해줘.,Check the status of meeting room light.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#meeting_room #Light).switch_switch)
+  ""
+}",회의실 조명의 상태를 알고 싶어.,1.0
+94,Light.switch_on,불을 켜줘.,Turn on the light.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Light).switch_on()
+  ""
+}",불을 켜줘.,1.0
+95,Light.switch_off,불을 꺼줘.,Turn off the light.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Light).switch_off()
+  ""
+}",불을 꺼줘.,1.0
+96,Light.switch_toggle,불을 토글해줘.,Toggle the light.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Light).switch_toggle()
+  ""
+}",조명을 토글해줘.,0.9
+97,Light.switchLevel_level,조도를 75로 설정해줘.,Set the light level to 75.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Light).switchLevel_level(75)
+  ""
+}",조명을 75% 밝기로 설정해줘.,0.8
+98,Light.switchLevel_levelRange,조명 스위치 레벨 범위를 알려줘.,Tell me the range light swith level range.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The light level range is ' + (#Light).switchLevel_levelRange
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",조명 밝기 범위를 알려줘.,0.9
+99,Light.switchLevel_setLevel,회의실 조명의 밝기를 75로 설정해줘.,Set the brightness of the meeting room light to 75.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#meeting_room #Light).switchLevel_setLevel(75)
+  ""
+}",회의실의 조명을 75%로 조절해줘.,1.0
+100,Light.switchLevel_alert,조명을 경고 모드로 설정해줘.,Set the light to alert mode.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Light).switchLevel_alert()
+  ""
+}",조명 밝기 상태를 알려줘.,0.2
+101,LightSensor.lightLevel_light,조도 센서에서 밝기 레벨을 확인해줘.,Check the brightness level from the light sensor.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current brightness level is ' + (#LightSensor).lightLevel_light + ' lux.'
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 밝기 수준이 얼마인지 알려줘.,0.5
+102,MenuProvider.menuProvider_menu,오늘 학생 식당의 점심 메뉴를 알려줘.,Tell me the lunch menu at the student cafeteria today.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    menu = (#MenuProvider).menuProvider_menu('오늘 학생식당 점심')
+    script ='Today\\'s lunch menu at the student cafeteria is ' + menu
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}
+  ""
+}",오늘 학생식당 점심 메뉴를 알려줘.,1.0
+103,MenuProvider.menuProvider_todayMenu,오늘의 메뉴를 알려줘.,Tell me today's menu.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    todayMenu = (#MenuProvider).menuProvider_todayMenu()
+    script ='Today\\'s menu is ' + todayMenu
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",오늘의 메뉴가 무엇인지 알려줘.,1.0
+104,MenuProvider.menuProvider_todayPlace,오늘의 식당을 무작위로 추천해 줘.,Recommend today's restaurant randomly.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    place = (#MenuProvider).menuProvider_todayPlace()
+    script ='Today\\'s recommended restaurant is ' + place
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",오늘 추천하는 식당이 어디인지 알려줘.,0.8
+105,MotionSensor.motionSensor_motion,회의실의 모션 센서 상태를 확인해줘.,Check the status of the motion sensor in the meeting room.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The motion sensor status in the meeting room is ' + (#meeting_room #MotionSensor).motionSensor_motion
+    (#meeting_room #Speaker).mediaPlayback_speak(script)
+  ""
+}",회의실의 모션 센서 상태를 알려줘.,1.0
+106,PresenceSensor.presenceSensor_presence,회의실의 존재감 센서 상태를 확인해줘,Check the status of the presence sensor in the meeting room),"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The presence sensor status in the meeting room is ' + (#meeting_room #PresenceSensor).presenceSensor_presence
+    (#meeting_room #Speaker).mediaPlayback_speak(script)
+  ""
+}",회의실의 존재 감지 센서 상태를 알려줘.,1.0
+107,Refrigerator.switch_switch,냉장고 상태를 확인해줘.,Check the refrigerator status.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Refrigerator).switch_switch)
+  ""
+}",냉장고의 전원 상태를 알려줘.,0.7
+108,Refrigerator.switch_on,냉장고를 켜줘.,Turn on the refrigerator.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Refrigerator).switch_on()
+  ""
+}",냉장고를 켜줘.,1.0
+109,Refrigerator.switch_off,냉장고를 꺼줘.,Turn off the refrigerator.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Refrigerator).switch_off()
+  ""
+}",냉장고를 꺼줘.,1.0
+110,Refrigerator.switch_toggle,냉장고 스위치를 토글해줘.,Toggle the refrigerator switch.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Refrigerator).switch_toggle()
+  ""
+}",냉장고의 전원을 토글해줘.,1.0
+111,Refrigerator.refrigeration_defrost,냉장고의 해동 상태를 확인해줘.,Check the status of the defrost in the refrigerator.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The status of the defrost is ' + (#Refrigerator).refrigeration_defrost
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",냉장고의 성에 제거 상태를 알려줘.,0.5
+112,Refrigerator.refrigeration_rapidCooling,냉장고의 급속냉각 상태를 확인해줘.,Check the status of the rapid cooling in the refrigerator.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The status of the rapid cooling is ' + (#Refrigerator).refrigeration_rapidCooling
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",냉장고의 급속 냉각 상태를 알려줘.,1.0
+113,Refrigerator.refrigeration_rapidFreezing,냉장고의 급속냉동 상태를 확인해줘.,Check the status of the rapid freezing in the refrigerator.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The status of the rapid freezing is ' + (#Refrigerator).refrigeration_rapidFreezing
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",급속 냉동 상태가 어떤지 알려줘.,0.9
+114,Refrigerator.refrigeration_setDefrost,냉장고의 제상 기능을 켜줘.,Turn on the defrost function of the refrigerator.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Refrigerator).refrigeration_setDefrost('on')
+  ""
+}",냉장고의 성에 제거 기능을 켜줘.,1.0
+115,Refrigerator.refrigeration_setRapidCooling,냉장고의 급속냉각 기능을 켜줘.,Turn on the rapid cooling of the refrigerator.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Refrigerator).refrigeration_setRapidCooling('on')
+  ""
+}",냉장고를 급속 냉각 모드로 설정해줘.,1.0
+116,Refrigerator.refrigeration_setRapidFreezing,급속 냉동 기능을 켜줘.,Turn on the rapid freezing function.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Refrigerator).refrigeration_setRapidFreezing('on')
+  ""
+}",냉장고의 급속 냉동 기능을 켜줘.,0.9
+117,RobotCleaner.switch_switch,로봇 청소기 상태를 확인해줘.,Check the robot cleaner status.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#RobotCleaner).switch_switch)
+  ""
+}",로봇 청소기 상태를 알려줘.,1.0
+118,RobotCleaner.switch_on,로봇 청소기를 켜줘.,Turn on the robot cleaner.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#RobotCleaner).switch_on()
+  ""
+}",로봇 청소기를 켜줘.,1.0
+119,RobotCleaner.switch_off,로봇 청소기를 꺼줘.,Turn off the robot cleaner.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#RobotCleaner).switch_off()
+  ""
+}",로봇 청소기를 꺼줘.,1.0
+120,RobotCleaner.switch_toggle,로봇 청소기의 스위치를 토글해줘.,Toggle the switch of the robot cleaner.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#RobotCleaner).switch_toggle()
+  ""
+}",로봇 청소기를 토글해줘.,1.0
+121,RobotCleaner.robotCleanerCleaningMode_robotCleanerCleaningMode,로봇 청소기 모드를 확인해줘.,Check the robot cleaner mode.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current robot cleaner cleaning mode is ' + (#RobotCleaner).robotCleanerCleaningMode_robotCleanerCleaningMode + ' mode.'
+		(#Speaker).mediaPlayback_speak(script)
+  ""
+}",로봇 청소기의 현재 청소 모드를 알려줘.,1.0
+122,RobotCleaner.robotCleanerCleaningMode_setRobotCleanerCleaningMode,로봇 청소기를 자동 모드로 설정해줘.,Set the robot cleaner to auto mode.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#RobotCleaner).robotCleanerCleaningMode_setRobotCleanerCleaningMode('auto')
+  ""
+}",로봇 청소기를 자동 모드로 설정해줘.,1.0
+123,Shade.windowShadeLevel_shadeLevel,회의실의 그늘 수준을 확인해줘.,Check the meeting room shade level.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current shade level is ' + (#meeting_room #Shade).windowShadeLevel_shadeLevel
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",회의실의 블라인드의 현재 블라인드 레벨을 알려줘.,0.8
+124,Shade.windowShadeLevel_setShadeLevel,회의실 창문 블라인드를 50%로 설정해줘.,Set the meeting room window shade to 50%.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#meeting_room #Shade).windowShadeLevel_setShadeLevel(50)
+  ""
+}",회의실의 블라인드를 50%로 조절해줘.,0.95
+125,Shade.windowShade_windowShade,회의실 창문 블라인드 상태를 확인해줘.,Check the meeting room window shade state.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current shade state is ' + (#meeting_room #Shade).windowShade_windowShade
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",회의실의 블라인드 상태가 어떤지 알려줘.,1.0
+126,Shade.windowShade_supportedWindowShadeCommands,회의실 창 블라인드에 지원되는 명령어 목록을 알려줘.,Tell me the list of supported commands for the meeting room window shade.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#meeting_room #Shade).windowShade_supportedWindowShadeCommands)
+  ""
+}",회의실 블라인드가 지원하는 명령어 목록을 알려줘.,1.0
+127,Shade.windowShade_open,창문 블라인드를 열어줘.,Open the window shade.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Shade).windowShade_open()
+  ""
+}",창문 블라인드를 열어줘.,1.0
+128,Shade.windowShade_close,회의실의 창문 블라인드를 내려줘.,Close the window shade in the meeting room.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#meeting_room #Shade).windowShade_close()
+  ""
+}",회의실의 블라인드를 닫아줘.,0.9
+129,Shade.windowShade_pause,창문 블라인드를 잠시 내려줘.,Pause the window shade.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Shade).windowShade_pause()
+  ""
+}",블라인드를 일시 정지해줘.,0.5
+130,Siren.switch_switch,사이렌 상태를 확인해줘.,Check the siren status.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Siren).switch_switch)
+  ""
+}",사이렌이 켜져 있는지 알려줘.,0.9
+131,Siren.switch_on,사이렌을 켜줘.,Turn on the siren.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Siren).switch_on()
+  ""
+}",사이렌을 켜줘.,1.0
+132,Siren.switch_off,사이렌을 꺼줘.,Turn off the siren.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Siren).switch_off()
+  ""
+}",사이렌을 꺼줘.,1.0
+133,Siren.switch_toggle,사이렌을 토글해줘.,Toggle the siren on or off.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Siren).switch_toggle()
+  ""
+}",사이렌을 토글해줘.,1.0
+134,Siren.sirenMode_sirenMode,사이렌 모드를 확인해줘.,Check the siren mode.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current siren mode is ' + (#Siren).sirenMode_sirenMode 
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",사이렌 모드를 알려줘.,1.0
+135,Siren.sirenMode_setSirenMode,사이렌을 사이렌 모드로 설정해줘.,Set the siren to siren mode.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Siren).sirenMode_setSirenMode('siren')
+  ""
+}",사이렌을 경고 모드로 설정해줘.,1.0
+136,SmartPlug.currentMeasurement_current,스마트 플러그의 전류를 측정해줘.,Measure the current from the smart plug.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current measured from the smart plug is ' + (#SmartPlug).currentMeasurement_current + ' amperes.'
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",스마트 플러그에서 측정한 전류를 알려줘.,1.0
+137,SmartPlug.switch_switch,스마트플러그 상태를 확인해줘.,Check the smartplug status.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#SmartPlug).switch_switch)
+  ""
+}",스마트 플러그의 스위치 상태를 알려줘.,0.9
+138,SmartPlug.switch_on,스마트 플러그를 켜줘.,Turn on the smart plug.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#SmartPlug).switch_on()
+  ""
+}",스마트 플러그를 켜줘.,1.0
+139,SmartPlug.switch_off,스마트 플러그를 꺼줘.,Turn off the smart plug.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#SmartPlug).switch_off()
+  ""
+}",스마트 플러그 꺼줘.,1.0
+140,SmartPlug.switch_toggle,스피커를 토글해줘.,Turn the speaker on or off.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#SmartPlug).switch_toggle()
+  ""
+}",스마트 플러그를 토글해줘.,0.2
+141,SmartPlug.voltageMeasurement_voltage,스마트 플러그의 전압을 측정해줘.,Measure the voltage of the smart plug.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current voltage is ' + (#SmartPlug).voltageMeasurement_voltage + ' volts.'
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 전압이 몇 볼트인지 알려줘.,0.5
+142,SmartPlug.powerMeter_power,현재 전력 소비량을 알려줘.(와트),Tell me the current power consumption. (watts),"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current power consumption is ' + (#SmartPlug).powerMeter_power + ' watts.'
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",스마트 플러그의 현재 전력 소비량을 알려줘.,0.8
+143,SmartPlug.powerMeter_powerConsumption,총 전력 소비량(Wh),total power comsumption (Wh),"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The power consumption of the smart plug is ' + (#SmartPlug).powerMeter_powerConsumption + ' Wh.'
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",스마트 플러그의 전력 소비량을 알고 싶어.,0.0
+144,SmokeDetector.smokeDetector_smoke,연기 감지기로 연기를 확인해줘.,Check if the smoke is detected.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#SmokeDetector).smokeDetector_smoke)
+  ""
+}",연기 감지기의 상태를 알려줘.,1.0
+145,SoundSensor.soundSensor_sound,소리가 감지되는지 확인해줘.,Check if the sound is detected.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#SoundSensor).soundSensor_sound)
+  ""
+}",소리 센서의 소리 상태를 알려줘.,1.0
+146,SoundSensor.soundPressureLevel_soundPressureLevel,사운드 센서의 음압 레벨을 확인해줘.,Check the sound pressure level of the sound sensor.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The sound pressure level is ' + (#SoundSensor).soundPressureLevel_soundPressureLevel
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",소음 압력 수준을 알려줘.,0.9
+147,Speaker.switch_switch,스피커 상태를 확인해줘.,Check the speaker status.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Speaker).switch_switch)
+  ""
+}",스피커의 전원 상태를 알려줘.,0.9
+148,Speaker.switch_on,스피커를 켜줘.,Turn on the speaker.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).switch_on()
+  ""
+}",스피커를 켜줘.,1.0
+149,Speaker.switch_off,스피커를 꺼줘.,Turn off the speaker.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).switch_off()
+  ""
+}",스피커 꺼줘.,1.0
+150,Speaker.switch_toggle,스피커를 토글해줘.,Toggle the speaker.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).switch_toggle()
+  ""
+}",스피커를 토글해줘.,1.0
+151,Speaker.mediaPlayback_playbackStatus,스피커의 미디어 재생 상태를 확인해줘.,Check the media playback status of the speaker.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The media playback status is ' + (#Speaker).mediaPlayback_playbackStatus
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",스피커의 미디어 재생 상태를 알려줘.,1.0
+152,Speaker.mediaPlayback_supportedPlaybackCommands,스피커에서 지원되는 미디어 재생 명령을 알려줘.,Tell me the supported media playback commands on the speaker.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Speaker).mediaPlayback_supportedPlaybackCommands)
+  ""
+}",스피커가 지원하는 미디어 재생 명령어를 알려줘.,1.0
+153,Speaker.mediaPlayback_play,스피커로 음악을 재생해줘.,Play music on the speaker.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_play('The source of the media playback')
+  ""
+}",스피커에서 'The source of the media playback'를 재생해줘.,0.9
+154,Speaker.mediaPlayback_stop,스피커에서 미디어 재생을 중지해줘.,Stop the media playback on the speaker.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_stop()
+  ""
+}",스피커의 미디어 재생을 멈춰줘.,1.0
+155,Speaker.mediaPlayback_pause,스피커에서 미디어 재생을 일시 중지해줘.,Pause the media playback on the speaker.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_pause()
+  ""
+}",스피커의 미디어 재생을 일시 정지해줘.,1.0
+156,Speaker.mediaPlayback_fastForward,스피커에서 미디어 재생을 빠르게 전달해줘.,Fast forward the media playback on the speaker.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_fastForward()
+  ""
+}",스피커의 미디어 재생을 빨리 감기해줘.,1.0
+157,Speaker.mediaPlayback_rewind,스피커에서 미디어 재생을 되감습니다.,Rewind the media playback on the speaker.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_rewind()
+  ""
+}",스피커의 미디어 재생을 되감아줘.,1.0
+158,Speaker.mediaPlayback_setPlaybackStatus,스피커의 재생 상태를 일시 정지로 설정해줘.,Set the speaker's playback status to paused.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_setPlaybackStatus('paused')
+  ""
+}",스피커의 재생 상태를 일시정지해줘.,1.0
+159,Speaker.mediaPlayback_speak,"화자에게 ""안녕해줘, 오늘 날씨는 맑습니다.""라고 말하라고 해줘.","Tell the speaker to say ""Hello, today's weather is clear.”","{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak('Hello, today's weather is clear.')
+  ""
+}",오늘 날씨가 맑은지 알려줘.,0.0
+160,Recorder.audioRecord_recordStatus,오디오 녹음기의 현재 상태를 확인해줘.,Check the current status of the audio recorder.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current status of the audio recorder is ' + (#Recorder).audioRecord_recordStatus
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",오디오 녹음기의 현재 상태를 알려줘.,1.0
+161,Recorder.audioRecord_record,5분 동안 'recording.wav'에 오디오를 녹음해줘.,Record audio to 'recording.wav' for 5 minutes.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Recorder).audioRecord_record('recording.wav', 300)
+  ""
+}",300초 동안 'recording.wav' 파일에 오디오를 녹음해줘.,1.0
+162,Recorder.switch_switch,레코더 상태를 확인해줘.,Check the recorder status.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Recorder).switch_switch)
+  ""
+}",녹음기의 스위치 상태를 알려줘.,0.9
+163,Recorder.switch_on,녹음기를 켜줘.,Turn on the recorder.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Recorder).switch_on()
+  ""
+}",녹음기를 켜줘.,1.0
+164,Recorder.switch_off,녹음기를 꺼줘.,Turn off the recorder.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Recorder).switch_off()
+  ""
+}",녹음기를 꺼줘.,1.0
+165,Recorder.switch_toggle,녹음기를 토글해줘.,Toggle the recorder on or off.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Recorder).switch_toggle()
+  ""
+}",녹음기를 토글해줘.,1.0
+166,Switch.switch_switch,스위치 상태를 확인해줘.,Check the switch status.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""    
+    (#Speaker).mediaPlayback_speak((#Switch).switch_switch)
+  ""
+}",스위치 상태를 알려줘.,1.0
+167,Switch.switch_on,스위치를 켜줘.,Turn on the switch.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Switch).switch_on()
+  ""
+}",스위치를 켜줘.,1.0
+168,Switch.switch_off,스위치를 꺼줘.,Turn off the switch.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Switch).switch_off()
+  ""
+}",스위치를 꺼줘.,1.0
+169,Switch.switch_toggle,스위치를 토글해줘.,Toggle the switch.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Switch).switch_toggle()
+  ""
+}",스위치를 토글해줘.,1.0
+170,Television.switch_switch,텔레비전 상태를 확인해줘.,Check the television status.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Television).switch_switch)
+  ""
+}",텔레비전의 전원 상태를 알려줘.,0.9
+171,Television.switch_on,텔레비전을 켜줘.,Turn on the television.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).switch_on()
+  ""
+}",텔레비전을 켜줘.,1.0
+172,Television.switch_off,텔레비전을 꺼줘.,Turn off the television.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).switch_off()
+  ""
+}",텔레비전을 꺼줘.,1.0
+173,Television.switch_toggle,텔레비전을 토글해줘.,Toggle the television on or off.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).switch_toggle()
+  ""
+}",텔레비전을 토글해줘.,1.0
+174,Television.tvChannel_tvChannel,TV 채널을 5로 설정해줘.,Set the TV channel to 5.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).tvChannel_tvChannel(5)
+  ""
+}",텔레비전 5번 채널로 바꿔줘.,1.0
+175,Television.tvChannel_tvChannelName,TV 채널 이름을 알려줘.,Tell me the TV channel name.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#Television).tvChannel_tvChannelName)
+  ""
+}",현재 TV 채널 이름을 알려줘.,1.0
+176,Television.tvChannel_channelUp,TV 채널을 하나 위로 올려줘.,Move the TV channel up by one.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).tvChannel_channelUp()
+  ""
+}",텔레비전 채널을 올려줘.,0.9
+177,Television.tvChannel_channelDown,TV 채널을 1단계 아래로 내려줘.,Move the TV channel down by 1.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).tvChannel_channelDown()
+  ""
+}",텔레비전 채널을 내려줘.,0.8
+178,Television.tvChannel_setTvChannel,TV 채널을 5로 설정해줘.,Set the TV channel to 5.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).tvChannel_setTvChannel(5)
+  ""
+}",텔레비전 채널을 5번으로 맞춰줘.,1.0
+179,Television.tvChannel_setTvChannelName,"TV 채널을 ""KBS""로 설정해줘.","Set the TV channel to ""KBS"".","{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).tvChannel_setTvChannelName('KBS')
+  ""
+}",텔레비전 채널을 KBS로 바꿔줘.,1.0
+180,Television.audioMute_muteStatus,TV의 음소거 상태를 확인해줘.,Check the mute status of the television.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The television is currently ' + (#Television).audioMute_muteStatus
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",텔레비전 음소거 상태가 어떤지 알려줘.,1.0
+181,Television.audioMute_mute,TV를 음소거로 설정해줘.,Set the TV to mute.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).audioMute_mute()
+  ""
+}",텔레비전 음소거해줘.,1.0
+182,Television.audioMute_unmute,TV 음소거를 해제해줘.,Unmute the television.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).audioMute_unmute()
+  ""
+}",텔레비전 음소거를 토글해줘.,0.8
+183,Television.audioMute_setMute,TV의 오디오 음소거 상태를 '음소거'로 설정해줘.,Set the television's audio mute state to 'muted'.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).audioMute_setMute('muted')
+  ""
+}",텔레비전 음소거해줘.,0.9
+184,Television.audioVolume_volume,TV의 현재 볼륨을 확인해줘.,Check the current volume of the TV.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current volume of the TV is ' + (#Television).audioVolume_volume
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",텔레비전의 현재 볼륨을 알려줘.,1.0
+185,Television.audioVolume_setVolume,TV 볼륨을 15로 설정해줘.,Set the TV volume to 15.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).audioVolume_setVolume(15)
+  ""
+}",텔레비전 볼륨 15로 설정해줘.,1.0
+186,Television.audioVolume_volumeUp,TV 볼륨을 1만큼 높여줘.,Increase the TV volume by 1.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).audioVolume_volumeUp()
+  ""
+}",텔레비전 소리를 키워줘.,0.8
+187,Television.audioVolume_volumeDown,TV 볼륨을 1단계 낮춰줘.,Turn the TV volume down by 1.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Television).audioVolume_volumeDown()
+  ""
+}",텔레비전 소리를 줄여줘.,0.9
+188,TemperatureSensor.temperatureMeasurement_temperature,온도 센서로부터 현재 온도를 측정해줘.,Measure the current temperature from the temperature sensor.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current temperature is ' + (#TemperatureSensor).temperatureMeasurement_temperature
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 온도를 알려줘.,0.7
+189,TemperatureSensor.temperatureMeasurement_temperatureRange,온도 범위(DICT 유형),temperature range(DICT type),"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current temperature range is ' + (#TemperatureSensor).temperatureMeasurement_temperatureRange
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 온도 범위를 알려줘.,0.5
+190,WeatherProvider.weatherProvider_temperatureWeather,현재 기온을 알려줘.,Tell me the current temperature.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current temperature is ' + (#WeatherProvider).weatherProvider_temperatureWeather
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 온도가 어떻게 되는지 알려줘.,1.0
+191,WeatherProvider.weatherProvider_pressureWeather,현재 압력 수준을 알려줘.,Tell me the current pressure level.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current pressure level is ' + (#WeatherProvider).weatherProvider_pressureWeather
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 기압 수준을 알려줘.,1.0
+192,WeatherProvider.weatherProvider_pm25Weather,현재 PM2.5 수준을 알려줘.,Tell me the current PM2.5 level.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current PM2.5 level is ' + (#WeatherProvider).weatherProvider_pm25Weather
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 PM2.5 수치를 알려줘.,1.0
+193,WeatherProvider.weatherProvider_pm10Weather,현재 PM10 수치를 알려줘.,Tell me the current PM10 level.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current PM10 level is ' + pm10_(#WeatherProvider).weatherProvider_pm10Weatherlevel
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 PM10 수치를 알려줘.,1.0
+194,WeatherProvider.weatherProvider_weather,현재 날씨를 알려줘.,Tell me the current weather.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    script ='The current weather is ' + (#WeatherProvider).weatherProvider_weather
+    (#Speaker).mediaPlayback_speak(script)
+  ""
+}",현재 날씨가 어떤지 알려줘.,1.0
+195,WeatherProvider.weatherProvider_getWeatherInfo,현재 위치의 최신 날씨 정보를 알려줘.,Get the current weather information for the current location.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_getWeatherInfo)
+  ""
+}",현재 날씨를 알려줘.,0.75
+196,Window.windowControl_window,창문이 닫혀 있는지 확인해줘.,Check if the window is closed.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak( (#Window).windowControl_window)
+  ""
+}",창문 상태를 알려줘.,0.8
+197,Window.windowControl_open,창문을 열어줘.,Open the window.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Window).windowControl_open()
+  ""
+}",창문 열어줘.,1.0
+198,Window.windowControl_close,창을 닫아줘.,Close the window.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Window).windowControl_close()
+  ""
+}",창문 닫아줘.,0.9
+199,FallDetector.fallDetection_fall,넘어짐이 발생했는지 감지해줘.,Detect if a fall has occurred.,"{
+  ""cron"": """",
+  ""period"": 100,
+  ""script"": ""
+    (#Speaker).mediaPlayback_speak((#fallDetector).fallDetection_fall)
+  ""
+}",낙상 감지 상태를 알려줘.,0.8
+200,OccupancySensor.presenceSensor_presence,로비에 누군가 있는지 확인해줘.,Check if there is someone in the lobby.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+      (#lobby #Speaker).mediaPlayback_speak((#lobby #OccupancySensor).presenceSensor_presence)
+  ""
+}",로비에 사람 있는지 알려줘.,1.0
+201,Timer.timer_add,30분 후에 만료되는 타이머를 'timer1'이라는 이름으로 설정해줘.,Set a timer with the name 'timer1' to expire in 30 minutes.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Timer).timer_add('timer1', 30 MIN)
+  ""
+}",타이머를 30분으로 설정해줘.,0.7
+202,Timer.timer_set,'아침운동'이라는 이름의 타이머를 5분 후에 만료되도록 설정해줘.,Set the timer with the name 'Morning Exercise'to expire in 5 minutes.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Timer).timer_set('Morning Exercise', 5 MIN)
+  ""
+}",5분 후에 '아침 운동' 알람을 설정해줘.,0.7
+203,Timer.timer_start,'아침 운동'이라는 이름으로 타이머를 시작해줘.,Start the timer with the name 'Morning Exercise'.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+    (#Timer).timer_start('Morning Exercise')
+  ""
+}",아침 운동 타이머를 시작해줘.,1.0
+204,Timer.timer_isSet,'저녁 운동'이라는 이름의 타이머가 설정되어 있는지 확인해줘.,Check if the timer with the name ‘Evening Exercise’ is set.,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+   status = (#Timer).timer_isSet('Evening Exercise’)
+  (#Speaker).mediaPlayback_speak(status)
+  ""
+}",저녁 운동 타이머가 설정되어 있는지 알려줘.,1.0
+205,Timer.timer_isExist,'저녁 운동'이라는 이름의 타이머가 있는지 확인해줘.,Check if the timer with the name ‘Evening Exercise’ exists .,"{
+  ""cron"": """",
+  ""period"": -1,
+  ""script"": ""
+   status = (#Timer).timer_isExist('Evening Exercise')
+    (#Speaker).mediaPlayback_speak(status)
+  ""
+}",'Evening Exercise'라는 타이머가 있는지 알려줘.,1.0

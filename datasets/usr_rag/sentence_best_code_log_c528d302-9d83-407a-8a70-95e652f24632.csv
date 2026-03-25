@@ -1,0 +1,2 @@
+﻿sentence,best_code
+임의의 스위치를 켠다.,"[{'name': '임의스위치켜기', 'cron': '', 'period': -1, 'code': '(#Switch).on()'}]"

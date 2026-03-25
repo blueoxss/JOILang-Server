@@ -1,0 +1,2 @@
+﻿sentence,best_code
+"모든 조명을 켜고, 그 다음 모든 스위치를 켠다.","[{'name': '사무실전등스위치켜기', 'cron': '', 'period': -1, 'code': 'all(#Light).on()\nall(#Switch).on()'}]"

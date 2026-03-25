@@ -1,0 +1,2956 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    HASH
+
+Grammar
+
+Rule 0     S' -> scenario
+Rule 1     scenario -> statement_list
+Rule 2     statement_list -> statement
+Rule 3     statement_list -> statement statement_list
+Rule 4     statement -> action
+Rule 5     statement -> all_action
+Rule 6     statement -> assignment
+Rule 7     statement -> if_statement
+Rule 8     statement -> wait_statement
+Rule 9     statement -> compound_statement
+Rule 10    tag_list -> TAG
+Rule 11    tag_list -> tag_list TAG
+Rule 12    tag_expression -> LPAREN tag_list RPAREN
+Rule 13    expression -> tag_expression DOT IDENTIFIER
+Rule 14    expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN
+Rule 15    expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN
+Rule 16    action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN
+Rule 17    action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN
+Rule 18    all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN
+Rule 19    all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN
+Rule 20    expression -> expression AND expression
+Rule 21    expression -> expression OR expression
+Rule 22    expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+Rule 23    expression -> expression PERCENT
+Rule 24    assignment -> IDENTIFIER ASSIGN expression
+Rule 25    assignment -> IDENTIFIER DECLARE expression
+Rule 26    expression -> IDENTIFIER
+Rule 27    expression -> INTEGER
+Rule 28    expression -> DOUBLE
+Rule 29    expression -> STRING_LITERAL
+Rule 30    expression -> expression PLUS expression
+Rule 31    expression -> expression MINUS expression
+Rule 32    expression -> expression TIMES expression
+Rule 33    expression -> expression DIVIDE expression
+Rule 34    input -> expression
+Rule 35    input -> input COMMA expression
+Rule 36    compound_statement -> LBRACE statement_list RBRACE
+Rule 37    if_statement -> IF LPAREN condition_list RPAREN compound_statement else_clause
+Rule 38    else_clause -> ELSE statement
+Rule 39    else_clause -> empty
+Rule 40    statement -> DELAY LPAREN expression RPAREN
+Rule 41    condition_list -> condition
+Rule 42    condition_list -> LPAREN condition_list RPAREN
+Rule 43    condition_list -> condition_list AND condition_list
+Rule 44    condition_list -> condition_list OR condition_list
+Rule 45    condition_list -> ANY condition_list
+Rule 46    condition_list -> ALL condition_list
+Rule 47    condition_list -> NOT condition
+Rule 48    condition -> expression GE expression
+Rule 49    condition -> expression LE expression
+Rule 50    condition -> expression EQ expression
+Rule 51    condition -> expression NE expression
+Rule 52    condition -> expression GT expression
+Rule 53    condition -> expression LT expression
+Rule 54    wait_statement -> WAIT_UNTIL LPAREN condition_list RPAREN
+Rule 55    wait_statement -> WAIT_UNTIL LPAREN period_time RPAREN
+Rule 56    period_time -> INTEGER time_unit
+Rule 57    time_unit -> MILLISECOND
+Rule 58    time_unit -> SECOND
+Rule 59    time_unit -> MINUTE
+Rule 60    time_unit -> HOUR
+Rule 61    time_unit -> DAY
+Rule 62    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ALL                  : 18 19 22 46
+AND                  : 20 43
+ANY                  : 45
+ASSIGN               : 24
+COMMA                : 35
+DAY                  : 61
+DECLARE              : 25
+DELAY                : 40
+DIVIDE               : 33
+DOT                  : 13 14 15 16 17 18 19 22
+DOUBLE               : 28
+ELSE                 : 38
+EQ                   : 50
+GE                   : 48
+GT                   : 52
+HASH                 : 
+HOUR                 : 60
+IDENTIFIER           : 13 14 15 16 17 18 19 22 24 25 26
+IF                   : 37
+INTEGER              : 27 56
+LBRACE               : 36
+LE                   : 49
+LPAREN               : 12 14 15 16 16 17 17 18 18 19 19 22 37 40 42 54 55
+LT                   : 53
+MILLISECOND          : 57
+MINUS                : 31
+MINUTE               : 59
+NE                   : 51
+NOT                  : 47
+OR                   : 21 44
+PERCENT              : 23
+PLUS                 : 30
+RBRACE               : 36
+RPAREN               : 12 14 15 16 16 17 17 18 18 19 19 22 37 40 42 54 55
+SECOND               : 58
+STRING_LITERAL       : 29
+TAG                  : 10 11
+TIMES                : 32
+WAIT_UNTIL           : 54 55
+error                : 
+
+Nonterminals, with rules where they appear
+
+action               : 4
+all_action           : 5
+assignment           : 6
+compound_statement   : 9 37
+condition            : 41 47
+condition_list       : 37 42 43 43 44 44 45 46 54
+else_clause          : 37
+empty                : 39
+expression           : 20 20 21 21 23 24 25 30 30 31 31 32 32 33 33 34 35 40 48 48 49 49 50 50 51 51 52 52 53 53
+if_statement         : 7
+input                : 14 17 19 35
+period_time          : 55
+scenario             : 0
+statement            : 2 3 38
+statement_list       : 1 3 36
+tag_expression       : 13 14 15
+tag_list             : 11 12 16 17 18 19 22
+time_unit            : 56
+wait_statement       : 8
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . scenario
+    (1) scenario -> . statement_list
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement statement_list
+    (4) statement -> . action
+    (5) statement -> . all_action
+    (6) statement -> . assignment
+    (7) statement -> . if_statement
+    (8) statement -> . wait_statement
+    (9) statement -> . compound_statement
+    (40) statement -> . DELAY LPAREN expression RPAREN
+    (16) action -> . LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN
+    (17) action -> . LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN
+    (18) all_action -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN
+    (19) all_action -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN
+    (24) assignment -> . IDENTIFIER ASSIGN expression
+    (25) assignment -> . IDENTIFIER DECLARE expression
+    (37) if_statement -> . IF LPAREN condition_list RPAREN compound_statement else_clause
+    (54) wait_statement -> . WAIT_UNTIL LPAREN condition_list RPAREN
+    (55) wait_statement -> . WAIT_UNTIL LPAREN period_time RPAREN
+    (36) compound_statement -> . LBRACE statement_list RBRACE
+
+    DELAY           shift and go to state 10
+    LPAREN          shift and go to state 11
+    ALL             shift and go to state 13
+    IDENTIFIER      shift and go to state 12
+    IF              shift and go to state 14
+    WAIT_UNTIL      shift and go to state 15
+    LBRACE          shift and go to state 16
+
+    scenario                       shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+    action                         shift and go to state 4
+    all_action                     shift and go to state 5
+    assignment                     shift and go to state 6
+    if_statement                   shift and go to state 7
+    wait_statement                 shift and go to state 8
+    compound_statement             shift and go to state 9
+
+state 1
+
+    (0) S' -> scenario .
+
+
+
+state 2
+
+    (1) scenario -> statement_list .
+
+    $end            reduce using rule 1 (scenario -> statement_list .)
+
+
+state 3
+
+    (2) statement_list -> statement .
+    (3) statement_list -> statement . statement_list
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement statement_list
+    (4) statement -> . action
+    (5) statement -> . all_action
+    (6) statement -> . assignment
+    (7) statement -> . if_statement
+    (8) statement -> . wait_statement
+    (9) statement -> . compound_statement
+    (40) statement -> . DELAY LPAREN expression RPAREN
+    (16) action -> . LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN
+    (17) action -> . LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN
+    (18) all_action -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN
+    (19) all_action -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN
+    (24) assignment -> . IDENTIFIER ASSIGN expression
+    (25) assignment -> . IDENTIFIER DECLARE expression
+    (37) if_statement -> . IF LPAREN condition_list RPAREN compound_statement else_clause
+    (54) wait_statement -> . WAIT_UNTIL LPAREN condition_list RPAREN
+    (55) wait_statement -> . WAIT_UNTIL LPAREN period_time RPAREN
+    (36) compound_statement -> . LBRACE statement_list RBRACE
+
+    $end            reduce using rule 2 (statement_list -> statement .)
+    RBRACE          reduce using rule 2 (statement_list -> statement .)
+    DELAY           shift and go to state 10
+    LPAREN          shift and go to state 11
+    ALL             shift and go to state 13
+    IDENTIFIER      shift and go to state 12
+    IF              shift and go to state 14
+    WAIT_UNTIL      shift and go to state 15
+    LBRACE          shift and go to state 16
+
+    statement                      shift and go to state 3
+    statement_list                 shift and go to state 17
+    action                         shift and go to state 4
+    all_action                     shift and go to state 5
+    assignment                     shift and go to state 6
+    if_statement                   shift and go to state 7
+    wait_statement                 shift and go to state 8
+    compound_statement             shift and go to state 9
+
+state 4
+
+    (4) statement -> action .
+
+    DELAY           reduce using rule 4 (statement -> action .)
+    LPAREN          reduce using rule 4 (statement -> action .)
+    ALL             reduce using rule 4 (statement -> action .)
+    IDENTIFIER      reduce using rule 4 (statement -> action .)
+    IF              reduce using rule 4 (statement -> action .)
+    WAIT_UNTIL      reduce using rule 4 (statement -> action .)
+    LBRACE          reduce using rule 4 (statement -> action .)
+    $end            reduce using rule 4 (statement -> action .)
+    RBRACE          reduce using rule 4 (statement -> action .)
+
+
+state 5
+
+    (5) statement -> all_action .
+
+    DELAY           reduce using rule 5 (statement -> all_action .)
+    LPAREN          reduce using rule 5 (statement -> all_action .)
+    ALL             reduce using rule 5 (statement -> all_action .)
+    IDENTIFIER      reduce using rule 5 (statement -> all_action .)
+    IF              reduce using rule 5 (statement -> all_action .)
+    WAIT_UNTIL      reduce using rule 5 (statement -> all_action .)
+    LBRACE          reduce using rule 5 (statement -> all_action .)
+    $end            reduce using rule 5 (statement -> all_action .)
+    RBRACE          reduce using rule 5 (statement -> all_action .)
+
+
+state 6
+
+    (6) statement -> assignment .
+
+    DELAY           reduce using rule 6 (statement -> assignment .)
+    LPAREN          reduce using rule 6 (statement -> assignment .)
+    ALL             reduce using rule 6 (statement -> assignment .)
+    IDENTIFIER      reduce using rule 6 (statement -> assignment .)
+    IF              reduce using rule 6 (statement -> assignment .)
+    WAIT_UNTIL      reduce using rule 6 (statement -> assignment .)
+    LBRACE          reduce using rule 6 (statement -> assignment .)
+    $end            reduce using rule 6 (statement -> assignment .)
+    RBRACE          reduce using rule 6 (statement -> assignment .)
+
+
+state 7
+
+    (7) statement -> if_statement .
+
+    DELAY           reduce using rule 7 (statement -> if_statement .)
+    LPAREN          reduce using rule 7 (statement -> if_statement .)
+    ALL             reduce using rule 7 (statement -> if_statement .)
+    IDENTIFIER      reduce using rule 7 (statement -> if_statement .)
+    IF              reduce using rule 7 (statement -> if_statement .)
+    WAIT_UNTIL      reduce using rule 7 (statement -> if_statement .)
+    LBRACE          reduce using rule 7 (statement -> if_statement .)
+    $end            reduce using rule 7 (statement -> if_statement .)
+    RBRACE          reduce using rule 7 (statement -> if_statement .)
+
+
+state 8
+
+    (8) statement -> wait_statement .
+
+    DELAY           reduce using rule 8 (statement -> wait_statement .)
+    LPAREN          reduce using rule 8 (statement -> wait_statement .)
+    ALL             reduce using rule 8 (statement -> wait_statement .)
+    IDENTIFIER      reduce using rule 8 (statement -> wait_statement .)
+    IF              reduce using rule 8 (statement -> wait_statement .)
+    WAIT_UNTIL      reduce using rule 8 (statement -> wait_statement .)
+    LBRACE          reduce using rule 8 (statement -> wait_statement .)
+    $end            reduce using rule 8 (statement -> wait_statement .)
+    RBRACE          reduce using rule 8 (statement -> wait_statement .)
+
+
+state 9
+
+    (9) statement -> compound_statement .
+
+    DELAY           reduce using rule 9 (statement -> compound_statement .)
+    LPAREN          reduce using rule 9 (statement -> compound_statement .)
+    ALL             reduce using rule 9 (statement -> compound_statement .)
+    IDENTIFIER      reduce using rule 9 (statement -> compound_statement .)
+    IF              reduce using rule 9 (statement -> compound_statement .)
+    WAIT_UNTIL      reduce using rule 9 (statement -> compound_statement .)
+    LBRACE          reduce using rule 9 (statement -> compound_statement .)
+    $end            reduce using rule 9 (statement -> compound_statement .)
+    RBRACE          reduce using rule 9 (statement -> compound_statement .)
+
+
+state 10
+
+    (40) statement -> DELAY . LPAREN expression RPAREN
+
+    LPAREN          shift and go to state 18
+
+
+state 11
+
+    (16) action -> LPAREN . tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN
+    (17) action -> LPAREN . tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN
+    (10) tag_list -> . TAG
+    (11) tag_list -> . tag_list TAG
+
+    TAG             shift and go to state 20
+
+    tag_list                       shift and go to state 19
+
+state 12
+
+    (24) assignment -> IDENTIFIER . ASSIGN expression
+    (25) assignment -> IDENTIFIER . DECLARE expression
+
+    ASSIGN          shift and go to state 21
+    DECLARE         shift and go to state 22
+
+
+state 13
+
+    (18) all_action -> ALL . LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN
+    (19) all_action -> ALL . LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN
+
+    LPAREN          shift and go to state 23
+
+
+state 14
+
+    (37) if_statement -> IF . LPAREN condition_list RPAREN compound_statement else_clause
+
+    LPAREN          shift and go to state 24
+
+
+state 15
+
+    (54) wait_statement -> WAIT_UNTIL . LPAREN condition_list RPAREN
+    (55) wait_statement -> WAIT_UNTIL . LPAREN period_time RPAREN
+
+    LPAREN          shift and go to state 25
+
+
+state 16
+
+    (36) compound_statement -> LBRACE . statement_list RBRACE
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement statement_list
+    (4) statement -> . action
+    (5) statement -> . all_action
+    (6) statement -> . assignment
+    (7) statement -> . if_statement
+    (8) statement -> . wait_statement
+    (9) statement -> . compound_statement
+    (40) statement -> . DELAY LPAREN expression RPAREN
+    (16) action -> . LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN
+    (17) action -> . LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN
+    (18) all_action -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN
+    (19) all_action -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN
+    (24) assignment -> . IDENTIFIER ASSIGN expression
+    (25) assignment -> . IDENTIFIER DECLARE expression
+    (37) if_statement -> . IF LPAREN condition_list RPAREN compound_statement else_clause
+    (54) wait_statement -> . WAIT_UNTIL LPAREN condition_list RPAREN
+    (55) wait_statement -> . WAIT_UNTIL LPAREN period_time RPAREN
+    (36) compound_statement -> . LBRACE statement_list RBRACE
+
+    DELAY           shift and go to state 10
+    LPAREN          shift and go to state 11
+    ALL             shift and go to state 13
+    IDENTIFIER      shift and go to state 12
+    IF              shift and go to state 14
+    WAIT_UNTIL      shift and go to state 15
+    LBRACE          shift and go to state 16
+
+    statement_list                 shift and go to state 26
+    statement                      shift and go to state 3
+    action                         shift and go to state 4
+    all_action                     shift and go to state 5
+    assignment                     shift and go to state 6
+    if_statement                   shift and go to state 7
+    wait_statement                 shift and go to state 8
+    compound_statement             shift and go to state 9
+
+state 17
+
+    (3) statement_list -> statement statement_list .
+
+    $end            reduce using rule 3 (statement_list -> statement statement_list .)
+    RBRACE          reduce using rule 3 (statement_list -> statement statement_list .)
+
+
+state 18
+
+    (40) statement -> DELAY LPAREN . expression RPAREN
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 28
+    tag_expression                 shift and go to state 29
+
+state 19
+
+    (16) action -> LPAREN tag_list . RPAREN DOT IDENTIFIER LPAREN RPAREN
+    (17) action -> LPAREN tag_list . RPAREN DOT IDENTIFIER LPAREN input RPAREN
+    (11) tag_list -> tag_list . TAG
+
+    RPAREN          shift and go to state 35
+    TAG             shift and go to state 36
+
+
+state 20
+
+    (10) tag_list -> TAG .
+
+    RPAREN          reduce using rule 10 (tag_list -> TAG .)
+    TAG             reduce using rule 10 (tag_list -> TAG .)
+
+
+state 21
+
+    (24) assignment -> IDENTIFIER ASSIGN . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 37
+    tag_expression                 shift and go to state 29
+
+state 22
+
+    (25) assignment -> IDENTIFIER DECLARE . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 38
+    tag_expression                 shift and go to state 29
+
+state 23
+
+    (18) all_action -> ALL LPAREN . tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN
+    (19) all_action -> ALL LPAREN . tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN
+    (10) tag_list -> . TAG
+    (11) tag_list -> . tag_list TAG
+
+    TAG             shift and go to state 20
+
+    tag_list                       shift and go to state 39
+
+state 24
+
+    (37) if_statement -> IF LPAREN . condition_list RPAREN compound_statement else_clause
+    (41) condition_list -> . condition
+    (42) condition_list -> . LPAREN condition_list RPAREN
+    (43) condition_list -> . condition_list AND condition_list
+    (44) condition_list -> . condition_list OR condition_list
+    (45) condition_list -> . ANY condition_list
+    (46) condition_list -> . ALL condition_list
+    (47) condition_list -> . NOT condition
+    (48) condition -> . expression GE expression
+    (49) condition -> . expression LE expression
+    (50) condition -> . expression EQ expression
+    (51) condition -> . expression NE expression
+    (52) condition -> . expression GT expression
+    (53) condition -> . expression LT expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    LPAREN          shift and go to state 40
+    ANY             shift and go to state 43
+    ALL             shift and go to state 44
+    NOT             shift and go to state 45
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+
+    condition_list                 shift and go to state 41
+    condition                      shift and go to state 42
+    expression                     shift and go to state 46
+    tag_expression                 shift and go to state 29
+
+state 25
+
+    (54) wait_statement -> WAIT_UNTIL LPAREN . condition_list RPAREN
+    (55) wait_statement -> WAIT_UNTIL LPAREN . period_time RPAREN
+    (41) condition_list -> . condition
+    (42) condition_list -> . LPAREN condition_list RPAREN
+    (43) condition_list -> . condition_list AND condition_list
+    (44) condition_list -> . condition_list OR condition_list
+    (45) condition_list -> . ANY condition_list
+    (46) condition_list -> . ALL condition_list
+    (47) condition_list -> . NOT condition
+    (56) period_time -> . INTEGER time_unit
+    (48) condition -> . expression GE expression
+    (49) condition -> . expression LE expression
+    (50) condition -> . expression EQ expression
+    (51) condition -> . expression NE expression
+    (52) condition -> . expression GT expression
+    (53) condition -> . expression LT expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    LPAREN          shift and go to state 40
+    ANY             shift and go to state 43
+    ALL             shift and go to state 44
+    NOT             shift and go to state 45
+    INTEGER         shift and go to state 49
+    IDENTIFIER      shift and go to state 30
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+
+    condition_list                 shift and go to state 47
+    period_time                    shift and go to state 48
+    condition                      shift and go to state 42
+    expression                     shift and go to state 46
+    tag_expression                 shift and go to state 29
+
+state 26
+
+    (36) compound_statement -> LBRACE statement_list . RBRACE
+
+    RBRACE          shift and go to state 50
+
+
+state 27
+
+    (12) tag_expression -> LPAREN . tag_list RPAREN
+    (10) tag_list -> . TAG
+    (11) tag_list -> . tag_list TAG
+
+    TAG             shift and go to state 20
+
+    tag_list                       shift and go to state 51
+
+state 28
+
+    (40) statement -> DELAY LPAREN expression . RPAREN
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          shift and go to state 52
+    AND             shift and go to state 53
+    OR              shift and go to state 54
+    PERCENT         shift and go to state 55
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+
+state 29
+
+    (13) expression -> tag_expression . DOT IDENTIFIER
+    (14) expression -> tag_expression . DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> tag_expression . DOT IDENTIFIER LPAREN RPAREN
+
+    DOT             shift and go to state 60
+
+
+state 30
+
+    (26) expression -> IDENTIFIER .
+
+    RPAREN          reduce using rule 26 (expression -> IDENTIFIER .)
+    AND             reduce using rule 26 (expression -> IDENTIFIER .)
+    OR              reduce using rule 26 (expression -> IDENTIFIER .)
+    PERCENT         reduce using rule 26 (expression -> IDENTIFIER .)
+    PLUS            reduce using rule 26 (expression -> IDENTIFIER .)
+    MINUS           reduce using rule 26 (expression -> IDENTIFIER .)
+    TIMES           reduce using rule 26 (expression -> IDENTIFIER .)
+    DIVIDE          reduce using rule 26 (expression -> IDENTIFIER .)
+    DELAY           reduce using rule 26 (expression -> IDENTIFIER .)
+    LPAREN          reduce using rule 26 (expression -> IDENTIFIER .)
+    ALL             reduce using rule 26 (expression -> IDENTIFIER .)
+    IDENTIFIER      reduce using rule 26 (expression -> IDENTIFIER .)
+    IF              reduce using rule 26 (expression -> IDENTIFIER .)
+    WAIT_UNTIL      reduce using rule 26 (expression -> IDENTIFIER .)
+    LBRACE          reduce using rule 26 (expression -> IDENTIFIER .)
+    $end            reduce using rule 26 (expression -> IDENTIFIER .)
+    RBRACE          reduce using rule 26 (expression -> IDENTIFIER .)
+    GE              reduce using rule 26 (expression -> IDENTIFIER .)
+    LE              reduce using rule 26 (expression -> IDENTIFIER .)
+    EQ              reduce using rule 26 (expression -> IDENTIFIER .)
+    NE              reduce using rule 26 (expression -> IDENTIFIER .)
+    GT              reduce using rule 26 (expression -> IDENTIFIER .)
+    LT              reduce using rule 26 (expression -> IDENTIFIER .)
+    COMMA           reduce using rule 26 (expression -> IDENTIFIER .)
+
+
+state 31
+
+    (22) expression -> ALL . LPAREN tag_list RPAREN DOT IDENTIFIER
+
+    LPAREN          shift and go to state 61
+
+
+state 32
+
+    (27) expression -> INTEGER .
+
+    RPAREN          reduce using rule 27 (expression -> INTEGER .)
+    AND             reduce using rule 27 (expression -> INTEGER .)
+    OR              reduce using rule 27 (expression -> INTEGER .)
+    PERCENT         reduce using rule 27 (expression -> INTEGER .)
+    PLUS            reduce using rule 27 (expression -> INTEGER .)
+    MINUS           reduce using rule 27 (expression -> INTEGER .)
+    TIMES           reduce using rule 27 (expression -> INTEGER .)
+    DIVIDE          reduce using rule 27 (expression -> INTEGER .)
+    DELAY           reduce using rule 27 (expression -> INTEGER .)
+    LPAREN          reduce using rule 27 (expression -> INTEGER .)
+    ALL             reduce using rule 27 (expression -> INTEGER .)
+    IDENTIFIER      reduce using rule 27 (expression -> INTEGER .)
+    IF              reduce using rule 27 (expression -> INTEGER .)
+    WAIT_UNTIL      reduce using rule 27 (expression -> INTEGER .)
+    LBRACE          reduce using rule 27 (expression -> INTEGER .)
+    $end            reduce using rule 27 (expression -> INTEGER .)
+    RBRACE          reduce using rule 27 (expression -> INTEGER .)
+    GE              reduce using rule 27 (expression -> INTEGER .)
+    LE              reduce using rule 27 (expression -> INTEGER .)
+    EQ              reduce using rule 27 (expression -> INTEGER .)
+    NE              reduce using rule 27 (expression -> INTEGER .)
+    GT              reduce using rule 27 (expression -> INTEGER .)
+    LT              reduce using rule 27 (expression -> INTEGER .)
+    COMMA           reduce using rule 27 (expression -> INTEGER .)
+
+
+state 33
+
+    (28) expression -> DOUBLE .
+
+    RPAREN          reduce using rule 28 (expression -> DOUBLE .)
+    AND             reduce using rule 28 (expression -> DOUBLE .)
+    OR              reduce using rule 28 (expression -> DOUBLE .)
+    PERCENT         reduce using rule 28 (expression -> DOUBLE .)
+    PLUS            reduce using rule 28 (expression -> DOUBLE .)
+    MINUS           reduce using rule 28 (expression -> DOUBLE .)
+    TIMES           reduce using rule 28 (expression -> DOUBLE .)
+    DIVIDE          reduce using rule 28 (expression -> DOUBLE .)
+    DELAY           reduce using rule 28 (expression -> DOUBLE .)
+    LPAREN          reduce using rule 28 (expression -> DOUBLE .)
+    ALL             reduce using rule 28 (expression -> DOUBLE .)
+    IDENTIFIER      reduce using rule 28 (expression -> DOUBLE .)
+    IF              reduce using rule 28 (expression -> DOUBLE .)
+    WAIT_UNTIL      reduce using rule 28 (expression -> DOUBLE .)
+    LBRACE          reduce using rule 28 (expression -> DOUBLE .)
+    $end            reduce using rule 28 (expression -> DOUBLE .)
+    RBRACE          reduce using rule 28 (expression -> DOUBLE .)
+    GE              reduce using rule 28 (expression -> DOUBLE .)
+    LE              reduce using rule 28 (expression -> DOUBLE .)
+    EQ              reduce using rule 28 (expression -> DOUBLE .)
+    NE              reduce using rule 28 (expression -> DOUBLE .)
+    GT              reduce using rule 28 (expression -> DOUBLE .)
+    LT              reduce using rule 28 (expression -> DOUBLE .)
+    COMMA           reduce using rule 28 (expression -> DOUBLE .)
+
+
+state 34
+
+    (29) expression -> STRING_LITERAL .
+
+    RPAREN          reduce using rule 29 (expression -> STRING_LITERAL .)
+    AND             reduce using rule 29 (expression -> STRING_LITERAL .)
+    OR              reduce using rule 29 (expression -> STRING_LITERAL .)
+    PERCENT         reduce using rule 29 (expression -> STRING_LITERAL .)
+    PLUS            reduce using rule 29 (expression -> STRING_LITERAL .)
+    MINUS           reduce using rule 29 (expression -> STRING_LITERAL .)
+    TIMES           reduce using rule 29 (expression -> STRING_LITERAL .)
+    DIVIDE          reduce using rule 29 (expression -> STRING_LITERAL .)
+    DELAY           reduce using rule 29 (expression -> STRING_LITERAL .)
+    LPAREN          reduce using rule 29 (expression -> STRING_LITERAL .)
+    ALL             reduce using rule 29 (expression -> STRING_LITERAL .)
+    IDENTIFIER      reduce using rule 29 (expression -> STRING_LITERAL .)
+    IF              reduce using rule 29 (expression -> STRING_LITERAL .)
+    WAIT_UNTIL      reduce using rule 29 (expression -> STRING_LITERAL .)
+    LBRACE          reduce using rule 29 (expression -> STRING_LITERAL .)
+    $end            reduce using rule 29 (expression -> STRING_LITERAL .)
+    RBRACE          reduce using rule 29 (expression -> STRING_LITERAL .)
+    GE              reduce using rule 29 (expression -> STRING_LITERAL .)
+    LE              reduce using rule 29 (expression -> STRING_LITERAL .)
+    EQ              reduce using rule 29 (expression -> STRING_LITERAL .)
+    NE              reduce using rule 29 (expression -> STRING_LITERAL .)
+    GT              reduce using rule 29 (expression -> STRING_LITERAL .)
+    LT              reduce using rule 29 (expression -> STRING_LITERAL .)
+    COMMA           reduce using rule 29 (expression -> STRING_LITERAL .)
+
+
+state 35
+
+    (16) action -> LPAREN tag_list RPAREN . DOT IDENTIFIER LPAREN RPAREN
+    (17) action -> LPAREN tag_list RPAREN . DOT IDENTIFIER LPAREN input RPAREN
+
+    DOT             shift and go to state 62
+
+
+state 36
+
+    (11) tag_list -> tag_list TAG .
+
+    RPAREN          reduce using rule 11 (tag_list -> tag_list TAG .)
+    TAG             reduce using rule 11 (tag_list -> tag_list TAG .)
+
+
+state 37
+
+    (24) assignment -> IDENTIFIER ASSIGN expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    DELAY           reduce using rule 24 (assignment -> IDENTIFIER ASSIGN expression .)
+    LPAREN          reduce using rule 24 (assignment -> IDENTIFIER ASSIGN expression .)
+    ALL             reduce using rule 24 (assignment -> IDENTIFIER ASSIGN expression .)
+    IDENTIFIER      reduce using rule 24 (assignment -> IDENTIFIER ASSIGN expression .)
+    IF              reduce using rule 24 (assignment -> IDENTIFIER ASSIGN expression .)
+    WAIT_UNTIL      reduce using rule 24 (assignment -> IDENTIFIER ASSIGN expression .)
+    LBRACE          reduce using rule 24 (assignment -> IDENTIFIER ASSIGN expression .)
+    $end            reduce using rule 24 (assignment -> IDENTIFIER ASSIGN expression .)
+    RBRACE          reduce using rule 24 (assignment -> IDENTIFIER ASSIGN expression .)
+    AND             shift and go to state 53
+    OR              shift and go to state 54
+    PERCENT         shift and go to state 55
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+
+state 38
+
+    (25) assignment -> IDENTIFIER DECLARE expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    DELAY           reduce using rule 25 (assignment -> IDENTIFIER DECLARE expression .)
+    LPAREN          reduce using rule 25 (assignment -> IDENTIFIER DECLARE expression .)
+    ALL             reduce using rule 25 (assignment -> IDENTIFIER DECLARE expression .)
+    IDENTIFIER      reduce using rule 25 (assignment -> IDENTIFIER DECLARE expression .)
+    IF              reduce using rule 25 (assignment -> IDENTIFIER DECLARE expression .)
+    WAIT_UNTIL      reduce using rule 25 (assignment -> IDENTIFIER DECLARE expression .)
+    LBRACE          reduce using rule 25 (assignment -> IDENTIFIER DECLARE expression .)
+    $end            reduce using rule 25 (assignment -> IDENTIFIER DECLARE expression .)
+    RBRACE          reduce using rule 25 (assignment -> IDENTIFIER DECLARE expression .)
+    AND             shift and go to state 53
+    OR              shift and go to state 54
+    PERCENT         shift and go to state 55
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+
+state 39
+
+    (18) all_action -> ALL LPAREN tag_list . RPAREN DOT IDENTIFIER LPAREN RPAREN
+    (19) all_action -> ALL LPAREN tag_list . RPAREN DOT IDENTIFIER LPAREN input RPAREN
+    (11) tag_list -> tag_list . TAG
+
+    RPAREN          shift and go to state 63
+    TAG             shift and go to state 36
+
+
+state 40
+
+    (42) condition_list -> LPAREN . condition_list RPAREN
+    (12) tag_expression -> LPAREN . tag_list RPAREN
+    (41) condition_list -> . condition
+    (42) condition_list -> . LPAREN condition_list RPAREN
+    (43) condition_list -> . condition_list AND condition_list
+    (44) condition_list -> . condition_list OR condition_list
+    (45) condition_list -> . ANY condition_list
+    (46) condition_list -> . ALL condition_list
+    (47) condition_list -> . NOT condition
+    (10) tag_list -> . TAG
+    (11) tag_list -> . tag_list TAG
+    (48) condition -> . expression GE expression
+    (49) condition -> . expression LE expression
+    (50) condition -> . expression EQ expression
+    (51) condition -> . expression NE expression
+    (52) condition -> . expression GT expression
+    (53) condition -> . expression LT expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    LPAREN          shift and go to state 40
+    ANY             shift and go to state 43
+    ALL             shift and go to state 44
+    NOT             shift and go to state 45
+    TAG             shift and go to state 20
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+
+    condition_list                 shift and go to state 64
+    tag_list                       shift and go to state 51
+    condition                      shift and go to state 42
+    expression                     shift and go to state 46
+    tag_expression                 shift and go to state 29
+
+state 41
+
+    (37) if_statement -> IF LPAREN condition_list . RPAREN compound_statement else_clause
+    (43) condition_list -> condition_list . AND condition_list
+    (44) condition_list -> condition_list . OR condition_list
+
+    RPAREN          shift and go to state 65
+    AND             shift and go to state 66
+    OR              shift and go to state 67
+
+
+state 42
+
+    (41) condition_list -> condition .
+
+    RPAREN          reduce using rule 41 (condition_list -> condition .)
+    AND             reduce using rule 41 (condition_list -> condition .)
+    OR              reduce using rule 41 (condition_list -> condition .)
+
+
+state 43
+
+    (45) condition_list -> ANY . condition_list
+    (41) condition_list -> . condition
+    (42) condition_list -> . LPAREN condition_list RPAREN
+    (43) condition_list -> . condition_list AND condition_list
+    (44) condition_list -> . condition_list OR condition_list
+    (45) condition_list -> . ANY condition_list
+    (46) condition_list -> . ALL condition_list
+    (47) condition_list -> . NOT condition
+    (48) condition -> . expression GE expression
+    (49) condition -> . expression LE expression
+    (50) condition -> . expression EQ expression
+    (51) condition -> . expression NE expression
+    (52) condition -> . expression GT expression
+    (53) condition -> . expression LT expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    LPAREN          shift and go to state 40
+    ANY             shift and go to state 43
+    ALL             shift and go to state 44
+    NOT             shift and go to state 45
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+
+    condition_list                 shift and go to state 68
+    condition                      shift and go to state 42
+    expression                     shift and go to state 46
+    tag_expression                 shift and go to state 29
+
+state 44
+
+    (46) condition_list -> ALL . condition_list
+    (22) expression -> ALL . LPAREN tag_list RPAREN DOT IDENTIFIER
+    (41) condition_list -> . condition
+    (42) condition_list -> . LPAREN condition_list RPAREN
+    (43) condition_list -> . condition_list AND condition_list
+    (44) condition_list -> . condition_list OR condition_list
+    (45) condition_list -> . ANY condition_list
+    (46) condition_list -> . ALL condition_list
+    (47) condition_list -> . NOT condition
+    (48) condition -> . expression GE expression
+    (49) condition -> . expression LE expression
+    (50) condition -> . expression EQ expression
+    (51) condition -> . expression NE expression
+    (52) condition -> . expression GT expression
+    (53) condition -> . expression LT expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    LPAREN          shift and go to state 70
+    ANY             shift and go to state 43
+    ALL             shift and go to state 44
+    NOT             shift and go to state 45
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+
+    condition_list                 shift and go to state 69
+    condition                      shift and go to state 42
+    expression                     shift and go to state 46
+    tag_expression                 shift and go to state 29
+
+state 45
+
+    (47) condition_list -> NOT . condition
+    (48) condition -> . expression GE expression
+    (49) condition -> . expression LE expression
+    (50) condition -> . expression EQ expression
+    (51) condition -> . expression NE expression
+    (52) condition -> . expression GT expression
+    (53) condition -> . expression LT expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    condition                      shift and go to state 71
+    expression                     shift and go to state 46
+    tag_expression                 shift and go to state 29
+
+state 46
+
+    (48) condition -> expression . GE expression
+    (49) condition -> expression . LE expression
+    (50) condition -> expression . EQ expression
+    (51) condition -> expression . NE expression
+    (52) condition -> expression . GT expression
+    (53) condition -> expression . LT expression
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    GE              shift and go to state 72
+    LE              shift and go to state 73
+    EQ              shift and go to state 74
+    NE              shift and go to state 75
+    GT              shift and go to state 76
+    LT              shift and go to state 77
+    AND             shift and go to state 53
+    OR              shift and go to state 54
+    PERCENT         shift and go to state 55
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+
+state 47
+
+    (54) wait_statement -> WAIT_UNTIL LPAREN condition_list . RPAREN
+    (43) condition_list -> condition_list . AND condition_list
+    (44) condition_list -> condition_list . OR condition_list
+
+    RPAREN          shift and go to state 78
+    AND             shift and go to state 66
+    OR              shift and go to state 67
+
+
+state 48
+
+    (55) wait_statement -> WAIT_UNTIL LPAREN period_time . RPAREN
+
+    RPAREN          shift and go to state 79
+
+
+state 49
+
+    (56) period_time -> INTEGER . time_unit
+    (27) expression -> INTEGER .
+    (57) time_unit -> . MILLISECOND
+    (58) time_unit -> . SECOND
+    (59) time_unit -> . MINUTE
+    (60) time_unit -> . HOUR
+    (61) time_unit -> . DAY
+
+    GE              reduce using rule 27 (expression -> INTEGER .)
+    LE              reduce using rule 27 (expression -> INTEGER .)
+    EQ              reduce using rule 27 (expression -> INTEGER .)
+    NE              reduce using rule 27 (expression -> INTEGER .)
+    GT              reduce using rule 27 (expression -> INTEGER .)
+    LT              reduce using rule 27 (expression -> INTEGER .)
+    AND             reduce using rule 27 (expression -> INTEGER .)
+    OR              reduce using rule 27 (expression -> INTEGER .)
+    PERCENT         reduce using rule 27 (expression -> INTEGER .)
+    PLUS            reduce using rule 27 (expression -> INTEGER .)
+    MINUS           reduce using rule 27 (expression -> INTEGER .)
+    TIMES           reduce using rule 27 (expression -> INTEGER .)
+    DIVIDE          reduce using rule 27 (expression -> INTEGER .)
+    MILLISECOND     shift and go to state 81
+    SECOND          shift and go to state 82
+    MINUTE          shift and go to state 83
+    HOUR            shift and go to state 84
+    DAY             shift and go to state 85
+
+    time_unit                      shift and go to state 80
+
+state 50
+
+    (36) compound_statement -> LBRACE statement_list RBRACE .
+
+    DELAY           reduce using rule 36 (compound_statement -> LBRACE statement_list RBRACE .)
+    LPAREN          reduce using rule 36 (compound_statement -> LBRACE statement_list RBRACE .)
+    ALL             reduce using rule 36 (compound_statement -> LBRACE statement_list RBRACE .)
+    IDENTIFIER      reduce using rule 36 (compound_statement -> LBRACE statement_list RBRACE .)
+    IF              reduce using rule 36 (compound_statement -> LBRACE statement_list RBRACE .)
+    WAIT_UNTIL      reduce using rule 36 (compound_statement -> LBRACE statement_list RBRACE .)
+    LBRACE          reduce using rule 36 (compound_statement -> LBRACE statement_list RBRACE .)
+    $end            reduce using rule 36 (compound_statement -> LBRACE statement_list RBRACE .)
+    RBRACE          reduce using rule 36 (compound_statement -> LBRACE statement_list RBRACE .)
+    ELSE            reduce using rule 36 (compound_statement -> LBRACE statement_list RBRACE .)
+
+
+state 51
+
+    (12) tag_expression -> LPAREN tag_list . RPAREN
+    (11) tag_list -> tag_list . TAG
+
+    RPAREN          shift and go to state 86
+    TAG             shift and go to state 36
+
+
+state 52
+
+    (40) statement -> DELAY LPAREN expression RPAREN .
+
+    DELAY           reduce using rule 40 (statement -> DELAY LPAREN expression RPAREN .)
+    LPAREN          reduce using rule 40 (statement -> DELAY LPAREN expression RPAREN .)
+    ALL             reduce using rule 40 (statement -> DELAY LPAREN expression RPAREN .)
+    IDENTIFIER      reduce using rule 40 (statement -> DELAY LPAREN expression RPAREN .)
+    IF              reduce using rule 40 (statement -> DELAY LPAREN expression RPAREN .)
+    WAIT_UNTIL      reduce using rule 40 (statement -> DELAY LPAREN expression RPAREN .)
+    LBRACE          reduce using rule 40 (statement -> DELAY LPAREN expression RPAREN .)
+    $end            reduce using rule 40 (statement -> DELAY LPAREN expression RPAREN .)
+    RBRACE          reduce using rule 40 (statement -> DELAY LPAREN expression RPAREN .)
+
+
+state 53
+
+    (20) expression -> expression AND . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 87
+    tag_expression                 shift and go to state 29
+
+state 54
+
+    (21) expression -> expression OR . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 88
+    tag_expression                 shift and go to state 29
+
+state 55
+
+    (23) expression -> expression PERCENT .
+
+    RPAREN          reduce using rule 23 (expression -> expression PERCENT .)
+    AND             reduce using rule 23 (expression -> expression PERCENT .)
+    OR              reduce using rule 23 (expression -> expression PERCENT .)
+    PERCENT         reduce using rule 23 (expression -> expression PERCENT .)
+    PLUS            reduce using rule 23 (expression -> expression PERCENT .)
+    MINUS           reduce using rule 23 (expression -> expression PERCENT .)
+    TIMES           reduce using rule 23 (expression -> expression PERCENT .)
+    DIVIDE          reduce using rule 23 (expression -> expression PERCENT .)
+    DELAY           reduce using rule 23 (expression -> expression PERCENT .)
+    LPAREN          reduce using rule 23 (expression -> expression PERCENT .)
+    ALL             reduce using rule 23 (expression -> expression PERCENT .)
+    IDENTIFIER      reduce using rule 23 (expression -> expression PERCENT .)
+    IF              reduce using rule 23 (expression -> expression PERCENT .)
+    WAIT_UNTIL      reduce using rule 23 (expression -> expression PERCENT .)
+    LBRACE          reduce using rule 23 (expression -> expression PERCENT .)
+    $end            reduce using rule 23 (expression -> expression PERCENT .)
+    RBRACE          reduce using rule 23 (expression -> expression PERCENT .)
+    GE              reduce using rule 23 (expression -> expression PERCENT .)
+    LE              reduce using rule 23 (expression -> expression PERCENT .)
+    EQ              reduce using rule 23 (expression -> expression PERCENT .)
+    NE              reduce using rule 23 (expression -> expression PERCENT .)
+    GT              reduce using rule 23 (expression -> expression PERCENT .)
+    LT              reduce using rule 23 (expression -> expression PERCENT .)
+    COMMA           reduce using rule 23 (expression -> expression PERCENT .)
+
+
+state 56
+
+    (30) expression -> expression PLUS . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 89
+    tag_expression                 shift and go to state 29
+
+state 57
+
+    (31) expression -> expression MINUS . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 90
+    tag_expression                 shift and go to state 29
+
+state 58
+
+    (32) expression -> expression TIMES . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 91
+    tag_expression                 shift and go to state 29
+
+state 59
+
+    (33) expression -> expression DIVIDE . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 92
+    tag_expression                 shift and go to state 29
+
+state 60
+
+    (13) expression -> tag_expression DOT . IDENTIFIER
+    (14) expression -> tag_expression DOT . IDENTIFIER LPAREN input RPAREN
+    (15) expression -> tag_expression DOT . IDENTIFIER LPAREN RPAREN
+
+    IDENTIFIER      shift and go to state 93
+
+
+state 61
+
+    (22) expression -> ALL LPAREN . tag_list RPAREN DOT IDENTIFIER
+    (10) tag_list -> . TAG
+    (11) tag_list -> . tag_list TAG
+
+    TAG             shift and go to state 20
+
+    tag_list                       shift and go to state 94
+
+state 62
+
+    (16) action -> LPAREN tag_list RPAREN DOT . IDENTIFIER LPAREN RPAREN
+    (17) action -> LPAREN tag_list RPAREN DOT . IDENTIFIER LPAREN input RPAREN
+
+    IDENTIFIER      shift and go to state 95
+
+
+state 63
+
+    (18) all_action -> ALL LPAREN tag_list RPAREN . DOT IDENTIFIER LPAREN RPAREN
+    (19) all_action -> ALL LPAREN tag_list RPAREN . DOT IDENTIFIER LPAREN input RPAREN
+
+    DOT             shift and go to state 96
+
+
+state 64
+
+    (42) condition_list -> LPAREN condition_list . RPAREN
+    (43) condition_list -> condition_list . AND condition_list
+    (44) condition_list -> condition_list . OR condition_list
+
+    RPAREN          shift and go to state 97
+    AND             shift and go to state 66
+    OR              shift and go to state 67
+
+
+state 65
+
+    (37) if_statement -> IF LPAREN condition_list RPAREN . compound_statement else_clause
+    (36) compound_statement -> . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 16
+
+    compound_statement             shift and go to state 98
+
+state 66
+
+    (43) condition_list -> condition_list AND . condition_list
+    (41) condition_list -> . condition
+    (42) condition_list -> . LPAREN condition_list RPAREN
+    (43) condition_list -> . condition_list AND condition_list
+    (44) condition_list -> . condition_list OR condition_list
+    (45) condition_list -> . ANY condition_list
+    (46) condition_list -> . ALL condition_list
+    (47) condition_list -> . NOT condition
+    (48) condition -> . expression GE expression
+    (49) condition -> . expression LE expression
+    (50) condition -> . expression EQ expression
+    (51) condition -> . expression NE expression
+    (52) condition -> . expression GT expression
+    (53) condition -> . expression LT expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    LPAREN          shift and go to state 40
+    ANY             shift and go to state 43
+    ALL             shift and go to state 44
+    NOT             shift and go to state 45
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+
+    condition_list                 shift and go to state 99
+    condition                      shift and go to state 42
+    expression                     shift and go to state 46
+    tag_expression                 shift and go to state 29
+
+state 67
+
+    (44) condition_list -> condition_list OR . condition_list
+    (41) condition_list -> . condition
+    (42) condition_list -> . LPAREN condition_list RPAREN
+    (43) condition_list -> . condition_list AND condition_list
+    (44) condition_list -> . condition_list OR condition_list
+    (45) condition_list -> . ANY condition_list
+    (46) condition_list -> . ALL condition_list
+    (47) condition_list -> . NOT condition
+    (48) condition -> . expression GE expression
+    (49) condition -> . expression LE expression
+    (50) condition -> . expression EQ expression
+    (51) condition -> . expression NE expression
+    (52) condition -> . expression GT expression
+    (53) condition -> . expression LT expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    LPAREN          shift and go to state 40
+    ANY             shift and go to state 43
+    ALL             shift and go to state 44
+    NOT             shift and go to state 45
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+
+    condition_list                 shift and go to state 100
+    condition                      shift and go to state 42
+    expression                     shift and go to state 46
+    tag_expression                 shift and go to state 29
+
+state 68
+
+    (45) condition_list -> ANY condition_list .
+    (43) condition_list -> condition_list . AND condition_list
+    (44) condition_list -> condition_list . OR condition_list
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    RPAREN          reduce using rule 45 (condition_list -> ANY condition_list .)
+    AND             shift and go to state 66
+    OR              shift and go to state 67
+
+  ! AND             [ reduce using rule 45 (condition_list -> ANY condition_list .) ]
+  ! OR              [ reduce using rule 45 (condition_list -> ANY condition_list .) ]
+
+
+state 69
+
+    (46) condition_list -> ALL condition_list .
+    (43) condition_list -> condition_list . AND condition_list
+    (44) condition_list -> condition_list . OR condition_list
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    RPAREN          reduce using rule 46 (condition_list -> ALL condition_list .)
+    AND             shift and go to state 66
+    OR              shift and go to state 67
+
+  ! AND             [ reduce using rule 46 (condition_list -> ALL condition_list .) ]
+  ! OR              [ reduce using rule 46 (condition_list -> ALL condition_list .) ]
+
+
+state 70
+
+    (22) expression -> ALL LPAREN . tag_list RPAREN DOT IDENTIFIER
+    (42) condition_list -> LPAREN . condition_list RPAREN
+    (12) tag_expression -> LPAREN . tag_list RPAREN
+    (10) tag_list -> . TAG
+    (11) tag_list -> . tag_list TAG
+    (41) condition_list -> . condition
+    (42) condition_list -> . LPAREN condition_list RPAREN
+    (43) condition_list -> . condition_list AND condition_list
+    (44) condition_list -> . condition_list OR condition_list
+    (45) condition_list -> . ANY condition_list
+    (46) condition_list -> . ALL condition_list
+    (47) condition_list -> . NOT condition
+    (48) condition -> . expression GE expression
+    (49) condition -> . expression LE expression
+    (50) condition -> . expression EQ expression
+    (51) condition -> . expression NE expression
+    (52) condition -> . expression GT expression
+    (53) condition -> . expression LT expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    TAG             shift and go to state 20
+    LPAREN          shift and go to state 40
+    ANY             shift and go to state 43
+    ALL             shift and go to state 44
+    NOT             shift and go to state 45
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+
+    tag_list                       shift and go to state 101
+    condition_list                 shift and go to state 64
+    condition                      shift and go to state 42
+    expression                     shift and go to state 46
+    tag_expression                 shift and go to state 29
+
+state 71
+
+    (47) condition_list -> NOT condition .
+
+    RPAREN          reduce using rule 47 (condition_list -> NOT condition .)
+    AND             reduce using rule 47 (condition_list -> NOT condition .)
+    OR              reduce using rule 47 (condition_list -> NOT condition .)
+
+
+state 72
+
+    (48) condition -> expression GE . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 102
+    tag_expression                 shift and go to state 29
+
+state 73
+
+    (49) condition -> expression LE . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 103
+    tag_expression                 shift and go to state 29
+
+state 74
+
+    (50) condition -> expression EQ . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 104
+    tag_expression                 shift and go to state 29
+
+state 75
+
+    (51) condition -> expression NE . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 105
+    tag_expression                 shift and go to state 29
+
+state 76
+
+    (52) condition -> expression GT . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 106
+    tag_expression                 shift and go to state 29
+
+state 77
+
+    (53) condition -> expression LT . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 107
+    tag_expression                 shift and go to state 29
+
+state 78
+
+    (54) wait_statement -> WAIT_UNTIL LPAREN condition_list RPAREN .
+
+    DELAY           reduce using rule 54 (wait_statement -> WAIT_UNTIL LPAREN condition_list RPAREN .)
+    LPAREN          reduce using rule 54 (wait_statement -> WAIT_UNTIL LPAREN condition_list RPAREN .)
+    ALL             reduce using rule 54 (wait_statement -> WAIT_UNTIL LPAREN condition_list RPAREN .)
+    IDENTIFIER      reduce using rule 54 (wait_statement -> WAIT_UNTIL LPAREN condition_list RPAREN .)
+    IF              reduce using rule 54 (wait_statement -> WAIT_UNTIL LPAREN condition_list RPAREN .)
+    WAIT_UNTIL      reduce using rule 54 (wait_statement -> WAIT_UNTIL LPAREN condition_list RPAREN .)
+    LBRACE          reduce using rule 54 (wait_statement -> WAIT_UNTIL LPAREN condition_list RPAREN .)
+    $end            reduce using rule 54 (wait_statement -> WAIT_UNTIL LPAREN condition_list RPAREN .)
+    RBRACE          reduce using rule 54 (wait_statement -> WAIT_UNTIL LPAREN condition_list RPAREN .)
+
+
+state 79
+
+    (55) wait_statement -> WAIT_UNTIL LPAREN period_time RPAREN .
+
+    DELAY           reduce using rule 55 (wait_statement -> WAIT_UNTIL LPAREN period_time RPAREN .)
+    LPAREN          reduce using rule 55 (wait_statement -> WAIT_UNTIL LPAREN period_time RPAREN .)
+    ALL             reduce using rule 55 (wait_statement -> WAIT_UNTIL LPAREN period_time RPAREN .)
+    IDENTIFIER      reduce using rule 55 (wait_statement -> WAIT_UNTIL LPAREN period_time RPAREN .)
+    IF              reduce using rule 55 (wait_statement -> WAIT_UNTIL LPAREN period_time RPAREN .)
+    WAIT_UNTIL      reduce using rule 55 (wait_statement -> WAIT_UNTIL LPAREN period_time RPAREN .)
+    LBRACE          reduce using rule 55 (wait_statement -> WAIT_UNTIL LPAREN period_time RPAREN .)
+    $end            reduce using rule 55 (wait_statement -> WAIT_UNTIL LPAREN period_time RPAREN .)
+    RBRACE          reduce using rule 55 (wait_statement -> WAIT_UNTIL LPAREN period_time RPAREN .)
+
+
+state 80
+
+    (56) period_time -> INTEGER time_unit .
+
+    RPAREN          reduce using rule 56 (period_time -> INTEGER time_unit .)
+
+
+state 81
+
+    (57) time_unit -> MILLISECOND .
+
+    RPAREN          reduce using rule 57 (time_unit -> MILLISECOND .)
+
+
+state 82
+
+    (58) time_unit -> SECOND .
+
+    RPAREN          reduce using rule 58 (time_unit -> SECOND .)
+
+
+state 83
+
+    (59) time_unit -> MINUTE .
+
+    RPAREN          reduce using rule 59 (time_unit -> MINUTE .)
+
+
+state 84
+
+    (60) time_unit -> HOUR .
+
+    RPAREN          reduce using rule 60 (time_unit -> HOUR .)
+
+
+state 85
+
+    (61) time_unit -> DAY .
+
+    RPAREN          reduce using rule 61 (time_unit -> DAY .)
+
+
+state 86
+
+    (12) tag_expression -> LPAREN tag_list RPAREN .
+
+    DOT             reduce using rule 12 (tag_expression -> LPAREN tag_list RPAREN .)
+
+
+state 87
+
+    (20) expression -> expression AND expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 20 (expression -> expression AND expression .)
+    AND             reduce using rule 20 (expression -> expression AND expression .)
+    OR              reduce using rule 20 (expression -> expression AND expression .)
+    PERCENT         reduce using rule 20 (expression -> expression AND expression .)
+    DELAY           reduce using rule 20 (expression -> expression AND expression .)
+    LPAREN          reduce using rule 20 (expression -> expression AND expression .)
+    ALL             reduce using rule 20 (expression -> expression AND expression .)
+    IDENTIFIER      reduce using rule 20 (expression -> expression AND expression .)
+    IF              reduce using rule 20 (expression -> expression AND expression .)
+    WAIT_UNTIL      reduce using rule 20 (expression -> expression AND expression .)
+    LBRACE          reduce using rule 20 (expression -> expression AND expression .)
+    $end            reduce using rule 20 (expression -> expression AND expression .)
+    RBRACE          reduce using rule 20 (expression -> expression AND expression .)
+    GE              reduce using rule 20 (expression -> expression AND expression .)
+    LE              reduce using rule 20 (expression -> expression AND expression .)
+    EQ              reduce using rule 20 (expression -> expression AND expression .)
+    NE              reduce using rule 20 (expression -> expression AND expression .)
+    GT              reduce using rule 20 (expression -> expression AND expression .)
+    LT              reduce using rule 20 (expression -> expression AND expression .)
+    COMMA           reduce using rule 20 (expression -> expression AND expression .)
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+  ! PLUS            [ reduce using rule 20 (expression -> expression AND expression .) ]
+  ! MINUS           [ reduce using rule 20 (expression -> expression AND expression .) ]
+  ! TIMES           [ reduce using rule 20 (expression -> expression AND expression .) ]
+  ! DIVIDE          [ reduce using rule 20 (expression -> expression AND expression .) ]
+  ! AND             [ shift and go to state 53 ]
+  ! OR              [ shift and go to state 54 ]
+  ! PERCENT         [ shift and go to state 55 ]
+
+
+state 88
+
+    (21) expression -> expression OR expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 21 (expression -> expression OR expression .)
+    OR              reduce using rule 21 (expression -> expression OR expression .)
+    PERCENT         reduce using rule 21 (expression -> expression OR expression .)
+    DELAY           reduce using rule 21 (expression -> expression OR expression .)
+    LPAREN          reduce using rule 21 (expression -> expression OR expression .)
+    ALL             reduce using rule 21 (expression -> expression OR expression .)
+    IDENTIFIER      reduce using rule 21 (expression -> expression OR expression .)
+    IF              reduce using rule 21 (expression -> expression OR expression .)
+    WAIT_UNTIL      reduce using rule 21 (expression -> expression OR expression .)
+    LBRACE          reduce using rule 21 (expression -> expression OR expression .)
+    $end            reduce using rule 21 (expression -> expression OR expression .)
+    RBRACE          reduce using rule 21 (expression -> expression OR expression .)
+    GE              reduce using rule 21 (expression -> expression OR expression .)
+    LE              reduce using rule 21 (expression -> expression OR expression .)
+    EQ              reduce using rule 21 (expression -> expression OR expression .)
+    NE              reduce using rule 21 (expression -> expression OR expression .)
+    GT              reduce using rule 21 (expression -> expression OR expression .)
+    LT              reduce using rule 21 (expression -> expression OR expression .)
+    COMMA           reduce using rule 21 (expression -> expression OR expression .)
+    AND             shift and go to state 53
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+  ! AND             [ reduce using rule 21 (expression -> expression OR expression .) ]
+  ! PLUS            [ reduce using rule 21 (expression -> expression OR expression .) ]
+  ! MINUS           [ reduce using rule 21 (expression -> expression OR expression .) ]
+  ! TIMES           [ reduce using rule 21 (expression -> expression OR expression .) ]
+  ! DIVIDE          [ reduce using rule 21 (expression -> expression OR expression .) ]
+  ! OR              [ shift and go to state 54 ]
+  ! PERCENT         [ shift and go to state 55 ]
+
+
+state 89
+
+    (30) expression -> expression PLUS expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 30 (expression -> expression PLUS expression .)
+    AND             reduce using rule 30 (expression -> expression PLUS expression .)
+    OR              reduce using rule 30 (expression -> expression PLUS expression .)
+    PERCENT         reduce using rule 30 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 30 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 30 (expression -> expression PLUS expression .)
+    DELAY           reduce using rule 30 (expression -> expression PLUS expression .)
+    LPAREN          reduce using rule 30 (expression -> expression PLUS expression .)
+    ALL             reduce using rule 30 (expression -> expression PLUS expression .)
+    IDENTIFIER      reduce using rule 30 (expression -> expression PLUS expression .)
+    IF              reduce using rule 30 (expression -> expression PLUS expression .)
+    WAIT_UNTIL      reduce using rule 30 (expression -> expression PLUS expression .)
+    LBRACE          reduce using rule 30 (expression -> expression PLUS expression .)
+    $end            reduce using rule 30 (expression -> expression PLUS expression .)
+    RBRACE          reduce using rule 30 (expression -> expression PLUS expression .)
+    GE              reduce using rule 30 (expression -> expression PLUS expression .)
+    LE              reduce using rule 30 (expression -> expression PLUS expression .)
+    EQ              reduce using rule 30 (expression -> expression PLUS expression .)
+    NE              reduce using rule 30 (expression -> expression PLUS expression .)
+    GT              reduce using rule 30 (expression -> expression PLUS expression .)
+    LT              reduce using rule 30 (expression -> expression PLUS expression .)
+    COMMA           reduce using rule 30 (expression -> expression PLUS expression .)
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+  ! TIMES           [ reduce using rule 30 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 30 (expression -> expression PLUS expression .) ]
+  ! AND             [ shift and go to state 53 ]
+  ! OR              [ shift and go to state 54 ]
+  ! PERCENT         [ shift and go to state 55 ]
+  ! PLUS            [ shift and go to state 56 ]
+  ! MINUS           [ shift and go to state 57 ]
+
+
+state 90
+
+    (31) expression -> expression MINUS expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 31 (expression -> expression MINUS expression .)
+    AND             reduce using rule 31 (expression -> expression MINUS expression .)
+    OR              reduce using rule 31 (expression -> expression MINUS expression .)
+    PERCENT         reduce using rule 31 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 31 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 31 (expression -> expression MINUS expression .)
+    DELAY           reduce using rule 31 (expression -> expression MINUS expression .)
+    LPAREN          reduce using rule 31 (expression -> expression MINUS expression .)
+    ALL             reduce using rule 31 (expression -> expression MINUS expression .)
+    IDENTIFIER      reduce using rule 31 (expression -> expression MINUS expression .)
+    IF              reduce using rule 31 (expression -> expression MINUS expression .)
+    WAIT_UNTIL      reduce using rule 31 (expression -> expression MINUS expression .)
+    LBRACE          reduce using rule 31 (expression -> expression MINUS expression .)
+    $end            reduce using rule 31 (expression -> expression MINUS expression .)
+    RBRACE          reduce using rule 31 (expression -> expression MINUS expression .)
+    GE              reduce using rule 31 (expression -> expression MINUS expression .)
+    LE              reduce using rule 31 (expression -> expression MINUS expression .)
+    EQ              reduce using rule 31 (expression -> expression MINUS expression .)
+    NE              reduce using rule 31 (expression -> expression MINUS expression .)
+    GT              reduce using rule 31 (expression -> expression MINUS expression .)
+    LT              reduce using rule 31 (expression -> expression MINUS expression .)
+    COMMA           reduce using rule 31 (expression -> expression MINUS expression .)
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+  ! TIMES           [ reduce using rule 31 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 31 (expression -> expression MINUS expression .) ]
+  ! AND             [ shift and go to state 53 ]
+  ! OR              [ shift and go to state 54 ]
+  ! PERCENT         [ shift and go to state 55 ]
+  ! PLUS            [ shift and go to state 56 ]
+  ! MINUS           [ shift and go to state 57 ]
+
+
+state 91
+
+    (32) expression -> expression TIMES expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 32 (expression -> expression TIMES expression .)
+    AND             reduce using rule 32 (expression -> expression TIMES expression .)
+    OR              reduce using rule 32 (expression -> expression TIMES expression .)
+    PERCENT         reduce using rule 32 (expression -> expression TIMES expression .)
+    PLUS            reduce using rule 32 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 32 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 32 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 32 (expression -> expression TIMES expression .)
+    DELAY           reduce using rule 32 (expression -> expression TIMES expression .)
+    LPAREN          reduce using rule 32 (expression -> expression TIMES expression .)
+    ALL             reduce using rule 32 (expression -> expression TIMES expression .)
+    IDENTIFIER      reduce using rule 32 (expression -> expression TIMES expression .)
+    IF              reduce using rule 32 (expression -> expression TIMES expression .)
+    WAIT_UNTIL      reduce using rule 32 (expression -> expression TIMES expression .)
+    LBRACE          reduce using rule 32 (expression -> expression TIMES expression .)
+    $end            reduce using rule 32 (expression -> expression TIMES expression .)
+    RBRACE          reduce using rule 32 (expression -> expression TIMES expression .)
+    GE              reduce using rule 32 (expression -> expression TIMES expression .)
+    LE              reduce using rule 32 (expression -> expression TIMES expression .)
+    EQ              reduce using rule 32 (expression -> expression TIMES expression .)
+    NE              reduce using rule 32 (expression -> expression TIMES expression .)
+    GT              reduce using rule 32 (expression -> expression TIMES expression .)
+    LT              reduce using rule 32 (expression -> expression TIMES expression .)
+    COMMA           reduce using rule 32 (expression -> expression TIMES expression .)
+
+  ! AND             [ shift and go to state 53 ]
+  ! OR              [ shift and go to state 54 ]
+  ! PERCENT         [ shift and go to state 55 ]
+  ! PLUS            [ shift and go to state 56 ]
+  ! MINUS           [ shift and go to state 57 ]
+  ! TIMES           [ shift and go to state 58 ]
+  ! DIVIDE          [ shift and go to state 59 ]
+
+
+state 92
+
+    (33) expression -> expression DIVIDE expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 33 (expression -> expression DIVIDE expression .)
+    AND             reduce using rule 33 (expression -> expression DIVIDE expression .)
+    OR              reduce using rule 33 (expression -> expression DIVIDE expression .)
+    PERCENT         reduce using rule 33 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 33 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 33 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 33 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 33 (expression -> expression DIVIDE expression .)
+    DELAY           reduce using rule 33 (expression -> expression DIVIDE expression .)
+    LPAREN          reduce using rule 33 (expression -> expression DIVIDE expression .)
+    ALL             reduce using rule 33 (expression -> expression DIVIDE expression .)
+    IDENTIFIER      reduce using rule 33 (expression -> expression DIVIDE expression .)
+    IF              reduce using rule 33 (expression -> expression DIVIDE expression .)
+    WAIT_UNTIL      reduce using rule 33 (expression -> expression DIVIDE expression .)
+    LBRACE          reduce using rule 33 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 33 (expression -> expression DIVIDE expression .)
+    RBRACE          reduce using rule 33 (expression -> expression DIVIDE expression .)
+    GE              reduce using rule 33 (expression -> expression DIVIDE expression .)
+    LE              reduce using rule 33 (expression -> expression DIVIDE expression .)
+    EQ              reduce using rule 33 (expression -> expression DIVIDE expression .)
+    NE              reduce using rule 33 (expression -> expression DIVIDE expression .)
+    GT              reduce using rule 33 (expression -> expression DIVIDE expression .)
+    LT              reduce using rule 33 (expression -> expression DIVIDE expression .)
+    COMMA           reduce using rule 33 (expression -> expression DIVIDE expression .)
+
+  ! AND             [ shift and go to state 53 ]
+  ! OR              [ shift and go to state 54 ]
+  ! PERCENT         [ shift and go to state 55 ]
+  ! PLUS            [ shift and go to state 56 ]
+  ! MINUS           [ shift and go to state 57 ]
+  ! TIMES           [ shift and go to state 58 ]
+  ! DIVIDE          [ shift and go to state 59 ]
+
+
+state 93
+
+    (13) expression -> tag_expression DOT IDENTIFIER .
+    (14) expression -> tag_expression DOT IDENTIFIER . LPAREN input RPAREN
+    (15) expression -> tag_expression DOT IDENTIFIER . LPAREN RPAREN
+
+  ! shift/reduce conflict for LPAREN resolved as shift
+    RPAREN          reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    AND             reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    OR              reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    PERCENT         reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    PLUS            reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    MINUS           reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    TIMES           reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    DIVIDE          reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    DELAY           reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    ALL             reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    IDENTIFIER      reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    IF              reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    WAIT_UNTIL      reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    LBRACE          reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    $end            reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    RBRACE          reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    GE              reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    LE              reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    EQ              reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    NE              reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    GT              reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    LT              reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    COMMA           reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .)
+    LPAREN          shift and go to state 108
+
+  ! LPAREN          [ reduce using rule 13 (expression -> tag_expression DOT IDENTIFIER .) ]
+
+
+state 94
+
+    (22) expression -> ALL LPAREN tag_list . RPAREN DOT IDENTIFIER
+    (11) tag_list -> tag_list . TAG
+
+    RPAREN          shift and go to state 109
+    TAG             shift and go to state 36
+
+
+state 95
+
+    (16) action -> LPAREN tag_list RPAREN DOT IDENTIFIER . LPAREN RPAREN
+    (17) action -> LPAREN tag_list RPAREN DOT IDENTIFIER . LPAREN input RPAREN
+
+    LPAREN          shift and go to state 110
+
+
+state 96
+
+    (18) all_action -> ALL LPAREN tag_list RPAREN DOT . IDENTIFIER LPAREN RPAREN
+    (19) all_action -> ALL LPAREN tag_list RPAREN DOT . IDENTIFIER LPAREN input RPAREN
+
+    IDENTIFIER      shift and go to state 111
+
+
+state 97
+
+    (42) condition_list -> LPAREN condition_list RPAREN .
+
+    RPAREN          reduce using rule 42 (condition_list -> LPAREN condition_list RPAREN .)
+    AND             reduce using rule 42 (condition_list -> LPAREN condition_list RPAREN .)
+    OR              reduce using rule 42 (condition_list -> LPAREN condition_list RPAREN .)
+
+
+state 98
+
+    (37) if_statement -> IF LPAREN condition_list RPAREN compound_statement . else_clause
+    (38) else_clause -> . ELSE statement
+    (39) else_clause -> . empty
+    (62) empty -> .
+
+    ELSE            shift and go to state 113
+    DELAY           reduce using rule 62 (empty -> .)
+    LPAREN          reduce using rule 62 (empty -> .)
+    ALL             reduce using rule 62 (empty -> .)
+    IDENTIFIER      reduce using rule 62 (empty -> .)
+    IF              reduce using rule 62 (empty -> .)
+    WAIT_UNTIL      reduce using rule 62 (empty -> .)
+    LBRACE          reduce using rule 62 (empty -> .)
+    $end            reduce using rule 62 (empty -> .)
+    RBRACE          reduce using rule 62 (empty -> .)
+
+    else_clause                    shift and go to state 112
+    empty                          shift and go to state 114
+
+state 99
+
+    (43) condition_list -> condition_list AND condition_list .
+    (43) condition_list -> condition_list . AND condition_list
+    (44) condition_list -> condition_list . OR condition_list
+
+    RPAREN          reduce using rule 43 (condition_list -> condition_list AND condition_list .)
+    AND             reduce using rule 43 (condition_list -> condition_list AND condition_list .)
+    OR              reduce using rule 43 (condition_list -> condition_list AND condition_list .)
+
+  ! AND             [ shift and go to state 66 ]
+  ! OR              [ shift and go to state 67 ]
+
+
+state 100
+
+    (44) condition_list -> condition_list OR condition_list .
+    (43) condition_list -> condition_list . AND condition_list
+    (44) condition_list -> condition_list . OR condition_list
+
+    RPAREN          reduce using rule 44 (condition_list -> condition_list OR condition_list .)
+    OR              reduce using rule 44 (condition_list -> condition_list OR condition_list .)
+    AND             shift and go to state 66
+
+  ! AND             [ reduce using rule 44 (condition_list -> condition_list OR condition_list .) ]
+  ! OR              [ shift and go to state 67 ]
+
+
+state 101
+
+    (22) expression -> ALL LPAREN tag_list . RPAREN DOT IDENTIFIER
+    (12) tag_expression -> LPAREN tag_list . RPAREN
+    (11) tag_list -> tag_list . TAG
+
+    RPAREN          shift and go to state 115
+    TAG             shift and go to state 36
+
+
+state 102
+
+    (48) condition -> expression GE expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 48 (condition -> expression GE expression .)
+    AND             reduce using rule 48 (condition -> expression GE expression .)
+    OR              reduce using rule 48 (condition -> expression GE expression .)
+    PERCENT         shift and go to state 55
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+  ! AND             [ shift and go to state 53 ]
+  ! OR              [ shift and go to state 54 ]
+
+
+state 103
+
+    (49) condition -> expression LE expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 49 (condition -> expression LE expression .)
+    AND             reduce using rule 49 (condition -> expression LE expression .)
+    OR              reduce using rule 49 (condition -> expression LE expression .)
+    PERCENT         shift and go to state 55
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+  ! AND             [ shift and go to state 53 ]
+  ! OR              [ shift and go to state 54 ]
+
+
+state 104
+
+    (50) condition -> expression EQ expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 50 (condition -> expression EQ expression .)
+    AND             reduce using rule 50 (condition -> expression EQ expression .)
+    OR              reduce using rule 50 (condition -> expression EQ expression .)
+    PERCENT         shift and go to state 55
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+  ! AND             [ shift and go to state 53 ]
+  ! OR              [ shift and go to state 54 ]
+
+
+state 105
+
+    (51) condition -> expression NE expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 51 (condition -> expression NE expression .)
+    AND             reduce using rule 51 (condition -> expression NE expression .)
+    OR              reduce using rule 51 (condition -> expression NE expression .)
+    PERCENT         shift and go to state 55
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+  ! AND             [ shift and go to state 53 ]
+  ! OR              [ shift and go to state 54 ]
+
+
+state 106
+
+    (52) condition -> expression GT expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 52 (condition -> expression GT expression .)
+    AND             reduce using rule 52 (condition -> expression GT expression .)
+    OR              reduce using rule 52 (condition -> expression GT expression .)
+    PERCENT         shift and go to state 55
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+  ! AND             [ shift and go to state 53 ]
+  ! OR              [ shift and go to state 54 ]
+
+
+state 107
+
+    (53) condition -> expression LT expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 53 (condition -> expression LT expression .)
+    AND             reduce using rule 53 (condition -> expression LT expression .)
+    OR              reduce using rule 53 (condition -> expression LT expression .)
+    PERCENT         shift and go to state 55
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+  ! AND             [ shift and go to state 53 ]
+  ! OR              [ shift and go to state 54 ]
+
+
+state 108
+
+    (14) expression -> tag_expression DOT IDENTIFIER LPAREN . input RPAREN
+    (15) expression -> tag_expression DOT IDENTIFIER LPAREN . RPAREN
+    (34) input -> . expression
+    (35) input -> . input COMMA expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    RPAREN          shift and go to state 117
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    tag_expression                 shift and go to state 29
+    input                          shift and go to state 116
+    expression                     shift and go to state 118
+
+state 109
+
+    (22) expression -> ALL LPAREN tag_list RPAREN . DOT IDENTIFIER
+
+    DOT             shift and go to state 119
+
+
+state 110
+
+    (16) action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN . RPAREN
+    (17) action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN . input RPAREN
+    (34) input -> . expression
+    (35) input -> . input COMMA expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    RPAREN          shift and go to state 120
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    input                          shift and go to state 121
+    expression                     shift and go to state 118
+    tag_expression                 shift and go to state 29
+
+state 111
+
+    (18) all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER . LPAREN RPAREN
+    (19) all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER . LPAREN input RPAREN
+
+    LPAREN          shift and go to state 122
+
+
+state 112
+
+    (37) if_statement -> IF LPAREN condition_list RPAREN compound_statement else_clause .
+
+    DELAY           reduce using rule 37 (if_statement -> IF LPAREN condition_list RPAREN compound_statement else_clause .)
+    LPAREN          reduce using rule 37 (if_statement -> IF LPAREN condition_list RPAREN compound_statement else_clause .)
+    ALL             reduce using rule 37 (if_statement -> IF LPAREN condition_list RPAREN compound_statement else_clause .)
+    IDENTIFIER      reduce using rule 37 (if_statement -> IF LPAREN condition_list RPAREN compound_statement else_clause .)
+    IF              reduce using rule 37 (if_statement -> IF LPAREN condition_list RPAREN compound_statement else_clause .)
+    WAIT_UNTIL      reduce using rule 37 (if_statement -> IF LPAREN condition_list RPAREN compound_statement else_clause .)
+    LBRACE          reduce using rule 37 (if_statement -> IF LPAREN condition_list RPAREN compound_statement else_clause .)
+    $end            reduce using rule 37 (if_statement -> IF LPAREN condition_list RPAREN compound_statement else_clause .)
+    RBRACE          reduce using rule 37 (if_statement -> IF LPAREN condition_list RPAREN compound_statement else_clause .)
+
+
+state 113
+
+    (38) else_clause -> ELSE . statement
+    (4) statement -> . action
+    (5) statement -> . all_action
+    (6) statement -> . assignment
+    (7) statement -> . if_statement
+    (8) statement -> . wait_statement
+    (9) statement -> . compound_statement
+    (40) statement -> . DELAY LPAREN expression RPAREN
+    (16) action -> . LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN
+    (17) action -> . LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN
+    (18) all_action -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN
+    (19) all_action -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN
+    (24) assignment -> . IDENTIFIER ASSIGN expression
+    (25) assignment -> . IDENTIFIER DECLARE expression
+    (37) if_statement -> . IF LPAREN condition_list RPAREN compound_statement else_clause
+    (54) wait_statement -> . WAIT_UNTIL LPAREN condition_list RPAREN
+    (55) wait_statement -> . WAIT_UNTIL LPAREN period_time RPAREN
+    (36) compound_statement -> . LBRACE statement_list RBRACE
+
+    DELAY           shift and go to state 10
+    LPAREN          shift and go to state 11
+    ALL             shift and go to state 13
+    IDENTIFIER      shift and go to state 12
+    IF              shift and go to state 14
+    WAIT_UNTIL      shift and go to state 15
+    LBRACE          shift and go to state 16
+
+    statement                      shift and go to state 123
+    action                         shift and go to state 4
+    all_action                     shift and go to state 5
+    assignment                     shift and go to state 6
+    if_statement                   shift and go to state 7
+    wait_statement                 shift and go to state 8
+    compound_statement             shift and go to state 9
+
+state 114
+
+    (39) else_clause -> empty .
+
+    DELAY           reduce using rule 39 (else_clause -> empty .)
+    LPAREN          reduce using rule 39 (else_clause -> empty .)
+    ALL             reduce using rule 39 (else_clause -> empty .)
+    IDENTIFIER      reduce using rule 39 (else_clause -> empty .)
+    IF              reduce using rule 39 (else_clause -> empty .)
+    WAIT_UNTIL      reduce using rule 39 (else_clause -> empty .)
+    LBRACE          reduce using rule 39 (else_clause -> empty .)
+    $end            reduce using rule 39 (else_clause -> empty .)
+    RBRACE          reduce using rule 39 (else_clause -> empty .)
+
+
+state 115
+
+    (22) expression -> ALL LPAREN tag_list RPAREN . DOT IDENTIFIER
+    (12) tag_expression -> LPAREN tag_list RPAREN .
+
+  ! shift/reduce conflict for DOT resolved as shift
+    DOT             shift and go to state 119
+
+  ! DOT             [ reduce using rule 12 (tag_expression -> LPAREN tag_list RPAREN .) ]
+
+
+state 116
+
+    (14) expression -> tag_expression DOT IDENTIFIER LPAREN input . RPAREN
+    (35) input -> input . COMMA expression
+
+    RPAREN          shift and go to state 124
+    COMMA           shift and go to state 125
+
+
+state 117
+
+    (15) expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .
+
+    RPAREN          reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    AND             reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    OR              reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    PERCENT         reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    PLUS            reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    MINUS           reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    TIMES           reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    DIVIDE          reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    DELAY           reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    LPAREN          reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    ALL             reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    IDENTIFIER      reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    IF              reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    WAIT_UNTIL      reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    LBRACE          reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    $end            reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    RBRACE          reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    GE              reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    LE              reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    EQ              reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    NE              reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    GT              reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    LT              reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+    COMMA           reduce using rule 15 (expression -> tag_expression DOT IDENTIFIER LPAREN RPAREN .)
+
+
+state 118
+
+    (34) input -> expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 34 (input -> expression .)
+    COMMA           reduce using rule 34 (input -> expression .)
+    AND             shift and go to state 53
+    OR              shift and go to state 54
+    PERCENT         shift and go to state 55
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+
+state 119
+
+    (22) expression -> ALL LPAREN tag_list RPAREN DOT . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 126
+
+
+state 120
+
+    (16) action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .
+
+    DELAY           reduce using rule 16 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    LPAREN          reduce using rule 16 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    ALL             reduce using rule 16 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    IDENTIFIER      reduce using rule 16 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    IF              reduce using rule 16 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    WAIT_UNTIL      reduce using rule 16 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    LBRACE          reduce using rule 16 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    $end            reduce using rule 16 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    RBRACE          reduce using rule 16 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+
+
+state 121
+
+    (17) action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input . RPAREN
+    (35) input -> input . COMMA expression
+
+    RPAREN          shift and go to state 127
+    COMMA           shift and go to state 125
+
+
+state 122
+
+    (18) all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN . RPAREN
+    (19) all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN . input RPAREN
+    (34) input -> . expression
+    (35) input -> . input COMMA expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    RPAREN          shift and go to state 128
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    input                          shift and go to state 129
+    expression                     shift and go to state 118
+    tag_expression                 shift and go to state 29
+
+state 123
+
+    (38) else_clause -> ELSE statement .
+
+    DELAY           reduce using rule 38 (else_clause -> ELSE statement .)
+    LPAREN          reduce using rule 38 (else_clause -> ELSE statement .)
+    ALL             reduce using rule 38 (else_clause -> ELSE statement .)
+    IDENTIFIER      reduce using rule 38 (else_clause -> ELSE statement .)
+    IF              reduce using rule 38 (else_clause -> ELSE statement .)
+    WAIT_UNTIL      reduce using rule 38 (else_clause -> ELSE statement .)
+    LBRACE          reduce using rule 38 (else_clause -> ELSE statement .)
+    $end            reduce using rule 38 (else_clause -> ELSE statement .)
+    RBRACE          reduce using rule 38 (else_clause -> ELSE statement .)
+
+
+state 124
+
+    (14) expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .
+
+    RPAREN          reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    AND             reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    OR              reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    PERCENT         reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    PLUS            reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    MINUS           reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    TIMES           reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    DIVIDE          reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    DELAY           reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    LPAREN          reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    ALL             reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    IDENTIFIER      reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    IF              reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    WAIT_UNTIL      reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    LBRACE          reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    $end            reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    RBRACE          reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    GE              reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    LE              reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    EQ              reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    NE              reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    GT              reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    LT              reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+    COMMA           reduce using rule 14 (expression -> tag_expression DOT IDENTIFIER LPAREN input RPAREN .)
+
+
+state 125
+
+    (35) input -> input COMMA . expression
+    (13) expression -> . tag_expression DOT IDENTIFIER
+    (14) expression -> . tag_expression DOT IDENTIFIER LPAREN input RPAREN
+    (15) expression -> . tag_expression DOT IDENTIFIER LPAREN RPAREN
+    (20) expression -> . expression AND expression
+    (21) expression -> . expression OR expression
+    (22) expression -> . ALL LPAREN tag_list RPAREN DOT IDENTIFIER
+    (23) expression -> . expression PERCENT
+    (26) expression -> . IDENTIFIER
+    (27) expression -> . INTEGER
+    (28) expression -> . DOUBLE
+    (29) expression -> . STRING_LITERAL
+    (30) expression -> . expression PLUS expression
+    (31) expression -> . expression MINUS expression
+    (32) expression -> . expression TIMES expression
+    (33) expression -> . expression DIVIDE expression
+    (12) tag_expression -> . LPAREN tag_list RPAREN
+
+    ALL             shift and go to state 31
+    IDENTIFIER      shift and go to state 30
+    INTEGER         shift and go to state 32
+    DOUBLE          shift and go to state 33
+    STRING_LITERAL  shift and go to state 34
+    LPAREN          shift and go to state 27
+
+    expression                     shift and go to state 130
+    tag_expression                 shift and go to state 29
+
+state 126
+
+    (22) expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .
+
+    RPAREN          reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    AND             reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    OR              reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    PERCENT         reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    PLUS            reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    MINUS           reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    TIMES           reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    DIVIDE          reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    DELAY           reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    LPAREN          reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    ALL             reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    IDENTIFIER      reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    IF              reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    WAIT_UNTIL      reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    LBRACE          reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    $end            reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    RBRACE          reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    GE              reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    LE              reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    EQ              reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    NE              reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    GT              reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    LT              reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+    COMMA           reduce using rule 22 (expression -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER .)
+
+
+state 127
+
+    (17) action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .
+
+    DELAY           reduce using rule 17 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    LPAREN          reduce using rule 17 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    ALL             reduce using rule 17 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    IDENTIFIER      reduce using rule 17 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    IF              reduce using rule 17 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    WAIT_UNTIL      reduce using rule 17 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    LBRACE          reduce using rule 17 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    $end            reduce using rule 17 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    RBRACE          reduce using rule 17 (action -> LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+
+
+state 128
+
+    (18) all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .
+
+    DELAY           reduce using rule 18 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    LPAREN          reduce using rule 18 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    ALL             reduce using rule 18 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    IDENTIFIER      reduce using rule 18 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    IF              reduce using rule 18 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    WAIT_UNTIL      reduce using rule 18 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    LBRACE          reduce using rule 18 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    $end            reduce using rule 18 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+    RBRACE          reduce using rule 18 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN RPAREN .)
+
+
+state 129
+
+    (19) all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input . RPAREN
+    (35) input -> input . COMMA expression
+
+    RPAREN          shift and go to state 131
+    COMMA           shift and go to state 125
+
+
+state 130
+
+    (35) input -> input COMMA expression .
+    (20) expression -> expression . AND expression
+    (21) expression -> expression . OR expression
+    (23) expression -> expression . PERCENT
+    (30) expression -> expression . PLUS expression
+    (31) expression -> expression . MINUS expression
+    (32) expression -> expression . TIMES expression
+    (33) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 35 (input -> input COMMA expression .)
+    COMMA           reduce using rule 35 (input -> input COMMA expression .)
+    AND             shift and go to state 53
+    OR              shift and go to state 54
+    PERCENT         shift and go to state 55
+    PLUS            shift and go to state 56
+    MINUS           shift and go to state 57
+    TIMES           shift and go to state 58
+    DIVIDE          shift and go to state 59
+
+
+state 131
+
+    (19) all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .
+
+    DELAY           reduce using rule 19 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    LPAREN          reduce using rule 19 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    ALL             reduce using rule 19 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    IDENTIFIER      reduce using rule 19 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    IF              reduce using rule 19 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    WAIT_UNTIL      reduce using rule 19 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    LBRACE          reduce using rule 19 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    $end            reduce using rule 19 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+    RBRACE          reduce using rule 19 (all_action -> ALL LPAREN tag_list RPAREN DOT IDENTIFIER LPAREN input RPAREN .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for AND in state 68 resolved as shift
+WARNING: shift/reduce conflict for OR in state 68 resolved as shift
+WARNING: shift/reduce conflict for AND in state 69 resolved as shift
+WARNING: shift/reduce conflict for OR in state 69 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 93 resolved as shift
+WARNING: shift/reduce conflict for DOT in state 115 resolved as shift

@@ -1,0 +1,3 @@
+﻿sentence,best_code
+임의의 방 에어컨 온도를 15도로 설정한다.,"[{'name': '내방온도15도설정', 'cron': '', 'period': -1, 'code': '(#AirConditioner #Room).airConditionerMode_setTemperature(15)'}]"
+먼저 임의의 내방 에어컨 온도를 15도로 설정한다.,"[{'name': '내방온도15도재설정', 'cron': '', 'period': -1, 'code': '(#AirConditioner #myRoom).airConditionerMode_setTemperature(15)'}]"

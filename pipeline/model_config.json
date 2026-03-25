@@ -1,0 +1,14 @@
+{
+  "model_name": "ollama8b_ver0.1",
+  "device_id": "a6000",
+  "model_version": "0.1",
+  "model_description": "This version is designed for basic IoT control using SoPLang language. It includes strict syntax rules and core services.",
+  "model_create": "2025-03-15",
+  "author": {
+    "first_name": "Mingi",
+    "last_name": "Jeong"
+  },
+  "model_input": {
+    "model": "ollama"
+  }
+}
