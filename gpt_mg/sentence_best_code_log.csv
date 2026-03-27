@@ -61,3 +61,20 @@ Set the air conditioner temperature indoors in Gwanak-gu to 24 degrees Celsius f
 "사무실에 사람이 있을 경우 모든 스마트 플러그, 스위치, 전등을 켜고, 15분 동안 사람이 없으면 스위치만 끄는 시나리오를 추가해줘.","[{'name': '사무실재실제어', 'cron': '', 'period': 100, 'code': 'triggered := false\nabsenceTimer := 0\npresence = any(#OccupancySensor).presence\nif (presence == ""present"") {\n    if (triggered == false) {\n        all(#SmartPlug).on()\n        all(#Switch).on()\n        all(#Light).on()\n        triggered = true\n        absenceTimer = 0\n    } else {\n        absenceTimer = 0\n    }\n} else {\n    absenceTimer = absenceTimer + 100\n    if (absenceTimer >= 900000) {\n        all(#Switch).off()\n        triggered = false\n        absenceTimer = 0\n    }\n}'}]"
 사무실 내 모든 전등과 스위치를 켜는 작업 수행,"[{'name': '사무실전등스위치켜기', 'cron': '', 'period': -1, 'code': 'all(#Light).on()\nall(#Switch).on()'}]"
 turn off all the lights,"[{'name': '모든조명끄기', 'cron': '', 'period': -1, 'code': 'all(#Light).off()'}]"
+불을켜줘.,"[{'name': '불켜기', 'cron': '', 'period': -1, 'code': '(#Light).switch_on()'}]"
+불을켜줘.,"[{'name': '불켜기', 'cron': '', 'period': -1, 'code': '(#Light).switch_on()'}]"
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,
+Turn on the lights at 9 AM on weekdays.,

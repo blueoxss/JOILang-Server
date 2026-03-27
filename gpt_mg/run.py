@@ -24,7 +24,7 @@ import csv
 import re
 
 
-model_default = 'version0_7'
+model_default = 'version0_6'
 feedback=0
 all_items = []
 choice_no = 0
@@ -70,15 +70,6 @@ def move_global_assignments(response_text):
             assignment_idxs.append(i)
     if code_eq_idx is None:
         return response_text  # code= 없으면 그대로 반환
-
-    '''
-    for i, line in enumerate(lines):
-        if i <= code_eq_idx:
-            continue
-        if re.match(r'^\s*\w+\s*:=\s*.+$', line):
-            assignment_lines.append(line)
-            assignment_idxs.append(i)
-    '''
 
     # 해당 줄 제거
     for idx in reversed(assignment_idxs):
@@ -128,6 +119,7 @@ Output the results as a list under a "choices" key, where each item contains onl
     global all_items  # 전체 item을 누적할 리스트
     global choice_no
     try:
+        model_input["model"] = "Qwen/Qwen2.5-Coder-7B-Instruct"
         response = client.chat.completions.create(**model_input)
         print("Response:: ", response)
         all_items = []
@@ -498,25 +490,13 @@ def merge_duplicate_blocks(generated_code):
         code = code[:-3]
     #code = code.strip()
 
-    # 각 필드의 시작 위치를 찾고, 다음 필드가 나오기 전까지의 내용을 추출
-    """
-    name_pattern = re.compile(r'"?name"?\s*[:=]\s*(.*?)(?=(?:\n\s*"?cron"?\s*[:=])|(?:\n\s*"?period"?\s*[:=])|(?:\n\s*"?code"?\s*[:=])|$)', re.DOTALL)
-    cron_pattern = re.compile(r'"?cron"?\s*[:=]\s*(.*?)(?=(?:\n\s*"?name"?\s*[:=])|(?:\n\s*"?period"?\s*[:=])|(?:\n\s*"?code"?\s*[:=])|$)', re.DOTALL)
-    period_pattern = re.compile(r'"?period"?\s*[:=]\s*(.*?)(?=(?:\n\s*"?name"?\s*[:=])|(?:\n\s*"?cron"?\s*[:=])|(?:\n\s*"?code"?\s*[:=])|$)', re.DOTALL)
-    code_pattern = re.compile(r'\"?code\"?\s*[:=]\s*(.*?)(?=(?:\n\s*\"?name\"?\s*[:=])|(?:\n\s*\"?cron\"?\s*[:=])|(?:\n\s*\"?period\"?\s*[:=])|$)', re.DOTALL)
-    """
     # 정확히 "key" 형식만 매칭하도록 수정
     name_pattern = re.compile(r'"name"\s*:\s*"([^"]*)"', re.DOTALL)
     cron_pattern = re.compile(r'"cron"\s*:\s*"([^"]*)"', re.DOTALL)
     period_pattern = re.compile(r'"period"\s*:\s*(-?\d+(?:\.\d+)?)', re.DOTALL)
     code_pattern = re.compile(r'"code"\s*:\s*"((?:\\.|[^"\\])*)"', re.DOTALL)
     
-    """
-    # 필드 추출
-    name_fields = [m.group(1).strip() for m in name_pattern.finditer(code)]
-    cron_fields = [m.group(1).strip() for m in cron_pattern.finditer(code)]
-    period_fields = [m.group(1).strip() for m in period_pattern.finditer(code)]
-    """
+
     name_fields = [m.group(1).strip().strip(',').strip() for m in name_pattern.finditer(code)]
     cron_fields = [m.group(1).strip().strip(',').strip() for m in cron_pattern.finditer(code)]
     period_fields = [m.group(1).strip().strip(',').strip() for m in period_pattern.finditer(code)]
@@ -796,53 +776,57 @@ TV가 켜져 있고 스피커가 꺼져 있으며 조명이 꺼져 있으면 스
         try_no = 0
         current_sentence = dataset[0]  # 요구사항 누적용
         while True:
-            print(f"---\nCandidate #{choice_no+1}: {all_items[choice_no]}")
-            ###########################
-            ### re-converted sentence
-            response_kor = ""
-            model_path = f"version0_6_reconverted.config_loader"
-            config_loader_module = importlib.import_module(model_path)
-            load_version_config = getattr(config_loader_module, 'load_version_config')
-
-            config, model_input = load_version_config(f"""넌 한글 언어학자 마스터야.
-    {all_items[choice_no]}를 다시 한글 명령어로 바꿔서 아래 [ ] 를 채워줘. 단, 아래 조건들을 모두 만족하는, 한글 1~3 줄 커맨드로 구체적이고 정확하게 알아듣기 좋게 잘 변환해줘.
-all이나 any가 없는 경우 임의의 ~를 ~한다 임의의 ~가 ~를 만족하면과 같이 구체적으로 명시해줘. all/any도 마찬가지고.
-사용자 지정, 임의의 태그는 정확히 한글로 명시하는데, 특히 A, B, C와 같은 태그는 반드시 한글로 구분해줘. 예를 들어, 온실A, 온실B, 온실C와 같이.
-""") 
-#'/geners~/{url_id, setnece0} 
-#'/regenerated/{url_id, sentence0}
-            response_kor = client.chat.completions.create(**model_input)
-            if response_kor:
-                resp['log']['translated_sentence'] = response_kor.choices[0].message.content.strip() #content
-            else:
-                print("No reconverted response, using original sentence.")
-                resp['log']['translated_sentence'] = current_sentence
-
-            print("Reconverted Version of The Detailed Sentence: \n", resp['log']["translated_sentence"])
-            ###########################
-            answer = input("최종 결과에 만족하는가? (y: 저장 / n: 종료 / 엔터: 다음 / 요구사항: 요구사항 추가) >>> ")
-            
-            if answer.lower() == 'y':
-                save_sentence_and_code(current_sentence, all_items[choice_no])
+            if (all_items is None) or (len(all_items) == 0):
+                print("No candidates generated.")
                 break
-            elif answer.lower() == 'n':
-                print("종료합니다.")
-                break 
-            elif answer == "":
-                # 빈칸 엔터: 다음 후보로 이동
-                choice_no += 1
-                if choice_no >= len(all_items):
-                    print("후보가 더 이상 없습니다.")
-                    #break
             else:
-                # 어떤 문자열이든 요구사항으로 누적
-                all_items = []
-                choice_no = 0
-                current_sentence += " " + f"+추가 조건: {answer}"
-                new_dataset = [current_sentence]
-                joilang_each_command(new_dataset, selected_model)
-                print(f"요구사항 {try_no} '{answer}' 반영하여 재시작")
-                try_no += 1
+                print(f"---\nCandidate #{choice_no+1}: {all_items[choice_no]}")
+                ###########################
+                ### re-converted sentence
+                response_kor = ""
+                model_path = f"version0_6_reconverted.config_loader"
+                config_loader_module = importlib.import_module(model_path)
+                load_version_config = getattr(config_loader_module, 'load_version_config')
+
+                config, model_input = load_version_config(f"""넌 한글 언어학자 마스터야.
+        {all_items[choice_no]}를 다시 한글 명령어로 바꿔서 아래 [ ] 를 채워줘. 단, 아래 조건들을 모두 만족하는, 한글 1~3 줄 커맨드로 구체적이고 정확하게 알아듣기 좋게 잘 변환해줘.
+    all이나 any가 없는 경우 임의의 ~를 ~한다 임의의 ~가 ~를 만족하면과 같이 구체적으로 명시해줘. all/any도 마찬가지고.
+    사용자 지정, 임의의 태그는 정확히 한글로 명시하는데, 특히 A, B, C와 같은 태그는 반드시 한글로 구분해줘. 예를 들어, 온실A, 온실B, 온실C와 같이.
+    """) 
+    #'/geners~/{url_id, setnece0} 
+    #'/regenerated/{url_id, sentence0}
+                response_kor = client.chat.completions.create(**model_input)
+                if response_kor:
+                    resp['log']['translated_sentence'] = response_kor.choices[0].message.content.strip() #content
+                else:
+                    print("No reconverted response, using original sentence.")
+                    resp['log']['translated_sentence'] = current_sentence
+
+                print("Reconverted Version of The Detailed Sentence: \n", resp['log']["translated_sentence"])
+                ###########################
+                answer = input("최종 결과에 만족하는가? (y: 저장 / n: 종료 / 엔터: 다음 / 요구사항: 요구사항 추가) >>> ")
+                
+                if answer.lower() == 'y':
+                    save_sentence_and_code(current_sentence, all_items[choice_no])
+                    break
+                elif answer.lower() == 'n':
+                    print("종료합니다.")
+                    break 
+                elif answer == "":
+                    # 빈칸 엔터: 다음 후보로 이동
+                    choice_no += 1
+                    if choice_no >= len(all_items):
+                        print("후보가 더 이상 없습니다.")
+                        #break
+                else:
+                    # 어떤 문자열이든 요구사항으로 누적
+                    all_items = []
+                    choice_no = 0
+                    current_sentence += " " + f"+추가 조건: {answer}"
+                    new_dataset = [current_sentence]
+                    joilang_each_command(new_dataset, selected_model)
+                    print(f"요구사항 {try_no} '{answer}' 반영하여 재시작")
+                    try_no += 1
 
     elif len(args) == 1:
         #selected_model = args[0]

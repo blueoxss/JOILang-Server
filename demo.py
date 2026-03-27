@@ -17,7 +17,7 @@ import uvicorn
 # 사용할 모델
 #MODEL_NAME = "ollama.version0_3"
 MODEL_NAME = "gpt_mg.version0_6"
-MODEL_NAME_KOR = "gpt_mg.version0_6_reconverted"
+MODEL_NAME_REVERSED = "gpt_mg.version0_6_reconverted"
 
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
@@ -149,7 +149,7 @@ from openai import OpenAI
 client = OpenAI()
 
 # 모델 리스트
-AVAILABLE_MODELS = ['CAP_gpt4.1_mini_old', 'JOI_gpt4.1_mini', 'JOI_gpt5_mini']
+AVAILABLE_MODELS = ['CAP_gpt4.1_mini_old', 'JOI_gpt4.1_mini', 'local_8b', 'JOI_gpt5_mini']
 selected_model_raw = ''
 
 @app.get("/get_model_list")
@@ -189,6 +189,8 @@ async def generate_code(request: GenerateJOICodeRequest):
         selected_model = 'gpt4.1-mini'
     elif selected_model_raw == 'JOI_gpt4.1_mini':
         selected_model = 'gpt_mg.version0_6'
+    elif selected_model_raw == 'local_8b':
+        selected_model = 'gpt_mg.version0_13'
     else:
         selected_model = 'gpt_mg.version0_7'
         
@@ -204,7 +206,6 @@ async def generate_code(request: GenerateJOICodeRequest):
     elif selected_model_raw == 'JOI_gpt4.1_mini':
         result = generate_joi_code(
             sentence=request.sentence,
-            # model=request.model,
             model=selected_model,  # 모델 이름을 서버에서 고정 (MODEL_NAME)에서 사용자로부터 받는걸로 수정
             connected_devices=connected_devices,
             current_time=request.current_time,
@@ -213,15 +214,14 @@ async def generate_code(request: GenerateJOICodeRequest):
     else:
         result = generate_joi_code(
             sentence=request.sentence,
-            # model=request.model,
-            model=selected_model,  # 모델 이름을 서버에서 고정 (MODEL_NAME)에서 사용자로부터 받는걸로 수정
+            model=selected_model,  
             connected_devices=connected_devices,
             current_time=request.current_time,
             other_params=request.other_params,
         )
 #        model_resources=MODEL_RESOURCES,
     last_result = result #copy.deepcopy(result)
-    model_path = f"{MODEL_NAME_KOR}.config_loader"
+    model_path = f"{MODEL_NAME_REVERSED}.config_loader"
     config_loader_module = importlib.import_module(model_path)
     load_version_config = getattr(config_loader_module, 'load_version_config')
     config, model_input = load_version_config(return_kor_prompt(result.get('code', ''))) 
@@ -386,7 +386,7 @@ async def re_generate_code(request: GenerateJOICodeRequest):
                 try_kor+=1
         if try_kor: 
             last_result = result
-            model_path = f"{MODEL_NAME_KOR}.config_loader"
+            model_path = f"{MODEL_NAME_REVERSED}.config_loader"
             config_loader_module = importlib.import_module(model_path)
             load_version_config = getattr(config_loader_module, 'load_version_config')
 
@@ -432,7 +432,7 @@ def joi_retry_module(code_generator_func, sentence, model,
             ###########################
             ### re-converted sentence
             response_kor = ""
-            model_path = f"{MODEL_NAME_KOR}.config_loader"
+            model_path = f"{MODEL_NAME_REVERSED}.config_loader"
             config_loader_module = importlib.import_module(model_path)
             load_version_config = getattr(config_loader_module, 'load_version_config')
             config, model_input = load_version_config(return_kor_prompt(all_items[choice_no]))
@@ -625,6 +625,10 @@ if __name__ == "__main__":
             print("Running in CAP mode with model...")
             joi_retry_module(generate_joi_code_cap, sentence=mode, model=selected_model)
         elif (selected_model == 'joi'):
+            selected_model ='gpt_mg.version0_6'
+            print("Running in JOI mode with model...")
+            joi_retry_module(generate_joi_code, sentence=mode, model=selected_model)
+        elif (selected_model == 'local_7b'):
             selected_model ='gpt_mg.version0_6'
             print("Running in JOI mode with model...")
             joi_retry_module(generate_joi_code, sentence=mode, model=selected_model)

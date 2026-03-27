@@ -287,7 +287,7 @@ if __name__ == "__main__":
     print(f"> Local IP address: http://{get_local_ip()}:8000")
     print(f"> External IP address: http://{get_external_ip()}:10004")
     #uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)    
-    uvicorn.run("server:app", host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
 #    uvicorn.run("server:app", host="0.0.0.0", port=8000, 
 #                ssl_keyfile="./key.pem", ssl_certfile="./cert.pem")  # 프로덕션에
 
