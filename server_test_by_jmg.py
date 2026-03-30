@@ -274,7 +274,7 @@ async def compute_similarity(payload: dict = Body(...)):
 
     return {"similarity": similarity_percent}
 
-async def get_script_gpt_async(prompt: str, model='version0_3'):
+async def get_script_gpt_async(prompt: str, model='version0_13'):
     result = get_script_gpt(prompt, model)
     result['device_name'] = 'Server'
 
