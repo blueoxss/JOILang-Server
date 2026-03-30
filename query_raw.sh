@@ -4,12 +4,12 @@ set -euo pipefail
 ROW_NO="${1:-1}"
 TIME="${2:-2026-03-31T12:00:00}"
 DATASET_PATH="./datasets/JOICommands-280.csv"
-VALUE_SERVICES_PATH="./gpt_mg/version0_13/service_list_ver1.5.4_value.json"
-FUNCTION_SERVICES_PATH="./gpt_mg/version0_13/service_list_ver1.5.4_function.json"
 FORBIDDEN_ACTIONS_PATH="./datasets/forbidden_actions.json"
 RUN_ID="raw_row${ROW_NO}_$(date +%Y%m%d_%H%M%S)"
 GENERATION_DIR="./results/generation/${RUN_ID}"
 GENERATION_JSONL="${GENERATION_DIR}/generation.jsonl"
+MERGED_VALUE_SERVICES_PATH="${GENERATION_DIR}/merged_value_services.json"
+MERGED_FUNCTION_SERVICES_PATH="${GENERATION_DIR}/merged_function_services.json"
 DET_OUTPUT_DIR="./results/det_paper"
 
 if ! [[ "$ROW_NO" =~ ^[0-9]+$ ]] || [ "$ROW_NO" -lt 1 ]; then
@@ -45,6 +45,42 @@ fi
 
 mkdir -p "$GENERATION_DIR" "$DET_OUTPUT_DIR"
 : > "$GENERATION_JSONL"
+
+python3 - "$MERGED_VALUE_SERVICES_PATH" \
+  "./gpt_mg/version0_13/service_list_ver1.5.4_value.json" \
+  "./gpt_mg/version0_12/service_list_ver2.0.1_value.json" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+output_path = Path(sys.argv[1])
+items = []
+for src in sys.argv[2:]:
+    data = json.loads(Path(src).read_text(encoding="utf-8"))
+    if isinstance(data, list):
+        items.extend(data)
+    else:
+        items.append(data)
+output_path.write_text(json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8")
+PY
+
+python3 - "$MERGED_FUNCTION_SERVICES_PATH" \
+  "./gpt_mg/version0_13/service_list_ver1.5.4_function.json" \
+  "./gpt_mg/version0_12/service_list_ver2.0.1_function.json" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+output_path = Path(sys.argv[1])
+items = []
+for src in sys.argv[2:]:
+    data = json.loads(Path(src).read_text(encoding="utf-8"))
+    if isinstance(data, list):
+        items.extend(data)
+    else:
+        items.append(data)
+output_path.write_text(json.dumps(items, ensure_ascii=False, indent=2), encoding="utf-8")
+PY
 
 CONNECTED_DEVICES="$(python3 - <<'PY'
 import json
@@ -127,9 +163,10 @@ echo "RUN_ID: $RUN_ID"
 echo "GENERATION_JSONL: $GENERATION_JSONL"
 echo
 
-run_model "[1/3] CAP_gpt4.1_mini_old" "gpt4.1-mini" "CAP_gpt4.1_mini_old"
-run_model "[2/3] JOI_gpt4.1_mini (version0_6)" "gpt_mg.version0_6" "JOI_gpt4.1_mini"
-run_model "[3/3] local_8b (version0_13)" "gpt_mg.version0_13" "local_8b"
+run_model "[1/4] CAP-old_gpt4.1-mini_svc-v1.5.4" "gpt4.1-mini" "CAP-old_gpt4.1-mini_svc-v1.5.4"
+run_model "[2/4] JOI_gpt4.1-mini_v1.5.4" "gpt_mg.version0_6" "JOI_gpt4.1-mini_v1.5.4"
+run_model "[3/4] Local5080_qwen-7b_svc-v1.5.4" "gpt_mg.version0_13" "Local5080_qwen-7b_svc-v1.5.4"
+run_model "[4/4] Local5080_qwen-7b_svc-v2.0.1" "gpt_mg.version0_12" "Local5080_qwen-7b_svc-v2.0.1"
 
 DET_CMD=(
   python3
@@ -137,8 +174,8 @@ DET_CMD=(
   --generation-jsonl "$GENERATION_JSONL"
   --dataset "$DATASET_PATH"
   --command-column command_kor
-  --value-services "$VALUE_SERVICES_PATH"
-  --function-services "$FUNCTION_SERVICES_PATH"
+  --value-services "$MERGED_VALUE_SERVICES_PATH"
+  --function-services "$MERGED_FUNCTION_SERVICES_PATH"
   --strict-paper
   --output-dir "$DET_OUTPUT_DIR"
   --run-name "$RUN_ID"

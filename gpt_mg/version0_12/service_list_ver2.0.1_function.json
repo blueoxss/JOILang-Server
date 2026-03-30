@@ -1,0 +1,765 @@
+[
+  {
+    "device": "AirConditioner",
+    "service": "SetAirConditionerMode",
+    "type": "function",
+    "descriptor": "Controls air conditioner mode and temperature settings",
+    "argument_descriptor": "Set air conditioner mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Air conditioner mode to set",
+    "return_type": "VOID"
+  },
+  {
+    "device": "AirConditioner",
+    "service": "SetTargetTemperature",
+    "type": "function",
+    "descriptor": "Controls air conditioner mode and temperature settings",
+    "argument_descriptor": "Set air conditioner temperature",
+    "argument_type": "DOUBLE",
+    "argument_bounds": "Temperature to set",
+    "return_type": "VOID"
+  },
+  {
+    "device": "AirPurifier",
+    "service": "SetAirPurifierMode",
+    "type": "function",
+    "descriptor": "Controls air purifier mode",
+    "argument_descriptor": "Set air purifier mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Air purifier mode to set",
+    "return_type": "VOID"
+  },
+  {
+    "device": "ArmRobot",
+    "service": "SendCommand",
+    "type": "function",
+    "descriptor": "Allows for the control of the arm robot",
+    "argument_descriptor": "Send command to arm robot",
+    "argument_type": "ENUM",
+    "argument_bounds": "Command to send to the arm robot. List of string, separated by '|'",
+    "return_type": "VOID"
+  },
+  {
+    "device": "ArmRobot",
+    "service": "SetPosition",
+    "type": "function",
+    "descriptor": "Allows for the control of the arm robot",
+    "argument_descriptor": "Send position to arm robot",
+    "argument_type": "ENUM",
+    "argument_bounds": "Position to set for the arm robot (home, hello, refuse)",
+    "return_type": "VOID"
+  },
+  {
+    "device": "ArmRobot",
+    "service": "Hello",
+    "type": "function",
+    "descriptor": "Allows for the control of the arm robot",
+    "argument_descriptor": "Send hello command to arm robot",
+    "return_type": "VOID"
+  },
+  {
+    "device": "AudioRecorder",
+    "service": "RecordStart",
+    "type": "function",
+    "descriptor": "Record audio",
+    "argument_descriptor": "Start recording audio",
+    "return_type": "VOID"
+  },
+  {
+    "device": "AudioRecorder",
+    "service": "RecordStop",
+    "type": "function",
+    "descriptor": "Record audio",
+    "argument_descriptor": "Stop recording audio",
+    "argument_type": "BINARY",
+    "argument_bounds": "The file to save the recording to",
+    "return_type": "VOID"
+  },
+  {
+    "device": "AudioRecorder",
+    "service": "RecordWithDuration",
+    "type": "function",
+    "descriptor": "Record audio",
+    "argument_descriptor": "Record audio with a specified duration",
+    "argument_type": "STRING | DOUBLE",
+    "argument_format": " | ",
+    "argument_bounds": "The file to record to | The duration to record for",
+    "return_type": "BINARY"
+  },
+  {
+    "device": "Camera",
+    "service": "StartStream",
+    "type": "function",
+    "descriptor": "Controls camera device for image/video capture and streaming",
+    "argument_descriptor": "Start the camera stream - Return the stream URL",
+    "return_type": "STRING"
+  },
+  {
+    "device": "Camera",
+    "service": "StopStream",
+    "type": "function",
+    "descriptor": "Controls camera device for image/video capture and streaming",
+    "argument_descriptor": "Stop the camera stream",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Camera",
+    "service": "CaptureImage",
+    "type": "function",
+    "descriptor": "Controls camera device for image/video capture and streaming",
+    "argument_descriptor": "Take a picture with the camera - Return the image as binary data",
+    "return_type": "BINARY"
+  },
+  {
+    "device": "Camera",
+    "service": "CaptureVideo",
+    "type": "function",
+    "descriptor": "Controls camera device for image/video capture and streaming",
+    "argument_descriptor": "Take a video with the camera - Return the video as binary data",
+    "return_type": "BINARY"
+  },
+  {
+    "device": "Clock",
+    "service": "Delay",
+    "type": "function",
+    "descriptor": "Provide current date and time",
+    "argument_descriptor": "delay for a given amount of time",
+    "argument_type": "INTEGER | INTEGER | INTEGER",
+    "argument_format": " | | ",
+    "argument_bounds": "hour | minute | second",
+    "return_type": "VOID"
+  },
+  {
+    "device": "CloudServiceProvider",
+    "service": "IsAvailable",
+    "type": "function",
+    "descriptor": "Provides cloud service functionalities",
+    "argument_descriptor": "Check if the cloud service is available",
+    "argument_type": "BOOL",
+    "argument_bounds": "The name of the cloud service to check",
+    "return_type": "BOOL"
+  },
+  {
+    "device": "CloudServiceProvider",
+    "service": "UploadFile",
+    "type": "function",
+    "descriptor": "Provides cloud service functionalities",
+    "argument_descriptor": "Upload file to the cloud service",
+    "argument_type": "STRING",
+    "argument_bounds": "File to upload to the cloud service",
+    "return_type": "BINARY"
+  },
+  {
+    "device": "CloudServiceProvider",
+    "service": "TextToSpeech",
+    "type": "function",
+    "descriptor": "Provides cloud service functionalities",
+    "argument_descriptor": "Convert text to speech using the cloud service",
+    "argument_type": "STRING",
+    "argument_bounds": "Text to be converted to speech",
+    "return_type": "BINARY"
+  },
+  {
+    "device": "CloudServiceProvider",
+    "service": "SpeechToText",
+    "type": "function",
+    "descriptor": "Provides cloud service functionalities",
+    "argument_descriptor": "Convert speech to text using the cloud service",
+    "argument_type": "STRING",
+    "argument_bounds": "Audio file containing the speech to convert",
+    "return_type": "STRING"
+  },
+  {
+    "device": "CloudServiceProvider",
+    "service": "GenerateImage",
+    "type": "function",
+    "descriptor": "Provides cloud service functionalities",
+    "argument_descriptor": "Generate an image based on a text prompt using the cloud service",
+    "argument_type": "STRING",
+    "argument_bounds": "The text prompt to generate the image from",
+    "return_type": "BINARY"
+  },
+  {
+    "device": "CloudServiceProvider",
+    "service": "ExplainImage",
+    "type": "function",
+    "descriptor": "Provides cloud service functionalities",
+    "argument_descriptor": "Explain an image and return a description using the cloud service",
+    "argument_type": "BINARY",
+    "argument_bounds": "Image file to be explained",
+    "return_type": "STRING"
+  },
+  {
+    "device": "CloudServiceProvider",
+    "service": "ChatWithAI",
+    "type": "function",
+    "descriptor": "Provides cloud service functionalities",
+    "argument_descriptor": "Chat with an AI model using the cloud service",
+    "argument_type": "STRING",
+    "argument_bounds": "The text prompt to chat with the AI model",
+    "return_type": "STRING"
+  },
+  {
+    "device": "CloudServiceProvider",
+    "service": "SaveToFile",
+    "type": "function",
+    "descriptor": "Provides cloud service functionalities",
+    "argument_descriptor": "Save data to a file in local",
+    "argument_type": "BINARY | STRING",
+    "argument_format": " | ",
+    "argument_bounds": "The base64 data to save to the file | Path of the file to save data to",
+    "return_type": "STRING"
+  },
+  {
+    "device": "CloudServiceProvider",
+    "service": "UploadToCloudStorage",
+    "type": "function",
+    "descriptor": "Provides cloud service functionalities",
+    "argument_descriptor": "Upload a file to cloud storage",
+    "argument_type": "STRING",
+    "argument_bounds": "Path of the file or Base64 data to upload to cloud storage",
+    "return_type": "STRING"
+  },
+  {
+    "device": "ColorControl",
+    "service": "SetColor",
+    "type": "function",
+    "descriptor": "Allows for control of a color changing device",
+    "argument_descriptor": "Set the color of the device",
+    "argument_type": "STRING",
+    "argument_bounds": "RGB color value in format 'r|g|b' (0-255 for each)",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Dehumidifier",
+    "service": "SetDehumidifierMode",
+    "type": "function",
+    "descriptor": "Allows for the control of the dehumidifier mode",
+    "argument_descriptor": "Set the dehumidifier mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the dehumidifier mode",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Dishwasher",
+    "service": "SetDishwasherMode",
+    "type": "function",
+    "descriptor": "Allows for the control of the dishwasher mode",
+    "argument_descriptor": "Set the dishwasher mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the dishwasher mode to \"eco\", \"intense\", \"auto\", \"quick\", \"rinse\", or \"dry\" mode",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Door",
+    "service": "Open",
+    "type": "function",
+    "descriptor": "Allow for the control of a door",
+    "argument_descriptor": "Open the door",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Door",
+    "service": "Close",
+    "type": "function",
+    "descriptor": "Allow for the control of a door",
+    "argument_descriptor": "Close the door",
+    "return_type": "VOID"
+  },
+  {
+    "device": "DoorLock",
+    "service": "Lock",
+    "type": "function",
+    "descriptor": "Allow for the control of a door lock",
+    "argument_descriptor": "Lock the door",
+    "return_type": "VOID"
+  },
+  {
+    "device": "DoorLock",
+    "service": "Unlock",
+    "type": "function",
+    "descriptor": "Allow for the control of a door lock",
+    "argument_descriptor": "Unlock the door",
+    "return_type": "VOID"
+  },
+  {
+    "device": "EmailProvider",
+    "service": "SendMail",
+    "type": "function",
+    "descriptor": "Provides email service",
+    "argument_descriptor": "Send an email to the specified recipient",
+    "argument_type": "STRING | STRING | STRING",
+    "argument_format": " | | ",
+    "argument_bounds": "The email address of the recipient | The title of the email | The body content of the email",
+    "return_type": "VOID"
+  },
+  {
+    "device": "EmailProvider",
+    "service": "SendMailWithFile",
+    "type": "function",
+    "descriptor": "Provides email service",
+    "argument_descriptor": "Send an email with an attachment to the specified recipient",
+    "argument_type": "STRING | STRING | STRING | STRING",
+    "argument_format": " | | | ",
+    "argument_bounds": "The email address of the recipient | The title of the email | The body content of the email | The file path of the attachment or base64 encoded string",
+    "return_type": "VOID"
+  },
+  {
+    "device": "FaceRecognizer",
+    "service": "Start",
+    "type": "function",
+    "descriptor": "Controls face recognition features",
+    "argument_descriptor": "Start face recognition",
+    "return_type": "BOOL"
+  },
+  {
+    "device": "FaceRecognizer",
+    "service": "End",
+    "type": "function",
+    "descriptor": "Controls face recognition features",
+    "argument_descriptor": "End face recognition",
+    "return_type": "BOOL"
+  },
+  {
+    "device": "FaceRecognizer",
+    "service": "AddFace",
+    "type": "function",
+    "descriptor": "Controls face recognition features",
+    "argument_descriptor": "Add a new face to the recognition database",
+    "argument_type": "STRING",
+    "argument_bounds": "ID for the new face",
+    "return_type": "BOOL"
+  },
+  {
+    "device": "FaceRecognizer",
+    "service": "DeleteFace",
+    "type": "function",
+    "descriptor": "Controls face recognition features",
+    "argument_descriptor": "Delete a face from the recognition database",
+    "argument_type": "STRING",
+    "argument_bounds": "ID of the face to delete",
+    "return_type": "BOOL"
+  },
+  {
+    "device": "Humidifier",
+    "service": "SetHumidifierMode",
+    "type": "function",
+    "descriptor": "Maintains and sets the state of an humidifier",
+    "argument_descriptor": "Set the humidifier mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the humidifier mode to \"auto\", \"low\", \"medium\", or \"high\" mode",
+    "return_type": "VOID"
+  },
+  {
+    "device": "LaundryDryer",
+    "service": "SetLaundryDryerMode",
+    "type": "function",
+    "descriptor": "Allows for the control of the laundry dryer mode",
+    "argument_descriptor": "Set the laundry dryer mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the laundry dryer mode",
+    "return_type": "VOID"
+  },
+  {
+    "device": "LaundryDryer",
+    "service": "SetSpinSpeed",
+    "type": "function",
+    "descriptor": "Allows for the control of the laundry dryer mode",
+    "argument_descriptor": "Set the spin speed of the laundry dryer",
+    "argument_type": "INTEGER",
+    "argument_bounds": "Set the spin speed of the laundry dryer",
+    "return_type": "VOID"
+  },
+  {
+    "device": "LevelControl",
+    "service": "MoveToLevel",
+    "type": "function",
+    "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch",
+    "argument_descriptor": "Move the level to the given value. If the device supports being turned on and off then it will be turned on if level is greater than 0 and turned off if level is equal to 0.",
+    "argument_type": "DOUBLE | DOUBLE",
+    "argument_format": " | ",
+    "argument_bounds": "The level value, usually 0-100 in percent | The rate at which to change the level",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Light",
+    "service": "MoveToBrightness",
+    "type": "function",
+    "descriptor": "A numerical representation of the brightness intensity",
+    "argument_descriptor": "Move the Brightness to the given value. If the device supports being turned on and off then it will be turned on if brightness is greater than 0 and turned off if brightness is equal to 0.",
+    "argument_type": "DOUBLE | DOUBLE",
+    "argument_format": " | ",
+    "argument_bounds": "The brightness value, usually 0-100 in percent | The rate at which to change the brightness",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Light",
+    "service": "MoveToHue",
+    "type": "function",
+    "descriptor": "A numerical representation of the brightness intensity",
+    "argument_descriptor": "Gradually change to the set Hue",
+    "argument_type": "DOUBLE",
+    "argument_bounds": "Hue value to change to",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Light",
+    "service": "MoveToSaturation",
+    "type": "function",
+    "descriptor": "A numerical representation of the brightness intensity",
+    "argument_descriptor": "Gradually change to the set Saturation",
+    "argument_type": "DOUBLE",
+    "argument_bounds": "saturation value",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Light",
+    "service": "MoveToHueAndSaturation",
+    "type": "function",
+    "descriptor": "A numerical representation of the brightness intensity",
+    "argument_descriptor": "Gradually change to the set Hue and Saturation",
+    "argument_type": "DOUBLE | DOUBLE",
+    "argument_format": " | ",
+    "argument_bounds": "hue value | saturation value",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Light",
+    "service": "MoveToRGB",
+    "type": "function",
+    "descriptor": "A numerical representation of the brightness intensity",
+    "argument_descriptor": "Gradually change to the set RGB",
+    "argument_type": "INTEGER | INTEGER | INTEGER",
+    "argument_format": " | | ",
+    "argument_bounds": "red value | green value | blue value",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Light",
+    "service": "MoveToXY",
+    "type": "function",
+    "descriptor": "A numerical representation of the brightness intensity",
+    "argument_descriptor": "Gradually change to the set XY",
+    "argument_type": "DOUBLE | DOUBLE",
+    "argument_format": " | ",
+    "argument_bounds": "color X value | color Y value",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Light",
+    "service": "MoveToColorTemperature",
+    "type": "function",
+    "descriptor": "A numerical representation of the brightness intensity",
+    "argument_descriptor": "Gradually change to the set color temperature",
+    "argument_type": "INTEGER",
+    "argument_bounds": "color temperature value",
+    "return_type": "VOID"
+  },
+  {
+    "device": "MenuProvider",
+    "service": "GetMenu",
+    "type": "function",
+    "descriptor": "Provides menu information services",
+    "argument_descriptor": "Get the menu - Return the menu list",
+    "argument_type": "STRING",
+    "argument_bounds": "The command to get the menu - format: [오늘|내일] [학생식당|수의대식당|전망대(3식당)|예술계식당(아름드리)|기숙사식당|아워홈|동원관식당(113동)|웰스토리(220동)|투굿(공대간이식당)|자하연식당|301동식당] [아침|점심|저녁]",
+    "return_type": "STRING"
+  },
+  {
+    "device": "Oven",
+    "service": "SetOvenMode",
+    "type": "function",
+    "descriptor": "Allows for the control of the oven mode",
+    "argument_descriptor": "Set the oven mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the oven mode",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Oven",
+    "service": "SetCookingParameters",
+    "type": "function",
+    "descriptor": "Allows for the control of the oven mode",
+    "argument_descriptor": "Set the cooking parameters of the oven",
+    "argument_type": "ENUM | DOUBLE",
+    "argument_format": " | ",
+    "argument_bounds": "Set the mode of the oven | Set the cooking time of the oven",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Oven",
+    "service": "AddMoreTime",
+    "type": "function",
+    "descriptor": "Allows for the control of the oven mode",
+    "argument_descriptor": "Add more time to the current cooking process of the oven",
+    "argument_type": "DOUBLE",
+    "argument_bounds": "Set the additional cooking time of the oven",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Pump",
+    "service": "SetPumpMode",
+    "type": "function",
+    "descriptor": "Allows for the control of a pump device",
+    "argument_descriptor": "Set the Pump mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "The desired Pump mode",
+    "return_type": "VOID"
+  },
+  {
+    "device": "RiceCooker",
+    "service": "AddMoreTime",
+    "type": "function",
+    "descriptor": "Allows for the control of the Rice Cooker",
+    "argument_descriptor": "Add more time to the Rice Cooker",
+    "argument_type": "DOUBLE",
+    "argument_bounds": "The additional time to add to the Rice Cooker",
+    "return_type": "VOID"
+  },
+  {
+    "device": "RiceCooker",
+    "service": "SetRiceCookerMode",
+    "type": "function",
+    "descriptor": "Allows for the control of the Rice Cooker",
+    "argument_descriptor": "Set the Rice Cooker mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "The desired Rice Cooker mode",
+    "return_type": "VOID"
+  },
+  {
+    "device": "RiceCooker",
+    "service": "SetCookingParameters",
+    "type": "function",
+    "descriptor": "Allows for the control of the Rice Cooker",
+    "argument_descriptor": "Set the cooking parameters for the Rice Cooker",
+    "argument_type": "ENUM | DOUBLE",
+    "argument_format": " | ",
+    "argument_bounds": "The desired Rice Cooker mode | The cooking time",
+    "return_type": "VOID"
+  },
+  {
+    "device": "RobotVacuumCleaner",
+    "service": "SetRobotVacuumCleanerModeMode",
+    "type": "function",
+    "descriptor": "Allows for the control of the robot cleaner cleaning mode",
+    "argument_descriptor": "Set the robot cleaner cleaning mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the robot cleaner cleaning mode, to \"auto\", \"part\", \"repeat\", \"manual\" or \"stop\" modes",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Safe",
+    "service": "Lock",
+    "type": "function",
+    "descriptor": "Allows for the control of the Safe",
+    "argument_descriptor": "Lock the Safe",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Safe",
+    "service": "Unlock",
+    "type": "function",
+    "descriptor": "Allows for the control of the Safe",
+    "argument_descriptor": "Unlock the Safe",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Siren",
+    "service": "SetSirenMode",
+    "type": "function",
+    "descriptor": "Allows for the control of the Siren",
+    "argument_descriptor": "Set the Siren mode",
+    "argument_type": "ENUM",
+    "argument_bounds": "Set the Siren mode",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Speaker",
+    "service": "Play",
+    "type": "function",
+    "descriptor": "Speaker device for audio playback and media control",
+    "argument_descriptor": "Start media playback",
+    "argument_type": "STRING",
+    "argument_bounds": "Media source to play (e.g., URL or file path)",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Speaker",
+    "service": "Pause",
+    "type": "function",
+    "descriptor": "Speaker device for audio playback and media control",
+    "argument_descriptor": "Pause media playback",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Speaker",
+    "service": "Stop",
+    "type": "function",
+    "descriptor": "Speaker device for audio playback and media control",
+    "argument_descriptor": "Stop media playback",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Speaker",
+    "service": "FastForward",
+    "type": "function",
+    "descriptor": "Speaker device for audio playback and media control",
+    "argument_descriptor": "Fast forward media playback",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Speaker",
+    "service": "Rewind",
+    "type": "function",
+    "descriptor": "Speaker device for audio playback and media control",
+    "argument_descriptor": "Rewind media playback",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Speaker",
+    "service": "SetVolume",
+    "type": "function",
+    "descriptor": "Speaker device for audio playback and media control",
+    "argument_descriptor": "Set the speaker volume level. Returns the new volume level.",
+    "argument_type": "INTEGER",
+    "argument_bounds": "Volume level to set (0-100)",
+    "return_type": "INTEGER"
+  },
+  {
+    "device": "Speaker",
+    "service": "VolumeUp",
+    "type": "function",
+    "descriptor": "Speaker device for audio playback and media control",
+    "argument_descriptor": "Set the speaker volume level. Return the new volume level",
+    "return_type": "INTEGER"
+  },
+  {
+    "device": "Speaker",
+    "service": "VolumeDown",
+    "type": "function",
+    "descriptor": "Speaker device for audio playback and media control",
+    "argument_descriptor": "Set the speaker volume level. Return the new volume level",
+    "return_type": "INTEGER"
+  },
+  {
+    "device": "Speaker",
+    "service": "Speak",
+    "type": "function",
+    "descriptor": "Speaker device for audio playback and media control",
+    "argument_descriptor": "Speak a text string",
+    "argument_type": "STRING",
+    "argument_bounds": "Text to speak",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Switch",
+    "service": "On",
+    "type": "function",
+    "descriptor": "Allows for the control of a Switch device",
+    "argument_descriptor": "Turn a Switch on",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Switch",
+    "service": "Off",
+    "type": "function",
+    "descriptor": "Allows for the control of a Switch device",
+    "argument_descriptor": "Turn a Switch off",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Switch",
+    "service": "Toggle",
+    "type": "function",
+    "descriptor": "Allows for the control of a Switch device",
+    "argument_descriptor": "Toggle a Switch. Returns the new state of the Switch.",
+    "return_type": "BOOL"
+  },
+  {
+    "device": "Television",
+    "service": "ChannelUp",
+    "type": "function",
+    "descriptor": "A television device",
+    "argument_descriptor": "Change the channel up",
+    "return_type": "INTEGER"
+  },
+  {
+    "device": "Television",
+    "service": "ChannelDown",
+    "type": "function",
+    "descriptor": "A television device",
+    "argument_descriptor": "Change the channel down",
+    "return_type": "INTEGER"
+  },
+  {
+    "device": "Television",
+    "service": "SetChannel",
+    "type": "function",
+    "descriptor": "A television device",
+    "argument_descriptor": "Set the current channel",
+    "argument_type": "INTEGER",
+    "argument_bounds": "Set the current channel (0-10000)",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Valve",
+    "service": "Open",
+    "type": "function",
+    "descriptor": "Controls a valve to open or close it",
+    "argument_descriptor": "Open the valve",
+    "return_type": "VOID"
+  },
+  {
+    "device": "Valve",
+    "service": "Close",
+    "type": "function",
+    "descriptor": "Controls a valve to open or close it",
+    "argument_descriptor": "Close the valve",
+    "return_type": "VOID"
+  },
+  {
+    "device": "WeatherProvider",
+    "service": "GetWeatherInfo",
+    "type": "function",
+    "descriptor": "Provides weather information",
+    "argument_descriptor": "Get the current weather information - Return whole weather information, format: \"temperature, humidity, pressure, pm25, pm10, weather, weather_string, icon_id, location\"",
+    "argument_type": "DOUBLE | DOUBLE",
+    "argument_format": " | ",
+    "argument_bounds": "The latitude of the location | The longitude of the location",
+    "return_type": "STRING"
+  },
+  {
+    "device": "WindowCovering",
+    "service": "UpOrOpen",
+    "type": "function",
+    "descriptor": "Controls a window covering to open or close it",
+    "argument_descriptor": "Up or open the window",
+    "return_type": "VOID"
+  },
+  {
+    "device": "WindowCovering",
+    "service": "DownOrClose",
+    "type": "function",
+    "descriptor": "Controls a window covering to open or close it",
+    "argument_descriptor": "Down or close the window",
+    "return_type": "VOID"
+  },
+  {
+    "device": "WindowCovering",
+    "service": "Stop",
+    "type": "function",
+    "descriptor": "Controls a window covering to open or close it",
+    "argument_descriptor": "Stop the window covering",
+    "return_type": "VOID"
+  },
+  {
+    "device": "WindowCovering",
+    "service": "SetLevel",
+    "type": "function",
+    "descriptor": "Controls a window covering to open or close it",
+    "argument_descriptor": "Set the level of the window covering (0-100). Return the level set.",
+    "argument_type": "INTEGER",
+    "argument_bounds": "Level to set the window covering to (0-100)",
+    "return_type": "INTEGER"
+  }
+]

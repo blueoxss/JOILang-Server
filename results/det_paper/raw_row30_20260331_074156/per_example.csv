@@ -1,0 +1,9 @@
+﻿line_no,row_no,dataset_index,model_label,request_model,selected_model,command,det_pass,sdet,script_similarity,fatal_reasons,reference_script,predicted_script,predicted_services
+1,30,30,[1/4] CAP-old_gpt4.1-mini_svc-v1.5.4,gpt4.1-mini,CAP-old_gpt4.1-mini_svc-v1.5.4,TV 30번 채널 틀어줘.,True,0.759494,0.759494,,"
+(#Television).Television_SetChannel(30)",(#Television).tvChannel_setTvChannel(30),tvChannel_setTvChannel
+2,30,30,[2/4] JOI_gpt4.1-mini_v1.5.4,gpt_mg.version0_6,JOI_gpt4.1-mini_v1.5.4,TV 30번 채널 틀어줘.,True,0.759494,0.759494,,"
+(#Television).Television_SetChannel(30)",(#Television).tvChannel_setTvChannel(30),tvChannel_setTvChannel
+3,30,30,[3/4] Local5080_qwen-7b_svc-v1.5.4,gpt_mg.version0_13,Local5080_qwen-7b_svc-v1.5.4,TV 30번 채널 틀어줘.,True,0.759494,0.759494,,"
+(#Television).Television_SetChannel(30)",(#Television).tvChannel_setTvChannel(30),tvChannel_setTvChannel
+4,30,30,[4/4] Local5080_qwen-7b_svc-v2.0.1,gpt_mg.version0_12,Local5080_qwen-7b_svc-v2.0.1,TV 30번 채널 틀어줘.,False,0.0,0.0,missing_prediction_code | generation_error:invalid_json_response,"
+(#Television).Television_SetChannel(30)",,

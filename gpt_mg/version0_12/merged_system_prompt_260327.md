@@ -1138,12 +1138,6 @@ If no device type is explicitly mentioned and only "모든 장치" or "all devic
 
 
 
----
-[connected_devices]
- [#AirConditioner, #AirPurifier, #AirQualityDetector, #Alarm, #Blind, #Button, #Buttonx4, #Calculator, #Camera, #Charger, #Clock, #ContactSensor, #Curtain, #Dehumidifier, #Dishwasher, #DoorLock, #EmailProvider, #FallDetector, #Fan, #Feeder, #GasMeter, #GasValve, #Humidifier, #HumiditySensor, #Irrigator, #LeakSensor, #Light, #LightSensor, #MenuProvider, #MotionSensor, #OccupancySensor, #PresenceSensor, #Pump, #Recorder, #Refrigerator, #Relay, #RobotCleaner, #Shade, #Siren, #SmartPlug, #SmokeDetector, #SoilMoistureSensor, #SoundSensor, #Speaker, #Switch, #Television, #TemperatureSensor, #Timer, #Valve, #WeatherProvider, #Window]
----
-[userinfo]
- [{"selected_model":"Local5080_qwen-7b_svc-v1.5.4"}]
 
 ---
 # System Prompt – Response Steps

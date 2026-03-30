@@ -10,7 +10,7 @@ with open("./datasets/things.json", encoding="utf-8") as f:
 PY
 )"
 
-echo "=== [1/3] CAP_gpt4.1_mini_old ==="
+echo "=== [1/4] CAP-old_gpt4.1-mini_svc-v1.5.4 ==="
 curl -s -X POST http://localhost:8000/generate_joi_code \
   -H "Content-Type: application/json" \
   -d '{
@@ -18,11 +18,11 @@ curl -s -X POST http://localhost:8000/generate_joi_code \
     "model": "gpt4.1-mini",
     "connected_devices": '"$CONNECTED_DEVICES"',
     "current_time": "'"$TIME"'",
-    "other_params": [{"selected_model": "CAP_gpt4.1_mini_old"}]
+    "other_params": [{"selected_model": "CAP-old_gpt4.1-mini_svc-v1.5.4"}]
   }'
 echo -e "\n"
 
-echo "=== [2/3] JOI_gpt4.1_mini (version0_6) ==="
+echo "=== [2/4] JOI_gpt4.1-mini_v1.5.4 ==="
 curl -s -X POST http://localhost:8000/generate_joi_code \
   -H "Content-Type: application/json" \
   -d '{
@@ -30,11 +30,11 @@ curl -s -X POST http://localhost:8000/generate_joi_code \
     "model": "gpt_mg.version0_6",
     "connected_devices": '"$CONNECTED_DEVICES"',
     "current_time": "'"$TIME"'",
-    "other_params": [{"selected_model": "JOI_gpt4.1_mini"}]
+    "other_params": [{"selected_model": "JOI_gpt4.1-mini_v1.5.4"}]
   }'
 echo -e "\n"
 
-echo "=== [3/3] local_8b (version0_13) ==="
+echo "=== [3/4] Local5080_qwen-7b_svc-v1.5.4 ==="
 curl -s -X POST http://localhost:8000/generate_joi_code \
   -H "Content-Type: application/json" \
   -d '{
@@ -42,6 +42,18 @@ curl -s -X POST http://localhost:8000/generate_joi_code \
     "model": "gpt_mg.version0_13",
     "connected_devices": '"$CONNECTED_DEVICES"',
     "current_time": "'"$TIME"'",
-    "other_params": [{"selected_model": "local_8b"}]
+    "other_params": [{"selected_model": "Local5080_qwen-7b_svc-v1.5.4"}]
+  }'
+echo -e "\n"
+
+echo "=== [4/4] Local5080_qwen-7b_svc-v2.0.1 ==="
+curl -s -X POST http://localhost:8000/generate_joi_code \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sentence": "'"$SENTENCE"'",
+    "model": "gpt_mg.version0_12",
+    "connected_devices": '"$CONNECTED_DEVICES"',
+    "current_time": "'"$TIME"'",
+    "other_params": [{"selected_model": "Local5080_qwen-7b_svc-v2.0.1"}]
   }'
 echo -e "\n"

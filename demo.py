@@ -149,8 +149,61 @@ from openai import OpenAI
 client = OpenAI()
 
 # 모델 리스트
-AVAILABLE_MODELS = ['CAP_gpt4.1_mini_old', 'JOI_gpt4.1_mini', 'local_8b', 'JOI_gpt5_mini']
+MODEL_OPTIONS = [
+    {
+        "display": "CAP-old_gpt4.1-mini_svc-v1.5.4",
+        "aliases": ["CAP-old_gpt4.1-mini_svc-v1.5.4", "CAP_gpt4.1_mini_old"],
+        "runtime_model": "gpt4.1-mini",
+        "generator": "cap",
+    },
+    {
+        "display": "JOI_gpt4.1-mini_v1.5.4",
+        "aliases": ["JOI_gpt4.1-mini_v1.5.4", "JOI_gpt4.1_mini"],
+        "runtime_model": "gpt_mg.version0_6",
+        "generator": "mg",
+    },
+    {
+        "display": "Local5080_qwen-7b_svc-v1.5.4",
+        "aliases": ["Local5080_qwen-7b_svc-v1.5.4", "local_8b"],
+        "runtime_model": "gpt_mg.version0_13",
+        "generator": "mg",
+    },
+    {
+        "display": "Local5080_qwen-7b_svc-v2.0.1",
+        "aliases": ["Local5080_qwen-7b_svc-v2.0.1"],
+        "runtime_model": "gpt_mg.version0_12",
+        "generator": "mg",
+    },
+    {
+        "display": "JOI5_gpt5-mini_svc-v1.5.4",
+        "aliases": ["JOI5_gpt5-mini_svc-v1.5.4", "JOI_gpt5_mini"],
+        "runtime_model": "gpt_mg.version0_7",
+        "generator": "mg",
+    },
+]
+AVAILABLE_MODELS = [option["display"] for option in MODEL_OPTIONS]
+MODEL_ALIAS_MAP = {
+    alias: option
+    for option in MODEL_OPTIONS
+    for alias in option["aliases"]
+}
+DEFAULT_MODEL_OPTION = MODEL_OPTIONS[-1]
+
 selected_model_raw = ''
+
+
+def extract_selected_model_raw(other_params):
+    if isinstance(other_params, dict):
+        return str(other_params.get('selected_model', '')).strip()
+    if isinstance(other_params, list):
+        for item in other_params:
+            if isinstance(item, dict) and 'selected_model' in item:
+                return str(item['selected_model']).strip()
+    return ''
+
+
+def resolve_selected_model_option(selected_model_raw):
+    return MODEL_ALIAS_MAP.get(selected_model_raw, DEFAULT_MODEL_OPTION)
 
 @app.get("/get_model_list")
 async def get_model_list():
@@ -177,36 +230,15 @@ async def generate_code(request: GenerateJOICodeRequest):
         connected_devices = request.connected_devices
         last_connected_devices = connected_devices  # 상태 갱신
 
-    if isinstance(request.other_params, dict):
-        selected_model_raw = request.other_params.get('selected_model', '').strip()
-    elif isinstance(request.other_params, list):
-        for item in request.other_params:
-            if isinstance(item, dict) and 'selected_model' in item:
-                selected_model_raw = item['selected_model'].strip()
-                break
-   
-    if selected_model_raw == 'CAP_gpt4.1_mini_old':
-        selected_model = 'gpt4.1-mini'
-    elif selected_model_raw == 'JOI_gpt4.1_mini':
-        selected_model = 'gpt_mg.version0_6'
-    elif selected_model_raw == 'local_8b':
-        selected_model = 'gpt_mg.version0_13'
-    else:
-        selected_model = 'gpt_mg.version0_7'
+    selected_model_raw = extract_selected_model_raw(request.other_params)
+    selected_model_option = resolve_selected_model_option(selected_model_raw)
+    selected_model = selected_model_option["runtime_model"]
         
     print("Request Model Name>> ", request.model)
-    if selected_model_raw == 'CAP_gpt4.1_mini_old':
+    if selected_model_option["generator"] == 'cap':
         result = generate_joi_code_cap(
             sentence=request.sentence,
             model=selected_model,  # 모델 이름을 서버에서 고정
-            connected_devices=connected_devices,
-            current_time=request.current_time,
-            other_params=request.other_params,
-        )
-    elif selected_model_raw == 'JOI_gpt4.1_mini':
-        result = generate_joi_code(
-            sentence=request.sentence,
-            model=selected_model,  # 모델 이름을 서버에서 고정 (MODEL_NAME)에서 사용자로부터 받는걸로 수정
             connected_devices=connected_devices,
             current_time=request.current_time,
             other_params=request.other_params,
@@ -221,21 +253,16 @@ async def generate_code(request: GenerateJOICodeRequest):
         )
 #        model_resources=MODEL_RESOURCES,
     last_result = result #copy.deepcopy(result)
+    model_path = f"{MODEL_NAME_REVERSED}.config_loader"
+    config_loader_module = importlib.import_module(model_path)
+    load_version_config = getattr(config_loader_module, 'load_version_config')
+    config, model_input = load_version_config(return_kor_prompt(result.get('code', ''))) 
 
-    if result.get('code'):
-        model_path = f"{MODEL_NAME_REVERSED}.config_loader"
-        config_loader_module = importlib.import_module(model_path)
-        load_version_config = getattr(config_loader_module, 'load_version_config')
-        config, model_input = load_version_config(return_kor_prompt(result.get('code', ''))) 
-
-        response_kor = client.chat.completions.create(**model_input)
-        if response_kor:
-            result['log']['translated_sentence'] = response_kor.choices[0].message.content.strip() #content
-        else:
-            print("No reconverted response, using original sentence.")
-            result['log']['translated_sentence'] = request.sentence
+    response_kor = client.chat.completions.create(**model_input)
+    if response_kor:
+        result['log']['translated_sentence'] = response_kor.choices[0].message.content.strip() #content
     else:
-        print("No generated code, skipping reconverted translation.")
+        print("No reconverted response, using original sentence.")
         result['log']['translated_sentence'] = request.sentence
 
     print("Reconverted Version of The Detailed Sentence: \n", result['log']["translated_sentence"])
@@ -354,27 +381,14 @@ async def re_generate_code(request: GenerateJOICodeRequest):
                 current_sentence += " " + f"\n+ add condition: {extra_content}"
                 
                 new_dataset = [f"Regenerate the JOI Lang code based on **current sentence** and **the added conditions**.: {current_sentence}"]
-                selected_model_raw = request.other_params.get('selected_model', '').strip() if request.other_params else ''
-                if selected_model_raw == 'CAP_gpt4.1_mini_old':
-                    selected_model = 'gpt4.1-mini'
-                elif selected_model_raw == 'JOI_gpt4.1_mini':
-                    selected_model = 'gpt_mg.version0_6'
-                else:
-                    selected_model = 'gpt_mg.version0_7'
+                selected_model_raw = extract_selected_model_raw(request.other_params)
+                selected_model_option = resolve_selected_model_option(selected_model_raw)
+                selected_model = selected_model_option["runtime_model"]
 
-                if selected_model_raw == 'CAP_gpt4.1_mini_old':
+                if selected_model_option["generator"] == 'cap':
                     result = generate_joi_code_cap(
                         sentence=request.sentence,
                         model=selected_model,  # 모델 이름을 서버에서 고정
-                        connected_devices=connected_devices,
-                        current_time=request.current_time,
-                        other_params=request.other_params,
-                    )
-                elif selected_model_raw == 'JOI_gpt4.1_mini':
-                    result = generate_joi_code(
-                        sentence=request.sentence,
-                        # model=request.model,
-                        model=selected_model,  # 모델 이름을 서버에서 고정 (MODEL_NAME)에서 사용자로부터 받는걸로 수정
                         connected_devices=connected_devices,
                         current_time=request.current_time,
                         other_params=request.other_params,

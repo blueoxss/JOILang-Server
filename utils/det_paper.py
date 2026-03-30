@@ -303,6 +303,36 @@ def _build_generation_row(
     }
 
 
+def evaluate_generation_records(
+    records: list[dict[str, Any]],
+    dataset_path: str,
+    command_column: str = "command_eng",
+    value_services_path: str | None = None,
+    function_services_path: str | None = None,
+    services_path: str | None = None,
+    forbidden_actions_path: str | None = None,
+    missing_reference_policy: str = "paper_strict",
+) -> list[dict[str, Any]]:
+    allowed_services = _load_service_names(services_path, value_services_path, function_services_path)
+    forbidden_actions = _load_forbidden_actions(forbidden_actions_path)
+    rows_by_position, rows_by_command = _load_dataset_rows(dataset_path, command_column)
+
+    results: list[dict[str, Any]] = []
+    for line_no, record in enumerate(records, start=1):
+        dataset_row = _match_row(record, rows_by_position, rows_by_command, command_column)
+        result = _build_generation_row(
+            record=record,
+            dataset_row=dataset_row,
+            allowed_services=allowed_services,
+            forbidden_actions=forbidden_actions,
+            command_column=command_column,
+            missing_reference_policy=missing_reference_policy,
+        )
+        result["line_no"] = line_no
+        results.append(result)
+    return results
+
+
 def run_det_paper_from_files(
     generation_jsonl: str,
     dataset_path: str,
@@ -317,10 +347,6 @@ def run_det_paper_from_files(
     run_name: str | None = None,
     verbose: bool = False,
 ) -> dict[str, Any]:
-    allowed_services = _load_service_names(services_path, value_services_path, function_services_path)
-    forbidden_actions = _load_forbidden_actions(forbidden_actions_path)
-    rows_by_position, rows_by_command = _load_dataset_rows(dataset_path, command_column)
-
     generation_path = Path(generation_jsonl)
     if not generation_path.exists():
         raise FileNotFoundError(f"generation_jsonl not found: {generation_jsonl}")
@@ -332,24 +358,24 @@ def run_det_paper_from_files(
     per_example_csv = output_dir / "per_example.csv"
     summary_json = output_dir / "summary.json"
 
-    results: list[dict[str, Any]] = []
+    records: list[dict[str, Any]] = []
     with generation_path.open(encoding="utf-8") as f:
-        for line_no, line in enumerate(f, start=1):
+        for line in f:
             stripped = line.strip()
             if not stripped:
                 continue
-            record = json.loads(stripped)
-            dataset_row = _match_row(record, rows_by_position, rows_by_command, command_column)
-            result = _build_generation_row(
-                record=record,
-                dataset_row=dataset_row,
-                allowed_services=allowed_services,
-                forbidden_actions=forbidden_actions,
-                command_column=command_column,
-                missing_reference_policy=missing_reference_policy,
-            )
-            result["line_no"] = line_no
-            results.append(result)
+            records.append(json.loads(stripped))
+
+    results = evaluate_generation_records(
+        records=records,
+        dataset_path=dataset_path,
+        command_column=command_column,
+        value_services_path=value_services_path,
+        function_services_path=function_services_path,
+        services_path=services_path,
+        forbidden_actions_path=forbidden_actions_path,
+        missing_reference_policy=missing_reference_policy,
+    )
 
     with per_example_jsonl.open("w", encoding="utf-8") as f:
         for row in results:
