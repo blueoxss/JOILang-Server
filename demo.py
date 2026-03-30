@@ -221,16 +221,21 @@ async def generate_code(request: GenerateJOICodeRequest):
         )
 #        model_resources=MODEL_RESOURCES,
     last_result = result #copy.deepcopy(result)
-    model_path = f"{MODEL_NAME_REVERSED}.config_loader"
-    config_loader_module = importlib.import_module(model_path)
-    load_version_config = getattr(config_loader_module, 'load_version_config')
-    config, model_input = load_version_config(return_kor_prompt(result.get('code', ''))) 
 
-    response_kor = client.chat.completions.create(**model_input)
-    if response_kor:
-        result['log']['translated_sentence'] = response_kor.choices[0].message.content.strip() #content
+    if result.get('code'):
+        model_path = f"{MODEL_NAME_REVERSED}.config_loader"
+        config_loader_module = importlib.import_module(model_path)
+        load_version_config = getattr(config_loader_module, 'load_version_config')
+        config, model_input = load_version_config(return_kor_prompt(result.get('code', ''))) 
+
+        response_kor = client.chat.completions.create(**model_input)
+        if response_kor:
+            result['log']['translated_sentence'] = response_kor.choices[0].message.content.strip() #content
+        else:
+            print("No reconverted response, using original sentence.")
+            result['log']['translated_sentence'] = request.sentence
     else:
-        print("No reconverted response, using original sentence.")
+        print("No generated code, skipping reconverted translation.")
         result['log']['translated_sentence'] = request.sentence
 
     print("Reconverted Version of The Detailed Sentence: \n", result['log']["translated_sentence"])

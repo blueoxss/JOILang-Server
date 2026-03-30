@@ -51,7 +51,7 @@ def _resolve_device_map(local_device: str):
                 return {"": requested_id}
             else:
                 # 요청한 GPU가 없는 경우 (예: GPU 1개뿐인데 cuda:1 요청) -> 안전하게 0번으로 폴백!
-                print(f"경고: {device_name}이 존재하지 않아 cuda:0으로 자동 전환합니다.")
+                print(f"경고: {device_name}이 존재하지 않아 cuda:0으로 자동 전환합니다.", file=sys.stderr)
                 return {"": 0}
         
         # 그냥 "cuda"라고만 들어오면 무조건 첫 번째(0번) 사용

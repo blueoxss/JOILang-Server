@@ -1,0 +1,2 @@
+﻿line_no,row_no,dataset_index,model_label,request_model,selected_model,command,det_pass,sdet,script_similarity,fatal_reasons,reference_script,predicted_script,predicted_services
+1,1,1,JOI_gpt4.1_mini (version0_6),gpt_mg.version0_6,JOI_gpt4.1_mini,식기세척기를 건조 모드로 설정해줘.,True,0.921569,0.921569,,"(#Dishwasher).Dishwasher_SetDishwasherMode(""dry"")","(#Dishwasher).dishwasherMode_setDishwasherMode(""dry"")",dishwasherMode_setDishwasherMode

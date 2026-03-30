@@ -118,12 +118,11 @@ Output the results as a list under a "choices" key, where each item contains onl
     response = {}
     global all_items  # 전체 item을 누적할 리스트
     global choice_no
+    all_items = []
+    choice_no = 0
     try:
-        model_input["model"] = "Qwen/Qwen2.5-Coder-7B-Instruct"
         response = client.chat.completions.create(**model_input)
         print("Response:: ", response)
-        all_items = []
-        choice_no = 0
 
         #print("Output:: >> ", response)
         if (feedback == 1) and not (choice_no):
@@ -257,9 +256,11 @@ Output the results as a list under a "choices" key, where each item contains onl
                 #print('----')
                 #print(all_items)
                 print("## <<2. generate_joi_code>> \n Error in generate_joi_code:", e)
+                logs["error"] = f"response_parse_failed: {e}"
                 generated_code = {}
     except Exception as e:
         print("exception in response:", e)
+        logs["error"] = f"model_call_failed: {e}"
     #print("Length of Created Code :: ", len(all_items))
     #if feedback == 1:
     #    for idx, generated_code in enumerate(choice_responses):

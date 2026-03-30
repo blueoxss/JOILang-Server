@@ -79,3 +79,22 @@ Turn on the lights at 9 AM on weekdays.,
 Turn on the lights at 9 AM on weekdays.,
 Turn on the lights at 9 AM on weekdays.,
 불 다 꺼줘,
+불을 켜줘,
+불을 켜줘,
+불을 켜줘,"[{'name': '불켜기', 'cron': '', 'period': -1, 'code': '(#Light).switch_on()'}]"
+불을 켜줘,"[{'name': '불켜기', 'cron': '', 'period': -1, 'code': '(#Light).switch_on()'}]"
+불을 켜줘,"[{'name': '불켜기', 'cron': '', 'period': -1, 'code': '(#Light).switch_on()'}]"
+불을 켜줘,
+불을 켜줘,"[{'name': '불켜기', 'cron': '', 'period': -1, 'code': '(#Light).switch_on()'}]"
+불을 켜줘,"[{'name': 'TurnOnLight', 'cron': '', 'period': -1, 'code': '(#Light).switch_on()'}]"
+회의실 에어컨의 목표 온도를 1시간마다 25와 20으로 번갈아 설정해줘.,"[{'name': '회의실에어컨목표온도교대', 'cron': '', 'period': 3600000, 'code': 'toggle := false\nif (toggle == false) {\n  (#AirConditioner #회의실).airConditionerMode_setTemperature(25)\n  toggle = true\n} else {\n  (#AirConditioner #회의실).airConditionerMode_setTemperature(20)\n  toggle = false\n}'}]"
+회의실 에어컨의 목표 온도를 1시간마다 25와 20으로 번갈아 설정해줘.,"[{'name': 'ACTempToggle', 'cron': '', 'period': 3600000, 'code': 'if (triggered == false) {\n  (#ConferenceRoomAC).airConditionerMode_setTemperature(25)\n  triggered = true\n} else {\n  (#ConferenceRoomAC).airConditionerMode_setTemperature(20)\n  triggered = false\n}'}]"
+식기세척기를 건조 모드로 설정해줘.,"[{'name': '식기세척기건조모드설정', 'cron': '', 'period': -1, 'code': '(#Dishwasher).dishwasherMode_setDishwasherMode(""dry"")'}]"
+식기세척기를 건조 모드로 설정해줘.,"[{'name': 'Set Dishwasher Dry Mode', 'cron': '', 'period': -1, 'code': '(#Dishwasher).dishwasherMode_setDishwasherMode(""dry"")'}]"
+오늘의 301동 점심 메뉴를 스피커로 알려줘.,"[{'name': '오늘301동점심메뉴알림', 'cron': '', 'period': -1, 'code': '(#MenuProvider).menuProvider_menu(""오늘,301동,점심"")\nmenu = ""오늘,301동,점심""\n(#Speaker).mediaPlayback_speak(menu)'}]"
+오늘의 301동 점심 메뉴를 스피커로 알려줘.,"[{'name': ""Today's Menu Announcement"", 'cron': '', 'period': -1, 'code': '(#Speaker).mediaPlayback_speak(""오늘의 301동 점심 메뉴는 [메뉴 이름]입니다."")'}]"
+오늘의 301동 점심 메뉴를 스피커로 알려줘.,"[{'name': '오늘301동점심메뉴알림', 'cron': '', 'period': -1, 'code': '(#MenuProvider).menuProvider_menu(""오늘,301동식당,점심"")\nmenu = """"\nmenu = (#MenuProvider).menuProvider_menu\n(#Speaker).mediaPlayback_speak(menu)'}]"
+식기세척기를 건조 모드로 설정해줘.,"[{'name': '식기세척기건조모드설정', 'cron': '', 'period': -1, 'code': '(#Dishwasher).dishwasherMode_setDishwasherMode(""dry"")'}]"
+오늘의 301동 점심 메뉴를 스피커로 알려줘.,"[{'name': ""Today's Menu Announcement"", 'cron': '', 'period': -1, 'code': '(#Speaker).mediaPlayback_speak(""오늘의 301동 점심 메뉴는 [메뉴 이름]입니다."")'}]"
+식기세척기를 건조 모드로 설정해줘.,"[{'name': 'Set Dishwasher Dry Mode', 'cron': '', 'period': -1, 'code': '(#Dishwasher).dishwasherMode_setDishwasherMode(""dry"")'}]"
+식기세척기를 건조 모드로 설정해줘.,"[{'name': '식기세척기건조모드설정', 'cron': '', 'period': -1, 'code': '(#Dishwasher).dishwasherMode_setDishwasherMode(""dry"")'}]"

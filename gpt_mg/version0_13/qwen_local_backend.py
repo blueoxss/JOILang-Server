@@ -167,7 +167,6 @@ class _Version013LocalChatCompletion:
             completion_tokens=int(worker_result.get("completion_tokens", 0)),
         )
 
-
 def ensure_version013_backend_installed():
     run_module = _find_run_module()
     if run_module is None:
@@ -178,8 +177,17 @@ def ensure_version013_backend_installed():
         return
 
     completions = client.chat.completions
-    if getattr(completions, "_version013_dispatch_installed", False):
+    completions_cls = completions.__class__
+    if getattr(completions_cls, "_version013_dispatch_installed", False):
         return
 
-    completions.create = _Version013LocalChatCompletion(completions.create).create
-    completions._version013_dispatch_installed = True
+    original_create = completions_cls.create
+
+    def patched_create(self, *args, **kwargs):
+        dispatcher = _Version013LocalChatCompletion(
+            lambda **forwarded_kwargs: original_create(self, *args, **forwarded_kwargs)
+        )
+        return dispatcher.create(**kwargs)
+
+    completions_cls.create = patched_create
+    completions_cls._version013_dispatch_installed = True

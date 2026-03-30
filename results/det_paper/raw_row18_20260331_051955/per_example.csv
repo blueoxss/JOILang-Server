@@ -1,0 +1,53 @@
+﻿line_no,row_no,dataset_index,model_label,request_model,selected_model,command,det_pass,sdet,script_similarity,fatal_reasons,reference_script,predicted_script,predicted_services
+1,18,18,[1/3] CAP_gpt4.1_mini_old,gpt4.1-mini,CAP_gpt4.1_mini_old,현관문이 열리면 그 후부터 5분마다 금고를 체크해서 잠겨있지 않으면 스피커로 금고가 열려있다고 출력해줘.,True,0.300395,0.300395,,"
+active := 0
+
+if (active == 0) {
+
+    wait until ((#Entrance #Door).Door_DoorState == ""open"")
+
+    active = 1
+
+}
+
+if ((#Safe).Safe_SafeState != ""locked"") {
+
+    (#Speaker).Speaker_Speak(""금고가 열려있습니다"")
+
+}","(#MenuProvider).menuProvider_menu('오늘 301동 점심')
+(#Speaker).mediaPlayback_speak('오늘 301동 점심 메뉴를 알려드립니다')","mediaPlayback_speak, menuProvider_menu"
+2,18,18,[2/3] JOI_gpt4.1_mini (version0_6),gpt_mg.version0_6,JOI_gpt4.1_mini,현관문이 열리면 그 후부터 5분마다 금고를 체크해서 잠겨있지 않으면 스피커로 금고가 열려있다고 출력해줘.,True,0.320557,0.320557,,"
+active := 0
+
+if (active == 0) {
+
+    wait until ((#Entrance #Door).Door_DoorState == ""open"")
+
+    active = 1
+
+}
+
+if ((#Safe).Safe_SafeState != ""locked"") {
+
+    (#Speaker).Speaker_Speak(""금고가 열려있습니다"")
+
+}","(#MenuProvider).menuProvider_menu(""오늘,301동식당,점심"")
+menu = """"
+menu = (#MenuProvider).menuProvider_menu
+(#Speaker).mediaPlayback_speak(menu)",menuProvider_menu
+3,18,18,[3/3] local_8b (version0_13),gpt_mg.version0_13,local_8b,현관문이 열리면 그 후부터 5분마다 금고를 체크해서 잠겨있지 않으면 스피커로 금고가 열려있다고 출력해줘.,True,0.234742,0.234742,,"
+active := 0
+
+if (active == 0) {
+
+    wait until ((#Entrance #Door).Door_DoorState == ""open"")
+
+    active = 1
+
+}
+
+if ((#Safe).Safe_SafeState != ""locked"") {
+
+    (#Speaker).Speaker_Speak(""금고가 열려있습니다"")
+
+}","(#Speaker).mediaPlayback_speak(""오늘의 301동 점심 메뉴는 [메뉴 이름]입니다."")",mediaPlayback_speak
