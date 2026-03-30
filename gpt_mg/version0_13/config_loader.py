@@ -41,10 +41,16 @@ def parse_selected_device(connected_devices: dict, s_l: dict):
     for device_info in connected_devices.values():
         category = device_info.get('category')
         if category:
-            all_categories.add(category)
+            if isinstance(category, list):
+                all_categories.update(category)
+            else:
+                all_categories.add(category)
 
         tags = device_info.get('tags', [])
-        cnt_others_tags.update(tag for tag in tags if tag != category)
+        if isinstance(tags, str):
+            tags = [tags]
+        cat_set = set(category) if isinstance(category, list) else {category} if category else set()
+        cnt_others_tags.update(tag for tag in tags if tag not in cat_set)
 
     # ✅ 문자열 리스트 형태로 결합: "[#Light, #Alarm, #Fan]"
     category_tags_str = "[" + ", ".join(f"#{cat}" for cat in sorted(all_categories)) + "]"
@@ -74,10 +80,16 @@ def parse_selected_device_simple(connected_devices: dict):
     for device_info in connected_devices.values():
         category = device_info.get('category')
         if category:
-            all_categories.add(category)
+            if isinstance(category, list):
+                all_categories.update(category)
+            else:
+                all_categories.add(category)
 
         tags = device_info.get('tags', [])
-        cnt_others_tags.update(tag for tag in tags if tag != category)
+        if isinstance(tags, str):
+            tags = [tags]
+        cat_set = set(category) if isinstance(category, list) else {category} if category else set()
+        cnt_others_tags.update(tag for tag in tags if tag not in cat_set)
 
     # ✅ 문자열 리스트 형태로 결합: "[#Light, #Alarm, #Fan]"
     category_tags_str = "[" + ", ".join(f"#{cat}" for cat in sorted(all_categories)) + "]"
