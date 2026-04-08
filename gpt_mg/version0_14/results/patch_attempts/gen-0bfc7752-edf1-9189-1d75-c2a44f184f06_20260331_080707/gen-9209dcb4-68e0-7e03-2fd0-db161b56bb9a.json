@@ -1,0 +1,33 @@
+{
+  "id": "gen-9209dcb4-68e0-7e03-2fd0-db161b56bb9a",
+  "seed": 23,
+  "blocks": [
+    "01",
+    "02"
+  ],
+  "params": {
+    "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "temperature": 0.0,
+    "few_shot_count": 3,
+    "max_tokens": 1024,
+    "candidate_strategies": [
+      "explicit_preconditions",
+      "compact_json",
+      "minimal",
+      "direct",
+      "canonical_names_first"
+    ]
+  },
+  "block_params": {
+    "02": {
+      "few_shot_count": 1,
+      "micro_rules": [],
+      "source_file": "generated/02_generator_prompt__patch_20260331_080707_2.txt"
+    },
+    "05": {
+      "repair_mode": "conservative",
+      "few_shot_count": 3,
+      "source_file": "generated/05_repair_prompt__patch_20260331_080707_2.txt"
+    }
+  }
+}

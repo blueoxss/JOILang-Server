@@ -1,0 +1,31 @@
+{
+  "id": "gen-0bfc7752-edf1-9189-1d75-c2a44f184f06",
+  "seed": 965765173,
+  "blocks": [
+    "01",
+    "02"
+  ],
+  "params": {
+    "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "temperature": 0.05,
+    "few_shot_count": 3,
+    "max_tokens": 1024,
+    "candidate_strategies": [
+      "explicit_preconditions",
+      "compact_json",
+      "minimal",
+      "direct",
+      "canonical_names_first"
+    ]
+  },
+  "block_params": {
+    "02": {
+      "few_shot_count": 1,
+      "micro_rules": []
+    },
+    "05": {
+      "repair_mode": "conservative",
+      "few_shot_count": 3
+    }
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "run_id": "feedback_baseline_gen-fd63b939-809f-dfa8-e2f2-e8e434e68444_1017",
+  "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-fd63b939-809f-dfa8-e2f2-e8e434e68444_1017.csv",
+  "rows": [
+    {
+      "row_no": 82,
+      "category": "3",
+      "command_eng": "If it is raining, set all dehumidifiers in the house to drying mode.",
+      "det_score": 84.3129,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.637097,
+      "failure_reasons": [
+        "gt_mismatch",
+        "semantic"
+      ],
+      "output": "{\"name\":\"SetAllDehumidifiersDryingMode\",\"cron\":\"\",\"period\":0,\"code\":\"all(#House_Dehum_1 #House_Dehum_2).Dehumidifier_SetDehumidifierMode(\\\"drying\\\")\"}",
+      "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nif ((#RainSensor).RainSensor_Rain == true) {\\n\\n    all(#House #Dehumidifier).Dehumidifier_SetDehumidifierMode(\\\"drying\\\")\\n\\n}\"}"
+    },
+    {
+      "row_no": 90,
+      "category": "3",
+      "command_eng": "If the lab humidity is 50 or higher, turn on the dehumidifier, and if it's below 50, turn on the humidifier.",
+      "det_score": 85.5951,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.619836,
+      "failure_reasons": [
+        "gt_mismatch"
+      ],
+      "output": "{\"name\":\"AdjustHumidity\",\"cron\":\"\",\"period\":0,\"code\":\"if ((#Lab_Humidity).HumiditySensor_Humidity >= 50) then (#Lab_Dehumidifier).Dehumidifier_SetDehumidifierMode(\\\"dehumidifying\\\") else (#Lab_Humidifier).Humidifier_SetHumidifierMode(\\\"auto\\\") end\"}",
+      "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nif ((#Lab #HumiditySensor).HumiditySensor_Humidity >= 50) {\\n\\n    (#Lab #Dehumidifier).Switch_On()\\n\\n} else {\\n\\n    (#Lab #Humidifier).Switch_On()\\n\\n}\"}"
+    }
+  ],
+  "avg_det_score": 84.954,
+  "variance": 0.411009,
+  "failure_summary": {
+    "top_failure_types": [
+      [
+        "gt_mismatch",
+        2
+      ],
+      [
+        "semantic",
+        1
+      ]
+    ],
+    "count": 3
+  },
+  "generation_summary": {
+    "run_id": "feedback_baseline_gen-fd63b939-809f-dfa8-e2f2-e8e434e68444_1017",
+    "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-fd63b939-809f-dfa8-e2f2-e8e434e68444_1017.csv",
+    "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-fd63b939-809f-dfa8-e2f2-e8e434e68444_1017.jsonl",
+    "row_count": 2,
+    "rows": [
+      {
+        "index": "22",
+        "category": "3",
+        "command_kor": "지금 비가 오고 있으면, 집안의 모든 제습기를 건조 모드로 설정해줘.",
+        "command_eng": "If it is raining, set all dehumidifiers in the house to drying mode.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nif ((#RainSensor).Rain == true) {\\n\\n    all(#House #Dehumidifier).SetDehumidifierMode(\\\"drying\\\")\\n\\n}\"}",
+        "connected_devices": "{'Outdoor_Rain': {'category': 'RainSensor', 'tags': ['Outdoor', 'RainSensor']}, 'House_Dehum_1': {'category': 'Dehumidifier', 'tags': ['House', 'Dehumidifier']}, 'House_Dehum_2': {'category': 'Dehumidifier', 'tags': ['House', 'Dehumidifier']}}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nif ((#RainSensor).RainSensor_Rain == true) {\\n\\n    all(#House #Dehumidifier).Dehumidifier_SetDehumidifierMode(\\\"drying\\\")\\n\\n}\"}",
+        "row_no": 82,
+        "profile": "version0_14",
+        "genome_id": "gen-fd63b939-809f-dfa8-e2f2-e8e434e68444",
+        "genome_seed": 1017,
+        "run_id": "feedback_baseline_gen-fd63b939-809f-dfa8-e2f2-e8e434e68444_1017",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"SetAllDehumidifiersDryingMode\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"all(#House_Dehum_1 #House_Dehum_2).Dehumidifier_SetDehumidifierMode(\\\\\\\"drying\\\\\\\")\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 4546, \"completion_tokens\": 57, \"total_tokens\": 4603, \"latency_sec\": 10.6524, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/generated/02_generator_prompt__patch_20260331_082917_1.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_baseline_gen-fd63b939-809f-dfa8-e2f2-e8e434e68444_1017/row_082_cand_1.json\"]",
+        "generation_status": "ok",
+        "llm_mode": "worker",
+        "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+      },
+      {
+        "index": "30",
+        "category": "3",
+        "command_kor": "연구실 습도가 50 이상이면 제습기를 켜고 50 미만이면 가습기를 켜줘.",
+        "command_eng": "If the lab humidity is 50 or higher, turn on the dehumidifier, and if it's below 50, turn on the humidifier.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nif ((#Lab #HumiditySensor).Humidity >= 50) {\\n\\n    (#Lab #Dehumidifier).On()\\n\\n} else {\\n\\n    (#Lab #Humidifier).On()\\n\\n}\"}",
+        "connected_devices": "{'Lab_Humidity': {'category': 'HumiditySensor', 'tags': ['Lab', 'HumiditySensor']}, 'Lab_Dehumidifier': {'category': ['Dehumidifier', 'Switch'], 'tags': ['Lab', 'Dehumidifier', 'Switch']}, 'Lab_Humidifier': {'category': ['Humidifier', 'Switch'], 'tags': ['Lab', 'Humidifier', 'Switch']}}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nif ((#Lab #HumiditySensor).HumiditySensor_Humidity >= 50) {\\n\\n    (#Lab #Dehumidifier).Switch_On()\\n\\n} else {\\n\\n    (#Lab #Humidifier).Switch_On()\\n\\n}\"}",
+        "row_no": 90,
+        "profile": "version0_14",
+        "genome_id": "gen-fd63b939-809f-dfa8-e2f2-e8e434e68444",
+        "genome_seed": 1017,
+        "run_id": "feedback_baseline_gen-fd63b939-809f-dfa8-e2f2-e8e434e68444_1017",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"AdjustHumidity\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"if ((#Lab_Humidity).HumiditySensor_Humidity >= 50) then (#Lab_Dehumidifier).Dehumidifier_SetDehumidifierMode(\\\\\\\"dehumidifying\\\\\\\") else (#Lab_Humidifier).Humidifier_SetHumidifierMode(\\\\\\\"auto\\\\\\\") end\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 4507, \"completion_tokens\": 96, \"total_tokens\": 4603, \"latency_sec\": 11.7159, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/generated/02_generator_prompt__patch_20260331_082917_1.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_baseline_gen-fd63b939-809f-dfa8-e2f2-e8e434e68444_1017/row_090_cand_1.json\"]",
+        "generation_status": "ok",
+        "llm_mode": "worker",
+        "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+      }
+    ],
+    "fieldnames": [
+      "index",
+      "category",
+      "command_kor",
+      "command_eng",
+      "gt_raw",
+      "connected_devices",
+      "gt",
+      "row_no",
+      "profile",
+      "genome_id",
+      "genome_seed",
+      "run_id",
+      "candidate_count",
+      "candidates",
+      "candidate_metadata",
+      "prompt_log_paths",
+      "generation_status",
+      "llm_mode",
+      "llm_model"
+    ]
+  }
+}

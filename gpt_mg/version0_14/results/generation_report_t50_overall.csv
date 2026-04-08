@@ -1,0 +1,6 @@
+﻿generation,csv,rows,avg_det,pass_rate@50,exact_rate,exact_count,repaired_count,selected_from
+v1,results/full_280_rerank.csv,280,90.7156,98.93%,33.21%,93,112,-
+v2,results/full_280_rerank_v2.csv,280,91.7515,99.29%,36.79%,103,122,-
+v3,results/full_280_rerank_v3.csv,280,92.5769,99.64%,38.21%,107,128,-
+v4,results/full_280_rerank_v4.csv,280,93.2698,100.00%,37.50%,105,88,-
+best_of_v2_v3_v4,results/full_280_rerank_best_of_v2_v3_v4.csv,280,94.7038,100.00%,45.71%,128,139,"v2:192, v3:36, v4:52"

@@ -35,7 +35,7 @@ curl -s -X POST http://localhost:8000/generate_joi_code \
 echo -e "\n"
 
 echo "=== [3/4] Local5080_qwen-7b_svc-v1.5.4 ==="
-curl -s -X POST http://localhost:8000/generate_joi_code \
+curl -s -X POST 147.46.215.237:10004/generate_joi_code \
   -H "Content-Type: application/json" \
   -d '{
     "sentence": "'"$SENTENCE"'",

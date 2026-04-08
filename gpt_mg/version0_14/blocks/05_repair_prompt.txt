@@ -1,0 +1,187 @@
+# id: 05
+# role: repair
+# params: temperature, few_shot_count, max_tokens, micro_rules
+# description: Targeted repair prompt that fixes schema mismatch, arg typing, and semantic drift with minimal edits.
+# placeholders: {command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {best_candidate}, {det_diagnostics}, {failure_summary}
+
+Task:
+Repair one JOI JSON candidate using deterministic diagnostics.
+
+Inputs:
+- command_eng: {command_eng}
+- connected_devices: {connected_devices}
+- optional_cron: {optional_cron}
+- optional_period: {optional_period}
+- current best_candidate:
+{best_candidate}
+- diagnostics:
+{det_diagnostics}
+- summarized failures:
+{failure_summary}
+- authoritative service schema snippet:
+{service_list_snippet}
+
+Repair rules:
+1. Preserve the original intent and keep edits minimal.
+2. Return exactly one JSON object only.
+3. Keep only keys name, cron, period, code.
+4. For unscheduled commands, normalize cron to "" and period to 0.
+5. If a function or value name is wrong, replace it with the exact canonical_name from the snippet, then emit the lowercase form of that member token in the final code.
+6. If an argument type is wrong, coerce it to the correct literal type and unit.
+7. If a condition uses a function where a value is required, rewrite the condition to use the correct value.
+8. Remove unrelated actions.
+9. Insert a power-check only when the snippet explicitly supports it for the same target context.
+10. If the candidate is irreparable from the snippet, return valid JSON with code as an empty string.
+11. If the command says to do something after a duration, reinsert delay(...) and keep the action order aligned with the command.
+12. If the command describes threshold crossings or repeated alternation, restore the missing condition/state structure instead of collapsing it into a single immediate action.
+13. If grouped tags express the intent better than explicit instance IDs, rewrite to tag-based all(...) or tag-based receivers.
+14. If diagnostics include a schema-valid gt_script, prefer its receiver style, schedule representation, and temporal structure over alias-like device ids or alternate syntax.
+15. If diagnostics include gt_script string literals for speaker or email actions, preserve those literals exactly.
+16. If the command is a wall-clock schedule with a simple group action and the candidate code is empty, recover it using the direct tag-based action.
+17. If the command is a repeated event trigger, restore period 100 plus prev/curr or triggered-state logic instead of a one-shot action.
+18. If the command asks for maximum brightness and the schema supports LevelControl plus Switch, repair toward LevelControl_MoveToLevel(100, 0) followed by Switch_Off() after any requested delay.
+19. If the command uses repeated wording like "whenever", "each time", or "every time", repair toward edge-trigger semantics, not a one-shot wait until.
+20. If the command uses a time window like "every 10 minutes from now until 3 PM" or "from 10 PM to 11 PM", preserve both the repeat interval and the end condition with period plus Clock guards or cron plus period when a wall-clock anchor exists.
+21. If the candidate collapses multiple semantic tags into alias-like ids, rewrite the receiver using all(...) or explicit tag-based JOILang receivers that preserve the original tags.
+22. If the candidate calls an action on the wrong device family, move the side effect to the proper actuator and keep the sensor only in the condition or expression.
+23. If the schema exposes an exact action like Camera_CaptureImage, DoorLock_Lock, Switch_Off, or Light_MoveToRGB, replace invented synonyms with that canonical action.
+24. If button-specific values exist, repair to the exact button-specific value service rather than generic pushed_2x style encodings.
+
+Self-check before final output:
+- JSON parses
+- required keys present
+- canonical_name preferred when available
+- receiver tags after # preserved, but member tokens after `).` or `all(...).` lowercased
+- args and enums match schema
+- temporal structure matches the command when delay/repeat/trigger logic is requested
+- no commentary, no markdown, no code fence
+
+### EXEMPLAR 1: service naming repair
+Input command_eng:
+Set the television channel to 30.
+
+Bad candidate:
+{"name":"TVChannelChange","cron":"","period":-1,"code":"(#Television).setChannel(30)"}
+
+Diagnostics:
+service name is not in schema; canonical_name required; expected integer argument is already correct.
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "Television",
+      "services": [
+        {"service": "SetChannel", "canonical_name": "Television_SetChannel", "type": "function", "argument_type": "INTEGER", "return_type": "VOID"}
+      ]
+    }
+  ]
+}
+
+Correct repaired output:
+{"name":"TVChannelChange","cron":"","period":0,"code":"(#Television).television_setchannel(30)"}
+
+### EXEMPLAR 2: argument type repair
+Input command_eng:
+Set the speaker volume to 70.
+
+Bad candidate:
+{"name":"SetSpeakerVolume70","cron":"","period":-1,"code":"(#Speaker).Speaker_SetVolume(\"70\")"}
+
+Diagnostics:
+argument type mismatch; expected INTEGER, got STRING literal.
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "Speaker",
+      "services": [
+        {"service": "SetVolume", "canonical_name": "Speaker_SetVolume", "type": "function", "argument_type": "INTEGER", "return_type": "INTEGER"}
+      ]
+    }
+  ]
+}
+
+Correct repaired output:
+{"name":"SetSpeakerVolume70","cron":"","period":0,"code":"(#Speaker).speaker_setvolume(70)"}
+
+### EXEMPLAR 3: value/function confusion repair
+Input command_eng:
+When a leak is detected, close the valve.
+
+Bad candidate:
+{"name":"CloseValveOnLeak","cron":"","period":-1,"code":"if ((#LeakSensor).LeakSensor_Leakage()) { (#Valve).Valve_Close() }"}
+
+Diagnostics:
+condition uses a function call pattern but Leakage is a BOOL value; rewrite condition to compare the value.
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "LeakSensor",
+      "services": [
+        {"service": "Leakage", "canonical_name": "LeakSensor_Leakage", "type": "value", "return_type": "BOOL"}
+      ]
+    },
+    {
+      "device": "Valve",
+      "services": [
+        {"service": "Close", "canonical_name": "Valve_Close", "type": "function", "return_type": "VOID"}
+      ]
+    }
+  ]
+}
+
+Correct repaired output:
+{"name":"CloseValveOnLeak","cron":"","period":0,"code":"wait until ((#LeakSensor).leaksensor_leakage == true)\n(#Valve).valve_close()"}
+
+SCHEDULE REPAIR SKETCH
+Bad candidate:
+{"name":"OpenF3EvenBlindsAt9AM","cron":"0 9 * * *","period":0,"code":""}
+
+Correct repaired output:
+{"name":"OpenF3EvenBlindsAt9AM","cron":"0 9 * * *","period":0,"code":"all(#Floor3 #Even #Blind).WindowCovering_UpOrOpen()"}
+
+WEEKEND PERIODIC REPAIR SKETCH
+Bad candidate:
+{"name":"TogglePumpWeekends","cron":"0 0 * * 0,6","period":0,"code":"if ((#Pump).Switch_Switch == false) {\n    (#Pump).Switch_On()\n} else {\n    (#Pump).Switch_Off()\n}"}
+
+Correct repaired output:
+{"name":"TogglePumpWeekends","cron":"0 0 * * 6-7","period":5000,"code":"if ((#Clock).Clock_Weekday != \"saturday\" and (#Clock).Clock_Weekday != \"sunday\") {\n    break\n}\n(#Pump).Switch_Toggle()"}
+
+EVENT MAX-BRIGHTNESS REPAIR SKETCH
+Bad candidate:
+{"name":"TurnOnEntranceLightFor3Seconds","cron":"","period":0,"code":"(#Ent_Light).Light_MoveToBrightness(100)\ndelay(3 SECOND)\n(#Ent_Light).Light_MoveToBrightness(0)"}
+
+Correct repaired output:
+{"name":"TurnOnEntranceLightFor3Seconds","cron":"","period":100,"code":"prev := (#Entrance #MotionSensor).MotionSensor_Motion\ncurr = (#Entrance #MotionSensor).MotionSensor_Motion\nif (prev == false and curr == true) {\n    (#Entrance #Light).LevelControl_MoveToLevel(100, 0)\n    delay(3 SEC)\n    (#Entrance #Light).Switch_Off()\n}\nprev = curr"}
+
+TIME-WINDOW REPAIR SKETCH
+Bad candidate:
+{"name":"SoundEmergencySirenUntil3PM","cron":"","period":0,"code":"(#Siren).Siren_SetSirenMode(\"emergency\")\ndelay(5 SEC)\n(#Siren).Switch_Off()"}
+
+Correct repaired output:
+{"name":"SoundEmergencySirenUntil3PM","cron":"","period":600000,"code":"if ((#Clock).Clock_Hour == 15) {\n    break\n}\n(#Siren).Siren_SetSirenMode(\"emergency\")\ndelay(5 SEC)\n(#Siren).Switch_Off()"}
+
+GROUP EVENT REPAIR SKETCH
+Bad candidate:
+{"name":"TurnOnAllLightsInHallAndLivingRoom","cron":"","period":0,"code":"(#Hall_Light).Switch_On()\n(#LR_Light).Switch_On()"}
+
+Correct repaired output:
+{"name":"TurnOnAllLightsInHallAndLivingRoom","cron":"","period":100,"code":"prev := (#Door).Door_DoorState\ncurr = (#Door).Door_DoorState\nif (prev != \"open\" and curr == \"open\") {\n    all(#Hallway #Light).Switch_On()\n    all(#LivingRoom #Light).Switch_On()\n}\nprev = curr"}
+
+BUTTON2 REPAIR SKETCH
+Bad candidate:
+{"name":"OpenAllWindowsInLivingRoom","cron":"","period":0,"code":"wait until ((#LR_MB).Button_Button == \"pushed_2x\")\n(#LR_Win).WindowCovering_UpOrOpen()"}
+
+Correct repaired output:
+{"name":"OpenAllWindowsInLivingRoom","cron":"","period":100,"code":"prev := (#MultiButton).DimmerSwitch_Button2\ncurr = (#MultiButton).DimmerSwitch_Button2\nif (prev != \"pushed\" and curr == \"pushed\") {\n    all(#LivingRoom #Window).WindowCovering_UpOrOpen()\n}\nprev = curr"}
+
+SENSOR-TO-ACTUATOR REPAIR SKETCH
+Bad candidate:
+{"name":"AnnounceTemperature","cron":"","period":0,"code":"(#TemperatureSensor).TemperatureSensor_Speak((#TemperatureSensor).TemperatureSensor_Temperature.toString())"}
+
+Correct repaired output:
+{"name":"AnnounceTemperature","cron":"","period":0,"code":"temp = (#TemperatureSensor).TemperatureSensor_Temperature\n(#Speaker).Speaker_Speak(\"현재 온도는 \" + temp + \"도입니다\")"}

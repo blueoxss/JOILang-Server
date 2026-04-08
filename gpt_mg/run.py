@@ -31,6 +31,47 @@ choice_no = 0
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 #from Evaluation.compare_soplang_ir import compare_codes
+def _normalize_version014_generated_code(model: str, generated_code):
+    if "version0_14" not in str(model):
+        return generated_code
+    try:
+        from gpt_mg.version0_14.utils.pipeline_common import normalize_candidate_json_text
+    except Exception:
+        try:
+            from version0_14.utils.pipeline_common import normalize_candidate_json_text
+        except Exception:
+            return generated_code
+
+    if generated_code in ("", None):
+        return generated_code
+
+    try:
+        if isinstance(generated_code, list):
+            if not generated_code:
+                return generated_code
+            payload_text = json.dumps(generated_code[0], ensure_ascii=False)
+            normalized_text = normalize_candidate_json_text(payload_text, default_cron="", default_period=0)
+            parsed = json.loads(normalized_text)
+            return [parsed] if isinstance(parsed, dict) else generated_code
+        if isinstance(generated_code, dict):
+            payload_text = json.dumps(generated_code, ensure_ascii=False)
+            normalized_text = normalize_candidate_json_text(payload_text, default_cron="", default_period=0)
+            parsed = json.loads(normalized_text)
+            return parsed if isinstance(parsed, dict) else generated_code
+        if isinstance(generated_code, str):
+            normalized_text = normalize_candidate_json_text(generated_code, default_cron="", default_period=0)
+            try:
+                parsed = json.loads(normalized_text)
+                if isinstance(parsed, dict):
+                    return [parsed]
+            except Exception:
+                return generated_code
+    except Exception:
+        return generated_code
+
+    return generated_code
+
+
 def save_sentence_and_code(sentence, best_code, filename="sentence_best_code_log.csv"):
     """
     입력 sentence와 best_code를 한 파일에 누적으로 저장 (중복 허용)
@@ -272,6 +313,8 @@ Output the results as a list under a "choices" key, where each item contains onl
         generated_code = all_items#[choice_no]
     else:
         generated_code = ""
+
+    generated_code = _normalize_version014_generated_code(model, generated_code)
 
     end = time.perf_counter()
     logs["response_time"] = f"{end - start:.4f} seconds"

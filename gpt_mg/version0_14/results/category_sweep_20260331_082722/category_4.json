@@ -1,0 +1,25 @@
+{
+  "category": "4",
+  "sample_size": 2,
+  "before_avg_det_score": 91.5412,
+  "after_avg_det_score": 96.9091,
+  "before_failures": {
+    "top_failure_types": [
+      [
+        "gt_mismatch",
+        2
+      ],
+      [
+        "arg_type",
+        1
+      ]
+    ],
+    "count": 3
+  },
+  "after_failures": {
+    "top_failure_types": [],
+    "count": 0
+  },
+  "improved": true,
+  "patch_dir": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-cc37a75d-63c5-4c1d-4cb3-61aaff80b41a_20260331_083201"
+}

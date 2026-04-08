@@ -1,0 +1,13 @@
+{
+  "run_id": "raw_row1_20260331_151311",
+  "output_dir": "/home/andrew/joi-llm/results/det_paper/raw_row1_20260331_151311",
+  "per_example_jsonl": "/home/andrew/joi-llm/results/det_paper/raw_row1_20260331_151311/per_example.jsonl",
+  "per_example_csv": "/home/andrew/joi-llm/results/det_paper/raw_row1_20260331_151311/per_example.csv",
+  "summary_json": "/home/andrew/joi-llm/results/det_paper/raw_row1_20260331_151311/summary.json",
+  "mean_sdet": 0.545098,
+  "det_pass_rate": 0.6,
+  "number_of_fatal_failures": 2,
+  "number_of_examples": 5,
+  "strict_paper": true,
+  "missing_reference_policy": "paper_strict"
+}

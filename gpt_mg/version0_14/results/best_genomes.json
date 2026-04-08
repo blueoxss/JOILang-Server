@@ -1,0 +1,38 @@
+[
+  {
+    "generation": 1,
+    "genome_id": "gen-378892e9-ecc3-87ab-8b45-85023a0286cc",
+    "fitness": 20.0,
+    "avg_det_score": 20.0,
+    "validation_avg_det_score": 20.0,
+    "genome": {
+      "id": "gen-378892e9-ecc3-87ab-8b45-85023a0286cc",
+      "seed": 626297831,
+      "blocks": [
+        "01",
+        "02",
+        "06"
+      ],
+      "params": {
+        "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+        "temperature": 0.0,
+        "few_shot_count": 3,
+        "max_tokens": 1024,
+        "candidate_strategies": [
+          "compact_json",
+          "canonical_names_first"
+        ]
+      },
+      "block_params": {
+        "02": {
+          "few_shot_count": 1,
+          "micro_rules": []
+        },
+        "05": {
+          "repair_mode": "conservative",
+          "few_shot_count": 3
+        }
+      }
+    }
+  }
+]

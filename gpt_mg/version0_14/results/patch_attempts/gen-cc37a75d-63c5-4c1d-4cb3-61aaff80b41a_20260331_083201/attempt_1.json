@@ -1,0 +1,117 @@
+{
+  "attempt": {
+    "attempt": 1,
+    "failure_types": [
+      "gt_mismatch"
+    ],
+    "genome_json": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-cc37a75d-63c5-4c1d-4cb3-61aaff80b41a_20260331_083201/gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5.json",
+    "avg_det_score": 96.9091,
+    "variance": 0.826463,
+    "improved": true
+  },
+  "metrics": {
+    "run_id": "feedback_attempt_1_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1019",
+    "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_attempt_1_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1019.csv",
+    "rows": [
+      {
+        "row_no": 91,
+        "category": "4",
+        "command_eng": "When the contact sensor is detected, turn on the light.",
+        "det_score": 96.0,
+        "det_gt_exact": true,
+        "det_gt_similarity": 1.0,
+        "failure_reasons": [],
+        "output": "{\"name\":\"TurnOnLightOnContact\",\"cron\":\"\",\"period\":0,\"code\":\"wait until ((#ContactSensor).ContactSensor_Contact == true)\\n(#Light).Switch_On()\"}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#ContactSensor).ContactSensor_Contact == true)\\n\\n(#Light).Switch_On()\"}"
+      },
+      {
+        "row_no": 104,
+        "category": "4",
+        "command_eng": "When the indoor very fine dust level becomes 35 or higher, set the air purifier to high.",
+        "det_score": 97.8182,
+        "det_gt_exact": true,
+        "det_gt_similarity": 1.0,
+        "failure_reasons": [],
+        "output": "{\"name\":\"SetAirPurifierHighOnFineDust\",\"cron\":\"\",\"period\":0,\"code\":\"wait until ((#AirQualitySensor).AirQualitySensor_VeryFineDustLevel >= 35)\\n(#AirPurifier).AirPurifier_SetAirPurifierMode(\\\"high\\\")\"}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#AirQualitySensor).AirQualitySensor_VeryFineDustLevel >= 35)\\n\\n(#AirPurifier).AirPurifier_SetAirPurifierMode(\\\"high\\\")\"}"
+      }
+    ],
+    "avg_det_score": 96.9091,
+    "variance": 0.826463,
+    "failure_summary": {
+      "top_failure_types": [],
+      "count": 0
+    },
+    "generation_summary": {
+      "run_id": "feedback_attempt_1_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1019",
+      "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_attempt_1_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1019.csv",
+      "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_attempt_1_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1019.jsonl",
+      "row_count": 2,
+      "rows": [
+        {
+          "index": "1",
+          "category": "4",
+          "command_kor": "접촉 센서가 감지되면 조명을 켜줘.",
+          "command_eng": "When the contact sensor is detected, turn on the light.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#ContactSensor).Contact == true)\\n\\n(#Light).On()\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#ContactSensor).ContactSensor_Contact == true)\\n\\n(#Light).Switch_On()\"}",
+          "row_no": 91,
+          "profile": "version0_14",
+          "genome_id": "gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5",
+          "genome_seed": 1019,
+          "run_id": "feedback_attempt_1_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1019",
+          "candidate_count": 1,
+          "candidates": "[\"{\\\"name\\\":\\\"TurnOnLightOnContact\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"wait until ((#ContactSensor).ContactSensor_Contact == true)\\\\n(#Light).Switch_On()\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 4361, \"completion_tokens\": 44, \"total_tokens\": 4405, \"latency_sec\": 10.7855, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/generated/02_generator_prompt__patch_20260331_082917_1__patch_20260331_083043_1__patch_20260331_083201_1.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_attempt_1_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1019/row_091_cand_1.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "worker",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        },
+        {
+          "index": "14",
+          "category": "4",
+          "command_kor": "내부 초미세먼지 농도가 35 이상이 되면 공기청정기를 강하게 틀어줘.",
+          "command_eng": "When the indoor very fine dust level becomes 35 or higher, set the air purifier to high.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#AirQualitySensor).VeryFineDustLevel >= 35)\\n\\n(#AirPurifier).SetAirPurifierMode(\\\"high\\\")\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#AirQualitySensor).AirQualitySensor_VeryFineDustLevel >= 35)\\n\\n(#AirPurifier).AirPurifier_SetAirPurifierMode(\\\"high\\\")\"}",
+          "row_no": 104,
+          "profile": "version0_14",
+          "genome_id": "gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5",
+          "genome_seed": 1019,
+          "run_id": "feedback_attempt_1_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1019",
+          "candidate_count": 1,
+          "candidates": "[\"{\\\"name\\\":\\\"SetAirPurifierHighOnFineDust\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"wait until ((#AirQualitySensor).AirQualitySensor_VeryFineDustLevel >= 35)\\\\n(#AirPurifier).AirPurifier_SetAirPurifierMode(\\\\\\\"high\\\\\\\")\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 3996, \"completion_tokens\": 83, \"total_tokens\": 4079, \"latency_sec\": 11.8507, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/generated/02_generator_prompt__patch_20260331_082917_1__patch_20260331_083043_1__patch_20260331_083201_1.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_attempt_1_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1019/row_104_cand_1.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "worker",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        }
+      ],
+      "fieldnames": [
+        "index",
+        "category",
+        "command_kor",
+        "command_eng",
+        "gt_raw",
+        "connected_devices",
+        "gt",
+        "row_no",
+        "profile",
+        "genome_id",
+        "genome_seed",
+        "run_id",
+        "candidate_count",
+        "candidates",
+        "candidate_metadata",
+        "prompt_log_paths",
+        "generation_status",
+        "llm_mode",
+        "llm_model"
+      ]
+    }
+  }
+}

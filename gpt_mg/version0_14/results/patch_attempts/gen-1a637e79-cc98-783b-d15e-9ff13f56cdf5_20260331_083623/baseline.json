@@ -1,0 +1,120 @@
+{
+  "run_id": "feedback_baseline_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1021",
+  "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1021.csv",
+  "rows": [
+    {
+      "row_no": 189,
+      "category": "7",
+      "command_eng": "When the new year begins, make the arm robot say hello.",
+      "det_score": 92.05,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.9,
+      "failure_reasons": [
+        "gt_mismatch",
+        "semantic"
+      ],
+      "output": "{\"name\":\"ArmRobotSayHello\",\"cron\":\"\",\"period\":0,\"code\":\"(#ArmRobot).ArmRobot_Hello()\"}",
+      "gt": "{\"name\": \"\", \n\"cron\": \"0 0 1 1 *\", \n\"period\": 0, \n\"script\": \"\\n(#ArmRobot).ArmRobot_Hello()\"}"
+    },
+    {
+      "row_no": 210,
+      "category": "7",
+      "command_eng": "Every morning at 7 AM, open all blinds in Zone 1.",
+      "det_score": 84.5613,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.63871,
+      "failure_reasons": [
+        "gt_mismatch",
+        "semantic"
+      ],
+      "output": "{\"name\":\"OpenAllBlindsInZone1\",\"cron\":\"\",\"period\":0,\"code\":\"(#Z1_Blind_1).WindowCovering_UpOrOpen()\\n(#Z1_Blind_2).WindowCovering_UpOrOpen()\"}",
+      "gt": "{\"name\": \"\", \n\"cron\": \"0 7 * * *\", \n\"period\": 0, \n\"script\": \"\\nall(#Sector1 #Blind).WindowCovering_UpOrOpen()\"}"
+    }
+  ],
+  "avg_det_score": 88.3056,
+  "variance": 14.020157,
+  "failure_summary": {
+    "top_failure_types": [
+      [
+        "gt_mismatch",
+        2
+      ],
+      [
+        "semantic",
+        2
+      ]
+    ],
+    "count": 4
+  },
+  "generation_summary": {
+    "run_id": "feedback_baseline_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1021",
+    "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1021.csv",
+    "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1021.jsonl",
+    "row_count": 2,
+    "rows": [
+      {
+        "index": "9",
+        "category": "7",
+        "command_kor": "새해가 되면 로봇팔로 인사해줘.",
+        "command_eng": "When the new year begins, make the arm robot say hello.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"0 0 1 1 *\", \n\"period\": 0, \n\"script\": \"\\n(#ArmRobot).Hello()\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"0 0 1 1 *\", \n\"period\": 0, \n\"script\": \"\\n(#ArmRobot).ArmRobot_Hello()\"}",
+        "row_no": 189,
+        "profile": "version0_14",
+        "genome_id": "gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5",
+        "genome_seed": 1019,
+        "run_id": "feedback_baseline_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1021",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"ArmRobotSayHello\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#ArmRobot).ArmRobot_Hello()\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 3602, \"completion_tokens\": 31, \"total_tokens\": 3633, \"latency_sec\": 9.9069, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/generated/02_generator_prompt__patch_20260331_082917_1__patch_20260331_083043_1__patch_20260331_083201_1.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_baseline_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1021/row_189_cand_1.json\"]",
+        "generation_status": "ok",
+        "llm_mode": "worker",
+        "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+      },
+      {
+        "index": "30",
+        "category": "7",
+        "command_kor": "매일 아침 7시에 구역1에 있는 모든 블라인드를 올려줘.",
+        "command_eng": "Every morning at 7 AM, open all blinds in Zone 1.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"0 7 * * *\", \n\"period\": 0, \n\"script\": \"\\nall(#Sector1 #Blind).UpOrOpen()\"}",
+        "connected_devices": "{'Z1_Blind_1': {'category': ['WindowCovering'], 'tags': ['Sector1', 'Blind', 'WindowCovering']}, 'Z1_Blind_2': {'category': ['WindowCovering'], 'tags': ['Sector1', 'Blind', 'WindowCovering']}, 'Z2_Blind_1': {'category': ['WindowCovering'], 'tags': ['Sector2', 'Blind', 'WindowCovering']}}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"0 7 * * *\", \n\"period\": 0, \n\"script\": \"\\nall(#Sector1 #Blind).WindowCovering_UpOrOpen()\"}",
+        "row_no": 210,
+        "profile": "version0_14",
+        "genome_id": "gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5",
+        "genome_seed": 1019,
+        "run_id": "feedback_baseline_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1021",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"OpenAllBlindsInZone1\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#Z1_Blind_1).WindowCovering_UpOrOpen()\\\\n(#Z1_Blind_2).WindowCovering_UpOrOpen()\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 3118, \"completion_tokens\": 68, \"total_tokens\": 3186, \"latency_sec\": 10.8867, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/generated/02_generator_prompt__patch_20260331_082917_1__patch_20260331_083043_1__patch_20260331_083201_1.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_baseline_gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_1021/row_210_cand_1.json\"]",
+        "generation_status": "ok",
+        "llm_mode": "worker",
+        "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+      }
+    ],
+    "fieldnames": [
+      "index",
+      "category",
+      "command_kor",
+      "command_eng",
+      "gt_raw",
+      "connected_devices",
+      "gt",
+      "row_no",
+      "profile",
+      "genome_id",
+      "genome_seed",
+      "run_id",
+      "candidate_count",
+      "candidates",
+      "candidate_metadata",
+      "prompt_log_paths",
+      "generation_status",
+      "llm_mode",
+      "llm_model"
+    ]
+  }
+}

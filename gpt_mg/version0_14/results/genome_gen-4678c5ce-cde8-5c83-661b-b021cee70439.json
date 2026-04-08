@@ -1,0 +1,501 @@
+{
+  "genome": {
+    "id": "gen-4678c5ce-cde8-5c83-661b-b021cee70439",
+    "seed": 204335998,
+    "blocks": [
+      "01",
+      "02"
+    ],
+    "params": {
+      "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "temperature": 0.05,
+      "few_shot_count": 3,
+      "max_tokens": 1024,
+      "candidate_strategies": [
+        "explicit_preconditions",
+        "compact_json",
+        "minimal",
+        "direct",
+        "canonical_names_first"
+      ]
+    },
+    "block_params": {
+      "02": {
+        "few_shot_count": 1,
+        "micro_rules": []
+      },
+      "05": {
+        "repair_mode": "conservative",
+        "few_shot_count": 3
+      }
+    }
+  },
+  "fitness": 20.0,
+  "avg_det_score": 20.0,
+  "variance": 0.0,
+  "validation_avg_det_score": 20.0,
+  "train_metrics": {
+    "run_id": "ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022",
+    "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022.csv",
+    "rows": [
+      {
+        "row_no": 1,
+        "command_eng": "Switch the dishwasher to dry mode.",
+        "det_score": 20.0,
+        "failure_reasons": [
+          "arg_type",
+          "extraneous",
+          "precondition",
+          "semantic",
+          "service_match"
+        ],
+        "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":-1,\"code\":\"\"}"
+      },
+      {
+        "row_no": 2,
+        "command_eng": "Add 5 minutes to the oven.",
+        "det_score": 20.0,
+        "failure_reasons": [
+          "arg_type",
+          "extraneous",
+          "precondition",
+          "semantic",
+          "service_match"
+        ],
+        "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":-1,\"code\":\"\"}"
+      },
+      {
+        "row_no": 3,
+        "command_eng": "Start the rice cooker on cooking mode for 30 minutes.",
+        "det_score": 20.0,
+        "failure_reasons": [
+          "arg_type",
+          "extraneous",
+          "precondition",
+          "semantic",
+          "service_match"
+        ],
+        "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":-1,\"code\":\"\"}"
+      },
+      {
+        "row_no": 4,
+        "command_eng": "Set the siren to emergency mode.",
+        "det_score": 20.0,
+        "failure_reasons": [
+          "arg_type",
+          "extraneous",
+          "precondition",
+          "semantic",
+          "service_match"
+        ],
+        "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":-1,\"code\":\"\"}"
+      },
+      {
+        "row_no": 5,
+        "command_eng": "Set the speaker volume to 30.",
+        "det_score": 20.0,
+        "failure_reasons": [
+          "arg_type",
+          "extraneous",
+          "precondition",
+          "semantic",
+          "service_match"
+        ],
+        "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":-1,\"code\":\"\"}"
+      }
+    ],
+    "avg_det_score": 20.0,
+    "variance": 0.0,
+    "failure_summary": {
+      "top_failure_types": [
+        [
+          "arg_type",
+          5
+        ],
+        [
+          "extraneous",
+          5
+        ],
+        [
+          "precondition",
+          5
+        ],
+        [
+          "semantic",
+          5
+        ],
+        [
+          "service_match",
+          5
+        ]
+      ],
+      "count": 25
+    },
+    "generation_summary": {
+      "run_id": "ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022",
+      "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022.csv",
+      "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022.jsonl",
+      "row_count": 5,
+      "rows": [
+        {
+          "index": "1",
+          "category": "1",
+          "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+          "command_eng": "Switch the dishwasher to dry mode.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+          "row_no": 1,
+          "profile": "version0_14",
+          "genome_id": "gen-4678c5ce-cde8-5c83-661b-b021cee70439",
+          "genome_seed": 204335998,
+          "run_id": "ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022",
+          "candidate_count": 2,
+          "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022/row_001_cand_2.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "mock",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        },
+        {
+          "index": "2",
+          "category": "1",
+          "command_kor": "오븐의 작동 시간을 5분 늘려줘.",
+          "command_eng": "Add 5 minutes to the oven.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Oven).AddMoreTime(300)\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Oven).Oven_AddMoreTime(300)\"}",
+          "row_no": 2,
+          "profile": "version0_14",
+          "genome_id": "gen-4678c5ce-cde8-5c83-661b-b021cee70439",
+          "genome_seed": 204335998,
+          "run_id": "ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022",
+          "candidate_count": 2,
+          "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022/row_002_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022/row_002_cand_2.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "mock",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        },
+        {
+          "index": "3",
+          "category": "1",
+          "command_kor": "밥솥을 조리 모드로 30분 작동시켜.",
+          "command_eng": "Start the rice cooker on cooking mode for 30 minutes.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#RiceCooker).SetCookingParameters(\\\"cooking\\\", 1800)\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#RiceCooker).RiceCooker_SetCookingParameters(\\\"cooking\\\", 1800)\"}",
+          "row_no": 3,
+          "profile": "version0_14",
+          "genome_id": "gen-4678c5ce-cde8-5c83-661b-b021cee70439",
+          "genome_seed": 204335998,
+          "run_id": "ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022",
+          "candidate_count": 2,
+          "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022/row_003_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022/row_003_cand_2.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "mock",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        },
+        {
+          "index": "4",
+          "category": "1",
+          "command_kor": "사이렌을 응급모드로 울려줘.",
+          "command_eng": "Set the siren to emergency mode.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Siren).SetSirenMode(\\\"emergency\\\")\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Siren).Siren_SetSirenMode(\\\"emergency\\\")\"}",
+          "row_no": 4,
+          "profile": "version0_14",
+          "genome_id": "gen-4678c5ce-cde8-5c83-661b-b021cee70439",
+          "genome_seed": 204335998,
+          "run_id": "ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022",
+          "candidate_count": 2,
+          "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022/row_004_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022/row_004_cand_2.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "mock",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        },
+        {
+          "index": "5",
+          "category": "1",
+          "command_kor": "스피커의 볼륨을 30으로 설정해줘.",
+          "command_eng": "Set the speaker volume to 30.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Speaker).SetVolume(30)\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Speaker).Speaker_SetVolume(30)\"}",
+          "row_no": 5,
+          "profile": "version0_14",
+          "genome_id": "gen-4678c5ce-cde8-5c83-661b-b021cee70439",
+          "genome_seed": 204335998,
+          "run_id": "ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022",
+          "candidate_count": 2,
+          "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022/row_005_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_quick_gen-4678c5ce-cde8-5c83-661b-b021cee70439_6022/row_005_cand_2.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "mock",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        }
+      ],
+      "fieldnames": [
+        "index",
+        "category",
+        "command_kor",
+        "command_eng",
+        "gt_raw",
+        "connected_devices",
+        "gt",
+        "row_no",
+        "profile",
+        "genome_id",
+        "genome_seed",
+        "run_id",
+        "candidate_count",
+        "candidates",
+        "candidate_metadata",
+        "prompt_log_paths",
+        "generation_status",
+        "llm_mode",
+        "llm_model"
+      ]
+    }
+  },
+  "validation_metrics": {
+    "run_id": "ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022",
+    "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022.csv",
+    "rows": [
+      {
+        "row_no": 1,
+        "command_eng": "Switch the dishwasher to dry mode.",
+        "det_score": 20.0,
+        "failure_reasons": [
+          "arg_type",
+          "extraneous",
+          "precondition",
+          "semantic",
+          "service_match"
+        ],
+        "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":-1,\"code\":\"\"}"
+      },
+      {
+        "row_no": 2,
+        "command_eng": "Add 5 minutes to the oven.",
+        "det_score": 20.0,
+        "failure_reasons": [
+          "arg_type",
+          "extraneous",
+          "precondition",
+          "semantic",
+          "service_match"
+        ],
+        "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":-1,\"code\":\"\"}"
+      },
+      {
+        "row_no": 3,
+        "command_eng": "Start the rice cooker on cooking mode for 30 minutes.",
+        "det_score": 20.0,
+        "failure_reasons": [
+          "arg_type",
+          "extraneous",
+          "precondition",
+          "semantic",
+          "service_match"
+        ],
+        "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":-1,\"code\":\"\"}"
+      },
+      {
+        "row_no": 4,
+        "command_eng": "Set the siren to emergency mode.",
+        "det_score": 20.0,
+        "failure_reasons": [
+          "arg_type",
+          "extraneous",
+          "precondition",
+          "semantic",
+          "service_match"
+        ],
+        "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":-1,\"code\":\"\"}"
+      },
+      {
+        "row_no": 5,
+        "command_eng": "Set the speaker volume to 30.",
+        "det_score": 20.0,
+        "failure_reasons": [
+          "arg_type",
+          "extraneous",
+          "precondition",
+          "semantic",
+          "service_match"
+        ],
+        "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":-1,\"code\":\"\"}"
+      }
+    ],
+    "avg_det_score": 20.0,
+    "variance": 0.0,
+    "failure_summary": {
+      "top_failure_types": [
+        [
+          "arg_type",
+          5
+        ],
+        [
+          "extraneous",
+          5
+        ],
+        [
+          "precondition",
+          5
+        ],
+        [
+          "semantic",
+          5
+        ],
+        [
+          "service_match",
+          5
+        ]
+      ],
+      "count": 25
+    },
+    "generation_summary": {
+      "run_id": "ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022",
+      "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022.csv",
+      "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022.jsonl",
+      "row_count": 5,
+      "rows": [
+        {
+          "index": "1",
+          "category": "1",
+          "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+          "command_eng": "Switch the dishwasher to dry mode.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+          "row_no": 1,
+          "profile": "version0_14",
+          "genome_id": "gen-4678c5ce-cde8-5c83-661b-b021cee70439",
+          "genome_seed": 204335998,
+          "run_id": "ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022",
+          "candidate_count": 2,
+          "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022/row_001_cand_2.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "mock",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        },
+        {
+          "index": "2",
+          "category": "1",
+          "command_kor": "오븐의 작동 시간을 5분 늘려줘.",
+          "command_eng": "Add 5 minutes to the oven.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Oven).AddMoreTime(300)\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Oven).Oven_AddMoreTime(300)\"}",
+          "row_no": 2,
+          "profile": "version0_14",
+          "genome_id": "gen-4678c5ce-cde8-5c83-661b-b021cee70439",
+          "genome_seed": 204335998,
+          "run_id": "ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022",
+          "candidate_count": 2,
+          "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022/row_002_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022/row_002_cand_2.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "mock",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        },
+        {
+          "index": "3",
+          "category": "1",
+          "command_kor": "밥솥을 조리 모드로 30분 작동시켜.",
+          "command_eng": "Start the rice cooker on cooking mode for 30 minutes.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#RiceCooker).SetCookingParameters(\\\"cooking\\\", 1800)\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#RiceCooker).RiceCooker_SetCookingParameters(\\\"cooking\\\", 1800)\"}",
+          "row_no": 3,
+          "profile": "version0_14",
+          "genome_id": "gen-4678c5ce-cde8-5c83-661b-b021cee70439",
+          "genome_seed": 204335998,
+          "run_id": "ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022",
+          "candidate_count": 2,
+          "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022/row_003_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022/row_003_cand_2.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "mock",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        },
+        {
+          "index": "4",
+          "category": "1",
+          "command_kor": "사이렌을 응급모드로 울려줘.",
+          "command_eng": "Set the siren to emergency mode.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Siren).SetSirenMode(\\\"emergency\\\")\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Siren).Siren_SetSirenMode(\\\"emergency\\\")\"}",
+          "row_no": 4,
+          "profile": "version0_14",
+          "genome_id": "gen-4678c5ce-cde8-5c83-661b-b021cee70439",
+          "genome_seed": 204335998,
+          "run_id": "ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022",
+          "candidate_count": 2,
+          "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022/row_004_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022/row_004_cand_2.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "mock",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        },
+        {
+          "index": "5",
+          "category": "1",
+          "command_kor": "스피커의 볼륨을 30으로 설정해줘.",
+          "command_eng": "Set the speaker volume to 30.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Speaker).SetVolume(30)\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Speaker).Speaker_SetVolume(30)\"}",
+          "row_no": 5,
+          "profile": "version0_14",
+          "genome_id": "gen-4678c5ce-cde8-5c83-661b-b021cee70439",
+          "genome_seed": 204335998,
+          "run_id": "ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022",
+          "candidate_count": 2,
+          "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":-1,\\\"code\\\":\\\"\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022/row_005_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_14/logs/ga_validation_gen-4678c5ce-cde8-5c83-661b-b021cee70439_506022/row_005_cand_2.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "mock",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        }
+      ],
+      "fieldnames": [
+        "index",
+        "category",
+        "command_kor",
+        "command_eng",
+        "gt_raw",
+        "connected_devices",
+        "gt",
+        "row_no",
+        "profile",
+        "genome_id",
+        "genome_seed",
+        "run_id",
+        "candidate_count",
+        "candidates",
+        "candidate_metadata",
+        "prompt_log_paths",
+        "generation_status",
+        "llm_mode",
+        "llm_model"
+      ]
+    }
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "baseline": {
+    "run_id": "feedback_baseline_gen-example-version0-14_1015",
+    "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-example-version0-14_1015.csv",
+    "rows": [
+      {
+        "row_no": 23,
+        "category": "1",
+        "command_eng": "Close the door.",
+        "det_score": 100.0,
+        "det_gt_exact": true,
+        "det_gt_similarity": 1.0,
+        "failure_reasons": [],
+        "output": "{\"name\":\"CloseDoor\",\"cron\":\"\",\"period\":0,\"code\":\"(#Door).Door_Close()\"}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Door).Door_Close()\"}"
+      },
+      {
+        "row_no": 28,
+        "category": "1",
+        "command_eng": "Lower the speaker volume by one.",
+        "det_score": 98.0,
+        "det_gt_exact": true,
+        "det_gt_similarity": 1.0,
+        "failure_reasons": [],
+        "output": "{\"name\":\"LowerSpeakerVolumeByOne\",\"cron\":\"\",\"period\":0,\"code\":\"(#Speaker).Speaker_VolumeDown()\"}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Speaker).Speaker_VolumeDown()\"}"
+      }
+    ],
+    "avg_det_score": 99.0,
+    "variance": 1.0,
+    "failure_summary": {
+      "top_failure_types": [],
+      "count": 0
+    },
+    "generation_summary": {
+      "run_id": "feedback_baseline_gen-example-version0-14_1015",
+      "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-example-version0-14_1015.csv",
+      "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-example-version0-14_1015.jsonl",
+      "row_count": 2,
+      "rows": [
+        {
+          "index": "23",
+          "category": "1",
+          "command_kor": "문을 닫아줘.",
+          "command_eng": "Close the door.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Door).Close()\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Door).Door_Close()\"}",
+          "row_no": 23,
+          "profile": "version0_14",
+          "genome_id": "gen-example-version0-14",
+          "genome_seed": 12345,
+          "run_id": "feedback_baseline_gen-example-version0-14_1015",
+          "candidate_count": 1,
+          "candidates": "[\"{\\\"name\\\":\\\"CloseDoor\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#Door).Door_Close()\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 2460, \"completion_tokens\": 26, \"total_tokens\": 2486, \"latency_sec\": 10.3612, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_baseline_gen-example-version0-14_1015/row_023_cand_1.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "worker",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        },
+        {
+          "index": "28",
+          "category": "1",
+          "command_kor": "스피커 볼륨을 하나 낮춰줘.",
+          "command_eng": "Lower the speaker volume by one.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Speaker).VolumeDown()\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Speaker).Speaker_VolumeDown()\"}",
+          "row_no": 28,
+          "profile": "version0_14",
+          "genome_id": "gen-example-version0-14",
+          "genome_seed": 12345,
+          "run_id": "feedback_baseline_gen-example-version0-14_1015",
+          "candidate_count": 1,
+          "candidates": "[\"{\\\"name\\\":\\\"LowerSpeakerVolumeByOne\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#Speaker).Speaker_VolumeDown()\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 2197, \"completion_tokens\": 31, \"total_tokens\": 2228, \"latency_sec\": 9.9873, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_baseline_gen-example-version0-14_1015/row_028_cand_1.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "worker",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        }
+      ],
+      "fieldnames": [
+        "index",
+        "category",
+        "command_kor",
+        "command_eng",
+        "gt_raw",
+        "connected_devices",
+        "gt",
+        "row_no",
+        "profile",
+        "genome_id",
+        "genome_seed",
+        "run_id",
+        "candidate_count",
+        "candidates",
+        "candidate_metadata",
+        "prompt_log_paths",
+        "generation_status",
+        "llm_mode",
+        "llm_model"
+      ]
+    }
+  },
+  "best_metrics": {
+    "run_id": "feedback_baseline_gen-example-version0-14_1015",
+    "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-example-version0-14_1015.csv",
+    "rows": [
+      {
+        "row_no": 23,
+        "category": "1",
+        "command_eng": "Close the door.",
+        "det_score": 100.0,
+        "det_gt_exact": true,
+        "det_gt_similarity": 1.0,
+        "failure_reasons": [],
+        "output": "{\"name\":\"CloseDoor\",\"cron\":\"\",\"period\":0,\"code\":\"(#Door).Door_Close()\"}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Door).Door_Close()\"}"
+      },
+      {
+        "row_no": 28,
+        "category": "1",
+        "command_eng": "Lower the speaker volume by one.",
+        "det_score": 98.0,
+        "det_gt_exact": true,
+        "det_gt_similarity": 1.0,
+        "failure_reasons": [],
+        "output": "{\"name\":\"LowerSpeakerVolumeByOne\",\"cron\":\"\",\"period\":0,\"code\":\"(#Speaker).Speaker_VolumeDown()\"}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Speaker).Speaker_VolumeDown()\"}"
+      }
+    ],
+    "avg_det_score": 99.0,
+    "variance": 1.0,
+    "failure_summary": {
+      "top_failure_types": [],
+      "count": 0
+    },
+    "generation_summary": {
+      "run_id": "feedback_baseline_gen-example-version0-14_1015",
+      "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-example-version0-14_1015.csv",
+      "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-example-version0-14_1015.jsonl",
+      "row_count": 2,
+      "rows": [
+        {
+          "index": "23",
+          "category": "1",
+          "command_kor": "문을 닫아줘.",
+          "command_eng": "Close the door.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Door).Close()\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Door).Door_Close()\"}",
+          "row_no": 23,
+          "profile": "version0_14",
+          "genome_id": "gen-example-version0-14",
+          "genome_seed": 12345,
+          "run_id": "feedback_baseline_gen-example-version0-14_1015",
+          "candidate_count": 1,
+          "candidates": "[\"{\\\"name\\\":\\\"CloseDoor\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#Door).Door_Close()\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 2460, \"completion_tokens\": 26, \"total_tokens\": 2486, \"latency_sec\": 10.3612, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_baseline_gen-example-version0-14_1015/row_023_cand_1.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "worker",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        },
+        {
+          "index": "28",
+          "category": "1",
+          "command_kor": "스피커 볼륨을 하나 낮춰줘.",
+          "command_eng": "Lower the speaker volume by one.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Speaker).VolumeDown()\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Speaker).Speaker_VolumeDown()\"}",
+          "row_no": 28,
+          "profile": "version0_14",
+          "genome_id": "gen-example-version0-14",
+          "genome_seed": 12345,
+          "run_id": "feedback_baseline_gen-example-version0-14_1015",
+          "candidate_count": 1,
+          "candidates": "[\"{\\\"name\\\":\\\"LowerSpeakerVolumeByOne\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#Speaker).Speaker_VolumeDown()\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 2197, \"completion_tokens\": 31, \"total_tokens\": 2228, \"latency_sec\": 9.9873, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_baseline_gen-example-version0-14_1015/row_028_cand_1.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "worker",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        }
+      ],
+      "fieldnames": [
+        "index",
+        "category",
+        "command_kor",
+        "command_eng",
+        "gt_raw",
+        "connected_devices",
+        "gt",
+        "row_no",
+        "profile",
+        "genome_id",
+        "genome_seed",
+        "run_id",
+        "candidate_count",
+        "candidates",
+        "candidate_metadata",
+        "prompt_log_paths",
+        "generation_status",
+        "llm_mode",
+        "llm_model"
+      ]
+    }
+  },
+  "best_genome": {
+    "id": "gen-example-version0-14",
+    "seed": 12345,
+    "blocks": [
+      "01",
+      "02",
+      "03",
+      "06"
+    ],
+    "params": {
+      "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "temperature": 0.0,
+      "few_shot_count": 3,
+      "max_tokens": 1024,
+      "candidate_strategies": [
+        "direct",
+        "minimal",
+        "canonical_names_first"
+      ]
+    },
+    "block_params": {
+      "02": {
+        "few_shot_count": 3,
+        "micro_rules": [
+          "Prefer canonical_name exactly when available.",
+          "Use value entries in conditions and function entries in actions."
+        ]
+      },
+      "05": {
+        "repair_mode": "conservative",
+        "few_shot_count": 3
+      }
+    }
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "failure_types": [
+        "semantic"
+      ],
+      "genome_json": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-example-version0-14_20260331_082803/gen-bcb52bf1-efc5-f538-aabb-ab97b80e5678.json",
+      "avg_det_score": 99.0,
+      "variance": 1.0,
+      "improved": false
+    }
+  ],
+  "patch_dir": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-example-version0-14_20260331_082803",
+  "improved": false
+}

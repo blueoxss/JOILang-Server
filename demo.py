@@ -152,31 +152,37 @@ client = OpenAI()
 MODEL_OPTIONS = [
     {
         "display": "CAP-old_gpt4.1-mini_svc-v1.5.4",
-        "aliases": ["CAP-old_gpt4.1-mini_svc-v1.5.4", "CAP_gpt4.1_mini_old"],
+        "aliases": ["CAP-old_gpt4.1-mini_svc-v1.5.4", "CAP_gpt4.1_mini_old", "gpt4.1-mini"],
         "runtime_model": "gpt4.1-mini",
         "generator": "cap",
     },
     {
         "display": "JOI_gpt4.1-mini_v1.5.4",
-        "aliases": ["JOI_gpt4.1-mini_v1.5.4", "JOI_gpt4.1_mini"],
+        "aliases": ["JOI_gpt4.1-mini_v1.5.4", "JOI_gpt4.1_mini", "gpt_mg.version0_6"],
         "runtime_model": "gpt_mg.version0_6",
         "generator": "mg",
     },
     {
         "display": "Local5080_qwen-7b_svc-v1.5.4",
-        "aliases": ["Local5080_qwen-7b_svc-v1.5.4", "local_8b"],
+        "aliases": ["Local5080_qwen-7b_svc-v1.5.4", "local_8b", "gpt_mg.version0_13"],
         "runtime_model": "gpt_mg.version0_13",
         "generator": "mg",
     },
     {
         "display": "Local5080_qwen-7b_svc-v2.0.1",
-        "aliases": ["Local5080_qwen-7b_svc-v2.0.1"],
+        "aliases": ["Local5080_qwen-7b_svc-v2.0.1", "gpt_mg.version0_12"],
         "runtime_model": "gpt_mg.version0_12",
         "generator": "mg",
     },
     {
+        "display": "PromptGA_v0.14_svc-v2.0.1",
+        "aliases": ["PromptGA_v0.14_svc-v2.0.1", "gpt_mg.version0_14", "version0_14"],
+        "runtime_model": "gpt_mg.version0_14",
+        "generator": "mg",
+    },
+    {
         "display": "JOI5_gpt5-mini_svc-v1.5.4",
-        "aliases": ["JOI5_gpt5-mini_svc-v1.5.4", "JOI_gpt5_mini"],
+        "aliases": ["JOI5_gpt5-mini_svc-v1.5.4", "JOI_gpt5_mini", "gpt_mg.version0_7"],
         "runtime_model": "gpt_mg.version0_7",
         "generator": "mg",
     },
@@ -230,7 +236,7 @@ async def generate_code(request: GenerateJOICodeRequest):
         connected_devices = request.connected_devices
         last_connected_devices = connected_devices  # 상태 갱신
 
-    selected_model_raw = extract_selected_model_raw(request.other_params)
+    selected_model_raw = extract_selected_model_raw(request.other_params) or str(request.model).strip()
     selected_model_option = resolve_selected_model_option(selected_model_raw)
     selected_model = selected_model_option["runtime_model"]
         

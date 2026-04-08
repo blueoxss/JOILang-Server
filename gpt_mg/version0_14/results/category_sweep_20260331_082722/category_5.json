@@ -1,0 +1,46 @@
+{
+  "category": "5",
+  "sample_size": 2,
+  "before_avg_det_score": 91.2652,
+  "after_avg_det_score": 42.8378,
+  "before_failures": {
+    "top_failure_types": [
+      [
+        "gt_mismatch",
+        2
+      ],
+      [
+        "extraneous",
+        1
+      ],
+      [
+        "semantic",
+        1
+      ]
+    ],
+    "count": 4
+  },
+  "after_failures": {
+    "top_failure_types": [
+      [
+        "invalid_json",
+        1
+      ],
+      [
+        "extraneous",
+        1
+      ],
+      [
+        "gt_mismatch",
+        1
+      ],
+      [
+        "semantic",
+        1
+      ]
+    ],
+    "count": 4
+  },
+  "improved": false,
+  "patch_dir": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_20260331_083331"
+}

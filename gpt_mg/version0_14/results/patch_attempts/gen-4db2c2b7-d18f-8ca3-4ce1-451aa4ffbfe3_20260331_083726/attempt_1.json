@@ -1,0 +1,130 @@
+{
+  "attempt": {
+    "attempt": 1,
+    "failure_types": [
+      "gt_mismatch"
+    ],
+    "genome_json": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-4db2c2b7-d18f-8ca3-4ce1-451aa4ffbfe3_20260331_083726/gen-fef4d90d-bbbc-d828-e356-63a8aecaf6e3.json",
+    "avg_det_score": 43.8617,
+    "variance": 1923.848727,
+    "improved": false
+  },
+  "metrics": {
+    "run_id": "feedback_attempt_1_gen-fef4d90d-bbbc-d828-e356-63a8aecaf6e3_1023",
+    "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_attempt_1_gen-fef4d90d-bbbc-d828-e356-63a8aecaf6e3_1023.csv",
+    "rows": [
+      {
+        "row_no": 266,
+        "category": "8",
+        "command_eng": "Whenever the brightness drops below 50 lux, open all shades in the parking lot.",
+        "det_score": 87.7234,
+        "det_gt_exact": false,
+        "det_gt_similarity": 0.698473,
+        "failure_reasons": [
+          "gt_mismatch"
+        ],
+        "output": "{\"name\":\"OpenParkingLotShades\",\"cron\":\"\",\"period\":0,\"code\":\"if ((#Light_S).LightSensor_Brightness < 50) {\\n    all(#ParkingLot #Shade).WindowCovering_UpOrOpen()\\n}\"}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 100, \n\"script\": \"\\nprev := (#LightSensor).LightSensor_Brightness\\n\\ncurr = (#LightSensor).LightSensor_Brightness\\n\\nif (prev >= 50 and curr < 50) {\\n\\n    all(#ParkingLot #Shade).WindowCovering_UpOrOpen()\\n\\n}\\n\\nprev = curr\"}"
+      },
+      {
+        "row_no": 276,
+        "category": "8",
+        "command_eng": "Repeat opening and closing the living room blind every hour.",
+        "det_score": 0.0,
+        "det_gt_exact": false,
+        "det_gt_similarity": 0.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 3600000, \n\"script\": \"\\nopen := false\\n\\nif (open == false) {\\n\\n    (#LivingRoom #Blind).WindowCovering_UpOrOpen()\\n\\n    open = true\\n\\n} else {\\n\\n    (#LivingRoom #Blind).WindowCovering_DownOrClose()\\n\\n    open = false\\n\\n}\"}"
+      }
+    ],
+    "avg_det_score": 43.8617,
+    "variance": 1923.848727,
+    "failure_summary": {
+      "top_failure_types": [
+        [
+          "gt_mismatch",
+          1
+        ],
+        [
+          "invalid_json",
+          1
+        ]
+      ],
+      "count": 2
+    },
+    "generation_summary": {
+      "run_id": "feedback_attempt_1_gen-fef4d90d-bbbc-d828-e356-63a8aecaf6e3_1023",
+      "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_attempt_1_gen-fef4d90d-bbbc-d828-e356-63a8aecaf6e3_1023.csv",
+      "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_attempt_1_gen-fef4d90d-bbbc-d828-e356-63a8aecaf6e3_1023.jsonl",
+      "row_count": 2,
+      "rows": [
+        {
+          "index": "36",
+          "category": "8",
+          "command_kor": "조도가 50럭스 미만으로 떨어질 때마다 주차장의 모든 쉐이드를 열어줘.",
+          "command_eng": "Whenever the brightness drops below 50 lux, open all shades in the parking lot.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 100, \n\"script\": \"\\nprev := (#LightSensor).Brightness\\n\\ncurr = (#LightSensor).Brightness\\n\\nif (prev >= 50 and curr < 50) {\\n\\n    all(#ParkingLot #Shade).UpOrOpen()\\n\\n}\\n\\nprev = curr\"}",
+          "connected_devices": "{'Light_S': {'category': 'LightSensor', 'tags': ['LightSensor']}, 'P_Shade': {'category': 'WindowCovering', 'tags': ['ParkingLot', 'Shade', 'WindowCovering']}, 'G_Shade': {'category': 'WindowCovering', 'tags': ['Garden', 'Shade', 'WindowCovering']}}",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 100, \n\"script\": \"\\nprev := (#LightSensor).LightSensor_Brightness\\n\\ncurr = (#LightSensor).LightSensor_Brightness\\n\\nif (prev >= 50 and curr < 50) {\\n\\n    all(#ParkingLot #Shade).WindowCovering_UpOrOpen()\\n\\n}\\n\\nprev = curr\"}",
+          "row_no": 266,
+          "profile": "version0_14",
+          "genome_id": "gen-fef4d90d-bbbc-d828-e356-63a8aecaf6e3",
+          "genome_seed": 1023,
+          "run_id": "feedback_attempt_1_gen-fef4d90d-bbbc-d828-e356-63a8aecaf6e3_1023",
+          "candidate_count": 1,
+          "candidates": "[\"{\\\"name\\\":\\\"OpenParkingLotShades\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"if ((#Light_S).LightSensor_Brightness < 50) {\\\\n    all(#ParkingLot #Shade).WindowCovering_UpOrOpen()\\\\n}\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 4809, \"completion_tokens\": 70, \"total_tokens\": 4879, \"latency_sec\": 11.0811, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/generated/02_generator_prompt__patch_20260331_082917_1__patch_20260331_083043_1__patch_20260331_083201_1__patch_20260331_083623_1__patch_20260331_083726_1.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_attempt_1_gen-fef4d90d-bbbc-d828-e356-63a8aecaf6e3_1023/row_266_cand_1.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "worker",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        },
+        {
+          "index": "46",
+          "category": "8",
+          "command_kor": "거실 블라인드를 1시간 간격으로 올렸다 내렸다 반복해줘.",
+          "command_eng": "Repeat opening and closing the living room blind every hour.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 3600000, \n\"script\": \"\\nopen := false\\n\\nif (open == false) {\\n\\n    (#LivingRoom #Blind).UpOrOpen()\\n\\n    open = true\\n\\n} else {\\n\\n    (#LivingRoom #Blind).DownOrClose()\\n\\n    open = false\\n\\n}\"}",
+          "connected_devices": "{'LR_Blind': {'category': 'WindowCovering', 'tags': ['LivingRoom', 'Blind', 'WindowCovering']}}",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 3600000, \n\"script\": \"\\nopen := false\\n\\nif (open == false) {\\n\\n    (#LivingRoom #Blind).WindowCovering_UpOrOpen()\\n\\n    open = true\\n\\n} else {\\n\\n    (#LivingRoom #Blind).WindowCovering_DownOrClose()\\n\\n    open = false\\n\\n}\"}",
+          "row_no": 276,
+          "profile": "version0_14",
+          "genome_id": "gen-fef4d90d-bbbc-d828-e356-63a8aecaf6e3",
+          "genome_seed": 1023,
+          "run_id": "feedback_attempt_1_gen-fef4d90d-bbbc-d828-e356-63a8aecaf6e3_1023",
+          "candidate_count": 1,
+          "candidates": "[\"\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"error\": \"local worker failed with exit code 1: 경고: cuda:1이 존재하지 않아 cuda:0으로 자동 전환합니다.\\n`torch_dtype` is deprecated! Use `dtype` instead!\\n\\nLoading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]\\nLoading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.21it/s]\\nLoading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.30it/s]\\nLoading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.40it/s]\\nLoading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.36it/s]\\nTraceback (most recent call last):\\n  File \\\"/home/andrew/joi-llm/gpt_mg/version0_13/qwen_local_worker.py\\\", line 196, in <module>\\n    main()\\n  File \\\"/home/andrew/joi-llm/gpt_mg/version0_13/qwen_local_worker.py\\\", line 156, in main\\n    model = AutoModelForCausalLM.from_pretrained(local_model_name, **model_kwargs)\\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/andrew/llm/v/lib/python3.12/site-packages/transformers/models/auto/auto_factory.py\\\", line 604, in from_pretrained\\n    return model_class.from_pretrained(\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/andrew/llm/v/lib/python3.12/site-packages/transformers/modeling_utils.py\\\", line 277, in _wrapper\\n    return func(*args, **kwargs)\\n           ^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/andrew/llm/v/lib/python3.12/site-packages/transformers/modeling_utils.py\\\", line 5048, in from_pretrained\\n    ) = cls._load_pretrained_model(\\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/andrew/llm/v/lib/python3.12/site-packages/transformers/modeling_utils.py\\\", line 5468, in _load_pretrained_model\\n    _error_msgs, disk_offload_index = load_shard_file(args)\\n                                      ^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/andrew/llm/v/lib/python3.12/site-packages/transformers/modeling_utils.py\\\", line 843, in load_shard_file\\n    disk_offload_index = _load_state_dict_into_meta_model(\\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/andrew/llm/v/lib/python3.12/site-packages/torch/utils/_contextlib.py\\\", line 120, in decorate_context\\n    return func(*args, **kwargs)\\n           ^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/home/andrew/llm/v/lib/python3.12/site-packages/transformers/modeling_utils.py\\\", line 748, in _load_state_dict_into_meta_model\\n    param = param[...]\\n            ~~~~~^^^^^\\ntorch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.02 GiB. GPU 0 has a total capacity of 31.36 GiB of which 281.00 MiB is free. Process 1482109 has 17.37 GiB memory in use. Including non-PyTorch memory, this process has 13.66 GiB memory in use. Of the allocated memory 13.17 GiB is allocated by PyTorch, and 3.86 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/generated/02_generator_prompt__patch_20260331_082917_1__patch_20260331_083043_1__patch_20260331_083201_1__patch_20260331_083623_1__patch_20260331_083726_1.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_attempt_1_gen-fef4d90d-bbbc-d828-e356-63a8aecaf6e3_1023/row_276_cand_1.json\"]",
+          "generation_status": "partial_error",
+          "llm_mode": "worker",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        }
+      ],
+      "fieldnames": [
+        "index",
+        "category",
+        "command_kor",
+        "command_eng",
+        "gt_raw",
+        "connected_devices",
+        "gt",
+        "row_no",
+        "profile",
+        "genome_id",
+        "genome_seed",
+        "run_id",
+        "candidate_count",
+        "candidates",
+        "candidate_metadata",
+        "prompt_log_paths",
+        "generation_status",
+        "llm_mode",
+        "llm_model"
+      ]
+    }
+  }
+}

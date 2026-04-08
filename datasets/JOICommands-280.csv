@@ -1,4 +1,4 @@
-index,category,command_kor,command_eng,gt,connected_devices,gt_converted
+index,category,command_kor,command_eng,gt_raw,connected_devices,gt
 1,1,식기세척기를 건조 모드로 설정해줘.,Switch the dishwasher to dry mode.,"{""name"": """", 
 ""cron"": """", 
 ""period"": 0, 

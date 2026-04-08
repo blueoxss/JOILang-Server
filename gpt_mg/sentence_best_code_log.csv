@@ -390,3 +390,345 @@ TV 30번 채널 틀어줘.,"[{'name': 'TVChannelChange', 'cron': '', 'period': -
 TV 30번 채널 틀어줘.,"[{'name': 'TV채널30번켜기', 'cron': '', 'period': -1, 'code': '(#Television).tvChannel_setTvChannel(30)'}]"
 TV 30번 채널 틀어줘.,"[{'name': 'TVChannelChange', 'cron': '', 'period': -1, 'code': '(#Television).tvChannel_setTvChannel(30)'}]"
 TV 30번 채널 틀어줘.,"[{'name': 'TVChannel30', 'cron': '', 'period': -1, 'code': '(#Television).Television_SetChannel(30)'}]"
+식기세척기를 건조 모드로 설정해줘.,"[{'name': 'SetDishwasherDryMode', 'cron': '', 'period': -1, 'code': '(#Dishwasher).DishwasherMode_setDishwasherMode(""dry"")'}]"
+오븐의 작동 시간을 5분 늘려줘.,"[{'name': 'IncreaseOvenDuration', 'cron': '', 'period': -1, 'code': '(#Oven).ovenOperatingState_increaseDuration(5)'}]"
+밥솥을 조리 모드로 30분 작동시켜.,"[{'name': 'RiceCookerCooking', 'cron': '', 'period': -1, 'code': '(#RiceCooker).RiceCookerMode_setRiceCookerMode(""cooking"")\n(#RiceCooker).RiceCookerMode_addMoreTime(1800)'}]"
+사이렌을 응급모드로 울려줘.,"[{'name': 'EmergencySiren', 'cron': '', 'period': -1, 'code': '(#Siren).SirenMode_setSirenMode(""emergency"")'}]"
+스피커의 볼륨을 30으로 설정해줘.,"[{'name': 'SetSpeakerVolume', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Volume(30)'}]"
+TV 채널을 하나 내려줘.,"[{'name': 'TVChannelDown', 'cron': '', 'period': -1, 'code': '(#Television).Television_ChannelDown()'}]"
+TV로 7번 채널을 틀어줘.,"[{'name': 'TVChannelChange', 'cron': '', 'period': -1, 'code': '(#Television).Television_SetChannel(7)'}]"
+현재 온도를 스피커로 알려줘.,"[{'name': 'ReportCurrentTemperature', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#TemperatureSensor).temperatureMeasurement_temperature)'}]"
+외부 온도를 스피커로 출력해줘.,"[{'name': 'ExternalTempToSpeaker', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#WeatherProvider).WeatherProvider_TemperatureWeather)'}]"
+현재 습도를 스피커로 말해줘.,"[{'name': 'ReportHumidity', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#HumiditySensor).Humidity)'}]"
+외부 습도를 스피커로 말해줘.,"[{'name': 'ExternalHumidityAnnouncement', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#WeatherProvider).weatherProvider_humidityWeather)'}]"
+오늘의 날씨를 스피커로 출력해줘.,"[{'name': 'WeatherReport', 'cron': '', 'period': -1, 'code': '(#WeatherProvider).weatherProvider_GetWeatherInfo()\n(#Speaker).mediaPlayback_speak(weatherInfo)'}]"
+미세먼지 농도를 스피커로 알려줘.,"[{'name': 'NotifyPM25', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#AirQualityDetector).dustSensor_fineDustLevel)'}]"
+외부 미세먼지 농도를 스피커로 알려줘.,"[{'name': 'NotifyExternalDustLevel', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#WeatherProvider).weatherProvider_pm25Weather)'}]"
+"클라우드로 고양이 사진을 생성하고 ""cat.png""로 저장해줘.","[{'name': 'GenerateCatPhoto', 'cron': '', 'period': -1, 'code': '(#CloudServiceProvider).CloudServiceProvider_GenerateImage(""cat.png"")'}]"
+충전기의 전력소모량을 스피커로 출력해줘.,"[{'name': 'BatteryConsumptionReport', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#Charger).Charger_Power)'}]"
+오늘의 메뉴를 스피커로 출력해줘.,"[{'name': 'TodayMenuAnnouncement', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#MenuProvider).Menu)'}]"
+오늘의 301동 점심 메뉴를 스피커로 알려줘.,"[{'name': 'TodayLunchMenu', 'cron': '', 'period': -1, 'code': '(#MenuProvider).GetMenu(""오늘"", ""301동"", ""점심"")'}]"
+클라우드 AI한테 llm이 무엇인지 질문하고 답을 스피커로 출력해줘.,"[{'name': 'AskCLoudAI', 'cron': '', 'period': -1, 'code': '(#CloudServiceProvider).ChatWithAI(""What is LLM?""); (#Speaker).Speaker_Speak((#CloudServiceProvider).ChatWithAI(""What is LLM?""))'}]"
+"조명의 색조를 200, 채도는 50으로 설정해줘.","[{'name': 'SetLightColorAndBrightness', 'cron': '', 'period': -1, 'code': '(#Light).Light_SetColorAndBrightness(""200|50"")'}]"
+조명 색을 노란색으로 바꿔줘.,"[{'name': 'ChangeLightColor', 'cron': '', 'period': -1, 'code': '(#Light).ColorControl_SetColor(""255|255|0"")'}]"
+금고를 잠그어줘.,"[{'name': 'LockSafe', 'cron': '', 'period': -1, 'code': '(#Safe).Safe_Lock()'}]"
+문을 닫아줘.,"[{'name': 'LockDoor', 'cron': '', 'period': -1, 'code': '(#Door).Door_Close()'}]"
+펌프를 일반 모드로 설정해줘.,"[{'name': 'SetPumpMode', 'cron': '', 'period': -1, 'code': '(#Pump).Pump_SetPumpMode(""normal"")'}]"
+로봇 청소기를 멈춰줘.,"[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': '(#RobotVacuumCleaner).robotVacuumCleanerMode_setRobotVacuumCleanerMode(""stop"")'}]"
+"스피커로 ""music.mp3"" 재생해줘.","[{'name': 'PlayMusic', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Play(""music.mp3"")'}]"
+스피커 볼륨을 최대로 해줘.,"[{'name': 'SetSpeakerVolumeMax', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Volume_setVolume(100)'}]"
+식기세척기를 건조 모드로 설정해줘.,"[{'name': 'SetDishwasherDryMode', 'cron': '', 'period': -1, 'code': '(#Dishwasher).DishwasherMode_setDishwasherMode(""dry"")'}]"
+오븐의 작동 시간을 5분 늘려줘.,"[{'name': 'IncreaseOvenDuration', 'cron': '', 'period': -1, 'code': '(#Oven).ovenOperatingState_increaseDuration(5)'}]"
+밥솥을 조리 모드로 30분 작동시켜.,"[{'name': 'RiceCookerCooking', 'cron': '', 'period': -1, 'code': '(#RiceCooker).RiceCookerMode_setRiceCookerMode(""cooking"")\n(#RiceCooker).RiceCookerMode_addMoreTime(1800)'}]"
+사이렌을 응급모드로 울려줘.,"[{'name': 'EmergencySiren', 'cron': '', 'period': -1, 'code': '(#Siren).SirenMode_setSirenMode(""emergency"")'}]"
+스피커의 볼륨을 30으로 설정해줘.,"[{'name': 'SetSpeakerVolume', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Volume(30)'}]"
+TV 채널을 하나 내려줘.,"[{'name': 'TVChannelDown', 'cron': '', 'period': -1, 'code': '(#Television).Television_ChannelDown()'}]"
+TV로 7번 채널을 틀어줘.,"[{'name': 'TVChannelChange', 'cron': '', 'period': -1, 'code': '(#Television).Television_SetChannel(7)'}]"
+식기세척기를 건조 모드로 설정해줘.,"[{'name': 'SetDishwasherDryMode', 'cron': '', 'period': -1, 'code': '(#Dishwasher).DishwasherMode_setDishwasherMode(""dry"")'}]"
+오븐의 작동 시간을 5분 늘려줘.,"[{'name': 'IncreaseOvenDuration', 'cron': '', 'period': -1, 'code': '(#Oven).ovenOperatingState_increaseDuration(5)'}]"
+밥솥을 조리 모드로 30분 작동시켜.,"[{'name': 'RiceCookerCooking', 'cron': '', 'period': -1, 'code': '(#RiceCooker).RiceCookerMode_setRiceCookerMode(""cooking"")\n(#RiceCooker).RiceCookerMode_addMoreTime(1800)'}]"
+사이렌을 응급모드로 울려줘.,"[{'name': 'EmergencySiren', 'cron': '', 'period': -1, 'code': '(#Siren).SirenMode_setSirenMode(""emergency"")'}]"
+식기세척기를 건조 모드로 설정해줘.,"[{'name': 'SetDishwasherDryMode', 'cron': '', 'period': -1, 'code': '(#Dishwasher).DishwasherMode_setDishwasherMode(""dry"")'}]"
+오븐의 작동 시간을 5분 늘려줘.,"[{'name': 'IncreaseOvenDuration', 'cron': '', 'period': -1, 'code': '(#Oven).ovenOperatingState_increaseDuration(5)'}]"
+밥솥을 조리 모드로 30분 작동시켜.,"[{'name': 'RiceCookerCooking', 'cron': '', 'period': -1, 'code': '(#RiceCooker).RiceCookerMode_setRiceCookerMode(""cooking"")\n(#RiceCooker).RiceCookerMode_addMoreTime(1800)'}]"
+사이렌을 응급모드로 울려줘.,"[{'name': 'EmergencySiren', 'cron': '', 'period': -1, 'code': '(#Siren).SirenMode_setSirenMode(""emergency"")'}]"
+스피커의 볼륨을 30으로 설정해줘.,"[{'name': 'SetSpeakerVolume', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Volume(30)'}]"
+TV 채널을 하나 내려줘.,"[{'name': 'TVChannelDown', 'cron': '', 'period': -1, 'code': '(#Television).Television_ChannelDown()'}]"
+TV로 7번 채널을 틀어줘.,"[{'name': 'TVChannelChange', 'cron': '', 'period': -1, 'code': '(#Television).Television_SetChannel(7)'}]"
+현재 온도를 스피커로 알려줘.,"[{'name': 'ReportCurrentTemperature', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#TemperatureSensor).temperatureMeasurement_temperature)'}]"
+외부 온도를 스피커로 출력해줘.,"[{'name': 'ExternalTempToSpeaker', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#WeatherProvider).WeatherProvider_TemperatureWeather)'}]"
+현재 습도를 스피커로 말해줘.,"[{'name': 'ReportHumidity', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#HumiditySensor).Humidity)'}]"
+외부 습도를 스피커로 말해줘.,"[{'name': 'ExternalHumidityAnnouncement', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#WeatherProvider).weatherProvider_humidityWeather)'}]"
+오늘의 날씨를 스피커로 출력해줘.,"[{'name': 'WeatherReport', 'cron': '', 'period': -1, 'code': '(#WeatherProvider).weatherProvider_GetWeatherInfo()\n(#Speaker).mediaPlayback_speak(weatherInfo)'}]"
+미세먼지 농도를 스피커로 알려줘.,"[{'name': 'NotifyPM25', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#AirQualityDetector).dustSensor_fineDustLevel)'}]"
+외부 미세먼지 농도를 스피커로 알려줘.,"[{'name': 'NotifyExternalDustLevel', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#WeatherProvider).weatherProvider_pm25Weather)'}]"
+"클라우드로 고양이 사진을 생성하고 ""cat.png""로 저장해줘.","[{'name': 'GenerateCatPhoto', 'cron': '', 'period': -1, 'code': '(#CloudServiceProvider).CloudServiceProvider_GenerateImage(""cat.png"")'}]"
+충전기의 전력소모량을 스피커로 출력해줘.,"[{'name': 'BatteryConsumptionReport', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#Charger).Charger_Power)'}]"
+오늘의 메뉴를 스피커로 출력해줘.,"[{'name': 'TodayMenuAnnouncement', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#MenuProvider).Menu)'}]"
+오늘의 301동 점심 메뉴를 스피커로 알려줘.,"[{'name': 'TodayLunchMenu', 'cron': '', 'period': -1, 'code': '(#MenuProvider).GetMenu(""오늘"", ""301동"", ""점심"")'}]"
+클라우드 AI한테 llm이 무엇인지 질문하고 답을 스피커로 출력해줘.,"[{'name': 'AskCLoudAI', 'cron': '', 'period': -1, 'code': '(#CloudServiceProvider).ChatWithAI(""What is LLM?""); (#Speaker).Speaker_Speak((#CloudServiceProvider).ChatWithAI(""What is LLM?""))'}]"
+"조명의 색조를 200, 채도는 50으로 설정해줘.","[{'name': 'SetLightColorAndBrightness', 'cron': '', 'period': -1, 'code': '(#Light).Light_SetColorAndBrightness(""200|50"")'}]"
+조명 색을 노란색으로 바꿔줘.,"[{'name': 'ChangeLightColor', 'cron': '', 'period': -1, 'code': '(#Light).ColorControl_SetColor(""255|255|0"")'}]"
+금고를 잠그어줘.,"[{'name': 'LockSafe', 'cron': '', 'period': -1, 'code': '(#Safe).Safe_Lock()'}]"
+문을 닫아줘.,"[{'name': 'LockDoor', 'cron': '', 'period': -1, 'code': '(#Door).Door_Close()'}]"
+펌프를 일반 모드로 설정해줘.,"[{'name': 'SetPumpMode', 'cron': '', 'period': -1, 'code': '(#Pump).Pump_SetPumpMode(""normal"")'}]"
+로봇 청소기를 멈춰줘.,"[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': '(#RobotVacuumCleaner).robotVacuumCleanerMode_setRobotVacuumCleanerMode(""stop"")'}]"
+"스피커로 ""music.mp3"" 재생해줘.","[{'name': 'PlayMusic', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Play(""music.mp3"")'}]"
+스피커 볼륨을 최대로 해줘.,"[{'name': 'SetSpeakerVolumeMax', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Volume_setVolume(100)'}]"
+스피커 볼륨을 하나 낮춰줘.,"[{'name': 'ReduceSpeakerVolume', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_VolumeDown()'}]"
+벨브를 열어줘.,"[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': '(#Blind).windowShade_open()'}]"
+TV 30번 채널 틀어줘.,"[{'name': 'TVChannel30', 'cron': '', 'period': -1, 'code': '(#Television).Television_SetChannel(30)'}]"
+거실 조명을 노란색으로 설정해줘.,"[{'name': 'SetLivingRoomLightToYellow', 'cron': '', 'period': -1, 'code': '(#Light).ColorControl_SetColor(""255|255|0"")'}]"
+카메라로 회의실 사진을 촬영해줘.,"[{'name': 'MeetingRoomPhoto', 'cron': '', 'period': -1, 'code': '(#Camera).camera_capture()'}]"
+거실 조명의 밝기를 80%로 설정해줘.,"[{'name': 'SetLivingRoomLightBrightness', 'cron': '', 'period': -1, 'code': '(#Light).Light_SetBrightness(80)'}]"
+연구실 제습기를 모두 AI건조모드로 설정해줘.,"[{'name': 'SetDehumidifierMode', 'cron': '', 'period': -1, 'code': 'all(#Dehumidifier).Dehumidifier_SetMode(""AI"")'}]"
+"거실 조명의 색조는 240, 채도는 80으로 맞춰줘.","[{'name': 'AdjustLivingRoomLight', 'cron': '', 'period': -1, 'code': '(#Light).Light_SetColor(""240|80"")'}]"
+짝수 태그 로봇 청소기를 모두 자동 모드로 설정해줘.,"[{'name': 'SetEvenTagRobotsToAutoMode', 'cron': '', 'period': -1, 'code': ""all(#EvenTagRobot).robotVacuumCleanerMode_setRobotVacuumCleanerMode('auto')""}]"
+모든 도어락을 잠궈줘.,"[{'name': 'AllDoorLocksLocked', 'cron': '', 'period': -1, 'code': 'all(#DoorLock).lock()'}]"
+구역1의 에어컨의 목표 온도를 18도로 설정해줘.,"[{'name': 'SetACTemperature', 'cron': '', 'period': -1, 'code': '(#Area1_AirConditioner).AirConditioner_SetTargetTemperature(18)'}]"
+안방의 공기청정기를 수면모드로 바꿔줘.,"[{'name': 'ChangeAirPurifierMode', 'cron': '', 'period': -1, 'code': '(#AirPurifier).AirPurifierMode_setAirPurifierMode(""sleep"")'}]"
+주방의 모든 벨브를 닫아줘.,"[{'name': 'CloseAllValvesInKitchen', 'cron': '', 'period': -1, 'code': 'all(#Kitchen_Valve).valve_close()'}]"
+모든 금고를 열어줘.,"[{'name': 'AllLocksOpen', 'cron': '', 'period': -1, 'code': 'all(#Safe).Safe_Lock()'}]"
+회의실 녹음기로 10초 동안 녹음해서 test.wav로 저장해줘.,"[{'name': 'MeetingRoomRecording', 'cron': '', 'period': -1, 'code': '(#MeetingRoomRecorder).recordStart(test.wav)\n(#Clock).clock_delay(10000)\n(#MeetingRoomRecorder).recordStop()'}]"
+사이렌으로 농장에 화재경보를 울려줘.,"[{'name': 'FireAlarm', 'cron': '', 'period': -1, 'code': '(#Siren).sirenMode_setSirenMode(""fire"")'}]"
+"놀이방의 스피커로 ""Golden.mp3"" 파일을 재생해줘.","[{'name': 'PlayGoldenMP3', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Play(""Golden.mp3"")'}]"
+안방 조명을 모두 꺼줘.,"[{'name': 'AllLightsOff', 'cron': '', 'period': -1, 'code': 'all(#Light).switch_off()'}]"
+거실에 있는 창문을 모두 닫아줘.,"[{'name': 'CloseAllWindowsInLivingRoom', 'cron': '', 'period': -1, 'code': 'all(#Window).windowControl_close()'}]"
+섹터2에 있는 블라인드를 모두 열어줘.,"[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': 'all(#Sector2_Blind).windowShade_open()'}]"
+거실 벽에 있는 조명을 빨간색으로 바꿔줘.,"[{'name': 'ChangeLivingRoomLightColor', 'cron': '', 'period': -1, 'code': ""(#Light).setColor('255|0|0')""}]"
+섹터 비에 있는 홀수 태그가 붙은 금고를 모두 잠궈줘.,"[{'name': 'Sec_Bi_FloodSafeLock', 'cron': '', 'period': -1, 'code': 'all(#Sec_Bi_FloodSafe).safe_Lock()'}]"
+회의실에 있는 조명 밝기를 100까지 높여줘.,"[{'name': 'IncreaseConferenceRoomLight', 'cron': '', 'period': -1, 'code': '(#ConferenceRoomLight).Light_MoveToBrightness(100)'}]"
+섹터2 모두 닫아줘.,"[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': 'all(#Sector2).windowShade_close()'}]"
+복도 벽에 있는 모든 조명을 파란색으로 바꿔줘.,"[{'name': 'ChangeAllLightsToBlue', 'cron': '', 'period': -1, 'code': 'all(#WallLight).ColorControl_SetColor(""0|0|255"")'}]"
+그룹1에서 상단부에 있는 조명들을 모두 파란색으로 변경해줘.,"[{'name': 'ChangeLightsToBlue', 'cron': '', 'period': -1, 'code': ""all(#Group1_Top_Lights).setColor('0|0|255')""}]"
+섹터10의 모든 조명을 흰색으로 바꿔줘.,"[{'name': 'ChangeLightsToWhite', 'cron': '', 'period': -1, 'code': 'all(#Sector10_Light).Light_Color_SetColor(""255|255|255"")'}]"
+안방에 있는 짝수 태그 블라인드를 모두 내려줘.,"[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': 'all(#EvenTaggedBlind).windowShade_close()'}]"
+3층에 있는 모든 로봇 청소기를 멈춰줘.,"[{'name': 'StopAllFloor3Robots', 'cron': '', 'period': -1, 'code': ""all(#Floor3_RobotVacuumCleaner).robotVacuumCleanerMode_setRobotVacuumCleanerMode('stop')""}]"
+거실 벽에 있는 모든 홀수 태그 조명을 켜줘.,"[{'name': 'LivingRoomLightOn', 'cron': '', 'period': -1, 'code': '(#Light_LivingRoom_All).switch_on()'}]"
+사무실의 모든 제습기를 제습 모드로 설정해줘.,"[{'name': 'SetAllDehumidifiersToHumidifyMode', 'cron': '', 'period': -1, 'code': 'all(#Dehumidifier).SetDehumidifierMode(""humidify"")'}]"
+창고의 모든 도어락을 잠궈줘.,"[{'name': 'LockAllWarehouseDoors', 'cron': '', 'period': -1, 'code': 'all(#WarehouseDoorLock).lock()'}]"
+주방의 모든 짝수 태그 밸브를 열어줘.,"[{'name': 'OpenEvenTaggedValvesInKitchen', 'cron': '', 'period': -1, 'code': 'all(#Kitchen Valve_Even).valve_open()'}]"
+녹음기가 녹음중이면 녹음을 중지하고 test.mp3로 저장해줘. 녹음중이 아니면 녹음을 시작해줘.,"[{'name': 'AudioRecorderControl', 'cron': '', 'period': -1, 'code': 'if ((#AudioRecorder).AudioRecorder_RecordStatus == ""recording"") {\n  (#AudioRecorder).AudioRecorder_RecordStop(""test.mp3"")\n} else {\n  (#AudioRecorder).AudioRecorder_RecordStart()\n}'}]"
+"충전 전압이 220볼트 이상이면, 충전을 멈춰줘.","[{'name': 'BatteryChargeMonitor', 'cron': '', 'period': -1, 'code': 'if ((#Charger).Charger_Voltage >= 220) { (#Charger).Charger_Stop() }'}]"
+"클라우드 서비스가 활성화되어있으면, test.png 파일을 클라우드에 업로드해줘.","[{'name': 'UploadTestImage', 'cron': '', 'period': -1, 'code': 'if ((#CloudServiceProvider).CloudServiceProvider_IsAvailable()) {\n  (#CloudServiceProvider).CloudServiceProvider_UploadFile(""test.png"")\n}'}]"
+"오븐이 그릴 모드이면, 시간을 4분 더 추가해줘","[{'name': 'OvenTimeExtension', 'cron': '', 'period': -1, 'code': 'if ((#Oven).ovenMode_mode == ""grill"") {\n  (#Oven).addMoreTime(4)\n}'}]"
+"밥솥이 보온 모드이면, 조리 모드로 변경해줘.","[{'name': 'ChangeCookingMode', 'cron': '', 'period': -1, 'code': 'if ((#RiceCooker).RiceCookerMode == ""boil"") {\n  (#RiceCooker).RiceCookerMode_setCookingParameters(""cook"", null)\n}'}]"
+"오늘이 공휴일이면 ""test@example.com""으로 ""오늘은 공휴일입니다.""라는 내용을 ""공휴일"" 제목으로 이메일을 보내줘.","[{'name': 'Send Holiday Email', 'cron': '', 'period': -1, 'code': 'if ((#Clock).IsHoliday == true) {\n  (#EmailProvider).SendMail(""test@example.com"", ""공휴일"", ""오늘은 공휴일입니다."")\n}'}]"
+"바깥의 초미세먼지 농도가 15 이상이면, 긴급 사이렌을 울려줘.","[{'name': 'HighPM25Alert', 'cron': '', 'period': -1, 'code': 'if ((#WeatherProvider).weatherProvider_pm25Weather >= 15) {\n  (#Siren).sirenMode_setSirenMode(""emergency"")\n}'}]"
+"충전기의 전류가 10암페어 이상이면, 긴급 사이렌을 울려줘.","[{'name': 'BatteryChargingAlert', 'cron': '', 'period': -1, 'code': 'if ((#Charger).current_current >= 10) {\n  (#Siren).sirenMode_setSirenMode(""emergency"")\n}'}]"
+펌프가 노말 모드이면 맥시멈 모드로 설정해줘.,"[{'name': 'SetPumpMode', 'cron': '', 'period': -1, 'code': 'if ((#Pump).pumpMode_pumpMode == ""normal"") {\n  (#Pump).pumpMode_setPumpMode(""maximum"")\n}'}]"
+"스피커가 재생중이면, 멈춰줘.","[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': 'if ((#Speaker).mediaPlayback_playbackState == ""playing"") {\n  (#Speaker).mediaPlayback_stop()\n}'}]"
+"건조기가 저소음 모드이면, 퀵 모드로 바꿔줘.","[{'name': 'DehumidifierModeChange', 'cron': '', 'period': -1, 'code': 'if ((#Dehumidifier).DehumidifierMode == ""low"") {\n  (#Dehumidifier).SetDehumidifierMode(""quick"")\n}'}]"
+"건조기 회전 강도가 3보다 크면 하나 줄이고, 아니면 하나 높여줘.","[{'name': 'AdjustDehumidifierSpeed', 'cron': '', 'period': -1, 'code': 'currentSpeed = (#Dehumidifier).DehumidifierMode\nif (currentSpeed > 3) {\n  (#Dehumidifier).SetDehumidifierMode(currentSpeed - 1)\n} else {\n  (#Dehumidifier).SetDehumidifierMode(currentSpeed + 1)\n}'}]"
+"충전기가 완충되어있으면, 충전기를 꺼줘.","[{'name': 'BatteryFullyCharged', 'cron': '', 'period': -1, 'code': 'if ((#Charger).Charger_ChargingState == ""fullyCharged"") {\n  (#Charger).Charger_Unplug()\n}'}]"
+"버튼이 눌려진 상태면, 블라인드를 올려줘.","[{'name': 'ButtonPressedBlindUp', 'cron': '', 'period': -1, 'code': 'if ((#Button).button_state == ""pressed"") {\n  (#Blind).windowShade_up()\n}'}]"
+스피커 볼륨이 40 이상이면 재생을 중단해줘.,"[{'name': 'SpeakerVolumeCheck', 'cron': '', 'period': -1, 'code': 'if ((#Speaker).Speaker_Volume >= 40) { (#Speaker).Speaker_Stop() }'}]"
+"입구의 얼굴 인식이 꺼져있으면, 얼굴 인식을 시작해줘","[{'name': 'FaceRecognitionStart', 'cron': '', 'period': -1, 'code': 'if ((#FaceRecognizer).FaceRecognizer_Start == ""off"") {\n  (#FaceRecognizer).FaceRecognizer_Start()\n}'}]"
+"쉐이드가 30%이하로 닫혀있으면, 50%만큼 닫아줘.","[{'name': 'ShadeAdjustment', 'cron': '', 'period': -1, 'code': 'if ((#Shade).windowShade_level <= 30) { (#Shade).windowShade_setLevel(50) }'}]"
+"거실의 소리 센서로 감지한 수치가 50보다 크면, 스피커 재생을 멈춰줘.","[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': 'if ((#LivingRoomSoundSensor).soundSensor_sound > 50) {\n  (#Speaker).mediaPlayback_stop()\n}'}]"
+"거실의 에어컨 모드가 냉방 모드이면, 자동 모드로 바꿔줘.","[{'name': 'ChangeACMode', 'cron': '', 'period': -1, 'code': 'if ((#LivingRoom_AirConditioner).AirConditionerMode == ""cool"") {\n  (#LivingRoom_AirConditioner).AirConditionerMode_setMode(""auto"")\n}'}]"
+"집에 있는 재실 센서중 하나라도 감지 상태이면, 긴급 사이렌을 울려줘.","[{'name': 'PresenceTrigger', 'cron': '', 'period': -1, 'code': 'if (any(#PresenceSensor).presenceSensor_presence == ""present"") {\n  (#Siren).sirenMode_setSirenMode(""emergency"")\n}'}]"
+"입구의 접촉 센서가 감지 상태이면, 긴급 사이렌을 울려줘.","[{'name': 'EntranceDetectionAlert', 'cron': '', 'period': -1, 'code': 'if ((#ContactSensor).contact_sensor_contact == ""detected"") {\n  (#Siren).sirenMode_setSirenMode(""emergency"")\n}'}]"
+"지금 비가 오고 있으면, 집안의 모든 제습기를 건조 모드로 설정해줘.","[{'name': 'SetDehumidifierMode', 'cron': '', 'period': -1, 'code': 'if ((#WeatherProvider).weatherProvider_weather == ""rain"") {\n  all(#Dehumidifier).Dehumidifier_SetMode(""dehumidifying"")\n}'}]"
+"거실 조도가 200 럭스 이상이면, 거실 불을 꺼줘.","[{'name': 'LivingRoomLightOff', 'cron': '', 'period': -1, 'code': 'if ((#LightSensor).Brightness >= 200) {\n  (#Light).MoveToBrightness(0)\n}'}]"
+"구역1의 온도가 36.5도 이상이면, 에어컨을 30도로 설정해줘.","[{'name': 'SetACInArea1', 'cron': '', 'period': -1, 'code': 'if ((#TemperatureSensor_Area1).temperatureMeasurement_temperature >= 36.5) { (#AirConditioner_Area1).AirConditioner_SetTargetTemperature(30) }'}]"
+"농장의 이산화탄소 농도가 800ppm 이상이면, 긴급 사이렌을 울려줘.","[{'name': 'HighCO2Alert', 'cron': '', 'period': -1, 'code': 'if ((#FarmCO2Sensor).gasSensor_gasValue >= 800) {\n  (#Siren).sirenMode_setSirenMode(""emergency"")\n}'}]"
+"회의실 온도가 20도 미만이면, 회의실 문을 닫아줘.","[{'name': 'MeetingRoomTempControl', 'cron': '', 'period': -1, 'code': 'if ((#TemperatureSensor).temperatureMeasurement_temperature < 20.0) {\n  (#MeetingRoomDoor).doorControl_close()\n}'}]"
+"회의실 조명이 꺼져 있으면, 조명을 켜줘.","[{'name': 'MeetingRoomLightOn', 'cron': '', 'period': -1, 'code': 'if ((#Light).Light_State == ""off"") { (#Light).Light_On() }'}]"
+"안방 온도가 36.5도 이상이면, 에어컨을 30도로 설정해줘.","[{'name': 'AdjustAC', 'cron': '', 'period': -1, 'code': 'if ((#TemperatureSensor).temperatureMeasurement_temperature >= 36.5) { (#AirConditioner).AirConditioner_SetTargetTemperature(30) }'}]"
+"거실에 움직임이 감지되고 있으면, 조명을 켜줘.","[{'name': 'MotionTrigger', 'cron': '', 'period': -1, 'code': 'if ((#MotionSensor).motionDetection_motion == ""detected"") {\n  (#Light).switch_on()\n}'}]"
+연구실 습도가 50 이상이면 제습기를 켜고 50 미만이면 가습기를 켜줘.,"[{'name': 'HumidityControl', 'cron': '', 'period': -1, 'code': 'if ((#HumiditySensor).relativeHumidityMeasurement_humidity >= 50) {\n  (#Dehumidifier).dehumidifierMode_setDehumidifierMode(""dehumidifying"")\n} else {\n  (#Humidifier).humidifierMode_setHumidifierMode(""humidifying"")\n}'}]"
+접촉 센서가 감지되면 조명을 켜줘.,"[{'name': 'ContactDetectedLightOn', 'cron': '', 'period': -1, 'code': 'if ((#ContactSensor).contact_sensor_contact == ""detected"") {\n  (#Light).switch_on()\n}'}]"
+재실 센서가 감지되면 TV를 켜줘.,"[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': 'if ((#PresenceSensor).presenceSensor_presence == ""present"") {\n  (#Television).switch_on()\n}'}]"
+소리 센서의 수치가 50보다 커지면 스피커 재생을 멈춰줘.,"[{'name': 'SoundThreshold', 'cron': '', 'period': -1, 'code': 'if ((#SoundSensor).soundSensor_sound > 50) {\n  (#Speaker).mediaPlayback_stop()\n}'}]"
+비가 오면 제습기를 켜줘.,"[{'name': 'RainyDayDehumidifier', 'cron': '', 'period': -1, 'code': 'if ((#WeatherProvider).weatherProvider_weather == ""rain"") {\n  (#Dehumidifier).dehumidifierMode_setDehumidifierMode(""auto"")\n}'}]"
+밝기가 100 럭스 미만이 되면 조명을 켜줘.,"[{'name': 'LightOnLowLux', 'cron': '', 'period': -1, 'code': 'if ((#LightSensor).brightness < 100) { (#Light).moveToBrightness(100) }'}]"
+이산화탄소 농도가 1000ppm 이상이 되면 긴급 사이렌을 울려줘.,"[{'name': 'HighCO2Alert', 'cron': '', 'period': -1, 'code': 'if ((#CO2Sensor).carbonDioxide >= 1000) {\n  (#Siren).Siren_SirenMode_setSirenMode(""emergency"")\n}'}]"
+연기가 감지되면 사이렌으로 화재경보를 울려줘.,"[{'name': 'FireAlarmOnDetection', 'cron': '', 'period': -1, 'code': 'if ((#FaceRecognizer).RecognizedResult != null) {\n  (#Siren).SirenMode_setSirenMode(""fire"")\n}'}]"
+버튼이 세번 눌리면 벨브를 열어줘.,"[{'name': 'ButtonPressAction', 'cron': '', 'period': -1, 'code': 'buttonPressCount := 0\nif ((#Button).Button == ""pushed_3x"") {\n  buttonPressCount += 1\n}\nif (buttonPressCount == 3) {\n  (#Valve).ValveState_open()\n  buttonPressCount = 0\n}'}]"
+온도가 35도 이상이 되면 에어컨의 목표 온도를 30도로 설정해줘.,"[{'name': 'SetACOnTemp', 'cron': '', 'period': -1, 'code': 'if ((#TemperatureSensor).temperatureMeasurement_temperature >= 35.0) {\n  (#AirConditioner).AirConditioner_SetTargetTemperature(30.0)\n}'}]"
+금고가 열리면 경찰 사이렌을 울려줘.,
+누수가 감지되면 벨브를 차단해줘.,"[{'name': 'LeakDetectionBlock', 'cron': '', 'period': -1, 'code': 'if ((#LeakSensor).leakage == true) {\n  (#Valve).valveState_close()\n}'}]"
+습도가 80%보다 커지면 제습기를 건조 모드로 작동시켜줘.,"[{'name': 'HumidityThresholdAction', 'cron': '', 'period': -1, 'code': 'if ((#HumiditySensor).relativeHumidityMeasurement_humidity > 80.0) {\n  (#Dehumidifier).dehumidifierMode_setDehumidifierMode(""dehumidifying"")\n}'}]"
+움직임이 감지되면 조명을 켜줘.,"[{'name': 'MotionTrigger', 'cron': '', 'period': -1, 'code': 'if ((#MotionSensor).motionDetection_motion == ""detected"") {\n  (#Light).switch_on()\n}'}]"
+내부 초미세먼지 농도가 35 이상이 되면 공기청정기를 강하게 틀어줘.,"[{'name': 'HighDustActivate', 'cron': '', 'period': -1, 'code': 'if ((#AirQualityDetector).dustSensor_fineDustLevel >= 35) {\n  (#AirPurifier).AirPurifierMode_setAirPurifierMode(""high"")\n}'}]"
+충전 전압이 250V보다 높아지면 충전을 중단해줘.,"[{'name': 'BatteryChargeMonitor', 'cron': '', 'period': -1, 'code': 'if ((#Charger).Charger_Voltage > 250) { (#Charger).Charger_ChargingState_stop() }'}]"
+현관 도어락이 잠금해제되면 거실 조명을 켜줘.,"[{'name': 'DoorUnlockLightOn', 'cron': '', 'period': -1, 'code': 'if ((#DoorLock).DoorLockState == ""unlocked"") {\n  (#Light).Light_On()\n}'}]"
+침실에 움직임이 감지되면 침실 에어컨을 켜줘.,"[{'name': 'MotionActivateAC', 'cron': '', 'period': -1, 'code': 'if ((#MotionSensor).motionDetection_motion == ""detected"") {\n  (#AirConditioner).AirConditionerMode_setAirConditionerMode(""cool"")\n}'}]"
+주방에 연기가 감지되면 주방 벨브를 잠궈줘.,"[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': 'if ((#KitchenSpeaker).speaker_detection_speakerDetected == true) {\n  (#KitchenVentilation).ventilation_control_stop()\n}'}]"
+서재 미세먼지 농도가 30 이상이 되면 서재 공기청정기를 켜줘.,"[{'name': 'RoomDustFilterOn', 'cron': '', 'period': -1, 'code': 'if ((#AirQualityDetector).dustSensor_fineDustLevel >= 30) {\n  (#AirPurifier).airPurifierMode_setAirPurifierMode(""on"")\n}'}]"
+지하에 누수가 감지되면 메인 사이렌을 비상모드로 울려줘.,"[{'name': 'LeakDetectionAlert', 'cron': '', 'period': -1, 'code': 'if ((#LeakSensor).leakStatus_leak == ""detected"") {\n  (#Siren).sirenMode_setSirenMode(""emergency"")\n}'}]"
+테라스 조도가 50 미만이 되면 테라스 조명을 켜줘.,
+차고 문이 열리면 차고 카메라로 사진을 찍어줘.,"[{'name': 'GarageDoorPhoto', 'cron': '', 'period': -1, 'code': 'if ((#GarageDoor).garageDoor_state == ""open"") {\n  (#GarageCamera).camera_capture()\n}'}]"
+아기방 소리가 40dB보다 커지면 거실 스피커로 아기방에 소음이 감지되었다고 말해줘.,"[{'name': 'BabyRoomNoiseAlert', 'cron': '', 'period': -1, 'code': 'if ((#BabyRoomSoundSensor).soundSensor_sound > 40) {\n  (#LivingRoomSpeaker).speaker_Speak(""아기방에 소음이 감지되었습니다."")\n}'}]"
+세탁실 건조기 회전 속도가 5 이하가 되면 거실 스피커로 세탁이 끝났다고 알려줘.,"[{'name': 'NotifyLaundryDone', 'cron': '', 'period': -1, 'code': 'if ((#Dishwasher).LaundryDryer_DryerMode == ""low"" || (#Dishwasher).LaundryDryer_DryerMode == ""medium"" || (#Dishwasher).LaundryDryer_DryerMode == ""high"") {\n  (#Speaker).Speaker_Speak(""세탁이 끝났습니다."")\n}'}]"
+창고 온도가 25도 이상이 되면 창고 에어컨을 켜줘.,"[{'name': 'WarehouseTempControl', 'cron': '', 'period': -1, 'code': 'if ((#WarehouseTemperatureSensor).temperatureMeasurement_temperature >= 25.0) {\n  (#WarehouseAirConditioner).AirConditioner_SetAirConditionerMode(""cool"")\n}'}]"
+욕실 습도가 70%보다 높아지면 욕실 제습기를 동결 방지 모드로 설정해줘.,
+사무실 버튼이 눌리면 사무실 가습기를 모두 켜줘.,
+복도에 재실 센서가 하나라도 감지되면 모든 복도 조명을 보라색으로 설정해줘.,"[{'name': 'SetBlueLightsWhenMotionDetected', 'cron': '', 'period': -1, 'code': 'if (any(#Corridor_MotionSensor).motionDetection_motion == ""detected"") {\n  all(#Corridor_Light).setColor(""0|0|255"")\n}'}]"
+서버실 일산화탄소 농도가 5000 ppm 이상이되면 모든 사이렌을 비상모드로 울려줘.,"[{'name': 'ServerRoomFireAlarm', 'cron': '', 'period': -1, 'code': 'if ((#ServerRoomGasSensor).gasSensor_carbonDioxide >= 5000) {\n  all(#Siren).sirenMode_setSirenMode(""emergency"")\n}'}]"
+안방 쉐이드 버튼이 눌리면 쉐이드를 내려줘.,"[{'name': 'ShadeDownOnButtonClick', 'cron': '', 'period': -1, 'code': 'if ((#ShadeButton).button_button == ""pushed"") {\n  (#Shade).windowShade_close()\n}'}]"
+TV 채널을 7번으로 바꾸고 1시간 뒤에 11번으로 바꿔줘.,
+에어컨을 냉방 모드로 설정하고 30분 뒤에 자동 모드로 설정해줘.,
+공기청정기를 자동 모드로 설정하고 2시간 뒤에 수면 모드로 설정해줘.,
+에어컨 온도를 24도로 설정하고 1시간 뒤에 26도로 설정해줘.,
+오븐 모드를 베이크로 설정하고 10분 뒤에 데우기 모드로 바꿔줘.,
+재실 센서에 감지가 되면 1분 뒤에 사진을 찍어줘.,"[{'name': 'PresencePhoto', 'cron': '', 'period': -1, 'code': 'wait until ((#PresenceSensor).presenceSensor_presence == ""present"")\n(#Clock).clock_delay(60000)\n(#Camera).camera_take()'}]"
+오븐이 가열 모드가 되면 3초 뒤에 전자레인지 모드로 바꿔줘.,
+"습도가 30%보다 낮아지면 3초 뒤에 스피커로 ""습도가 낮습니다""를 출력해.",
+비가 오면 문을 닫고 1시간 뒤에 체크해서 비가 안오면 문을 다시 열어줘.,
+외부 미세먼지 농도가 2000 이상이면 문을 닫고 4시간 뒤에 밸브를 잠궈줘.,"[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': 'if ((#WeatherProvider).weatherProvider_pm25Weather >= 2000) {\n  (#Door).doorControl_close()\n  wait until (#Clock).clock_delay(14400000)\n  (#Valve).valveControl_lock()\n}'}]"
+사이렌을 응급 모드로 울리고 5초 뒤에 사이렌 모드를 화재 모드로 바꿔줘.,
+조명 밝기를 30으로 설정했다가 10분 뒤에 80으로 올려줘.,"[{'name': 'AdjustLightBrightness', 'cron': '', 'period': 600000, 'code': 'brightness = 30\n(#Light).moveToBrightness(brightness)\nclock_delay(600000)\nbrightness = 80\n(#Light).moveToBrightness(brightness)'}]"
+로봇 청소기를 자동 모드로 시작하고 30분 뒤에 수동 모드로 바꿔줘.,
+스피커 볼륨을 20으로 설정하고 10분 뒤에 40으로 높여줘.,
+제습기를 건조 모드로 작동시키고 1시간 뒤에 리프레쉬 모드로 바꿔줘.,
+거실의 모든 전등을 켜고 1시간 뒤에 꺼줘.,
+집안의 재실 센서가 하나라도 감지되면 10초 뒤에 모든 긴급 사이렌을 울려줘.,
+주방의 모든 벨브를 열고 5분 뒤에 다시 잠궈줘.,
+안방의 모든 블라인드를 닫고 2시간 뒤에 다시 열어줘.,
+복도의 조명이 하나라도 켜지면 5분 뒤에 거실의 모든 조명을 꺼줘.,
+연구실의 모든 제습기를 켜고 4시간 뒤에 꺼줘.,
+사무실의 공기청정기가 하나라도 수면모드로 바뀌면 10분 뒤에 조명을 꺼줘.,
+창고의 모든 도어락을 잠그고 1분 뒤에 긴급 사이렌을 울려줘.,
+테라스의 어느 조도 센서라도 100 럭스 이상이 되면 5초 뒤에 모든 블라인드를 올려줘.,
+데이터 센터의 어느 온도 센서라도 30도 이상이 되면 1분 뒤에 모든 에어컨을 냉방 모드로 작동시켜줘.,
+주방 조명을 켜고 10초 뒤에 주방 제습기를 켜줘.,
+서재 공기청정기를 강풍으로 틀고 2시간 뒤에 꺼줘.,
+욕실 조명을 끄고 5분 뒤에 켜줘.,
+회의실 문을 닫고 3초 뒤에 회의실 카메라로 촬영해줘.,
+"지금 와인 셀러 온도를 체크하고 10분뒤에 다시 체크해서 1도 이상 차이가 나면, 스피커로 온도가 급변했다고 안내해줘.",
+"온도가 28도 이상이고 습도가 70% 이상이면, 에어컨을 냉방 모드로 설정하고 온도를 24도로 맞춰줘.",
+"이산화탄소 농도가 1200ppm 이상이고 사람이 감지되고 있으면, 공기청정기를 강풍으로 바꾸고 스피커로 경고해줘.",
+"비가 오고 있고 습도가 80% 이상이면, 제습기를 건조 모드로 작동시키고 ""비가 오고 습도가 높습니다""라고 스피커로 출력해줘.",
+"소음 수치가 70 이상이고 집에 아무도 없으면, 카메라로 사진을 찍고 경찰 사이렌을 울려줘.",
+"조도가 100 럭스 이하이고 사람이 감지되고 있으면, 스피커 볼륨을 30으로 설정하고 relax.mp3 음악을 재생해줘.",
+"미세먼지 농도가 150 이상이고 문이 열려 있으면, 문을 닫고 공기청정기를 강풍으로 작동시켜줘.",
+"비가 오고 아무도 없는 상태면, 도어락을 잠그고 밸브를 차단해줘.",
+"오븐이 가열 중이고 아무도 없으면, 오븐을 보온 모드로 변경하고 스피커로 보온 모드로 변경했다고 알려줘.",
+"소음이 80 이상이고 사람이 없으면, 스피커 재생을 멈추고 긴급 사이렌을 울려줘.",
+"이산화탄소가 1500ppm 이상이고 블라인드가 닫혀있으면, 공기청정기를 자동 모드로 켜고 블라인드를 올려줘.",
+"온도가 18도 이하이고 사람이 감지되고있으면, 에어컨을 난방 모드로 설정하고 22도로 조절해줘.",
+"비가 오고 문이 열려 있으면, 문을 닫고 제습기를 내부케어 모드로 작동시켜줘.",
+"사람이 있는데 연기가 감지되고 있으면, 사이렌을 화재 모드로 울리고 스피커로 ""대피하세요""라고 해줘.",
+"수압이 100 이상이고 사람이 없으면, 밸브를 잠그고 긴급 사이렌을 울려줘.",
+"움직임이 감지되지 않는데 문이 열려 있으면, 사진을 찍고 스피커로 ""경고""라고 말해줘.",
+"거실에 사람이 있고 주방에서 연기가 감지되고 있으면, 거실 스피커로 주방에 연기가 감지되었다고 출력하고 주방 밸브를 잠궈줘.",
+"안방의 온도가 26도 이상이고 창문이 열려 있으면, 창문을 닫고 에어컨을 켜줘.",
+"차고에서 움직임이 감지되고 있고 메인 사이렌이 꺼져있으면, 비상 사이렌을 울리고 차고 사진을 찍어줘.",
+"서재 이산화탄소가 1000ppm 이상이고 공기청정기가 수면 모드이면, 자동 모드로 바꾸고 스피커로 ""공기청정기를 자동모드로 변경합니다""라고 말해줘.",
+"욕실 습도가 85% 이상이고 욕실 문이 닫혀 있으면, 조명을 켜고 문을 열어줘.",
+"현관에서 인식된 얼굴 ID가 ""가족""이고 도어락이 잠겨 있으면, 도어락을 풀고 문을 열어줘.","[{'name': 'UnlockDoor', 'cron': '', 'period': -1, 'code': 'if ((#FaceRecognizer).RecognizedResult == ""가족"") {\n  if ((#DoorLock).DoorLockState == ""locked"") {\n    (#DoorLock).Unlock()\n    (#Door).Open()\n  }\n}'}]"
+"정원 조도가 50 미만이고 테라스 조명이 꺼져 있으면, 조명을 켜고 정원 스피커로 조명을 켠다고 말해줘.","[{'name': 'GardenLighting', 'cron': '', 'period': -1, 'code': 'if ((#LawnLighting).lawnLighting_level < 50 && (#TerraceLight).switch_switch == ""off"") {\n  (#TerraceLight).switch_on()\n  (#LawnSpeaker).speaker_Speak(""정원 조도가 50 미만이고 테라스 조명이 꺼져 있어요. 조명을 켜줘"")\n}'}]"
+"비가 오고 거실 창문이 열려 있으면, 창문을 닫고 건조기를 건조 모드로 설정해줘.","[{'name': 'RainyWindowCloseAndDehumidifierMode', 'cron': '', 'period': -1, 'code': 'if ((#WeatherProvider).weatherProvider_weather == ""rain"") {\n  if ((#Window).windowControl_window == ""open"") {\n    (#Window).windowControl_close()\n    (#Dehumidifier).dehumidifierMode_setDehumidifierMode(""drying"")\n  }\n}'}]"
+"아기방 소리가 50dB 이상이고 거실 스피커가 멈춘 상태면, 거실 스피커로 아기가 깼다고 말하고 lullaby.mp3 파일 재생을 시작해줘.","[{'name': 'BabyRoomNoiseAlert', 'cron': '', 'period': -1, 'code': 'if ((#BabyRoomSoundSensor).soundSensor_soundLevel >= 50 && (#LivingRoomSpeaker).speakerPlaybackState == ""stopped"") {\n  (#LivingRoomSpeaker).speaker_Speak(""아기가 깼어요"")\n  (#LivingRoomSpeaker).speaker_PlaybackStart(""lullaby.mp3"")\n}'}]"
+"서버실 온도가 30도 이상이고 에어컨이 꺼져 있으면, 에어컨을 냉방 모드로 켜고 메인 사이렌을 긴급 모드로 울려줘.","[{'name': 'ServerRoomTempControl', 'cron': '', 'period': -1, 'code': 'if ((#TemperatureSensor).temperatureMeasurement_temperature >= 30.0 and (#AirConditioner).airConditionerMode == ""off"") {\n  (#AirConditioner).airConditionerMode_setMode(""cool"")\n  (#Alarm).alarm_siren_setMode(""emergency"")\n}'}]"
+"와인 셀러 온도가 15도 이상이고 습도가 60% 이상이면, 에어컨을 켜고 가습기를 꺼줘.","[{'name': 'CoolAndDehumidify', 'cron': '', 'period': -1, 'code': 'if ((#WineCellar).temperatureMeasurement_temperature >= 15.0 and (#WineCellar).humidityMeasurement_humidity >= 60.0) {\n  (#AirConditioner).AirConditionerMode_setAirConditionerMode(""cool"")\n  (#Humidifier).HumidifierMode_setHumidifierMode(""off"")\n}'}]"
+"지하에서 누수가 감지되고 메인 밸브가 열려 있으면, 모든 메인 밸브를 잠그고 경찰 사이렌을 울려줘.","[{'name': 'LeakDetectionAlert', 'cron': '', 'period': -1, 'code': 'if ((#LeakSensor).leakStatus_leak == ""detected"") {\n  if ((#MainValve).valveState_valve == ""open"") {\n    all(#MainValve).valveState_lock()\n    (#PoliceSiren).sirenMode_setSirenMode(""emergency"")\n  }\n}'}]"
+"창고 미세먼지가 100 이상이고 공기청정기가 자동 모드이면, 모드를 강풍 모드로 바꾸고 창고 스피커로 ""강풍 모드로 전환합니다""라고 말해줘.","[{'name': 'WarehouseDustAndFanMode', 'cron': '', 'period': -1, 'code': 'if ((#DustSensor).dustSensor_fineDustLevel >= 100 && (#AirPurifier).airPurifierMode == ""auto"") {\n  (#AirPurifier).airPurifierMode_setMode(""strong"")\n  (#Speaker).Speaker_Speak(""강풍 모드로 전환되었습니다"")\n}'}]"
+"게스트룸에 움직임이 감지되고 있고 에어컨이 꺼져 있으면, 에어컨을 자동 모드로 설정하고 목표 온도를 24도로 설정해줘.","[{'name': 'AutoACAdjustment', 'cron': '', 'period': -1, 'code': 'if ((#MotionSensor_GuestRoom).motionDetection_motion == ""detected"") {\n  if ((#AirConditioner_GuestRoom).airConditionerMode == ""off"") {\n    (#AirConditioner_GuestRoom).airConditionerMode_setMode(""auto"")\n    (#AirConditioner_GuestRoom).airConditionerMode_setTemperature(24)\n  }\n}'}]"
+"거실 조명이 켜져 있고 조도가 50 럭스 이상이면, 거실 블라인드를 닫고 에어컨을 자동 모드로 설정해줘.","[{'name': 'LivingRoomAutomation', 'cron': '', 'period': -1, 'code': 'if ((#Light).Light_Brightness >= 50) {\n  (#Blind).Blind_Close()\n  (#AirConditioner).AirConditionerMode_SetAirConditionerMode(""auto"")\n}'}]"
+10분마다 확인해서 온도가 30도 이상이면 에어컨을 쿨모드로 설정해줘.,"[{'name': 'TemperatureCheckAndCool', 'cron': '', 'period': 600000, 'code': 'if ((#TemperatureSensor).temperatureMeasurement_temperature >= 30.0) {\n  (#AirConditioner).AirConditionerMode_setAirConditionerMode(""cool"")\n}'}]"
+"30분마다 체크해서 온도가 20도 이상, 30도 미만이면 에어컨을 자동모드로 설정하고, 30도 이상이면 쿨모드로 설정해줘.","[{'name': 'TemperatureControl', 'cron': '', 'period': 1800000, 'code': 'currentTemp = (#TemperatureSensor).temperatureMeasurement_temperature\nif (currentTemp >= 30.0) {\n  (#AirConditioner).AirConditionerMode_setAirConditionerMode(""cool"")\n} else if (currentTemp > 20.0 && currentTemp < 30.0) {\n  (#AirConditioner).AirConditionerMode_setAirConditionerMode(""auto"")\n}'}]"
+매일 자정에 도어락을 잠궈줘.,"[{'name': 'LockDoorAtMidnight', 'cron': '0 0 * * *', 'period': -1, 'code': '(#DoorLock).lock()'}]"
+주말 오후 3시에 누수를 체크해서 감지되면 긴급 사이렌을 울려줘.,"[{'name': 'LeakDetectionAlert', 'cron': '0 15 * * 0,6', 'period': -1, 'code': 'if ((#LeakSensor).leakStatus == ""detected"") {\n  (#Siren).Siren_SoundAlarm()\n}'}]"
+매일 아침 7시에 밥솥을 재가열 모드로 설정해줘.,"[{'name': 'RiceCookerWarmMode', 'cron': '0 7 * * *', 'period': -1, 'code': '(#RiceCooker).RiceCookerMode_setRiceCookerMode(""warm"")'}]"
+주말 오후에 30분마다 로봇청소기를 자동모드로 작동시켜줘.,
+밤10시부터 자정까지 10분마다 긴급 사이렌을 울려줘.,
+평일 오전 8시부터 자정까지 한 시간마다 카메라로 사진을 찍어줘.,
+새해가 되면 로봇팔로 인사해줘.,
+평일 오전 7시에 밥솥을 자동청소 모드로 작동해줘.,"[{'name': 'AutoCleanRiceCooker', 'cron': '0 7 * * 1-5', 'period': -1, 'code': '(#RiceCooker).RiceCookerMode_setRiceCookerMode(""autoClean"")'}]"
+월요일과 수요일 오전 6시에 날씨 정보를 스피커로 알려줘.,"[{'name': 'WeatherInfoAnnouncement', 'cron': '0 6 * * 1,4', 'period': -1, 'code': '(#WeatherProvider).GetWeatherInfo(37.498, 127.028)\n(#Speaker).mediaPlayback_speak(""Today\'s weather is: "")\n(#Speaker).mediaPlayback_speak(weatherInfo)'}]"
+1시간마다 스피커 볼륨을 10씩 올려줘.,"[{'name': 'IncreaseSpeakerVolume', 'cron': '', 'period': 3600000, 'code': 'volume = (#Speaker).Speaker_Volume\nvolume += 10\n(#Speaker).Speaker_SetVolume(volume)'}]"
+"월요일 아침 8시마다 금고와 도어락이 모두 잠겨있으면 스피커로 ""안전합니다""라고 말해줘.","[{'name': 'SafetyCheck', 'cron': '0 8 * * 1', 'period': -1, 'code': 'if ((#Safe).safe_state == ""locked"" and (#DoorLock).door_lock_state == ""locked"") {\n  (#Speaker).speaker_speak(""안전합니다"")\n}'}]"
+저녁 7시부터 10시까지 30분마다 로봇청소기를 체크해서 멈춰있으면 자동 모드로 실행시켜줘.,"[{'name': 'RobotCleanerCheck', 'cron': '0 19 * * *', 'period': 1800000, 'code': 'if ((#RobotVacuumCleaner).robotVacuumCleanerMode == ""stop"") {\n  (#RobotVacuumCleaner).robotVacuumCleanerMode_setRobotVacuumCleanerMode(""auto"")\n}'}]"
+정오마다 301동 식당의 점심 메뉴를 스피커로 말해줘.,
+오후 6시에 학생 식당의 저녁 메뉴를 스피커로 알려줘.,"[{'name': 'AnnounceDinnerMenu', 'cron': '0 18 * * *', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#MenuProvider).Menu)'}]"
+"오후 11시에 금고가 열려있거나 도어락이 열려있으면, 스피커로 ""금고와 도어락을 확인하세요""라고 말해줘.","[{'name': 'SecurityCheck', 'cron': '0 23 * * *', 'period': -1, 'code': 'if ((#Safe).safe_state == ""open"" or (#DoorLock).door_lock_state == ""open"") {\n  (#Speaker).speaker_speak(""금고와 도어락을 확인하세요"")\n}'}]"
+"30분마다 체크해서 온도가 30도 이상이면 목표 온도를 25도로 설정하고, 23도 미만이면 26도로 설정해줘.","[{'name': 'TemperatureAdjustment', 'cron': '', 'period': 1800000, 'code': 'currentTemp = (#TemperatureSensor).temperatureMeasurement_temperature\nif (currentTemp >= 30.0) {\n  (#Heater).Heater_SetTemperature(25)\n} else if (currentTemp < 23.0) {\n  (#Heater).Heater_SetTemperature(26)\n}'}]"
+10분마다 습도를 체크해서 50 이상이면 가습기를 끄고 20 이하면 가습기를 켜고 자동모드로 설정해줘.,"[{'name': 'HumidityMonitor', 'cron': '', 'period': 600000, 'code': 'humidity = (#HumiditySensor).HumiditySensor_relativeHumidity\nif (humidity >= 50) {\n  (#Humidifier).HumidifierMode_setHumidifierMode(""off"")\n} else if (humidity <= 20) {\n  (#Humidifier).HumidifierMode_setHumidifierMode(""auto"")\n}'}]"
+1시간마다 미세먼지 농도를 체크해서 200 이상이면 공기청정기를 강풍모드로 설정하고 100 이하이면 미풍모드로 설정해줘.,
+5분마다 체크해서 충전기가 완충됐으면 충전기를 꺼줘.,
+크리스마스가 되면 불을 빨간색으로 바꿔줘.,"[{'name': 'ChristmasRedLight', 'cron': '', 'period': -1, 'code': 'if ((#Clock).clock_month == 12 and (#Clock).clock_day == 25) {\n  (#Light).Light_SetColor(""255|0|0"")\n}'}]"
+"크리스마스에 1시간마다 스피커로 ""Christmas.mp3""을 재생해줘.","[{'name': 'ChristmasMusic', 'cron': '0 0 * * 25', 'period': 3600000, 'code': '(#Speaker).Speaker_Play(""Christmas.mp3"")'}]"
+지금부터 자정까지 30분마다 현재 시각을 스피커로 출력해줘.,"[{'name': 'TimeAnnouncement', 'cron': '', 'period': 1800000, 'code': '(#Speaker).Speaker_Speak((#Clock).clock_datetime)'}]"
+지금부터 오후 3시까지 10분마다 긴급 사이렌을 5초간 울렸다 꺼줘.,
+오후 6시에 벽에 있는 홀수 태그가 붙은 블라인드 높이를 모두 50%로 조절해줘.,
+주말에 2시간마다 거실에 있는 로봇 청소기들을 모두 반복 모드로 설정해줘.,"[{'name': 'WeeklyRoomVacuumCleaner', 'cron': '0 0 * * 0,6', 'period': 7200000, 'code': 'all(#LivingRoom_RobotVacuumCleaner).robotVacuumCleanerMode_setRobotVacuumCleanerMode(""repeat"")'}]"
+"그룹 2에 속한 습도 센서들을 1분마다 체크해서 모두 50% 이상이면, 모든 제습기를 리프레쉬 모드로 설정해줘.","[{'name': 'HumidityCheckAndRefresh', 'cron': '', 'period': 60000, 'code': ""if (any(#Group2_HumiditySensor).relativeHumidityMeasurement_humidity >= 50) { all(#Group2_Humidifier).SetHumidifierMode('refreshing') }""}]"
+밤 11시에 짝수 태그가 붙은 모든 문을 닫아줘.,"[{'name': 'CloseEvenTaggedDoorsAtNight', 'cron': '0 23 * * *', 'period': -1, 'code': 'all(#EvenTaggedDoor).doorControl_close()'}]"
+매일 아침 7시에 구역1에 있는 모든 블라인드를 올려줘.,"[{'name': 'MorningBlindUp', 'cron': '0 7 * * *', 'period': -1, 'code': 'all(#Area1_Blind).windowShade_up()'}]"
+밤 7시에 1층에 사람이 없으면 불을 다 꺼주고 2층은 8시에 사람이 없으면 불을 다 꺼줘.,"[{'name': 'NightLightControl', 'cron': '0 19 * * *', 'period': -1, 'code': 'if ((#Floor1_PresenceSensor).presenceSensor_presence == ""absent"") {\n  all(#Floor1_Light).switch_off()\n}\n\nif ((#Clock).clock_hour == 8) {\n  if ((#Floor2_PresenceSensor).presenceSensor_presence == ""absent"") {\n    all(#Floor2_Light).switch_off()\n  }\n}'}]"
+"섹터1의 모든 도어락을 1시간마다 확인해서, 하나라도 열려 있으면 해당 섹터의 모든 조명을 빨간색으로 바꿔줘.","[{'name': 'CheckDoorLocksAndChangeLights', 'cron': '', 'period': 3600000, 'code': 'any(#Sector1_DoorLock).doorLockState == ""open"" { (#Sector1_Light).colorControl_setColor(""255|0|0"") }'}]"
+평일 오후 6시에 사무실의 재실 센서가 부재 상태를 나타내면 사무실 에어컨과 가습기를 전부 꺼줘.,
+"아침 8시에 홀수 태그가 붙은 블라인드를 모두 열어주고, 9시에는 짝수 태그가 붙은 모든 블라인드를 열어줘.",
+"주말 동안 공장의 모든 펌프를 30분마다 확인해서, 켜진 펌프가 하나라도 있으면 모두 꺼주고 ""test@example.com""에게 ""위험"" 제목으로 ""펌프가 켜졌습니다""라는 내용의 메일 보내줘.",
+"밤 10시에 거실에 사람이 감지되면, 모든 불을 켜줘.",
+"자정에 복도에 움직임이 감지되면, 복도의 모든 조명을 100%로 켜줘.",
+"자정부터 오전 5시까지 1시간마다 체크해서 문이 하나라도 열려있으면, 복도의 조명을 모두 50%로 켜줘.",
+"밤 10시부터 11시까지 움직임이 한번도 감지되지 않았으면, 모든 도어락을 잠궈줘.",
+아침 9시에 3층의 짝수 태그가 붙은 블라인드를 모두 올려줘.,"[{'name': 'Morning9AMRaiseEvenFloorBlinds', 'cron': '0 9 * * *', 'period': -1, 'code': 'all(#EvenTaggedBlind).windowShade_up()'}]"
+매일 아침 8시에 조명을 켜 줘.,"[{'name': 'MorningLightOn', 'cron': '0 8 * * *', 'period': -1, 'code': '(#Light).switch_on()'}]"
+매일 아침 8시에 스피커로 ‘일어나세요’라고 말해 줘. 그리고 창문이 닫혀있으면 열어줘.,"[{'name': 'GoodMorningAndOpenWindow', 'cron': '0 8 * * *', 'period': -1, 'code': 'if ((#Window).windowControl_window == ""closed"") {\n  (#Window).windowControl_open()\n}\n(#Speaker).Speaker_Speak(""일어나세요"")'}]"
+오후 10시부터 11시까지 30초마다 비를 감지해서 비가 오면 창문을 닫아줘.,"[{'name': 'RainDetectionAndWindowClosure', 'cron': '0 22 * * *', 'period': 180000, 'code': 'if ((#RainSensor).rainStatus == ""on"") {\n  (#Window).windowControl_close()\n}'}]"
+"주말에 5초마다 체크해서 펌프가 꺼져 있으면 켜고, 켜져 있으면 꺼줘.","[{'name': 'PumpToggle', 'cron': '', 'period': 5000, 'code': ""weekend := (#Clock).clock_weekday\nif ((weekend != 'saturday') and (weekend != 'sunday')) {\n  break\n}\npumpStatus := (#Pump).pumpMode\nif (pumpStatus == 'off') {\n  (#Pump).pumpMode_setPumpMode('normal')\n} else {\n  (#Pump).pumpMode_setPumpMode('off')\n}""}]"
+"15분마다 온도를 측정해서 25도 이상이면 에어컨을 냉방 모드로 켜고, 25도 미만이면 꺼줘.","[{'name': 'TemperatureControl', 'cron': '', 'period': 900000, 'code': 'currentTemp = (#TemperatureSensor).temperatureMeasurement_temperature\nif (currentTemp >= 25.0) {\n  (#AirConditioner).AirConditionerMode_setAirConditionerMode(""cool"")\n} else {\n  (#AirConditioner).AirConditionerMode_setAirConditionerMode(""off"")\n}'}]"
+오후 10시부터 11시까지 5분마다 체크해서 충전이 완료되면 꺼줘.,"[{'name': 'BatteryCheck', 'cron': '', 'period': 300000, 'code': 'if ((#Charger).ChargingState_chargingState == ""fullyCharged"") {\n  (#Charger).ChargingState_stop()\n}'}]"
+오전 8시에 고효율 태그가 붙은 공기청정기를 켜고 자동모드로 설정해줘.,
+오후 6시에 창문이 하나라도 열려있으면 모두 닫아줘.,"[{'name': 'CloseAllWindows', 'cron': '0 18 * * *', 'period': -1, 'code': 'if (any(#Window).windowControl_window == ""open"") {\n  all(#Window).windowControl_close()\n}'}]"
+오후 1시에 블라인드를 모두 열어줘.,
+오후 6시부터 8시까지 1층에 사람이 감지되면 1층 불을 다 켜줘.,
+1시간마다 문을 열었다 닫았다 반복해줘.,
+오후 1시부터 3시까지 5분마다 벨브를 열었다 닫았다 반복해줘.,
+30분마다 거실 공기청정기를 수면모드와 자동모드 사이에서 전환해줘.,
+10분마다 창문을 열었다 닫았다 반복해줘.,
+30분마다 공기청정기를 수면모드와 강풍모드 사이에서 전환해줘.,
+습도가 30% 이하로 떨어질 때마다 가습기를 켜줘.,
+비가 그칠 때마다 창문을 열어줘.,
+소리 센서 값이 30을 넘길 때마다 공기 청정기를 수면모드로 바꿔줘.,
+습도가 50% 밑으로 떨어질 때마다 제습기를 건조모드로 작동해줘.,
+창문이 열릴 때마다 스피커로 '창문이 열렸습니다'라고 말해줘.,
+움직임이 감지될 때마다 조명의 밝기를 10씩 높여줘. 최대 밝기가 되면 그만해.,
+조도가 100룩스 미만이 될 때마다 조명을 켜줘.,
+미세먼지 농도가 80보다 높아질 때마다 공기청정기를 강풍으로 설정해줘.,
+이산화탄소 농도가 900ppm 이상이 될때마다 벨브를 닫아줘.,
+온도가 30도 이상이 될 때마다 블라인드를 닫아줘.,
+"문이 열리면 이후에 1분마다 스피커로 ""어서오세요""를 출력해줘.",
+접촉센서가 닫히면 10초마다 경찰 사이렌을 울려줘.,
+현관문이 열리면 그 후부터 5분마다 금고를 체크해서 잠겨있지 않으면 스피커로 금고가 열려있다고 출력해줘.,
+"누수가 감지되면 즉시 밸브를 잠그고 1분마다 스피커로 ""누수가 감지되었습니다. 대피하세요""라고 출력해줘.",
+연기가 감지되면 1분마다 긴급 사이렌을 5초간 울려줘.,
+"자정이 되면 문을 닫고, 오전 6시까지 한 시간마다 조명을 체크해서 밝기가 30보다 크면 10으로 낮춰줘.",
+"충전기 전압이 4V 이하로 떨어지면 30분마다 ""충전 전압이 낮습니다""라고 스피커로 말해줘.",
+"연기가 감지되면 스피커로 화재를 알리고, 이후 5분마다 test@example.com으로 ""화재 경고""라는 제목과 ""화재가 발생했습니다. 대피하세요""라는 내용의 이메일을 보내줘.",
+건조가 끝나면 10분마다 '세탁물을 꺼내세요'라고 스피커로 말해줘.,
+움직임이 감지되면 그 뒤로 10초마다 사진을 찍어줘.,
+"습도가 50% 이상이 될 때마다, 그룹1 태그가 붙은 제습기를 모두 건조모드로 작동시켜.",
+조도가 200럭스보다 낮아질 때마다 모든 조명을 켜줘.,
+"상단부에 있는 조명이 켜질 때마다, 하단부에 있는 조명도 켜줘.",
+"조명 태그가 붙은 버튼이 눌릴때마다, 홀수 태그가 붙은 모든 조명의 밝기를 최대로 밝혀줘.",
+"로봇 태그가 붙은 버튼이 눌릴때마다, 짝수 태그 로봇청소기들을 모두 자동모드로 작동시켜줘.",
+"문이 열릴 때마다, 복도와 거실의 조명을 모두 켜줘.",
+중단 태그가 달린 버튼이 눌릴때마다 짝수 태그가 붙은 장치들을 모두 꺼줘.,
+"비가 올때마다, 모든 창문과 문을 닫아줘",
+도어락이 잠길때마다 입구의 조명을 최대밝기로 10초 유지하다가 꺼줘.,
+입구에 움직임이 감지될 때마다 입구 조명을 최대밝기로 켰다가 3초 뒤에 꺼줘.,
+조도가 50럭스 미만으로 떨어질 때마다 주차장의 모든 쉐이드를 열어줘.,
+서버 랙 습도가 70%보다 높아지면 연구실 제습기를 제습모드로 설정하고 1시간마다 습도를 다시 체크해서 50% 밑이면 제습기를 꺼줘.,
+"주차장 이산화탄소 농도가 880ppm보다 높아지면, 10초마다 ""CO2 농도 위험""이라고 주차장 스피커로 출력해줘.",
+"거실에서 연기가 감지되면 모든 화재 경보를 울리고, 10초마다 스피커로 ""대피하세요""라고 출력해줘.",
+"1층에서 재실센서가 하나라도 감지되면, 1분마다 모든 긴급 사이렌을 3초간 울렸다 꺼줘.",
+로비에서 움직임이 감지되면 30초마다 로비 사진을 찍어줘.,
+"주방의 연기 감지기로 연기가 감지가 되면 거실 스피커로 10초마다 ""화재 발생""이라고 말해줘.",
+주방의 누수 센서가 감지될 때마다 주방 카메라로 스트리밍을 시작해줘.,
+마당에 있는 움직임 센서가 감지될 때마다 경찰 사이렌을 울려줘.,
+멀티버튼의 버튼2가 눌릴 때마다 거실의 창문을 모두 열어줘.,
+거실 블라인드를 1시간 간격으로 올렸다 내렸다 반복해줘.,
+안방 창문을 2시간마다 열었다 닫았다 반복해줘.,
+회의실 에어컨의 목표 온도를 1시간마다 25와 20으로 번갈아 설정해줘.,
+"주차장의 차량 충전기가 완충될때마다, 스피커로 ""충전이 완료되었습니다""라고 말해줘.",
+"회의실 문이 열릴 때마다, 조명의 밝기를 최대밝기로 켰다가 10초뒤에 꺼줘.",
+아침마다 불 다 켜줘,
+매일 9시에 불을 켜줘,"[{'name': 'TurnOnLightAt9AM', 'cron': '0 9 * * *', 'period': -1, 'code': '(#Light).switch_on()'}]"
+매일 오후 9시에 불을 꺼줘,"[{'name': 'LightsOffAtNight', 'cron': '0 21 * * *', 'period': -1, 'code': '(#Light).switch_off()'}]"
+식기세척기를 건조 모드로 설정해줘.,"[{'name': '식기세척기건조모드설정', 'cron': '', 'period': -1, 'code': '(#Dishwasher).dishwasherMode_setDishwasherMode(""dry"")'}]"
+식기세척기를 건조 모드로 설정해줘.,"[{'name': 'SetDishwasherDryMode', 'cron': '', 'period': -1, 'code': '(#Dishwasher).dishwasherMode_setDishwasherMode(""dry"")'}]"
+식기세척기를 건조 모드로 설정해줘.,"[{'name': 'SetDishwasherDryMode', 'cron': '', 'period': -1, 'code': '(#Dishwasher).DishwasherMode_setDishwasherMode(""dry"")'}]"
+섹터2에 있는 블라인드를 모두 열어줘.,"[{'name': '섹터2블라인드열기', 'cron': '', 'period': -1, 'code': 'all(#Sector2 #Blind).blind_open()'}]"
+섹터2에 있는 블라인드를 모두 열어줘.,"[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': 'all(#Sector2_Blind).windowShade_open()'}]"
+섹터2에 있는 블라인드를 모두 열어줘.,"[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': 'all(#Sector2_Blind).windowShade_open()'}]"
+섹터2에 있는 블라인드를 모두 열어줘.,"[{'name': '섹터2블라인드열기', 'cron': '', 'period': -1, 'code': 'all(#Sector2 #Blind).blind_open()'}]"
+섹터2에 있는 블라인드를 모두 열어줘.,"[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': 'all(#Sector2_Blind).windowShade_open()'}]"
+섹터2에 있는 블라인드를 모두 열어줘.,"[{'name': 'Scenario1', 'cron': '', 'period': -1, 'code': 'all(#Sector2_Blind).windowShade_open()'}]"
+매일 아침 블라인드가 닫히면 스피커로 '안녕'이라고 인사하는 시나리오,"[{'name': 'GoodMorningGreeting', 'cron': '0 6 * * *', 'period': -1, 'code': 'if ((#Blind).windowShade_state == ""closed"") {\n  (#Speaker).mediaPlayback_speak(""안녕"")\n}'}]"
+Switch the dishwasher to dry mode.,"[{'name': 'SwitchDishwasherToDryMode', 'cron': '', 'period': 0, 'code': '(#Dishwasher).dishwasher_setdishwashermode(""dry"")'}]"
+식기세척기를 건조 모드로 설정해줘.,"[{'name': '', 'cron': '', 'period': 0, 'code': ''}]"
+미세먼지 농도를 스피커로 알려줘.,"[{'name': '미세먼지알림', 'cron': '', 'period': -1, 'code': 'pm25 = (#WeatherProvider).weatherProvider_pm25Weather\nmessage = ""현재 미세먼지 농도는 ""\nmessage = message + pm25\nmessage = message + ""입니다.""\n(#Speaker).mediaPlayback_speak(message)'}]"
+미세먼지 농도를 스피커로 알려줘.,"[{'name': 'NotifyPM25', 'cron': '', 'period': -1, 'code': '(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_pm25Weather)'}]"
+미세먼지 농도를 스피커로 알려줘.,"[{'name': 'NotifyPM25', 'cron': '', 'period': -1, 'code': '(#Speaker).Speaker_Speak((#AirQualityDetector).dustSensor_fineDustLevel)'}]"
+미세먼지 농도를 스피커로 알려줘.,"[{'name': '미세먼지농도알림', 'cron': '', 'period': -1, 'code': 'pm25 = (#WeatherProvider).weatherProvider_pm25Weather\nmessage = ""현재 미세먼지 농도는 ""\npm25_str = pm25\n(#Speaker).mediaPlayback_speak(message)\n(#Speaker).mediaPlayback_speak(pm25_str)'}]"
+미세먼지 농도를 스피커로 알려줘.,"[{'name': 'NotifyPM25', 'cron': '', 'period': -1, 'code': '(#Speaker).mediaPlayback_speak((#WeatherProvider).weatherProvider_pm25Weather)'}]"
+매일 오후 3시에 사람이 없으면 불을 끄고 1시간마다 로봇청소기를 작동시키는 시나리오,"[{'name': 'TurnOffLightIfNoOnePresent', 'cron': '', 'period': 0, 'code': 'while true {\n    if ((#LightSensor).lightsensor_brightness < 10) {\n        (#Light).switch_off()\n    } else {\n        (#Light).switch_on()\n    }\n    delay(1 MIN)\n}'}]"
+매일 오후 3시에 사람이 없으면 불을 끄고 1시간마다 로봇청소기를 돌리는 자동화 시나리오,"[{'name': 'AutoOffAndScheduleVacuum', 'cron': '', 'period': 0, 'code': 'prev := (#LightSensor).lightsensor_brightness\ncurr = (#LightSensor).lightsensor_brightness\nif (prev > 0 and curr == 0) {\n    (#Light).switch_off()\n}\ndelay(3600000)\nall(#Even #RobotVacuumCleaner).switch_on()'}]"
+아침 9시마다 사람이 있으면 블라인드를 열어줘.,"[{'name': 'OpenBlindsAt9AM', 'cron': '0 9 * * *', 'period': 0, 'code': '(#Blind).windowcovering_uporopen()'}]"
+아침 9시마다 사람이 있으면 블라인드를 열어줘.,"[{'name': 'OpenBlindsAt9AM', 'cron': '0 9 * * *', 'period': 0, 'code': '(#Blind).windowcovering_uporopen()'}]"

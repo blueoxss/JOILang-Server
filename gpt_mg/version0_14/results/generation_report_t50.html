@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Generation Report</title>
+<style>
+body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; margin: 24px; color: #17202a; background: linear-gradient(180deg, #f7fbff 0%, #eef4f8 100%); }
+h1 { margin: 0 0 8px; font-size: 28px; }
+h2 { margin: 28px 0 12px; font-size: 20px; }
+.subtitle { color: #4b5563; margin-bottom: 20px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin: 18px 0 24px; }
+.card { background: white; border-radius: 14px; padding: 16px; box-shadow: 0 8px 20px rgba(27, 39, 51, 0.08); border: 1px solid #dce6ef; }
+.card h3 { margin: 0 0 12px; font-size: 18px; }
+.metric { display: flex; justify-content: space-between; gap: 12px; margin: 8px 0; }
+.metric span { color: #64748b; }
+.metric strong { font-size: 16px; }
+section { margin-bottom: 28px; }
+table { border-collapse: separate; border-spacing: 0; width: 100%; background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 20px rgba(27, 39, 51, 0.08); border: 1px solid #dce6ef; }
+th, td { padding: 10px 12px; text-align: center; border-bottom: 1px solid #edf2f7; }
+thead th { background: #0f172a; color: white; position: sticky; top: 0; }
+tbody tr:nth-child(even) { background: #f8fbfd; }
+tbody tr:hover { background: #eef6ff; }
+tbody th { text-align: left; background: #f3f7fb; }
+code { background: #e2ecf5; padding: 2px 6px; border-radius: 6px; }
+</style></head><body>
+<h1>Generation Report</h1>
+<div class="subtitle">DET pass threshold = <code>50</code>. Higher values trend greener. Row-best cells are outlined.</div>
+<div class="cards"><div class="card">
+<h3>v1</h3>
+<div class="metric"><span>Avg DET</span><strong>90.7156</strong></div>
+<div class="metric"><span>Pass Rate</span><strong>98.93%</strong></div>
+<div class="metric"><span>Exact Rate</span><strong>33.21%</strong></div>
+<div class="metric"><span>Rows</span><strong>280</strong></div>
+</div>
+<div class="card">
+<h3>v2</h3>
+<div class="metric"><span>Avg DET</span><strong>91.7515</strong></div>
+<div class="metric"><span>Pass Rate</span><strong>99.29%</strong></div>
+<div class="metric"><span>Exact Rate</span><strong>36.79%</strong></div>
+<div class="metric"><span>Rows</span><strong>280</strong></div>
+</div>
+<div class="card">
+<h3>v3</h3>
+<div class="metric"><span>Avg DET</span><strong>92.5769</strong></div>
+<div class="metric"><span>Pass Rate</span><strong>99.64%</strong></div>
+<div class="metric"><span>Exact Rate</span><strong>38.21%</strong></div>
+<div class="metric"><span>Rows</span><strong>280</strong></div>
+</div>
+<div class="card">
+<h3>v4</h3>
+<div class="metric"><span>Avg DET</span><strong>93.2698</strong></div>
+<div class="metric"><span>Pass Rate</span><strong>100.00%</strong></div>
+<div class="metric"><span>Exact Rate</span><strong>37.50%</strong></div>
+<div class="metric"><span>Rows</span><strong>280</strong></div>
+</div>
+<div class="card">
+<h3>best_of_v2_v3_v4</h3>
+<div class="metric"><span>Avg DET</span><strong>94.7038</strong></div>
+<div class="metric"><span>Pass Rate</span><strong>100.00%</strong></div>
+<div class="metric"><span>Exact Rate</span><strong>45.71%</strong></div>
+<div class="metric"><span>Rows</span><strong>280</strong></div>
+</div></div>
+<section><h2>Overall Metric Heatmap</h2>
+<table>
+<thead><tr>
+<th>metric</th>
+<th>v1</th>
+<th>v2</th>
+<th>v3</th>
+<th>v4</th>
+<th>best_of_v2_v3_v4</th>
+</tr></thead><tbody>
+<tr>
+<th>avg_det</th>
+<th style="background:rgb(106, 191, 118)">90.7156</th>
+<td style="background:rgb(102, 190, 117)">91.7515</td>
+<td style="background:rgb(99, 190, 116)">92.5769</td>
+<td style="background:rgb(97, 189, 115)">93.2698</td>
+<td style="background:rgb(92, 188, 113); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">94.7038</td>
+</tr>
+<tr>
+<th>pass_rate@50</th>
+<th style="background:rgb(77, 184, 109)">98.93%</th>
+<td style="background:rgb(76, 184, 108)">99.29%</td>
+<td style="background:rgb(75, 184, 108)">99.64%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+</tr>
+<tr>
+<th>exact_rate</th>
+<th style="background:rgb(248, 187, 145)">33.21%</th>
+<td style="background:rgb(248, 195, 149)">36.79%</td>
+<td style="background:rgb(248, 198, 150)">38.21%</td>
+<td style="background:rgb(248, 197, 150)">37.50%</td>
+<td style="background:rgb(248, 216, 158); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">45.71%</td>
+</tr>
+</tbody></table></section>
+<section><h2>Overall Detail</h2>
+<table>
+<thead><tr>
+<th>generation</th>
+<th>csv</th>
+<th>rows</th>
+<th>avg_det</th>
+<th>pass_rate@50</th>
+<th>exact_rate</th>
+<th>exact_count</th>
+<th>repaired_count</th>
+<th>selected_from</th>
+</tr></thead><tbody>
+<tr>
+<th>v1</th>
+<th>results/full_280_rerank.csv</th>
+<td>280</td>
+<td style="background:rgb(106, 191, 118)">90.7156</td>
+<td style="background:rgb(77, 184, 109)">98.93%</td>
+<td style="background:rgb(248, 187, 145)">33.21%</td>
+<td>93</td>
+<td>112</td>
+<td>-</td>
+</tr>
+<tr>
+<th>v2</th>
+<th>results/full_280_rerank_v2.csv</th>
+<td>280</td>
+<td style="background:rgb(102, 190, 117)">91.7515</td>
+<td style="background:rgb(76, 184, 108)">99.29%</td>
+<td style="background:rgb(248, 195, 149)">36.79%</td>
+<td>103</td>
+<td>122</td>
+<td>-</td>
+</tr>
+<tr>
+<th>v3</th>
+<th>results/full_280_rerank_v3.csv</th>
+<td>280</td>
+<td style="background:rgb(99, 190, 116)">92.5769</td>
+<td style="background:rgb(75, 184, 108)">99.64%</td>
+<td style="background:rgb(248, 198, 150)">38.21%</td>
+<td>107</td>
+<td>128</td>
+<td>-</td>
+</tr>
+<tr>
+<th>v4</th>
+<th>results/full_280_rerank_v4.csv</th>
+<td>280</td>
+<td style="background:rgb(97, 189, 115)">93.2698</td>
+<td style="background:rgb(74, 184, 108)">100.00%</td>
+<td style="background:rgb(248, 197, 150)">37.50%</td>
+<td>105</td>
+<td>88</td>
+<td>-</td>
+</tr>
+<tr>
+<th>best_of_v2_v3_v4</th>
+<th>results/full_280_rerank_best_of_v2_v3_v4.csv</th>
+<td>280</td>
+<td style="background:rgb(92, 188, 113)">94.7038</td>
+<td style="background:rgb(74, 184, 108)">100.00%</td>
+<td style="background:rgb(248, 216, 158)">45.71%</td>
+<td>128</td>
+<td>139</td>
+<td>v2:192, v3:36, v4:52</td>
+</tr>
+</tbody></table></section>
+<section><h2>Category Pass Rate</h2>
+<table>
+<thead><tr>
+<th>category</th>
+<th>rows</th>
+<th>v1</th>
+<th>v2</th>
+<th>v3</th>
+<th>v4</th>
+<th>best_of_v2_v3_v4</th>
+</tr></thead><tbody>
+<tr>
+<th>1</th>
+<th>30</th>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+</tr>
+<tr>
+<th>2</th>
+<th>30</th>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+</tr>
+<tr>
+<th>3</th>
+<th>30</th>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+</tr>
+<tr>
+<th>4</th>
+<th>30</th>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+</tr>
+<tr>
+<th>5</th>
+<th>30</th>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+</tr>
+<tr>
+<th>6</th>
+<th>30</th>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+</tr>
+<tr>
+<th>7</th>
+<th>50</th>
+<td style="background:rgb(94, 189, 114)">94.00%</td>
+<td style="background:rgb(87, 187, 112)">96.00%</td>
+<td style="background:rgb(80, 185, 110)">98.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+</tr>
+<tr>
+<th>8</th>
+<th>50</th>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+<td style="background:rgb(74, 184, 108); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">100.00%</td>
+</tr>
+</tbody></table></section>
+<section><h2>Category Exact Rate</h2>
+<table>
+<thead><tr>
+<th>category</th>
+<th>rows</th>
+<th>v1</th>
+<th>v2</th>
+<th>v3</th>
+<th>v4</th>
+<th>best_of_v2_v3_v4</th>
+</tr></thead><tbody>
+<tr>
+<th>1</th>
+<th>30</th>
+<td style="background:rgb(166, 206, 137)">73.33%</td>
+<td style="background:rgb(166, 206, 137)">73.33%</td>
+<td style="background:rgb(178, 209, 141)">70.00%</td>
+<td style="background:rgb(166, 206, 137)">73.33%</td>
+<td style="background:rgb(132, 198, 126); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">83.33%</td>
+</tr>
+<tr>
+<th>2</th>
+<th>30</th>
+<td style="background:rgb(248, 210, 156)">43.33%</td>
+<td style="background:rgb(248, 210, 156)">43.33%</td>
+<td style="background:rgb(248, 226, 163)">50.00%</td>
+<td style="background:rgb(201, 214, 148); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">63.33%</td>
+<td style="background:rgb(201, 214, 148); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">63.33%</td>
+</tr>
+<tr>
+<th>3</th>
+<th>30</th>
+<td style="background:rgb(248, 195, 149)">36.67%</td>
+<td style="background:rgb(248, 210, 156)">43.33%</td>
+<td style="background:rgb(248, 218, 159)">46.67%</td>
+<td style="background:rgb(248, 195, 149)">36.67%</td>
+<td style="background:rgb(248, 226, 163); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">50.00%</td>
+</tr>
+<tr>
+<th>4</th>
+<th>30</th>
+<td style="background:rgb(248, 218, 159)">46.67%</td>
+<td style="background:rgb(248, 226, 163)">50.00%</td>
+<td style="background:rgb(248, 226, 163)">50.00%</td>
+<td style="background:rgb(236, 223, 159)">53.33%</td>
+<td style="background:rgb(213, 217, 152); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">60.00%</td>
+</tr>
+<tr>
+<th>5</th>
+<th>30</th>
+<td style="background:rgb(248, 226, 163)">50.00%</td>
+<td style="background:rgb(236, 223, 159)">53.33%</td>
+<td style="background:rgb(213, 217, 152)">60.00%</td>
+<td style="background:rgb(248, 226, 163)">50.00%</td>
+<td style="background:rgb(201, 214, 148); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">63.33%</td>
+</tr>
+<tr>
+<th>6</th>
+<th>30</th>
+<td style="background:rgb(248, 172, 138)">26.67%</td>
+<td style="background:rgb(248, 195, 149)">36.67%</td>
+<td style="background:rgb(248, 187, 145)">33.33%</td>
+<td style="background:rgb(248, 149, 128)">16.67%</td>
+<td style="background:rgb(248, 203, 152); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">40.00%</td>
+</tr>
+<tr>
+<th>7</th>
+<th>50</th>
+<td style="background:rgb(248, 147, 127)">16.00%</td>
+<td style="background:rgb(248, 157, 131)">20.00%</td>
+<td style="background:rgb(248, 157, 131)">20.00%</td>
+<td style="background:rgb(248, 161, 133)">22.00%</td>
+<td style="background:rgb(248, 175, 140); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">28.00%</td>
+</tr>
+<tr>
+<th>8</th>
+<th>50</th>
+<td style="background:rgb(248, 120, 115)">4.00%</td>
+<td style="background:rgb(248, 124, 117)">6.00%</td>
+<td style="background:rgb(248, 129, 119)">8.00%</td>
+<td style="background:rgb(248, 138, 123); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">12.00%</td>
+<td style="background:rgb(248, 138, 123); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">12.00%</td>
+</tr>
+</tbody></table></section>
+<section><h2>Category Avg DET</h2>
+<table>
+<thead><tr>
+<th>category</th>
+<th>rows</th>
+<th>v1</th>
+<th>v2</th>
+<th>v3</th>
+<th>v4</th>
+<th>best_of_v2_v3_v4</th>
+</tr></thead><tbody>
+<tr>
+<th>1</th>
+<th>30</th>
+<td style="background:rgb(90, 187, 113)">95.2465</td>
+<td style="background:rgb(87, 187, 112)">96.1372</td>
+<td style="background:rgb(88, 187, 112)">95.8392</td>
+<td style="background:rgb(87, 187, 112)">96.2543</td>
+<td style="background:rgb(79, 185, 109); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">98.5392</td>
+</tr>
+<tr>
+<th>2</th>
+<th>30</th>
+<td style="background:rgb(92, 188, 113)">94.6693</td>
+<td style="background:rgb(92, 188, 113)">94.6693</td>
+<td style="background:rgb(87, 187, 112)">95.9802</td>
+<td style="background:rgb(80, 185, 110)">98.0602</td>
+<td style="background:rgb(80, 185, 110); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">98.1305</td>
+</tr>
+<tr>
+<th>3</th>
+<th>30</th>
+<td style="background:rgb(93, 188, 114)">94.3427</td>
+<td style="background:rgb(88, 187, 112)">95.8979</td>
+<td style="background:rgb(87, 187, 112)">96.2260</td>
+<td style="background:rgb(91, 188, 113)">94.9732</td>
+<td style="background:rgb(85, 186, 111); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">96.7510</td>
+</tr>
+<tr>
+<th>4</th>
+<th>30</th>
+<td style="background:rgb(87, 187, 112)">96.2171</td>
+<td style="background:rgb(86, 187, 112)">96.3264</td>
+<td style="background:rgb(86, 187, 112)">96.3416</td>
+<td style="background:rgb(82, 186, 110)">97.4302</td>
+<td style="background:rgb(81, 185, 110); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">97.7097</td>
+</tr>
+<tr>
+<th>5</th>
+<th>30</th>
+<td style="background:rgb(91, 188, 113)">95.1028</td>
+<td style="background:rgb(90, 188, 113)">95.1913</td>
+<td style="background:rgb(86, 187, 112)">96.3336</td>
+<td style="background:rgb(89, 187, 112)">95.4744</td>
+<td style="background:rgb(83, 186, 111); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">97.2365</td>
+</tr>
+<tr>
+<th>6</th>
+<th>30</th>
+<td style="background:rgb(92, 188, 113)">94.6098</td>
+<td style="background:rgb(90, 187, 113)">95.3944</td>
+<td style="background:rgb(90, 188, 113)">95.1980</td>
+<td style="background:rgb(94, 188, 114)">94.2004</td>
+<td style="background:rgb(87, 187, 112); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">96.1620</td>
+</tr>
+<tr>
+<th>7</th>
+<th>50</th>
+<td style="background:rgb(127, 196, 124)">84.5707</td>
+<td style="background:rgb(119, 195, 122)">86.8278</td>
+<td style="background:rgb(113, 193, 120)">88.7120</td>
+<td style="background:rgb(110, 192, 119)">89.5048</td>
+<td style="background:rgb(102, 190, 117); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">91.6962</td>
+</tr>
+<tr>
+<th>8</th>
+<th>50</th>
+<td style="background:rgb(138, 199, 128)">81.3239</td>
+<td style="background:rgb(133, 198, 126)">82.8108</td>
+<td style="background:rgb(129, 197, 125)">84.1675</td>
+<td style="background:rgb(119, 194, 122)">86.9705</td>
+<td style="background:rgb(116, 194, 121); box-shadow: inset 0 0 0 2px #1f2937; font-weight: 700">87.9279</td>
+</tr>
+</tbody></table></section>
+</body></html>

@@ -1,0 +1,278 @@
+{
+  "sweep_dir": "/home/andrew/joi-llm/gpt_mg/version0_14/results/category_sweep_20260331_082722",
+  "category_reports": [
+    {
+      "category": "1",
+      "sample_size": 2,
+      "before_avg_det_score": 99.0,
+      "after_avg_det_score": 99.0,
+      "before_failures": {
+        "top_failure_types": [],
+        "count": 0
+      },
+      "after_failures": {
+        "top_failure_types": [],
+        "count": 0
+      },
+      "improved": false,
+      "patch_dir": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-example-version0-14_20260331_082803"
+    },
+    {
+      "category": "2",
+      "sample_size": 2,
+      "before_avg_det_score": 86.1557,
+      "after_avg_det_score": 94.1667,
+      "before_failures": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            2
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 3
+      },
+      "after_failures": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 2
+      },
+      "improved": true,
+      "patch_dir": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-example-version0-14_20260331_082917"
+    },
+    {
+      "category": "3",
+      "sample_size": 2,
+      "before_avg_det_score": 84.954,
+      "after_avg_det_score": 93.3173,
+      "before_failures": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            2
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 3
+      },
+      "after_failures": {
+        "top_failure_types": [
+          [
+            "extraneous",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 3
+      },
+      "improved": true,
+      "patch_dir": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-fd63b939-809f-dfa8-e2f2-e8e434e68444_20260331_083043"
+    },
+    {
+      "category": "4",
+      "sample_size": 2,
+      "before_avg_det_score": 91.5412,
+      "after_avg_det_score": 96.9091,
+      "before_failures": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            2
+          ],
+          [
+            "arg_type",
+            1
+          ]
+        ],
+        "count": 3
+      },
+      "after_failures": {
+        "top_failure_types": [],
+        "count": 0
+      },
+      "improved": true,
+      "patch_dir": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-cc37a75d-63c5-4c1d-4cb3-61aaff80b41a_20260331_083201"
+    },
+    {
+      "category": "5",
+      "sample_size": 2,
+      "before_avg_det_score": 91.2652,
+      "after_avg_det_score": 42.8378,
+      "before_failures": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            2
+          ],
+          [
+            "extraneous",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 4
+      },
+      "after_failures": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            1
+          ],
+          [
+            "extraneous",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 4
+      },
+      "improved": false,
+      "patch_dir": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_20260331_083331"
+    },
+    {
+      "category": "6",
+      "sample_size": 2,
+      "before_avg_det_score": 43.3672,
+      "after_avg_det_score": 86.0919,
+      "before_failures": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "invalid_json",
+            1
+          ]
+        ],
+        "count": 2
+      },
+      "after_failures": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            2
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 3
+      },
+      "improved": false,
+      "patch_dir": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_20260331_083509"
+    },
+    {
+      "category": "7",
+      "sample_size": 2,
+      "before_avg_det_score": 88.3056,
+      "after_avg_det_score": 93.725,
+      "before_failures": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            2
+          ],
+          [
+            "semantic",
+            2
+          ]
+        ],
+        "count": 4
+      },
+      "after_failures": {
+        "top_failure_types": [
+          [
+            "semantic",
+            2
+          ],
+          [
+            "gt_mismatch",
+            1
+          ]
+        ],
+        "count": 3
+      },
+      "improved": true,
+      "patch_dir": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-1a637e79-cc98-783b-d15e-9ff13f56cdf5_20260331_083623"
+    },
+    {
+      "category": "8",
+      "sample_size": 2,
+      "before_avg_det_score": 77.5556,
+      "after_avg_det_score": 77.5556,
+      "before_failures": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            2
+          ],
+          [
+            "semantic",
+            2
+          ],
+          [
+            "extraneous",
+            1
+          ]
+        ],
+        "count": 5
+      },
+      "after_failures": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            2
+          ],
+          [
+            "semantic",
+            2
+          ],
+          [
+            "extraneous",
+            1
+          ]
+        ],
+        "count": 5
+      },
+      "improved": false,
+      "patch_dir": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-4db2c2b7-d18f-8ca3-4ce1-451aa4ffbfe3_20260331_083726"
+    }
+  ],
+  "pre_full": null,
+  "final_feedback": null,
+  "post_full": null,
+  "final_best_genome": "/home/andrew/joi-llm/gpt_mg/version0_14/results/category_sweep_20260331_082722/final_best_genome.json"
+}

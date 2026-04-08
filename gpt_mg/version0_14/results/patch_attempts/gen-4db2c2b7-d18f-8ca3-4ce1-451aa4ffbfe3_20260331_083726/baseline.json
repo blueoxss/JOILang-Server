@@ -1,0 +1,125 @@
+{
+  "run_id": "feedback_baseline_gen-4db2c2b7-d18f-8ca3-4ce1-451aa4ffbfe3_1022",
+  "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-4db2c2b7-d18f-8ca3-4ce1-451aa4ffbfe3_1022.csv",
+  "rows": [
+    {
+      "row_no": 266,
+      "category": "8",
+      "command_eng": "Whenever the brightness drops below 50 lux, open all shades in the parking lot.",
+      "det_score": 75.1643,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.417273,
+      "failure_reasons": [
+        "gt_mismatch",
+        "semantic"
+      ],
+      "output": "{\"name\":\"OpenAllParkShades\",\"cron\":\"\",\"period\":0,\"code\":\"all(#ParkingLot #Shade).WindowCovering_UpOrOpen()\"}",
+      "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 100, \n\"script\": \"\\nprev := (#LightSensor).LightSensor_Brightness\\n\\ncurr = (#LightSensor).LightSensor_Brightness\\n\\nif (prev >= 50 and curr < 50) {\\n\\n    all(#ParkingLot #Shade).WindowCovering_UpOrOpen()\\n\\n}\\n\\nprev = curr\"}"
+    },
+    {
+      "row_no": 276,
+      "category": "8",
+      "command_eng": "Repeat opening and closing the living room blind every hour.",
+      "det_score": 79.9469,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.69823,
+      "failure_reasons": [
+        "extraneous",
+        "gt_mismatch",
+        "semantic"
+      ],
+      "output": "{\"name\":\"ToggleLRBlindHourly\",\"cron\":\"0 * * * *\",\"period\":0,\"code\":\"(#LR_Blind).WindowCovering_UpOrOpen()\\n(#LR_Blind).WindowCovering_DownOrClose()\"}",
+      "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 3600000, \n\"script\": \"\\nopen := false\\n\\nif (open == false) {\\n\\n    (#LivingRoom #Blind).WindowCovering_UpOrOpen()\\n\\n    open = true\\n\\n} else {\\n\\n    (#LivingRoom #Blind).WindowCovering_DownOrClose()\\n\\n    open = false\\n\\n}\"}"
+    }
+  ],
+  "avg_det_score": 77.5556,
+  "variance": 5.718316,
+  "failure_summary": {
+    "top_failure_types": [
+      [
+        "gt_mismatch",
+        2
+      ],
+      [
+        "semantic",
+        2
+      ],
+      [
+        "extraneous",
+        1
+      ]
+    ],
+    "count": 5
+  },
+  "generation_summary": {
+    "run_id": "feedback_baseline_gen-4db2c2b7-d18f-8ca3-4ce1-451aa4ffbfe3_1022",
+    "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-4db2c2b7-d18f-8ca3-4ce1-451aa4ffbfe3_1022.csv",
+    "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-4db2c2b7-d18f-8ca3-4ce1-451aa4ffbfe3_1022.jsonl",
+    "row_count": 2,
+    "rows": [
+      {
+        "index": "36",
+        "category": "8",
+        "command_kor": "조도가 50럭스 미만으로 떨어질 때마다 주차장의 모든 쉐이드를 열어줘.",
+        "command_eng": "Whenever the brightness drops below 50 lux, open all shades in the parking lot.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 100, \n\"script\": \"\\nprev := (#LightSensor).Brightness\\n\\ncurr = (#LightSensor).Brightness\\n\\nif (prev >= 50 and curr < 50) {\\n\\n    all(#ParkingLot #Shade).UpOrOpen()\\n\\n}\\n\\nprev = curr\"}",
+        "connected_devices": "{'Light_S': {'category': 'LightSensor', 'tags': ['LightSensor']}, 'P_Shade': {'category': 'WindowCovering', 'tags': ['ParkingLot', 'Shade', 'WindowCovering']}, 'G_Shade': {'category': 'WindowCovering', 'tags': ['Garden', 'Shade', 'WindowCovering']}}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 100, \n\"script\": \"\\nprev := (#LightSensor).LightSensor_Brightness\\n\\ncurr = (#LightSensor).LightSensor_Brightness\\n\\nif (prev >= 50 and curr < 50) {\\n\\n    all(#ParkingLot #Shade).WindowCovering_UpOrOpen()\\n\\n}\\n\\nprev = curr\"}",
+        "row_no": 266,
+        "profile": "version0_14",
+        "genome_id": "gen-4db2c2b7-d18f-8ca3-4ce1-451aa4ffbfe3",
+        "genome_seed": 1022,
+        "run_id": "feedback_baseline_gen-4db2c2b7-d18f-8ca3-4ce1-451aa4ffbfe3_1022",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"OpenAllParkShades\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"all(#ParkingLot #Shade).WindowCovering_UpOrOpen()\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 4499, \"completion_tokens\": 50, \"total_tokens\": 4549, \"latency_sec\": 10.3622, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/generated/02_generator_prompt__patch_20260331_082917_1__patch_20260331_083043_1__patch_20260331_083201_1__patch_20260331_083623_1.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_baseline_gen-4db2c2b7-d18f-8ca3-4ce1-451aa4ffbfe3_1022/row_266_cand_1.json\"]",
+        "generation_status": "ok",
+        "llm_mode": "worker",
+        "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+      },
+      {
+        "index": "46",
+        "category": "8",
+        "command_kor": "거실 블라인드를 1시간 간격으로 올렸다 내렸다 반복해줘.",
+        "command_eng": "Repeat opening and closing the living room blind every hour.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 3600000, \n\"script\": \"\\nopen := false\\n\\nif (open == false) {\\n\\n    (#LivingRoom #Blind).UpOrOpen()\\n\\n    open = true\\n\\n} else {\\n\\n    (#LivingRoom #Blind).DownOrClose()\\n\\n    open = false\\n\\n}\"}",
+        "connected_devices": "{'LR_Blind': {'category': 'WindowCovering', 'tags': ['LivingRoom', 'Blind', 'WindowCovering']}}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 3600000, \n\"script\": \"\\nopen := false\\n\\nif (open == false) {\\n\\n    (#LivingRoom #Blind).WindowCovering_UpOrOpen()\\n\\n    open = true\\n\\n} else {\\n\\n    (#LivingRoom #Blind).WindowCovering_DownOrClose()\\n\\n    open = false\\n\\n}\"}",
+        "row_no": 276,
+        "profile": "version0_14",
+        "genome_id": "gen-4db2c2b7-d18f-8ca3-4ce1-451aa4ffbfe3",
+        "genome_seed": 1022,
+        "run_id": "feedback_baseline_gen-4db2c2b7-d18f-8ca3-4ce1-451aa4ffbfe3_1022",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"ToggleLRBlindHourly\\\",\\\"cron\\\":\\\"0 * * * *\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#LR_Blind).WindowCovering_UpOrOpen()\\\\n(#LR_Blind).WindowCovering_DownOrClose()\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 3663, \"completion_tokens\": 68, \"total_tokens\": 3731, \"latency_sec\": 10.6526, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/generated/02_generator_prompt__patch_20260331_082917_1__patch_20260331_083043_1__patch_20260331_083201_1__patch_20260331_083623_1.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_baseline_gen-4db2c2b7-d18f-8ca3-4ce1-451aa4ffbfe3_1022/row_276_cand_1.json\"]",
+        "generation_status": "ok",
+        "llm_mode": "worker",
+        "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+      }
+    ],
+    "fieldnames": [
+      "index",
+      "category",
+      "command_kor",
+      "command_eng",
+      "gt_raw",
+      "connected_devices",
+      "gt",
+      "row_no",
+      "profile",
+      "genome_id",
+      "genome_seed",
+      "run_id",
+      "candidate_count",
+      "candidates",
+      "candidate_metadata",
+      "prompt_log_paths",
+      "generation_status",
+      "llm_mode",
+      "llm_model"
+    ]
+  }
+}

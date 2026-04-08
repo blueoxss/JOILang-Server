@@ -1,0 +1,119 @@
+{
+  "run_id": "feedback_baseline_gen-example-version0-14_1016",
+  "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-example-version0-14_1016.csv",
+  "rows": [
+    {
+      "row_no": 37,
+      "category": "2",
+      "command_eng": "Lock all door locks.",
+      "det_score": 90.2316,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.741053,
+      "failure_reasons": [
+        "gt_mismatch"
+      ],
+      "output": "{\"name\":\"LockAllDoors\",\"cron\":\"\",\"period\":0,\"code\":\"(#FrontDoor_Lock).DoorLock_Lock()\\n(#BackDoor_Lock).DoorLock_Lock()\"}",
+      "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"all(#DoorLock).DoorLock_Lock()\"}"
+    },
+    {
+      "row_no": 49,
+      "category": "2",
+      "command_eng": "Lock all safes with odd tags in Sector B.",
+      "det_score": 82.0798,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.569325,
+      "failure_reasons": [
+        "gt_mismatch",
+        "semantic"
+      ],
+      "output": "{\"name\":\"LockOddSafesInSectorB\",\"cron\":\"\",\"period\":0,\"code\":\"foreach device d in (select * from SB_Safe_1, SB_Safe_2 where d.tags contains \\\"Odd\\\" and d.tags contains \\\"SectorB\\\")\\n((d).Safe_Lock())\"}",
+      "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nall(#SectorB #Odd #Safe).Safe_Lock()\"}"
+    }
+  ],
+  "avg_det_score": 86.1557,
+  "variance": 16.612961,
+  "failure_summary": {
+    "top_failure_types": [
+      [
+        "gt_mismatch",
+        2
+      ],
+      [
+        "semantic",
+        1
+      ]
+    ],
+    "count": 3
+  },
+  "generation_summary": {
+    "run_id": "feedback_baseline_gen-example-version0-14_1016",
+    "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-example-version0-14_1016.csv",
+    "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_14/results/candidates_feedback_baseline_gen-example-version0-14_1016.jsonl",
+    "row_count": 2,
+    "rows": [
+      {
+        "index": "7",
+        "category": "2",
+        "command_kor": "모든 도어락을 잠궈줘.",
+        "command_eng": "Lock all door locks.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"all(#DoorLock).Lock()\"}",
+        "connected_devices": "{'FrontDoor_Lock': {'category': 'DoorLock', 'tags': ['Front', 'DoorLock']}, 'BackDoor_Lock': {'category': 'DoorLock', 'tags': ['Back', 'DoorLock']}}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"all(#DoorLock).DoorLock_Lock()\"}",
+        "row_no": 37,
+        "profile": "version0_14",
+        "genome_id": "gen-example-version0-14",
+        "genome_seed": 12345,
+        "run_id": "feedback_baseline_gen-example-version0-14_1016",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"LockAllDoors\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#FrontDoor_Lock).DoorLock_Lock()\\\\n(#BackDoor_Lock).DoorLock_Lock()\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 2153, \"completion_tokens\": 45, \"total_tokens\": 2198, \"latency_sec\": 10.4014, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_baseline_gen-example-version0-14_1016/row_037_cand_1.json\"]",
+        "generation_status": "ok",
+        "llm_mode": "worker",
+        "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+      },
+      {
+        "index": "19",
+        "category": "2",
+        "command_kor": "섹터 비에 있는 홀수 태그가 붙은 금고를 모두 잠궈줘.",
+        "command_eng": "Lock all safes with odd tags in Sector B.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nall(#SectorB #Odd #Safe).Lock()\"}",
+        "connected_devices": "{'SB_Safe_1': {'category': ['Safe'], 'tags': ['SectorB', 'Odd', 'Safe']}, 'SB_Safe_2': {'category': ['Safe'], 'tags': ['SectorB', 'Even', 'Safe']}, 'SA_Safe_3': {'category': ['Safe'], 'tags': ['SectorA', 'Odd', 'Safe']}}",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nall(#SectorB #Odd #Safe).Safe_Lock()\"}",
+        "row_no": 49,
+        "profile": "version0_14",
+        "genome_id": "gen-example-version0-14",
+        "genome_seed": 12345,
+        "run_id": "feedback_baseline_gen-example-version0-14_1016",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"LockOddSafesInSectorB\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"foreach device d in (select * from SB_Safe_1, SB_Safe_2 where d.tags contains \\\\\\\"Odd\\\\\\\" and d.tags contains \\\\\\\"SectorB\\\\\\\")\\\\n((d).Safe_Lock())\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 2025, \"completion_tokens\": 69, \"total_tokens\": 2094, \"latency_sec\": 11.4193, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_14/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_14/logs/feedback_baseline_gen-example-version0-14_1016/row_049_cand_1.json\"]",
+        "generation_status": "ok",
+        "llm_mode": "worker",
+        "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+      }
+    ],
+    "fieldnames": [
+      "index",
+      "category",
+      "command_kor",
+      "command_eng",
+      "gt_raw",
+      "connected_devices",
+      "gt",
+      "row_no",
+      "profile",
+      "genome_id",
+      "genome_seed",
+      "run_id",
+      "candidate_count",
+      "candidates",
+      "candidate_metadata",
+      "prompt_log_paths",
+      "generation_status",
+      "llm_mode",
+      "llm_model"
+    ]
+  }
+}

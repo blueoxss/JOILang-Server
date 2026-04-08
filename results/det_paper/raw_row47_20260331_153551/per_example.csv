@@ -1,0 +1,11 @@
+﻿line_no,row_no,dataset_index,model_label,request_model,selected_model,command,det_pass,sdet,script_similarity,fatal_reasons,reference_script,predicted_script,predicted_services
+1,47,17,[1/5] CAP-old_gpt4.1-mini_svc-v1.5.4,gpt4.1-mini,CAP-old_gpt4.1-mini_svc-v1.5.4,섹터2에 있는 블라인드를 모두 열어줘.,True,0.753247,0.753247,,"
+all(#Sector2 #Blind).WindowCovering_UpOrOpen()",all(#Sector2 #Blind).blind_open(),blind_open
+2,47,17,[2/5] JOI_gpt4.1-mini_v1.5.4,gpt_mg.version0_6,JOI_gpt4.1-mini_v1.5.4,섹터2에 있는 블라인드를 모두 열어줘.,True,0.753247,0.753247,,"
+all(#Sector2 #Blind).WindowCovering_UpOrOpen()",all(#Sector2 #Blind).blind_open(),blind_open
+3,47,17,[3/5] Local5080_qwen-7b_svc-v1.5.4,gpt_mg.version0_13,Local5080_qwen-7b_svc-v1.5.4,섹터2에 있는 블라인드를 모두 열어줘.,True,0.722892,0.722892,,"
+all(#Sector2 #Blind).WindowCovering_UpOrOpen()",all(#Sector2_Blind).windowShade_open(),windowShade_open
+4,47,17,[4/5] Local5080_qwen-7b_svc-v2.0.1,gpt_mg.version0_12,Local5080_qwen-7b_svc-v2.0.1,섹터2에 있는 블라인드를 모두 열어줘.,True,0.722892,0.722892,,"
+all(#Sector2 #Blind).WindowCovering_UpOrOpen()",all(#Sector2_Blind).windowShade_open(),windowShade_open
+5,47,17,[5/5] PromptGA_v0.14_svc-v2.0.1,gpt_mg.version0_14,PromptGA_v0.14_svc-v2.0.1,섹터2에 있는 블라인드를 모두 열어줘.,False,0.0,1.0,unknown_services:WindowCovering_UpOrOpen,"
+all(#Sector2 #Blind).WindowCovering_UpOrOpen()",all(#Sector2 #Blind).WindowCovering_UpOrOpen(),WindowCovering_UpOrOpen

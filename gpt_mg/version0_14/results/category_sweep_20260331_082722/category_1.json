@@ -1,0 +1,16 @@
+{
+  "category": "1",
+  "sample_size": 2,
+  "before_avg_det_score": 99.0,
+  "after_avg_det_score": 99.0,
+  "before_failures": {
+    "top_failure_types": [],
+    "count": 0
+  },
+  "after_failures": {
+    "top_failure_types": [],
+    "count": 0
+  },
+  "improved": false,
+  "patch_dir": "/home/andrew/joi-llm/gpt_mg/version0_14/results/patch_attempts/gen-example-version0-14_20260331_082803"
+}
