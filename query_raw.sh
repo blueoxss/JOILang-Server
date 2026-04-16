@@ -222,6 +222,64 @@ with output_path.open("a", encoding="utf-8") as f:
 PY
 }
 
+build_command_error_response() {
+  local request_model="$1"
+  local stage="$2"
+  local exit_code="$3"
+  local stderr_file="$4"
+
+  python3 - "$request_model" "$stage" "$exit_code" "$stderr_file" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+request_model = sys.argv[1]
+stage = sys.argv[2]
+exit_code = int(sys.argv[3])
+stderr_path = Path(sys.argv[4])
+
+stderr_text = ""
+if stderr_path.exists():
+    stderr_text = stderr_path.read_text(encoding="utf-8", errors="replace").strip()
+
+response = {
+    "code": "",
+    "log": {
+        "error": "command_failed",
+        "model_name": request_model,
+        "stage": stage,
+        "exit_code": exit_code,
+        "stderr": stderr_text,
+    },
+}
+print(json.dumps(response, ensure_ascii=False))
+PY
+}
+
+print_and_record_response() {
+  local label="$1"
+  local request_model="$2"
+  local selected_model="$3"
+  local response="$4"
+
+  echo "$response"
+  append_generation_jsonl "$label" "$request_model" "$selected_model" "$response"
+  echo
+}
+
+record_model_error() {
+  local label="$1"
+  local request_model="$2"
+  local selected_model="$3"
+  local stage="$4"
+  local exit_code="$5"
+  local stderr_file="$6"
+  local response
+
+  response="$(build_command_error_response "$request_model" "$stage" "$exit_code" "$stderr_file")"
+  print_and_record_response "$label" "$request_model" "$selected_model" "$response"
+}
+
 resolve_version0_14_genome() {
   if [ -n "${V14_GENOME_JSON:-}" ] && [ -f "$V14_GENOME_JSON" ]; then
     printf '%s\n' "$V14_GENOME_JSON"
@@ -382,9 +440,14 @@ run_model() {
   local request_model="$2"
   local selected_model="$3"
   local payload
+  local response
+  local exit_code
+  local stderr_file
 
   echo "=== ${label} ==="
-  payload="$(python3 - "$SENTENCE" "$request_model" "$CONNECTED_DEVICES" "$TIME" "$selected_model" <<'PY'
+  stderr_file="$(mktemp)"
+
+  if payload="$(python3 - "$SENTENCE" "$request_model" "$CONNECTED_DEVICES" "$TIME" "$selected_model" 2>"$stderr_file" <<'PY'
 import json
 import sys
 
@@ -402,35 +465,58 @@ print(json.dumps({
     "other_params": [{"selected_model": selected_model}],
 }, ensure_ascii=False))
 PY
-)"
-  local response
-  response="$(curl -s -X POST http://localhost:8000/generate_joi_code \
+  )"; then
+    :
+  else
+    exit_code=$?
+    record_model_error "$label" "$request_model" "$selected_model" "build_payload" "$exit_code" "$stderr_file"
+    rm -f "$stderr_file"
+    return 0
+  fi
+
+  : > "$stderr_file"
+  if response="$(curl -sS -X POST http://localhost:8000/generate_joi_code \
     -H "Content-Type: application/json" \
-    -d "$payload")"
-  echo "$response"
-  append_generation_jsonl "$label" "$request_model" "$selected_model" "$response"
-  echo -e "\n"
+    -d "$payload" 2>"$stderr_file")"; then
+    print_and_record_response "$label" "$request_model" "$selected_model" "$response"
+  else
+    exit_code=$?
+    record_model_error "$label" "$request_model" "$selected_model" "generate_request" "$exit_code" "$stderr_file"
+  fi
+
+  rm -f "$stderr_file"
 }
 
 run_version0_14() {
   local label="$1"
   local selected_model="$2"
   local genome_json
+  local response
+  local exit_code
+  local stderr_file
 
   echo "=== ${label} ==="
 
   if ! genome_json="$(resolve_version0_14_genome)"; then
     local missing_response
     missing_response='{"code":"","log":{"error":"version0_14_genome_not_found","model_name":"gpt_mg.version0_14"}}'
-    echo "$missing_response"
-    append_generation_jsonl "$label" "gpt_mg.version0_14" "$selected_model" "$missing_response"
-    echo -e "\n"
+    print_and_record_response "$label" "gpt_mg.version0_14" "$selected_model" "$missing_response"
     return 0
   fi
 
-  write_version0_14_row_dataset
+  stderr_file="$(mktemp)"
 
-  python3 "${V14_ROOT}/scripts/run_generate.py" \
+  if write_version0_14_row_dataset 2>"$stderr_file"; then
+    :
+  else
+    exit_code=$?
+    record_model_error "$label" "gpt_mg.version0_14" "$selected_model" "write_row_dataset" "$exit_code" "$stderr_file"
+    rm -f "$stderr_file"
+    return 0
+  fi
+
+  : > "$stderr_file"
+  if python3 "${V14_ROOT}/scripts/run_generate.py" \
     --profile version0_14 \
     --genome-json "$genome_json" \
     --dataset "$V14_ROW_DATASET" \
@@ -438,21 +524,63 @@ run_version0_14() {
     --end-row 1 \
     --candidate-k "$V14_CANDIDATE_K" \
     --run-id "${RUN_ID}_version0_14" \
-    --output-csv "$V14_CANDIDATES_CSV" >/dev/null
+    --output-csv "$V14_CANDIDATES_CSV" >/dev/null 2>"$stderr_file"; then
+    :
+  else
+    exit_code=$?
+    record_model_error "$label" "gpt_mg.version0_14" "$selected_model" "run_generate" "$exit_code" "$stderr_file"
+    rm -f "$stderr_file"
+    return 0
+  fi
 
-  python3 "${V14_ROOT}/scripts/run_rerank.py" \
+  : > "$stderr_file"
+  if python3 "${V14_ROOT}/scripts/run_rerank.py" \
     --profile version0_14 \
     --genome-json "$genome_json" \
     --candidates-csv "$V14_CANDIDATES_CSV" \
     --repair-threshold "$V14_REPAIR_THRESHOLD" \
     --repair-attempts "$V14_REPAIR_ATTEMPTS" \
-    --output-csv "$V14_RERANK_CSV" >/dev/null
+    --output-csv "$V14_RERANK_CSV" >/dev/null 2>"$stderr_file"; then
+    :
+  else
+    exit_code=$?
+    record_model_error "$label" "gpt_mg.version0_14" "$selected_model" "run_rerank" "$exit_code" "$stderr_file"
+    rm -f "$stderr_file"
+    return 0
+  fi
 
-  local response
-  response="$(build_version0_14_response "$V14_RERANK_CSV" "$genome_json")"
-  echo "$response"
-  append_generation_jsonl "$label" "gpt_mg.version0_14" "$selected_model" "$response"
-  echo -e "\n"
+  : > "$stderr_file"
+  if response="$(build_version0_14_response "$V14_RERANK_CSV" "$genome_json" 2>"$stderr_file")"; then
+    print_and_record_response "$label" "gpt_mg.version0_14" "$selected_model" "$response"
+  else
+    exit_code=$?
+    record_model_error "$label" "gpt_mg.version0_14" "$selected_model" "build_response" "$exit_code" "$stderr_file"
+  fi
+
+  rm -f "$stderr_file"
+}
+
+run_det_paper() {
+  local exit_code
+  local stderr_file
+
+  echo "=== DET Paper ==="
+  if [ "$HAS_REFERENCE" -eq 0 ]; then
+    echo "Skipped: raw command does not exactly match a dataset command, so there is no reference script for DET scoring."
+    return 0
+  fi
+
+  stderr_file="$(mktemp)"
+  if "${DET_CMD[@]}" 2>"$stderr_file"; then
+    rm -f "$stderr_file"
+    return 0
+  fi
+
+  exit_code=$?
+  echo "ERROR: DET Paper failed (exit_code=${exit_code})" >&2
+  cat "$stderr_file" >&2
+  rm -f "$stderr_file"
+  return 0
 }
 
 if [ "$INPUT_MODE" = "row" ]; then
@@ -494,9 +622,4 @@ if [ -f "$FORBIDDEN_ACTIONS_PATH" ]; then
   DET_CMD+=(--forbidden-actions "$FORBIDDEN_ACTIONS_PATH")
 fi
 
-echo "=== DET Paper ==="
-if [ "$HAS_REFERENCE" -eq 1 ]; then
-  "${DET_CMD[@]}"
-else
-  echo "Skipped: raw command does not exactly match a dataset command, so there is no reference script for DET scoring."
-fi
+run_det_paper
