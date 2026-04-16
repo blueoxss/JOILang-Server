@@ -1,0 +1,318 @@
+# id: 02
+# role: generator
+# params: temperature, few_shot_count, max_tokens, micro_rules
+# description: Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.
+# placeholders: {command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}
+
+Task:
+Generate exactly one JOI JSON object for the input command.
+
+Inputs:
+- command_eng: {command_eng}
+- connected_devices: {connected_devices}
+- optional_cron: {optional_cron}
+- optional_period: {optional_period}
+- candidate_strategy: {candidate_strategy}
+- authoritative service schema snippet:
+{service_list_snippet}
+
+Output contract:
+- Return exactly one JSON object and nothing else.
+- The object must contain exactly these keys: name, cron, period, code.
+- name must be ASCII-safe, concise, and at most 50 characters.
+- cron must be "{optional_cron}" when a schedule is provided, otherwise "".
+- period must be {optional_period} when a schedule is provided, otherwise 0. Treat period 0 as the canonical default for unscheduled dataset rows.
+- code must be a JOILang string, validly escaped for JSON.
+
+Hard generation rules:
+1. Use only services and values present in the provided schema snippet.
+2. Prefer canonical_name exactly when it is present in the snippet.
+3. Do not output bare raw service names when canonical_name is available.
+4. Use value entries in conditions and function entries in actions.
+5. Match argument counts and argument types exactly.
+6. For ENUM arguments, use only enum values explicitly present in the snippet.
+7. If the command implies time, convert to the service argument unit described by the snippet. period always uses milliseconds.
+8. Insert a power-check only if the snippet shows both a switch-like value and a power-on function for the same target context.
+9. If the request is ambiguous, choose the smallest schema-valid program that best matches the command.
+10. If you cannot produce a schema-valid action with confidence, still return valid JSON with code as an empty string.
+11. If the command is a repeated event trigger using wording like "whenever", "each time", "every time", "button is pressed", "door is opened", or "becomes fully charged", default to period 100 and preserve edge-trigger semantics with prev/curr or a triggered flag. Do not reduce these commands to one-shot wait until.
+12. If the command is a one-shot trigger with plain "when" and no repeated wording, wait until is acceptable.
+13. For commands that say "every N minutes from X to Y" or "check every N minutes from X to Y", represent the repeated interval with period in milliseconds and preserve the time-window stop condition with Clock guards or break logic. Use cron only for wall-clock anchors that are explicitly stated.
+14. Read values from sensors and send side effects to actuators. Never call Speaker_Speak on a TemperatureSensor, never call Camera functions on PresenceSensor, and never set charging state through an invented service if the schema offers Switch_Off for the charger.
+15. Preserve every meaningful tag from the command in the receiver. Prefer all(#Hallway #Light), all(#LivingRoom #Window), all(#Even #RobotVacuumCleaner), or (#ParkingLot #Speaker) over compressed aliases or single-instance ids.
+16. If the schema offers an exact canonical function such as Camera_CaptureImage, DoorLock_Lock, Valve_Close, Switch_Off, or Light_MoveToRGB, use it exactly instead of a natural-language synonym like TakePicture, CloseDoorlock, SetChargingState, or SetColor.
+17. If the schema shows a button-specific value such as DimmerSwitch_Button2, use that exact value for button-2 events instead of generic Button_Button with pushed_2x or similar invented encodings.
+18. If the schema uses a nonobvious but canonical value for open/closed state, such as a current position or a specific door-state value, follow the schema exactly rather than substituting a more intuitive but unsupported service.
+
+Self-check before final output:
+- valid JSON object only
+- required keys present
+- every referenced value/function exists in the snippet
+- every service token prefers canonical_name when offered
+- argument literals match types and enums
+- no unrelated action added
+- no markdown, no commentary, no code fence
+
+### EXEMPLAR 1: easy
+Input command_eng:
+Switch the dishwasher to dry mode.
+
+Input connected_devices:
+{}
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "Dishwasher",
+      "services": [
+        {"service": "DishwasherMode", "canonical_name": "Dishwasher_DishwasherMode", "type": "value", "return_type": "ENUM", "enums": ["auto", "wash", "dry"]},
+        {"service": "SetDishwasherMode", "canonical_name": "Dishwasher_SetDishwasherMode", "type": "function", "argument_type": "ENUM", "return_type": "VOID", "enums": ["auto", "wash", "dry"]}
+      ]
+    }
+  ]
+}
+
+Correct output:
+{"name":"SetDishwasherDryMode","cron":"","period":0,"code":"(#Dishwasher).Dishwasher_SetDishwasherMode(\"dry\")"}
+
+### EXEMPLAR 2: medium
+Input command_eng:
+Set the speaker volume to 70.
+
+Input connected_devices:
+{}
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "Speaker",
+      "services": [
+        {"service": "Volume", "canonical_name": "Speaker_Volume", "type": "value", "return_type": "INTEGER"},
+        {"service": "SetVolume", "canonical_name": "Speaker_SetVolume", "type": "function", "argument_type": "INTEGER", "return_type": "INTEGER"}
+      ]
+    }
+  ]
+}
+
+Correct output:
+{"name":"SetSpeakerVolume70","cron":"","period":0,"code":"(#Speaker).Speaker_SetVolume(70)"}
+
+### EXEMPLAR 3: hard
+Input command_eng:
+When a leak is detected, close the valve.
+
+Input connected_devices:
+{}
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "LeakSensor",
+      "services": [
+        {"service": "Leakage", "canonical_name": "LeakSensor_Leakage", "type": "value", "return_type": "BOOL"}
+      ]
+    },
+    {
+      "device": "Valve",
+      "services": [
+        {"service": "Close", "canonical_name": "Valve_Close", "type": "function", "return_type": "VOID"}
+      ]
+    }
+  ]
+}
+
+Correct output:
+{"name":"CloseValveOnLeak","cron":"","period":0,"code":"wait until ((#LeakSensor).LeakSensor_Leakage == true)\n(#Valve).Valve_Close()"}
+
+AUTO-PATCH MICRO-RULES
+- Prefer the smallest schema-valid program that directly matches the command's target operation, ordering, and dataset conventions. For unscheduled commands, default to cron "" and period 0 rather than alternate defaults.
+
+AUTO-GENERATED EXEMPLARS FROM GT FAILURES
+### AUTO EXEMPLAR 1
+Input command_eng:
+Lock all safes with odd tags in Sector B.
+
+Correct output:
+{"name": "AutoExample49", "cron": "", "period": 0, "code": "all(#SectorB #Odd #Safe).Safe_Lock()"}
+
+### AUTO EXEMPLAR 2
+Input command_eng:
+Lock all door locks.
+
+Correct output:
+{"name": "AutoExample37", "cron": "", "period": 0, "code": "all(#DoorLock).DoorLock_Lock()"}
+
+AUTO-PATCH MICRO-RULES
+- Prefer the smallest schema-valid program that directly matches the command's target operation, ordering, and dataset conventions. For unscheduled commands, default to cron "" and period 0 rather than alternate defaults.
+
+AUTO-GENERATED EXEMPLARS FROM GT FAILURES
+### AUTO EXEMPLAR 1
+Input command_eng:
+If the lab humidity is 50 or higher, turn on the dehumidifier, and if it's below 50, turn on the humidifier.
+
+Correct output:
+{"name": "AutoExample90", "cron": "", "period": 0, "code": "if ((#Lab #HumiditySensor).HumiditySensor_Humidity >= 50) {\n\n    (#Lab #Dehumidifier).Switch_On()\n\n} else {\n\n    (#Lab #Humidifier).Switch_On()\n\n}"}
+
+### AUTO EXEMPLAR 2
+Input command_eng:
+If it is raining, set all dehumidifiers in the house to drying mode.
+
+Correct output:
+{"name": "AutoExample82", "cron": "", "period": 0, "code": "if ((#RainSensor).RainSensor_Rain == true) {\n\n    all(#House #Dehumidifier).Dehumidifier_SetDehumidifierMode(\"drying\")\n\n}"}
+
+AUTO-PATCH MICRO-RULES
+- Prefer the smallest schema-valid program that directly matches the command's target operation, ordering, and dataset conventions. For unscheduled commands, default to cron "" and period 0 rather than alternate defaults.
+
+AUTO-GENERATED EXEMPLARS FROM GT FAILURES
+### AUTO EXEMPLAR 1
+Input command_eng:
+When the contact sensor is detected, turn on the light.
+
+Correct output:
+{"name": "AutoExample91", "cron": "", "period": 0, "code": "wait until ((#ContactSensor).ContactSensor_Contact == true)\n\n(#Light).Switch_On()"}
+
+### AUTO EXEMPLAR 2
+Input command_eng:
+When the indoor very fine dust level becomes 35 or higher, set the air purifier to high.
+
+Correct output:
+{"name": "AutoExample104", "cron": "", "period": 0, "code": "wait until ((#AirQualitySensor).AirQualitySensor_VeryFineDustLevel >= 35)\n\n(#AirPurifier).AirPurifier_SetAirPurifierMode(\"high\")"}
+
+AUTO-PATCH MICRO-RULES
+- Prefer the smallest schema-valid program that directly matches the command's target operation, ordering, and dataset conventions. For unscheduled commands, default to cron "" and period 0 rather than alternate defaults.
+
+AUTO-GENERATED EXEMPLARS FROM GT FAILURES
+### AUTO EXEMPLAR 1
+Input command_eng:
+Every morning at 7 AM, open all blinds in Zone 1.
+
+Correct output:
+{"name": "AutoExample210", "cron": "0 7 * * *", "period": 0, "code": "all(#Sector1 #Blind).WindowCovering_UpOrOpen()"}
+
+### AUTO EXEMPLAR 2
+Input command_eng:
+When the new year begins, make the arm robot say hello.
+
+Correct output:
+{"name": "AutoExample189", "cron": "0 0 1 1 *", "period": 0, "code": "(#ArmRobot).ArmRobot_Hello()"}
+
+DATASET TEMPORAL ALIGNMENT RULES
+- If a command says to do action A and then action B after some duration, preserve both steps and insert delay(...) between them. Do not collapse the sequence into a single action.
+- If a command says a value drops below or rises above a threshold, preserve the trigger semantics with wait until or prev/curr edge detection instead of a plain immediate action.
+- If a command asks to repeat alternating actions every N minutes or hours, prefer period-based stateful logic with variables such as open := false. Use cron only for wall-clock schedules.
+- If the intent targets any or all devices by location/type, prefer tag-based receivers such as all(#Hallway #Light), all(#LivingRoom #Light), or (#LivingRoom #Blind) instead of enumerating instance ids when tag-based code matches the command better.
+
+TEMPORAL PATTERN SKETCH 1
+Input command_eng:
+Set the air purifier to auto mode and switch to sleep mode after 2 hours.
+
+Correct output:
+{"name":"SetAirPurifierAutoThenSleep","cron":"","period":0,"code":"(#AirPurifier).AirPurifier_SetAirPurifierMode(\"auto\")\ndelay(2 HOUR)\n(#AirPurifier).AirPurifier_SetAirPurifierMode(\"sleep\")"}
+
+TEMPORAL PATTERN SKETCH 2
+Input command_eng:
+Whenever the brightness drops below 50 lux, open all shades in the parking lot.
+
+Correct output:
+{"name":"OpenParkingLotShadesOnBrightnessDrop","cron":"","period":100,"code":"prev := (#LightSensor).LightSensor_Brightness\ncurr = (#LightSensor).LightSensor_Brightness\nif (prev >= 50 and curr < 50) {\n    all(#ParkingLot #Shade).WindowCovering_UpOrOpen()\n}\nprev = curr"}
+
+TEMPORAL PATTERN SKETCH 3
+Input command_eng:
+Repeat opening and closing the living room blind every hour.
+
+Correct output:
+{"name":"ToggleLivingRoomBlindHourly","cron":"","period":3600000,"code":"open := false\nif (open == false) {\n    (#LivingRoom #Blind).WindowCovering_UpOrOpen()\n    open = true\n} else {\n    (#LivingRoom #Blind).WindowCovering_DownOrClose()\n    open = false\n}"}
+
+GROUPED DELAY PATTERN SKETCH
+Input command_eng:
+When any light in the hallway is turned on, turn off all lights in the living room after 5 minutes.
+
+Correct output:
+{"name":"TurnOffLivingRoomLightsAfter5Minutes","cron":"","period":0,"code":"wait until (all(#Hallway #Light).Switch_Switch ==| true)\ndelay(5 MIN)\nall(#LivingRoom #Light).Switch_Off()"}
+
+SCHEDULE AND EVENT ALIGNMENT RULES
+- If the command is a simple wall-clock action such as "at 9 AM" or "every morning at 8 AM", emit the direct tag-based action instead of returning empty code.
+- If the command says "during weekends" together with "every N seconds/minutes/hours", use both cron \"0 0 * * 6-7\" and the matching period in milliseconds. Guard the body with (#Clock).Clock_Weekday checks when needed.
+- If the command says "each time", "whenever", "button is pressed", "door is opened", or "motion is detected", treat it as a repeated event trigger. Default to period 100 and use prev/curr or triggered-state logic instead of a one-shot wait-until.
+- If a light exposes LevelControl and Switch behavior, represent maximum brightness with LevelControl_MoveToLevel(100, 0) and represent turning the light off with Switch_Off().
+- Prefer semantic tags from the command over alias-like device ids from connected_devices when the intended tags are clear, such as all(#Floor3 #Even #Blind), all(#Blind), (#Entrance #Light), (#MeetingRoom #Door), or (#Light #Button).
+
+SCHEDULE PATTERN SKETCH
+Input command_eng:
+At 9 AM, open all blinds with even tags on the 3rd floor.
+
+Correct output:
+{"name":"OpenF3EvenBlindsAt9AM","cron":"0 9 * * *","period":0,"code":"all(#Floor3 #Even #Blind).WindowCovering_UpOrOpen()"}
+
+WEEKEND PERIODIC PATTERN SKETCH
+Input command_eng:
+Every 5 seconds on weekends, if the pump is off, turn it on; if it is on, turn it off.
+
+Correct output:
+{"name":"TogglePumpWeekends","cron":"0 0 * * 6-7","period":5000,"code":"if ((#Clock).Clock_Weekday != \"saturday\" and (#Clock).Clock_Weekday != \"sunday\") {\n    break\n}\n(#Pump).Switch_Toggle()"}
+
+EVENT MAX-BRIGHTNESS PATTERN SKETCH
+Input command_eng:
+Whenever motion is detected at the entrance, turn on the entrance light at maximum brightness and then turn it off after 3 seconds.
+
+Correct output:
+{"name":"TurnOnEntranceLightFor3Seconds","cron":"","period":100,"code":"prev := (#Entrance #MotionSensor).MotionSensor_Motion\ncurr = (#Entrance #MotionSensor).MotionSensor_Motion\nif (prev == false and curr == true) {\n    (#Entrance #Light).LevelControl_MoveToLevel(100, 0)\n    delay(3 SEC)\n    (#Entrance #Light).Switch_Off()\n}\nprev = curr"}
+
+BUTTON EVENT PATTERN SKETCH
+Input command_eng:
+Whenever the button with the 'Light' tag is pressed, set the brightness of all lights with 'Odd' tags to maximum.
+
+Correct output:
+{"name":"SetOddLightsBrightnessToMax","cron":"","period":100,"code":"prev := (#Light #Button).Button_Button\ncurr = (#Light #Button).Button_Button\nif (prev != \"pushed\" and curr == \"pushed\") {\n    all(#Odd #Light).Light_MoveToBrightness(100, 0)\n}\nprev = curr"}
+
+MIDNIGHT LOCK PATTERN SKETCH
+Input command_eng:
+Lock the doorlock every day at midnight.
+
+Correct output:
+{"name":"LockDoorlockMidnight","cron":"0 0 * * *","period":0,"code":"(#DoorLock).DoorLock_Lock()"}
+
+TIME-WINDOW PERIODIC PATTERN SKETCH
+Input command_eng:
+Every 10 minutes from now until 3 PM, sound the emergency siren for 5 seconds and then turn it off.
+
+Correct output:
+{"name":"SoundEmergencySirenUntil3PM","cron":"","period":600000,"code":"if ((#Clock).Clock_Hour == 15) {\n    break\n}\n(#Siren).Siren_SetSirenMode(\"emergency\")\ndelay(5 SEC)\n(#Siren).Switch_Off()"}
+
+SENSOR-TO-SPEAKER PATTERN SKETCH
+Input command_eng:
+Announce the temperature through the speaker.
+
+Correct output:
+{"name":"AnnounceTemperature","cron":"","period":0,"code":"temp = (#TemperatureSensor).TemperatureSensor_Temperature\n(#Speaker).Speaker_Speak(\"현재 온도는 \" + temp + \"도입니다\")"}
+
+RGB COLOR PATTERN SKETCH
+Input command_eng:
+Change the light color to yellow.
+
+Correct output:
+{"name":"ChangeLightColorToYellow","cron":"","period":0,"code":"(#Light).Light_MoveToRGB(255, 255, 0)"}
+
+CAPTURE IMAGE PATTERN SKETCH
+Input command_eng:
+When the presence sensor detects someone, take a picture after 1 minute.
+
+Correct output:
+{"name":"TakePictureAfter1Minute","cron":"","period":0,"code":"wait until ((#PresenceSensor).PresenceSensor_Presence == true)\ndelay(1 MIN)\n(#Camera).Camera_CaptureImage()"}
+
+EDGE-TRIGGER GROUP PATTERN SKETCH
+Input command_eng:
+Each time the door is opened, turn on all lights in the hallway and living room.
+
+Correct output:
+{"name":"TurnOnAllLightsInHallAndLivingRoom","cron":"","period":100,"code":"prev := (#Door).Door_DoorState\ncurr = (#Door).Door_DoorState\nif (prev != \"open\" and curr == \"open\") {\n    all(#Hallway #Light).Switch_On()\n    all(#LivingRoom #Light).Switch_On()\n}\nprev = curr"}
+
+BUTTON2 WINDOW PATTERN SKETCH
+Input command_eng:
+Whenever button 2 of the multi-button is pressed, open all windows in the living room.
+
+Correct output:
+{"name":"OpenAllWindowsInLivingRoom","cron":"","period":100,"code":"prev := (#MultiButton).DimmerSwitch_Button2\ncurr = (#MultiButton).DimmerSwitch_Button2\nif (prev != \"pushed\" and curr == \"pushed\") {\n    all(#LivingRoom #Window).WindowCovering_UpOrOpen()\n}\nprev = curr"}

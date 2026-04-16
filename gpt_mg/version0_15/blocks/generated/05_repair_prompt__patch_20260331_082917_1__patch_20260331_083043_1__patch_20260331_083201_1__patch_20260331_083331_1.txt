@@ -1,0 +1,134 @@
+# id: 05
+# role: repair
+# params: temperature, few_shot_count, max_tokens, micro_rules
+# description: Targeted repair prompt that fixes schema mismatch, arg typing, and semantic drift with minimal edits.
+# placeholders: {command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {best_candidate}, {det_diagnostics}, {failure_summary}
+
+Task:
+Repair one JOI JSON candidate using deterministic diagnostics.
+
+Inputs:
+- command_eng: {command_eng}
+- connected_devices: {connected_devices}
+- optional_cron: {optional_cron}
+- optional_period: {optional_period}
+- current best_candidate:
+{best_candidate}
+- diagnostics:
+{det_diagnostics}
+- summarized failures:
+{failure_summary}
+- authoritative service schema snippet:
+{service_list_snippet}
+
+Repair rules:
+1. Preserve the original intent and keep edits minimal.
+2. Return exactly one JSON object only.
+3. Keep only keys name, cron, period, code.
+4. For unscheduled commands, normalize cron to "" and period to 0.
+5. If a function or value name is wrong, replace it with the exact canonical_name from the snippet.
+6. If an argument type is wrong, coerce it to the correct literal type and unit.
+7. If a condition uses a function where a value is required, rewrite the condition to use the correct value.
+8. Remove unrelated actions.
+9. Insert a power-check only when the snippet explicitly supports it for the same target context.
+10. If the candidate is irreparable from the snippet, return valid JSON with code as an empty string.
+
+Self-check before final output:
+- JSON parses
+- required keys present
+- canonical_name preferred when available
+- args and enums match schema
+- no commentary, no markdown, no code fence
+
+### EXEMPLAR 1: service naming repair
+Input command_eng:
+Set the television channel to 30.
+
+Bad candidate:
+{"name":"TVChannelChange","cron":"","period":-1,"code":"(#Television).setChannel(30)"}
+
+Diagnostics:
+service name is not in schema; canonical_name required; expected integer argument is already correct.
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "Television",
+      "services": [
+        {"service": "SetChannel", "canonical_name": "Television_SetChannel", "type": "function", "argument_type": "INTEGER", "return_type": "VOID"}
+      ]
+    }
+  ]
+}
+
+Correct repaired output:
+{"name":"TVChannelChange","cron":"","period":0,"code":"(#Television).Television_SetChannel(30)"}
+
+### EXEMPLAR 2: argument type repair
+Input command_eng:
+Set the speaker volume to 70.
+
+Bad candidate:
+{"name":"SetSpeakerVolume70","cron":"","period":-1,"code":"(#Speaker).Speaker_SetVolume(\"70\")"}
+
+Diagnostics:
+argument type mismatch; expected INTEGER, got STRING literal.
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "Speaker",
+      "services": [
+        {"service": "SetVolume", "canonical_name": "Speaker_SetVolume", "type": "function", "argument_type": "INTEGER", "return_type": "INTEGER"}
+      ]
+    }
+  ]
+}
+
+Correct repaired output:
+{"name":"SetSpeakerVolume70","cron":"","period":0,"code":"(#Speaker).Speaker_SetVolume(70)"}
+
+### EXEMPLAR 3: value/function confusion repair
+Input command_eng:
+When a leak is detected, close the valve.
+
+Bad candidate:
+{"name":"CloseValveOnLeak","cron":"","period":-1,"code":"if ((#LeakSensor).LeakSensor_Leakage()) { (#Valve).Valve_Close() }"}
+
+Diagnostics:
+condition uses a function call pattern but Leakage is a BOOL value; rewrite condition to compare the value.
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "LeakSensor",
+      "services": [
+        {"service": "Leakage", "canonical_name": "LeakSensor_Leakage", "type": "value", "return_type": "BOOL"}
+      ]
+    },
+    {
+      "device": "Valve",
+      "services": [
+        {"service": "Close", "canonical_name": "Valve_Close", "type": "function", "return_type": "VOID"}
+      ]
+    }
+  ]
+}
+
+Correct repaired output:
+{"name":"CloseValveOnLeak","cron":"","period":0,"code":"wait until ((#LeakSensor).LeakSensor_Leakage == true)\n(#Valve).Valve_Close()"}
+
+AUTO-PATCH MICRO-RULES
+- When the output is schema-valid but diverges from the expected target action sequence, rewrite it toward the canonical action ordering, literals, and schedule defaults. For unscheduled commands, normalize to cron "" and period 0.
+
+AUTO-PATCH MICRO-RULES
+- When the output is schema-valid but diverges from the expected target action sequence, rewrite it toward the canonical action ordering, literals, and schedule defaults. For unscheduled commands, normalize to cron "" and period 0.
+
+AUTO-PATCH MICRO-RULES
+- When the output is schema-valid but diverges from the expected target action sequence, rewrite it toward the canonical action ordering, literals, and schedule defaults. For unscheduled commands, normalize to cron "" and period 0.
+
+AUTO-PATCH MICRO-RULES
+- When repairing, preserve only keys name, cron, period, code and output valid JSON only.

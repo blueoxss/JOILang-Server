@@ -1,7 +1,0 @@
-{"saved_at_utc": "2026-03-25T15:06:11.845752+00:00", 
-"event_ts": "1774451170.807989", "channel": "D0AP53XUU3T", 
-"slack_user_id": "U082RCR9R2A", "slack_user_name": "unknown", 
-"slack_real_name": "unknown", 
-"text": "매일을 제대로 반영안해주고 있어. 주기도 -1인데 0으로 표시하고 있어.", 
-"raw_event": {"type": "message", "user": "U082RCR9R2A", 
-"ts": "1774451170.807989", "client_msg_id": "8db43a5e-2426-4485-9b4d-4babe27f9993", "text": "매일을 제대로 반영안해주고 있어. 주기도 -1인데 0으로 표시하고 있어.", "team": "T07AMHL4RNW", "blocks": [{"type": "rich_text", "block_id": "6u3a/", "elements": [{"type": "rich_text_section", "elements": [{"type": "text", "text": "매일을 제대로 반영안해주고 있어. 주기도 -1인데 0으로 표시하고 있어."}]}]}], "channel": "D0AP53XUU3T", "event_ts": "1774451170.807989", "channel_type": "im"}}

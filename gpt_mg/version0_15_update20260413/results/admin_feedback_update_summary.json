@@ -1,0 +1,280 @@
+{
+  "run_dir": "/home/andrew/joi-llm/gpt_mg/version0_15/results/admin_feedback_update_20260413_204740",
+  "profile": "version0_15",
+  "admin_log_root": "/tmp/no-admin-logs",
+  "admin_feedback_file": "/home/andrew/joi-llm/gpt_mg/version0_15/logs/admin_feedback/manual_feedback.json",
+  "base_genome_json": "/home/andrew/joi-llm/gpt_mg/version0_15/results/best_genome.json",
+  "final_genome_json": "/home/andrew/joi-llm/gpt_mg/version0_15/results/admin_feedback_update_20260413_204740/best_after_ga.json",
+  "admin_case_count": 0,
+  "admin_replay_case_count": 0,
+  "admin_working_row_count": 0,
+  "admin_failing_row_count": 0,
+  "manual_rule_count": 0,
+  "admin_baseline": null,
+  "admin_feedback": null,
+  "admin_post": null,
+  "admin_final": null,
+  "benchmark_baseline": {
+    "label": "benchmark_baseline",
+    "candidates_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/admin_feedback_update_20260413_204740/benchmark_baseline_candidates.csv",
+    "rerank_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/admin_feedback_update_20260413_204740/benchmark_baseline_rerank.csv",
+    "generation": {
+      "run_id": "benchmark_baseline_gen-3008808b-f615-53c1-e1e5-5db7526c34f6_2031",
+      "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/admin_feedback_update_20260413_204740/benchmark_baseline_candidates.csv",
+      "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_benchmark_baseline_gen-3008808b-f615-53c1-e1e5-5db7526c34f6_2031.jsonl",
+      "row_count": 1,
+      "rows": [
+        {
+          "index": "1",
+          "category": "1",
+          "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+          "command_eng": "Switch the dishwasher to dry mode.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+          "row_no": 1,
+          "profile": "version0_15",
+          "genome_id": "gen-3008808b-f615-53c1-e1e5-5db7526c34f6",
+          "genome_seed": 266834528,
+          "run_id": "benchmark_baseline_gen-3008808b-f615-53c1-e1e5-5db7526c34f6_2031",
+          "candidate_count": 1,
+          "candidates": "[\"{\\\"name\\\":\\\"SwitchDishwasherToDryMode\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#Dishwasher).setdishwashermode(\\\\\\\"dry\\\\\\\")\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 31899, \"completion_tokens\": 51, \"total_tokens\": 31950, \"latency_sec\": 9.6985, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/benchmark_baseline_gen-3008808b-f615-53c1-e1e5-5db7526c34f6_2031/row_001_cand_1.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "worker",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        }
+      ],
+      "fieldnames": [
+        "index",
+        "category",
+        "command_kor",
+        "command_eng",
+        "gt_raw",
+        "connected_devices",
+        "gt",
+        "row_no",
+        "profile",
+        "genome_id",
+        "genome_seed",
+        "run_id",
+        "candidate_count",
+        "candidates",
+        "candidate_metadata",
+        "prompt_log_paths",
+        "generation_status",
+        "llm_mode",
+        "llm_model"
+      ]
+    },
+    "rerank": {
+      "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/admin_feedback_update_20260413_204740/benchmark_baseline_rerank.csv",
+      "row_count": 1,
+      "repaired_count": 0
+    },
+    "metrics": {
+      "row_count": 1,
+      "avg_det_score": 96.7414,
+      "avg_gt_similarity": 0.8914,
+      "gt_exact_count": 0,
+      "pass_count": 1,
+      "fail_count": 0,
+      "top_failure_types": [],
+      "failed_row_nos": [],
+      "failed_cases": []
+    }
+  },
+  "ga_summary": {
+    "best_history": [
+      {
+        "generation": 1,
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499",
+        "fitness": 98.898,
+        "avg_det_score": 98.898,
+        "validation_avg_det_score": 98.898,
+        "genome": {
+          "id": "gen-10d1e822-839a-a138-8806-3c64fda98499",
+          "seed": 975035167,
+          "blocks": [
+            "01",
+            "02",
+            "03"
+          ],
+          "params": {
+            "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+            "temperature": 0.1,
+            "few_shot_count": 3,
+            "max_tokens": 768,
+            "candidate_strategies": [
+              "compact_json",
+              "minimal",
+              "explicit_preconditions",
+              "direct"
+            ]
+          },
+          "block_params": {
+            "02": {
+              "few_shot_count": 1,
+              "micro_rules": [
+                "Return exactly one JSON object only with keys name, cron, period, code."
+              ]
+            },
+            "05": {
+              "repair_mode": "conservative",
+              "few_shot_count": 3
+            }
+          }
+        }
+      }
+    ],
+    "best_genome": {
+      "id": "gen-10d1e822-839a-a138-8806-3c64fda98499",
+      "seed": 975035167,
+      "blocks": [
+        "01",
+        "02",
+        "03"
+      ],
+      "params": {
+        "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+        "temperature": 0.1,
+        "few_shot_count": 3,
+        "max_tokens": 768,
+        "candidate_strategies": [
+          "compact_json",
+          "minimal",
+          "explicit_preconditions",
+          "direct"
+        ]
+      },
+      "block_params": {
+        "02": {
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code."
+          ]
+        },
+        "05": {
+          "repair_mode": "conservative",
+          "few_shot_count": 3
+        }
+      }
+    },
+    "best_fitness": 98.898,
+    "best_validation_avg_det_score": 98.898
+  },
+  "category_summary": null,
+  "benchmark_final": {
+    "label": "benchmark_final",
+    "candidates_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/admin_feedback_update_20260413_204740/benchmark_final_candidates.csv",
+    "rerank_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/admin_feedback_update_20260413_204740/benchmark_final_rerank.csv",
+    "generation": {
+      "run_id": "benchmark_final_gen-10d1e822-839a-a138-8806-3c64fda98499_4031",
+      "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/admin_feedback_update_20260413_204740/benchmark_final_candidates.csv",
+      "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_benchmark_final_gen-10d1e822-839a-a138-8806-3c64fda98499_4031.jsonl",
+      "row_count": 1,
+      "rows": [
+        {
+          "index": "1",
+          "category": "1",
+          "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+          "command_eng": "Switch the dishwasher to dry mode.",
+          "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+          "connected_devices": "",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+          "row_no": 1,
+          "profile": "version0_15",
+          "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499",
+          "genome_seed": 975035167,
+          "run_id": "benchmark_final_gen-10d1e822-839a-a138-8806-3c64fda98499_4031",
+          "candidate_count": 1,
+          "candidates": "[\"{\\\"name\\\":\\\"SwitchDishwasherToDryMode\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#Dishwasher).dishwasher_setdishwashermode(\\\\\\\"dry\\\\\\\")\\\"}\"]",
+          "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"prompt_tokens\": 31753, \"completion_tokens\": 53, \"total_tokens\": 31806, \"latency_sec\": 3.9148, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+          "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/benchmark_final_gen-10d1e822-839a-a138-8806-3c64fda98499_4031/row_001_cand_1.json\"]",
+          "generation_status": "ok",
+          "llm_mode": "worker",
+          "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+        }
+      ],
+      "fieldnames": [
+        "index",
+        "category",
+        "command_kor",
+        "command_eng",
+        "gt_raw",
+        "connected_devices",
+        "gt",
+        "row_no",
+        "profile",
+        "genome_id",
+        "genome_seed",
+        "run_id",
+        "candidate_count",
+        "candidates",
+        "candidate_metadata",
+        "prompt_log_paths",
+        "generation_status",
+        "llm_mode",
+        "llm_model"
+      ]
+    },
+    "rerank": {
+      "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/admin_feedback_update_20260413_204740/benchmark_final_rerank.csv",
+      "row_count": 1,
+      "repaired_count": 0
+    },
+    "metrics": {
+      "row_count": 1,
+      "avg_det_score": 98.898,
+      "avg_gt_similarity": 0.9633,
+      "gt_exact_count": 0,
+      "pass_count": 1,
+      "fail_count": 0,
+      "top_failure_types": [],
+      "failed_row_nos": [],
+      "failed_cases": []
+    }
+  },
+  "benchmark_guard": {
+    "ok": true,
+    "avg_det_score_non_decreasing": true,
+    "avg_gt_similarity_non_decreasing": true,
+    "gt_exact_count_non_decreasing": true,
+    "fail_count_non_increasing": true,
+    "before": {
+      "row_count": 1,
+      "avg_det_score": 96.7414,
+      "avg_gt_similarity": 0.8914,
+      "gt_exact_count": 0,
+      "pass_count": 1,
+      "fail_count": 0,
+      "top_failure_types": [],
+      "failed_row_nos": [],
+      "failed_cases": []
+    },
+    "after": {
+      "row_count": 1,
+      "avg_det_score": 98.898,
+      "avg_gt_similarity": 0.9633,
+      "gt_exact_count": 0,
+      "pass_count": 1,
+      "fail_count": 0,
+      "top_failure_types": [],
+      "failed_row_nos": [],
+      "failed_cases": []
+    }
+  },
+  "admin_guard": {
+    "ok": true,
+    "reason": "not_applicable"
+  },
+  "promotion": {
+    "requested_name": "version0_15_update20260413",
+    "performed": true,
+    "reason": "benchmark_ok_no_admin_rows",
+    "target_root": "/home/andrew/joi-llm/gpt_mg/version0_15_update20260413",
+    "runtime_model": "gpt_mg.version0_15_update20260413",
+    "display_name": "PromptGA_version0_15_update20260413_svc-v2.0.1_cd"
+  }
+}

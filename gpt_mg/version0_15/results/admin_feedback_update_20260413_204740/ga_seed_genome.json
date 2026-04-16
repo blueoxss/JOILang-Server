@@ -1,0 +1,35 @@
+{
+  "id": "gen-3008808b-f615-53c1-e1e5-5db7526c34f6",
+  "seed": 266834528,
+  "blocks": [
+    "01",
+    "02",
+    "03",
+    "06"
+  ],
+  "params": {
+    "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "temperature": 0.05,
+    "few_shot_count": 3,
+    "max_tokens": 1024,
+    "candidate_strategies": [
+      "direct",
+      "compact_json",
+      "canonical_names_first"
+    ]
+  },
+  "block_params": {
+    "02": {
+      "few_shot_count": 1,
+      "micro_rules": [
+        "Keep the code minimal and remove unrelated actions.",
+        "For INTEGER and DOUBLE arguments, avoid quoted numeric literals.",
+        "Return exactly one JSON object only with keys name, cron, period, code."
+      ]
+    },
+    "05": {
+      "repair_mode": "conservative",
+      "few_shot_count": 3
+    }
+  }
+}

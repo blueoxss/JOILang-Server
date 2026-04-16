@@ -136,6 +136,7 @@ def _system_prompt() -> str:
 
 def load_version_config(user_input, connected_devices: dict = None, other_params: dict = None, base_path: str = "."):
     connected_devices = connected_devices or {}
+    print("[version0_14] connected_devices:\n" + json.dumps(connected_devices, ensure_ascii=False, indent=2, sort_keys=True))
     ensure_version013_backend_installed()
 
     base_dir = VERSION_ROOT

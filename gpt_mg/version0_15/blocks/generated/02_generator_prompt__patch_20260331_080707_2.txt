@@ -1,0 +1,124 @@
+# id: 02
+# role: generator
+# params: temperature, few_shot_count, max_tokens, micro_rules
+# description: Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.
+# placeholders: {command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}
+
+Task:
+Generate exactly one JOI JSON object for the input command.
+
+Inputs:
+- command_eng: {command_eng}
+- connected_devices: {connected_devices}
+- optional_cron: {optional_cron}
+- optional_period: {optional_period}
+- candidate_strategy: {candidate_strategy}
+- authoritative service schema snippet:
+{service_list_snippet}
+
+Output contract:
+- Return exactly one JSON object and nothing else.
+- The object must contain exactly these keys: name, cron, period, code.
+- name must be ASCII-safe, concise, and at most 50 characters.
+- cron must be "{optional_cron}" when a schedule is provided, otherwise "".
+- period must be {optional_period} when a schedule is provided, otherwise -1.
+- code must be a JOILang string, validly escaped for JSON.
+
+Hard generation rules:
+1. Use only services and values present in the provided schema snippet.
+2. Prefer canonical_name exactly when it is present in the snippet.
+3. Do not output bare raw service names when canonical_name is available.
+4. Use value entries in conditions and function entries in actions.
+5. Match argument counts and argument types exactly.
+6. For ENUM arguments, use only enum values explicitly present in the snippet.
+7. If the command implies time, convert to the service argument unit described by the snippet. period always uses milliseconds.
+8. Insert a power-check only if the snippet shows both a switch-like value and a power-on function for the same target context.
+9. If the request is ambiguous, choose the smallest schema-valid program that best matches the command.
+10. If you cannot produce a schema-valid action with confidence, still return valid JSON with code as an empty string.
+
+Self-check before final output:
+- valid JSON object only
+- required keys present
+- every referenced value/function exists in the snippet
+- every service token prefers canonical_name when offered
+- argument literals match types and enums
+- no unrelated action added
+- no markdown, no commentary, no code fence
+
+### EXEMPLAR 1: easy
+Input command_eng:
+Switch the dishwasher to dry mode.
+
+Input connected_devices:
+{}
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "Dishwasher",
+      "services": [
+        {"service": "DishwasherMode", "canonical_name": "Dishwasher_DishwasherMode", "type": "value", "return_type": "ENUM", "enums": ["auto", "wash", "dry"]},
+        {"service": "SetDishwasherMode", "canonical_name": "Dishwasher_SetDishwasherMode", "type": "function", "argument_type": "ENUM", "return_type": "VOID", "enums": ["auto", "wash", "dry"]}
+      ]
+    }
+  ]
+}
+
+Correct output:
+{"name":"SetDishwasherDryMode","cron":"","period":-1,"code":"(#Dishwasher).Dishwasher_SetDishwasherMode(\"dry\")"}
+
+### EXEMPLAR 2: medium
+Input command_eng:
+Set the speaker volume to 70.
+
+Input connected_devices:
+{}
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "Speaker",
+      "services": [
+        {"service": "Volume", "canonical_name": "Speaker_Volume", "type": "value", "return_type": "INTEGER"},
+        {"service": "SetVolume", "canonical_name": "Speaker_SetVolume", "type": "function", "argument_type": "INTEGER", "return_type": "INTEGER"}
+      ]
+    }
+  ]
+}
+
+Correct output:
+{"name":"SetSpeakerVolume70","cron":"","period":-1,"code":"(#Speaker).Speaker_SetVolume(70)"}
+
+### EXEMPLAR 3: hard
+Input command_eng:
+When a leak is detected, close the valve.
+
+Input connected_devices:
+{}
+
+Relevant schema example:
+{
+  "selected_devices": [
+    {
+      "device": "LeakSensor",
+      "services": [
+        {"service": "Leakage", "canonical_name": "LeakSensor_Leakage", "type": "value", "return_type": "BOOL"}
+      ]
+    },
+    {
+      "device": "Valve",
+      "services": [
+        {"service": "Close", "canonical_name": "Valve_Close", "type": "function", "return_type": "VOID"}
+      ]
+    }
+  ]
+}
+
+Correct output:
+{"name":"CloseValveOnLeak","cron":"","period":-1,"code":"wait until ((#LeakSensor).LeakSensor_Leakage == true)\n(#Valve).Valve_Close()"}
+
+AUTO-PATCH MICRO-RULES
+- Match argument_type positionally. INTEGER and DOUBLE literals should be unquoted; ENUM literals must use allowed enum strings only.
+- Remove unrelated actions, duplicate actions, and helper steps that do not directly support the command.

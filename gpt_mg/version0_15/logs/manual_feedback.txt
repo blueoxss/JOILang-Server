@@ -1,0 +1,5 @@
+# version0_14 manual focus rules
+# One rule per line. Lines starting with # are ignored.
+
+Keep receiver tags after # unchanged, such as #Kitchen, #LivingRoom, #DoorLock, or #MeetingRoom.
+Lowercase every service or value token after ). or all(...). so Device_Service becomes device_service in the final JOILang code.

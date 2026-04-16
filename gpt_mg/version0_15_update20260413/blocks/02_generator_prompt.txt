@@ -1,0 +1,278 @@
+# id: 02
+# role: generator
+# params: temperature, few_shot_count, max_tokens, micro_rules
+# description: Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.
+# placeholders: {command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}
+
+Task:
+Generate exactly one JOI JSON object for the input command.
+
+Inputs:
+- command_eng: {command_eng}
+- connected_devices: {connected_devices}
+- optional_cron: {optional_cron}
+- optional_period: {optional_period}
+- candidate_strategy: {candidate_strategy}
+- authoritative service schema snippet:
+{service_list_snippet}
+
+How to read the snippet:
+- `service_list_snippet` is the authoritative capability map. Use it instead of guessing from raw `connected_devices`.
+- Each `device_group` is one connected-device group, or one schema fallback group when `connected_devices` is empty.
+- Each `capability_binding` is one pair of:
+  1. a `category` and the full service list allowed for that category
+  2. the selector tags that may be combined with that category: `user_defined_tags`, `locations`, and `selector_tags`
+- A receiver must end with the binding category tag.
+- Valid receiver forms are:
+  - `(#Category)`
+  - `(#SelectorTag #Category)`
+  - `(#Location #CustomTag #Category)`
+  - `all(#Location #CustomTag #Category)`
+- If the command does not mention any selector tag, the base receiver `(#Category)` is valid.
+- If the command mentions multiple supported selector tags, combine them before the category. Put `locations` first, then other custom tags, then the category tag.
+- Never use raw instance ids like `tc1_...` in the final JOILang code.
+
+Output contract:
+- Return exactly one JSON object and nothing else.
+- The object must contain exactly these keys: name, cron, period, code.
+- name must be ASCII-safe, concise, and at most 50 characters.
+- cron must be "{optional_cron}" when a schedule is provided, otherwise "".
+- period must be {optional_period} when a schedule is provided, otherwise 0. Treat period 0 as the canonical default for unscheduled dataset rows.
+- code must be a JOILang string, validly escaped for JSON.
+
+Hard generation rules:
+1. Use only categories, values, functions, enum values, and receiver tags supported by the provided capability bindings.
+2. When `connected_devices` is non-empty, do not use categories that are absent from the snippet. When it is empty, the snippet is schema fallback and category-only receivers are allowed.
+3. A service may be used only through the category that owns it. If the receiver ends with `#Switch`, use only services listed under the `Switch` binding.
+4. If the command mentions a location, platform, brand, or custom tag, keep only the selector tags that are both explicitly implied by the command and present in the matching binding.
+5. If the command does not mention a selector tag, prefer the base receiver `(#Category)`.
+6. If the command addresses a group such as "all", "every", or a plural target, prefer `all(...)` with the same selector tags instead of a single-target receiver.
+7. Never emit raw connected-device ids such as `tc1_...` in the JOILang code.
+8. Use `canonical_name` only as the schema-matching reference. In the final JOILang code, emit the lowercase form of that member token after the receiver dot. Example: canonical_name `Dishwasher_SetDishwasherMode` becomes `dishwasher_setdishwashermode` in code.
+9. Do not output bare raw service names when `canonical_name` is available, and do not preserve uppercase service casing in the final code.
+10. Use value entries in conditions and function entries in actions.
+11. Match argument counts and argument types exactly.
+12. For ENUM arguments, use only enum values explicitly present in the snippet.
+13. If the command implies time, convert to the service argument unit described by the snippet. `period` always uses milliseconds.
+14. Insert a power-check only if the same capability binding shows both a switch-like value and a power-on function for the same target context.
+15. If the request is ambiguous, choose the smallest schema-valid program that best matches the command.
+16. If you cannot produce a schema-valid action with confidence, still return valid JSON with `code` as an empty string.
+17. If the command says to do one action and then another action after some duration, keep the first action immediately, then use `delay(...)` with the requested duration, then emit the follow-up action.
+18. If the command describes a threshold crossing such as "drops below", "rises above", or "becomes X or higher", do not collapse it to a single unconditional action. Use an explicit condition, wait-until, or `prev/curr` edge-detection pattern that preserves the trigger semantics.
+19. If the command asks to repeat alternating actions over time, prefer period-based stateful logic over cron syntax unless the command refers to a wall-clock time like 7 AM or every Monday.
+20. If the command is a repeated event trigger using wording like "whenever", "each time", "every time", "button is pressed", "door is opened", or "becomes fully charged", default to `period = 100` and preserve edge-trigger semantics with `prev/curr` or a triggered flag. Do not reduce these commands to one-shot `wait until`.
+21. If the command is a one-shot trigger with plain "when" and no repeated wording, `wait until` is acceptable.
+22. For commands that say "every N minutes from X to Y" or "check every N minutes from X to Y", represent the repeated interval with `period` in milliseconds and preserve the time-window stop condition with `Clock` guards or break logic. Use `cron` only for wall-clock anchors that are explicitly stated.
+23. Read values from sensors and send side effects to actuators. Never call `Speaker_Speak` on a `TemperatureSensor`, never call camera functions on a `PresenceSensor`, and never set charging state through an invented service if the schema offers `Switch_Off` for the charger.
+24. Preserve every meaningful selector tag from the command in the receiver. Prefer `all(#Hallway #Light)`, `all(#LivingRoom #Window)`, `all(#Even #RobotVacuumCleaner)`, or `(#ParkingLot #Speaker)` over compressed aliases or single-instance ids.
+25. If the schema offers an exact canonical function such as `Camera_CaptureImage`, `DoorLock_Lock`, `Valve_Close`, `Switch_Off`, or `Light_MoveToRGB`, use it exactly instead of a natural-language synonym like `TakePicture`, `CloseDoorlock`, `SetChargingState`, or `SetColor`.
+26. If the schema shows a button-specific value such as `DimmerSwitch_Button2`, use that exact value for button-2 events instead of generic `Button_Button` with `pushed_2x` or similar invented encodings.
+27. If the schema uses a nonobvious but canonical value for open or closed state, such as a current position or a specific door-state value, follow the schema exactly rather than substituting a more intuitive but unsupported service.
+
+Self-check before final output:
+- valid JSON object only
+- required keys present
+- every referenced value/function exists in the snippet
+- every receiver category and selector tag combination is supported by at least one capability binding
+- every service token resolves to canonical_name when offered, but is emitted in lowercase after the receiver dot
+- argument literals match types and enums
+- delayed, repeated, and edge-triggered commands preserve their temporal structure
+- no unrelated action added
+- no markdown, no commentary, no code fence
+
+CASE STYLE RULE
+- Keep receiver tags after `#` in their original tag case such as `#Kitchen`, `#LivingRoom`, or `#DoorLock`.
+- Lowercase only the member token after `).` or `all(...).`.
+- Example: `(#Kitchen #Light).Light_MoveToRGB(255, 255, 0)` -> `(#Kitchen #Light).light_movetorgb(255, 255, 0)`.
+
+### EXEMPLAR 1: easy
+Input command_eng:
+Turn on the Philips Hue switch.
+
+Input connected_devices:
+{
+  "tc1_de19adc7-a6fd-4b6f-85a5-3321a747a4d0": {
+    "category": ["Switch", "Light"],
+    "tags": ["Smartthings", "platform__PhilipsHue", "Light", "Switch"]
+  }
+}
+
+Relevant capability snippet:
+{
+  "device_groups": [
+    {
+      "group_id": "tc1_de19adc7-a6fd-4b6f-85a5-3321a747a4d0",
+      "capability_bindings": [
+        {
+          "category": "Switch",
+          "user_defined_tags": ["Smartthings", "platform__PhilipsHue"],
+          "locations": [],
+          "selector_tags": ["Smartthings", "platform__PhilipsHue"],
+          "services": [
+            {"service": "Switch", "canonical_name": "Switch_Switch", "type": "value", "return_type": "BOOL"},
+            {"service": "On", "canonical_name": "Switch_On", "type": "function", "return_type": "VOID"},
+            {"service": "Off", "canonical_name": "Switch_Off", "type": "function", "return_type": "VOID"}
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+Correct output:
+{"name":"TurnOnPhilipsHueSwitch","cron":"","period":0,"code":"(#platform__PhilipsHue #Switch).switch_on()"}
+
+### EXEMPLAR 2: medium
+Input command_eng:
+Change the living room Philips Hue light to yellow.
+
+Input connected_devices:
+{
+  "tc1_de19adc7-a6fd-4b6f-85a5-3321a747a4d0": {
+    "category": ["Switch", "Light"],
+    "tags": ["Smartthings", "platform__PhilipsHue", "Light", "Switch"],
+    "locations": ["LivingRoom"]
+  }
+}
+
+Relevant capability snippet:
+{
+  "device_groups": [
+    {
+      "group_id": "tc1_de19adc7-a6fd-4b6f-85a5-3321a747a4d0",
+      "capability_bindings": [
+        {
+          "category": "Light",
+          "user_defined_tags": ["Smartthings", "platform__PhilipsHue"],
+          "locations": ["LivingRoom"],
+          "selector_tags": ["LivingRoom", "Smartthings", "platform__PhilipsHue"],
+          "services": [
+            {"service": "CurrentRGB", "canonical_name": "Light_CurrentRGB", "type": "value", "return_type": "STRING"},
+            {"service": "MoveToRGB", "canonical_name": "Light_MoveToRGB", "type": "function", "argument_type": "INTEGER | INTEGER | INTEGER", "return_type": "VOID"}
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+Correct output:
+{"name":"ChangeLivingRoomPhilipsHueLightToYellow","cron":"","period":0,"code":"(#LivingRoom #platform__PhilipsHue #Light).light_movetorgb(255, 255, 0)"}
+
+### EXEMPLAR 3: hard
+Input command_eng:
+When the boiler room leak sensor detects a leak, close the boiler room valve.
+
+Input connected_devices:
+{
+  "tc1_sensor": {
+    "category": ["LeakSensor"],
+    "tags": ["LeakSensor"],
+    "locations": ["BoilerRoom"]
+  },
+  "tc1_valve": {
+    "category": ["Valve"],
+    "tags": ["Valve"],
+    "locations": ["BoilerRoom"]
+  }
+}
+
+Relevant capability snippet:
+{
+  "device_groups": [
+    {
+      "group_id": "tc1_sensor",
+      "capability_bindings": [
+        {
+          "category": "LeakSensor",
+          "user_defined_tags": [],
+          "locations": ["BoilerRoom"],
+          "selector_tags": ["BoilerRoom"],
+          "services": [
+            {"service": "Leakage", "canonical_name": "LeakSensor_Leakage", "type": "value", "return_type": "BOOL"}
+          ]
+        }
+      ]
+    },
+    {
+      "group_id": "tc1_valve",
+      "capability_bindings": [
+        {
+          "category": "Valve",
+          "user_defined_tags": [],
+          "locations": ["BoilerRoom"],
+          "selector_tags": ["BoilerRoom"],
+          "services": [
+            {"service": "Close", "canonical_name": "Valve_Close", "type": "function", "return_type": "VOID"}
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+Correct output:
+{"name":"CloseBoilerRoomValveOnLeak","cron":"","period":0,"code":"wait until ((#BoilerRoom #LeakSensor).leaksensor_leakage == true)\n(#BoilerRoom #Valve).valve_close()"}
+
+SCHEDULE AND EVENT ALIGNMENT RULES
+- If the command is a simple wall-clock action such as "at 9 AM" or "every morning at 8 AM", emit the direct tag-based action instead of returning empty code.
+- If the command says "during weekends" together with "every N seconds/minutes/hours", use both cron \"0 0 * * 6-7\" and the matching period in milliseconds. Guard the body with `(#Clock).clock_weekday` checks when needed.
+- If the command says "each time", "whenever", "button is pressed", "door is opened", or "motion is detected", treat it as a repeated event trigger. Default to period 100 and use prev/curr or triggered-state logic instead of a one-shot wait-until.
+- If a light exposes `LevelControl` and `Switch` behavior, represent maximum brightness with `LevelControl_MoveToLevel(100, 0)` and represent turning the light off with `Switch_Off()`.
+- Prefer semantic tags from the command over alias-like device ids from `connected_devices` when the intended tags are clear, such as `all(#Floor3 #Even #Blind)`, `all(#Blind)`, `(#Entrance #Light)`, or `(#MeetingRoom #Door)`.
+
+GROUP TAG PATTERN SKETCH
+Input command_eng:
+Turn off all Philips Hue switches in the living room.
+
+Correct output:
+{"name":"TurnOffAllLivingRoomPhilipsHueSwitches","cron":"","period":0,"code":"all(#LivingRoom #platform__PhilipsHue #Switch).switch_off()"}
+
+WEEKEND PERIODIC PATTERN SKETCH
+Input command_eng:
+Every 5 seconds on weekends, if the pump is off, turn it on; if it is on, turn it off.
+
+Correct output:
+{"name":"TogglePumpWeekends","cron":"0 0 * * 6-7","period":5000,"code":"if ((#Clock).clock_weekday != \"saturday\" and (#Clock).clock_weekday != \"sunday\") {\n    break\n}\n(#Pump).switch_toggle()"}
+
+EVENT MAX-BRIGHTNESS PATTERN SKETCH
+Input command_eng:
+Whenever motion is detected at the entrance, turn on the entrance light at maximum brightness and then turn it off after 3 seconds.
+
+Correct output:
+{"name":"TurnOnEntranceLightFor3Seconds","cron":"","period":100,"code":"prev := (#Entrance #MotionSensor).motionsensor_motion\ncurr = (#Entrance #MotionSensor).motionsensor_motion\nif (prev == false and curr == true) {\n    (#Entrance #Light).levelcontrol_movetolevel(100, 0)\n    delay(3 SEC)\n    (#Entrance #Light).switch_off()\n}\nprev = curr"}
+
+MIDNIGHT LOCK PATTERN SKETCH
+Input command_eng:
+Lock the doorlock every day at midnight.
+
+Correct output:
+{"name":"LockDoorlockMidnight","cron":"0 0 * * *","period":0,"code":"(#DoorLock).doorlock_lock()"}
+
+TIME-WINDOW PERIODIC PATTERN SKETCH
+Input command_eng:
+Every 10 minutes from now until 3 PM, sound the emergency siren for 5 seconds and then turn it off.
+
+Correct output:
+{"name":"SoundEmergencySirenUntil3PM","cron":"","period":600000,"code":"if ((#Clock).clock_hour == 15) {\n    break\n}\n(#Siren).siren_setsirenmode(\"emergency\")\ndelay(5 SEC)\n(#Siren).switch_off()"}
+
+SENSOR-TO-SPEAKER PATTERN SKETCH
+Input command_eng:
+Announce the temperature through the speaker.
+
+Correct output:
+{"name":"AnnounceTemperature","cron":"","period":0,"code":"temp = (#TemperatureSensor).temperaturesensor_temperature\n(#Speaker).speaker_speak(\"현재 온도는 \" + temp + \"도입니다\")"}
+
+RGB COLOR PATTERN SKETCH
+Input command_eng:
+Change the light color to yellow.
+
+Correct output:
+{"name":"ChangeLightColorToYellow","cron":"","period":0,"code":"(#Light).light_movetorgb(255, 255, 0)"}
+
+BUTTON2 WINDOW PATTERN SKETCH
+Input command_eng:
+Whenever button 2 of the multi-button is pressed, open all windows in the living room.
+
+Correct output:
+{"name":"OpenAllWindowsInLivingRoom","cron":"","period":100,"code":"prev := (#MultiButton).dimmerswitch_button2\ncurr = (#MultiButton).dimmerswitch_button2\nif (prev != \"pushed\" and curr == \"pushed\") {\n    all(#LivingRoom #Window).windowcovering_uporopen()\n}\nprev = curr"}

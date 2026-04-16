@@ -1,0 +1,32 @@
+{
+  "updated_at": "2026-04-13T20:34:21.290137",
+  "case_count": 1,
+  "ignored_count": 0,
+  "manual_feedback": [
+    "Handle concise English natural-language commands directly and preserve the requested action ordering, tags, and timing semantics.",
+    "If an admin feedback case has a known correct pattern, prefer the smallest schema-valid program that matches that known target behavior exactly."
+  ],
+  "cases": [
+    {
+      "case_id": "test:1",
+      "source_path": "/tmp/tmp.Yvu7kjlKwC/slack/test.jsonl",
+      "source_line": 1,
+      "source_kind": "raw_text",
+      "raw_text": "Switch the dishwasher to dry mode.",
+      "command_eng": "Switch the dishwasher to dry mode.",
+      "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+      "category": "1",
+      "connected_devices": "{}",
+      "gt": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+      "cron": "",
+      "period": "0",
+      "language": "en",
+      "matched_dataset_row_no": 1,
+      "manual_rules": "[]",
+      "note_only": "false",
+      "raw_failed": "",
+      "seen_count": 1
+    }
+  ],
+  "ignored": []
+}

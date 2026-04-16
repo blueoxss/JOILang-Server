@@ -1,0 +1,2 @@
+category,command_kor,command_eng,connected_devices,gt,cron,period,case_id,source_path,source_line,seen_count,language,matched_dataset_row_no,source_kind,note_only,raw_text,manual_rules
+1,식기세척기를 건조 모드로 설정해줘.,Switch the dishwasher to dry mode.,{},"{""name"": """", ""cron"": """", ""period"": 0, ""script"": ""(#Dishwasher).Dishwasher_SetDishwasherMode(\""dry\"")""}",,0,cases:1,/tmp/tmp.Pz3xooKilA/cases.json,1,1,en,1,structured_record,false,,"[""Prefer the dishwasher dry mode mapping without adding extra devices.""]"

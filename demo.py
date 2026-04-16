@@ -4,6 +4,7 @@ from fastapi.responses import JSONResponse
 import json, os
 import logging
 from datetime import datetime
+from pathlib import Path
 from pydantic import BaseModel
 from typing import Dict, Any, Optional, List
 
@@ -98,6 +99,25 @@ class GenerateJOICodeRequest(BaseModel):
     current_time: str
     other_params: Optional[List[Dict[str, Any]]] = None
 
+
+class AdminFeedbackUpdateRequest(BaseModel):
+    model: str = "gpt_mg.version0_15"
+    admin_log_root: str = "admin_logs"
+    admin_limit: Optional[int] = None
+    benchmark_limit: Optional[int] = None
+    start_row: int = 1
+    end_row: Optional[int] = None
+    category: Optional[List[str]] = None
+    admin_candidate_k: int = 1
+    benchmark_candidate_k: int = 2
+    llm_mode: Optional[str] = None
+    llm_endpoint: Optional[str] = None
+    skip_benchmark: bool = False
+    skip_category_sweep: bool = False
+    update_name: Optional[str] = None
+    force_promote: bool = False
+    seed: int = 15
+
 # 기본 연결된 장치 정보 로드
 print("현재 작업 디렉토리:", os.getcwd())
 things_path = "./datasets/things.json"
@@ -148,8 +168,11 @@ os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY_PROJ_DEMO")  # .env 파
 from openai import OpenAI
 client = OpenAI()
 
+APP_ROOT = Path(__file__).resolve().parent
+GPT_MG_ROOT = APP_ROOT / "gpt_mg"
+
 # 모델 리스트
-MODEL_OPTIONS = [
+STATIC_MODEL_OPTIONS = [
     {
         "display": "CAP-old_gpt4.1-mini_svc-v1.5.4",
         "aliases": ["CAP-old_gpt4.1-mini_svc-v1.5.4", "CAP_gpt4.1_mini_old", "gpt4.1-mini"],
@@ -181,21 +204,74 @@ MODEL_OPTIONS = [
         "generator": "mg",
     },
     {
+        "display": "PromptGA_v0.15_svc-v2.0.1_cd",
+        "aliases": ["PromptGA_v0.15_svc-v2.0.1", "gpt_mg.version0_15", "version0_15"],
+        "runtime_model": "gpt_mg.version0_15",
+        "generator": "mg",
+    },
+    {
         "display": "JOI5_gpt5-mini_svc-v1.5.4",
         "aliases": ["JOI5_gpt5-mini_svc-v1.5.4", "JOI_gpt5_mini", "gpt_mg.version0_7"],
         "runtime_model": "gpt_mg.version0_7",
         "generator": "mg",
     },
 ]
-AVAILABLE_MODELS = [option["display"] for option in MODEL_OPTIONS]
-MODEL_ALIAS_MAP = {
-    alias: option
-    for option in MODEL_OPTIONS
-    for alias in option["aliases"]
-}
-DEFAULT_MODEL_OPTION = MODEL_OPTIONS[-1]
+
+MODEL_OPTIONS: List[Dict[str, Any]] = []
+AVAILABLE_MODELS: List[str] = []
+MODEL_ALIAS_MAP: Dict[str, Dict[str, Any]] = {}
+DEFAULT_MODEL_OPTION: Dict[str, Any] = {}
 
 selected_model_raw = ''
+
+
+def _discover_update_model_options() -> List[Dict[str, Any]]:
+    discovered: List[Dict[str, Any]] = []
+    if not GPT_MG_ROOT.exists():
+        return discovered
+    for version_dir in sorted(GPT_MG_ROOT.glob("version0_15_update*")):
+        if not version_dir.is_dir():
+            continue
+        if not (version_dir / "config_loader.py").exists():
+            continue
+        runtime_model = f"gpt_mg.{version_dir.name}"
+        display = f"PromptGA_{version_dir.name}_svc-v2.0.1_cd"
+        discovered.append(
+            {
+                "display": display,
+                "aliases": [display, runtime_model, version_dir.name],
+                "runtime_model": runtime_model,
+                "generator": "mg",
+            }
+        )
+    return discovered
+
+
+def refresh_model_registry() -> None:
+    global MODEL_OPTIONS
+    global AVAILABLE_MODELS
+    global MODEL_ALIAS_MAP
+    global DEFAULT_MODEL_OPTION
+
+    MODEL_OPTIONS = list(STATIC_MODEL_OPTIONS) + _discover_update_model_options()
+    AVAILABLE_MODELS = [option["display"] for option in MODEL_OPTIONS]
+    MODEL_ALIAS_MAP = {
+        alias: option
+        for option in MODEL_OPTIONS
+        for alias in option["aliases"]
+    }
+    update_candidates = [
+        option
+        for option in MODEL_OPTIONS
+        if str(option.get("runtime_model", "")).startswith("gpt_mg.version0_15_update")
+    ]
+    if update_candidates:
+        DEFAULT_MODEL_OPTION = update_candidates[-1]
+    else:
+        DEFAULT_MODEL_OPTION = MODEL_ALIAS_MAP.get("gpt_mg.version0_15", MODEL_OPTIONS[-1])
+
+
+refresh_model_registry()
 
 
 def extract_selected_model_raw(other_params):
@@ -209,13 +285,18 @@ def extract_selected_model_raw(other_params):
 
 
 def resolve_selected_model_option(selected_model_raw):
-    return MODEL_ALIAS_MAP.get(selected_model_raw, DEFAULT_MODEL_OPTION)
+    option = MODEL_ALIAS_MAP.get(selected_model_raw)
+    if option is None and selected_model_raw:
+        refresh_model_registry()
+        option = MODEL_ALIAS_MAP.get(selected_model_raw)
+    return option or DEFAULT_MODEL_OPTION
 
 @app.get("/get_model_list")
 async def get_model_list():
     """
     Return the list of available model names.
     """
+    refresh_model_registry()
     print("Send model list: ", AVAILABLE_MODELS)
     return {"models": AVAILABLE_MODELS}
 
@@ -224,6 +305,63 @@ async def get_model_list():
 async def health_check():
     """Health check endpoint"""
     return {"status": "active", "timestamp": datetime.now().isoformat()}
+
+
+@app.post("/run_admin_feedback_update")
+async def run_admin_feedback_update(request: AdminFeedbackUpdateRequest):
+    refresh_model_registry()
+    selected_model_option = resolve_selected_model_option(str(request.model).strip())
+    runtime_model = selected_model_option["runtime_model"]
+    if not str(runtime_model).startswith("gpt_mg.version0_15"):
+        return JSONResponse(
+            status_code=400,
+            content={
+                "error": "admin feedback update is only supported for version0_15 family models",
+                "resolved_model": runtime_model,
+            },
+        )
+
+    module_name = f"{runtime_model}.scripts.run_admin_feedback_update"
+    try:
+        pipeline_module = importlib.import_module(module_name)
+    except ImportError as exc:
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": f"failed to import admin feedback update module: {module_name}",
+                "details": str(exc),
+            },
+        )
+
+    run_update = getattr(pipeline_module, "run_admin_feedback_update", None)
+    if run_update is None:
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": f"{module_name} does not expose run_admin_feedback_update",
+            },
+        )
+
+    summary = run_update(
+        profile=runtime_model.split(".")[-1],
+        admin_log_root=request.admin_log_root,
+        admin_limit=request.admin_limit,
+        benchmark_limit=request.benchmark_limit,
+        start_row=request.start_row,
+        end_row=request.end_row,
+        category=request.category or [],
+        admin_candidate_k=request.admin_candidate_k,
+        benchmark_candidate_k=request.benchmark_candidate_k,
+        llm_mode=request.llm_mode,
+        llm_endpoint=request.llm_endpoint,
+        skip_benchmark=request.skip_benchmark,
+        skip_category_sweep=request.skip_category_sweep,
+        update_name=request.update_name,
+        force_promote=request.force_promote,
+        seed=request.seed,
+    )
+    refresh_model_registry()
+    return summary
 
 @app.post("/generate_joi_code")
 async def generate_code(request: GenerateJOICodeRequest):

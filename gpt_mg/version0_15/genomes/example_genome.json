@@ -1,0 +1,29 @@
+{
+  "id": "gen-example-version0-15",
+  "seed": 12345,
+  "blocks": ["01", "02", "03", "06"],
+  "params": {
+    "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "temperature": 0.0,
+    "few_shot_count": 3,
+    "max_tokens": 256,
+    "candidate_strategies": [
+      "direct",
+      "minimal",
+      "canonical_names_first"
+    ]
+  },
+  "block_params": {
+    "02": {
+      "few_shot_count": 3,
+      "micro_rules": [
+        "Prefer canonical_name exactly when available.",
+        "Use value entries in conditions and function entries in actions."
+      ]
+    },
+    "05": {
+      "repair_mode": "conservative",
+      "few_shot_count": 3
+    }
+  }
+}

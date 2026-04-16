@@ -1,0 +1,42 @@
+{
+  "id": "gen-5d135fec-3cab-4d64-19aa-b7104bd459ba",
+  "seed": 3027,
+  "blocks": [
+    "01",
+    "02",
+    "03",
+    "06"
+  ],
+  "params": {
+    "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "temperature": 0.0,
+    "few_shot_count": 3,
+    "max_tokens": 1024,
+    "candidate_strategies": [
+      "canonical_names_first",
+      "minimal",
+      "direct"
+    ]
+  },
+  "block_params": {
+    "02": {
+      "few_shot_count": 3,
+      "micro_rules": [
+        "Prefer canonical_name exactly when available.",
+        "Use value entries in conditions and function entries in actions."
+      ],
+      "source_file": "generated/02_generator_prompt__patch_20260413_203600_2.txt"
+    },
+    "05": {
+      "repair_mode": "conservative",
+      "few_shot_count": 3,
+      "source_file": "generated/05_repair_prompt__patch_20260413_203600_2.txt"
+    },
+    "01": {
+      "source_file": "generated/01_preamble__patch_20260413_203600_2.txt"
+    },
+    "03": {
+      "source_file": "generated/03_postprocessor__patch_20260413_203600_2.txt"
+    }
+  }
+}

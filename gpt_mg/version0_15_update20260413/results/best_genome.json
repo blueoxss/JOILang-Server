@@ -1,0 +1,33 @@
+{
+  "id": "gen-10d1e822-839a-a138-8806-3c64fda98499",
+  "seed": 975035167,
+  "blocks": [
+    "01",
+    "02",
+    "03"
+  ],
+  "params": {
+    "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "temperature": 0.1,
+    "few_shot_count": 3,
+    "max_tokens": 768,
+    "candidate_strategies": [
+      "compact_json",
+      "minimal",
+      "explicit_preconditions",
+      "direct"
+    ]
+  },
+  "block_params": {
+    "02": {
+      "few_shot_count": 1,
+      "micro_rules": [
+        "Return exactly one JSON object only with keys name, cron, period, code."
+      ]
+    },
+    "05": {
+      "repair_mode": "conservative",
+      "few_shot_count": 3
+    }
+  }
+}

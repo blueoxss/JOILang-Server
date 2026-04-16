@@ -1,0 +1,37 @@
+{
+  "run_dir": "/home/andrew/joi-llm/gpt_mg/version0_15/results/admin_feedback_update_20260413_203412",
+  "profile": "version0_15",
+  "admin_log_root": "/tmp/does-not-exist",
+  "admin_feedback_file": "/home/andrew/joi-llm/gpt_mg/version0_15/logs/admin_feedback/manual_feedback.json",
+  "base_genome_json": "/home/andrew/joi-llm/gpt_mg/version0_15/genomes/example_genome.json",
+  "final_genome_json": "/home/andrew/joi-llm/gpt_mg/version0_15/results/admin_feedback_update_20260413_203412/base_genome.json",
+  "admin_case_count": 0,
+  "admin_replay_case_count": 0,
+  "admin_working_row_count": 0,
+  "admin_failing_row_count": 0,
+  "manual_rule_count": 0,
+  "admin_baseline": null,
+  "admin_feedback": null,
+  "admin_post": null,
+  "admin_final": null,
+  "benchmark_baseline": null,
+  "ga_summary": null,
+  "category_summary": null,
+  "benchmark_final": null,
+  "benchmark_guard": {
+    "ok": true,
+    "reason": "not_applicable"
+  },
+  "admin_guard": {
+    "ok": true,
+    "reason": "not_applicable"
+  },
+  "promotion": {
+    "requested_name": "version0_15_update20260413",
+    "performed": false,
+    "reason": "benchmark_skipped",
+    "target_root": "",
+    "runtime_model": "",
+    "display_name": ""
+  }
+}

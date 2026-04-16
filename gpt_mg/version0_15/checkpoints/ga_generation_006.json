@@ -1,0 +1,2002 @@
+{
+  "generation": 6,
+  "population": [
+    {
+      "genome": {
+        "id": "gen-047274d0-e42e-d242-a73d-73a8a0766c09",
+        "seed": 855102013,
+        "blocks": [
+          "01",
+          "02",
+          "03",
+          "06"
+        ],
+        "params": {
+          "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+          "temperature": 0.1,
+          "few_shot_count": 3,
+          "max_tokens": 1024,
+          "candidate_strategies": [
+            "canonical_names_first",
+            "minimal",
+            "direct"
+          ]
+        },
+        "block_params": {
+          "02": {
+            "few_shot_count": 3,
+            "micro_rules": [
+              "Prefer canonical_name exactly when available.",
+              "Use value entries in conditions and function entries in actions."
+            ]
+          },
+          "05": {
+            "repair_mode": "conservative",
+            "few_shot_count": 3
+          }
+        }
+      },
+      "fitness": 24.0,
+      "avg_det_score": 24.0,
+      "variance": 0.0,
+      "validation_avg_det_score": 24.0,
+      "train_metrics": {
+        "run_id": "ga_quick_gen-047274d0-e42e-d242-a73d-73a8a0766c09_5040",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-047274d0-e42e-d242-a73d-73a8a0766c09_5040.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_quick_gen-047274d0-e42e-d242-a73d-73a8a0766c09_5040",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-047274d0-e42e-d242-a73d-73a8a0766c09_5040.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-047274d0-e42e-d242-a73d-73a8a0766c09_5040.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-047274d0-e42e-d242-a73d-73a8a0766c09",
+              "genome_seed": 855102013,
+              "run_id": "ga_quick_gen-047274d0-e42e-d242-a73d-73a8a0766c09_5040",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"canonical_names_first\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"minimal\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-047274d0-e42e-d242-a73d-73a8a0766c09_5040/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-047274d0-e42e-d242-a73d-73a8a0766c09_5040/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      },
+      "validation_metrics": {
+        "run_id": "ga_validation_gen-047274d0-e42e-d242-a73d-73a8a0766c09_505040",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-047274d0-e42e-d242-a73d-73a8a0766c09_505040.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_validation_gen-047274d0-e42e-d242-a73d-73a8a0766c09_505040",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-047274d0-e42e-d242-a73d-73a8a0766c09_505040.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-047274d0-e42e-d242-a73d-73a8a0766c09_505040.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-047274d0-e42e-d242-a73d-73a8a0766c09",
+              "genome_seed": 855102013,
+              "run_id": "ga_validation_gen-047274d0-e42e-d242-a73d-73a8a0766c09_505040",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"canonical_names_first\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"minimal\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-047274d0-e42e-d242-a73d-73a8a0766c09_505040/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-047274d0-e42e-d242-a73d-73a8a0766c09_505040/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      }
+    },
+    {
+      "genome": {
+        "id": "gen-0d925104-a481-fa79-3ebe-d866f61d584c",
+        "seed": 826560553,
+        "blocks": [
+          "01",
+          "02",
+          "03",
+          "06"
+        ],
+        "params": {
+          "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+          "temperature": 0.1,
+          "few_shot_count": 3,
+          "max_tokens": 1024,
+          "candidate_strategies": [
+            "canonical_names_first",
+            "minimal",
+            "direct"
+          ]
+        },
+        "block_params": {
+          "02": {
+            "few_shot_count": 3,
+            "micro_rules": [
+              "Prefer canonical_name exactly when available.",
+              "Use value entries in conditions and function entries in actions."
+            ]
+          },
+          "05": {
+            "repair_mode": "conservative",
+            "few_shot_count": 3
+          }
+        }
+      },
+      "fitness": 24.0,
+      "avg_det_score": 24.0,
+      "variance": 0.0,
+      "validation_avg_det_score": 24.0,
+      "train_metrics": {
+        "run_id": "ga_quick_gen-0d925104-a481-fa79-3ebe-d866f61d584c_3580",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-0d925104-a481-fa79-3ebe-d866f61d584c_3580.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_quick_gen-0d925104-a481-fa79-3ebe-d866f61d584c_3580",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-0d925104-a481-fa79-3ebe-d866f61d584c_3580.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-0d925104-a481-fa79-3ebe-d866f61d584c_3580.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-0d925104-a481-fa79-3ebe-d866f61d584c",
+              "genome_seed": 826560553,
+              "run_id": "ga_quick_gen-0d925104-a481-fa79-3ebe-d866f61d584c_3580",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"canonical_names_first\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"minimal\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-0d925104-a481-fa79-3ebe-d866f61d584c_3580/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-0d925104-a481-fa79-3ebe-d866f61d584c_3580/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      },
+      "validation_metrics": {
+        "run_id": "ga_validation_gen-0d925104-a481-fa79-3ebe-d866f61d584c_503580",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-0d925104-a481-fa79-3ebe-d866f61d584c_503580.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_validation_gen-0d925104-a481-fa79-3ebe-d866f61d584c_503580",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-0d925104-a481-fa79-3ebe-d866f61d584c_503580.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-0d925104-a481-fa79-3ebe-d866f61d584c_503580.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-0d925104-a481-fa79-3ebe-d866f61d584c",
+              "genome_seed": 826560553,
+              "run_id": "ga_validation_gen-0d925104-a481-fa79-3ebe-d866f61d584c_503580",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"canonical_names_first\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"minimal\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-0d925104-a481-fa79-3ebe-d866f61d584c_503580/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-0d925104-a481-fa79-3ebe-d866f61d584c_503580/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      }
+    },
+    {
+      "genome": {
+        "id": "gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4",
+        "seed": 418500278,
+        "blocks": [
+          "01",
+          "02",
+          "03",
+          "06"
+        ],
+        "params": {
+          "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+          "temperature": 0.1,
+          "few_shot_count": 3,
+          "max_tokens": 1024,
+          "candidate_strategies": [
+            "canonical_names_first",
+            "minimal",
+            "direct"
+          ]
+        },
+        "block_params": {
+          "02": {
+            "few_shot_count": 3,
+            "micro_rules": []
+          },
+          "05": {
+            "repair_mode": "conservative",
+            "few_shot_count": 3
+          }
+        }
+      },
+      "fitness": 24.0,
+      "avg_det_score": 24.0,
+      "variance": 0.0,
+      "validation_avg_det_score": 24.0,
+      "train_metrics": {
+        "run_id": "ga_quick_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_3305",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_3305.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_quick_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_3305",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_3305.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_3305.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4",
+              "genome_seed": 418500278,
+              "run_id": "ga_quick_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_3305",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"canonical_names_first\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"minimal\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_3305/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_3305/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      },
+      "validation_metrics": {
+        "run_id": "ga_validation_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_503305",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_503305.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_validation_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_503305",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_503305.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_503305.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4",
+              "genome_seed": 418500278,
+              "run_id": "ga_validation_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_503305",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"canonical_names_first\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"minimal\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_503305/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-1dba3fe2-6bfe-9111-fb9d-44e17617cee4_503305/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      }
+    },
+    {
+      "genome": {
+        "id": "gen-1e48329a-7e23-f59d-297a-df40e8cceee0",
+        "seed": 728069731,
+        "blocks": [
+          "01",
+          "02",
+          "03",
+          "06"
+        ],
+        "params": {
+          "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+          "temperature": 0.1,
+          "few_shot_count": 3,
+          "max_tokens": 768,
+          "candidate_strategies": [
+            "direct",
+            "compact_json",
+            "canonical_names_first"
+          ]
+        },
+        "block_params": {
+          "02": {
+            "few_shot_count": 3,
+            "micro_rules": [
+              "Prefer canonical_name exactly when available.",
+              "Use value entries in conditions and function entries in actions."
+            ]
+          },
+          "05": {
+            "repair_mode": "conservative",
+            "few_shot_count": 3
+          }
+        }
+      },
+      "fitness": 24.0,
+      "avg_det_score": 24.0,
+      "variance": 0.0,
+      "validation_avg_det_score": 24.0,
+      "train_metrics": {
+        "run_id": "ga_quick_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_12758",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_12758.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_quick_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_12758",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_12758.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_12758.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-1e48329a-7e23-f59d-297a-df40e8cceee0",
+              "genome_seed": 728069731,
+              "run_id": "ga_quick_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_12758",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_12758/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_12758/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      },
+      "validation_metrics": {
+        "run_id": "ga_validation_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_512758",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_512758.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_validation_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_512758",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_512758.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_512758.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-1e48329a-7e23-f59d-297a-df40e8cceee0",
+              "genome_seed": 728069731,
+              "run_id": "ga_validation_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_512758",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_512758/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-1e48329a-7e23-f59d-297a-df40e8cceee0_512758/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      }
+    },
+    {
+      "genome": {
+        "id": "gen-6c91e451-5761-c377-a0dd-9cda455ca475",
+        "seed": 227330633,
+        "blocks": [
+          "01",
+          "02",
+          "03",
+          "06"
+        ],
+        "params": {
+          "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+          "temperature": 0.1,
+          "few_shot_count": 3,
+          "max_tokens": 1024,
+          "candidate_strategies": [
+            "canonical_names_first",
+            "minimal",
+            "direct"
+          ]
+        },
+        "block_params": {
+          "02": {
+            "few_shot_count": 3,
+            "micro_rules": [
+              "Prefer canonical_name exactly when available.",
+              "Use value entries in conditions and function entries in actions."
+            ]
+          },
+          "05": {
+            "repair_mode": "conservative",
+            "few_shot_count": 3
+          }
+        }
+      },
+      "fitness": 24.0,
+      "avg_det_score": 24.0,
+      "variance": 0.0,
+      "validation_avg_det_score": 24.0,
+      "train_metrics": {
+        "run_id": "ga_quick_gen-6c91e451-5761-c377-a0dd-9cda455ca475_3660",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-6c91e451-5761-c377-a0dd-9cda455ca475_3660.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_quick_gen-6c91e451-5761-c377-a0dd-9cda455ca475_3660",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-6c91e451-5761-c377-a0dd-9cda455ca475_3660.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-6c91e451-5761-c377-a0dd-9cda455ca475_3660.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-6c91e451-5761-c377-a0dd-9cda455ca475",
+              "genome_seed": 227330633,
+              "run_id": "ga_quick_gen-6c91e451-5761-c377-a0dd-9cda455ca475_3660",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"canonical_names_first\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"minimal\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-6c91e451-5761-c377-a0dd-9cda455ca475_3660/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-6c91e451-5761-c377-a0dd-9cda455ca475_3660/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      },
+      "validation_metrics": {
+        "run_id": "ga_validation_gen-6c91e451-5761-c377-a0dd-9cda455ca475_503660",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-6c91e451-5761-c377-a0dd-9cda455ca475_503660.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_validation_gen-6c91e451-5761-c377-a0dd-9cda455ca475_503660",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-6c91e451-5761-c377-a0dd-9cda455ca475_503660.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-6c91e451-5761-c377-a0dd-9cda455ca475_503660.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-6c91e451-5761-c377-a0dd-9cda455ca475",
+              "genome_seed": 227330633,
+              "run_id": "ga_validation_gen-6c91e451-5761-c377-a0dd-9cda455ca475_503660",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"canonical_names_first\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"minimal\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-6c91e451-5761-c377-a0dd-9cda455ca475_503660/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-6c91e451-5761-c377-a0dd-9cda455ca475_503660/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      }
+    },
+    {
+      "genome": {
+        "id": "gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10",
+        "seed": 192862531,
+        "blocks": [
+          "01",
+          "02",
+          "03",
+          "06"
+        ],
+        "params": {
+          "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+          "temperature": 0.1,
+          "few_shot_count": 3,
+          "max_tokens": 1024,
+          "candidate_strategies": [
+            "canonical_names_first",
+            "minimal",
+            "direct"
+          ]
+        },
+        "block_params": {
+          "02": {
+            "few_shot_count": 3,
+            "micro_rules": [
+              "Prefer canonical_name exactly when available.",
+              "Use value entries in conditions and function entries in actions."
+            ]
+          },
+          "05": {
+            "repair_mode": "conservative",
+            "few_shot_count": 3
+          }
+        }
+      },
+      "fitness": 24.0,
+      "avg_det_score": 24.0,
+      "variance": 0.0,
+      "validation_avg_det_score": 24.0,
+      "train_metrics": {
+        "run_id": "ga_quick_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_5558",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_5558.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_quick_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_5558",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_5558.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_5558.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10",
+              "genome_seed": 192862531,
+              "run_id": "ga_quick_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_5558",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"canonical_names_first\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"minimal\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_5558/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_5558/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      },
+      "validation_metrics": {
+        "run_id": "ga_validation_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_505558",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_505558.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_validation_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_505558",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_505558.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_505558.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10",
+              "genome_seed": 192862531,
+              "run_id": "ga_validation_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_505558",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"canonical_names_first\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"minimal\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_505558/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-ca6b643c-d118-8ab2-4cfd-ae029c0b3a10_505558/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      }
+    },
+    {
+      "genome": {
+        "id": "gen-d24a9c2b-8374-a447-6671-8539893c7053",
+        "seed": 480192952,
+        "blocks": [
+          "01",
+          "02",
+          "03",
+          "06"
+        ],
+        "params": {
+          "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+          "temperature": 0.1,
+          "few_shot_count": 3,
+          "max_tokens": 1024,
+          "candidate_strategies": [
+            "canonical_names_first",
+            "minimal",
+            "direct"
+          ]
+        },
+        "block_params": {
+          "02": {
+            "few_shot_count": 3,
+            "micro_rules": [
+              "Prefer canonical_name exactly when available.",
+              "Use value entries in conditions and function entries in actions."
+            ]
+          },
+          "05": {
+            "repair_mode": "conservative",
+            "few_shot_count": 3
+          }
+        }
+      },
+      "fitness": 24.0,
+      "avg_det_score": 24.0,
+      "variance": 0.0,
+      "validation_avg_det_score": 24.0,
+      "train_metrics": {
+        "run_id": "ga_quick_gen-d24a9c2b-8374-a447-6671-8539893c7053_5979",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-d24a9c2b-8374-a447-6671-8539893c7053_5979.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_quick_gen-d24a9c2b-8374-a447-6671-8539893c7053_5979",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-d24a9c2b-8374-a447-6671-8539893c7053_5979.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-d24a9c2b-8374-a447-6671-8539893c7053_5979.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-d24a9c2b-8374-a447-6671-8539893c7053",
+              "genome_seed": 480192952,
+              "run_id": "ga_quick_gen-d24a9c2b-8374-a447-6671-8539893c7053_5979",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"canonical_names_first\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"minimal\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-d24a9c2b-8374-a447-6671-8539893c7053_5979/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-d24a9c2b-8374-a447-6671-8539893c7053_5979/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      },
+      "validation_metrics": {
+        "run_id": "ga_validation_gen-d24a9c2b-8374-a447-6671-8539893c7053_505979",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-d24a9c2b-8374-a447-6671-8539893c7053_505979.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_validation_gen-d24a9c2b-8374-a447-6671-8539893c7053_505979",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-d24a9c2b-8374-a447-6671-8539893c7053_505979.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-d24a9c2b-8374-a447-6671-8539893c7053_505979.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-d24a9c2b-8374-a447-6671-8539893c7053",
+              "genome_seed": 480192952,
+              "run_id": "ga_validation_gen-d24a9c2b-8374-a447-6671-8539893c7053_505979",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"canonical_names_first\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"minimal\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-d24a9c2b-8374-a447-6671-8539893c7053_505979/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-d24a9c2b-8374-a447-6671-8539893c7053_505979/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      }
+    },
+    {
+      "genome": {
+        "id": "gen-ffd9a871-7db6-3c65-4367-0c47df502148",
+        "seed": 34297880,
+        "blocks": [
+          "01",
+          "02",
+          "03",
+          "06"
+        ],
+        "params": {
+          "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+          "temperature": 0.1,
+          "few_shot_count": 3,
+          "max_tokens": 768,
+          "candidate_strategies": [
+            "direct",
+            "compact_json",
+            "canonical_names_first"
+          ]
+        },
+        "block_params": {
+          "02": {
+            "few_shot_count": 3,
+            "micro_rules": [
+              "Prefer canonical_name exactly when available.",
+              "Use value entries in conditions and function entries in actions."
+            ]
+          },
+          "05": {
+            "repair_mode": "conservative",
+            "few_shot_count": 3
+          }
+        }
+      },
+      "fitness": 24.0,
+      "avg_det_score": 24.0,
+      "variance": 0.0,
+      "validation_avg_det_score": 24.0,
+      "train_metrics": {
+        "run_id": "ga_quick_gen-ffd9a871-7db6-3c65-4367-0c47df502148_10907",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-ffd9a871-7db6-3c65-4367-0c47df502148_10907.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_quick_gen-ffd9a871-7db6-3c65-4367-0c47df502148_10907",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-ffd9a871-7db6-3c65-4367-0c47df502148_10907.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_quick_gen-ffd9a871-7db6-3c65-4367-0c47df502148_10907.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-ffd9a871-7db6-3c65-4367-0c47df502148",
+              "genome_seed": 34297880,
+              "run_id": "ga_quick_gen-ffd9a871-7db6-3c65-4367-0c47df502148_10907",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-ffd9a871-7db6-3c65-4367-0c47df502148_10907/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_quick_gen-ffd9a871-7db6-3c65-4367-0c47df502148_10907/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      },
+      "validation_metrics": {
+        "run_id": "ga_validation_gen-ffd9a871-7db6-3c65-4367-0c47df502148_510907",
+        "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-ffd9a871-7db6-3c65-4367-0c47df502148_510907.csv",
+        "rows": [
+          {
+            "row_no": 1,
+            "category": "1",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 24.0,
+            "det_gt_exact": false,
+            "det_gt_similarity": 0.3,
+            "failure_reasons": [
+              "arg_type",
+              "extraneous",
+              "gt_mismatch",
+              "precondition",
+              "semantic",
+              "service_match"
+            ],
+            "output": "{\"name\":\"MockCandidate\",\"cron\":\"\",\"period\":0,\"code\":\"\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ],
+        "avg_det_score": 24.0,
+        "variance": 0.0,
+        "failure_summary": {
+          "top_failure_types": [
+            [
+              "arg_type",
+              1
+            ],
+            [
+              "extraneous",
+              1
+            ],
+            [
+              "gt_mismatch",
+              1
+            ],
+            [
+              "precondition",
+              1
+            ],
+            [
+              "semantic",
+              1
+            ],
+            [
+              "service_match",
+              1
+            ]
+          ],
+          "count": 6
+        },
+        "generation_summary": {
+          "run_id": "ga_validation_gen-ffd9a871-7db6-3c65-4367-0c47df502148_510907",
+          "output_csv": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-ffd9a871-7db6-3c65-4367-0c47df502148_510907.csv",
+          "jsonl_path": "/home/andrew/joi-llm/gpt_mg/version0_15/results/candidates_ga_validation_gen-ffd9a871-7db6-3c65-4367-0c47df502148_510907.jsonl",
+          "row_count": 1,
+          "rows": [
+            {
+              "index": "1",
+              "category": "1",
+              "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+              "command_eng": "Switch the dishwasher to dry mode.",
+              "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+              "connected_devices": "",
+              "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+              "row_no": 1,
+              "profile": "version0_15",
+              "genome_id": "gen-ffd9a871-7db6-3c65-4367-0c47df502148",
+              "genome_seed": 34297880,
+              "run_id": "ga_validation_gen-ffd9a871-7db6-3c65-4367-0c47df502148_510907",
+              "candidate_count": 2,
+              "candidates": "[\"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\", \"{\\\"name\\\":\\\"MockCandidate\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"\\\"}\"]",
+              "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"direct\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}, {\"candidate_index\": 1, \"strategy\": \"compact_json\", \"prompt_tokens\": 0, \"completion_tokens\": 0, \"total_tokens\": 0, \"latency_sec\": 0.0, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"06\", \"path\": \"/home/andrew/joi-llm/gpt_mg/version0_15/blocks/06_det_helper.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"micro_rules\", \"description\": \"Diagnostic helper block enumerating the evaluator targets so the generator avoids common failures.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+              "prompt_log_paths": "[\"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-ffd9a871-7db6-3c65-4367-0c47df502148_510907/row_001_cand_1.json\", \"/home/andrew/joi-llm/gpt_mg/version0_15/logs/ga_validation_gen-ffd9a871-7db6-3c65-4367-0c47df502148_510907/row_001_cand_2.json\"]",
+              "generation_status": "ok",
+              "llm_mode": "mock",
+              "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+            }
+          ],
+          "fieldnames": [
+            "index",
+            "category",
+            "command_kor",
+            "command_eng",
+            "gt_raw",
+            "connected_devices",
+            "gt",
+            "row_no",
+            "profile",
+            "genome_id",
+            "genome_seed",
+            "run_id",
+            "candidate_count",
+            "candidates",
+            "candidate_metadata",
+            "prompt_log_paths",
+            "generation_status",
+            "llm_mode",
+            "llm_model"
+          ]
+        }
+      }
+    }
+  ]
+}
