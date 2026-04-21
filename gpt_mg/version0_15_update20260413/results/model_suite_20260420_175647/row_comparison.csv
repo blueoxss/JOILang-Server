@@ -1,5 +1,0 @@
-row_no,category,command_eng,command_kor,gt,gt_name,gt_cron,gt_period,gt_code,gemma2_9b_it__det_score,gemma2_9b_it__det_gt_exact,gemma2_9b_it__det_gt_similarity,gemma2_9b_it__failure_reasons,gemma2_9b_it__output,gemma2_9b_it__output_name,gemma2_9b_it__output_cron,gemma2_9b_it__output_period,gemma2_9b_it__output_code
-1,1,Switch the dishwasher to dry mode.,식기세척기를 건조 모드로 설정해줘.,"{""name"": """", 
-""cron"": """", 
-""period"": 0, 
-""script"": ""(#Dishwasher).Dishwasher_SetDishwasherMode(\""dry\"")""}",,,0,"(#Dishwasher).Dishwasher_SetDishwasherMode(""dry"")",0.0,False,0.0,"[""invalid_json""]",,,,,

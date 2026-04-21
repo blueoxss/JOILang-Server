@@ -12,7 +12,7 @@
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
     "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242",
-    "local_device": "cuda:0",
+    "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
     "local_trust_remote_code": false,
@@ -45,9 +45,27 @@
       "ok": true,
       "content": "{\n  \"name\": \"SwitchDishwasherToDryMode\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#Dishwasher).dishwasher_setdishwashermode(\\\"dry\\\")\"\n}",
       "prompt_tokens": 31753,
-      "completion_tokens": 53
+      "completion_tokens": 53,
+      "prompt_prep_sec": 0.0807,
+      "generate_sec": 7.7588,
+      "decode_sec": 0.0003,
+      "total_worker_sec": 7.86,
+      "worker_pid": 3039475,
+      "peak_vram_bytes": 21605599232,
+      "peak_vram_gb": 20.1218,
+      "peak_vram_by_device": {
+        "0": 0,
+        "1": 21605599232
+      }
     },
-    "latency_sec": 17.9602,
+    "peak_vram_bytes": 21605599232,
+    "peak_vram_gb": 20.1218,
+    "prompt_prep_sec": 0.0807,
+    "generate_sec": 7.7588,
+    "decode_sec": 0.0003,
+    "total_worker_sec": 7.86,
+    "worker_pid": 3039475,
+    "latency_sec": 7.8658,
     "attempt": 1
   }
 }

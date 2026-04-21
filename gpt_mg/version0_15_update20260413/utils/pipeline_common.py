@@ -118,9 +118,11 @@ def select_rows(
     start_row: int = 1,
     end_row: int | None = None,
     limit: int | None = None,
+    limit_per_category: int | None = None,
     categories: list[str] | tuple[str, ...] | None = None,
 ) -> list[tuple[int, dict[str, str]]]:
     selected: list[tuple[int, dict[str, str]]] = []
+    per_category_counts: dict[str, int] = {}
     if start_row < 1:
         start_row = 1
     last = end_row if end_row is not None else len(rows)
@@ -128,9 +130,17 @@ def select_rows(
     for idx, row in enumerate(rows, start=1):
         if idx < start_row or idx > last:
             continue
-        if category_filter and str(row.get("category", "")).strip() not in category_filter:
+        category = str(row.get("category", "")).strip()
+        if category_filter and category not in category_filter:
             continue
+        if limit_per_category is not None:
+            category_key = category or "__uncategorized__"
+            if per_category_counts.get(category_key, 0) >= int(limit_per_category):
+                continue
         selected.append((idx, row))
+        if limit_per_category is not None:
+            category_key = category or "__uncategorized__"
+            per_category_counts[category_key] = per_category_counts.get(category_key, 0) + 1
         if limit is not None and len(selected) >= limit:
             break
     return selected

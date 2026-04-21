@@ -10,7 +10,31 @@
     "endpoint": null,
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
-    "persistent_worker": true
+    "persistent_worker": true,
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242",
+    "local_device": "cuda:1",
+    "local_dtype": "bf16",
+    "local_files_only": true,
+    "local_trust_remote_code": false,
+    "local_load_in_4bit": false,
+    "local_hf_modules_cache": "/tmp/joi_v15_hf_modules",
+    "local_attn_implementation": "",
+    "worker_runtime": {
+      "ok": true,
+      "torch_version": "2.9.1+cu128",
+      "cuda_available": true,
+      "device_count": 2,
+      "cuda_devices": [
+        "NVIDIA RTX A6000",
+        "NVIDIA RTX A6000"
+      ],
+      "transformers_version": "4.57.3",
+      "python_path": "/home/mgjeong/miniconda3/envs/l/bin/python",
+      "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py",
+      "persistent_worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
+      "persistent_worker": true,
+      "hf_modules_cache": "/tmp/joi_v15_hf_modules"
+    }
   },
   "response": {
     "content": "{}",
@@ -21,9 +45,27 @@
       "ok": true,
       "content": "{}",
       "prompt_tokens": 31754,
-      "completion_tokens": 6
+      "completion_tokens": 6,
+      "prompt_prep_sec": 0.0769,
+      "generate_sec": 6.4547,
+      "decode_sec": 0.0002,
+      "total_worker_sec": 6.5542,
+      "worker_pid": 3039475,
+      "peak_vram_bytes": 21605625856,
+      "peak_vram_gb": 20.1218,
+      "peak_vram_by_device": {
+        "0": 0,
+        "1": 21605625856
+      }
     },
-    "latency_sec": 6.5687,
+    "peak_vram_bytes": 21605625856,
+    "peak_vram_gb": 20.1218,
+    "prompt_prep_sec": 0.0769,
+    "generate_sec": 6.4547,
+    "decode_sec": 0.0002,
+    "total_worker_sec": 6.5542,
+    "worker_pid": 3039475,
+    "latency_sec": 6.5598,
     "attempt": 1
   }
 }

@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from pathlib import Path
 from typing import Any
 
@@ -13,7 +14,12 @@ VERSION_ROOT = Path(__file__).resolve().parents[1]
 if str(VERSION_ROOT) not in sys.path:
     sys.path.insert(0, str(VERSION_ROOT))
 
-from utils.local_llm_client import LocalLLMError, call as llm_call
+from utils.local_llm_client import (
+    LocalLLMError,
+    call as llm_call,
+    classify_error_text,
+    is_oom_error_type,
+)
 from utils.pipeline_common import (
     DATASET_DEFAULT,
     DEFAULT_CANDIDATE_STRATEGIES,
@@ -48,6 +54,18 @@ GENERATION_EXTRA_FIELDS = [
     "candidate_metadata",
     "prompt_log_paths",
     "generation_status",
+    "generation_call_count",
+    "generation_error_count",
+    "generation_error_type",
+    "generation_error_types",
+    "generation_oom_flag",
+    "generation_prompt_chars_total",
+    "generation_prompt_tokens_total",
+    "generation_completion_tokens_total",
+    "generation_total_tokens_total",
+    "generation_llm_latency_sec",
+    "generation_peak_vram_gb",
+    "generation_total_pipeline_sec",
     "llm_mode",
     "llm_model",
 ]
@@ -106,6 +124,46 @@ def _system_prompt() -> str:
     return "You are a deterministic JOILang generation engine. Follow the user instructions exactly and return only the requested JSON object."
 
 
+def _error_type_from_exception(exc: Exception) -> str:
+    if isinstance(exc, LocalLLMError):
+        return str(exc.error_type or classify_error_text(str(exc)))
+    return classify_error_text(str(exc))
+
+
+def _summarize_candidate_meta(candidate_meta: list[dict[str, Any]]) -> dict[str, Any]:
+    error_types: list[str] = []
+    prompt_chars = 0
+    prompt_tokens = 0
+    completion_tokens = 0
+    total_tokens = 0
+    llm_latency_sec = 0.0
+    peak_vram_gb = 0.0
+    for meta in candidate_meta:
+        prompt_chars += int(meta.get("prompt_chars") or 0)
+        prompt_tokens += int(meta.get("prompt_tokens") or 0)
+        completion_tokens += int(meta.get("completion_tokens") or 0)
+        total_tokens += int(meta.get("total_tokens") or 0)
+        llm_latency_sec += float(meta.get("latency_sec") or 0.0)
+        peak_vram_gb = max(peak_vram_gb, float(meta.get("peak_vram_gb") or 0.0))
+        error_type = str(meta.get("error_type", "") or "").strip()
+        if error_type:
+            error_types.append(error_type)
+    primary_error = error_types[0] if error_types else ""
+    return {
+        "generation_call_count": len(candidate_meta),
+        "generation_error_count": len(error_types),
+        "generation_error_type": primary_error,
+        "generation_error_types": json.dumps(error_types, ensure_ascii=False),
+        "generation_oom_flag": any(is_oom_error_type(item) for item in error_types),
+        "generation_prompt_chars_total": prompt_chars,
+        "generation_prompt_tokens_total": prompt_tokens,
+        "generation_completion_tokens_total": completion_tokens,
+        "generation_total_tokens_total": total_tokens,
+        "generation_llm_latency_sec": round(llm_latency_sec, 4),
+        "generation_peak_vram_gb": round(peak_vram_gb, 4),
+    }
+
+
 def generate_candidates_for_rows(
     *,
     profile: str,
@@ -134,8 +192,10 @@ def generate_candidates_for_rows(
     output_rows: list[dict[str, Any]] = []
     fieldnames: list[str] | None = None
     strategies = _candidate_strategies(genome, candidate_k)
+    system_prompt = _system_prompt()
 
     for row_no, row in dataset_rows:
+        row_started = time.perf_counter()
         candidates: list[str] = []
         candidate_meta: list[dict[str, Any]] = []
         prompt_log_paths: list[str] = []
@@ -145,11 +205,12 @@ def generate_candidates_for_rows(
             values = build_prompt_values(row_no, row, service_schema, candidate_strategy=strategy)
             rendered_prompt, manifest = render_blocks_for_genome(genome, values=values)
             user_prompt = rendered_prompt + "\n\nReturn the final JSON object now."
+            prompt_chars = len(system_prompt) + len(user_prompt)
             log_path = logs_dir / f"row_{row_no:03d}_cand_{candidate_index + 1}.json"
             prompt_log_paths.append(str(log_path))
             try:
                 response = llm_call(
-                    _system_prompt(),
+                    system_prompt,
                     user_prompt,
                     temperature=temperature,
                     max_tokens=max_tokens,
@@ -172,26 +233,40 @@ def generate_candidates_for_rows(
                     {
                         "candidate_index": candidate_index,
                         "strategy": strategy,
+                        "prompt_chars": prompt_chars,
                         "prompt_tokens": response.get("prompt_tokens", 0),
                         "completion_tokens": response.get("completion_tokens", 0),
                         "total_tokens": response.get("total_tokens", 0),
                         "latency_sec": response.get("latency_sec", 0.0),
+                        "peak_vram_gb": response.get("peak_vram_gb", 0.0),
+                        "load_sec": response.get("load_sec", 0.0),
+                        "generate_sec": response.get("generate_sec", 0.0),
+                        "prompt_prep_sec": response.get("prompt_prep_sec", 0.0),
+                        "decode_sec": response.get("decode_sec", 0.0),
+                        "worker_pid": response.get("worker_pid", 0),
+                        "error_type": "",
+                        "oom_flag": False,
                         "block_manifest": manifest,
                     }
                 )
             except Exception as exc:
                 generation_status = "partial_error"
+                error_type = _error_type_from_exception(exc)
                 candidates.append("")
                 candidate_meta.append(
                     {
                         "candidate_index": candidate_index,
                         "strategy": strategy,
+                        "prompt_chars": prompt_chars,
                         "error": str(exc),
+                        "error_type": error_type,
+                        "oom_flag": is_oom_error_type(error_type),
                         "block_manifest": manifest,
                     }
                 )
                 dump_json(log_path, {"error": str(exc), "block_manifest": manifest, "prompt": user_prompt})
 
+        row_metrics = _summarize_candidate_meta(candidate_meta)
         result_row = dict(row)
         result_row.update(
             {
@@ -205,10 +280,12 @@ def generate_candidates_for_rows(
                 "candidate_metadata": json.dumps(candidate_meta, ensure_ascii=False),
                 "prompt_log_paths": json.dumps(prompt_log_paths, ensure_ascii=False),
                 "generation_status": generation_status,
+                "generation_total_pipeline_sec": round(time.perf_counter() - row_started, 4),
                 "llm_mode": llm_mode or "worker",
                 "llm_model": model,
             }
         )
+        result_row.update(row_metrics)
         output_rows.append(result_row)
         fieldnames = unique_fieldnames(output_rows, GENERATION_EXTRA_FIELDS)
         atomic_write_csv(output_csv, fieldnames, output_rows)

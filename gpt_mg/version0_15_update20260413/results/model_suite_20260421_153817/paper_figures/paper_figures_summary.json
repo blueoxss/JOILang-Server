@@ -1,0 +1,94 @@
+{
+  "results_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817",
+  "output_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures",
+  "figures": {
+    "det_vs_warm_latency": {
+      "png": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/det_vs_warm_latency.png",
+      "pdf": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/det_vs_warm_latency.pdf",
+      "pareto_models": [
+        "qwen25_coder_7b",
+        "qwen25_coder_14b"
+      ]
+    },
+    "det_vs_prompt_tokens": {
+      "png": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/det_vs_prompt_tokens.png",
+      "pdf": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/det_vs_prompt_tokens.pdf",
+      "pareto_models": [
+        "qwen25_coder_14b"
+      ]
+    },
+    "det_vs_peak_vram": {
+      "png": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/det_vs_peak_vram.png",
+      "pdf": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/det_vs_peak_vram.pdf",
+      "pareto_models": [
+        "qwen25_coder_7b",
+        "qwen25_coder_14b"
+      ]
+    },
+    "summary_bars": {
+      "png": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/paper_summary_bars.png",
+      "pdf": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/paper_summary_bars.pdf"
+    },
+    "category_det_vs_warm_latency": {
+      "png": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/category_det_vs_warm_latency.png",
+      "pdf": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/category_det_vs_warm_latency.pdf",
+      "categories": [
+        "1",
+        "2"
+      ],
+      "models": [
+        "qwen25_coder_7b",
+        "qwen25_coder_14b"
+      ],
+      "pareto_by_category": {
+        "1": [
+          "qwen25_coder_7b",
+          "qwen25_coder_14b"
+        ],
+        "2": [
+          "qwen25_coder_7b",
+          "qwen25_coder_14b"
+        ]
+      }
+    },
+    "category_det_vs_prompt_tokens": {
+      "png": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/category_det_vs_prompt_tokens.png",
+      "pdf": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/category_det_vs_prompt_tokens.pdf",
+      "categories": [
+        "1",
+        "2"
+      ],
+      "models": [
+        "qwen25_coder_7b",
+        "qwen25_coder_14b"
+      ],
+      "pareto_by_category": {
+        "1": [
+          "qwen25_coder_14b"
+        ],
+        "2": [
+          "qwen25_coder_14b"
+        ]
+      }
+    },
+    "category_metric_panels": {
+      "png": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/category_metric_panels.png",
+      "pdf": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_153817/paper_figures/category_metric_panels.pdf",
+      "categories": [
+        "1",
+        "2"
+      ],
+      "models": [
+        "qwen25_coder_7b",
+        "qwen25_coder_14b"
+      ],
+      "metrics": [
+        "avg_det_score",
+        "det_pass_rate",
+        "warm_latency_p50",
+        "avg_prompt_tokens"
+      ]
+    }
+  },
+  "status": "ok"
+}

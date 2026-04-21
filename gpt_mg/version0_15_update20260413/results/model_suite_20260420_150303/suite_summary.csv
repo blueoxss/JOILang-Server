@@ -1,2 +1,0 @@
-model_key,model_label,mode,model,row_count,avg_det_score,avg_gt_similarity,gt_exact_count,pass_count,fail_count,avg_prompt_tokens,avg_completion_tokens,avg_total_tokens,avg_latency_sec
-qwen25_coder_7b,Qwen2.5-Coder-7B-Instruct,worker,Qwen/Qwen2.5-Coder-7B-Instruct,20,41.3774,0.4321,0,5,15,31756.6000,38.2000,31794.8000,8.2039

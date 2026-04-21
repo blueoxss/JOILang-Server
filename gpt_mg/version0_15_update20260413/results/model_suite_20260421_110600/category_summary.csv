@@ -1,3 +1,0 @@
-model_key,model_label,category,row_count,avg_det_score,avg_gt_similarity,gt_exact_count,pass_count,fail_count,top_failure_types
-qwen25_coder_7b,Qwen2.5-Coder-7B-Instruct,1,1,98.8980,0.9633,0,1,0,"[[""gt_mismatch"", 1]]"
-qwen25_coder_14b,Qwen2.5-Coder-14B-Instruct,1,1,89.8937,0.9531,0,1,0,"[[""arg_type"", 1], [""gt_mismatch"", 1]]"

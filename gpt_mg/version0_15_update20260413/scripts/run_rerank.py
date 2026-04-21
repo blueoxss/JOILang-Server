@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from pathlib import Path
 from typing import Any
 
@@ -15,7 +16,12 @@ if str(VERSION_ROOT) not in sys.path:
 
 from scripts.run_generate import _llm_settings
 from utils.det_evaluator import evaluate_candidate, evaluate_candidates
-from utils.local_llm_client import call as llm_call
+from utils.local_llm_client import (
+    LocalLLMError,
+    call as llm_call,
+    classify_error_text,
+    is_oom_error_type,
+)
 from utils.pipeline_common import (
     LOGS_DIR,
     RESULTS_DIR,
@@ -41,6 +47,19 @@ RERANK_EXTRA_FIELDS = [
     "selected_candidate_index",
     "repair_applied",
     "repair_log_path",
+    "repair_metadata",
+    "repair_call_count",
+    "repair_error_count",
+    "repair_error_type",
+    "repair_error_types",
+    "repair_oom_flag",
+    "repair_prompt_chars_total",
+    "repair_prompt_tokens_total",
+    "repair_completion_tokens_total",
+    "repair_total_tokens_total",
+    "repair_llm_latency_sec",
+    "repair_peak_vram_gb",
+    "repair_total_pipeline_sec",
     "det_valid_json",
     "det_schema_ok",
     "det_service_match",
@@ -76,6 +95,46 @@ def build_parser() -> argparse.ArgumentParser:
 
 def _system_prompt() -> str:
     return "You are a deterministic JOILang repair engine. Return exactly one repaired JSON object only."
+
+
+def _error_type_from_exception(exc: Exception) -> str:
+    if isinstance(exc, LocalLLMError):
+        return str(exc.error_type or classify_error_text(str(exc)))
+    return classify_error_text(str(exc))
+
+
+def _summarize_repair_meta(repair_meta: list[dict[str, Any]]) -> dict[str, Any]:
+    error_types: list[str] = []
+    prompt_chars = 0
+    prompt_tokens = 0
+    completion_tokens = 0
+    total_tokens = 0
+    llm_latency_sec = 0.0
+    peak_vram_gb = 0.0
+    for meta in repair_meta:
+        prompt_chars += int(meta.get("prompt_chars") or 0)
+        prompt_tokens += int(meta.get("prompt_tokens") or 0)
+        completion_tokens += int(meta.get("completion_tokens") or 0)
+        total_tokens += int(meta.get("total_tokens") or 0)
+        llm_latency_sec += float(meta.get("latency_sec") or 0.0)
+        peak_vram_gb = max(peak_vram_gb, float(meta.get("peak_vram_gb") or 0.0))
+        error_type = str(meta.get("error_type", "") or "").strip()
+        if error_type:
+            error_types.append(error_type)
+    primary_error = error_types[0] if error_types else ""
+    return {
+        "repair_call_count": len(repair_meta),
+        "repair_error_count": len(error_types),
+        "repair_error_type": primary_error,
+        "repair_error_types": json.dumps(error_types, ensure_ascii=False),
+        "repair_oom_flag": any(is_oom_error_type(item) for item in error_types),
+        "repair_prompt_chars_total": prompt_chars,
+        "repair_prompt_tokens_total": prompt_tokens,
+        "repair_completion_tokens_total": completion_tokens,
+        "repair_total_tokens_total": total_tokens,
+        "repair_llm_latency_sec": round(llm_latency_sec, 4),
+        "repair_peak_vram_gb": round(peak_vram_gb, 4),
+    }
 
 
 def _parse_candidates(value: str) -> list[Any]:
@@ -147,8 +206,10 @@ def rerank_candidates_csv(
     output_rows: list[dict[str, Any]] = []
     fieldnames: list[str] | None = None
     repaired_count = 0
+    system_prompt = _system_prompt()
 
     for row in input_rows:
+        row_started = time.perf_counter()
         row_no = int(row.get("row_no") or 0)
         command_eng = row.get("command_eng", "")
         connected_devices = row.get("connected_devices", "")
@@ -170,6 +231,7 @@ def rerank_candidates_csv(
         selected_candidate = best.get("candidate", "") if scored else ""
         repair_applied = False
         repair_log_path = ""
+        repair_meta: list[dict[str, Any]] = []
 
         if float(best.get("det_score", 0.0)) < repair_threshold:
             current_best_candidate = selected_candidate
@@ -185,12 +247,14 @@ def rerank_candidates_csv(
                     failure_summary=", ".join(current_best_det.get("failure_reasons", [])),
                 )
                 rendered_prompt, manifest = render_blocks_for_genome(repair_genome, values=values)
+                repair_prompt = rendered_prompt + "\n\nReturn the repaired JSON object now."
+                prompt_chars = len(system_prompt) + len(repair_prompt)
                 repair_log = rerank_logs_dir / f"row_{row_no:03d}_repair_{attempt + 1}.json"
                 repair_log_path = str(repair_log)
                 try:
                     response = llm_call(
-                        _system_prompt(),
-                        rendered_prompt + "\n\nReturn the repaired JSON object now.",
+                        system_prompt,
+                        repair_prompt,
                         temperature=temperature,
                         max_tokens=max_tokens,
                         mode=llm_mode,
@@ -202,12 +266,42 @@ def rerank_candidates_csv(
                         log_path=repair_log,
                         extra_payload=llm_extra_payload,
                     )
+                    repair_meta.append(
+                        {
+                            "attempt": attempt + 1,
+                            "prompt_chars": prompt_chars,
+                            "prompt_tokens": response.get("prompt_tokens", 0),
+                            "completion_tokens": response.get("completion_tokens", 0),
+                            "total_tokens": response.get("total_tokens", 0),
+                            "latency_sec": response.get("latency_sec", 0.0),
+                            "peak_vram_gb": response.get("peak_vram_gb", 0.0),
+                            "load_sec": response.get("load_sec", 0.0),
+                            "generate_sec": response.get("generate_sec", 0.0),
+                            "prompt_prep_sec": response.get("prompt_prep_sec", 0.0),
+                            "decode_sec": response.get("decode_sec", 0.0),
+                            "worker_pid": response.get("worker_pid", 0),
+                            "error_type": "",
+                            "oom_flag": False,
+                            "manifest": manifest,
+                        }
+                    )
                     repaired_candidate = normalize_candidate_json_text(
                         str(response.get("content", "")).strip(),
                         default_cron=str(values.get("optional_cron", "") or ""),
                         default_period=int(str(values.get("optional_period", "0") or "0")),
                     )
                 except Exception as exc:
+                    error_type = _error_type_from_exception(exc)
+                    repair_meta.append(
+                        {
+                            "attempt": attempt + 1,
+                            "prompt_chars": prompt_chars,
+                            "error": str(exc),
+                            "error_type": error_type,
+                            "oom_flag": is_oom_error_type(error_type),
+                            "manifest": manifest,
+                        }
+                    )
                     dump_json(repair_log, {"error": str(exc), "prompt": rendered_prompt, "manifest": manifest})
                     continue
                 repaired_det = evaluate_candidate(
@@ -228,6 +322,7 @@ def rerank_candidates_csv(
                 selected_candidate = current_best_candidate
                 best = current_best_det
 
+        repair_summary = _summarize_repair_meta(repair_meta)
         result_row = dict(row)
         result_row.update(
             {
@@ -235,6 +330,8 @@ def rerank_candidates_csv(
                 "selected_candidate_index": best.get("candidate_index", 0),
                 "repair_applied": repair_applied,
                 "repair_log_path": repair_log_path,
+                "repair_metadata": json.dumps(repair_meta, ensure_ascii=False),
+                "repair_total_pipeline_sec": round(time.perf_counter() - row_started, 4),
                 "det_valid_json": best.get("det_valid_json", False),
                 "det_schema_ok": best.get("det_schema_ok", False),
                 "det_service_match": best.get("det_service_match", 0.0),
@@ -249,6 +346,7 @@ def rerank_candidates_csv(
                 "det_resolved_services": json.dumps(best.get("resolved_services", []), ensure_ascii=False),
             }
         )
+        result_row.update(repair_summary)
         output_rows.append(result_row)
         fieldnames = unique_fieldnames(output_rows, RERANK_EXTRA_FIELDS)
         atomic_write_csv(output_csv, fieldnames, output_rows)

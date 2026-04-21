@@ -1,6 +1,0 @@
-model_key,model_label,mode,model,row_count,avg_det_score,avg_gt_similarity,gt_exact_count,pass_count,fail_count,avg_prompt_tokens,avg_completion_tokens,avg_total_tokens,avg_latency_sec
-phi35_mini,Phi-3.5-mini-instruct,worker,microsoft/Phi-3.5-mini-instruct,20,0.0000,0.0000,0,0,20,0.0000,0.0000,0.0000,0.0000
-qwen25_coder_7b,Qwen2.5-Coder-7B-Instruct,worker,Qwen/Qwen2.5-Coder-7B-Instruct,20,41.3774,0.4321,0,5,15,31756.6000,38.2000,31794.8000,8.2505
-llama31_8b,Llama-3.1-8B-Instruct,worker,meta-llama/Llama-3.1-8B-Instruct,20,0.0000,0.0000,0,0,20,0.0000,0.0000,0.0000,0.0000
-gemma2_9b_it,Gemma-2-9B-it,worker,google/gemma-2-9b-it,20,0.0000,0.0000,0,0,20,0.0000,0.0000,0.0000,0.0000
-qwen25_coder_14b,Qwen2.5-Coder-14B-Instruct,worker,Qwen/Qwen2.5-Coder-14B-Instruct,20,0.0000,0.0000,0,0,20,0.0000,0.0000,0.0000,0.0000

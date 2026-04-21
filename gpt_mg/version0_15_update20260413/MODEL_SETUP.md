@@ -77,6 +77,64 @@ export JOI_V15_WORKER_PYTHON=/home/mgjeong/miniconda3/envs/l/bin/python
 export JOI_V15_LOCAL_DEVICE=cuda:0
 ```
 
+## fair measurement runtime
+
+논문용 공정 비교에서는 여러 모델을 동시에 VRAM에 상주시킨 뒤 latency를 비교하지 않습니다.
+
+- 권장 fair mode:
+  - `--paper-fair-mode`
+  - 내부적으로 모델별 fresh worker를 시작
+  - warmup request 후 evaluation rows를 실행
+  - 모델이 끝나면 worker를 종료해서 메모리를 해제
+- wall-clock 단축용 parallel mode:
+  - `--max-workers 2` 같은 형태
+  - latency 공정 비교용 숫자로 해석하면 안 됨
+
+현재 worker는 row별로 아래 메트릭을 반환하도록 보강되어 있습니다.
+
+- `prompt_tokens`
+- `completion_tokens`
+- `total_tokens`
+- `latency_sec`
+- `peak_vram_gb`
+- `load_sec`
+- `prompt_prep_sec`
+- `generate_sec`
+- `decode_sec`
+
+benchmark runner는 이를 바탕으로 아래 paper 축을 계산합니다.
+
+- `DET`
+- `warm_latency_mean/p50/p95`
+- `cold_load_sec`
+- `avg_prompt_tokens`
+- `peak_vram_gb_max`
+- `oom_count`
+- `generation_error_rate`
+- `failure_rate`
+- `row_success_rate`
+
+## 현재 fair-mode smoke 기준
+
+대표 smoke output:
+
+- `/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260421_121042`
+
+여기서 확인된 값 예시:
+
+- `qwen25_coder_7b`
+  - `avg_det_score=98.8980`
+  - `cold_load_sec=17.8122`
+  - `warm_latency_p50=7.8561`
+  - `peak_vram_gb_max=20.1218`
+- `qwen25_coder_14b`
+  - `avg_det_score=89.8937`
+  - `cold_load_sec=30.9921`
+  - `warm_latency_p50=17.5017`
+  - `peak_vram_gb_max=37.0264`
+
+이 값들은 fresh worker + warmup 후에 측정된 결과라, raw same-process multi-model 실행보다 더 공정한 비교에 가깝습니다.
+
 ## 중요한 동작 메모
 
 - `--llm-extra-json '{"local_model_name":"/your/local/path/..."}'`의 `/your/local/path/...`는 예시 placeholder입니다.
@@ -107,6 +165,26 @@ JOI_V15_LOCAL_DEVICE=cuda:0 \
 python gpt_mg/version0_15_update20260413/scripts/prepare_local_models.py \
   --suite paper_local5 \
   --download-missing
+```
+
+paper-fair smoke 예시:
+
+```bash
+cd /home/mgjeong/Desktop/llm/JOILang-Server
+
+JOI_V15_WORKER_PYTHON=/home/mgjeong/miniconda3/envs/l/bin/python \
+JOI_V15_LOCAL_DEVICE=cuda:0 \
+python gpt_mg/version0_15_update20260413/scripts/run_model_suite_benchmark.py \
+  --suite paper_local5 \
+  --model-key qwen25_coder_7b \
+  --model-key qwen25_coder_14b \
+  --row-no 1 \
+  --candidate-k 1 \
+  --repair-attempts 0 \
+  --paper-fair-mode \
+  --export-paper-artifacts \
+  --print-mode summary \
+  --strict-availability
 ```
 
 `Llama`와 `Gemma`를 실제로 준비하려면 먼저 Hugging Face login + access 승인이 필요합니다.

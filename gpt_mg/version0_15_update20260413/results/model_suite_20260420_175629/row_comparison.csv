@@ -1,5 +1,0 @@
-row_no,category,command_eng,command_kor,gt,gt_name,gt_cron,gt_period,gt_code,llama31_8b__det_score,llama31_8b__det_gt_exact,llama31_8b__det_gt_similarity,llama31_8b__failure_reasons,llama31_8b__output,llama31_8b__output_name,llama31_8b__output_cron,llama31_8b__output_period,llama31_8b__output_code
-1,1,Switch the dishwasher to dry mode.,식기세척기를 건조 모드로 설정해줘.,"{""name"": """", 
-""cron"": """", 
-""period"": 0, 
-""script"": ""(#Dishwasher).Dishwasher_SetDishwasherMode(\""dry\"")""}",,,0,"(#Dishwasher).Dishwasher_SetDishwasherMode(""dry"")",0.0,False,0.0,"[""invalid_json""]",,,,,

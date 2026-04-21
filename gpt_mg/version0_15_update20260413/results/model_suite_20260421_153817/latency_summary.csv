@@ -1,0 +1,3 @@
+model_key,model_label,cold_load_sec,warm_latency_mean,warm_latency_p50,warm_latency_p95,row_success_rate
+qwen25_coder_7b,Qwen2.5-Coder-7B-Instruct,17.9666,4.9252,4.6600,7.8036,0.6500
+qwen25_coder_14b,Qwen2.5-Coder-14B-Instruct,31.3762,11.2731,11.4465,19.1491,0.9500

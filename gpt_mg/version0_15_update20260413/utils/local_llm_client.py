@@ -57,8 +57,40 @@ _PYTHON_RUNTIME_PROBE = (
 )
 
 
+def classify_error_text(text: str) -> str:
+    lowered = str(text or "").strip().lower()
+    if not lowered:
+        return "unknown_error"
+    if "out of memory" in lowered or "cuda out of memory" in lowered or "cuda oom" in lowered:
+        return "cuda_oom"
+    if "gatedrepoerror" in lowered or "gated repo" in lowered or "access to model" in lowered:
+        return "gated_model"
+    if "local_files_only=true" in lowered or "not cached locally" in lowered:
+        return "missing_cache"
+    if "incompatible runtime" in lowered or "python_not_found" in lowered:
+        return "incompatible_runtime"
+    if "timed out" in lowered or "timeout" in lowered:
+        return "cpu_fallback_timeout"
+    if "non-json" in lowered or "invalid json" in lowered or "jsondecodeerror" in lowered:
+        return "invalid_json"
+    if "worker" in lowered and ("failed" in lowered or "closed" in lowered or "broke" in lowered or "crash" in lowered):
+        return "worker_crash"
+    if "401" in lowered and "unauthorized" in lowered:
+        return "gated_model"
+    if "repo id must be in the form" in lowered:
+        return "incompatible_runtime"
+    return "local_llm_error"
+
+
+def is_oom_error_type(error_type: str) -> bool:
+    return str(error_type or "").strip().lower() == "cuda_oom"
+
+
 class LocalLLMError(RuntimeError):
-    pass
+    def __init__(self, message: str, *, error_type: str | None = None, details: dict[str, Any] | None = None) -> None:
+        super().__init__(message)
+        self.error_type = str(error_type or classify_error_text(message))
+        self.details = dict(details or {})
 
 
 def _python_has_torch(python_path: str) -> bool:
@@ -198,6 +230,18 @@ def _use_persistent_worker() -> bool:
     return value in {"1", "true", "yes", "on"}
 
 
+def _payload_use_persistent_worker(extra_payload: dict[str, Any] | None) -> bool:
+    if extra_payload:
+        for key in ("persistent_worker", "local_persistent_worker", "worker_reuse"):
+            if key not in extra_payload:
+                continue
+            value = extra_payload.get(key)
+            if isinstance(value, bool):
+                return value
+            return str(value).strip().lower() in {"1", "true", "yes", "on"}
+    return _use_persistent_worker()
+
+
 def _build_worker_payload(
     system: str,
     user: str,
@@ -268,6 +312,10 @@ def _close_persistent_worker() -> None:
 atexit.register(_close_persistent_worker)
 
 
+def close_persistent_worker() -> None:
+    _close_persistent_worker()
+
+
 def _ensure_persistent_worker(worker_python: str, worker_path: str, payload: dict[str, Any]) -> subprocess.Popen[str]:
     global _PERSISTENT_WORKER_PROCESS, _PERSISTENT_WORKER_KEY
     key = _persistent_worker_key(worker_python, worker_path, payload)
@@ -292,19 +340,27 @@ def _ensure_persistent_worker(worker_python: str, worker_path: str, payload: dic
 
 def _read_persistent_worker_response(process: subprocess.Popen[str], timeout_sec: int) -> dict[str, Any]:
     if process.stdout is None:
-        raise LocalLLMError("persistent worker stdout is unavailable")
+        raise LocalLLMError("persistent worker stdout is unavailable", error_type="worker_crash")
     ready, _, _ = select.select([process.stdout], [], [], timeout_sec)
     if not ready:
-        raise LocalLLMError(f"persistent worker timed out after {timeout_sec} seconds")
+        raise LocalLLMError(f"persistent worker timed out after {timeout_sec} seconds", error_type="cpu_fallback_timeout")
     line = process.stdout.readline()
     if not line:
-        raise LocalLLMError("persistent worker closed stdout unexpectedly")
+        raise LocalLLMError("persistent worker closed stdout unexpectedly", error_type="worker_crash")
     try:
         payload = json.loads(line)
     except json.JSONDecodeError as exc:
-        raise LocalLLMError(f"persistent worker returned non-JSON output: {line[:500]}") from exc
+        raise LocalLLMError(
+            f"persistent worker returned non-JSON output: {line[:500]}",
+            error_type="invalid_json",
+        ) from exc
     if not payload.get("ok", False):
-        raise LocalLLMError(str(payload.get("error", "persistent worker failed")))
+        error_text = str(payload.get("error", "persistent worker failed"))
+        raise LocalLLMError(
+            error_text,
+            error_type=str(payload.get("error_type") or classify_error_text(error_text)),
+            details=payload,
+        )
     return payload
 
 
@@ -408,18 +464,46 @@ def _call_worker(
     )
     if completed.returncode != 0:
         detail = (completed.stderr or completed.stdout or "").strip()
-        raise LocalLLMError(f"local worker failed with exit code {completed.returncode}: {detail}")
+        raise LocalLLMError(
+            f"local worker failed with exit code {completed.returncode}: {detail}",
+            error_type=classify_error_text(detail),
+        )
     try:
         worker_result = json.loads((completed.stdout or "").strip())
     except json.JSONDecodeError as exc:
-        raise LocalLLMError(f"local worker returned non-JSON output: {(completed.stdout or '')[:500]}") from exc
-    return {
+        raise LocalLLMError(
+            f"local worker returned non-JSON output: {(completed.stdout or '')[:500]}",
+            error_type="invalid_json",
+        ) from exc
+    if not worker_result.get("ok", True):
+        error_text = str(worker_result.get("error", "local worker failed"))
+        raise LocalLLMError(
+            error_text,
+            error_type=str(worker_result.get("error_type") or classify_error_text(error_text)),
+            details=worker_result,
+        )
+    response = {
         "content": worker_result.get("content", ""),
         "prompt_tokens": int(worker_result.get("prompt_tokens", 0)),
         "completion_tokens": int(worker_result.get("completion_tokens", 0)),
         "total_tokens": int(worker_result.get("prompt_tokens", 0)) + int(worker_result.get("completion_tokens", 0)),
         "raw": worker_result,
     }
+    for key in (
+        "peak_vram_bytes",
+        "peak_vram_gb",
+        "load_sec",
+        "load_peak_vram_bytes",
+        "load_peak_vram_gb",
+        "prompt_prep_sec",
+        "generate_sec",
+        "decode_sec",
+        "total_worker_sec",
+        "worker_pid",
+    ):
+        if key in worker_result:
+            response[key] = worker_result.get(key)
+    return response
 
 
 def _call_worker_persistent(
@@ -444,21 +528,36 @@ def _call_worker_persistent(
     worker_path = _env("JOI_V15_PERSISTENT_WORKER_PATH", "JOI_V14_PERSISTENT_WORKER_PATH", DEFAULT_PERSISTENT_WORKER)
     process = _ensure_persistent_worker(worker_python, worker_path, payload)
     if process.stdin is None:
-        raise LocalLLMError("persistent worker stdin is unavailable")
+        raise LocalLLMError("persistent worker stdin is unavailable", error_type="worker_crash")
     try:
         process.stdin.write(json.dumps(payload, ensure_ascii=False) + "\n")
         process.stdin.flush()
     except BrokenPipeError as exc:
         _close_persistent_worker()
-        raise LocalLLMError("persistent worker stdin pipe broke") from exc
+        raise LocalLLMError("persistent worker stdin pipe broke", error_type="worker_crash") from exc
     worker_result = _read_persistent_worker_response(process, timeout_sec)
-    return {
+    response = {
         "content": worker_result.get("content", ""),
         "prompt_tokens": int(worker_result.get("prompt_tokens", 0)),
         "completion_tokens": int(worker_result.get("completion_tokens", 0)),
         "total_tokens": int(worker_result.get("prompt_tokens", 0)) + int(worker_result.get("completion_tokens", 0)),
         "raw": worker_result,
     }
+    for key in (
+        "peak_vram_bytes",
+        "peak_vram_gb",
+        "load_sec",
+        "load_peak_vram_bytes",
+        "load_peak_vram_gb",
+        "prompt_prep_sec",
+        "generate_sec",
+        "decode_sec",
+        "total_worker_sec",
+        "worker_pid",
+    ):
+        if key in worker_result:
+            response[key] = worker_result.get(key)
+    return response
 
 
 def call(
@@ -482,6 +581,7 @@ def call(
     effective_endpoint = endpoint or DEFAULT_ENDPOINT
     last_error: Exception | None = None
     worker_payload_preview: dict[str, Any] | None = None
+    use_persistent_worker = effective_mode == "worker" and _payload_use_persistent_worker(extra_payload)
     if effective_mode == "worker":
         worker_payload_preview = _build_worker_payload(
             system,
@@ -501,11 +601,11 @@ def call(
         "endpoint": effective_endpoint if effective_mode != "worker" else None,
         "worker_path": (
             _env("JOI_V15_PERSISTENT_WORKER_PATH", "JOI_V14_PERSISTENT_WORKER_PATH", DEFAULT_PERSISTENT_WORKER)
-            if effective_mode == "worker" and _use_persistent_worker()
+            if effective_mode == "worker" and use_persistent_worker
             else _env("JOI_V15_WORKER_PATH", "JOI_V14_WORKER_PATH", DEFAULT_WORKER) if effective_mode == "worker" else None
         ),
         "worker_python": DEFAULT_WORKER_PYTHON if effective_mode == "worker" else None,
-        "persistent_worker": _use_persistent_worker() if effective_mode == "worker" else False,
+        "persistent_worker": use_persistent_worker if effective_mode == "worker" else False,
         "resolved_local_model_name": (
             worker_payload_preview.get("local_model_name") if worker_payload_preview is not None else None
         ),
@@ -532,7 +632,7 @@ def call(
         started_at = time.time()
         try:
             if effective_mode == "worker":
-                if _use_persistent_worker():
+                if use_persistent_worker:
                     response = _call_worker_persistent(
                         system,
                         user,
@@ -575,10 +675,14 @@ def call(
                     "prompt_tokens": 0,
                     "completion_tokens": 0,
                     "total_tokens": 0,
+                    "peak_vram_gb": 0.0,
                     "raw": {"mock": True},
                 }
             else:
-                raise LocalLLMError(f"Unsupported JOI_V15_LLM_MODE: {effective_mode}")
+                raise LocalLLMError(
+                    f"Unsupported JOI_V15_LLM_MODE: {effective_mode}",
+                    error_type="incompatible_runtime",
+                )
             response["latency_sec"] = round(time.time() - started_at, 4)
             response["attempt"] = attempt + 1
             if log_path is not None:
@@ -590,5 +694,12 @@ def call(
                 break
             time.sleep(backoff_sec * (attempt + 1))
     if log_path is not None:
-        dump_json(log_path, {"request": request_record, "error": str(last_error)})
+        payload = {"request": request_record, "error": str(last_error)}
+        if isinstance(last_error, LocalLLMError):
+            payload["error_type"] = last_error.error_type
+            if last_error.details:
+                payload["error_details"] = last_error.details
+        dump_json(log_path, payload)
+    if isinstance(last_error, LocalLLMError):
+        raise last_error
     raise LocalLLMError(str(last_error) if last_error else "local llm call failed")
