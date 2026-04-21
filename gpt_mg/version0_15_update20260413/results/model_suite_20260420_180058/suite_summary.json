@@ -1,0 +1,258 @@
+{
+  "output_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_180058",
+  "manifest": {
+    "created_at": "2026-04-20T18:00:58.668413",
+    "suite": "paper_local5",
+    "requested_model_keys": [
+      "phi35_mini"
+    ],
+    "model_keys": [
+      "phi35_mini"
+    ],
+    "genome_json": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/best_genome.json",
+    "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499",
+    "blocks": [
+      "01",
+      "02",
+      "03"
+    ],
+    "candidate_strategies": [
+      "compact_json",
+      "minimal",
+      "explicit_preconditions",
+      "direct"
+    ],
+    "candidate_k": 1,
+    "repair_threshold": 70.0,
+    "repair_attempts": 0,
+    "row_count": 1,
+    "row_nos": [
+      1
+    ],
+    "preflight": [
+      {
+        "model_key": "phi35_mini",
+        "model_label": "Phi-3.5-mini-instruct",
+        "mode": "worker",
+        "backend": "transformers_worker",
+        "configured_model": "microsoft/Phi-3.5-mini-instruct",
+        "status": "ready",
+        "message": "cached locally (hf_cache, snapshots=1)",
+        "ollama_used": false,
+        "local_model_name": "microsoft/Phi-3.5-mini-instruct",
+        "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--microsoft--Phi-3.5-mini-instruct/snapshots/2fe192450127e6a83f7441aef6e3ca586c338b77",
+        "local_files_only": true,
+        "local_device": "cuda:0",
+        "local_dtype": "bf16",
+        "local_load_in_4bit": false,
+        "local_attn_implementation": "",
+        "cache_kind": "hf_cache",
+        "cache_path": "/home/mgjeong/.cache/huggingface/hub/models--microsoft--Phi-3.5-mini-instruct/snapshots/2fe192450127e6a83f7441aef6e3ca586c338b77",
+        "cache_exists": true,
+        "snapshot_count": 1,
+        "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
+        "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py",
+        "persistent_worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
+        "persistent_worker": true,
+        "worker_runtime": {
+          "ok": true,
+          "torch_version": "2.9.1+cu128",
+          "cuda_available": true,
+          "device_count": 2,
+          "cuda_devices": [
+            "NVIDIA RTX A6000",
+            "NVIDIA RTX A6000"
+          ],
+          "transformers_version": "4.57.3",
+          "python_path": "/home/mgjeong/miniconda3/envs/l/bin/python",
+          "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py",
+          "persistent_worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
+          "persistent_worker": true,
+          "hf_modules_cache": "/tmp/joi_v15_hf_modules"
+        }
+      }
+    ],
+    "skipped_models": [],
+    "skip_unavailable": false,
+    "requested_max_workers": 1,
+    "debug_runtime": true,
+    "effective_max_workers": 1
+  },
+  "models": [
+    {
+      "model_key": "phi35_mini",
+      "model_label": "Phi-3.5-mini-instruct",
+      "mode": "worker",
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "endpoint": "",
+      "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+      "blocks": [
+        "01",
+        "02",
+        "03"
+      ],
+      "temperature": 0.1,
+      "max_tokens": 768,
+      "candidate_k": 1,
+      "repair_attempts": 0,
+      "llm_extra_payload": {
+        "local_trust_remote_code": true
+      },
+      "runtime": {
+        "model_key": "phi35_mini",
+        "model_label": "Phi-3.5-mini-instruct",
+        "mode": "worker",
+        "backend": "transformers_worker",
+        "configured_model": "microsoft/Phi-3.5-mini-instruct",
+        "status": "ready",
+        "message": "cached locally (hf_cache, snapshots=1)",
+        "ollama_used": false,
+        "local_model_name": "microsoft/Phi-3.5-mini-instruct",
+        "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--microsoft--Phi-3.5-mini-instruct/snapshots/2fe192450127e6a83f7441aef6e3ca586c338b77",
+        "local_files_only": true,
+        "local_device": "cuda:0",
+        "local_dtype": "bf16",
+        "local_load_in_4bit": false,
+        "local_attn_implementation": "",
+        "cache_kind": "hf_cache",
+        "cache_path": "/home/mgjeong/.cache/huggingface/hub/models--microsoft--Phi-3.5-mini-instruct/snapshots/2fe192450127e6a83f7441aef6e3ca586c338b77",
+        "cache_exists": true,
+        "snapshot_count": 1,
+        "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
+        "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py",
+        "persistent_worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
+        "persistent_worker": true,
+        "worker_runtime": {
+          "ok": true,
+          "torch_version": "2.9.1+cu128",
+          "cuda_available": true,
+          "device_count": 2,
+          "cuda_devices": [
+            "NVIDIA RTX A6000",
+            "NVIDIA RTX A6000"
+          ],
+          "transformers_version": "4.57.3",
+          "python_path": "/home/mgjeong/miniconda3/envs/l/bin/python",
+          "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py",
+          "persistent_worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
+          "persistent_worker": true,
+          "hf_modules_cache": "/tmp/joi_v15_hf_modules"
+        }
+      },
+      "resolved_model_path": "/home/mgjeong/.cache/huggingface/hub/models--microsoft--Phi-3.5-mini-instruct/snapshots/2fe192450127e6a83f7441aef6e3ca586c338b77",
+      "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
+      "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py",
+      "persistent_worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
+      "persistent_worker": true,
+      "local_device": "cuda:0",
+      "local_dtype": "bf16",
+      "local_load_in_4bit": false,
+      "local_attn_implementation": "",
+      "local_files_only": true,
+      "generation": {
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_180058/phi35_mini_candidates.csv",
+        "jsonl_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/candidates_suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15.jsonl",
+        "row_count": 1,
+        "rows": [
+          {
+            "index": "1",
+            "category": "1",
+            "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+            "connected_devices": "",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+            "row_no": 1,
+            "profile": "version0_15_update20260413",
+            "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+            "genome_seed": 975035167,
+            "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+            "candidate_count": 1,
+            "candidates": "[\"\"]",
+            "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"CUDA out of memory. Tried to allocate 103.27 GiB. GPU 0 has a total capacity of 47.43 GiB of which 31.63 GiB is free. Including non-PyTorch memory, this process has 15.75 GiB memory in use. Of the allocated memory 12.27 GiB is allocated by PyTorch, and 3.17 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+            "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_001_cand_1.json\"]",
+            "generation_status": "partial_error",
+            "llm_mode": "worker",
+            "llm_model": "microsoft/Phi-3.5-mini-instruct"
+          }
+        ],
+        "fieldnames": [
+          "index",
+          "category",
+          "command_kor",
+          "command_eng",
+          "gt_raw",
+          "connected_devices",
+          "gt",
+          "row_no",
+          "profile",
+          "genome_id",
+          "genome_seed",
+          "run_id",
+          "candidate_count",
+          "candidates",
+          "candidate_metadata",
+          "prompt_log_paths",
+          "generation_status",
+          "llm_mode",
+          "llm_model"
+        ]
+      },
+      "rerank": {
+        "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_180058/phi35_mini_rerank.csv",
+        "row_count": 1,
+        "repaired_count": 0
+      },
+      "metrics": {
+        "row_count": 1,
+        "avg_det_score": 0.0,
+        "avg_gt_similarity": 0.0,
+        "gt_exact_count": 0,
+        "pass_count": 0,
+        "fail_count": 1,
+        "top_failure_types": [
+          [
+            "invalid_json",
+            1
+          ]
+        ],
+        "failed_row_nos": [
+          1
+        ],
+        "failed_cases": [
+          {
+            "row_no": 1,
+            "command_eng": "Switch the dishwasher to dry mode.",
+            "det_score": 0.0,
+            "threshold": 70.0,
+            "failure_reasons": [
+              "invalid_json"
+            ],
+            "output": "",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+          }
+        ]
+      },
+      "usage": {
+        "candidate_count": 0,
+        "avg_prompt_tokens": 0.0,
+        "avg_completion_tokens": 0.0,
+        "avg_total_tokens": 0.0,
+        "avg_latency_sec": 0.0,
+        "error_count": 1,
+        "top_errors": [
+          [
+            "CUDA out of memory. Tried to allocate 103.27 GiB. GPU 0 has a total capacity of 47.43 GiB of which 31.63 GiB is free. Including non-PyTorch memory, this process has 15.75 GiB memory in use. Of the allocated memory 12.27 GiB is allocated by PyTorch, and 3.17 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)",
+            1
+          ]
+        ]
+      },
+      "suite_index": 0
+    }
+  ],
+  "suite_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_180058/suite_summary.csv",
+  "row_comparison_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_180058/row_comparison.csv",
+  "failure_reason_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_180058/failure_reason_summary.csv",
+  "category_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_180058/category_summary.csv"
+}

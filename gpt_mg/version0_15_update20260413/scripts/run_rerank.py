@@ -70,6 +70,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--timeout-sec", type=int, default=1800)
     parser.add_argument("--retries", type=int, default=1)
     parser.add_argument("--seed", type=int, default=14)
+    parser.add_argument("--model", default=None, help="Override the repair model id while keeping the same prompt/genome.")
     return parser
 
 
@@ -126,6 +127,8 @@ def rerank_candidates_csv(
     timeout_sec: int,
     retries: int,
     seed: int,
+    model_override: str | None = None,
+    llm_extra_payload: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     ensure_workspace()
     input_rows = read_csv_rows(candidates_csv)
@@ -133,7 +136,11 @@ def rerank_candidates_csv(
         raise SystemExit(f"No rows found in candidates CSV: {candidates_csv}")
 
     repair_genome = _repair_genome(genome)
-    temperature, max_tokens, model = _llm_settings(genome, argparse.Namespace(temperature=None, max_tokens=None))
+    temperature, max_tokens, model = _llm_settings(
+        genome,
+        argparse.Namespace(temperature=None, max_tokens=None),
+        model_override=model_override,
+    )
     rerank_logs_dir = LOGS_DIR / f"rerank_{slugify(genome.get('id', 'genome'))}"
     rerank_logs_dir.mkdir(parents=True, exist_ok=True)
 
@@ -193,6 +200,7 @@ def rerank_candidates_csv(
                         retries=retries,
                         seed=seed + row_no + attempt,
                         log_path=repair_log,
+                        extra_payload=llm_extra_payload,
                     )
                     repaired_candidate = normalize_candidate_json_text(
                         str(response.get("content", "")).strip(),
@@ -272,6 +280,7 @@ def main() -> int:
         timeout_sec=args.timeout_sec,
         retries=args.retries,
         seed=args.seed,
+        model_override=args.model,
     )
     print("Rerank completed")
     print(f"- output_csv: {summary['output_csv']}")

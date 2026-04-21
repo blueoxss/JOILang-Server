@@ -1,0 +1,81 @@
+row_no,category,command_eng,command_kor,gt,gemma2_9b_it__det_score,gemma2_9b_it__det_gt_exact,gemma2_9b_it__det_gt_similarity,gemma2_9b_it__failure_reasons,gemma2_9b_it__output,llama31_8b__det_score,llama31_8b__det_gt_exact,llama31_8b__det_gt_similarity,llama31_8b__failure_reasons,llama31_8b__output,phi35_mini__det_score,phi35_mini__det_gt_exact,phi35_mini__det_gt_similarity,phi35_mini__failure_reasons,phi35_mini__output,qwen25_coder_14b__det_score,qwen25_coder_14b__det_gt_exact,qwen25_coder_14b__det_gt_similarity,qwen25_coder_14b__failure_reasons,qwen25_coder_14b__output,qwen25_coder_7b__det_score,qwen25_coder_7b__det_gt_exact,qwen25_coder_7b__det_gt_similarity,qwen25_coder_7b__failure_reasons,qwen25_coder_7b__output
+1,1,Switch the dishwasher to dry mode.,식기세척기를 건조 모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Dishwasher).Dishwasher_SetDishwasherMode(\""dry\"")""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,98.898,False,0.963265,"[""gt_mismatch""]","{""name"":""SwitchDishwasherToDryMode"",""cron"":"""",""period"":0,""code"":""(#Dishwasher).dishwasher_setdishwashermode(\""dry\"")""}"
+2,1,Add 5 minutes to the oven.,오븐의 작동 시간을 5분 늘려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Oven).Oven_AddMoreTime(300)""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":""Add5MinutesToOven"",""cron"":"""",""period"":0,""code"":""""}"
+3,1,Start the rice cooker on cooking mode for 30 minutes.,밥솥을 조리 모드로 30분 작동시켜.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#RiceCooker).RiceCooker_SetCookingParameters(\""cooking\"", 1800)""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,74.3218,False,0.594059,"[""arg_type"", ""gt_mismatch"", ""semantic""]","{""name"":""StartRiceCooker"",""cron"":"""",""period"":0,""code"":""(#RiceCooker).setricecookermode(cooking)""}"
+4,1,Set the siren to emergency mode.,사이렌을 응급모드로 울려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Siren).Siren_SetSirenMode(\""emergency\"")""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,49.08,False,0.636,"[""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match"", ""unknown_service:set""]","{""name"":""SetSirenEmergencyMode"",""cron"":"""",""period"":0,""code"":""(#Siren).set sirens_mode(emergency)""}"
+5,1,Set the speaker volume to 30.,스피커의 볼륨을 30으로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Speaker).Speaker_SetVolume(30)""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,95.9071,False,0.903571,"[""gt_mismatch""]","{""name"":""SetSpeakerVolume"",""cron"":"""",""period"":0,""code"":""(#Speaker).setvolume(30)""}"
+6,1,Turn the TV channel down by one.,TV 채널을 하나 내려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Television).Television_ChannelDown()""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":"""",""cron"":"""",""period"":0,""code"":""""}"
+7,1,Switch the TV to channel 7.,TV로 7번 채널을 틀어줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Television).Television_SetChannel(7)""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":""SwitchTVChannel7"",""cron"":"""",""period"":0,""code"":""""}"
+8,1,Announce the temperature through the speaker.,현재 온도를 스피커로 알려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\ntemp = (#TemperatureSensor).TemperatureSensor_Temperature\n\n(#Speaker).Speaker_Speak(\""현재 온도는 \"" + temp + \""도입니다\"")""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":""AnnounceTemperature"",""cron"":"""",""period"":0,""code"":""""}"
+9,1,Tell me the outdoor temperature through the speaker.,외부 온도를 스피커로 출력해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\ntemp = (#WeatherProvider).WeatherProvider_TemperatureWeather\n\n(#Speaker).Speaker_Speak(\""외부 온도는 \"" + temp + \""도입니다\"")""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":""TellOutdoorTemperature"",""cron"":"""",""period"":0,""code"":""""}"
+10,1,Tell me the current humidity through the speaker.,현재 습도를 스피커로 말해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nhum = (#HumiditySensor).HumiditySensor_Humidity\n\n(#Speaker).Speaker_Speak(\""현재 습도는 \"" + hum + \""%입니다\"")""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":""TellMeCurrentHumidity"",""cron"":"""",""period"":0,""code"":""""}"
+11,1,Tell me the outdoor humidity through the speaker.,외부 습도를 스피커로 말해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nhum = (#WeatherProvider).WeatherProvider_HumidityWeather\n\n(#Speaker).Speaker_Speak(\""외부 습도는 \"" + hum + \""%입니다\"")""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":""TellOutdoorHumidityThroughSpeaker"",""cron"":"""",""period"":0,""code"":""""}"
+12,1,Output today's weather through the speaker.,오늘의 날씨를 스피커로 출력해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nweather = (#WeatherProvider).WeatherProvider_Weather\n\n(#Speaker).Speaker_Speak(\""오늘 날씨는 \"" + weather + \""입니다\"")""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":""OutputTodayWeatherThroughSpeaker"",""cron"":"""",""period"":0,""code"":""""}"
+13,1,Announce the fine dust level through the speaker.,미세먼지 농도를 스피커로 알려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\ndust = (#AirQualitySensor).AirQualitySensor_DustLevel\n\n(#Speaker).Speaker_Speak(\""미세먼지 농도는 \"" + dust + \""입니다\"")""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":""AnnounceFineDustLevel"",""cron"":"""",""period"":0,""code"":""""}"
+14,1,Announce the outdoor fine dust level using the speaker.,외부 미세먼지 농도를 스피커로 알려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\ndust = (#WeatherProvider).WeatherProvider_Pm10Weather\n\n(#Speaker).Speaker_Speak(\""외부 미세먼지 농도는 \"" + dust + \""입니다\"")""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":""AnnounceFineDustLevel"",""cron"":"""",""period"":0,""code"":""""}"
+15,1,"Generate a cat image using cloud service and save it as ""cat.png"".","클라우드로 고양이 사진을 생성하고 ""cat.png""로 저장해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nimg = (#CloudServiceProvider).CloudServiceProvider_GenerateImage(\""Generate a cat image\"")\n\n(#CloudServiceProvider).CloudServiceProvider_SaveToFile(img, \""cat.png\"")""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":""GenerateCatImageUsingCloudService"",""cron"":"""",""period"":0,""code"":""""}"
+16,1,Output the charger's power consumption through the speaker.,충전기의 전력소모량을 스피커로 출력해줘.,"{""name"": """",
+""cron"": """", 
+""period"": 0, 
+""script"": ""\npower = (#Charger).Charger_Power\n\n(#Speaker).Speaker_Speak(\""전력소모량은 \"" + power + \""입니다\"")""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":""OutputChargerPowerConsumptionThroughSpeaker"",""cron"":"""",""period"":0,""code"":""""}"
+17,1,Tell me today's menu using the speaker.,오늘의 메뉴를 스피커로 출력해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nmenu = (#MenuProvider).MenuProvider_TodayMenu\n\n(#Speaker).Speaker_Speak(\""오늘의 메뉴는 \"" + menu + \""입니다\"")""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":""TellMeTodayMenu"",""cron"":"""",""period"":0,""code"":""""}"
+18,1,Tell me the lunch menu for Building 301 today through the speaker.,오늘의 301동 점심 메뉴를 스피커로 알려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nmenu = (#MenuProvider).MenuProvider_GetMenu(\""오늘 301동식당 점심\"")\n\n(#Speaker).Speaker_Speak(\""오늘의 메뉴는 \"" + menu + \""입니다\"")""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,24.0,False,0.3,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic"", ""service_match""]","{""name"":""TellLunchMenuBuilding301"",""cron"":"""",""period"":0,""code"":""""}"
+19,1,"Ask the cloud AI what an LLM is, and output its answer through the speaker.",클라우드 AI한테 llm이 무엇인지 질문하고 답을 스피커로 출력해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nanswer = (#CloudServiceProvider).CloudServiceProvider_ChatWithAI(\""What is LLM?\"")\n\n(#Speaker).Speaker_Speak(answer)""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,88.5413,False,0.738043,"[""gt_mismatch""]","{""name"":""AskCloudAIAboutLLM"",""cron"":"""",""period"":0,""code"":""(#CloudServiceProvider).cloudserviceprovider_chatwithai(\""What is an LLM?\"")""}"
+20,1,Set the hue of the light to 200 and the saturation to 50.,"조명의 색조를 200, 채도는 50으로 설정해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Light).Light_MoveToHueAndSaturation(200, 50)""}",0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,0.0,False,0.0,"[""invalid_json""]",,84.7993,False,0.607595,"[""gt_mismatch""]","{""name"":""SetLightColor"",""cron"":"""",""period"":0,""code"":""(#Light).light_movetorgb(200, 50, 0)""}"

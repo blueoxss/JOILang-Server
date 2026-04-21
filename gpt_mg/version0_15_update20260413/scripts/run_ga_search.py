@@ -21,6 +21,7 @@ from utils.pipeline_common import (
     DATASET_DEFAULT,
     RESULTS_DIR,
     SERVICE_SCHEMA_DEFAULT,
+    atomic_write_csv,
     dump_json,
     ensure_workspace,
     load_dataset_rows,
@@ -41,6 +42,7 @@ MUTATION_RULES = [
 ]
 
 OPTIONAL_BLOCKS = ["03", "06"]
+DET_PASS_THRESHOLD = 70.0
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -247,6 +249,26 @@ def _evaluate_one(
     return evaluation
 
 
+def _metric_progress(metrics: dict[str, Any], *, threshold: float = DET_PASS_THRESHOLD) -> dict[str, Any]:
+    rows = list(metrics.get("rows", []))
+    row_count = len(rows)
+    gt_exact_count = sum(1 for row in rows if bool(row.get("det_gt_exact")))
+    det_pass_count = sum(
+        1
+        for row in rows
+        if bool(row.get("det_gt_exact")) or float(row.get("det_score") or 0.0) >= float(threshold)
+    )
+    return {
+        "row_count": row_count,
+        "gt_exact_count": gt_exact_count,
+        "gt_exact_rate": round((gt_exact_count / row_count) * 100.0, 4) if row_count else 0.0,
+        "det_pass_count": det_pass_count,
+        "det_pass_rate": round((det_pass_count / row_count) * 100.0, 4) if row_count else 0.0,
+        "avg_det_score": float(metrics.get("avg_det_score") or 0.0),
+        "variance": float(metrics.get("variance") or 0.0),
+    }
+
+
 def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
     ensure_workspace()
     rng = random.Random(args.seed)
@@ -268,6 +290,7 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
 
     population = [_random_genome(base_genome, rng) for _ in range(args.population)]
     best_history: list[dict[str, Any]] = []
+    generation_progress: list[dict[str, Any]] = []
     global_best: dict[str, Any] | None = None
     no_improvement_generations = 0
 
@@ -304,6 +327,27 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
             key=lambda item: (-float(item["fitness"]), -float(item["validation_avg_det_score"]), item["genome"]["id"])
         )
         generation_best = evaluated_population[0]
+        train_progress = _metric_progress(generation_best["train_metrics"])
+        validation_progress = _metric_progress(generation_best["validation_metrics"])
+        progress_record = {
+            "profile": args.profile,
+            "generation": generation,
+            "genome_id": generation_best["genome"]["id"],
+            "model": str(generation_best["genome"].get("params", {}).get("model", "")),
+            "fitness": generation_best["fitness"],
+            "train_avg_det_score": train_progress["avg_det_score"],
+            "train_variance": train_progress["variance"],
+            "train_det_pass_rate": train_progress["det_pass_rate"],
+            "train_gt_exact_rate": train_progress["gt_exact_rate"],
+            "validation_avg_det_score": validation_progress["avg_det_score"],
+            "validation_variance": validation_progress["variance"],
+            "validation_det_pass_rate": validation_progress["det_pass_rate"],
+            "validation_gt_exact_rate": validation_progress["gt_exact_rate"],
+            "replay_acc_rate_proxy": validation_progress["gt_exact_rate"],
+            "candidate_strategies": "|".join(str(item) for item in generation_best["genome"].get("params", {}).get("candidate_strategies", []) or []),
+            "blocks": "|".join(str(item) for item in generation_best["genome"].get("blocks", []) or []),
+        }
+        generation_progress.append(progress_record)
         best_history.append(
             {
                 "generation": generation,
@@ -311,6 +355,11 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
                 "fitness": generation_best["fitness"],
                 "avg_det_score": generation_best["avg_det_score"],
                 "validation_avg_det_score": generation_best["validation_avg_det_score"],
+                "train_det_pass_rate": train_progress["det_pass_rate"],
+                "train_gt_exact_rate": train_progress["gt_exact_rate"],
+                "validation_det_pass_rate": validation_progress["det_pass_rate"],
+                "validation_gt_exact_rate": validation_progress["gt_exact_rate"],
+                "replay_acc_rate_proxy": validation_progress["gt_exact_rate"],
                 "genome": generation_best["genome"],
             }
         )
@@ -381,10 +430,20 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
         population = next_population[: args.population]
 
         dump_json(RESULTS_DIR / "best_genomes.json", best_history)
+        atomic_write_csv(
+            RESULTS_DIR / "ga_generation_progress.csv",
+            list(progress_record.keys()),
+            generation_progress,
+        )
+        with (RESULTS_DIR / "ga_generation_progress.jsonl").open("w", encoding="utf-8") as handle:
+            for item in generation_progress:
+                handle.write(json.dumps(item, ensure_ascii=False) + "\n")
 
     final_best = global_best if global_best is not None else {}
     summary = {
         "best_history": best_history,
+        "generation_progress_csv": str(RESULTS_DIR / "ga_generation_progress.csv"),
+        "generation_progress_jsonl": str(RESULTS_DIR / "ga_generation_progress.jsonl"),
         "best_genome": final_best.get("genome") if final_best else None,
         "best_fitness": final_best.get("fitness") if final_best else None,
         "best_validation_avg_det_score": final_best.get("validation_avg_det_score") if final_best else None,

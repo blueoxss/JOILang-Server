@@ -33,6 +33,28 @@ DEFAULT_ENDPOINT = _env("JOI_V15_OPENAI_ENDPOINT", "JOI_V14_OPENAI_ENDPOINT", "h
 DEFAULT_WORKER = str((REPO_ROOT / "gpt_mg" / "version0_13" / "qwen_local_worker.py").resolve())
 DEFAULT_PERSISTENT_WORKER = str((Path(__file__).resolve().parent / "persistent_qwen_worker.py").resolve())
 DEFAULT_PYTHON = _env("JOI_V15_PYTHON", "JOI_V14_PYTHON", sys.executable or "python3")
+DEFAULT_HF_MODULES_CACHE = _env("JOI_V15_HF_MODULES_CACHE", "JOI_V14_HF_MODULES_CACHE", "/tmp/joi_v15_hf_modules")
+
+_PYTHON_RUNTIME_PROBE = (
+    "import json\n"
+    "payload = {}\n"
+    "try:\n"
+    "    import torch\n"
+    "    payload['ok'] = True\n"
+    "    payload['torch_version'] = getattr(torch, '__version__', '')\n"
+    "    payload['cuda_available'] = bool(torch.cuda.is_available())\n"
+    "    payload['device_count'] = int(torch.cuda.device_count()) if payload['cuda_available'] else 0\n"
+    "    payload['cuda_devices'] = [torch.cuda.get_device_name(i) for i in range(payload['device_count'])] if payload['cuda_available'] else []\n"
+    "except Exception as exc:\n"
+    "    payload['ok'] = False\n"
+    "    payload['error'] = str(exc)\n"
+    "try:\n"
+    "    import transformers\n"
+    "    payload['transformers_version'] = getattr(transformers, '__version__', '')\n"
+    "except Exception as exc:\n"
+    "    payload.setdefault('warnings', []).append(f'transformers: {exc}')\n"
+    "print(json.dumps(payload, ensure_ascii=False))\n"
+)
 
 
 class LocalLLMError(RuntimeError):
@@ -40,16 +62,44 @@ class LocalLLMError(RuntimeError):
 
 
 def _python_has_torch(python_path: str) -> bool:
-    if not python_path or not Path(python_path).exists():
-        return False
-    completed = subprocess.run(
-        [python_path, "-c", "import torch; print(torch.__version__)"],
-        text=True,
-        capture_output=True,
-        timeout=5,
-        check=False,
-    )
-    return completed.returncode == 0
+    return bool(_probe_python_runtime(python_path).get("ok"))
+
+
+def _probe_python_runtime(python_path: str) -> dict[str, Any]:
+    if not python_path:
+        return {"ok": False, "python_path": python_path, "error": "empty_python_path"}
+    candidate = Path(python_path).expanduser()
+    if not candidate.exists():
+        return {"ok": False, "python_path": str(candidate), "error": "python_not_found"}
+    try:
+        completed = subprocess.run(
+            [str(candidate), "-c", _PYTHON_RUNTIME_PROBE],
+            text=True,
+            capture_output=True,
+            timeout=10,
+            check=False,
+        )
+    except Exception as exc:
+        return {"ok": False, "python_path": str(candidate), "error": str(exc)}
+    if completed.returncode != 0:
+        return {
+            "ok": False,
+            "python_path": str(candidate),
+            "error": (completed.stderr or completed.stdout or "").strip() or f"exit_code={completed.returncode}",
+        }
+    try:
+        payload = json.loads((completed.stdout or "").strip() or "{}")
+    except Exception as exc:
+        return {
+            "ok": False,
+            "python_path": str(candidate),
+            "error": f"invalid_probe_output: {exc}",
+            "stdout": (completed.stdout or "")[:500],
+        }
+    if not isinstance(payload, dict):
+        payload = {"ok": False, "error": f"unexpected_probe_payload: {type(payload).__name__}"}
+    payload["python_path"] = str(candidate)
+    return payload
 
 
 def _discover_worker_python() -> str:
@@ -58,22 +108,78 @@ def _discover_worker_python() -> str:
         return explicit
     candidates = [
         DEFAULT_PYTHON,
+        "/home/mgjeong/miniconda3/envs/l/bin/python",
+        "/home/mgjeong/miniconda3/envs/paper-gpu/bin/python",
+        "/home/mgjeong/miniconda3/envs/nas_new/bin/python",
         "/home/andrew/llm/v/bin/python",
         "/usr/bin/python3",
     ]
     seen: set[str] = set()
+    ok_candidates: list[dict[str, Any]] = []
     for candidate in candidates:
         if not candidate or candidate in seen:
             continue
         seen.add(candidate)
-        if _python_has_torch(candidate):
-            return candidate
+        probe = _probe_python_runtime(candidate)
+        if probe.get("ok"):
+            ok_candidates.append(probe)
+            if bool(probe.get("cuda_available")):
+                return str(probe["python_path"])
+    if ok_candidates:
+        return str(ok_candidates[0]["python_path"])
     return DEFAULT_PYTHON
 
 
 DEFAULT_WORKER_PYTHON = _discover_worker_python()
 _PERSISTENT_WORKER_PROCESS: subprocess.Popen[str] | None = None
 _PERSISTENT_WORKER_KEY: tuple[str, ...] | None = None
+
+
+def _hf_cache_root() -> Path:
+    explicit = os.getenv("HF_HUB_CACHE", "").strip() or os.getenv("HUGGINGFACE_HUB_CACHE", "").strip()
+    if explicit:
+        return Path(explicit).expanduser()
+    transformers_cache = os.getenv("TRANSFORMERS_CACHE", "").strip()
+    if transformers_cache:
+        return Path(transformers_cache).expanduser()
+    return Path.home() / ".cache" / "huggingface" / "hub"
+
+
+def _hf_repo_cache_dir(model_name: str) -> Path:
+    return _hf_cache_root() / f"models--{model_name.replace('/', '--')}"
+
+
+def _resolve_local_model_name(model_name: str) -> str:
+    raw = str(model_name or "").strip()
+    if not raw:
+        return raw
+    path = Path(raw).expanduser()
+    if path.exists():
+        return str(path.resolve())
+    if "/" not in raw:
+        return raw
+    cache_dir = _hf_repo_cache_dir(raw)
+    snapshots_dir = cache_dir / "snapshots"
+    if not snapshots_dir.exists():
+        return raw
+    snapshots = sorted((item for item in snapshots_dir.iterdir() if item.is_dir()), key=lambda item: item.name)
+    if not snapshots:
+        return raw
+    return str(snapshots[-1].resolve())
+
+
+def describe_worker_runtime(python_path: str | None = None) -> dict[str, Any]:
+    worker_python = str(python_path or DEFAULT_WORKER_PYTHON)
+    runtime = _probe_python_runtime(worker_python)
+    runtime["worker_path"] = _env("JOI_V15_WORKER_PATH", "JOI_V14_WORKER_PATH", DEFAULT_WORKER)
+    runtime["persistent_worker_path"] = _env(
+        "JOI_V15_PERSISTENT_WORKER_PATH",
+        "JOI_V14_PERSISTENT_WORKER_PATH",
+        DEFAULT_PERSISTENT_WORKER,
+    )
+    runtime["persistent_worker"] = _use_persistent_worker()
+    runtime["hf_modules_cache"] = DEFAULT_HF_MODULES_CACHE
+    return runtime
 
 
 def _local_max_new_tokens(max_tokens: int) -> int:
@@ -100,9 +206,10 @@ def _build_worker_payload(
     max_tokens: int,
     extra_payload: dict[str, Any] | None,
 ) -> dict[str, Any]:
+    configured_model_name = _env("JOI_V15_LOCAL_MODEL_NAME", "JOI_V14_LOCAL_MODEL_NAME", model)
     payload = {
         "model": model,
-        "local_model_name": _env("JOI_V15_LOCAL_MODEL_NAME", "JOI_V14_LOCAL_MODEL_NAME", model),
+        "local_model_name": configured_model_name,
         "messages": [
             {"role": "system", "content": system},
             {"role": "user", "content": user},
@@ -113,9 +220,13 @@ def _build_worker_payload(
         "local_files_only": _env("JOI_V15_LOCAL_FILES_ONLY", "JOI_V14_LOCAL_FILES_ONLY", "true").lower() in {"1", "true", "yes", "on"},
         "local_trust_remote_code": _env("JOI_V15_LOCAL_TRUST_REMOTE_CODE", "JOI_V14_LOCAL_TRUST_REMOTE_CODE", "false").lower() in {"1", "true", "yes", "on"},
         "local_load_in_4bit": _env("JOI_V15_LOCAL_LOAD_IN_4BIT", "JOI_V14_LOCAL_LOAD_IN_4BIT", "false").lower() in {"1", "true", "yes", "on"},
+        "local_hf_modules_cache": DEFAULT_HF_MODULES_CACHE,
+        "local_attn_implementation": _env("JOI_V15_LOCAL_ATTN_IMPLEMENTATION", "JOI_V14_LOCAL_ATTN_IMPLEMENTATION", ""),
     }
     if extra_payload:
         payload.update(extra_payload)
+    payload["local_model_name"] = _resolve_local_model_name(str(payload.get("local_model_name", "")))
+    payload["local_hf_modules_cache"] = str(Path(str(payload.get("local_hf_modules_cache", DEFAULT_HF_MODULES_CACHE))).expanduser())
     return payload
 
 
@@ -197,15 +308,33 @@ def _read_persistent_worker_response(process: subprocess.Popen[str], timeout_sec
     return payload
 
 
-def _request_json(url: str, payload: dict[str, Any], timeout_sec: int) -> dict[str, Any]:
+def _request_json(
+    url: str,
+    payload: dict[str, Any],
+    timeout_sec: int,
+    *,
+    headers: dict[str, str] | None = None,
+) -> dict[str, Any]:
+    request_headers = {"Content-Type": "application/json"}
+    if headers:
+        request_headers.update(headers)
     req = urllib.request.Request(
         url,
         data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
-        headers={"Content-Type": "application/json"},
+        headers=request_headers,
         method="POST",
     )
     with urllib.request.urlopen(req, timeout=timeout_sec) as response:
         return json.loads(response.read().decode("utf-8"))
+
+
+def _request_auth_headers() -> dict[str, str]:
+    bearer = _env("JOI_V15_HTTP_AUTH_BEARER", "JOI_V14_HTTP_AUTH_BEARER", "")
+    if not bearer:
+        bearer = _env("JOI_V15_OPENAI_API_KEY", "JOI_V14_OPENAI_API_KEY", "")
+    if not bearer:
+        return {}
+    return {"Authorization": f"Bearer {bearer}"}
 
 
 def _call_openai_compatible(
@@ -230,7 +359,12 @@ def _call_openai_compatible(
     }
     if extra_payload:
         payload.update(extra_payload)
-    response = _request_json(endpoint, payload, timeout_sec)
+    response = _request_json(
+        endpoint,
+        payload,
+        timeout_sec,
+        headers=_request_auth_headers(),
+    )
     try:
         content = response["choices"][0]["message"]["content"]
     except Exception as exc:
@@ -344,11 +478,18 @@ def call(
     extra_payload: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     effective_mode = (mode or DEFAULT_MODE).strip().lower()
-    effective_model = model or DEFAULT_MODEL
+    effective_model = str(model).strip() if model else _env("JOI_V15_MODEL", "JOI_V14_MODEL", DEFAULT_MODEL)
     effective_endpoint = endpoint or DEFAULT_ENDPOINT
-    if seed is not None:
-        effective_model = _env("JOI_V15_MODEL", "JOI_V14_MODEL", effective_model)
     last_error: Exception | None = None
+    worker_payload_preview: dict[str, Any] | None = None
+    if effective_mode == "worker":
+        worker_payload_preview = _build_worker_payload(
+            system,
+            user,
+            model=effective_model,
+            max_tokens=max_tokens,
+            extra_payload=extra_payload,
+        )
     request_record = {
         "mode": effective_mode,
         "model": effective_model,
@@ -365,6 +506,27 @@ def call(
         ),
         "worker_python": DEFAULT_WORKER_PYTHON if effective_mode == "worker" else None,
         "persistent_worker": _use_persistent_worker() if effective_mode == "worker" else False,
+        "resolved_local_model_name": (
+            worker_payload_preview.get("local_model_name") if worker_payload_preview is not None else None
+        ),
+        "local_device": worker_payload_preview.get("local_device") if worker_payload_preview is not None else None,
+        "local_dtype": worker_payload_preview.get("local_dtype") if worker_payload_preview is not None else None,
+        "local_files_only": (
+            worker_payload_preview.get("local_files_only") if worker_payload_preview is not None else None
+        ),
+        "local_trust_remote_code": (
+            worker_payload_preview.get("local_trust_remote_code") if worker_payload_preview is not None else None
+        ),
+        "local_load_in_4bit": (
+            worker_payload_preview.get("local_load_in_4bit") if worker_payload_preview is not None else None
+        ),
+        "local_hf_modules_cache": (
+            worker_payload_preview.get("local_hf_modules_cache") if worker_payload_preview is not None else None
+        ),
+        "local_attn_implementation": (
+            worker_payload_preview.get("local_attn_implementation") if worker_payload_preview is not None else None
+        ),
+        "worker_runtime": describe_worker_runtime() if effective_mode == "worker" else None,
     }
     for attempt in range(retries + 1):
         started_at = time.time()

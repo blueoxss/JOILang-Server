@@ -73,6 +73,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--retries", type=int, default=1)
     parser.add_argument("--max-tokens", type=int, default=None)
     parser.add_argument("--temperature", type=float, default=None)
+    parser.add_argument("--model", default=None, help="Override the model id while keeping the same prompt/genome.")
     return parser
 
 
@@ -83,7 +84,12 @@ def _candidate_strategies(genome: dict[str, Any], candidate_k: int) -> list[str]
     return [strategies[idx % len(strategies)] for idx in range(candidate_k)]
 
 
-def _llm_settings(genome: dict[str, Any], cli_args: argparse.Namespace) -> tuple[float, int, str]:
+def _llm_settings(
+    genome: dict[str, Any],
+    cli_args: argparse.Namespace,
+    *,
+    model_override: str | None = None,
+) -> tuple[float, int, str]:
     params = genome.get("params", {})
     block_02 = genome.get("block_params", {}).get("02", {})
     temperature = cli_args.temperature
@@ -92,7 +98,7 @@ def _llm_settings(genome: dict[str, Any], cli_args: argparse.Namespace) -> tuple
     max_tokens = cli_args.max_tokens
     if max_tokens is None:
         max_tokens = block_02.get("max_tokens", params.get("max_tokens", 1024))
-    model = params.get("model", "Qwen/Qwen2.5-Coder-7B-Instruct")
+    model = str(model_override or params.get("model", "Qwen/Qwen2.5-Coder-7B-Instruct"))
     return float(temperature), int(max_tokens), str(model)
 
 
@@ -117,6 +123,7 @@ def generate_candidates_for_rows(
     temperature: float,
     max_tokens: int,
     model: str,
+    llm_extra_payload: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     ensure_workspace()
     output_csv = Path(output_csv)
@@ -153,6 +160,7 @@ def generate_candidates_for_rows(
                     retries=retries,
                     seed=seed + row_no + candidate_index,
                     log_path=log_path,
+                    extra_payload=llm_extra_payload,
                 )
                 candidate_text = normalize_candidate_json_text(
                     str(response.get("content", "")).strip(),
@@ -243,7 +251,7 @@ def main() -> int:
     if not selected_rows:
         raise SystemExit("No rows selected. Check --start-row/--end-row/--limit/--category.")
 
-    temperature, max_tokens, model = _llm_settings(genome, args)
+    temperature, max_tokens, model = _llm_settings(genome, args, model_override=args.model)
     run_id = args.run_id or make_run_id(f"generate_{args.profile}_{genome.get('id', 'genome')}", args.seed)
     output_csv = args.output_csv or RESULTS_DIR / f"candidates_{slugify(genome.get('id', 'genome'))}.csv"
 

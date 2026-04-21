@@ -1,7 +1,7 @@
-# version0_14 File Checklist
+# version0_15_update20260413 File Checklist
 
 - `README.md` - usage guide, folder map, quick commands, and DET notes.
-- `FILE_CHECKLIST.md` - file inventory for the version0_14 workspace.
+- `FILE_CHECKLIST.md` - file inventory for the version0_15_update20260413 workspace.
 - `blocks/01_preamble.txt` - global deterministic JOILang rules.
 - `blocks/02_generator_prompt.txt` - main generator prompt with metadata and three exemplars.
 - `blocks/03_postprocessor.txt` - JSON-only output scrubber.
@@ -14,6 +14,7 @@
 - `scripts/run_rerank.py` - DET scoring + repair runner.
 - `scripts/run_feedback_loop.py` - validation and prompt-surgery loop.
 - `scripts/run_ga_search.py` - GA orchestration with plateau handling.
+- `scripts/run_model_suite_benchmark.py` - fixed-prompt multi-model benchmark runner for row-level and dataset-level comparison.
 - `scripts/run_full_pipeline.sh` - end-to-end wrapper for quick/full runs.
 - `scripts/commit_results.py` - safe patch/instruction writer for git.
 - `utils/pipeline_common.py` - shared paths, prompt rendering, dataset helpers.

@@ -1,0 +1,93 @@
+{
+  "model_key": "qwen25_coder_7b",
+  "model_label": "Qwen2.5-Coder-7B-Instruct",
+  "mode": "worker",
+  "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+  "endpoint": "",
+  "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__qwen25_coder_7b",
+  "blocks": [
+    "01",
+    "02",
+    "03"
+  ],
+  "temperature": 0.1,
+  "max_tokens": 768,
+  "candidate_k": 1,
+  "repair_attempts": 0,
+  "llm_extra_payload": {},
+  "generation": {
+    "run_id": "suite_qwen25_coder_7b_gen-10d1e822-839a-a138-8806-3c64fda98499_qwen25_coder_7b_15",
+    "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_171832/qwen25_coder_7b_candidates.csv",
+    "jsonl_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/candidates_suite_qwen25_coder_7b_gen-10d1e822-839a-a138-8806-3c64fda98499_qwen25_coder_7b_15.jsonl",
+    "row_count": 1,
+    "rows": [
+      {
+        "index": "1",
+        "category": "1",
+        "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+        "command_eng": "Switch the dishwasher to dry mode.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+        "row_no": 1,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__qwen25_coder_7b",
+        "genome_seed": 975035167,
+        "run_id": "suite_qwen25_coder_7b_gen-10d1e822-839a-a138-8806-3c64fda98499_qwen25_coder_7b_15",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"SwitchDishwasherToDryMode\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#Dishwasher).dishwasher_setdishwashermode(\\\\\\\"dry\\\\\\\")\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"prompt_tokens\": 31753, \"completion_tokens\": 53, \"total_tokens\": 31806, \"latency_sec\": 702.2075, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_qwen25_coder_7b_gen-10d1e822-839a-a138-8806-3c64fda98499_qwen25_coder_7b_15/row_001_cand_1.json\"]",
+        "generation_status": "ok",
+        "llm_mode": "worker",
+        "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct"
+      }
+    ],
+    "fieldnames": [
+      "index",
+      "category",
+      "command_kor",
+      "command_eng",
+      "gt_raw",
+      "connected_devices",
+      "gt",
+      "row_no",
+      "profile",
+      "genome_id",
+      "genome_seed",
+      "run_id",
+      "candidate_count",
+      "candidates",
+      "candidate_metadata",
+      "prompt_log_paths",
+      "generation_status",
+      "llm_mode",
+      "llm_model"
+    ]
+  },
+  "rerank": {
+    "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_171832/qwen25_coder_7b_rerank.csv",
+    "row_count": 1,
+    "repaired_count": 0
+  },
+  "metrics": {
+    "row_count": 1,
+    "avg_det_score": 98.898,
+    "avg_gt_similarity": 0.9633,
+    "gt_exact_count": 0,
+    "pass_count": 1,
+    "fail_count": 0,
+    "top_failure_types": [],
+    "failed_row_nos": [],
+    "failed_cases": []
+  },
+  "usage": {
+    "candidate_count": 1,
+    "avg_prompt_tokens": 31753.0,
+    "avg_completion_tokens": 53.0,
+    "avg_total_tokens": 31806.0,
+    "avg_latency_sec": 702.2075,
+    "error_count": 0,
+    "top_errors": []
+  }
+}

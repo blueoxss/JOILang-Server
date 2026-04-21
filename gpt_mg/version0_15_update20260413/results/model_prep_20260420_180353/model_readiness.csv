@@ -1,0 +1,170 @@
+model_key,model_label,configured_model,mode,status_before,status_after,preparation_status,download_status,downloaded_now,resolved_model_path,cache_path,snapshot_count,worker_python,worker_path,local_device,local_dtype,local_load_in_4bit,local_files_only,smoke_status,smoke_output_dir,smoke_avg_det_score,note
+phi35_mini,Phi-3.5-mini-instruct,microsoft/Phi-3.5-mini-instruct,worker,ready,ready,runtime_broken,,False,/home/mgjeong/.cache/huggingface/hub/models--microsoft--Phi-3.5-mini-instruct/snapshots/2fe192450127e6a83f7441aef6e3ca586c338b77,/home/mgjeong/.cache/huggingface/hub/models--microsoft--Phi-3.5-mini-instruct/snapshots/2fe192450127e6a83f7441aef6e3ca586c338b77,1,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py,cuda:0,bf16,False,True,runtime_error,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_180358,0.0,"CUDA out of memory. Tried to allocate 103.27 GiB. GPU 0 has a total capacity of 47.43 GiB of which 31.63 GiB is free. Including non-PyTorch memory, this process has 15.75 GiB memory in use. Of the allocated memory 12.27 GiB is allocated by PyTorch, and 3.17 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)"
+qwen25_coder_7b,Qwen2.5-Coder-7B-Instruct,Qwen/Qwen2.5-Coder-7B-Instruct,worker,ready,ready,ready_and_smoke_tested,,False,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,1,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py,cuda:0,bf16,False,True,ok,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_180416,98.898,"cached locally (hf_cache, snapshots=1)"
+llama31_8b,Llama-3.1-8B-Instruct,meta-llama/Llama-3.1-8B-Instruct,worker,incomplete_cache,incomplete_cache,gated,gated,False,/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659,/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659,1,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py,cuda:0,bf16,False,True,,,0.0,"Fetching 17 files:   0%|          | 0/17 [00:00<?, ?it/s]
+Fetching 17 files:   0%|          | 0/17 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/utils/_http.py"", line 409, in hf_raise_for_status
+    response.raise_for_status()
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/requests/models.py"", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct/resolve/0e9e39f249a16976918f6564b8830bc894c89659/.gitattributes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""/home/mgjeong/miniconda3/bin/huggingface-cli"", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/commands/huggingface_cli.py"", line 57, in main
+    service.run()
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/commands/download.py"", line 153, in run
+    print(self._download())  # Print path to downloaded files
+          ^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/commands/download.py"", line 187, in _download
+    return snapshot_download(
+           ^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py"", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py"", line 296, in snapshot_download
+    thread_map(
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/tqdm/contrib/concurrent.py"", line 69, in thread_map
+    return _executor_map(ThreadPoolExecutor, fn, *iterables, **tqdm_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/tqdm/contrib/concurrent.py"", line 51, in _executor_map
+    return list(tqdm_class(ex.map(fn, *iterables, chunksize=chunksize), **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/tqdm/std.py"", line 1178, in __iter__
+    for obj in iterable:
+  File ""/home/mgjeong/miniconda3/lib/python3.12/concurrent/futures/_base.py"", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/concurrent/futures/_base.py"", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/concurrent/futures/_base.py"", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/concurrent/futures/_base.py"", line 401, in __get_result
+    raise self._exception
+  File ""/home/mgjeong/miniconda3/lib/python3.12/concurrent/futures/thread.py"", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py"", line 270, in _inner_hf_hub_download
+    return hf_hub_download(
+           ^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py"", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 961, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 1068, in _hf_hub_download_to_cache_dir
+    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 1596, in _raise_on_head_call_error
+    raise head_call_error
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 1484, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py"", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 1401, in get_hf_file_metadata
+    r = _request_wrapper(
+        ^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 285, in _request_wrapper
+    response = _request_wrapper(
+               ^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 309, in _request_wrapper
+    hf_raise_for_status(response)
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/utils/_http.py"", line 426, in hf_raise_for_status
+    raise _format(GatedRepoError, message, response) from e
+huggingface_hub.errors.GatedRepoError: 401 Client Error. (Request ID: Root=1-69e5ec29-60db9a4660d0d6b2445147b9;5cc9ab98-572a-49b9-9265-c0999e951333)
+
+Cannot access gated repo for url https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct/resolve/0e9e39f249a16976918f6564b8830bc894c89659/.gitattributes.
+Access to model meta-llama/Llama-3.1-8B-Instruct is restricted. You must have access to it and be authenticated to access it. Please log in."
+gemma2_9b_it,Gemma-2-9B-it,google/gemma-2-9b-it,worker,incomplete_cache,incomplete_cache,gated,gated,False,/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819,/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819,1,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py,cuda:0,bf16,False,True,,,0.0,"Fetching 14 files:   0%|          | 0/14 [00:00<?, ?it/s]
+Fetching 14 files:   0%|          | 0/14 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/utils/_http.py"", line 409, in hf_raise_for_status
+    response.raise_for_status()
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/requests/models.py"", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/google/gemma-2-9b-it/resolve/11c9b309abf73637e4b6f9a3fa1e92e615547819/.gitattributes
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""/home/mgjeong/miniconda3/bin/huggingface-cli"", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/commands/huggingface_cli.py"", line 57, in main
+    service.run()
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/commands/download.py"", line 153, in run
+    print(self._download())  # Print path to downloaded files
+          ^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/commands/download.py"", line 187, in _download
+    return snapshot_download(
+           ^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py"", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py"", line 296, in snapshot_download
+    thread_map(
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/tqdm/contrib/concurrent.py"", line 69, in thread_map
+    return _executor_map(ThreadPoolExecutor, fn, *iterables, **tqdm_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/tqdm/contrib/concurrent.py"", line 51, in _executor_map
+    return list(tqdm_class(ex.map(fn, *iterables, chunksize=chunksize), **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/tqdm/std.py"", line 1178, in __iter__
+    for obj in iterable:
+  File ""/home/mgjeong/miniconda3/lib/python3.12/concurrent/futures/_base.py"", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/concurrent/futures/_base.py"", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/concurrent/futures/_base.py"", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/concurrent/futures/_base.py"", line 401, in __get_result
+    raise self._exception
+  File ""/home/mgjeong/miniconda3/lib/python3.12/concurrent/futures/thread.py"", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py"", line 270, in _inner_hf_hub_download
+    return hf_hub_download(
+           ^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py"", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 961, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 1068, in _hf_hub_download_to_cache_dir
+    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 1596, in _raise_on_head_call_error
+    raise head_call_error
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 1484, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py"", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 1401, in get_hf_file_metadata
+    r = _request_wrapper(
+        ^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 285, in _request_wrapper
+    response = _request_wrapper(
+               ^^^^^^^^^^^^^^^^^
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/file_download.py"", line 309, in _request_wrapper
+    hf_raise_for_status(response)
+  File ""/home/mgjeong/miniconda3/lib/python3.12/site-packages/huggingface_hub/utils/_http.py"", line 426, in hf_raise_for_status
+    raise _format(GatedRepoError, message, response) from e
+huggingface_hub.errors.GatedRepoError: 401 Client Error. (Request ID: Root=1-69e5ec2f-45dab08d6b5b9f09676952a6;8e596b31-79ca-4673-b464-0e332d041d8e)
+
+Cannot access gated repo for url https://huggingface.co/google/gemma-2-9b-it/resolve/11c9b309abf73637e4b6f9a3fa1e92e615547819/.gitattributes.
+Access to model google/gemma-2-9b-it is restricted. You must have access to it and be authenticated to access it. Please log in."
+qwen25_coder_14b,Qwen2.5-Coder-14B-Instruct,Qwen/Qwen2.5-Coder-14B-Instruct,worker,ready,ready,ready_and_smoke_tested,,False,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-14B-Instruct/snapshots/aedcc2d42b622764e023cf882b6652e646b95671,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-14B-Instruct/snapshots/aedcc2d42b622764e023cf882b6652e646b95671,1,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py,cuda:0,bf16,False,True,ok,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_180454,89.8937,"cached locally (hf_cache, snapshots=1)"

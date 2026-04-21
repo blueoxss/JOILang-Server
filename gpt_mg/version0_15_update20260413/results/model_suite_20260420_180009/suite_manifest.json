@@ -1,0 +1,78 @@
+{
+  "created_at": "2026-04-20T18:00:09.022117",
+  "suite": "paper_local5",
+  "requested_model_keys": [
+    "phi35_mini"
+  ],
+  "model_keys": [
+    "phi35_mini"
+  ],
+  "genome_json": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/best_genome.json",
+  "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499",
+  "blocks": [
+    "01",
+    "02",
+    "03"
+  ],
+  "candidate_strategies": [
+    "compact_json",
+    "minimal",
+    "explicit_preconditions",
+    "direct"
+  ],
+  "candidate_k": 1,
+  "repair_threshold": 70.0,
+  "repair_attempts": 0,
+  "row_count": 1,
+  "row_nos": [
+    1
+  ],
+  "preflight": [
+    {
+      "model_key": "phi35_mini",
+      "model_label": "Phi-3.5-mini-instruct",
+      "mode": "worker",
+      "backend": "transformers_worker",
+      "configured_model": "microsoft/Phi-3.5-mini-instruct",
+      "status": "ready",
+      "message": "cached locally (hf_cache, snapshots=1)",
+      "ollama_used": false,
+      "local_model_name": "microsoft/Phi-3.5-mini-instruct",
+      "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--microsoft--Phi-3.5-mini-instruct/snapshots/2fe192450127e6a83f7441aef6e3ca586c338b77",
+      "local_files_only": true,
+      "local_device": "cuda:0",
+      "local_dtype": "bf16",
+      "local_load_in_4bit": false,
+      "local_attn_implementation": "sdpa",
+      "cache_kind": "hf_cache",
+      "cache_path": "/home/mgjeong/.cache/huggingface/hub/models--microsoft--Phi-3.5-mini-instruct/snapshots/2fe192450127e6a83f7441aef6e3ca586c338b77",
+      "cache_exists": true,
+      "snapshot_count": 1,
+      "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
+      "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py",
+      "persistent_worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
+      "persistent_worker": true,
+      "worker_runtime": {
+        "ok": true,
+        "torch_version": "2.9.1+cu128",
+        "cuda_available": true,
+        "device_count": 2,
+        "cuda_devices": [
+          "NVIDIA RTX A6000",
+          "NVIDIA RTX A6000"
+        ],
+        "transformers_version": "4.57.3",
+        "python_path": "/home/mgjeong/miniconda3/envs/l/bin/python",
+        "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py",
+        "persistent_worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
+        "persistent_worker": true,
+        "hf_modules_cache": "/tmp/joi_v15_hf_modules"
+      }
+    }
+  ],
+  "skipped_models": [],
+  "skip_unavailable": false,
+  "requested_max_workers": 1,
+  "debug_runtime": false,
+  "effective_max_workers": 1
+}

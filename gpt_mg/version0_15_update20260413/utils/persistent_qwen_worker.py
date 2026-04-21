@@ -6,12 +6,18 @@ import json
 import os
 import sys
 import traceback
+from pathlib import Path
 from typing import Any
 
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 os.environ.setdefault("TRANSFORMERS_NO_ADVISORY_WARNINGS", "1")
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+os.environ.setdefault("HF_MODULES_CACHE", os.getenv("JOI_V15_HF_MODULES_CACHE", "/tmp/joi_v15_hf_modules"))
+Path(os.environ["HF_MODULES_CACHE"]).mkdir(parents=True, exist_ok=True)
 
 import torch
+from transformers.cache_utils import DynamicCache
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers.utils import logging as hf_logging
 
@@ -36,6 +42,41 @@ def _parse_bool(value: Any, default: bool) -> bool:
     if isinstance(value, bool):
         return value
     return str(value).strip().lower() in {"1", "true", "yes", "y", "on"}
+
+
+def _ensure_dynamic_cache_compat() -> None:
+    if hasattr(DynamicCache, "seen_tokens"):
+        pass
+    else:
+        def _seen_tokens(self):
+            try:
+                return int(self.get_seq_length())
+            except Exception:
+                return 0
+
+        DynamicCache.seen_tokens = property(_seen_tokens)
+
+    if not hasattr(DynamicCache, "get_max_length"):
+        def _get_max_length(self):
+            return None
+
+        DynamicCache.get_max_length = _get_max_length
+
+    if not hasattr(DynamicCache, "get_usable_length"):
+        def _get_usable_length(self, new_seq_length=0, layer_idx=0):
+            try:
+                previous_seq_length = int(self.get_seq_length())
+            except Exception:
+                previous_seq_length = 0
+            try:
+                max_length = self.get_max_length()
+            except Exception:
+                max_length = None
+            if max_length is not None and previous_seq_length + int(new_seq_length or 0) > int(max_length):
+                return max(int(max_length) - int(new_seq_length or 0), 0)
+            return previous_seq_length
+
+        DynamicCache.get_usable_length = _get_usable_length
 
 
 def _resolve_dtype(dtype_name: str):
@@ -115,16 +156,22 @@ def _runtime_signature(payload: dict[str, Any]) -> tuple[str, ...]:
         str(payload.get("local_files_only", "")),
         str(payload.get("local_trust_remote_code", "")),
         str(payload.get("local_load_in_4bit", "")),
+        str(payload.get("local_attn_implementation", "")),
     )
 
 
 def _load_runtime(payload: dict[str, Any]):
+    hf_modules_cache = str(payload.get("local_hf_modules_cache") or os.environ.get("HF_MODULES_CACHE") or "/tmp/joi_v15_hf_modules")
+    os.environ["HF_MODULES_CACHE"] = hf_modules_cache
+    Path(hf_modules_cache).mkdir(parents=True, exist_ok=True)
+    _ensure_dynamic_cache_compat()
     local_model_name = payload["local_model_name"]
     local_device = payload.get("local_device", "cuda")
     local_dtype = payload.get("local_dtype", "bf16")
     local_files_only = _parse_bool(payload.get("local_files_only"), False)
     local_trust_remote_code = _parse_bool(payload.get("local_trust_remote_code"), False)
     local_load_in_4bit = _parse_bool(payload.get("local_load_in_4bit"), False)
+    local_attn_implementation = str(payload.get("local_attn_implementation", "") or "").strip()
 
     tokenizer = AutoTokenizer.from_pretrained(
         local_model_name,
@@ -138,6 +185,8 @@ def _load_runtime(payload: dict[str, Any]):
         "trust_remote_code": local_trust_remote_code,
         "local_files_only": local_files_only,
     }
+    if local_attn_implementation:
+        model_kwargs["attn_implementation"] = local_attn_implementation
     if local_load_in_4bit:
         if BitsAndBytesConfig is None:
             raise RuntimeError("bitsandbytes is not installed, but local_load_in_4bit=true was requested.")

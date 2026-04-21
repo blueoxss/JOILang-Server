@@ -1,0 +1,2 @@
+model_key,model_label,category,row_count,avg_det_score,avg_gt_similarity,gt_exact_count,pass_count,fail_count,top_failure_types
+gemma2_9b_it,Gemma-2-9B-it,1,1,0.0000,0.0000,0,0,1,"[[""invalid_json"", 1]]"

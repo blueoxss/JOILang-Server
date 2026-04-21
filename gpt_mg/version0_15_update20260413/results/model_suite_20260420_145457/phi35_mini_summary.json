@@ -1,0 +1,739 @@
+{
+  "model_key": "phi35_mini",
+  "model_label": "Phi-3.5-mini-instruct",
+  "mode": "worker",
+  "model": "microsoft/Phi-3.5-mini-instruct",
+  "endpoint": "",
+  "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+  "blocks": [
+    "01",
+    "02",
+    "03"
+  ],
+  "temperature": 0.1,
+  "max_tokens": 768,
+  "candidate_k": 1,
+  "repair_attempts": 0,
+  "llm_extra_payload": {
+    "local_trust_remote_code": true
+  },
+  "generation": {
+    "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+    "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_145457/phi35_mini_candidates.csv",
+    "jsonl_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/candidates_suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15.jsonl",
+    "row_count": 20,
+    "rows": [
+      {
+        "index": "1",
+        "category": "1",
+        "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+        "command_eng": "Switch the dishwasher to dry mode.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+        "row_no": 1,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_001_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "2",
+        "category": "1",
+        "command_kor": "오븐의 작동 시간을 5분 늘려줘.",
+        "command_eng": "Add 5 minutes to the oven.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Oven).AddMoreTime(300)\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Oven).Oven_AddMoreTime(300)\"}",
+        "row_no": 2,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_002_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "3",
+        "category": "1",
+        "command_kor": "밥솥을 조리 모드로 30분 작동시켜.",
+        "command_eng": "Start the rice cooker on cooking mode for 30 minutes.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#RiceCooker).SetCookingParameters(\\\"cooking\\\", 1800)\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#RiceCooker).RiceCooker_SetCookingParameters(\\\"cooking\\\", 1800)\"}",
+        "row_no": 3,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_003_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "4",
+        "category": "1",
+        "command_kor": "사이렌을 응급모드로 울려줘.",
+        "command_eng": "Set the siren to emergency mode.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Siren).SetSirenMode(\\\"emergency\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Siren).Siren_SetSirenMode(\\\"emergency\\\")\"}",
+        "row_no": 4,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_004_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "5",
+        "category": "1",
+        "command_kor": "스피커의 볼륨을 30으로 설정해줘.",
+        "command_eng": "Set the speaker volume to 30.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Speaker).SetVolume(30)\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Speaker).Speaker_SetVolume(30)\"}",
+        "row_no": 5,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_005_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "6",
+        "category": "1",
+        "command_kor": "TV 채널을 하나 내려줘.",
+        "command_eng": "Turn the TV channel down by one.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Television).ChannelDown()\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Television).Television_ChannelDown()\"}",
+        "row_no": 6,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_006_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "7",
+        "category": "1",
+        "command_kor": "TV로 7번 채널을 틀어줘.",
+        "command_eng": "Switch the TV to channel 7.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Television).SetChannel(7)\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Television).Television_SetChannel(7)\"}",
+        "row_no": 7,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_007_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "8",
+        "category": "1",
+        "command_kor": "현재 온도를 스피커로 알려줘.",
+        "command_eng": "Announce the temperature through the speaker.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ntemp = (#TemperatureSensor).Temperature\\n\\n(#Speaker).Speak(\\\"현재 온도는 \\\" + temp + \\\"도입니다\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ntemp = (#TemperatureSensor).TemperatureSensor_Temperature\\n\\n(#Speaker).Speaker_Speak(\\\"현재 온도는 \\\" + temp + \\\"도입니다\\\")\"}",
+        "row_no": 8,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_008_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "9",
+        "category": "1",
+        "command_kor": "외부 온도를 스피커로 출력해줘.",
+        "command_eng": "Tell me the outdoor temperature through the speaker.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ntemp = (#WeatherProvider).TemperatureWeather\\n\\n(#Speaker).Speak(\\\"외부 온도는 \\\" + temp + \\\"도입니다\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ntemp = (#WeatherProvider).WeatherProvider_TemperatureWeather\\n\\n(#Speaker).Speaker_Speak(\\\"외부 온도는 \\\" + temp + \\\"도입니다\\\")\"}",
+        "row_no": 9,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_009_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "10",
+        "category": "1",
+        "command_kor": "현재 습도를 스피커로 말해줘.",
+        "command_eng": "Tell me the current humidity through the speaker.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nhum = (#HumiditySensor).Humidity\\n\\n(#Speaker).Speak(\\\"현재 습도는 \\\" + hum + \\\"%입니다\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nhum = (#HumiditySensor).HumiditySensor_Humidity\\n\\n(#Speaker).Speaker_Speak(\\\"현재 습도는 \\\" + hum + \\\"%입니다\\\")\"}",
+        "row_no": 10,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_010_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "11",
+        "category": "1",
+        "command_kor": "외부 습도를 스피커로 말해줘.",
+        "command_eng": "Tell me the outdoor humidity through the speaker.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nhum = (#WeatherProvider).HumidityWeather\\n\\n(#Speaker).Speak(\\\"외부 습도는 \\\" + hum + \\\"%입니다\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nhum = (#WeatherProvider).WeatherProvider_HumidityWeather\\n\\n(#Speaker).Speaker_Speak(\\\"외부 습도는 \\\" + hum + \\\"%입니다\\\")\"}",
+        "row_no": 11,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_011_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "12",
+        "category": "1",
+        "command_kor": "오늘의 날씨를 스피커로 출력해줘.",
+        "command_eng": "Output today's weather through the speaker.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nweather = (#WeatherProvider).Weather\\n\\n(#Speaker).Speak(\\\"오늘 날씨는 \\\" + weather + \\\"입니다\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nweather = (#WeatherProvider).WeatherProvider_Weather\\n\\n(#Speaker).Speaker_Speak(\\\"오늘 날씨는 \\\" + weather + \\\"입니다\\\")\"}",
+        "row_no": 12,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_012_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "13",
+        "category": "1",
+        "command_kor": "미세먼지 농도를 스피커로 알려줘.",
+        "command_eng": "Announce the fine dust level through the speaker.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ndust = (#AirQualitySensor).DustLevel\\n\\n(#Speaker).Speak(\\\"미세먼지 농도는 \\\" + dust + \\\"입니다\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ndust = (#AirQualitySensor).AirQualitySensor_DustLevel\\n\\n(#Speaker).Speaker_Speak(\\\"미세먼지 농도는 \\\" + dust + \\\"입니다\\\")\"}",
+        "row_no": 13,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_013_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "14",
+        "category": "1",
+        "command_kor": "외부 미세먼지 농도를 스피커로 알려줘.",
+        "command_eng": "Announce the outdoor fine dust level using the speaker.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ndust = (#WeatherProvider).Pm10Weather\\n\\n(#Speaker).Speak(\\\"외부 미세먼지 농도는 \\\" + dust + \\\"입니다\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ndust = (#WeatherProvider).WeatherProvider_Pm10Weather\\n\\n(#Speaker).Speaker_Speak(\\\"외부 미세먼지 농도는 \\\" + dust + \\\"입니다\\\")\"}",
+        "row_no": 14,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_014_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "15",
+        "category": "1",
+        "command_kor": "클라우드로 고양이 사진을 생성하고 \"cat.png\"로 저장해줘.",
+        "command_eng": "Generate a cat image using cloud service and save it as \"cat.png\".",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nimg = (#CloudServiceProvider).GenerateImage(\\\"Generate a cat image\\\")\\n\\n(#CloudServiceProvider).SaveToFile(img, \\\"cat.png\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nimg = (#CloudServiceProvider).CloudServiceProvider_GenerateImage(\\\"Generate a cat image\\\")\\n\\n(#CloudServiceProvider).CloudServiceProvider_SaveToFile(img, \\\"cat.png\\\")\"}",
+        "row_no": 15,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_015_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "16",
+        "category": "1",
+        "command_kor": "충전기의 전력소모량을 스피커로 출력해줘.",
+        "command_eng": "Output the charger's power consumption through the speaker.",
+        "gt_raw": "{\"name\": \"\",\n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\npower = (#Charger).Power\\n\\n(#Speaker).Speak(\\\"전력소모량은 \\\" + power + \\\"입니다\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\",\n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\npower = (#Charger).Charger_Power\\n\\n(#Speaker).Speaker_Speak(\\\"전력소모량은 \\\" + power + \\\"입니다\\\")\"}",
+        "row_no": 16,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_016_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "17",
+        "category": "1",
+        "command_kor": "오늘의 메뉴를 스피커로 출력해줘.",
+        "command_eng": "Tell me today's menu using the speaker.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nmenu = (#MenuProvider).TodayMenu\\n\\n(#Speaker).Speak(\\\"오늘의 메뉴는 \\\" + menu + \\\"입니다\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nmenu = (#MenuProvider).MenuProvider_TodayMenu\\n\\n(#Speaker).Speaker_Speak(\\\"오늘의 메뉴는 \\\" + menu + \\\"입니다\\\")\"}",
+        "row_no": 17,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_017_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "18",
+        "category": "1",
+        "command_kor": "오늘의 301동 점심 메뉴를 스피커로 알려줘.",
+        "command_eng": "Tell me the lunch menu for Building 301 today through the speaker.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nmenu = (#MenuProvider).GetMenu(\\\"오늘 301동식당 점심\\\")\\n\\n(#Speaker).Speak(\\\"오늘의 메뉴는 \\\" + menu + \\\"입니다\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nmenu = (#MenuProvider).MenuProvider_GetMenu(\\\"오늘 301동식당 점심\\\")\\n\\n(#Speaker).Speaker_Speak(\\\"오늘의 메뉴는 \\\" + menu + \\\"입니다\\\")\"}",
+        "row_no": 18,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_018_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "19",
+        "category": "1",
+        "command_kor": "클라우드 AI한테 llm이 무엇인지 질문하고 답을 스피커로 출력해줘.",
+        "command_eng": "Ask the cloud AI what an LLM is, and output its answer through the speaker.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nanswer = (#CloudServiceProvider).ChatWithAI(\\\"What is LLM?\\\")\\n\\n(#Speaker).Speak(answer)\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nanswer = (#CloudServiceProvider).CloudServiceProvider_ChatWithAI(\\\"What is LLM?\\\")\\n\\n(#Speaker).Speaker_Speak(answer)\"}",
+        "row_no": 19,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_019_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      },
+      {
+        "index": "20",
+        "category": "1",
+        "command_kor": "조명의 색조를 200, 채도는 50으로 설정해줘.",
+        "command_eng": "Set the hue of the light to 200 and the saturation to 50.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Light).MoveToHueAndSaturation(200, 50)\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Light).Light_MoveToHueAndSaturation(200, 50)\"}",
+        "row_no": 20,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"We couldn't connect to 'https://huggingface.co' to load the files, and couldn't find them in the cached files.\\nCheck your internet connection or see how to run the library in offline mode at 'https://huggingface.co/docs/transformers/installation#offline-mode'.\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_020_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      }
+    ],
+    "fieldnames": [
+      "index",
+      "category",
+      "command_kor",
+      "command_eng",
+      "gt_raw",
+      "connected_devices",
+      "gt",
+      "row_no",
+      "profile",
+      "genome_id",
+      "genome_seed",
+      "run_id",
+      "candidate_count",
+      "candidates",
+      "candidate_metadata",
+      "prompt_log_paths",
+      "generation_status",
+      "llm_mode",
+      "llm_model"
+    ]
+  },
+  "rerank": {
+    "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_145457/phi35_mini_rerank.csv",
+    "row_count": 20,
+    "repaired_count": 0
+  },
+  "metrics": {
+    "row_count": 20,
+    "avg_det_score": 0.0,
+    "avg_gt_similarity": 0.0,
+    "gt_exact_count": 0,
+    "pass_count": 0,
+    "fail_count": 20,
+    "top_failure_types": [
+      [
+        "invalid_json",
+        20
+      ]
+    ],
+    "failed_row_nos": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "failed_cases": [
+      {
+        "row_no": 1,
+        "command_eng": "Switch the dishwasher to dry mode.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+      },
+      {
+        "row_no": 2,
+        "command_eng": "Add 5 minutes to the oven.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Oven).Oven_AddMoreTime(300)\"}"
+      },
+      {
+        "row_no": 3,
+        "command_eng": "Start the rice cooker on cooking mode for 30 minutes.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#RiceCooker).RiceCooker_SetCookingParameters(\\\"cooking\\\", 1800)\"}"
+      },
+      {
+        "row_no": 4,
+        "command_eng": "Set the siren to emergency mode.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Siren).Siren_SetSirenMode(\\\"emergency\\\")\"}"
+      },
+      {
+        "row_no": 5,
+        "command_eng": "Set the speaker volume to 30.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Speaker).Speaker_SetVolume(30)\"}"
+      },
+      {
+        "row_no": 6,
+        "command_eng": "Turn the TV channel down by one.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Television).Television_ChannelDown()\"}"
+      },
+      {
+        "row_no": 7,
+        "command_eng": "Switch the TV to channel 7.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Television).Television_SetChannel(7)\"}"
+      },
+      {
+        "row_no": 8,
+        "command_eng": "Announce the temperature through the speaker.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ntemp = (#TemperatureSensor).TemperatureSensor_Temperature\\n\\n(#Speaker).Speaker_Speak(\\\"현재 온도는 \\\" + temp + \\\"도입니다\\\")\"}"
+      },
+      {
+        "row_no": 9,
+        "command_eng": "Tell me the outdoor temperature through the speaker.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ntemp = (#WeatherProvider).WeatherProvider_TemperatureWeather\\n\\n(#Speaker).Speaker_Speak(\\\"외부 온도는 \\\" + temp + \\\"도입니다\\\")\"}"
+      },
+      {
+        "row_no": 10,
+        "command_eng": "Tell me the current humidity through the speaker.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nhum = (#HumiditySensor).HumiditySensor_Humidity\\n\\n(#Speaker).Speaker_Speak(\\\"현재 습도는 \\\" + hum + \\\"%입니다\\\")\"}"
+      },
+      {
+        "row_no": 11,
+        "command_eng": "Tell me the outdoor humidity through the speaker.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nhum = (#WeatherProvider).WeatherProvider_HumidityWeather\\n\\n(#Speaker).Speaker_Speak(\\\"외부 습도는 \\\" + hum + \\\"%입니다\\\")\"}"
+      },
+      {
+        "row_no": 12,
+        "command_eng": "Output today's weather through the speaker.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nweather = (#WeatherProvider).WeatherProvider_Weather\\n\\n(#Speaker).Speaker_Speak(\\\"오늘 날씨는 \\\" + weather + \\\"입니다\\\")\"}"
+      },
+      {
+        "row_no": 13,
+        "command_eng": "Announce the fine dust level through the speaker.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ndust = (#AirQualitySensor).AirQualitySensor_DustLevel\\n\\n(#Speaker).Speaker_Speak(\\\"미세먼지 농도는 \\\" + dust + \\\"입니다\\\")\"}"
+      },
+      {
+        "row_no": 14,
+        "command_eng": "Announce the outdoor fine dust level using the speaker.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\ndust = (#WeatherProvider).WeatherProvider_Pm10Weather\\n\\n(#Speaker).Speaker_Speak(\\\"외부 미세먼지 농도는 \\\" + dust + \\\"입니다\\\")\"}"
+      },
+      {
+        "row_no": 15,
+        "command_eng": "Generate a cat image using cloud service and save it as \"cat.png\".",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nimg = (#CloudServiceProvider).CloudServiceProvider_GenerateImage(\\\"Generate a cat image\\\")\\n\\n(#CloudServiceProvider).CloudServiceProvider_SaveToFile(img, \\\"cat.png\\\")\"}"
+      },
+      {
+        "row_no": 16,
+        "command_eng": "Output the charger's power consumption through the speaker.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\",\n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\npower = (#Charger).Charger_Power\\n\\n(#Speaker).Speaker_Speak(\\\"전력소모량은 \\\" + power + \\\"입니다\\\")\"}"
+      },
+      {
+        "row_no": 17,
+        "command_eng": "Tell me today's menu using the speaker.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nmenu = (#MenuProvider).MenuProvider_TodayMenu\\n\\n(#Speaker).Speaker_Speak(\\\"오늘의 메뉴는 \\\" + menu + \\\"입니다\\\")\"}"
+      },
+      {
+        "row_no": 18,
+        "command_eng": "Tell me the lunch menu for Building 301 today through the speaker.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nmenu = (#MenuProvider).MenuProvider_GetMenu(\\\"오늘 301동식당 점심\\\")\\n\\n(#Speaker).Speaker_Speak(\\\"오늘의 메뉴는 \\\" + menu + \\\"입니다\\\")\"}"
+      },
+      {
+        "row_no": 19,
+        "command_eng": "Ask the cloud AI what an LLM is, and output its answer through the speaker.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nanswer = (#CloudServiceProvider).CloudServiceProvider_ChatWithAI(\\\"What is LLM?\\\")\\n\\n(#Speaker).Speaker_Speak(answer)\"}"
+      },
+      {
+        "row_no": 20,
+        "command_eng": "Set the hue of the light to 200 and the saturation to 50.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\n(#Light).Light_MoveToHueAndSaturation(200, 50)\"}"
+      }
+    ]
+  },
+  "usage": {
+    "candidate_count": 0,
+    "avg_prompt_tokens": 0.0,
+    "avg_completion_tokens": 0.0,
+    "avg_total_tokens": 0.0,
+    "avg_latency_sec": 0.0
+  }
+}

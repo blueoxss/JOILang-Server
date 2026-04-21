@@ -1,0 +1,119 @@
+{
+  "model_key": "phi35_mini",
+  "model_label": "Phi-3.5-mini-instruct",
+  "mode": "worker",
+  "model": "microsoft/Phi-3.5-mini-instruct",
+  "endpoint": "",
+  "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+  "blocks": [
+    "01",
+    "02",
+    "03"
+  ],
+  "temperature": 0.1,
+  "max_tokens": 768,
+  "candidate_k": 1,
+  "repair_attempts": 0,
+  "llm_extra_payload": {
+    "local_trust_remote_code": true
+  },
+  "generation": {
+    "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+    "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_170804/phi35_mini_candidates.csv",
+    "jsonl_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/candidates_suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15.jsonl",
+    "row_count": 1,
+    "rows": [
+      {
+        "index": "1",
+        "category": "1",
+        "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+        "command_eng": "Switch the dishwasher to dry mode.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).SetDishwasherMode(\\\"dry\\\")\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}",
+        "row_no": 1,
+        "profile": "version0_15_update20260413",
+        "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__phi35_mini",
+        "genome_seed": 975035167,
+        "run_id": "suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"error\": \"persistent worker stdin pipe broke\", \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_phi35_mini_gen-10d1e822-839a-a138-8806-3c64fda98499_phi35_mini_15/row_001_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct"
+      }
+    ],
+    "fieldnames": [
+      "index",
+      "category",
+      "command_kor",
+      "command_eng",
+      "gt_raw",
+      "connected_devices",
+      "gt",
+      "row_no",
+      "profile",
+      "genome_id",
+      "genome_seed",
+      "run_id",
+      "candidate_count",
+      "candidates",
+      "candidate_metadata",
+      "prompt_log_paths",
+      "generation_status",
+      "llm_mode",
+      "llm_model"
+    ]
+  },
+  "rerank": {
+    "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260420_170804/phi35_mini_rerank.csv",
+    "row_count": 1,
+    "repaired_count": 0
+  },
+  "metrics": {
+    "row_count": 1,
+    "avg_det_score": 0.0,
+    "avg_gt_similarity": 0.0,
+    "gt_exact_count": 0,
+    "pass_count": 0,
+    "fail_count": 1,
+    "top_failure_types": [
+      [
+        "invalid_json",
+        1
+      ]
+    ],
+    "failed_row_nos": [
+      1
+    ],
+    "failed_cases": [
+      {
+        "row_no": 1,
+        "command_eng": "Switch the dishwasher to dry mode.",
+        "det_score": 0.0,
+        "threshold": 70.0,
+        "failure_reasons": [
+          "invalid_json"
+        ],
+        "output": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#Dishwasher).Dishwasher_SetDishwasherMode(\\\"dry\\\")\"}"
+      }
+    ]
+  },
+  "usage": {
+    "candidate_count": 0,
+    "avg_prompt_tokens": 0.0,
+    "avg_completion_tokens": 0.0,
+    "avg_total_tokens": 0.0,
+    "avg_latency_sec": 0.0,
+    "error_count": 1,
+    "top_errors": [
+      [
+        "persistent worker stdin pipe broke",
+        1
+      ]
+    ]
+  }
+}

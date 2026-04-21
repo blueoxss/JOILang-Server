@@ -1,0 +1,48 @@
+{
+  "created_at": "2026-04-20T17:11:28.725538",
+  "suite": "paper_local5",
+  "model_keys": [
+    "qwen25_coder_7b"
+  ],
+  "genome_json": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/best_genome.json",
+  "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499",
+  "blocks": [
+    "01",
+    "02",
+    "03"
+  ],
+  "candidate_strategies": [
+    "compact_json",
+    "minimal",
+    "explicit_preconditions",
+    "direct"
+  ],
+  "candidate_k": 1,
+  "repair_threshold": 70.0,
+  "repair_attempts": 0,
+  "row_count": 1,
+  "row_nos": [
+    1
+  ],
+  "preflight": [
+    {
+      "model_key": "qwen25_coder_7b",
+      "model_label": "Qwen2.5-Coder-7B-Instruct",
+      "mode": "worker",
+      "backend": "transformers_worker",
+      "configured_model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "status": "ready",
+      "message": "cached locally (hf_cache, snapshots=1)",
+      "ollama_used": false,
+      "local_model_name": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "local_files_only": true,
+      "local_device": "cuda:1",
+      "local_dtype": "bf16",
+      "local_load_in_4bit": false,
+      "cache_kind": "hf_cache",
+      "cache_path": "/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct",
+      "cache_exists": true,
+      "snapshot_count": 1
+    }
+  ]
+}
