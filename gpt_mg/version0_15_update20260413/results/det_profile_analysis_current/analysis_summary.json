@@ -1,0 +1,71 @@
+{
+  "created_at": "2026-04-23T22:10:42.760695",
+  "results_dirs": [
+    "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_142658",
+    "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_143911"
+  ],
+  "run_summaries": [
+    {
+      "results_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_142658",
+      "models": [
+        "qwen25_coder_14b",
+        "qwen25_coder_7b"
+      ],
+      "row_count": 40,
+      "suspicious_count": 3
+    },
+    {
+      "results_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_143911",
+      "models": [
+        "qwen25_coder_14b",
+        "qwen25_coder_7b"
+      ],
+      "row_count": 40,
+      "suspicious_count": 4
+    }
+  ],
+  "profile_summary": [
+    {
+      "results_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_142658",
+      "model_key": "qwen25_coder_14b",
+      "row_count": 20,
+      "legacy_avg_det_score": 84.7169,
+      "strict_avg_det_score": 81.481,
+      "avg_delta": -3.2359,
+      "exact_count": 0,
+      "legacy_high_to_strict_fail_count": 1
+    },
+    {
+      "results_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_142658",
+      "model_key": "qwen25_coder_7b",
+      "row_count": 20,
+      "legacy_avg_det_score": 77.1301,
+      "strict_avg_det_score": 72.4457,
+      "avg_delta": -4.6844,
+      "exact_count": 0,
+      "legacy_high_to_strict_fail_count": 2
+    },
+    {
+      "results_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_143911",
+      "model_key": "qwen25_coder_14b",
+      "row_count": 20,
+      "legacy_avg_det_score": 91.3497,
+      "strict_avg_det_score": 87.6197,
+      "avg_delta": -3.73,
+      "exact_count": 0,
+      "legacy_high_to_strict_fail_count": 3
+    },
+    {
+      "results_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_143911",
+      "model_key": "qwen25_coder_7b",
+      "row_count": 20,
+      "legacy_avg_det_score": 72.3424,
+      "strict_avg_det_score": 71.2114,
+      "avg_delta": -1.131,
+      "exact_count": 0,
+      "legacy_high_to_strict_fail_count": 1
+    }
+  ],
+  "suspicious_high_nonexact_count": 7,
+  "synthetic_suite_rows": 13
+}

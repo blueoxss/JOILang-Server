@@ -60,6 +60,7 @@ RERANK_EXTRA_FIELDS = [
     "repair_llm_latency_sec",
     "repair_peak_vram_gb",
     "repair_total_pipeline_sec",
+    "det_profile",
     "det_valid_json",
     "det_schema_ok",
     "det_service_match",
@@ -67,6 +68,12 @@ RERANK_EXTRA_FIELDS = [
     "det_precondition_ok",
     "det_semantic_ok",
     "det_min_extraneous",
+    "det_gt_service_coverage",
+    "det_gt_service_precision",
+    "det_gt_receiver_coverage",
+    "det_dataflow_score",
+    "det_numeric_grounding",
+    "det_enum_grounding",
     "det_gt_exact",
     "det_gt_similarity",
     "det_score",
@@ -83,6 +90,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--service-schema", default=str(SERVICE_SCHEMA_DEFAULT))
     parser.add_argument("--repair-threshold", type=float, default=70.0)
     parser.add_argument("--repair-attempts", type=int, default=2)
+    parser.add_argument("--det-profile", choices=["legacy", "strict"], default="legacy")
     parser.add_argument("--output-csv", default=None)
     parser.add_argument("--llm-mode", default=None)
     parser.add_argument("--llm-endpoint", default=None)
@@ -90,7 +98,24 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--retries", type=int, default=1)
     parser.add_argument("--seed", type=int, default=14)
     parser.add_argument("--model", default=None, help="Override the repair model id while keeping the same prompt/genome.")
+    parser.add_argument("--service-context-mode", default=None, choices=["auto", "retrieval_fallback", "schema_fallback"])
+    parser.add_argument("--enable-retrieval-premapping", action="store_true", help="Shortcut for --service-context-mode retrieval_fallback.")
+    parser.add_argument("--disable-retrieval-premapping", action="store_true", help="Shortcut for --service-context-mode schema_fallback.")
+    parser.add_argument("--retrieval-topk", type=int, default=None)
+    parser.add_argument("--retrieval-mode", default=None, choices=["hybrid", "dense", "bm25"])
+    parser.add_argument("--retrieval-json", default=None)
+    parser.add_argument("--retrieval-bundle-dir", default=None)
+    parser.add_argument("--retrieval-model-dir", default=None)
+    parser.add_argument("--retrieval-device", default=None)
     return parser
+
+
+def _service_context_mode(args: argparse.Namespace) -> str | None:
+    if args.enable_retrieval_premapping:
+        return "retrieval_fallback"
+    if args.disable_retrieval_premapping:
+        return "schema_fallback"
+    return args.service_context_mode
 
 
 def _system_prompt() -> str:
@@ -180,6 +205,7 @@ def rerank_candidates_csv(
     service_schema: dict[str, dict[str, Any]],
     repair_threshold: float,
     repair_attempts: int,
+    det_profile: str,
     output_csv: str | Path,
     llm_mode: str | None,
     llm_endpoint: str | None,
@@ -188,6 +214,7 @@ def rerank_candidates_csv(
     seed: int,
     model_override: str | None = None,
     llm_extra_payload: dict[str, Any] | None = None,
+    service_context_kwargs: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     ensure_workspace()
     input_rows = read_csv_rows(candidates_csv)
@@ -220,6 +247,7 @@ def rerank_candidates_csv(
             service_schema,
             connected_devices=connected_devices,
             ground_truth=row.get("gt", ""),
+            profile=det_profile,
         )
         best = scored[0] if scored else evaluate_candidate(
             command_eng,
@@ -227,6 +255,7 @@ def rerank_candidates_csv(
             service_schema,
             connected_devices=connected_devices,
             ground_truth=row.get("gt", ""),
+            profile=det_profile,
         )
         selected_candidate = best.get("candidate", "") if scored else ""
         repair_applied = False
@@ -242,6 +271,7 @@ def rerank_candidates_csv(
                     row,
                     service_schema,
                     candidate_strategy="repair",
+                    **(service_context_kwargs or {}),
                     det_diagnostics=_compact_det_diagnostics(current_best_det),
                     best_candidate=current_best_candidate if isinstance(current_best_candidate, str) else json.dumps(current_best_candidate, ensure_ascii=False),
                     failure_summary=", ".join(current_best_det.get("failure_reasons", [])),
@@ -310,6 +340,7 @@ def rerank_candidates_csv(
                     service_schema,
                     connected_devices=connected_devices,
                     ground_truth=row.get("gt", ""),
+                    profile=det_profile,
                 )
                 if float(repaired_det.get("det_score", 0.0)) > float(current_best_det.get("det_score", 0.0)):
                     current_best_candidate = repaired_candidate
@@ -333,12 +364,19 @@ def rerank_candidates_csv(
                 "repair_metadata": json.dumps(repair_meta, ensure_ascii=False),
                 "repair_total_pipeline_sec": round(time.perf_counter() - row_started, 4),
                 "det_valid_json": best.get("det_valid_json", False),
+                "det_profile": best.get("det_profile", det_profile),
                 "det_schema_ok": best.get("det_schema_ok", False),
                 "det_service_match": best.get("det_service_match", 0.0),
                 "det_arg_type_ok": best.get("det_arg_type_ok", 0.0),
                 "det_precondition_ok": best.get("det_precondition_ok", False),
                 "det_semantic_ok": best.get("det_semantic_ok", 0.0),
                 "det_min_extraneous": best.get("det_min_extraneous", 0.0),
+                "det_gt_service_coverage": best.get("det_gt_service_coverage", 1.0),
+                "det_gt_service_precision": best.get("det_gt_service_precision", 1.0),
+                "det_gt_receiver_coverage": best.get("det_gt_receiver_coverage", 1.0),
+                "det_dataflow_score": best.get("det_dataflow_score", 1.0),
+                "det_numeric_grounding": best.get("det_numeric_grounding", 1.0),
+                "det_enum_grounding": best.get("det_enum_grounding", 1.0),
                 "det_gt_exact": best.get("det_gt_exact", False),
                 "det_gt_similarity": best.get("det_gt_similarity", 0.0),
                 "det_score": best.get("det_score", 0.0),
@@ -372,6 +410,7 @@ def main() -> int:
         service_schema=service_schema,
         repair_threshold=args.repair_threshold,
         repair_attempts=args.repair_attempts,
+        det_profile=args.det_profile,
         output_csv=output_csv,
         llm_mode=args.llm_mode,
         llm_endpoint=args.llm_endpoint,
@@ -379,6 +418,15 @@ def main() -> int:
         retries=args.retries,
         seed=args.seed,
         model_override=args.model,
+        service_context_kwargs={
+            "service_context_mode": _service_context_mode(args),
+            "retrieval_topk": args.retrieval_topk,
+            "retrieval_mode": args.retrieval_mode,
+            "retrieval_json_path": args.retrieval_json,
+            "retrieval_bundle_dir": args.retrieval_bundle_dir,
+            "retrieval_model_dir": args.retrieval_model_dir,
+            "retrieval_device": args.retrieval_device,
+        },
     )
     print("Rerank completed")
     print(f"- output_csv: {summary['output_csv']}")

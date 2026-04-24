@@ -1,0 +1,84 @@
+{
+  "results_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_222827",
+  "output_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_222827/side_by_side_report_qwen25_coder_14b",
+  "model_key": "qwen25_coder_14b",
+  "title": "JOICode Side-by-Side Report · qwen25_coder_14b",
+  "row_count": 20,
+  "html_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_222827/side_by_side_report_qwen25_coder_14b/report.html",
+  "selected_rows_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_222827/side_by_side_report_qwen25_coder_14b/selected_rows.csv",
+  "filters": {
+    "category": [
+      "1",
+      "2"
+    ],
+    "row_no": [],
+    "start_row": 0,
+    "end_row": 0,
+    "limit": 0,
+    "failures_only": false,
+    "det_below": null
+  },
+  "summary": {
+    "row_count": 20,
+    "avg_det_score": 87.61969,
+    "det_pass_rate": 0.75,
+    "gt_exact_rate": 0.0,
+    "avg_similarity": 0.8795989499999999,
+    "avg_prompt_tokens": 8562.05,
+    "avg_completion_tokens": 57.4,
+    "avg_total_tokens": 8619.45,
+    "avg_latency_sec": 6.5035750000000005,
+    "p50_latency_sec": 5.87045,
+    "avg_pipeline_sec": 9.359950000000001,
+    "peak_vram_gb_max": 31.1208,
+    "oom_count": 0,
+    "top_failures": [
+      [
+        "gt_mismatch",
+        20
+      ],
+      [
+        "arg_type",
+        7
+      ],
+      [
+        "gt_receiver_coverage",
+        3
+      ],
+      [
+        "gt_service_coverage",
+        3
+      ],
+      [
+        "dataflow",
+        3
+      ],
+      [
+        "semantic",
+        2
+      ],
+      [
+        "numeric_grounding",
+        2
+      ],
+      [
+        "enum_grounding",
+        1
+      ]
+    ],
+    "snippet_sources": {
+      "service_retrieval_fallback": 10,
+      "connected_devices_only": 10
+    },
+    "categories": {
+      "1": 10,
+      "2": 10
+    },
+    "generation_errors": {}
+  },
+  "pdf": {
+    "ok": true,
+    "pdf_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_222827/side_by_side_report_qwen25_coder_14b/report.pdf",
+    "chrome_path": "/usr/bin/google-chrome"
+  }
+}

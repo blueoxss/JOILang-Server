@@ -13,6 +13,21 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+try:
+    from .retrieval_context import (
+        RetrievalConfig,
+        load_retrieval_config,
+        retrieval_ready,
+        search_with_worker,
+    )
+except ImportError:
+    from retrieval_context import (  # type: ignore
+        RetrievalConfig,
+        load_retrieval_config,
+        retrieval_ready,
+        search_with_worker,
+    )
+
 
 VERSION_ROOT = Path(__file__).resolve().parents[1]
 REPO_ROOT = VERSION_ROOT.parents[1]
@@ -404,23 +419,113 @@ def build_schema_fallback_groups(service_schema: dict[str, dict[str, Any]]) -> l
     ]
 
 
-def build_service_snippet(
+def build_retrieval_fallback_groups(
+    shortlist: list[dict[str, Any]],
+    *,
+    service_schema: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    groups: list[dict[str, Any]] = []
+    seen_categories: set[str] = set()
+    for hit in shortlist:
+        category = resolve_schema_category(hit.get("device"), service_schema)
+        if not category or category in seen_categories:
+            continue
+        seen_categories.add(category)
+        groups.append(
+            {
+                "group_id": f"retrieval::{hit.get('rank', len(groups) + 1)}::{category}",
+                "source": "service_retrieval_fallback",
+                "categories": [category],
+                "user_defined_tags": [],
+                "locations": [],
+                "retrieval_rank": int(hit.get("rank") or len(groups) + 1),
+                "retrieval_score": round(float(hit.get("score") or 0.0), 6),
+                "retrieval_dense_score": round(float(hit.get("dense_score") or 0.0), 6),
+                "retrieval_bm25_score": round(float(hit.get("bm25_score") or 0.0), 6),
+                "retrieval_info": str(hit.get("info", "") or ""),
+                "capability_bindings": [
+                    build_capability_binding(
+                        category,
+                        user_defined_tags=[],
+                        locations=[],
+                        service_schema=service_schema,
+                    )
+                ],
+            }
+        )
+    return groups
+
+
+def build_service_snippet_payload(
     command_eng: str,
     connected_devices: dict[str, Any],
     service_schema: dict[str, dict[str, Any]],
     *,
-    max_devices: int = 8,
-) -> str:
-    del command_eng, max_devices
+    retrieval_config: RetrievalConfig | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    retrieval_config = retrieval_config or load_retrieval_config()
+    snippet_source = "connected_devices_only"
+    retrieval_info: dict[str, Any] = {
+        "enabled": retrieval_config.enabled,
+        "mode": retrieval_config.retrieval_mode,
+        "topk": retrieval_config.retrieval_topk,
+        "device": retrieval_config.retrieval_device,
+        "status": "not_used",
+        "categories": [],
+        "scores": [],
+        "fallback_reason": "",
+    }
+
     if connected_devices:
         device_groups = build_connected_device_groups(connected_devices, service_schema)
-        snippet_source = "connected_devices_only"
+        retrieval_info["status"] = "skipped_connected_devices_present"
     else:
-        device_groups = build_schema_fallback_groups(service_schema)
         snippet_source = "service_schema_fallback"
+        if retrieval_config.enabled:
+            ready, probe = retrieval_ready(retrieval_config)
+            retrieval_info["probe"] = probe
+            if ready:
+                try:
+                    shortlist = search_with_worker(
+                        retrieval_config,
+                        command_eng or "",
+                        topk=retrieval_config.retrieval_topk,
+                        mode=retrieval_config.retrieval_mode,
+                    )
+                    retrieval_groups = build_retrieval_fallback_groups(shortlist, service_schema=service_schema)
+                    if retrieval_groups:
+                        device_groups = retrieval_groups
+                        snippet_source = "service_retrieval_fallback"
+                        retrieval_info["status"] = "used"
+                        retrieval_info["categories"] = [group["categories"][0] for group in retrieval_groups]
+                        retrieval_info["scores"] = [group.get("retrieval_score", 0.0) for group in retrieval_groups]
+                        retrieval_info["shortlist"] = [
+                            {
+                                "category": group["categories"][0],
+                                "rank": group.get("retrieval_rank", 0),
+                                "score": group.get("retrieval_score", 0.0),
+                            }
+                            for group in retrieval_groups
+                        ]
+                    else:
+                        device_groups = build_schema_fallback_groups(service_schema)
+                        retrieval_info["status"] = "empty_shortlist"
+                        retrieval_info["fallback_reason"] = "retrieval returned no supported categories"
+                except Exception as exc:
+                    device_groups = build_schema_fallback_groups(service_schema)
+                    retrieval_info["status"] = "error"
+                    retrieval_info["fallback_reason"] = str(exc)
+            else:
+                device_groups = build_schema_fallback_groups(service_schema)
+                retrieval_info["status"] = "assets_unavailable"
+                retrieval_info["fallback_reason"] = str(probe.get("message", "") or "")
+        else:
+            device_groups = build_schema_fallback_groups(service_schema)
+            retrieval_info["status"] = "disabled"
 
     snippet: dict[str, Any] = {
         "snippet_source": snippet_source,
+        "retrieval": retrieval_info,
         "canonical_rule": (
             "Resolve schema matches against canonical_name. "
             "In final JOILang code, keep receiver tags after # exactly as written, "
@@ -428,17 +533,45 @@ def build_service_snippet(
             "For example, Switch_On becomes switch_on."
         ),
         "binding_rule": [
-            "Each device_group is one connected-device group or one schema fallback group.",
+            "Each device_group is one connected-device group, one retrieval fallback group, or one schema fallback group.",
             "Each capability_binding pairs one category with the full authoritative service list for that category.",
             "user_defined_tags come from tags after removing category duplicates.",
             "locations are additional selector tags that can also be combined with the category.",
             "selector_tags are the usable extra tags that may be prepended before the category in a receiver.",
             "If the command does not mention any selector tag, the base receiver (#Category) is valid.",
             "If the command mentions locations or custom tags, preserve only the relevant selector tags before the category.",
+            "If snippet_source is service_retrieval_fallback, use only the retrieved categories present in device_groups.",
         ],
         "device_groups": device_groups,
     }
-    return json.dumps(snippet, ensure_ascii=False, indent=2)
+    snippet_meta = {
+        "service_list_snippet_source": snippet_source,
+        "service_list_device_count": len(device_groups),
+        "service_list_retrieval_status": retrieval_info.get("status", ""),
+        "service_list_retrieval_mode": retrieval_info.get("mode", ""),
+        "service_list_retrieval_topk": retrieval_info.get("topk", 0),
+        "service_list_retrieval_device": retrieval_info.get("device", ""),
+        "service_list_retrieval_categories": json.dumps(retrieval_info.get("categories", []), ensure_ascii=False),
+        "service_list_retrieval_scores": json.dumps(retrieval_info.get("scores", []), ensure_ascii=False),
+        "service_list_retrieval_fallback_reason": str(retrieval_info.get("fallback_reason", "") or ""),
+    }
+    return snippet, snippet_meta
+
+
+def build_service_snippet(
+    command_eng: str,
+    connected_devices: dict[str, Any],
+    service_schema: dict[str, dict[str, Any]],
+    *,
+    retrieval_config: RetrievalConfig | None = None,
+) -> str:
+    payload, _meta = build_service_snippet_payload(
+        command_eng,
+        connected_devices,
+        service_schema,
+        retrieval_config=retrieval_config,
+    )
+    return json.dumps(payload, ensure_ascii=False, indent=2)
 
 
 def parse_block_file(path: str | Path) -> tuple[dict[str, str], str]:
@@ -636,18 +769,41 @@ def build_prompt_values(
     service_schema: dict[str, dict[str, Any]],
     *,
     candidate_strategy: str,
+    service_context_mode: str | None = None,
+    retrieval_topk: int | None = None,
+    retrieval_mode: str | None = None,
+    retrieval_json_path: str | None = None,
+    retrieval_bundle_dir: str | None = None,
+    retrieval_model_dir: str | None = None,
+    retrieval_device: str | None = None,
     det_diagnostics: str = "",
     best_candidate: str = "",
     failure_summary: str = "",
 ) -> dict[str, Any]:
     connected_devices = parse_connected_devices(row.get("connected_devices", ""))
     cron, period = extract_optional_schedule(row)
-    service_snippet = build_service_snippet(row.get("command_eng", ""), connected_devices, service_schema)
-    return {
+    retrieval_config = load_retrieval_config(
+        {
+            "service_context_mode": service_context_mode,
+            "retrieval_topk": retrieval_topk,
+            "retrieval_mode": retrieval_mode,
+            "retrieval_json_path": retrieval_json_path,
+            "retrieval_bundle_dir": retrieval_bundle_dir,
+            "retrieval_model_dir": retrieval_model_dir,
+            "retrieval_device": retrieval_device,
+        }
+    )
+    service_snippet_payload, snippet_meta = build_service_snippet_payload(
+        row.get("command_eng") or row.get("command_kor", ""),
+        connected_devices,
+        service_schema,
+        retrieval_config=retrieval_config,
+    )
+    values = {
         "row_no": row_no,
         "command_eng": row.get("command_eng", ""),
         "connected_devices": json.dumps(connected_devices, ensure_ascii=False, indent=2),
-        "service_list_snippet": service_snippet,
+        "service_list_snippet": json.dumps(service_snippet_payload, ensure_ascii=False, indent=2),
         "optional_cron": cron,
         "optional_period": period,
         "cron": cron,
@@ -657,6 +813,8 @@ def build_prompt_values(
         "best_candidate": best_candidate,
         "failure_summary": failure_summary,
     }
+    values.update(snippet_meta)
+    return values
 
 
 def unique_fieldnames(rows: list[dict[str, Any]], extra_fields: list[str]) -> list[str]:

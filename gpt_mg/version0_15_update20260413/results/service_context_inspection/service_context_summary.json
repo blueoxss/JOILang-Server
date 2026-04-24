@@ -1,0 +1,70 @@
+{
+  "dataset": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/JOICommands-280.csv",
+  "service_schema": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+  "genome_json": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/best_genome.json",
+  "modes": [
+    "schema_fallback",
+    "retrieval_fallback"
+  ],
+  "row_count": 1,
+  "records": [
+    {
+      "row_no": 1,
+      "category": "1",
+      "command_eng": "Switch the dishwasher to dry mode.",
+      "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+      "mode": "schema_fallback",
+      "service_list_snippet_source": "service_schema_fallback",
+      "service_list_device_count": 50,
+      "service_list_retrieval_status": "disabled",
+      "service_list_retrieval_mode": "hybrid",
+      "service_list_retrieval_topk": 10,
+      "service_list_retrieval_device": "cpu",
+      "service_list_retrieval_categories": [],
+      "service_list_retrieval_scores": [],
+      "service_list_retrieval_fallback_reason": "",
+      "service_list_snippet_chars": 139150,
+      "rendered_prompt_chars": 153232
+    },
+    {
+      "row_no": 1,
+      "category": "1",
+      "command_eng": "Switch the dishwasher to dry mode.",
+      "command_kor": "식기세척기를 건조 모드로 설정해줘.",
+      "mode": "retrieval_fallback",
+      "service_list_snippet_source": "service_retrieval_fallback",
+      "service_list_device_count": 10,
+      "service_list_retrieval_status": "used",
+      "service_list_retrieval_mode": "hybrid",
+      "service_list_retrieval_topk": 10,
+      "service_list_retrieval_device": "cpu",
+      "service_list_retrieval_categories": [
+        "Dishwasher",
+        "LaundryDryer",
+        "DimmerSwitch",
+        "Dehumidifier",
+        "Switch",
+        "AirPurifier",
+        "RiceCooker",
+        "AirConditioner",
+        "Oven",
+        "Humidifier"
+      ],
+      "service_list_retrieval_scores": [
+        1.807315,
+        0.942203,
+        0.950162,
+        0.832717,
+        1.02901,
+        0.786224,
+        0.756057,
+        0.758835,
+        0.753476,
+        0.769978
+      ],
+      "service_list_retrieval_fallback_reason": "",
+      "service_list_snippet_chars": 32323,
+      "rendered_prompt_chars": 46405
+    }
+  ]
+}

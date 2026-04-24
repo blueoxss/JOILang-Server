@@ -149,8 +149,18 @@ def build_parser() -> argparse.ArgumentParser:
         default=0,
         help="Repair attempts during rerank. Use 0 for raw same-prompt comparison first.",
     )
+    parser.add_argument("--det-profile", choices=["legacy", "strict"], default="legacy")
     parser.add_argument("--temperature", type=float, default=None, help="Optional temperature override for all models.")
     parser.add_argument("--max-tokens", type=int, default=None, help="Optional max token override for all models.")
+    parser.add_argument("--service-context-mode", default=None, choices=["auto", "retrieval_fallback", "schema_fallback"])
+    parser.add_argument("--enable-retrieval-premapping", action="store_true", help="Shortcut for --service-context-mode retrieval_fallback.")
+    parser.add_argument("--disable-retrieval-premapping", action="store_true", help="Shortcut for --service-context-mode schema_fallback.")
+    parser.add_argument("--retrieval-topk", type=int, default=None)
+    parser.add_argument("--retrieval-mode", default=None, choices=["hybrid", "dense", "bm25"])
+    parser.add_argument("--retrieval-json", default=None)
+    parser.add_argument("--retrieval-bundle-dir", default=None)
+    parser.add_argument("--retrieval-model-dir", default=None)
+    parser.add_argument("--retrieval-device", default=None)
     parser.add_argument("--measure-latency", action="store_true", help="Collect and summarize latency-oriented metrics.")
     parser.add_argument("--measure-vram", action="store_true", help="Collect and summarize VRAM-oriented metrics when supported.")
     parser.add_argument(
@@ -594,9 +604,16 @@ def _build_model_row_metrics(
                 "output": str(rerank_row.get("output", "") or ""),
                 "det_score": _safe_float(rerank_row.get("det_score")),
                 "det_pass": det_pass,
+                "det_profile": str(rerank_row.get("det_profile", "") or ""),
                 "gt_exact": _coerce_bool(rerank_row.get("det_gt_exact")),
                 "det_valid_json": _coerce_bool(rerank_row.get("det_valid_json")),
                 "det_gt_similarity": _safe_float(rerank_row.get("det_gt_similarity")),
+                "det_gt_service_coverage": _safe_float(rerank_row.get("det_gt_service_coverage")),
+                "det_gt_service_precision": _safe_float(rerank_row.get("det_gt_service_precision")),
+                "det_gt_receiver_coverage": _safe_float(rerank_row.get("det_gt_receiver_coverage")),
+                "det_dataflow_score": _safe_float(rerank_row.get("det_dataflow_score")),
+                "det_numeric_grounding": _safe_float(rerank_row.get("det_numeric_grounding")),
+                "det_enum_grounding": _safe_float(rerank_row.get("det_enum_grounding")),
                 "failure_reasons": failure_reasons,
                 "failure_reasons_json": json.dumps(failure_reasons, ensure_ascii=False),
                 "prompt_chars": prompt_chars,
@@ -613,6 +630,12 @@ def _build_model_row_metrics(
                 "resolved_model_path": str(
                     runtime_info.get("resolved_local_model_name", runtime_info.get("local_model_name", ""))
                 ),
+                "service_list_snippet_source": str(generation_row.get("service_list_snippet_source", "") or ""),
+                "service_list_device_count": _safe_int(generation_row.get("service_list_device_count")),
+                "service_list_retrieval_status": str(generation_row.get("service_list_retrieval_status", "") or ""),
+                "service_list_retrieval_mode": str(generation_row.get("service_list_retrieval_mode", "") or ""),
+                "service_list_retrieval_topk": _safe_int(generation_row.get("service_list_retrieval_topk")),
+                "service_list_retrieval_categories": str(generation_row.get("service_list_retrieval_categories", "") or ""),
                 "warmup_excluded": False,
                 "selected_candidate_index": _safe_int(rerank_row.get("selected_candidate_index")),
                 "repair_applied": _coerce_bool(rerank_row.get("repair_applied")),
@@ -902,6 +925,9 @@ def _print_row_comparisons(
             llm_latency = str(row.get(f"{model_key}__llm_latency_sec", "") or "0")
             peak_vram = str(row.get(f"{model_key}__peak_vram_gb", "") or "0")
             generation_error_type = str(row.get(f"{model_key}__generation_error_type", "") or "")
+            snippet_source = str(row.get(f"{model_key}__service_list_snippet_source", "") or "")
+            snippet_count = str(row.get(f"{model_key}__service_list_device_count", "") or "")
+            retrieval_categories = _pretty_json_list(str(row.get(f"{model_key}__service_list_retrieval_categories", "") or ""))
             print("")
             print(
                 f"[{model_key}] {model_summary['model_label']} | "
@@ -909,6 +935,8 @@ def _print_row_comparisons(
             )
             print(f"Generated schedule: cron=\"{output_view.get('cron', '')}\" period={output_period}")
             print(f"Prompt tokens: {prompt_tokens} | LLM latency: {llm_latency}s | Peak VRAM: {peak_vram}GB")
+            if snippet_source:
+                print(f"Service context: source={snippet_source} groups={snippet_count} shortlist={retrieval_categories}")
             if generation_error_type:
                 print(f"Generation error type: {generation_error_type}")
             print(
@@ -1262,6 +1290,23 @@ def _genome_for_model(base_genome: dict[str, Any], entry: dict[str, Any]) -> dic
     return genome
 
 
+def _service_context_kwargs(args: argparse.Namespace) -> dict[str, Any]:
+    service_context_mode = args.service_context_mode
+    if args.enable_retrieval_premapping:
+        service_context_mode = "retrieval_fallback"
+    elif args.disable_retrieval_premapping:
+        service_context_mode = "schema_fallback"
+    return {
+        "service_context_mode": service_context_mode,
+        "retrieval_topk": args.retrieval_topk,
+        "retrieval_mode": args.retrieval_mode,
+        "retrieval_json_path": args.retrieval_json,
+        "retrieval_bundle_dir": args.retrieval_bundle_dir,
+        "retrieval_model_dir": args.retrieval_model_dir,
+        "retrieval_device": args.retrieval_device,
+    }
+
+
 def _merge_llm_extra(entry: dict[str, Any], global_extra: dict[str, Any]) -> dict[str, Any] | None:
     merged = dict(entry.get("llm_extra_payload") or {})
     merged.update(global_extra)
@@ -1351,6 +1396,7 @@ def _run_single_model(
                 max_tokens=max_tokens,
                 model=resolved_model,
                 llm_extra_payload=llm_extra_payload,
+                service_context_kwargs=_service_context_kwargs(args),
             )
             warmup_first_latency = 0.0
             if warmup_generation["rows"]:
@@ -1383,6 +1429,7 @@ def _run_single_model(
             max_tokens=max_tokens,
             model=resolved_model,
             llm_extra_payload=llm_extra_payload,
+            service_context_kwargs=_service_context_kwargs(args),
         )
         rerank = rerank_candidates_csv(
             profile=VERSION_ROOT.name,
@@ -1391,6 +1438,7 @@ def _run_single_model(
             service_schema=service_schema,
             repair_threshold=args.repair_threshold,
             repair_attempts=max(0, int(args.repair_attempts)),
+            det_profile=args.det_profile,
             output_csv=rerank_csv,
             llm_mode=llm_mode,
             llm_endpoint=llm_endpoint,
@@ -1399,6 +1447,7 @@ def _run_single_model(
             seed=args.seed,
             model_override=resolved_model,
             llm_extra_payload=llm_extra_payload,
+            service_context_kwargs=_service_context_kwargs(args),
         )
         rerank_rows = read_csv_rows(rerank_csv)
     finally:
@@ -1882,8 +1931,15 @@ def _build_row_comparison_rows(model_summaries: list[dict[str, Any]]) -> tuple[l
             output_view = _parse_program_view(row.get("output", ""))
             entry[f"{model_key}__det_score"] = row.get("det_score", "")
             entry[f"{model_key}__det_pass"] = row.get("det_pass", "")
+            entry[f"{model_key}__det_profile"] = row.get("det_profile", "")
             entry[f"{model_key}__det_gt_exact"] = row.get("gt_exact", "")
             entry[f"{model_key}__det_gt_similarity"] = row.get("det_gt_similarity", "")
+            entry[f"{model_key}__det_gt_service_coverage"] = row.get("det_gt_service_coverage", "")
+            entry[f"{model_key}__det_gt_service_precision"] = row.get("det_gt_service_precision", "")
+            entry[f"{model_key}__det_gt_receiver_coverage"] = row.get("det_gt_receiver_coverage", "")
+            entry[f"{model_key}__det_dataflow_score"] = row.get("det_dataflow_score", "")
+            entry[f"{model_key}__det_numeric_grounding"] = row.get("det_numeric_grounding", "")
+            entry[f"{model_key}__det_enum_grounding"] = row.get("det_enum_grounding", "")
             entry[f"{model_key}__failure_reasons"] = row.get("failure_reasons_json", "")
             entry[f"{model_key}__output"] = row.get("output", "")
             entry[f"{model_key}__output_name"] = output_view.get("name", "")
@@ -1902,6 +1958,12 @@ def _build_row_comparison_rows(model_summaries: list[dict[str, Any]]) -> tuple[l
             entry[f"{model_key}__oom_flag"] = row.get("oom_flag", "")
             entry[f"{model_key}__worker_python"] = row.get("worker_python", "")
             entry[f"{model_key}__resolved_model_path"] = row.get("resolved_model_path", "")
+            entry[f"{model_key}__service_list_snippet_source"] = row.get("service_list_snippet_source", "")
+            entry[f"{model_key}__service_list_device_count"] = row.get("service_list_device_count", "")
+            entry[f"{model_key}__service_list_retrieval_status"] = row.get("service_list_retrieval_status", "")
+            entry[f"{model_key}__service_list_retrieval_mode"] = row.get("service_list_retrieval_mode", "")
+            entry[f"{model_key}__service_list_retrieval_topk"] = row.get("service_list_retrieval_topk", "")
+            entry[f"{model_key}__service_list_retrieval_categories"] = row.get("service_list_retrieval_categories", "")
             entry[f"{model_key}__warmup_excluded"] = row.get("warmup_excluded", "")
             entry[f"{model_key}__row_category"] = row.get("row_category", "")
     ordered_model_keys = sorted(dict.fromkeys(model_keys))
@@ -1923,8 +1985,15 @@ def _build_row_comparison_rows(model_summaries: list[dict[str, Any]]) -> tuple[l
             [
                 f"{model_key}__det_score",
                 f"{model_key}__det_pass",
+                f"{model_key}__det_profile",
                 f"{model_key}__det_gt_exact",
                 f"{model_key}__det_gt_similarity",
+                f"{model_key}__det_gt_service_coverage",
+                f"{model_key}__det_gt_service_precision",
+                f"{model_key}__det_gt_receiver_coverage",
+                f"{model_key}__det_dataflow_score",
+                f"{model_key}__det_numeric_grounding",
+                f"{model_key}__det_enum_grounding",
                 f"{model_key}__failure_reasons",
                 f"{model_key}__output",
                 f"{model_key}__output_name",
@@ -1943,6 +2012,12 @@ def _build_row_comparison_rows(model_summaries: list[dict[str, Any]]) -> tuple[l
                 f"{model_key}__oom_flag",
                 f"{model_key}__worker_python",
                 f"{model_key}__resolved_model_path",
+                f"{model_key}__service_list_snippet_source",
+                f"{model_key}__service_list_device_count",
+                f"{model_key}__service_list_retrieval_status",
+                f"{model_key}__service_list_retrieval_mode",
+                f"{model_key}__service_list_retrieval_topk",
+                f"{model_key}__service_list_retrieval_categories",
                 f"{model_key}__warmup_excluded",
                 f"{model_key}__row_category",
             ]
@@ -2054,6 +2129,7 @@ def main() -> int:
         "blocks": base_genome.get("blocks", []),
         "candidate_strategies": base_genome.get("params", {}).get("candidate_strategies", []),
         "candidate_k": args.candidate_k,
+        "det_profile": args.det_profile,
         "repair_threshold": args.repair_threshold,
         "repair_attempts": args.repair_attempts,
         "category_filters": category_filters,

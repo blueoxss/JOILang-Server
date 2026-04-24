@@ -68,6 +68,15 @@ GENERATION_EXTRA_FIELDS = [
     "generation_total_pipeline_sec",
     "llm_mode",
     "llm_model",
+    "service_list_snippet_source",
+    "service_list_device_count",
+    "service_list_retrieval_status",
+    "service_list_retrieval_mode",
+    "service_list_retrieval_topk",
+    "service_list_retrieval_device",
+    "service_list_retrieval_categories",
+    "service_list_retrieval_scores",
+    "service_list_retrieval_fallback_reason",
 ]
 
 
@@ -92,7 +101,24 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-tokens", type=int, default=None)
     parser.add_argument("--temperature", type=float, default=None)
     parser.add_argument("--model", default=None, help="Override the model id while keeping the same prompt/genome.")
+    parser.add_argument("--service-context-mode", default=None, choices=["auto", "retrieval_fallback", "schema_fallback"])
+    parser.add_argument("--enable-retrieval-premapping", action="store_true", help="Shortcut for --service-context-mode retrieval_fallback.")
+    parser.add_argument("--disable-retrieval-premapping", action="store_true", help="Shortcut for --service-context-mode schema_fallback.")
+    parser.add_argument("--retrieval-topk", type=int, default=None)
+    parser.add_argument("--retrieval-mode", default=None, choices=["hybrid", "dense", "bm25"])
+    parser.add_argument("--retrieval-json", default=None)
+    parser.add_argument("--retrieval-bundle-dir", default=None)
+    parser.add_argument("--retrieval-model-dir", default=None)
+    parser.add_argument("--retrieval-device", default=None)
     return parser
+
+
+def _service_context_mode(args: argparse.Namespace) -> str | None:
+    if args.enable_retrieval_premapping:
+        return "retrieval_fallback"
+    if args.disable_retrieval_premapping:
+        return "schema_fallback"
+    return args.service_context_mode
 
 
 def _candidate_strategies(genome: dict[str, Any], candidate_k: int) -> list[str]:
@@ -182,6 +208,7 @@ def generate_candidates_for_rows(
     max_tokens: int,
     model: str,
     llm_extra_payload: dict[str, Any] | None = None,
+    service_context_kwargs: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     ensure_workspace()
     output_csv = Path(output_csv)
@@ -202,7 +229,13 @@ def generate_candidates_for_rows(
         generation_status = "ok"
         for candidate_index in range(candidate_k):
             strategy = strategies[candidate_index]
-            values = build_prompt_values(row_no, row, service_schema, candidate_strategy=strategy)
+            values = build_prompt_values(
+                row_no,
+                row,
+                service_schema,
+                candidate_strategy=strategy,
+                **(service_context_kwargs or {}),
+            )
             rendered_prompt, manifest = render_blocks_for_genome(genome, values=values)
             user_prompt = rendered_prompt + "\n\nReturn the final JSON object now."
             prompt_chars = len(system_prompt) + len(user_prompt)
@@ -285,6 +318,18 @@ def generate_candidates_for_rows(
                 "llm_model": model,
             }
         )
+        for key in (
+            "service_list_snippet_source",
+            "service_list_device_count",
+            "service_list_retrieval_status",
+            "service_list_retrieval_mode",
+            "service_list_retrieval_topk",
+            "service_list_retrieval_device",
+            "service_list_retrieval_categories",
+            "service_list_retrieval_scores",
+            "service_list_retrieval_fallback_reason",
+        ):
+            result_row[key] = values.get(key, "")
         result_row.update(row_metrics)
         output_rows.append(result_row)
         fieldnames = unique_fieldnames(output_rows, GENERATION_EXTRA_FIELDS)
@@ -348,6 +393,15 @@ def main() -> int:
         temperature=temperature,
         max_tokens=max_tokens,
         model=model,
+        service_context_kwargs={
+            "service_context_mode": _service_context_mode(args),
+            "retrieval_topk": args.retrieval_topk,
+            "retrieval_mode": args.retrieval_mode,
+            "retrieval_json_path": args.retrieval_json,
+            "retrieval_bundle_dir": args.retrieval_bundle_dir,
+            "retrieval_model_dir": args.retrieval_model_dir,
+            "retrieval_device": args.retrieval_device,
+        },
     )
 
     print("Generation completed")

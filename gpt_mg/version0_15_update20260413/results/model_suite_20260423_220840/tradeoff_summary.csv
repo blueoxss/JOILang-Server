@@ -1,0 +1,2 @@
+model_key,model_label,avg_det_score,warm_latency_p50,avg_prompt_tokens,peak_vram_gb_max,cold_load_sec,oom_count,generation_error_rate,failure_rate,det_per_latency,det_per_prompt_token,det_per_vram,pareto_det_vs_warm_latency,pareto_det_vs_prompt_tokens,pareto_det_vs_peak_vram
+qwen25_coder_7b,Qwen2.5-Coder-7B-Instruct,49.1475,17.6127,31869.0000,20.1411,0.0000,0,0.0000,1.0000,2.7905,0.001542,2.4402,True,True,True

@@ -26,6 +26,7 @@ Repair rules:
 2. Return exactly one JSON object only.
 3. Keep only keys name, cron, period, code.
 4. For unscheduled commands, normalize cron to "" and period to 0.
+4a. Treat `service_list_snippet` as the only authoritative capability scope. If the snippet is retrieval-scoped, do not invent categories outside the listed `device_groups`.
 5. If a function or value name is wrong, replace it with the exact canonical_name from the snippet, then emit the lowercase form of that member token in the final code.
 6. If an argument type is wrong, coerce it to the correct literal type and unit.
 7. If a condition uses a function where a value is required, rewrite the condition to use the correct value.

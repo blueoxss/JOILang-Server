@@ -138,6 +138,29 @@ def _max_tokens(genome: dict[str, Any], model_input: dict[str, Any], other_param
     return int(model_input.get("local_max_new_tokens", 512))
 
 
+def _service_context_kwargs(other_params: Any) -> dict[str, Any]:
+    def _truthy(value: Any) -> bool:
+        if isinstance(value, bool):
+            return value
+        return str(value or "").strip().lower() in {"1", "true", "yes", "y", "on"}
+
+    service_context_mode = _extract_other_param(other_params, "service_context_mode")
+    if service_context_mode is None:
+        if _truthy(_extract_other_param(other_params, "enable_retrieval_premapping")):
+            service_context_mode = "retrieval_fallback"
+        elif _truthy(_extract_other_param(other_params, "disable_retrieval_premapping")):
+            service_context_mode = "schema_fallback"
+    return {
+        "service_context_mode": service_context_mode,
+        "retrieval_topk": _extract_other_param(other_params, "retrieval_topk"),
+        "retrieval_mode": _extract_other_param(other_params, "retrieval_mode"),
+        "retrieval_json_path": _extract_other_param(other_params, "retrieval_json"),
+        "retrieval_bundle_dir": _extract_other_param(other_params, "retrieval_bundle_dir"),
+        "retrieval_model_dir": _extract_other_param(other_params, "retrieval_model_dir"),
+        "retrieval_device": _extract_other_param(other_params, "retrieval_device"),
+    }
+
+
 def _system_prompt() -> str:
     return (
         "You are a deterministic JOILang generation engine. "
@@ -179,6 +202,7 @@ def load_version_config(user_input, connected_devices: dict = None, other_params
         row,
         service_schema,
         candidate_strategy=_candidate_strategy(genome, other_params),
+        **_service_context_kwargs(other_params),
     )
     rendered_prompt, manifest = render_blocks_for_genome(genome, values=values)
     language_bridge = (
@@ -206,6 +230,10 @@ def load_version_config(user_input, connected_devices: dict = None, other_params
         f"- genome_json: {genome_path}",
         f"- temperature: {model_input['temperature']}",
         f"- local_max_new_tokens: {model_input['local_max_new_tokens']}",
+        f"- service_list_snippet_source: {values.get('service_list_snippet_source', '')}",
+        f"- service_list_device_count: {values.get('service_list_device_count', '')}",
+        f"- service_list_retrieval_status: {values.get('service_list_retrieval_status', '')}",
+        f"- service_list_retrieval_categories: {values.get('service_list_retrieval_categories', '')}",
         "",
         "## System",
         _system_prompt(),

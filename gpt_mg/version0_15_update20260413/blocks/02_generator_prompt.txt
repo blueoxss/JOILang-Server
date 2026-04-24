@@ -18,7 +18,7 @@ Inputs:
 
 How to read the snippet:
 - `service_list_snippet` is the authoritative capability map. Use it instead of guessing from raw `connected_devices`.
-- Each `device_group` is one connected-device group, or one schema fallback group when `connected_devices` is empty.
+- Each `device_group` is one connected-device group, one retrieval fallback group, or one schema fallback group.
 - Each `capability_binding` is one pair of:
   1. a `category` and the full service list allowed for that category
   2. the selector tags that may be combined with that category: `user_defined_tags`, `locations`, and `selector_tags`
@@ -42,7 +42,7 @@ Output contract:
 
 Hard generation rules:
 1. Use only categories, values, functions, enum values, and receiver tags supported by the provided capability bindings.
-2. When `connected_devices` is non-empty, do not use categories that are absent from the snippet. When it is empty, the snippet is schema fallback and category-only receivers are allowed.
+2. When `connected_devices` is non-empty, do not use categories that are absent from the snippet. When it is empty, do not assume full-schema access; use only the categories explicitly present in the snippet.
 3. A service may be used only through the category that owns it. If the receiver ends with `#Switch`, use only services listed under the `Switch` binding.
 4. If the command mentions a location, platform, brand, or custom tag, keep only the selector tags that are both explicitly implied by the command and present in the matching binding.
 5. If the command does not mention a selector tag, prefer the base receiver `(#Category)`.

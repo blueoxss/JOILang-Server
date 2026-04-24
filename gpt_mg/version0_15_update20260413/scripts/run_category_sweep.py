@@ -156,6 +156,7 @@ def _run_full_pass(
         service_schema=service_schema,
         repair_threshold=repair_threshold,
         repair_attempts=repair_attempts,
+        det_profile="legacy",
         output_csv=rerank_csv,
         llm_mode=llm_mode,
         llm_endpoint=llm_endpoint,

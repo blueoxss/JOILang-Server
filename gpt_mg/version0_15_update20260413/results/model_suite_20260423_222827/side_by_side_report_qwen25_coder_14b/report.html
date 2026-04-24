@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JOICode Side-by-Side Report · qwen25_coder_14b</title>
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 10mm;
+    }
+    :root {
+      --bg: #f6f4ec;
+      --paper: #fffdf8;
+      --ink: #1e2329;
+      --muted: #69707a;
+      --line: #d8d1c0;
+      --panel: #f2efe3;
+      --accent: #0d5c63;
+      --primary: #8f2d56;
+      --warn: #b26a00;
+      --failure: #8f1d1d;
+      --ok: #2f7d32;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", "Noto Sans KR", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.45;
+    }
+    main {
+      width: 100%;
+      margin: 0 auto;
+      padding: 14px 18px 24px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #fef9ea 0%, #eef4f7 55%, #f8eee8 100%);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 22px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      margin: 0 0 6px;
+      font-size: 28px;
+      line-height: 1.1;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta-grid, .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .meta-card, .summary-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      break-inside: avoid;
+    }
+    .meta-card h3, .summary-card h3 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 6px;
+    }
+    .meta-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13px;
+    }
+    .meta-list strong {
+      text-align: right;
+      font-weight: 600;
+    }
+    .summary-block {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .badge-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .badge {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-height: 68px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+    .badge-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+    .badge-value {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.15;
+      word-break: break-word;
+    }
+    .badge-primary .badge-value { color: var(--primary); }
+    .badge-accent .badge-value { color: var(--accent); }
+    .badge-warn .badge-value { color: var(--warn); }
+    .section-title {
+      margin: 18px 0 10px;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .row-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 14px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .row-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .row-header h2 {
+      margin: 0 0 6px;
+      font-size: 20px;
+    }
+    .command-eng {
+      margin: 0 0 4px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .command-kor {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .row-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+      max-width: 36%;
+    }
+    .chip-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #f4efe2;
+      border: 1px solid var(--line);
+    }
+    .chip-failure {
+      color: var(--failure);
+      background: #f9eceb;
+      border-color: #edc9c5;
+    }
+    .chip-ok {
+      color: var(--ok);
+      background: #edf7ed;
+      border-color: #c6e1c8;
+    }
+    .chip-neutral {
+      color: var(--ink);
+    }
+    .code-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 12px 0;
+    }
+    .code-panel, .subpanel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+      padding: 12px;
+      min-width: 0;
+    }
+    .code-panel h3, .subpanel h4 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+    .code-meta {
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      font-family: "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
+      font-size: 12px;
+      line-height: 1.55;
+      background: #fffdfa;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 12px;
+      padding: 12px;
+      min-height: 120px;
+    }
+    .subgrid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .diff-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      table-layout: fixed;
+    }
+    .diff-table th, .diff-table td {
+      border: 1px solid var(--line);
+      padding: 6px 8px;
+      vertical-align: top;
+      width: 50%;
+      background: #fffdfa;
+    }
+    .diff-table code {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
+    }
+    .diff-row.diff td {
+      background: #fff0ec;
+    }
+    .footer-note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <h1>JOICode Side-by-Side Report · qwen25_coder_14b</h1>
+      <p>Side-by-side GT vs Generated JOICode report for <strong>qwen25_coder_14b</strong>. This report is rendered from row-level benchmark outputs and is print-friendly for PDF export.</p>
+      <div class="badge-grid">
+        <div class="badge badge-neutral"><span class="badge-label">Rows</span><span class="badge-value">20</span></div><div class="badge badge-primary"><span class="badge-label">Avg DET</span><span class="badge-value">87.6197</span></div><div class="badge badge-primary"><span class="badge-label">DET Pass</span><span class="badge-value">75.0%</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">0.0%</span></div><div class="badge badge-accent"><span class="badge-label">Avg Prompt Tokens</span><span class="badge-value">8562.0</span></div><div class="badge badge-accent"><span class="badge-label">Avg Completion Tokens</span><span class="badge-value">57.4</span></div><div class="badge badge-accent"><span class="badge-label">Avg LLM Latency</span><span class="badge-value">6.504s</span></div><div class="badge badge-accent"><span class="badge-label">p50 LLM Latency</span><span class="badge-value">5.870s</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">31.121 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM Count</span><span class="badge-value">0</span></div>
+      </div>
+    </section>
+
+    <div class="summary-block">
+      <div class="summary-card">
+        <h3>Run Metadata</h3>
+        <ul class="meta-list">
+          <li><span>Results Dir</span><strong>/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_222827</strong></li><li><span>Output Dir</span><strong>/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_222827/side_by_side_report_qwen25_coder_14b</strong></li><li><span>Suite</span><strong>paper_local5</strong></li><li><span>Genome</span><strong>/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/best_genome.json</strong></li><li><span>Created At</span><strong>2026-04-23T22:28:27.265338</strong></li><li><span>Categories</span><strong>1, 2</strong></li><li><span>Limit/Category</span><strong>10</strong></li><li><span>Rows</span><strong>1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40</strong></li>
+        </ul>
+      </div>
+      <div class="summary-card">
+        <h3>Top Failure Reasons</h3>
+        <ul class="meta-list"><li><span>gt_mismatch</span><strong>20</strong></li><li><span>arg_type</span><strong>7</strong></li><li><span>gt_receiver_coverage</span><strong>3</strong></li><li><span>gt_service_coverage</span><strong>3</strong></li><li><span>dataflow</span><strong>3</strong></li><li><span>semantic</span><strong>2</strong></li><li><span>numeric_grounding</span><strong>2</strong></li><li><span>enum_grounding</span><strong>1</strong></li></ul>
+      </div>
+      <div class="summary-card">
+        <h3>Context + Categories</h3>
+        <ul class="meta-list"><li><span>service_retrieval_fallback</span><strong>10</strong></li><li><span>connected_devices_only</span><strong>10</strong></li><li><span>Category 1</span><strong>10</strong></li><li><span>Category 2</span><strong>10</strong></li></ul>
+      </div>
+    </div>
+
+    <div class="summary-card" style="margin-bottom: 16px;">
+      <h3>Model Runtime Snapshot</h3>
+      <div class="badge-grid">
+        <div class="badge badge-primary"><span class="badge-label">Model</span><span class="badge-value">Qwen2.5-Coder-14B-Instruct</span></div><div class="badge badge-neutral"><span class="badge-label">Resolved Model</span><span class="badge-value">/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-14B-Instruct/snapshots/aedcc2d42b622764e023cf882b6652e646b95671</span></div><div class="badge badge-neutral"><span class="badge-label">Worker Python</span><span class="badge-value">/home/mgjeong/miniconda3/envs/l/bin/python</span></div><div class="badge badge-neutral"><span class="badge-label">Candidate k</span><span class="badge-value">1</span></div><div class="badge badge-neutral"><span class="badge-label">Repair Attempts</span><span class="badge-value">0</span></div><div class="badge badge-neutral"><span class="badge-label">DET Profile</span><span class="badge-value">worker</span></div>
+      </div>
+    </div>
+
+    <p class="section-title">Row Details</p>
+    
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 1 · Category 1</h2>
+              <p class="command-eng">Switch the dishwasher to dry mode.</p>
+              <p class="command-kor">식기세척기를 건조 모드로 설정해줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: SwitchDishwasherToDryMode</span>
+              <span class="chip chip-neutral">Retrieval cats: Dishwasher, LaundryDryer, DimmerSwitch, Dehumidifier, Switch, AirPurifier, RiceCooker, AirConditioner, Oven, Humidifier</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">96.0656</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9531</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">10956</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">52</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">11008</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">21.056s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">24.415s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">522.7889</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">30.805 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">service_retrieval_fallback</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">10</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">used</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Dishwasher).Dishwasher_SetDishwasherMode(&quot;dry&quot;)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Dishwasher).dishwasher_setdishwashermode(dry)</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>arg_type</span><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>(#Dishwasher).Dishwasher_SetDishwasherMode(&quot;dry&quot;)</code></td><td><code>(#Dishwasher).dishwasher_setdishwashermode(dry)</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 2 · Category 1</h2>
+              <p class="command-eng">Add 5 minutes to the oven.</p>
+              <p class="command-kor">오븐의 작동 시간을 5분 늘려줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: AddTimeToOven</span>
+              <span class="chip chip-neutral">Retrieval cats: Oven, RiceCooker, MenuProvider, Dishwasher, LaundryDryer, Clock, AirConditioner, Button, TemperatureSensor, Door</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">94.6897</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9379</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">11448</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">48</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">11496</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">6.357s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">9.699s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1808.5140</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">30.955 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">service_retrieval_fallback</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">10</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">used</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Oven).Oven_AddMoreTime(300)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Oven).oven_addmoretime(300)</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>gt_mismatch</span><span class='chip chip-failure'>semantic</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>(#Oven).Oven_AddMoreTime(300)</code></td><td><code>(#Oven).oven_addmoretime(300)</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 3 · Category 1</h2>
+              <p class="command-eng">Start the rice cooker on cooking mode for 30 minutes.</p>
+              <p class="command-kor">밥솥을 조리 모드로 30분 작동시켜.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: StartRiceCookerInCookingModeFor30Minutes</span>
+              <span class="chip chip-neutral">Retrieval cats: RiceCooker, Oven, Dishwasher, RobotVacuumCleaner, FaceRecognizer, AudioRecorder, CarbonDioxideSensor, MenuProvider, Charger, Siren</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">47.8113</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.4789</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">0.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">0.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">0.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">0.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">10773</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">88</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">10861</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">8.296s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">11.579s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1309.2167</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">30.753 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">service_retrieval_fallback</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">10</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">used</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#RiceCooker).RiceCooker_SetCookingParameters(&quot;cooking&quot;, 1800)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#RiceCooker).ricecooker_setricecookermode(cooking)
+delay(1800000)
+(#RiceCooker).ricecooker_addmoretime(30)</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>arg_type</span><span class='chip chip-failure'>enum_grounding</span><span class='chip chip-failure'>gt_mismatch</span><span class='chip chip-failure'>gt_receiver_coverage</span><span class='chip chip-failure'>gt_service_coverage</span><span class='chip chip-failure'>numeric_grounding</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>(#RiceCooker).RiceCooker_SetCookingParameters(&quot;cooking&quot;, 1800)</code></td><td><code>(#RiceCooker).ricecooker_setricecookermode(cooking)</code></td></tr><tr class='diff-row diff'><td><code></code></td><td><code>delay(1800000)</code></td></tr><tr class='diff-row diff'><td><code></code></td><td><code>(#RiceCooker).ricecooker_addmoretime(30)</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 4 · Category 1</h2>
+              <p class="command-eng">Set the siren to emergency mode.</p>
+              <p class="command-kor">사이렌을 응급모드로 울려줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: SetSirenToEmergencyMode</span>
+              <span class="chip chip-neutral">Retrieval cats: Siren, SoundSensor, AudioRecorder, Speaker, Pump, Oven, Safe, ArmRobot, RiceCooker, PressureSensor</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">95.2115</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9423</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">10920</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">48</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">10968</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">6.190s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">9.557s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1771.7757</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">30.797 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">service_retrieval_fallback</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">10</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">used</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Siren).Siren_SetSirenMode(&quot;emergency&quot;)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Siren).siren_setsirenmode(emergency)</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>arg_type</span><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>(#Siren).Siren_SetSirenMode(&quot;emergency&quot;)</code></td><td><code>(#Siren).siren_setsirenmode(emergency)</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 5 · Category 1</h2>
+              <p class="command-eng">Set the speaker volume to 30.</p>
+              <p class="command-kor">스피커의 볼륨을 30으로 설정해줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: SetSpeakerVolume</span>
+              <span class="chip chip-neutral">Retrieval cats: Speaker, SoundSensor, AudioRecorder, Siren, Television, Pump, PressureSensor, AirPurifier, CloudServiceProvider, LevelControl</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">98.5891</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9578</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">11580</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">43</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">11623</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">6.149s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">9.411s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1890.1031</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">30.997 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">service_retrieval_fallback</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">10</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">used</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Speaker).Speaker_SetVolume(30)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Speaker).speaker_setvolume(30)</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>(#Speaker).Speaker_SetVolume(30)</code></td><td><code>(#Speaker).speaker_setvolume(30)</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 6 · Category 1</h2>
+              <p class="command-eng">Turn the TV channel down by one.</p>
+              <p class="command-kor">TV 채널을 하나 내려줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: TurnTVChannelDown</span>
+              <span class="chip chip-neutral">Retrieval cats: Television, DimmerSwitch, Speaker, TapDialSwitch, Dishwasher, Camera, Switch, LevelControl, Valve, Dehumidifier</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">97.8224</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9645</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">11684</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">45</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">11729</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">6.329s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">9.621s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1853.3618</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">31.023 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">service_retrieval_fallback</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">10</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">used</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Television).Television_ChannelDown()</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Television).television_channeldown()</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>(#Television).Television_ChannelDown()</code></td><td><code>(#Television).television_channeldown()</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 7 · Category 1</h2>
+              <p class="command-eng">Switch the TV to channel 7.</p>
+              <p class="command-kor">TV로 7번 채널을 틀어줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: SwitchTVToChannel7</span>
+              <span class="chip chip-neutral">Retrieval cats: Television, Switch, TapDialSwitch, LevelControl, DimmerSwitch, Valve, Dishwasher, Speaker, Camera, ColorControl</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">97.4224</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9645</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">11558</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">46</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">11604</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">6.357s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">9.941s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1825.2745</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">30.986 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">service_retrieval_fallback</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">10</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">used</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Television).Television_SetChannel(7)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Television).television_setchannel(7)</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>(#Television).Television_SetChannel(7)</code></td><td><code>(#Television).television_setchannel(7)</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 8 · Category 1</h2>
+              <p class="command-eng">Announce the temperature through the speaker.</p>
+              <p class="command-kor">현재 온도를 스피커로 알려줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: AnnounceTemperatureThroughSpeaker</span>
+              <span class="chip chip-neutral">Retrieval cats: Speaker, TemperatureSensor, AirConditioner, WeatherProvider, AudioRecorder, SoundSensor, PresenceVitalSensor, AirQualitySensor, Siren, Television</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">69.9000</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.7217</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">0.2000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">12004</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">76</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">12080</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">8.174s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">11.494s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1477.8205</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">31.121 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">service_retrieval_fallback</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">10</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">used</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>temp = (#TemperatureSensor).TemperatureSensor_Temperature
+
+(#Speaker).Speaker_Speak(&quot;현재 온도는 &quot; + temp + &quot;도입니다&quot;)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#TemperatureSensor).temperaturesensor_temperature() =&gt; (#Speaker).speaker_speak(&quot;The current temperature is &quot;) + (#TemperatureSensor).temperaturesensor_temperature() + &quot; degrees Celsius&quot;</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>dataflow</span><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>temp = (#TemperatureSensor).TemperatureSensor_Temperature</code></td><td><code>(#TemperatureSensor).temperaturesensor_temperature() =&gt; (#Speaker).speaker_speak(&quot;The current temperature is &quot;) + (#TemperatureSensor).temperaturesensor_temperature() + &quot; degrees Celsius&quot;</code></td></tr><tr class='diff-row same'><td><code></code></td><td><code></code></td></tr><tr class='diff-row diff'><td><code>(#Speaker).Speaker_Speak(&quot;현재 온도는 &quot; + temp + &quot;도입니다&quot;)</code></td><td><code></code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 9 · Category 1</h2>
+              <p class="command-eng">Tell me the outdoor temperature through the speaker.</p>
+              <p class="command-kor">외부 온도를 스피커로 출력해줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: TellOutdoorTemperatureThroughSpeaker</span>
+              <span class="chip chip-neutral">Retrieval cats: Speaker, TemperatureSensor, WeatherProvider, AirConditioner, SoundSensor, AudioRecorder, AirQualitySensor, Siren, PresenceVitalSensor, AirPurifier</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">62.5190</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.6895</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">0.5000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">0.5000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">0.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">11929</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">75</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">12004</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">8.145s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">11.437s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1473.7514</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">31.096 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">service_retrieval_fallback</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">10</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">used</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>temp = (#WeatherProvider).WeatherProvider_TemperatureWeather
+
+(#Speaker).Speaker_Speak(&quot;외부 온도는 &quot; + temp + &quot;도입니다&quot;)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#WeatherProvider).weatherprovider_getweatherinfo().split(&quot;,&quot;)[0].let(temp =&gt; (#Speaker).speaker_speak(&quot;The outdoor temperature is &quot; + temp + &quot; degrees Celsius.&quot;))</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>arg_type</span><span class='chip chip-failure'>dataflow</span><span class='chip chip-failure'>extraneous</span><span class='chip chip-failure'>gt_mismatch</span><span class='chip chip-failure'>gt_receiver_coverage</span><span class='chip chip-failure'>gt_service_coverage</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>temp = (#WeatherProvider).WeatherProvider_TemperatureWeather</code></td><td><code>(#WeatherProvider).weatherprovider_getweatherinfo().split(&quot;,&quot;)[0].let(temp =&gt; (#Speaker).speaker_speak(&quot;The outdoor temperature is &quot; + temp + &quot; degrees Celsius.&quot;))</code></td></tr><tr class='diff-row same'><td><code></code></td><td><code></code></td></tr><tr class='diff-row diff'><td><code>(#Speaker).Speaker_Speak(&quot;외부 온도는 &quot; + temp + &quot;도입니다&quot;)</code></td><td><code></code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 10 · Category 1</h2>
+              <p class="command-eng">Tell me the current humidity through the speaker.</p>
+              <p class="command-kor">현재 습도를 스피커로 말해줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: TellHumidityThroughSpeaker</span>
+              <span class="chip chip-neutral">Retrieval cats: Speaker, HumiditySensor, SoundSensor, WeatherProvider, AirQualitySensor, AudioRecorder, Humidifier, AirPurifier, Plug, Charger</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">69.9000</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.8701</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">0.2000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">11342</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">62</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">11404</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">7.166s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">10.434s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1591.4039</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">30.925 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">service_retrieval_fallback</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">10</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">used</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>hum = (#HumiditySensor).HumiditySensor_Humidity
+
+(#Speaker).Speaker_Speak(&quot;현재 습도는 &quot; + hum + &quot;%입니다&quot;)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#HumiditySensor).humiditysensor_humidity() -&gt; (#Speaker).speaker_speak(&quot;The current humidity is &quot;) + str()</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>dataflow</span><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>hum = (#HumiditySensor).HumiditySensor_Humidity</code></td><td><code>(#HumiditySensor).humiditysensor_humidity() -&gt; (#Speaker).speaker_speak(&quot;The current humidity is &quot;) + str()</code></td></tr><tr class='diff-row same'><td><code></code></td><td><code></code></td></tr><tr class='diff-row diff'><td><code>(#Speaker).Speaker_Speak(&quot;현재 습도는 &quot; + hum + &quot;%입니다&quot;)</code></td><td><code></code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 31 · Category 2</h2>
+              <p class="command-eng">Set the living room light to yellow.</p>
+              <p class="command-kor">거실 조명을 노란색으로 설정해줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: SetLivingRoomLightToYellow</span>
+              <span class="chip chip-neutral">Retrieval cats: -</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">60.1324</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.6265</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">0.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">0.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">7893</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">60</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">7953</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">5.591s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">8.018s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1422.3375</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">29.892 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">connected_devices_only</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">2</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">skipped_connected_devices_present</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#LivingRoom #Light).ColorControl_SetColor(&quot;255|255|0&quot;)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#LivingRoom #Light).light_movetorgb(255, 255, 0)</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>gt_mismatch</span><span class='chip chip-failure'>gt_receiver_coverage</span><span class='chip chip-failure'>gt_service_coverage</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>(#LivingRoom #Light).ColorControl_SetColor(&quot;255|255|0&quot;)</code></td><td><code>(#LivingRoom #Light).light_movetorgb(255, 255, 0)</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 32 · Category 2</h2>
+              <p class="command-eng">Capture an image of the meeting room with the camera.</p>
+              <p class="command-kor">카메라로 회의실 사진을 촬영해줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: CaptureMeetingRoomImage</span>
+              <span class="chip chip-neutral">Retrieval cats: -</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">97.4466</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9693</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">5402</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">44</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">5446</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">3.844s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">6.176s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1416.9377</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">29.146 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">connected_devices_only</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">2</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">skipped_connected_devices_present</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#MeetingRoom #Camera).Camera_CaptureImage()</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#MeetingRoom #Camera).camera_captureimage()</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>(#MeetingRoom #Camera).Camera_CaptureImage()</code></td><td><code>(#MeetingRoom #Camera).camera_captureimage()</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 33 · Category 2</h2>
+              <p class="command-eng">Set the brightness of the living room light to 80%.</p>
+              <p class="command-kor">거실 조명의 밝기를 80%로 설정해줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: SetLivingRoomLightBrightness</span>
+              <span class="chip chip-neutral">Retrieval cats: -</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">96.8163</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9633</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">7187</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">53</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">7240</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">4.951s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">7.324s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1462.4490</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">29.680 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">connected_devices_only</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">2</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">skipped_connected_devices_present</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#LivingRoom #Light).Light_MoveToBrightness(80, 0)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#LivingRoom #Light).light_movetobrightness(80, 0)</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>(#LivingRoom #Light).Light_MoveToBrightness(80, 0)</code></td><td><code>(#LivingRoom #Light).light_movetobrightness(80, 0)</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 34 · Category 2</h2>
+              <p class="command-eng">Set all dehumidifiers in the lab to AI drying mode.</p>
+              <p class="command-kor">연구실 제습기를 모두 AI건조모드로 설정해줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: SetDehumidifiersToAIDryingMode</span>
+              <span class="chip chip-neutral">Retrieval cats: -</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">92.5321</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9664</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">5424</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">63</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">5487</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">4.814s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">7.223s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1139.7769</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">29.154 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">connected_devices_only</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">3</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">skipped_connected_devices_present</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>all(#Lab #Dehumidifier).Dehumidifier_SetDehumidifierMode(&quot;AIDrying&quot;)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>all(#Lab #Dehumidifier).dehumidifier_setdehumidifiermode(AIDrying)</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>arg_type</span><span class='chip chip-failure'>gt_mismatch</span><span class='chip chip-failure'>semantic</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>all(#Lab #Dehumidifier).Dehumidifier_SetDehumidifierMode(&quot;AIDrying&quot;)</code></td><td><code>all(#Lab #Dehumidifier).dehumidifier_setdehumidifiermode(AIDrying)</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 35 · Category 2</h2>
+              <p class="command-eng">Set the hue of the living room light to 240 and the saturation to 80.</p>
+              <p class="command-kor">거실 조명의 색조는 240, 채도는 80으로 맞춰줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: SetLivingRoomLightHueAndSaturation</span>
+              <span class="chip chip-neutral">Retrieval cats: -</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">97.0965</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9526</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">7186</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">62</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">7248</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">5.435s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">7.808s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1333.4805</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">29.679 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">connected_devices_only</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">2</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">skipped_connected_devices_present</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#LivingRoom #Light).Light_MoveToHueAndSaturation(240, 80)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#LivingRoom #Light).light_movetohueandsaturation(240, 80)</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>(#LivingRoom #Light).Light_MoveToHueAndSaturation(240, 80)</code></td><td><code>(#LivingRoom #Light).light_movetohueandsaturation(240, 80)</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 36 · Category 2</h2>
+              <p class="command-eng">Set all robot vacuum cleaners with even tags to auto mode.</p>
+              <p class="command-kor">짝수 태그 로봇 청소기를 모두 자동 모드로 설정해줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: SetAllEvenRobotVacuumCleanersToAutoMode</span>
+              <span class="chip chip-neutral">Retrieval cats: -</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">93.8098</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9477</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">4715</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">66</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">4781</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">4.666s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">7.072s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1024.7123</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">28.939 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">connected_devices_only</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">2</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">skipped_connected_devices_present</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>all(#Even #RobotVacuumCleaner).RobotVacuumCleaner_SetRobotVacuumCleanerModeMode(&quot;auto&quot;)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>all(#Even #RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(auto)</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>arg_type</span><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>all(#Even #RobotVacuumCleaner).RobotVacuumCleaner_SetRobotVacuumCleanerModeMode(&quot;auto&quot;)</code></td><td><code>all(#Even #RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(auto)</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 37 · Category 2</h2>
+              <p class="command-eng">Lock all door locks.</p>
+              <p class="command-kor">모든 도어락을 잠궈줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: LockAllDoorLocks</span>
+              <span class="chip chip-neutral">Retrieval cats: -</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">97.0170</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.8034</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">4614</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">58</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">4672</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">4.256s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">6.617s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1097.7186</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">28.913 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">connected_devices_only</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">2</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">skipped_connected_devices_present</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>all(#DoorLock).DoorLock_Lock()</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>all(#Back #DoorLock).doorlock_lock()
+all(#Front #DoorLock).doorlock_lock()</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>all(#DoorLock).DoorLock_Lock()</code></td><td><code>all(#Back #DoorLock).doorlock_lock()</code></td></tr><tr class='diff-row diff'><td><code></code></td><td><code>all(#Front #DoorLock).doorlock_lock()</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 38 · Category 2</h2>
+              <p class="command-eng">Set the target temperature of the air conditioner in Sector1 to 18 degrees.</p>
+              <p class="command-kor">구역1의 에어컨의 목표 온도를 18도로 설정해줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: SetSector1ACTargetTemperature</span>
+              <span class="chip chip-neutral">Retrieval cats: -</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">95.2985</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9597</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">0.5000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">4906</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">56</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">4962</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">4.269s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">6.622s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1162.4148</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">28.999 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">connected_devices_only</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">2</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">skipped_connected_devices_present</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Sector1 #AirConditioner).AirConditioner_SetTargetTemperature(18)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Sector1 #AirConditioner).airconditioner_settargettemperature(18.0)</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>gt_mismatch</span><span class='chip chip-failure'>numeric_grounding</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>(#Sector1 #AirConditioner).AirConditioner_SetTargetTemperature(18)</code></td><td><code>(#Sector1 #AirConditioner).airconditioner_settargettemperature(18.0)</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 39 · Category 2</h2>
+              <p class="command-eng">Change the air purifier in the bedroom to sleep mode.</p>
+              <p class="command-kor">안방의 공기청정기를 수면모드로 바꿔줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: ChangeAirPurifierMode</span>
+              <span class="chip chip-neutral">Retrieval cats: -</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">94.8460</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9492</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">4621</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">56</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">4677</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">4.169s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">6.556s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1121.7441</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">28.915 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">connected_devices_only</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">2</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">skipped_connected_devices_present</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Bedroom #AirPurifier).AirPurifier_SetAirPurifierMode(&quot;sleep&quot;)</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>(#Bedroom #AirPurifier).airpurifier_setairpurifiermode(sleep)</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>arg_type</span><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>(#Bedroom #AirPurifier).AirPurifier_SetAirPurifierMode(&quot;sleep&quot;)</code></td><td><code>(#Bedroom #AirPurifier).airpurifier_setairpurifiermode(sleep)</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+        <section class="row-card">
+          <div class="row-header">
+            <div>
+              <h2>Row 40 · Category 2</h2>
+              <p class="command-eng">Close all valves in the kitchen.</p>
+              <p class="command-kor">주방의 모든 벨브를 닫아줘.</p>
+            </div>
+            <div class="row-meta">
+              <span class="chip chip-neutral">GT name: -</span>
+              <span class="chip chip-neutral">Output name: CloseAllValvesInKitchen</span>
+              <span class="chip chip-neutral">Retrieval cats: -</span>
+            </div>
+          </div>
+          <div class="badge-grid"><div class="badge badge-primary"><span class="badge-label">DET</span><span class="badge-value">97.4676</span></div><div class="badge badge-primary"><span class="badge-label">Pass</span><span class="badge-value">Yes</span></div><div class="badge badge-neutral"><span class="badge-label">GT Exact</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Similarity</span><span class="badge-value">0.9735</span></div><div class="badge badge-neutral"><span class="badge-label">GT Service Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Receiver Cov.</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Dataflow</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Numeric</span><span class="badge-value">1.0000</span></div><div class="badge badge-neutral"><span class="badge-label">Enum</span><span class="badge-value">1.0000</span></div><div class="badge badge-accent"><span class="badge-label">Prompt Tokens</span><span class="badge-value">5099</span></div><div class="badge badge-accent"><span class="badge-label">Completion Tokens</span><span class="badge-value">47</span></div><div class="badge badge-accent"><span class="badge-label">Total Tokens</span><span class="badge-value">5146</span></div><div class="badge badge-accent"><span class="badge-label">LLM Latency</span><span class="badge-value">3.857s</span></div><div class="badge badge-accent"><span class="badge-label">Pipeline</span><span class="badge-value">6.195s</span></div><div class="badge badge-accent"><span class="badge-label">Tok/s</span><span class="badge-value">1334.3013</span></div><div class="badge badge-warn"><span class="badge-label">Peak VRAM</span><span class="badge-value">29.056 GB</span></div><div class="badge badge-neutral"><span class="badge-label">OOM</span><span class="badge-value">No</span></div><div class="badge badge-neutral"><span class="badge-label">Snippet Source</span><span class="badge-value">connected_devices_only</span></div><div class="badge badge-neutral"><span class="badge-label">Device Count</span><span class="badge-value">3</span></div><div class="badge badge-neutral"><span class="badge-label">Retrieval</span><span class="badge-value">skipped_connected_devices_present</span></div><div class="badge badge-neutral"><span class="badge-label">Top-k</span><span class="badge-value">10</span></div></div>
+          <div class="code-grid">
+            <div class="code-panel">
+              <h3>GT JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>all(#Kitchen #Valve).Valve_Close()</code></pre>
+            </div>
+            <div class="code-panel">
+              <h3>Generated JOICode</h3>
+              <div class="code-meta">cron=&quot;&quot; · period=0</div>
+              <pre><code>all(#Kitchen #Valve).valve_close()</code></pre>
+            </div>
+          </div>
+          <div class="subgrid">
+            <div class="subpanel">
+              <h4>Failure Reasons</h4>
+              <div class="chip-wrap"><span class='chip chip-failure'>gt_mismatch</span></div>
+            </div>
+            <div class="subpanel">
+              <h4>Line Diff</h4>
+              <table class='diff-table'><thead><tr><th>GT</th><th>Generated</th></tr></thead><tbody><tr class='diff-row diff'><td><code>all(#Kitchen #Valve).Valve_Close()</code></td><td><code>all(#Kitchen #Valve).valve_close()</code></td></tr></tbody></table>
+            </div>
+          </div>
+        </section>
+        
+    <p class="footer-note">Generated from /home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_222827/row_comparison.csv. PDF export uses headless Chrome when available.</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,444 @@
+{
+  "output_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752",
+  "manifest": {
+    "created_at": "2026-04-23T22:07:52.033309",
+    "suite": "paper_local5",
+    "requested_model_keys": [
+      "qwen25_coder_7b"
+    ],
+    "model_keys": [
+      "qwen25_coder_7b"
+    ],
+    "genome_json": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/best_genome.json",
+    "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499",
+    "blocks": [
+      "01",
+      "02",
+      "03"
+    ],
+    "candidate_strategies": [
+      "compact_json",
+      "minimal",
+      "explicit_preconditions",
+      "direct"
+    ],
+    "candidate_k": 1,
+    "det_profile": "strict",
+    "repair_threshold": 70.0,
+    "repair_attempts": 0,
+    "category_filters": [],
+    "limit_per_category": null,
+    "row_count": 1,
+    "row_nos": [
+      10
+    ],
+    "warmup_row_count": 0,
+    "warmup_row_nos": [],
+    "preflight": [
+      {
+        "model_key": "qwen25_coder_7b",
+        "model_label": "Qwen2.5-Coder-7B-Instruct",
+        "mode": "worker",
+        "backend": "transformers_worker",
+        "configured_model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+        "status": "ready",
+        "message": "cached locally (hf_cache, snapshots=1)",
+        "ollama_used": false,
+        "local_model_name": "Qwen/Qwen2.5-Coder-7B-Instruct",
+        "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242",
+        "local_files_only": true,
+        "local_device": "cuda:0",
+        "local_dtype": "bf16",
+        "local_load_in_4bit": false,
+        "local_attn_implementation": "",
+        "cache_kind": "hf_cache",
+        "cache_path": "/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242",
+        "cache_exists": true,
+        "snapshot_count": 1,
+        "cache_complete": true,
+        "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
+        "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py",
+        "persistent_worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
+        "persistent_worker": true,
+        "worker_runtime": {
+          "ok": true,
+          "torch_version": "2.9.1+cu128",
+          "cuda_available": true,
+          "device_count": 2,
+          "cuda_devices": [
+            "NVIDIA RTX A6000",
+            "NVIDIA RTX A6000"
+          ],
+          "transformers_version": "4.57.3",
+          "python_path": "/home/mgjeong/miniconda3/envs/l/bin/python",
+          "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py",
+          "persistent_worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
+          "persistent_worker": true,
+          "hf_modules_cache": "/tmp/joi_v15_hf_modules"
+        }
+      }
+    ],
+    "skipped_models": [],
+    "skip_unavailable": false,
+    "requested_max_workers": 1,
+    "debug_runtime": false,
+    "measure_latency": false,
+    "measure_vram": false,
+    "latency_isolation_mode": "inherit",
+    "paper_fair_mode": false,
+    "export_paper_artifacts": false,
+    "effective_max_workers": 1,
+    "latency_comparison_fair": false
+  },
+  "models": [
+    {
+      "model_key": "qwen25_coder_7b",
+      "model_label": "Qwen2.5-Coder-7B-Instruct",
+      "mode": "worker",
+      "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "endpoint": "",
+      "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__qwen25_coder_7b",
+      "blocks": [
+        "01",
+        "02",
+        "03"
+      ],
+      "temperature": 0.1,
+      "max_tokens": 768,
+      "candidate_k": 1,
+      "repair_attempts": 0,
+      "llm_extra_payload": {},
+      "runtime": {
+        "model_key": "qwen25_coder_7b",
+        "model_label": "Qwen2.5-Coder-7B-Instruct",
+        "mode": "worker",
+        "backend": "transformers_worker",
+        "configured_model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+        "status": "ready",
+        "message": "cached locally (hf_cache, snapshots=1)",
+        "ollama_used": false,
+        "local_model_name": "Qwen/Qwen2.5-Coder-7B-Instruct",
+        "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242",
+        "local_files_only": true,
+        "local_device": "cuda:0",
+        "local_dtype": "bf16",
+        "local_load_in_4bit": false,
+        "local_attn_implementation": "",
+        "cache_kind": "hf_cache",
+        "cache_path": "/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242",
+        "cache_exists": true,
+        "snapshot_count": 1,
+        "cache_complete": true,
+        "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
+        "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py",
+        "persistent_worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
+        "persistent_worker": true,
+        "worker_runtime": {
+          "ok": true,
+          "torch_version": "2.9.1+cu128",
+          "cuda_available": true,
+          "device_count": 2,
+          "cuda_devices": [
+            "NVIDIA RTX A6000",
+            "NVIDIA RTX A6000"
+          ],
+          "transformers_version": "4.57.3",
+          "python_path": "/home/mgjeong/miniconda3/envs/l/bin/python",
+          "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py",
+          "persistent_worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
+          "persistent_worker": true,
+          "hf_modules_cache": "/tmp/joi_v15_hf_modules"
+        }
+      },
+      "resolved_model_path": "/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242",
+      "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
+      "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py",
+      "persistent_worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
+      "persistent_worker": true,
+      "local_device": "cuda:0",
+      "local_dtype": "bf16",
+      "local_load_in_4bit": false,
+      "local_attn_implementation": "",
+      "local_files_only": true,
+      "latency_isolation_mode": "inherit",
+      "paper_fair_mode": false,
+      "generation": {
+        "run_id": "suite_qwen25_coder_7b_gen-10d1e822-839a-a138-8806-3c64fda98499_qwen25_coder_7b_15",
+        "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/qwen25_coder_7b_candidates.csv",
+        "jsonl_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/candidates_suite_qwen25_coder_7b_gen-10d1e822-839a-a138-8806-3c64fda98499_qwen25_coder_7b_15.jsonl",
+        "row_count": 1,
+        "rows": [
+          {
+            "index": "10",
+            "category": "1",
+            "command_kor": "현재 습도를 스피커로 말해줘.",
+            "command_eng": "Tell me the current humidity through the speaker.",
+            "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nhum = (#HumiditySensor).Humidity\\n\\n(#Speaker).Speak(\\\"현재 습도는 \\\" + hum + \\\"%입니다\\\")\"}",
+            "connected_devices": "",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nhum = (#HumiditySensor).HumiditySensor_Humidity\\n\\n(#Speaker).Speaker_Speak(\\\"현재 습도는 \\\" + hum + \\\"%입니다\\\")\"}",
+            "row_no": 10,
+            "profile": "version0_15_update20260413",
+            "genome_id": "gen-10d1e822-839a-a138-8806-3c64fda98499__qwen25_coder_7b",
+            "genome_seed": 975035167,
+            "run_id": "suite_qwen25_coder_7b_gen-10d1e822-839a-a138-8806-3c64fda98499_qwen25_coder_7b_15",
+            "candidate_count": 1,
+            "candidates": "[\"{\\\"name\\\":\\\"TellMeCurrentHumidity\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#AirQualitySensor).airqualitysensor_humidity()\\\"}\"]",
+            "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"compact_json\", \"prompt_chars\": 153418, \"prompt_tokens\": 31869, \"completion_tokens\": 46, \"total_tokens\": 31915, \"latency_sec\": 17.609, \"peak_vram_gb\": 20.1411, \"load_sec\": 5.9568, \"generate_sec\": 7.9158, \"prompt_prep_sec\": 0.0903, \"decode_sec\": 0.0004, \"worker_pid\": 3084800, \"error_type\": \"\", \"oom_flag\": false, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/01_preamble.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, micro_rules\", \"description\": \"Global deterministic JOILang generation rules and schema-faithful behavior.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/02_generator_prompt.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"Main JOILang generator block with deterministic JSON-only output and schema-grounded exemplars.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/03_postprocessor.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"max_tokens, micro_rules\", \"description\": \"Final JOILang output scrubber that enforces JSON shape and strips explanation drift.\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}\"}}]}]",
+            "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/suite_qwen25_coder_7b_gen-10d1e822-839a-a138-8806-3c64fda98499_qwen25_coder_7b_15/row_010_cand_1.json\"]",
+            "generation_status": "ok",
+            "generation_total_pipeline_sec": 20.0276,
+            "llm_mode": "worker",
+            "llm_model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+            "service_list_snippet_source": "service_schema_fallback",
+            "service_list_device_count": 50,
+            "service_list_retrieval_status": "disabled",
+            "service_list_retrieval_mode": "hybrid",
+            "service_list_retrieval_topk": 10,
+            "service_list_retrieval_device": "cpu",
+            "service_list_retrieval_categories": "[]",
+            "service_list_retrieval_scores": "[]",
+            "service_list_retrieval_fallback_reason": "",
+            "generation_call_count": 1,
+            "generation_error_count": 0,
+            "generation_error_type": "",
+            "generation_error_types": "[]",
+            "generation_oom_flag": false,
+            "generation_prompt_chars_total": 153418,
+            "generation_prompt_tokens_total": 31869,
+            "generation_completion_tokens_total": 46,
+            "generation_total_tokens_total": 31915,
+            "generation_llm_latency_sec": 17.609,
+            "generation_peak_vram_gb": 20.1411
+          }
+        ],
+        "fieldnames": [
+          "index",
+          "category",
+          "command_kor",
+          "command_eng",
+          "gt_raw",
+          "connected_devices",
+          "gt",
+          "row_no",
+          "profile",
+          "genome_id",
+          "genome_seed",
+          "run_id",
+          "candidate_count",
+          "candidates",
+          "candidate_metadata",
+          "prompt_log_paths",
+          "generation_status",
+          "generation_total_pipeline_sec",
+          "llm_mode",
+          "llm_model",
+          "service_list_snippet_source",
+          "service_list_device_count",
+          "service_list_retrieval_status",
+          "service_list_retrieval_mode",
+          "service_list_retrieval_topk",
+          "service_list_retrieval_device",
+          "service_list_retrieval_categories",
+          "service_list_retrieval_scores",
+          "service_list_retrieval_fallback_reason",
+          "generation_call_count",
+          "generation_error_count",
+          "generation_error_type",
+          "generation_error_types",
+          "generation_oom_flag",
+          "generation_prompt_chars_total",
+          "generation_prompt_tokens_total",
+          "generation_completion_tokens_total",
+          "generation_total_tokens_total",
+          "generation_llm_latency_sec",
+          "generation_peak_vram_gb"
+        ]
+      },
+      "warmup": {
+        "row_count": 0,
+        "row_nos": [],
+        "candidate_count": 0,
+        "cold_load_sec": 0.0,
+        "output_csv": ""
+      },
+      "rerank": {
+        "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/qwen25_coder_7b_rerank.csv",
+        "row_count": 1,
+        "repaired_count": 0
+      },
+      "metrics": {
+        "row_count": 1,
+        "avg_det_score": 49.1475,
+        "avg_gt_similarity": 0.5152,
+        "gt_exact_count": 0,
+        "pass_count": 0,
+        "fail_count": 1,
+        "top_failure_types": [
+          [
+            "dataflow",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "gt_receiver_coverage",
+            1
+          ],
+          [
+            "gt_service_coverage",
+            1
+          ]
+        ],
+        "failed_row_nos": [
+          10
+        ],
+        "failed_cases": [
+          {
+            "row_no": 10,
+            "command_eng": "Tell me the current humidity through the speaker.",
+            "det_score": 49.1475,
+            "threshold": 70.0,
+            "failure_reasons": [
+              "dataflow",
+              "gt_mismatch",
+              "gt_receiver_coverage",
+              "gt_service_coverage"
+            ],
+            "output": "{\"name\":\"TellMeCurrentHumidity\",\"cron\":\"\",\"period\":0,\"code\":\"(#AirQualitySensor).airqualitysensor_humidity()\"}",
+            "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nhum = (#HumiditySensor).HumiditySensor_Humidity\\n\\n(#Speaker).Speaker_Speak(\\\"현재 습도는 \\\" + hum + \\\"%입니다\\\")\"}"
+          }
+        ]
+      },
+      "usage": {
+        "candidate_count": 1,
+        "avg_prompt_tokens": 31869.0,
+        "avg_completion_tokens": 46.0,
+        "avg_total_tokens": 31915.0,
+        "avg_latency_sec": 17.609,
+        "error_count": 0,
+        "top_errors": []
+      },
+      "row_metrics": [
+        {
+          "model_key": "qwen25_coder_7b",
+          "model_label": "Qwen2.5-Coder-7B-Instruct",
+          "row_no": 10,
+          "row_category": "1",
+          "category": "1",
+          "command_eng": "Tell me the current humidity through the speaker.",
+          "command_kor": "현재 습도를 스피커로 말해줘.",
+          "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nhum = (#HumiditySensor).HumiditySensor_Humidity\\n\\n(#Speaker).Speaker_Speak(\\\"현재 습도는 \\\" + hum + \\\"%입니다\\\")\"}",
+          "output": "{\"name\":\"TellMeCurrentHumidity\",\"cron\":\"\",\"period\":0,\"code\":\"(#AirQualitySensor).airqualitysensor_humidity()\"}",
+          "det_score": 49.1475,
+          "det_pass": false,
+          "det_profile": "strict",
+          "gt_exact": false,
+          "det_valid_json": true,
+          "det_gt_similarity": 0.515217,
+          "det_gt_service_coverage": 0.0,
+          "det_gt_service_precision": 0.0,
+          "det_gt_receiver_coverage": 0.0,
+          "det_dataflow_score": 0.0,
+          "det_numeric_grounding": 1.0,
+          "failure_reasons": [
+            "dataflow",
+            "gt_mismatch",
+            "gt_receiver_coverage",
+            "gt_service_coverage"
+          ],
+          "failure_reasons_json": "[\"dataflow\", \"gt_mismatch\", \"gt_receiver_coverage\", \"gt_service_coverage\"]",
+          "prompt_chars": 153418,
+          "prompt_tokens": 31869,
+          "completion_tokens": 46,
+          "total_tokens": 31915,
+          "llm_latency_sec": 17.609,
+          "total_pipeline_sec": 20.0304,
+          "peak_vram_gb": 20.1411,
+          "generation_error_type": "",
+          "generation_error_types": "[]",
+          "oom_flag": false,
+          "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
+          "resolved_model_path": "/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242",
+          "service_list_snippet_source": "service_schema_fallback",
+          "service_list_device_count": 50,
+          "service_list_retrieval_status": "disabled",
+          "service_list_retrieval_mode": "hybrid",
+          "service_list_retrieval_topk": 10,
+          "service_list_retrieval_categories": "[]",
+          "warmup_excluded": false,
+          "selected_candidate_index": 0,
+          "repair_applied": false,
+          "candidate_count": 1,
+          "generation_call_count": 1,
+          "repair_call_count": 0,
+          "row_success": false,
+          "tokens_per_sec": 1812.4255
+        }
+      ],
+      "paper_metrics": {
+        "row_count": 1,
+        "det_pass_rate": 0.0,
+        "gt_exact_rate": 0.0,
+        "warm_latency_mean": 17.609,
+        "warm_latency_p50": 17.609,
+        "warm_latency_p95": 17.609,
+        "cold_load_sec": 0.0,
+        "avg_prompt_chars": 153418.0,
+        "avg_prompt_tokens": 31869.0,
+        "avg_completion_tokens": 46.0,
+        "avg_total_tokens": 31915.0,
+        "avg_tokens_per_sec": 1812.4255,
+        "peak_vram_gb_max": 20.1411,
+        "oom_count": 0,
+        "generation_error_rate": 0.0,
+        "failure_rate": 1.0,
+        "row_success_rate": 0.0,
+        "failure_reason_topk": [
+          [
+            "dataflow",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "gt_receiver_coverage",
+            1
+          ],
+          [
+            "gt_service_coverage",
+            1
+          ]
+        ],
+        "warmup_row_count": 0
+      },
+      "suite_index": 0
+    }
+  ],
+  "suite_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/suite_summary.csv",
+  "row_comparison_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/row_comparison.csv",
+  "failure_reason_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/failure_reason_summary.csv",
+  "generation_error_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/generation_error_summary.csv",
+  "category_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/category_summary.csv",
+  "category_model_comparison_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/category_model_comparison.csv",
+  "latency_breakdown_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/latency_breakdown.csv",
+  "main_model_comparison_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/main_model_comparison.csv",
+  "tradeoff_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/tradeoff_summary.csv",
+  "latency_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/latency_summary.csv",
+  "vram_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/vram_summary.csv",
+  "tokenizer_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/tokenizer_summary.csv",
+  "paper_metrics_summary_json": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/paper_metrics_summary.json",
+  "paper_artifacts": {
+    "main_model_comparison_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/main_model_comparison.csv",
+    "tradeoff_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/tradeoff_summary.csv",
+    "category_model_comparison_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/category_model_comparison.csv",
+    "latency_breakdown_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/latency_breakdown.csv",
+    "latency_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/latency_summary.csv",
+    "vram_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/vram_summary.csv",
+    "tokenizer_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/tokenizer_summary.csv",
+    "generation_error_summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_220752/generation_error_summary.csv"
+  }
+}
