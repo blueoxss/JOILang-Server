@@ -1,0 +1,355 @@
+row_no,category,row_category,command_eng,command_kor,gt,gt_name,gt_cron,gt_period,gt_code,warmup_excluded,gpt41_mini__det_score,gpt41_mini__det_pass,gpt41_mini__det_profile,gpt41_mini__det_gt_exact,gpt41_mini__det_gt_similarity,gpt41_mini__det_gt_service_coverage,gpt41_mini__det_gt_service_precision,gpt41_mini__det_gt_receiver_coverage,gpt41_mini__det_dataflow_score,gpt41_mini__det_numeric_grounding,gpt41_mini__det_enum_grounding,gpt41_mini__failure_reasons,gpt41_mini__output,gpt41_mini__output_name,gpt41_mini__output_cron,gpt41_mini__output_period,gpt41_mini__output_code,gpt41_mini__prompt_chars,gpt41_mini__prompt_tokens,gpt41_mini__completion_tokens,gpt41_mini__total_tokens,gpt41_mini__llm_latency_sec,gpt41_mini__total_pipeline_sec,gpt41_mini__tokens_per_sec,gpt41_mini__peak_vram_gb,gpt41_mini__generation_error_type,gpt41_mini__oom_flag,gpt41_mini__worker_python,gpt41_mini__resolved_model_path,gpt41_mini__service_list_snippet_source,gpt41_mini__service_list_device_count,gpt41_mini__service_list_retrieval_status,gpt41_mini__service_list_retrieval_mode,gpt41_mini__service_list_retrieval_topk,gpt41_mini__service_list_retrieval_categories,gpt41_mini__prompt_render_mode,gpt41_mini__prompt_assets_dir,gpt41_mini__warmup_excluded,gpt41_mini__row_category
+121,5,5,Switch the TV to channel 7 and switch to channel 11 after 1 hour.,TV 채널을 7번으로 바꾸고 1시간 뒤에 11번으로 바꿔줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Television).television_setchannel(7)\n\ndelay(1 HOUR)\n\n(#Television).television_setchannel(11)""}",,,0,"
+(#Television).television_setchannel(7)
+
+delay(1 HOUR)
+
+(#Television).television_setchannel(11)",False,91.4841,True,strict,False,0.935714,1.0,0.5,1.0,1.0,0.666667,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding""]","{""name"":""TV_Channel_Switch_With_Delay"",""cron"":"""",""period"":0,""code"":""(#Television).television_setchannel(7)\n(#Clock).clock_delay(3600000)\n(#Television).television_setchannel(11)""}",TV_Channel_Switch_With_Delay,,0,"(#Television).television_setchannel(7)
+(#Clock).clock_delay(3600000)
+(#Television).television_setchannel(11)",80481,21294,66,21360,2.5476,7.8661,8384.3618,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Television"", ""Switch"", ""TapDialSwitch"", ""Clock"", ""LevelControl"", ""DimmerSwitch"", ""Speaker"", ""Valve"", ""Dishwasher"", ""Safe""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+122,5,5,Set the air conditioner to cool mode and switch to auto mode after 30 minutes.,에어컨을 냉방 모드로 설정하고 30분 뒤에 자동 모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n\ndelay(30 MIN)\n\n(#AirConditioner).airconditioner_setairconditionermode(\""auto\"")""}",,,0,"
+(#AirConditioner).airconditioner_setairconditionermode(""cool"")
+
+delay(30 MIN)
+
+(#AirConditioner).airconditioner_setairconditionermode(""auto"")",False,69.9,False,strict,False,0.959655,1.0,0.5,1.0,1.0,0.0,0.5,"[""arg_type"", ""enum_grounding"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""AirConditionerCoolThenAuto"",""cron"":"""",""period"":0,""code"":""(#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n(#Clock).clock_delay(1800000)\n(#AirConditioner).airconditioner_setairconditionermode(\""auto\"")""}",AirConditionerCoolThenAuto,,0,"(#AirConditioner).airconditioner_setairconditionermode(""cool"")
+(#Clock).clock_delay(1800000)
+(#AirConditioner).airconditioner_setairconditionermode(""auto"")",75228,19876,77,19953,2.5804,3.5619,7732.5221,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""Dishwasher"", ""Dehumidifier"", ""LaundryDryer"", ""DimmerSwitch"", ""Oven"", ""CarbonDioxideSensor"", ""TemperatureSensor""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+123,5,5,Set the air purifier to auto mode and switch to sleep mode after 2 hours.,공기청정기를 자동 모드로 설정하고 2시간 뒤에 수면 모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#AirPurifier).airpurifier_setairpurifiermode(\""auto\"")\n\ndelay(2 HOUR)\n\n(#AirPurifier).airpurifier_setairpurifiermode(\""sleep\"")""}",,,0,"
+(#AirPurifier).airpurifier_setairpurifiermode(""auto"")
+
+delay(2 HOUR)
+
+(#AirPurifier).airpurifier_setairpurifiermode(""sleep"")",False,69.9,False,strict,False,0.954297,1.0,0.5,1.0,1.0,0.0,0.5,"[""arg_type"", ""enum_grounding"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding""]","{""name"":""AirPurifierAutoThenSleep"",""cron"":"""",""period"":0,""code"":""(#AirPurifier).airpurifier_setairpurifiermode(\""auto\"")\n(#Clock).clock_delay(7200000)\n(#AirPurifier).airpurifier_setairpurifiermode(\""sleep\"")""}",AirPurifierAutoThenSleep,,0,"(#AirPurifier).airpurifier_setairpurifiermode(""auto"")
+(#Clock).clock_delay(7200000)
+(#AirPurifier).airpurifier_setairpurifiermode(""sleep"")",73813,19485,77,19562,2.0405,3.0047,9586.866,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""AirPurifier"", ""AirConditioner"", ""AirQualitySensor"", ""Dishwasher"", ""RobotVacuumCleaner"", ""LaundryDryer"", ""Dehumidifier"", ""Humidifier"", ""Pump"", ""SmokeDetector""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+124,5,5,Set the air conditioner temperature to 24 degrees and change it to 26 degrees after 1 hour.,에어컨 온도를 24도로 설정하고 1시간 뒤에 26도로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#AirConditioner).airconditioner_settargettemperature(24)\n\ndelay(1 HOUR)\n\n(#AirConditioner).airconditioner_settargettemperature(26)""}",,,0,"
+(#AirConditioner).airconditioner_settargettemperature(24)
+
+delay(1 HOUR)
+
+(#AirConditioner).airconditioner_settargettemperature(26)",False,91.6556,True,strict,False,0.953333,1.0,0.5,1.0,1.0,0.666667,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding""]","{""name"":""AirConditioner_TemperatureSchedule"",""cron"":"""",""period"":0,""code"":""(#AirConditioner).airconditioner_settargettemperature(24)\n(#Clock).clock_delay(3600000)\n(#AirConditioner).airconditioner_settargettemperature(26)""}",AirConditioner_TemperatureSchedule,,0,"(#AirConditioner).airconditioner_settargettemperature(24)
+(#Clock).clock_delay(3600000)
+(#AirConditioner).airconditioner_settargettemperature(26)",77958,20555,72,20627,6.957,7.9396,2964.9274,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""Dishwasher"", ""LaundryDryer"", ""TemperatureSensor"", ""Dehumidifier"", ""DimmerSwitch"", ""WeatherProvider"", ""Oven""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+125,5,5,Set the oven mode to Bake and change it to warming mode after 10 minutes.,오븐 모드를 베이크로 설정하고 10분 뒤에 데우기 모드로 바꿔줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Oven).oven_setovenmode(\""Bake\"")\n\ndelay(10 MIN)\n\n(#Oven).oven_setovenmode(\""warming\"")""}",,,0,"
+(#Oven).oven_setovenmode(""Bake"")
+
+delay(10 MIN)
+
+(#Oven).oven_setovenmode(""warming"")",False,69.9,False,strict,False,0.935714,1.0,0.5,1.0,1.0,0.0,0.5,"[""arg_type"", ""enum_grounding"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""OvenModeChangeWithDelay"",""cron"":"""",""period"":0,""code"":""(#Oven).oven_setovenmode(\""Bake\"")\n(#Clock).clock_delay(600000)\n(#Oven).oven_setovenmode(\""warming\"")""}",OvenModeChangeWithDelay,,0,"(#Oven).oven_setovenmode(""Bake"")
+(#Clock).clock_delay(600000)
+(#Oven).oven_setovenmode(""warming"")",74893,19860,70,19930,3.1734,4.1592,6280.3302,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Oven"", ""RiceCooker"", ""AirConditioner"", ""Dishwasher"", ""LaundryDryer"", ""TemperatureSensor"", ""Dehumidifier"", ""Button"", ""MenuProvider"", ""Television""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+126,5,5,"When the presence sensor detects someone, take a picture after 1 minute.",재실 센서에 감지가 되면 1분 뒤에 사진을 찍어줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#PresenceSensor).presencesensor_presence == true)\n\ndelay(1 MIN)\n\n(#Camera).camera_captureimage()""}",,,0,"
+wait until ((#PresenceSensor).presencesensor_presence == true)
+
+delay(1 MIN)
+
+(#Camera).camera_captureimage()",False,69.9,False,strict,False,0.94863,1.0,0.666667,1.0,0.2,0.0,1.0,"[""arg_type"", ""dataflow"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""PresenceDetectedTakePictureAfter1Minute"",""cron"":"""",""period"":0,""code"":""wait until ((#PresenceSensor).presencesensor_presence == true)\n(#Clock).clock_delay(60000)\n(#Camera).camera_captureimage()""}",PresenceDetectedTakePictureAfter1Minute,,0,"wait until ((#PresenceSensor).presencesensor_presence == true)
+(#Clock).clock_delay(60000)
+(#Camera).camera_captureimage()",70138,18392,67,18459,2.3642,3.3157,7807.7151,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""PresenceVitalSensor"", ""MotionSensor"", ""ContactSensor"", ""TemperatureSensor"", ""Camera"", ""LightSensor"", ""PressureSensor"", ""SoundSensor"", ""CarbonDioxideSensor""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+127,5,5,"When the oven enters heating mode, switch it to microwave mode after 3 seconds.",오븐이 가열 모드가 되면 3초 뒤에 전자레인지 모드로 바꿔줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Oven).oven_ovenmode == \""heating\"")\n\ndelay(3 SEC)\n\n(#Oven).oven_setovenmode(\""Microwave\"")""}",,,0,"
+wait until ((#Oven).oven_ovenmode == ""heating"")
+
+delay(3 SEC)
+
+(#Oven).oven_setovenmode(""Microwave"")",False,69.9,False,strict,False,0.9505,1.0,0.666667,1.0,0.2,0.0,1.0,"[""arg_type"", ""dataflow"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding""]","{""name"":""OvenHeatingToMicrowave"",""cron"":"""",""period"":0,""code"":""wait until ((#Oven).oven_ovenmode == \""heating\"")\n(#Clock).clock_delay(3000)\n(#Oven).oven_setovenmode(\""Microwave\"")""}",OvenHeatingToMicrowave,,0,"wait until ((#Oven).oven_ovenmode == ""heating"")
+(#Clock).clock_delay(3000)
+(#Oven).oven_setovenmode(""Microwave"")",77105,20463,75,20538,4.2344,5.208,4850.2739,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Oven"", ""Dishwasher"", ""RiceCooker"", ""DimmerSwitch"", ""Dehumidifier"", ""LaundryDryer"", ""MenuProvider"", ""TapDialSwitch"", ""AirConditioner"", ""Humidifier""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+128,5,5,"When the humidity falls below 30%, output ""Humidity is low"" through the speaker after 3 seconds.","습도가 30%보다 낮아지면 3초 뒤에 스피커로 ""습도가 낮습니다""를 출력해.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#HumiditySensor).humiditysensor_humidity < 30)\n\ndelay(3 SEC)\n\n(#Speaker).speaker_speak(\""습도가 낮습니다\"")""}",,,0,"
+wait until ((#HumiditySensor).humiditysensor_humidity < 30)
+
+delay(3 SEC)
+
+(#Speaker).speaker_speak(""습도가 낮습니다"")",False,69.9,False,strict,False,0.912338,1.0,0.666667,1.0,0.2,0.0,1.0,"[""arg_type"", ""dataflow"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding""]","{""name"":""LowHumidityAlert"",""cron"":"""",""period"":0,""code"":""wait until ((#HumiditySensor).humiditysensor_humidity < 30.0)\n(#Clock).clock_delay(3000)\n(#Speaker).speaker_speak(\""Humidity is low\"")""}",LowHumidityAlert,,0,"wait until ((#HumiditySensor).humiditysensor_humidity < 30.0)
+(#Clock).clock_delay(3000)
+(#Speaker).speaker_speak(""Humidity is low"")",79413,20816,68,20884,1.9721,2.9405,10589.7267,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""Speaker"", ""Humidifier"", ""AirQualitySensor"", ""WeatherProvider"", ""Dehumidifier"", ""AudioRecorder"", ""SoundSensor"", ""RainSensor"", ""PresenceVitalSensor""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+129,5,5,"When it rains, close the door and check again after 1 hour; if it's not raining then, open the door again.",비가 오면 문을 닫고 1시간 뒤에 체크해서 비가 안오면 문을 다시 열어줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#RainSensor).rainsensor_rain == true)\n\n(#Door).door_close()\ndelay(1 HOUR)\n\nif ((#WeatherProvider).weatherprovider_weather != \""rain\"") {\n\n    (#Door).door_open()\n\n}""}",,,0,"
+wait until ((#RainSensor).rainsensor_rain == true)
+
+(#Door).door_close()
+delay(1 HOUR)
+
+if ((#WeatherProvider).weatherprovider_weather != ""rain"") {
+
+    (#Door).door_open()
+
+}",False,68.6218,False,strict,False,0.807692,0.75,0.75,0.75,0.2,0.0,1.0,"[""arg_type"", ""dataflow"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic""]","{""name"":""RainTriggeredDoorControl"",""cron"":"""",""period"":0,""code"":""wait until ((#RainSensor).rainsensor_rain == true)\n(#Door).door_close()\n(#Clock).clock_delay(3600000)\nif ((#RainSensor).rainsensor_rain == false) {\n  (#Door).door_open()\n}""}",RainTriggeredDoorControl,,0,"wait until ((#RainSensor).rainsensor_rain == true)
+(#Door).door_close()
+(#Clock).clock_delay(3600000)
+if ((#RainSensor).rainsensor_rain == false) {
+  (#Door).door_open()
+}",76197,20175,86,20261,5.2632,6.2906,3849.5592,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Door"", ""RainSensor"", ""DoorLock"", ""WeatherProvider"", ""WindowCovering"", ""Valve"", ""Clock"", ""Humidifier"", ""HumiditySensor"", ""Pump""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+130,5,5,"If the dust level concentration is 2000ppm or above, close the door and close the valve after 4 hours.",외부 미세먼지 농도가 2000 이상이면 문을 닫고 4시간 뒤에 밸브를 잠궈줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nif ((#WeatherProvider).weatherprovider_pm10weather >= 2000) {\n\n    (#Door).door_close()\n\n    delay(4 HOUR)\n\n    (#Valve).valve_close()\n \n}""}",,,0,"
+if ((#WeatherProvider).weatherprovider_pm10weather >= 2000) {
+
+    (#Door).door_close()
+
+    delay(4 HOUR)
+
+    (#Valve).valve_close()
+ 
+}",False,69.9,False,strict,False,0.748148,0.666667,0.5,0.666667,0.2,0.416667,1.0,"[""arg_type"", ""dataflow"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding""]","{""name"":""DustLevelTriggerCloseDoorAndValve"",""cron"":"""",""period"":0,""code"":""if ((#AirQualitySensor).airqualitysensor_dustlevel >= 2000) {\n  (#Door).door_close()\n  (#Clock).clock_delay(14400000)\n  (#Valve).valve_close()\n}""}",DustLevelTriggerCloseDoorAndValve,,0,"if ((#AirQualitySensor).airqualitysensor_dustlevel >= 2000) {
+  (#Door).door_close()
+  (#Clock).clock_delay(14400000)
+  (#Valve).valve_close()
+}",76124,20081,81,20162,4.1533,5.1531,4854.4531,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Valve"", ""Door"", ""AirQualitySensor"", ""WindowCovering"", ""DoorLock"", ""RobotVacuumCleaner"", ""Dishwasher"", ""AirPurifier"", ""PresenceVitalSensor"", ""Pump""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+131,5,5,Sound the siren in emergency mode and change it to fire mode after 5 seconds.,사이렌을 응급 모드로 울리고 5초 뒤에 사이렌 모드를 화재 모드로 바꿔줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Siren).siren_setsirenmode(\""emergency\"")\n\ndelay(5 SEC)\n\n(#Siren).siren_setsirenmode(\""fire\"")""}",,,0,"
+(#Siren).siren_setsirenmode(""emergency"")
+
+delay(5 SEC)
+
+(#Siren).siren_setsirenmode(""fire"")",False,69.9,False,strict,False,0.94734,1.0,0.5,1.0,1.0,0.0,0.5,"[""arg_type"", ""enum_grounding"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding""]","{""name"":""SirenEmergencyToFireMode"",""cron"":"""",""period"":0,""code"":""(#Siren).siren_setsirenmode(\""emergency\"")\n(#Clock).clock_delay(5000)\n(#Siren).siren_setsirenmode(\""fire\"")""}",SirenEmergencyToFireMode,,0,"(#Siren).siren_setsirenmode(""emergency"")
+(#Clock).clock_delay(5000)
+(#Siren).siren_setsirenmode(""fire"")",77389,20376,71,20447,2.3255,3.2909,8792.5177,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Siren"", ""SoundSensor"", ""Speaker"", ""AudioRecorder"", ""PresenceVitalSensor"", ""Oven"", ""RiceCooker"", ""Pump"", ""AirPurifier"", ""SmokeDetector""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+132,5,5,"Set the light brightness to 30, then increase it to 80 after 10 minutes.",조명 밝기를 30으로 설정했다가 10분 뒤에 80으로 올려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Light).light_movetobrightness(30, 0)\n\ndelay(10 MIN)\n\n(#Light).light_movetobrightness(80, 0)""}",,,0,"
+(#Light).light_movetobrightness(30, 0)
+
+delay(10 MIN)
+
+(#Light).light_movetobrightness(80, 0)",False,88.8875,True,strict,False,0.923057,1.0,0.5,1.0,1.0,0.8,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""LightBrightnessIncreaseAfterDelay"",""cron"":"""",""period"":0,""code"":""(#Light).light_movetobrightness(30 | 0)\n(#Clock).clock_delay(600000)\n(#Light).light_movetobrightness(80 | 0)""}",LightBrightnessIncreaseAfterDelay,,0,"(#Light).light_movetobrightness(30 | 0)
+(#Clock).clock_delay(600000)
+(#Light).light_movetobrightness(80 | 0)",75802,19976,67,20043,2.5047,3.4563,8002.1559,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Light"", ""LightSensor"", ""ColorControl"", ""DimmerSwitch"", ""Dehumidifier"", ""Humidifier"", ""Television"", ""SmokeDetector"", ""Plug"", ""Dishwasher""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+133,5,5,Start the robot vacuum cleaner in auto mode and switch to manual mode after 30 minutes.,로봇 청소기를 자동 모드로 시작하고 30분 뒤에 수동 모드로 바꿔줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}",,,0,"
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+
+delay(30 MIN)
+
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""manual"")",False,69.9,False,strict,False,0.967318,1.0,0.5,1.0,1.0,0.0,0.5,"[""arg_type"", ""enum_grounding"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""RobotVacuumAutoToManual"",""cron"":"""",""period"":0,""code"":""(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n(#Clock).clock_delay(1800000)\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}",RobotVacuumAutoToManual,,0,"(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+(#Clock).clock_delay(1800000)
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""manual"")",75438,19867,85,19952,2.5937,3.5484,7692.4856,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""RobotVacuumCleaner"", ""ArmRobot"", ""LaundryDryer"", ""Dishwasher"", ""Valve"", ""AirPurifier"", ""Pump"", ""FaceRecognizer"", ""PresenceVitalSensor"", ""Humidifier""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+134,5,5,Set the speaker volume to 20 and increase it to 40 after 10 minutes.,스피커 볼륨을 20으로 설정하고 10분 뒤에 40으로 높여줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Speaker).speaker_setvolume(20)\n\ndelay(10 MIN)\n\n(#Speaker).speaker_setvolume(40)""}",,,0,"(#Speaker).speaker_setvolume(20)
+
+delay(10 MIN)
+
+(#Speaker).speaker_setvolume(40)",False,90.7379,True,strict,False,0.933432,1.0,0.5,1.0,1.0,0.666667,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""SpeakerVolumeIncreaseAfterDelay"",""cron"":"""",""period"":0,""code"":""(#Speaker).speaker_setvolume(20)\n(#Clock).clock_delay(600000)\n(#Speaker).speaker_setvolume(40)""}",SpeakerVolumeIncreaseAfterDelay,,0,"(#Speaker).speaker_setvolume(20)
+(#Clock).clock_delay(600000)
+(#Speaker).speaker_setvolume(40)",81054,21121,59,21180,2.9337,3.9013,7219.5521,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""AudioRecorder"", ""SoundSensor"", ""Siren"", ""Pump"", ""Television"", ""AirPurifier"", ""PresenceVitalSensor"", ""CloudServiceProvider"", ""PressureSensor""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+135,5,5,Start the dehumidifier in drying mode and change to refreshing mode after 1 hour.,제습기를 건조 모드로 작동시키고 1시간 뒤에 리프레쉬 모드로 바꿔줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Dehumidifier).dehumidifier_setdehumidifiermode(\""drying\"")\n\ndelay(1 HOUR)\n\n(#Dehumidifier).dehumidifier_setdehumidifiermode(\""refreshing\"")""}",,,0,"(#Dehumidifier).dehumidifier_setdehumidifiermode(""drying"")
+
+delay(1 HOUR)
+
+(#Dehumidifier).dehumidifier_setdehumidifiermode(""refreshing"")",False,69.9,False,strict,False,0.955319,1.0,0.5,1.0,1.0,0.0,0.5,"[""arg_type"", ""enum_grounding"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding""]","{""name"":""DehumidifierDryingToRefreshing"",""cron"":"""",""period"":0,""code"":""(#Dehumidifier).dehumidifier_setdehumidifiermode(\""drying\"")\n(#Clock).clock_delay(3600000)\n(#Dehumidifier).dehumidifier_setdehumidifiermode(\""refreshing\"")""}",DehumidifierDryingToRefreshing,,0,"(#Dehumidifier).dehumidifier_setdehumidifiermode(""drying"")
+(#Clock).clock_delay(3600000)
+(#Dehumidifier).dehumidifier_setdehumidifiermode(""refreshing"")",72539,19167,80,19247,2.798,3.795,6878.842,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Dehumidifier"", ""Humidifier"", ""LaundryDryer"", ""Dishwasher"", ""AirPurifier"", ""HumiditySensor"", ""AirConditioner"", ""RobotVacuumCleaner"", ""Pump"", ""DimmerSwitch""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+136,5,5,Turn on all lights in the living room and turn them off after 1 hour.,거실의 모든 전등을 켜고 1시간 뒤에 꺼줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nall(#LivingRoom #Light).switch_on()\n\ndelay(1 HOUR)\n\nall(#LivingRoom #Light).switch_off()""}",,,0,"
+all(#LivingRoom #Light).switch_on()
+
+delay(1 HOUR)
+
+all(#LivingRoom #Light).switch_off()",False,69.9,False,strict,False,0.863043,1.0,0.666667,1.0,1.0,0.0,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""LivingRoomLightsOnThenOffAfter1Hour"",""cron"":"""",""period"":0,""code"":""all(#Light #LivingRoom).switch_on()\n(#Clock).clock_delay(3600000)\nall(#Light #LivingRoom).switch_off()""}",LivingRoomLightsOnThenOffAfter1Hour,,0,"all(#Light #LivingRoom).switch_on()
+(#Clock).clock_delay(3600000)
+all(#Light #LivingRoom).switch_off()",68793,18111,67,18178,2.1967,2.2086,8275.14,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+137,5,5,"When any presence sensor in the house detects presence, sound all emergency sirens after 10 seconds.",집안의 재실 센서가 하나라도 감지되면 10초 뒤에 모든 긴급 사이렌을 울려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until (all(#House #PresenceSensor).presencesensor_presence ==| true)\n\ndelay(10 SEC)\n\nall(#Siren).siren_setsirenmode(\""emergency\"")""}",,,0,"
+wait until (all(#House #PresenceSensor).presencesensor_presence ==| true)
+
+delay(10 SEC)
+
+all(#Siren).siren_setsirenmode(""emergency"")",False,69.9,False,strict,False,0.883203,1.0,0.666667,1.0,0.2,0.0,1.0,"[""arg_type"", ""dataflow"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""PresenceTriggeredEmergencySiren"",""cron"":"""",""period"":0,""code"":""wait until (any(#PresenceSensor).presencesensor_presence == true)\n(#Clock).clock_delay(10000)\n(#Siren).siren_setsirenmode(\""emergency\"")""}",PresenceTriggeredEmergencySiren,,0,"wait until (any(#PresenceSensor).presencesensor_presence == true)
+(#Clock).clock_delay(10000)
+(#Siren).siren_setsirenmode(""emergency"")",62363,16513,72,16585,1.7539,1.7615,9456.0693,0.0,,False,,,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+138,5,5,Open all valves in the kitchen and close them again after 5 minutes.,주방의 모든 벨브를 열고 5분 뒤에 다시 잠궈줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nall(#Kitchen #Valve).valve_open()\n\ndelay(5 MIN)\n\nall(#Kitchen #Valve).valve_close()""}",,,0,"
+all(#Kitchen #Valve).valve_open()
+
+delay(5 MIN)
+
+all(#Kitchen #Valve).valve_close()",False,69.9,False,strict,False,0.844828,1.0,0.666667,1.0,1.0,0.0,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""OpenValvesAndCloseAfter5Minutes"",""cron"":"""",""period"":0,""code"":""all(#Valve #kitchen).valve_open()\n(#Clock).clock_delay(300000)\nall(#Valve #kitchen).valve_close()""}",OpenValvesAndCloseAfter5Minutes,,0,"all(#Valve #kitchen).valve_open()
+(#Clock).clock_delay(300000)
+all(#Valve #kitchen).valve_close()",62051,16424,65,16489,1.965,1.9726,8391.3486,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+139,5,5,Close all blinds in the bedroom and open them again after 2 hours.,안방의 모든 블라인드를 닫고 2시간 뒤에 다시 열어줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nall(#Bedroom #Blind).windowcovering_downorclose()\n\ndelay(2 HOUR)\n\nall(#Bedroom #Blind).windowcovering_uporopen()""}",,,0,"
+all(#Bedroom #Blind).windowcovering_downorclose()
+
+delay(2 HOUR)
+
+all(#Bedroom #Blind).windowcovering_uporopen()",False,69.9,False,strict,False,0.8632,1.0,0.666667,0.0,1.0,0.0,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""numeric_grounding""]","{""name"":""CloseAndReopenBlindsInBedroom"",""cron"":"""",""period"":0,""code"":""all(#WindowCovering #bedroom).windowcovering_downorclose()\n(#Clock).clock_delay(7200000)\nall(#WindowCovering #bedroom).windowcovering_uporopen()""}",CloseAndReopenBlindsInBedroom,,0,"all(#WindowCovering #bedroom).windowcovering_downorclose()
+(#Clock).clock_delay(7200000)
+all(#WindowCovering #bedroom).windowcovering_uporopen()",63489,16789,80,16869,4.2111,4.2194,4005.8417,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+140,5,5,"When any light in the hallway is turned on, turn off all lights in the living room after 5 minutes.",복도의 조명이 하나라도 켜지면 5분 뒤에 거실의 모든 조명을 꺼줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until (all(#Hallway #Light).switch_switch ==| true)\n\ndelay(5 MIN)\n\nall(#LivingRoom #Light).switch_off()""}",,,0,"
+wait until (all(#Hallway #Light).switch_switch ==| true)
+
+delay(5 MIN)
+
+all(#LivingRoom #Light).switch_off()",False,69.3978,False,strict,False,0.876147,1.0,0.666667,1.0,0.2,0.0,1.0,"[""arg_type"", ""dataflow"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""precondition"", ""semantic""]","{""name"":""TurnOffLivingRoomLightsAfterHallwayLightOn"",""cron"":"""",""period"":0,""code"":""wait until (any(#Light #Hallway).switch_switch == true)\n(#Clock).clock_delay(300000)\nall(#Light #LivingRoom).switch_off()""}",TurnOffLivingRoomLightsAfterHallwayLightOn,,0,"wait until (any(#Light #Hallway).switch_switch == true)
+(#Clock).clock_delay(300000)
+all(#Light #LivingRoom).switch_off()",68823,18117,74,18191,3.596,3.6068,5058.6763,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+141,5,5,Turn on all dehumidifiers in the lab and turn them off after 4 hours.,연구실의 모든 제습기를 켜고 4시간 뒤에 꺼줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nall(#Lab #Dehumidifier).switch_on()\n\ndelay(4 HOUR)\n\nall(#Lab #Dehumidifier).switch_off()""}",,,0,"
+all(#Lab #Dehumidifier).switch_on()
+
+delay(4 HOUR)
+
+all(#Lab #Dehumidifier).switch_off()",False,65.9876,False,strict,False,0.586406,0.5,0.333333,0.5,1.0,0.0,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic""]","{""name"":""LabDehumidifierOnOffAfter4Hours"",""cron"":"""",""period"":0,""code"":""(#Dehumidifier #lab).dehumidifier_setdehumidifiermode(\""dehumidifying\"")\n(#Clock).clock_delay(14400000)\n(#Dehumidifier #lab).switch_off()""}",LabDehumidifierOnOffAfter4Hours,,0,"(#Dehumidifier #lab).dehumidifier_setdehumidifiermode(""dehumidifying"")
+(#Clock).clock_delay(14400000)
+(#Dehumidifier #lab).switch_off()",63539,16821,79,16900,2.8762,2.8846,5875.8084,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+142,5,5,"When any air purifier in the office switches to sleep mode, turn off the light after 10 minutes.",사무실의 공기청정기가 하나라도 수면모드로 바뀌면 10분 뒤에 조명을 꺼줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until (all(#Office #AirPurifier).airpurifier_airpurifiermode ==| \""sleep\"")\n\ndelay(10 MIN)\n\n(#Office #Light).switch_off()""}",,,0,"
+wait until (all(#Office #AirPurifier).airpurifier_airpurifiermode ==| ""sleep"")
+
+delay(10 MIN)
+
+(#Office #Light).switch_off()",False,69.9,False,strict,False,0.847303,1.0,0.666667,1.0,0.2,0.0,1.0,"[""arg_type"", ""dataflow"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""precondition"", ""semantic""]","{""name"":""TurnOffLightAfterAirPurifierSleep"",""cron"":"""",""period"":0,""code"":""wait until (any(#AirPurifier #office).airpurifier_airpurifiermode == \""sleep\"")\n(#Clock).clock_delay(600000)\n(#Light).switch_off()""}",TurnOffLightAfterAirPurifierSleep,,0,"wait until (any(#AirPurifier #office).airpurifier_airpurifiermode == ""sleep"")
+(#Clock).clock_delay(600000)
+(#Light).switch_off()",69711,18360,75,18435,5.5374,5.5465,3329.1798,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+143,5,5,Lock all warehouse door locks and sound the emergency siren 1 minute later.,창고의 모든 도어락을 잠그고 1분 뒤에 긴급 사이렌을 울려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nall(#Warehouse #DoorLock).doorlock_lock()\n\ndelay(1 MIN)\n\n(#Siren).siren_setsirenmode(\""emergency\"")""}",,,0,"
+all(#Warehouse #DoorLock).doorlock_lock()
+
+delay(1 MIN)
+
+(#Siren).siren_setsirenmode(""emergency"")",False,69.9,False,strict,False,0.83115,1.0,0.666667,1.0,1.0,0.0,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""LockWarehouseDoorsAndEmergencySiren"",""cron"":"""",""period"":0,""code"":""(#DoorLock).doorlock_lock()\n(#Clock).clock_delay(60000)\n(#Siren).siren_setsirenmode(\""emergency\"")""}",LockWarehouseDoorsAndEmergencySiren,,0,"(#DoorLock).doorlock_lock()
+(#Clock).clock_delay(60000)
+(#Siren).siren_setsirenmode(""emergency"")",62974,16697,67,16764,5.3756,5.3827,3118.5356,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+144,5,5,"When any illuminance sensor on the terrace reaches 100 lux or higher, raise all blinds after 5 seconds.",테라스의 어느 조도 센서라도 100 럭스 이상이 되면 5초 뒤에 모든 블라인드를 올려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until (all(#Terrace #LightSensor).lightsensor_brightness >=| 100)\n\ndelay(5 SEC)\n\nall(#Terrace #Blind).windowcovering_uporopen()""}",,,0,"
+wait until (all(#Terrace #LightSensor).lightsensor_brightness >=| 100)
+
+delay(5 SEC)
+
+all(#Terrace #Blind).windowcovering_uporopen()",False,69.9,False,strict,False,0.8,1.0,0.666667,1.0,0.2,0.5,1.0,"[""arg_type"", ""dataflow"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""TerraceIlluminanceBlindsControl"",""cron"":"""",""period"":0,""code"":""wait until (any(#LightSensor #terrace).lightsensor_brightness >= 100)\n(#WindowCovering #terrace).windowcovering_uporopen()\n(#Clock).clock_delay(5000)""}",TerraceIlluminanceBlindsControl,,0,"wait until (any(#LightSensor #terrace).lightsensor_brightness >= 100)
+(#WindowCovering #terrace).windowcovering_uporopen()
+(#Clock).clock_delay(5000)",63886,16883,79,16962,3.7991,3.8068,4464.7416,0.0,,False,,,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+145,5,5,"When any temperature sensor in the data center reaches 30 degrees or higher, set all air conditioners to cool mode after 1 minute.",데이터 센터의 어느 온도 센서라도 30도 이상이 되면 1분 뒤에 모든 에어컨을 냉방 모드로 작동시켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until (all(#DataCenter #TemperatureSensor).temperaturesensor_temperature >=| 30)\n\ndelay(1 MIN)\n\nall(#DataCenter #AirConditioner).airconditioner_setairconditionermode(\""cool\"")""}",,,0,"
+wait until (all(#DataCenter #TemperatureSensor).temperaturesensor_temperature >=| 30)
+
+delay(1 MIN)
+
+all(#DataCenter #AirConditioner).airconditioner_setairconditionermode(""cool"")",False,52.8074,False,strict,False,0.650364,0.5,0.5,0.5,0.0,0.0,1.0,"[""arg_type"", ""dataflow"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic"", ""service_match"", ""unknown_service:temperaturemeasurement_temperature""]","{""name"":""DataCenterTempHighSetACCool"",""cron"":"""",""period"":0,""code"":""if (any(#TemperatureSensor #DataCenter).temperaturemeasurement_temperature >= 30.0) {\n  (#Clock).clock_delay(60000)\n  (#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n}""}",DataCenterTempHighSetACCool,,0,"if (any(#TemperatureSensor #DataCenter).temperaturemeasurement_temperature >= 30.0) {
+  (#Clock).clock_delay(60000)
+  (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+}",63483,16730,84,16814,1.5893,1.5971,10579.5004,0.0,,False,,,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+146,5,5,Turn on the kitchen light and turn on the kitchen dehumidifier 10 seconds later.,주방 조명을 켜고 10초 뒤에 주방 제습기를 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Kitchen #Light).switch_on()\n\ndelay(10 SEC)\n\n(#Kitchen #Dehumidifier).switch_on()""}",,,0,"
+(#Kitchen #Light).switch_on()
+
+delay(10 SEC)
+
+(#Kitchen #Dehumidifier).switch_on()",False,69.9,False,strict,False,0.82439,1.0,0.5,1.0,1.0,0.0,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""TurnOnKitchenLightAndDehumidifierDelayed"",""cron"":"""",""period"":0,""code"":""(#Light #kitchen).switch_on()\n(#Clock).clock_delay(10000)\n(#Switch #kitchen).switch_on()""}",TurnOnKitchenLightAndDehumidifierDelayed,,0,"(#Light #kitchen).switch_on()
+(#Clock).clock_delay(10000)
+(#Switch #kitchen).switch_on()",68804,18112,64,18176,1.9254,1.935,9440.1163,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+147,5,5,Set the study air purifier to high and turn it off after 2 hours.,서재 공기청정기를 강풍으로 틀고 2시간 뒤에 꺼줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Study #AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\ndelay(2 HOUR)\n\n(#Study #AirPurifier).switch_off()""}",,,0,"
+(#Study #AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+delay(2 HOUR)
+
+(#Study #AirPurifier).switch_off()",False,69.9,False,strict,False,0.731224,0.5,0.5,0.5,1.0,0.0,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding""]","{""name"":""StudyAirPurifierHighThenOffAfter2Hours"",""cron"":"""",""period"":0,""code"":""(#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n(#Clock).clock_delay(7200000)\n(#AirPurifier).airpurifier_setairpurifiermode(\""off\"")""}",StudyAirPurifierHighThenOffAfter2Hours,,0,"(#AirPurifier).airpurifier_setairpurifiermode(""high"")
+(#Clock).clock_delay(7200000)
+(#AirPurifier).airpurifier_setairpurifiermode(""off"")",62071,16435,81,16516,3.0312,3.0379,5448.6672,0.0,,False,,,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+148,5,5,Turn off the bathroom light and turn on after 5 minutes.,욕실 조명을 끄고 5분 뒤에 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Bathroom #Light).switch_off()\n\ndelay(5 MIN)\n\n(#Bathroom #Light).switch_on()""}",,,0,"
+(#Bathroom #Light).switch_off()
+
+delay(5 MIN)
+
+(#Bathroom #Light).switch_on()",False,69.9,False,strict,False,0.85,1.0,0.666667,1.0,1.0,0.0,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""BathroomLightDelayedOn"",""cron"":"""",""period"":0,""code"":""(#Light #Bathroom).switch_off()\n(#Clock).clock_delay(300000)\n(#Light #Bathroom).switch_on()""}",BathroomLightDelayedOn,,0,"(#Light #Bathroom).switch_off()
+(#Clock).clock_delay(300000)
+(#Light #Bathroom).switch_on()",69928,18414,57,18471,2.3528,2.3615,7850.646,0.0,,False,,,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+149,5,5,Close the meeting room door. After 3 seconds take a picture with the meeting room camera.,회의실 문을 닫고 3초 뒤에 회의실 카메라로 촬영해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#MeetingRoom #Door).door_close()\n\ndelay(3 SEC)\n\n(#MeetingRoom #Camera).camera_captureimage()""}",,,0,"
+(#MeetingRoom #Door).door_close()
+
+delay(3 SEC)
+
+(#MeetingRoom #Camera).camera_captureimage()",False,69.9,False,strict,False,0.86988,1.0,0.666667,1.0,1.0,0.0,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding""]","{""name"":""CloseDoorAndCaptureImage"",""cron"":"""",""period"":0,""code"":""(#Door).door_close()\n(#Clock).clock_delay(3000)\n(#Camera).camera_captureimage()""}",CloseDoorAndCaptureImage,,0,"(#Door).door_close()
+(#Clock).clock_delay(3000)
+(#Camera).camera_captureimage()",65008,17157,56,17213,2.5523,2.5589,6744.1132,0.0,,False,,,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+150,5,5,"Check the wine cellar temperature now and again in 10 minutes. If it has changed by 1 degree or higher, announce through the speaker that the wine cellar temperature has changed rapidly.","지금 와인 셀러 온도를 체크하고 10분뒤에 다시 체크해서 1도 이상 차이가 나면, 스피커로 온도가 급변했다고 안내해줘. ","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\noriginal_temp = (#WineCellar #TemperatureSensor).temperaturesensor_temperature\n\ndelay(10 MIN)\n\ntemp = (#WineCellar #TemperatureSensor).temperaturesensor_temperature\n\nif (temp >= original_temp + 1 or temp <= original_temp - 1) {\n\n    (#Speaker).speaker_speak(\""와인셀러의 온도가 급변했습니다\"")\n}""}",,,0,"
+original_temp = (#WineCellar #TemperatureSensor).temperaturesensor_temperature
+
+delay(10 MIN)
+
+temp = (#WineCellar #TemperatureSensor).temperaturesensor_temperature
+
+if (temp >= original_temp + 1 or temp <= original_temp - 1) {
+
+    (#Speaker).speaker_speak(""와인셀러의 온도가 급변했습니다"")
+}",False,18.535,False,strict,False,0.123675,0.0,0.0,0.0,0.0,0.833333,1.0,"[""arg_type"", ""dataflow"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""precondition"", ""semantic"", ""service_match"", ""unknown_service:mediaplayback_speak"", ""unknown_service:temperaturemeasurement_temperature""]","{""name"":""WineCellarTemperatureChangeAnnouncement"",""cron"":"""",""period"":600000,""code"":""prevTemp := (#TemperatureSensor).temperaturemeasurement_temperature\nif (prevTemp != (#TemperatureSensor).temperaturemeasurement_temperature) {\n  currTemp = (#TemperatureSensor).temperaturemeasurement_temperature\n  diff = currTemp - prevTemp\n  if ((diff >= 1) or (diff <= -1)) {\n    (#Speaker).mediaplayback_speak(\""The wine cellar temperature has changed rapidly\"")\n  }\n  prevTemp = currTemp\n}""}",WineCellarTemperatureChangeAnnouncement,,600000,"prevTemp := (#TemperatureSensor).temperaturemeasurement_temperature
+if (prevTemp != (#TemperatureSensor).temperaturemeasurement_temperature) {
+  currTemp = (#TemperatureSensor).temperaturemeasurement_temperature
+  diff = currTemp - prevTemp
+  if ((diff >= 1) or (diff <= -1)) {
+    (#Speaker).mediaplayback_speak(""The wine cellar temperature has changed rapidly"")
+  }
+  prevTemp = currTemp
+}",66281,17445,126,17571,2.5383,2.5462,6922.3496,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5

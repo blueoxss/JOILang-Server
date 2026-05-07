@@ -1,0 +1,40 @@
+{
+  "id": "v15-a6e0ae2c-32f5-a6e6-906b-5a6cec7a22ad",
+  "seed": 94045479,
+  "blocks": [
+    "01",
+    "02",
+    "03",
+    "06"
+  ],
+  "params": {
+    "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "temperature": 0.0,
+    "max_tokens": 1024,
+    "candidate_strategies": [
+      "explicit_preconditions",
+      "direct",
+      "canonical_names_first"
+    ]
+  },
+  "block_params": {
+    "01": {
+      "source_file": "01_preamble.txt"
+    },
+    "02": {
+      "source_file": "02_generator_prompt.txt",
+      "few_shot_count": 1,
+      "micro_rules": [
+        "Use value entries in conditions and function entries in actions.",
+        "Never invent service names outside the provided service_list_snippet.",
+        "Return exactly one JSON object only with keys name, cron, period, code."
+      ]
+    },
+    "03": {
+      "source_file": "03_postprocessor.txt"
+    },
+    "06": {
+      "source_file": "06_det_helper.txt"
+    }
+  }
+}

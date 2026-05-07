@@ -90,6 +90,16 @@ TOKEN_SYNONYMS = {
 
 HELPER_ACTIONS = {"On", "Off", "Toggle", "Switch_On", "Switch_Off", "Switch_Toggle"}
 STRUCTURAL_MARKERS = ("delay(", "wait until", "all(", "prev", "curr", "if (", "else", ":=")
+EQUIVALENT_SERVICE_FAMILIES = {
+    canonical_service_name("HumiditySensor", "Humidity"): "humidity_reading",
+    canonical_service_name("AirQualitySensor", "Humidity"): "humidity_reading",
+    canonical_service_name("TemperatureSensor", "Temperature"): "temperature_reading",
+    canonical_service_name("AirQualitySensor", "Temperature"): "temperature_reading",
+    canonical_service_name("CarbonDioxideSensor", "CarbonDioxide"): "carbon_dioxide_reading",
+    canonical_service_name("AirQualitySensor", "CarbonDioxide"): "carbon_dioxide_reading",
+    canonical_service_name("PresenceSensor", "Presence"): "presence_reading",
+    canonical_service_name("PresenceVitalSensor", "Presence"): "presence_reading",
+}
 
 
 def load_schema(service_list: dict[str, Any] | str | None = None) -> dict[str, dict[str, Any]]:
@@ -388,8 +398,8 @@ def _service_overlap_score(
     connected_devices: dict[str, Any],
 ) -> float:
     gt_usages = _resolved_gt_usages_from_code(gt_code, schema, connected_devices)
-    predicted = {usage["canonical_name"] for usage in predicted_usages}
-    reference = {usage["canonical_name"] for usage in gt_usages}
+    predicted = {_usage_family_name(usage) for usage in predicted_usages}
+    reference = {_usage_family_name(usage) for usage in gt_usages}
     if not reference:
         return 1.0 if not predicted else 0.0
     return len(predicted & reference) / len(reference)
@@ -425,9 +435,30 @@ def _resolved_gt_usages(
 
 def _service_set(usages: list[dict[str, Any]]) -> set[str]:
     return {
-        str(usage.get("canonical_name", "") or "")
+        _usage_family_name(usage)
         for usage in usages
-        if str(usage.get("canonical_name", "") or "").strip()
+        if _usage_family_name(usage)
+    }
+
+
+def _service_family_name(canonical_name: str) -> str:
+    name = str(canonical_name or "").strip()
+    if not name:
+        return ""
+    return EQUIVALENT_SERVICE_FAMILIES.get(name, name)
+
+
+def _usage_family_name(usage: dict[str, Any]) -> str:
+    return _service_family_name(str(usage.get("canonical_name", "") or ""))
+
+
+def _receiver_context_tags(usage: dict[str, Any], schema: dict[str, dict[str, Any]]) -> set[str]:
+    schema_devices = {device.lower() for device in schema}
+    device_name = str(usage.get("device", "") or "").lower()
+    return {
+        str(tag).lower()
+        for tag in usage.get("tags", []) or []
+        if str(tag).lower() and str(tag).lower() not in schema_devices and str(tag).lower() != device_name
     }
 
 
@@ -481,24 +512,40 @@ def _gt_receiver_coverage_score(
     predicted_usages: list[dict[str, Any]],
     gt_usages: list[dict[str, Any]],
     connected_devices: dict[str, Any],
+    schema: dict[str, dict[str, Any]],
 ) -> float:
     reference = _service_set(gt_usages)
     if not reference:
         return 1.0
     scores: list[float] = []
-    for canonical_name in sorted(reference):
-        gt_tokens: set[str] = set()
-        pred_tokens: set[str] = set()
-        for usage in gt_usages:
-            if usage.get("canonical_name") == canonical_name:
-                gt_tokens.update(_receiver_instance_tokens(usage, connected_devices))
-        for usage in predicted_usages:
-            if usage.get("canonical_name") == canonical_name:
-                pred_tokens.update(_receiver_instance_tokens(usage, connected_devices))
-        if not gt_tokens:
-            scores.append(1.0 if pred_tokens else 0.0)
+    for family_name in sorted(reference):
+        gt_family_usages = [usage for usage in gt_usages if _usage_family_name(usage) == family_name]
+        pred_family_usages = [usage for usage in predicted_usages if _usage_family_name(usage) == family_name]
+        if not pred_family_usages:
+            scores.append(0.0)
             continue
-        scores.append(len(gt_tokens & pred_tokens) / len(gt_tokens))
+        family_scores: list[float] = []
+        for gt_usage in gt_family_usages:
+            gt_tokens = _receiver_instance_tokens(gt_usage, connected_devices)
+            gt_context = _receiver_context_tags(gt_usage, schema)
+            best = 0.0
+            for pred_usage in pred_family_usages:
+                pred_tokens = _receiver_instance_tokens(pred_usage, connected_devices)
+                pred_context = _receiver_context_tags(pred_usage, schema)
+                if gt_usage.get("canonical_name") == pred_usage.get("canonical_name"):
+                    if not gt_tokens:
+                        best = max(best, 1.0 if pred_tokens else 0.0)
+                    else:
+                        best = max(best, len(gt_tokens & pred_tokens) / len(gt_tokens))
+                    continue
+                # Capability-equivalent services can come from a different sensor family.
+                # In that case, compare only the non-device receiver context (e.g. room/group tags).
+                if not gt_context and not pred_context:
+                    best = max(best, 1.0)
+                elif gt_context and gt_context == pred_context:
+                    best = max(best, 1.0)
+            family_scores.append(best)
+        scores.append(sum(family_scores) / max(len(family_scores), 1))
     return sum(scores) / max(len(scores), 1)
 
 
@@ -519,6 +566,13 @@ def _dataflow_score(code: str, predicted_usages: list[dict[str, Any]], gt_usages
     function_args = " ".join(" ".join(usage.get("args", [])) for usage in predicted_functions).lower()
     arg_kinds = [_literal_kind(arg) for usage in predicted_functions for arg in usage.get("args", [])]
     arg_has_expression = any(kind in {"EXPR", "IDENT"} for kind in arg_kinds)
+    lowered_code = (code or "").lower()
+    condition_lines = [
+        line.strip().lower()
+        for line in (code or "").splitlines()
+        if ("if (" in line.lower()) or ("wait until" in line.lower())
+    ]
+    condition_text = " ".join(condition_lines)
     source_markers: set[str] = set()
     for usage in predicted_values:
         source_markers.add(str(usage.get("member", "")).lower())
@@ -526,10 +580,13 @@ def _dataflow_score(code: str, predicted_usages: list[dict[str, Any]], gt_usages
         source_markers.add(str(usage.get("service", "")).lower())
         source_markers.update(str(tag).lower() for tag in usage.get("tags", []) if tag)
     source_mentioned_in_args = any(marker and marker in function_args for marker in source_markers)
+    source_mentioned_in_condition = any(marker and marker in condition_text for marker in source_markers)
     if assignment_like and arg_has_expression:
         return 1.0
     if source_mentioned_in_args and arg_has_expression:
         return 0.85
+    if source_mentioned_in_condition and ("if (" in lowered_code or "wait until" in lowered_code):
+        return 1.0
     if arg_has_expression:
         return 0.5
     return 0.2
@@ -946,7 +1003,7 @@ def evaluate_candidate(
     gt_usages, gt_code = _resolved_gt_usages(ground_truth, schema, connected)
     result["det_gt_service_coverage"] = round(_gt_service_coverage_score(resolved_usages, gt_usages), 6)
     result["det_gt_service_precision"] = round(_gt_service_precision_score(resolved_usages, gt_usages), 6)
-    result["det_gt_receiver_coverage"] = round(_gt_receiver_coverage_score(resolved_usages, gt_usages, connected), 6)
+    result["det_gt_receiver_coverage"] = round(_gt_receiver_coverage_score(resolved_usages, gt_usages, connected, schema), 6)
     result["det_dataflow_score"] = round(_dataflow_score(code, resolved_usages, gt_usages), 6)
     result["det_numeric_grounding"] = round(_numeric_grounding_score(command_eng, code, gt_code), 6)
     result["det_enum_grounding"] = round(_enum_grounding_score(resolved_usages, gt_usages), 6)

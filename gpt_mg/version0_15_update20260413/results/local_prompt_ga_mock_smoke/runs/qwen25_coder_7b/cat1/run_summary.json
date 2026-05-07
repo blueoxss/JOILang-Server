@@ -1,0 +1,23 @@
+{
+  "model_key": "qwen25_coder_7b",
+  "model_label": "Qwen2.5-Coder-7B-Instruct",
+  "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
+  "category": "1",
+  "row_count": 1,
+  "validation_row_count": 1,
+  "generation_count": 1,
+  "first_generation_validation_det": 46.5556,
+  "best_generation": 1,
+  "best_genome_id": "v13mix-384efae3-b633-4eeb-62db-53a3d451e7ae",
+  "best_validation_det": 46.5556,
+  "best_validation_pass_rate": 0.0,
+  "improvement_vs_generation1": 0.0,
+  "final_all_avg_det": 46.5556,
+  "final_all_pass_rate": 0.0,
+  "final_all_gt_exact_rate": 0.0,
+  "final_all_prompt_tokens": 0,
+  "final_all_llm_latency_sec": 0.0,
+  "final_all_peak_vram_gb": 0.0,
+  "run_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke/runs/qwen25_coder_7b/cat1",
+  "best_genome_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke/runs/qwen25_coder_7b/cat1/best_genome.json"
+}

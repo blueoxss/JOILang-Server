@@ -1,0 +1,566 @@
+[
+  {
+    "row_no": "31",
+    "service_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "service_schema_label": "service_list_ver2.0.1.json",
+    "snippet_source": "connected_devices_only",
+    "mode_label": "connected_devices scope",
+    "retrieval_status": "skipped_connected_devices_present",
+    "retrieval_mode": "hybrid",
+    "requested_topk": 10,
+    "effective_topk": 0,
+    "device_count": 2,
+    "all_injected_category_count": 2,
+    "all_injected_categories": [
+      "Light",
+      "ColorControl"
+    ],
+    "displayed_categories": [
+      "Light",
+      "ColorControl"
+    ],
+    "retrieval_categories": [],
+    "connected_categories": [
+      "Light",
+      "ColorControl"
+    ],
+    "relevant_categories": [
+      "Light"
+    ],
+    "note": "Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",
+    "category_cards": [
+      {
+        "category": "Light",
+        "role": "connected",
+        "rank": null,
+        "service_count": 15,
+        "value_count": 8,
+        "function_count": 7,
+        "values": [
+          {
+            "service": "Light_ColorMode",
+            "raw_service": "ColorMode",
+            "canonical_name": "Light_ColorMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentBrightness",
+            "raw_service": "CurrentBrightness",
+            "canonical_name": "Light_CurrentBrightness",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentColorTemperature",
+            "raw_service": "CurrentColorTemperature",
+            "canonical_name": "Light_CurrentColorTemperature",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentHue",
+            "raw_service": "CurrentHue",
+            "canonical_name": "Light_CurrentHue",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentRGB",
+            "raw_service": "CurrentRGB",
+            "canonical_name": "Light_CurrentRGB",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentSaturation",
+            "raw_service": "CurrentSaturation",
+            "canonical_name": "Light_CurrentSaturation",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentX",
+            "raw_service": "CurrentX",
+            "canonical_name": "Light_CurrentX",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentY",
+            "raw_service": "CurrentY",
+            "canonical_name": "Light_CurrentY",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Light_MoveToBrightness",
+            "raw_service": "MoveToBrightness",
+            "canonical_name": "Light_MoveToBrightness",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToColorTemperature",
+            "raw_service": "MoveToColorTemperature",
+            "canonical_name": "Light_MoveToColorTemperature",
+            "type": "function",
+            "argument_type": "INTEGER",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToHue",
+            "raw_service": "MoveToHue",
+            "canonical_name": "Light_MoveToHue",
+            "type": "function",
+            "argument_type": "DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToHueAndSaturation",
+            "raw_service": "MoveToHueAndSaturation",
+            "canonical_name": "Light_MoveToHueAndSaturation",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToRGB",
+            "raw_service": "MoveToRGB",
+            "canonical_name": "Light_MoveToRGB",
+            "type": "function",
+            "argument_type": "INTEGER | INTEGER | INTEGER",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToSaturation",
+            "raw_service": "MoveToSaturation",
+            "canonical_name": "Light_MoveToSaturation",
+            "type": "function",
+            "argument_type": "DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToXY",
+            "raw_service": "MoveToXY",
+            "canonical_name": "Light_MoveToXY",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          }
+        ]
+      },
+      {
+        "category": "ColorControl",
+        "role": "connected",
+        "rank": null,
+        "service_count": 2,
+        "value_count": 1,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "ColorControl_Color",
+            "raw_service": "Color",
+            "canonical_name": "ColorControl_Color",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Allows for control of a color changing device"
+          }
+        ],
+        "functions": [
+          {
+            "service": "ColorControl_SetColor",
+            "raw_service": "SetColor",
+            "canonical_name": "ColorControl_SetColor",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "VOID",
+            "descriptor": "Allows for control of a color changing device"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "row_no": "46",
+    "service_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "service_schema_label": "service_list_ver2.0.1.json",
+    "snippet_source": "connected_devices_only",
+    "mode_label": "connected_devices scope",
+    "retrieval_status": "skipped_connected_devices_present",
+    "retrieval_mode": "hybrid",
+    "requested_topk": 10,
+    "effective_topk": 0,
+    "device_count": 3,
+    "all_injected_category_count": 1,
+    "all_injected_categories": [
+      "WindowCovering"
+    ],
+    "displayed_categories": [
+      "WindowCovering"
+    ],
+    "retrieval_categories": [],
+    "connected_categories": [
+      "WindowCovering"
+    ],
+    "relevant_categories": [
+      "WindowCovering"
+    ],
+    "note": "Prompt context came from connected_devices, so retrieval was skipped. 1 connected-device category group(s) were injected.",
+    "category_cards": [
+      {
+        "category": "WindowCovering",
+        "role": "connected",
+        "rank": null,
+        "service_count": 6,
+        "value_count": 2,
+        "function_count": 4,
+        "values": [
+          {
+            "service": "WindowCovering_CurrentPosition",
+            "raw_service": "CurrentPosition",
+            "canonical_name": "WindowCovering_CurrentPosition",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "Controls a window covering to open or close it"
+          },
+          {
+            "service": "WindowCovering_WindowCoveringType",
+            "raw_service": "WindowCoveringType",
+            "canonical_name": "WindowCovering_WindowCoveringType",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Controls a window covering to open or close it"
+          }
+        ],
+        "functions": [
+          {
+            "service": "WindowCovering_DownOrClose",
+            "raw_service": "DownOrClose",
+            "canonical_name": "WindowCovering_DownOrClose",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Controls a window covering to open or close it"
+          },
+          {
+            "service": "WindowCovering_SetLevel",
+            "raw_service": "SetLevel",
+            "canonical_name": "WindowCovering_SetLevel",
+            "type": "function",
+            "argument_type": "INTEGER",
+            "return_type": "INTEGER",
+            "descriptor": "Controls a window covering to open or close it"
+          },
+          {
+            "service": "WindowCovering_Stop",
+            "raw_service": "Stop",
+            "canonical_name": "WindowCovering_Stop",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Controls a window covering to open or close it"
+          },
+          {
+            "service": "WindowCovering_UpOrOpen",
+            "raw_service": "UpOrOpen",
+            "canonical_name": "WindowCovering_UpOrOpen",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Controls a window covering to open or close it"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "row_no": "53",
+    "service_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "service_schema_label": "service_list_ver2.0.1.json",
+    "snippet_source": "connected_devices_only",
+    "mode_label": "connected_devices scope",
+    "retrieval_status": "skipped_connected_devices_present",
+    "retrieval_mode": "hybrid",
+    "requested_topk": 10,
+    "effective_topk": 0,
+    "device_count": 4,
+    "all_injected_category_count": 3,
+    "all_injected_categories": [
+      "Light",
+      "ColorControl",
+      "Switch"
+    ],
+    "displayed_categories": [
+      "Light",
+      "ColorControl",
+      "Switch"
+    ],
+    "retrieval_categories": [],
+    "connected_categories": [
+      "Light",
+      "ColorControl",
+      "Switch"
+    ],
+    "relevant_categories": [
+      "Light"
+    ],
+    "note": "Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",
+    "category_cards": [
+      {
+        "category": "Light",
+        "role": "connected",
+        "rank": null,
+        "service_count": 15,
+        "value_count": 8,
+        "function_count": 7,
+        "values": [
+          {
+            "service": "Light_ColorMode",
+            "raw_service": "ColorMode",
+            "canonical_name": "Light_ColorMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentBrightness",
+            "raw_service": "CurrentBrightness",
+            "canonical_name": "Light_CurrentBrightness",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentColorTemperature",
+            "raw_service": "CurrentColorTemperature",
+            "canonical_name": "Light_CurrentColorTemperature",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentHue",
+            "raw_service": "CurrentHue",
+            "canonical_name": "Light_CurrentHue",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentRGB",
+            "raw_service": "CurrentRGB",
+            "canonical_name": "Light_CurrentRGB",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentSaturation",
+            "raw_service": "CurrentSaturation",
+            "canonical_name": "Light_CurrentSaturation",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentX",
+            "raw_service": "CurrentX",
+            "canonical_name": "Light_CurrentX",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentY",
+            "raw_service": "CurrentY",
+            "canonical_name": "Light_CurrentY",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Light_MoveToBrightness",
+            "raw_service": "MoveToBrightness",
+            "canonical_name": "Light_MoveToBrightness",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToColorTemperature",
+            "raw_service": "MoveToColorTemperature",
+            "canonical_name": "Light_MoveToColorTemperature",
+            "type": "function",
+            "argument_type": "INTEGER",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToHue",
+            "raw_service": "MoveToHue",
+            "canonical_name": "Light_MoveToHue",
+            "type": "function",
+            "argument_type": "DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToHueAndSaturation",
+            "raw_service": "MoveToHueAndSaturation",
+            "canonical_name": "Light_MoveToHueAndSaturation",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToRGB",
+            "raw_service": "MoveToRGB",
+            "canonical_name": "Light_MoveToRGB",
+            "type": "function",
+            "argument_type": "INTEGER | INTEGER | INTEGER",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToSaturation",
+            "raw_service": "MoveToSaturation",
+            "canonical_name": "Light_MoveToSaturation",
+            "type": "function",
+            "argument_type": "DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToXY",
+            "raw_service": "MoveToXY",
+            "canonical_name": "Light_MoveToXY",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          }
+        ]
+      },
+      {
+        "category": "ColorControl",
+        "role": "connected",
+        "rank": null,
+        "service_count": 2,
+        "value_count": 1,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "ColorControl_Color",
+            "raw_service": "Color",
+            "canonical_name": "ColorControl_Color",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Allows for control of a color changing device"
+          }
+        ],
+        "functions": [
+          {
+            "service": "ColorControl_SetColor",
+            "raw_service": "SetColor",
+            "canonical_name": "ColorControl_SetColor",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "VOID",
+            "descriptor": "Allows for control of a color changing device"
+          }
+        ]
+      },
+      {
+        "category": "Switch",
+        "role": "connected",
+        "rank": null,
+        "service_count": 4,
+        "value_count": 1,
+        "function_count": 3,
+        "values": [
+          {
+            "service": "Switch_Switch",
+            "raw_service": "Switch",
+            "canonical_name": "Switch_Switch",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "Allows for the control of a Switch device"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Switch_Off",
+            "raw_service": "Off",
+            "canonical_name": "Switch_Off",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of a Switch device"
+          },
+          {
+            "service": "Switch_On",
+            "raw_service": "On",
+            "canonical_name": "Switch_On",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of a Switch device"
+          },
+          {
+            "service": "Switch_Toggle",
+            "raw_service": "Toggle",
+            "canonical_name": "Switch_Toggle",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "Allows for the control of a Switch device"
+          }
+        ]
+      }
+    ]
+  }
+]

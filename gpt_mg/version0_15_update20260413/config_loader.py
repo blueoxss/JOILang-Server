@@ -20,7 +20,7 @@ try:
         build_prompt_values,
         load_genome,
         load_service_schema,
-        render_blocks_for_genome,
+        render_prompt_bundle,
     )
 except ImportError:
     try:
@@ -29,7 +29,7 @@ except ImportError:
             build_prompt_values,
             load_genome,
             load_service_schema,
-            render_blocks_for_genome,
+            render_prompt_bundle,
         )
     except ImportError:
         from version0_15.utils.pipeline_common import (
@@ -37,7 +37,7 @@ except ImportError:
             build_prompt_values,
             load_genome,
             load_service_schema,
-            render_blocks_for_genome,
+            render_prompt_bundle,
         )
 
 
@@ -161,6 +161,13 @@ def _service_context_kwargs(other_params: Any) -> dict[str, Any]:
     }
 
 
+def _prompt_render_kwargs(other_params: Any) -> dict[str, Any]:
+    return {
+        "prompt_render_mode": _extract_other_param(other_params, "prompt_render_mode"),
+        "prompt_assets_dir": _extract_other_param(other_params, "prompt_assets_dir"),
+    }
+
+
 def _system_prompt() -> str:
     return (
         "You are a deterministic JOILang generation engine. "
@@ -204,19 +211,19 @@ def load_version_config(user_input, connected_devices: dict = None, other_params
         candidate_strategy=_candidate_strategy(genome, other_params),
         **_service_context_kwargs(other_params),
     )
-    rendered_prompt, manifest = render_blocks_for_genome(genome, values=values)
-    language_bridge = (
-        "Language handling rule:\n"
-        "- The command may be English or Korean.\n"
-        "- If it is Korean, translate it internally to the closest English command intent first.\n"
-        "- Do not output the translation. Output only the final JOI JSON object.\n"
+    system_prompt, user_prompt, manifest = render_prompt_bundle(
+        genome,
+        values=values,
+        command_text=str(user_input or ""),
+        phase="generate",
+        default_system_prompt=_system_prompt(),
+        **_prompt_render_kwargs(other_params),
     )
-    user_prompt = language_bridge + "\n" + rendered_prompt.rstrip() + "\n\nReturn the final JSON object now."
 
     model_input["temperature"] = _temperature(genome, model_input, other_params)
     model_input["local_max_new_tokens"] = _max_tokens(genome, model_input, other_params)
     model_input["messages"] = [
-        {"role": "system", "content": _system_prompt()},
+        {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt},
     ]
 
@@ -230,6 +237,7 @@ def load_version_config(user_input, connected_devices: dict = None, other_params
         f"- genome_json: {genome_path}",
         f"- temperature: {model_input['temperature']}",
         f"- local_max_new_tokens: {model_input['local_max_new_tokens']}",
+        f"- prompt_render_mode: {_prompt_render_kwargs(other_params).get('prompt_render_mode') or os.getenv('JOI_V15_PROMPT_RENDER_MODE', 'blocks')}",
         f"- service_list_snippet_source: {values.get('service_list_snippet_source', '')}",
         f"- service_list_device_count: {values.get('service_list_device_count', '')}",
         f"- service_list_retrieval_status: {values.get('service_list_retrieval_status', '')}",

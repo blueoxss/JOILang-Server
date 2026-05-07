@@ -161,6 +161,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--retrieval-bundle-dir", default=None)
     parser.add_argument("--retrieval-model-dir", default=None)
     parser.add_argument("--retrieval-device", default=None)
+    parser.add_argument("--prompt-render-mode", default=None, choices=["blocks", "legacy_v13_monolith"])
+    parser.add_argument("--prompt-assets-dir", default=None, help="Optional directory for legacy monolithic prompt assets.")
     parser.add_argument("--measure-latency", action="store_true", help="Collect and summarize latency-oriented metrics.")
     parser.add_argument("--measure-vram", action="store_true", help="Collect and summarize VRAM-oriented metrics when supported.")
     parser.add_argument(
@@ -227,6 +229,44 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Write paper-oriented CSV summaries and attempt figure export into the result directory.",
     )
+    parser.add_argument(
+        "--export-row-report",
+        action="store_true",
+        help="Export side-by-side GT vs Generated JOICode HTML/PDF reports after the benchmark. If omitted, single-model runs auto-export unless --skip-row-report is used.",
+    )
+    parser.add_argument(
+        "--skip-row-report",
+        action="store_true",
+        help="Disable automatic row report export for single-model runs.",
+    )
+    parser.add_argument(
+        "--row-report-model-key",
+        action="append",
+        default=[],
+        help="Restrict exported row reports to these model keys. Can be repeated.",
+    )
+    parser.add_argument("--row-report-category", action="append", default=[], help="Optional category filter for exported row reports.")
+    parser.add_argument("--row-report-row-no", action="append", type=int, default=[], help="Optional explicit row numbers for exported row reports.")
+    parser.add_argument("--row-report-start-row", type=int, default=0)
+    parser.add_argument("--row-report-end-row", type=int, default=0)
+    parser.add_argument("--row-report-limit", type=int, default=0)
+    parser.add_argument("--row-report-failures-only", action="store_true")
+    parser.add_argument("--row-report-det-below", type=float, default=None)
+    parser.add_argument("--row-report-skip-pdf", action="store_true")
+    parser.add_argument("--row-report-title-prefix", default="")
+    parser.add_argument(
+        "--compare-to",
+        default="",
+        help="Optional previous result directory to compare against. Useful for schema_fallback vs retrieval_fallback or other A/B runs.",
+    )
+    parser.add_argument("--compare-output-dir", default="")
+    parser.add_argument(
+        "--analyze-det",
+        action="store_true",
+        help="Run DET legacy-vs-strict audit on the produced result directory after the benchmark.",
+    )
+    parser.add_argument("--det-audit-output-dir", default="")
+    parser.add_argument("--det-audit-threshold", type=float, default=85.0)
     parser.add_argument(
         "--print-mode",
         choices=("paths", "summary", "compare"),
@@ -636,6 +676,8 @@ def _build_model_row_metrics(
                 "service_list_retrieval_mode": str(generation_row.get("service_list_retrieval_mode", "") or ""),
                 "service_list_retrieval_topk": _safe_int(generation_row.get("service_list_retrieval_topk")),
                 "service_list_retrieval_categories": str(generation_row.get("service_list_retrieval_categories", "") or ""),
+                "prompt_render_mode": str(generation_row.get("prompt_render_mode", "") or "blocks"),
+                "prompt_assets_dir": str(generation_row.get("prompt_assets_dir", "") or ""),
                 "warmup_excluded": False,
                 "selected_candidate_index": _safe_int(rerank_row.get("selected_candidate_index")),
                 "repair_applied": _coerce_bool(rerank_row.get("repair_applied")),
@@ -823,22 +865,21 @@ def _diff_summary(
 
 def _print_paths_summary(summary: dict[str, Any]) -> None:
     manifest = summary["manifest"]
+    payload = {
+        "output_dir": summary["output_dir"],
+        "suite_summary_csv": summary["suite_summary_csv"],
+        "row_comparison_csv": summary["row_comparison_csv"],
+        "failure_reason_summary_csv": summary.get("failure_reason_summary_csv", ""),
+        "category_summary_csv": summary.get("category_summary_csv", ""),
+        "main_model_comparison_csv": summary.get("main_model_comparison_csv", ""),
+        "tradeoff_summary_csv": summary.get("tradeoff_summary_csv", ""),
+        "model_keys": manifest["model_keys"],
+        "row_count": manifest["row_count"],
+    }
+    if summary.get("postprocess_artifacts"):
+        payload["postprocess_artifacts"] = summary["postprocess_artifacts"]
     print(
-        json.dumps(
-            {
-                "output_dir": summary["output_dir"],
-                "suite_summary_csv": summary["suite_summary_csv"],
-                "row_comparison_csv": summary["row_comparison_csv"],
-                "failure_reason_summary_csv": summary.get("failure_reason_summary_csv", ""),
-                "category_summary_csv": summary.get("category_summary_csv", ""),
-                "main_model_comparison_csv": summary.get("main_model_comparison_csv", ""),
-                "tradeoff_summary_csv": summary.get("tradeoff_summary_csv", ""),
-                "model_keys": manifest["model_keys"],
-                "row_count": manifest["row_count"],
-            },
-            ensure_ascii=False,
-            indent=2,
-        )
+        json.dumps(payload, ensure_ascii=False, indent=2)
     )
 
 
@@ -880,6 +921,16 @@ def _print_suite_summary(summary: dict[str, Any]) -> None:
         print(f"Main model comparison CSV: {summary['main_model_comparison_csv']}")
     if summary.get("tradeoff_summary_csv"):
         print(f"Tradeoff summary CSV: {summary['tradeoff_summary_csv']}")
+    post = summary.get("postprocess_artifacts") or {}
+    if post.get("row_reports"):
+        for model_key, report in post["row_reports"].items():
+            print(f"Row report ({model_key}) HTML: {report.get('html_path', '')}")
+            if isinstance(report.get("pdf"), dict) and report["pdf"].get("ok"):
+                print(f"Row report ({model_key}) PDF: {report['pdf'].get('pdf_path', '')}")
+    if post.get("comparison"):
+        print(f"Benchmark comparison JSON: {post['comparison'].get('output_dir', '')}/context_comparison_summary.json")
+    if post.get("det_audit"):
+        print(f"DET audit JSON: {post['det_audit'].get('output_dir', '')}/analysis_summary.json")
 
 
 def _print_row_comparisons(
@@ -955,6 +1006,86 @@ def _print_row_comparisons(
     if print_limit and len(row_rows) > print_limit:
         print("")
         print(f"... printed {print_limit} of {len(row_rows)} rows. See CSV for the full dataset comparison.")
+
+
+def _row_report_targets(args: argparse.Namespace, model_summaries: list[dict[str, Any]]) -> list[str]:
+    available = [str(summary["model_key"]) for summary in model_summaries]
+    explicit = [str(item).strip() for item in getattr(args, "row_report_model_key", []) if str(item).strip()]
+    if explicit:
+        unknown = [item for item in explicit if item not in available]
+        if unknown:
+            raise SystemExit(f"Unknown --row-report-model-key values: {', '.join(unknown)}")
+        return explicit
+    if getattr(args, "export_row_report", False):
+        return available
+    if len(available) == 1 and not getattr(args, "skip_row_report", False):
+        return available
+    return []
+
+
+def _maybe_export_row_reports(
+    *,
+    args: argparse.Namespace,
+    output_dir: Path,
+    model_summaries: list[dict[str, Any]],
+) -> dict[str, Any]:
+    targets = _row_report_targets(args, model_summaries)
+    if not targets:
+        return {}
+    from scripts.export_joi_code_side_by_side_report import export_row_report
+
+    reports: dict[str, Any] = {}
+    for model_key in targets:
+        title_prefix = str(getattr(args, "row_report_title_prefix", "") or "").strip()
+        title = f"{title_prefix} · {model_key}" if title_prefix else f"JOICode Side-by-Side Report · {model_key}"
+        reports[model_key] = export_row_report(
+            results_dir=output_dir,
+            model_key=model_key,
+            categories=list(getattr(args, "row_report_category", []) or []),
+            row_nos=list(getattr(args, "row_report_row_no", []) or []),
+            start_row=int(getattr(args, "row_report_start_row", 0) or 0),
+            end_row=int(getattr(args, "row_report_end_row", 0) or 0),
+            limit=int(getattr(args, "row_report_limit", 0) or 0),
+            failures_only=bool(getattr(args, "row_report_failures_only", False)),
+            det_below=getattr(args, "row_report_det_below", None),
+            skip_pdf=bool(getattr(args, "row_report_skip_pdf", False)),
+            title=title,
+        )
+    return reports
+
+
+def _maybe_compare_results(
+    *,
+    args: argparse.Namespace,
+    output_dir: Path,
+) -> dict[str, Any]:
+    compare_to = str(getattr(args, "compare_to", "") or "").strip()
+    if not compare_to:
+        return {}
+    from scripts.compare_service_context_results import compare_context_results
+
+    return compare_context_results(
+        compare_to,
+        output_dir,
+        output_dir=(str(getattr(args, "compare_output_dir", "") or "").strip() or None),
+    )
+
+
+def _maybe_run_det_audit(
+    *,
+    args: argparse.Namespace,
+    output_dir: Path,
+) -> dict[str, Any]:
+    if not getattr(args, "analyze_det", False):
+        return {}
+    from scripts.analyze_det_profiles import analyze_det_profiles_for_dirs
+
+    return analyze_det_profiles_for_dirs(
+        [output_dir],
+        dataset=str(args.dataset),
+        out_dir=(str(getattr(args, "det_audit_output_dir", "") or "").strip() or (output_dir / "det_audit")),
+        high_score_threshold=float(getattr(args, "det_audit_threshold", 85.0) or 85.0),
+    )
 
 
 def _resolved_output_dir(raw: str | None) -> Path:
@@ -1397,6 +1528,8 @@ def _run_single_model(
                 model=resolved_model,
                 llm_extra_payload=llm_extra_payload,
                 service_context_kwargs=_service_context_kwargs(args),
+                prompt_render_mode=args.prompt_render_mode,
+                prompt_assets_dir=args.prompt_assets_dir,
             )
             warmup_first_latency = 0.0
             if warmup_generation["rows"]:
@@ -1430,6 +1563,8 @@ def _run_single_model(
             model=resolved_model,
             llm_extra_payload=llm_extra_payload,
             service_context_kwargs=_service_context_kwargs(args),
+            prompt_render_mode=args.prompt_render_mode,
+            prompt_assets_dir=args.prompt_assets_dir,
         )
         rerank = rerank_candidates_csv(
             profile=VERSION_ROOT.name,
@@ -1448,6 +1583,8 @@ def _run_single_model(
             model_override=resolved_model,
             llm_extra_payload=llm_extra_payload,
             service_context_kwargs=_service_context_kwargs(args),
+            prompt_render_mode=args.prompt_render_mode,
+            prompt_assets_dir=args.prompt_assets_dir,
         )
         rerank_rows = read_csv_rows(rerank_csv)
     finally:
@@ -1527,6 +1664,8 @@ def _build_overall_rows(model_summaries: list[dict[str, Any]]) -> list[list[str]
                 str(summary.get("candidate_k", "")),
                 str(summary.get("repair_attempts", "")),
                 str(summary.get("genome_id", "")),
+                str((summary.get("generation", {}).get("rows") or [{}])[0].get("prompt_render_mode", "blocks")),
+                str((summary.get("generation", {}).get("rows") or [{}])[0].get("prompt_assets_dir", "")),
                 str(summary.get("latency_isolation_mode", "")),
                 str(summary.get("paper_fair_mode", False)),
                 str((summary.get("warmup") or {}).get("row_count", 0)),
@@ -1718,6 +1857,8 @@ def _build_main_model_comparison_rows(model_summaries: list[dict[str, Any]]) -> 
         "row_success_rate",
         "resolved_model_path",
         "worker_python",
+        "prompt_render_mode",
+        "prompt_assets_dir",
         "candidate_k",
         "repair_attempts",
         "latency_isolation_mode",
@@ -1748,6 +1889,8 @@ def _build_main_model_comparison_rows(model_summaries: list[dict[str, Any]]) -> 
                 "row_success_rate": f"{_safe_float(paper_metrics.get('row_success_rate')):.4f}",
                 "resolved_model_path": summary.get("resolved_model_path", ""),
                 "worker_python": summary.get("worker_python", ""),
+                "prompt_render_mode": str((summary.get("generation", {}).get("rows") or [{}])[0].get("prompt_render_mode", "blocks")),
+                "prompt_assets_dir": str((summary.get("generation", {}).get("rows") or [{}])[0].get("prompt_assets_dir", "")),
                 "candidate_k": str(summary.get("candidate_k", "")),
                 "repair_attempts": str(summary.get("repair_attempts", "")),
                 "latency_isolation_mode": summary.get("latency_isolation_mode", ""),
@@ -1964,6 +2107,8 @@ def _build_row_comparison_rows(model_summaries: list[dict[str, Any]]) -> tuple[l
             entry[f"{model_key}__service_list_retrieval_mode"] = row.get("service_list_retrieval_mode", "")
             entry[f"{model_key}__service_list_retrieval_topk"] = row.get("service_list_retrieval_topk", "")
             entry[f"{model_key}__service_list_retrieval_categories"] = row.get("service_list_retrieval_categories", "")
+            entry[f"{model_key}__prompt_render_mode"] = row.get("prompt_render_mode", "")
+            entry[f"{model_key}__prompt_assets_dir"] = row.get("prompt_assets_dir", "")
             entry[f"{model_key}__warmup_excluded"] = row.get("warmup_excluded", "")
             entry[f"{model_key}__row_category"] = row.get("row_category", "")
     ordered_model_keys = sorted(dict.fromkeys(model_keys))
@@ -2018,6 +2163,8 @@ def _build_row_comparison_rows(model_summaries: list[dict[str, Any]]) -> tuple[l
                 f"{model_key}__service_list_retrieval_mode",
                 f"{model_key}__service_list_retrieval_topk",
                 f"{model_key}__service_list_retrieval_categories",
+                f"{model_key}__prompt_render_mode",
+                f"{model_key}__prompt_assets_dir",
                 f"{model_key}__warmup_excluded",
                 f"{model_key}__row_category",
             ]
@@ -2122,6 +2269,8 @@ def main() -> int:
     manifest = {
         "created_at": datetime.now().isoformat(),
         "suite": args.suite,
+        "dataset": str(Path(args.dataset).resolve()),
+        "service_schema": str(Path(args.service_schema).resolve()),
         "requested_model_keys": [entry["key"] for entry in requested_suite_entries],
         "model_keys": [entry["key"] for entry in suite_entries],
         "genome_json": str(Path(args.genome_json).resolve()),
@@ -2132,6 +2281,8 @@ def main() -> int:
         "det_profile": args.det_profile,
         "repair_threshold": args.repair_threshold,
         "repair_attempts": args.repair_attempts,
+        "prompt_render_mode": args.prompt_render_mode or "blocks",
+        "prompt_assets_dir": str(Path(args.prompt_assets_dir).resolve()) if args.prompt_assets_dir else "",
         "category_filters": category_filters,
         "limit_per_category": args.limit_per_category,
         "row_count": len(rows),
@@ -2177,6 +2328,8 @@ def main() -> int:
         "candidate_k",
         "repair_attempts",
         "genome_id",
+        "prompt_render_mode",
+        "prompt_assets_dir",
         "latency_isolation_mode",
         "paper_fair_mode",
         "warmup_row_count",
@@ -2256,6 +2409,26 @@ def main() -> int:
             paper_artifacts["figure_export_error"] = str(exc)
     dump_json(output_dir / "paper_metrics_summary.json", paper_artifacts)
 
+    postprocess_artifacts: dict[str, Any] = {}
+    try:
+        row_reports = _maybe_export_row_reports(args=args, output_dir=output_dir, model_summaries=model_summaries)
+        if row_reports:
+            postprocess_artifacts["row_reports"] = row_reports
+    except Exception as exc:
+        postprocess_artifacts["row_report_error"] = str(exc)
+    try:
+        comparison = _maybe_compare_results(args=args, output_dir=output_dir)
+        if comparison:
+            postprocess_artifacts["comparison"] = comparison
+    except Exception as exc:
+        postprocess_artifacts["comparison_error"] = str(exc)
+    try:
+        det_audit = _maybe_run_det_audit(args=args, output_dir=output_dir)
+        if det_audit:
+            postprocess_artifacts["det_audit"] = det_audit
+    except Exception as exc:
+        postprocess_artifacts["det_audit_error"] = str(exc)
+
     summary = {
         "output_dir": str(output_dir),
         "manifest": manifest,
@@ -2274,6 +2447,7 @@ def main() -> int:
         "tokenizer_summary_csv": str(output_dir / "tokenizer_summary.csv"),
         "paper_metrics_summary_json": str(output_dir / "paper_metrics_summary.json"),
         "paper_artifacts": paper_artifacts,
+        "postprocess_artifacts": postprocess_artifacts,
     }
     dump_json(output_dir / "suite_summary.json", summary)
 

@@ -135,6 +135,12 @@ then use:
 ### For **function services**:
 Use **argument_type** or **argument_format** to determine the correct format.
 Use **argument_bounds** or **argument_descriptor** to determine the correct format.
+- The argument separator is **service-specific**. Never copy the separator of one function into another unrelated function.
+- Use `|` only when the current function explicitly says `argument_format: " | "`.
+- If a function takes normal positional arguments, keep comma-separated JOILang syntax.
+  - Correct: `(#Light).light_movetorgb(255, 255, 0)`
+  - Incorrect: `(#Light).light_movetorgb(255 | 255 | 0)`
+- RGB-like functions are **not automatically pipe-separated**. Always follow the exact signature of the current function in `[service_list_function]`.
 
 #### [Example1]
 - If "device": "Light", "service": "colorControl_setColor" has argument type DICT

@@ -274,3 +274,10 @@ Important:
 - Do NOT print markdown fences or explanations.
 - Return ONLY one final JOILang JSON object with keys `name`, `cron`, `period`, and `code`.
 - The final output must be directly parseable by Python `json.loads()`.
+- Before finalizing the JSON, run this internal self-check:
+  - Every service name and argument separator exactly matches the current service signature.
+  - No service_value access is chained into another function call with dot notation.
+  - Every service_value read is actually used later; do not leave dead reads or dead variables.
+  - For report/speak/tell/announce commands about a current sensor reading, the final code must contain both:
+    1. a value read into a variable, and
+    2. a speaker call that actually depends on that variable.

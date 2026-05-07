@@ -36,7 +36,7 @@ from utils.pipeline_common import (
     load_service_schema,
     make_run_id,
     normalize_candidate_json_text,
-    render_blocks_for_genome,
+    render_prompt_bundle,
     select_rows,
     slugify,
     unique_fieldnames,
@@ -77,6 +77,8 @@ GENERATION_EXTRA_FIELDS = [
     "service_list_retrieval_categories",
     "service_list_retrieval_scores",
     "service_list_retrieval_fallback_reason",
+    "prompt_render_mode",
+    "prompt_assets_dir",
 ]
 
 
@@ -110,6 +112,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--retrieval-bundle-dir", default=None)
     parser.add_argument("--retrieval-model-dir", default=None)
     parser.add_argument("--retrieval-device", default=None)
+    parser.add_argument("--prompt-render-mode", default=None, choices=["blocks", "legacy_v13_monolith"])
+    parser.add_argument("--prompt-assets-dir", default=None, help="Optional directory for legacy monolithic prompt assets.")
     return parser
 
 
@@ -209,6 +213,8 @@ def generate_candidates_for_rows(
     model: str,
     llm_extra_payload: dict[str, Any] | None = None,
     service_context_kwargs: dict[str, Any] | None = None,
+    prompt_render_mode: str | None = None,
+    prompt_assets_dir: str | None = None,
 ) -> dict[str, Any]:
     ensure_workspace()
     output_csv = Path(output_csv)
@@ -219,8 +225,6 @@ def generate_candidates_for_rows(
     output_rows: list[dict[str, Any]] = []
     fieldnames: list[str] | None = None
     strategies = _candidate_strategies(genome, candidate_k)
-    system_prompt = _system_prompt()
-
     for row_no, row in dataset_rows:
         row_started = time.perf_counter()
         candidates: list[str] = []
@@ -236,8 +240,15 @@ def generate_candidates_for_rows(
                 candidate_strategy=strategy,
                 **(service_context_kwargs or {}),
             )
-            rendered_prompt, manifest = render_blocks_for_genome(genome, values=values)
-            user_prompt = rendered_prompt + "\n\nReturn the final JSON object now."
+            system_prompt, user_prompt, manifest = render_prompt_bundle(
+                genome,
+                values=values,
+                command_text=row.get("command_eng") or row.get("command_kor", ""),
+                prompt_render_mode=prompt_render_mode,
+                prompt_assets_dir=prompt_assets_dir,
+                phase="generate",
+                default_system_prompt=_system_prompt(),
+            )
             prompt_chars = len(system_prompt) + len(user_prompt)
             log_path = logs_dir / f"row_{row_no:03d}_cand_{candidate_index + 1}.json"
             prompt_log_paths.append(str(log_path))
@@ -316,6 +327,8 @@ def generate_candidates_for_rows(
                 "generation_total_pipeline_sec": round(time.perf_counter() - row_started, 4),
                 "llm_mode": llm_mode or "worker",
                 "llm_model": model,
+                "prompt_render_mode": str(prompt_render_mode or "blocks"),
+                "prompt_assets_dir": str(prompt_assets_dir or ""),
             }
         )
         for key in (
@@ -402,6 +415,8 @@ def main() -> int:
             "retrieval_model_dir": args.retrieval_model_dir,
             "retrieval_device": args.retrieval_device,
         },
+        prompt_render_mode=args.prompt_render_mode,
+        prompt_assets_dir=args.prompt_assets_dir,
     )
 
     print("Generation completed")

@@ -1,0 +1,606 @@
+row_no,category,row_category,command_eng,command_kor,gt,gt_name,gt_cron,gt_period,gt_code,warmup_excluded,gpt41_mini__det_score,gpt41_mini__det_pass,gpt41_mini__det_profile,gpt41_mini__det_gt_exact,gpt41_mini__det_gt_similarity,gpt41_mini__det_gt_service_coverage,gpt41_mini__det_gt_service_precision,gpt41_mini__det_gt_receiver_coverage,gpt41_mini__det_dataflow_score,gpt41_mini__det_numeric_grounding,gpt41_mini__det_enum_grounding,gpt41_mini__failure_reasons,gpt41_mini__output,gpt41_mini__output_name,gpt41_mini__output_cron,gpt41_mini__output_period,gpt41_mini__output_code,gpt41_mini__prompt_chars,gpt41_mini__prompt_tokens,gpt41_mini__completion_tokens,gpt41_mini__total_tokens,gpt41_mini__llm_latency_sec,gpt41_mini__total_pipeline_sec,gpt41_mini__tokens_per_sec,gpt41_mini__peak_vram_gb,gpt41_mini__generation_error_type,gpt41_mini__oom_flag,gpt41_mini__worker_python,gpt41_mini__resolved_model_path,gpt41_mini__service_list_snippet_source,gpt41_mini__service_list_device_count,gpt41_mini__service_list_retrieval_status,gpt41_mini__service_list_retrieval_mode,gpt41_mini__service_list_retrieval_topk,gpt41_mini__service_list_retrieval_categories,gpt41_mini__prompt_render_mode,gpt41_mini__prompt_assets_dir,gpt41_mini__warmup_excluded,gpt41_mini__row_category
+181,7,7,"Every 10 minutes, if the temperature is 30 degrees or higher, set the air conditioner to cool mode.",10분마다 확인해서 온도가 30도 이상이면 에어컨을 쿨모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 600000, 
+""script"": ""\nif ((#TemperatureSensor).temperaturesensor_temperature >= 30) {\n\n    (#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n\n}""}",,,600000,"
+if ((#TemperatureSensor).temperaturesensor_temperature >= 30) {
+
+    (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+
+}",False,56.4728,False,strict,False,0.851693,0.5,1.0,0.5,0.0,0.0,1.0,"[""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic"", ""service_match"", ""unknown_service:temperaturemeasurement_temperature""]","{""name"":""AirConditionerCoolOnHighTemp"",""cron"":"""",""period"":600000,""code"":""if ((#TemperatureSensor).temperaturemeasurement_temperature >= 30.0) {\n  (#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n}""}",AirConditionerCoolOnHighTemp,,600000,"if ((#TemperatureSensor).temperaturemeasurement_temperature >= 30.0) {
+  (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+}",77998,20524,70,20594,3.2912,8.6005,6257.2922,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""TemperatureSensor"", ""Dehumidifier"", ""Dishwasher"", ""WeatherProvider"", ""LaundryDryer"", ""RiceCooker"", ""ArmRobot""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+182,7,7,"Every 30 minutes, if the temperature is 20 degrees or higher and below 30 degrees, set the air conditioner to auto mode; if it is 30 degrees or higher, set it to cool mode.","30분마다 체크해서 온도가 20도 이상, 30도 미만이면 에어컨을 자동모드로 설정하고, 30도 이상이면 쿨모드로 설정해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 1800000, 
+""script"": ""\ntemp = (#TemperatureSensor).temperaturesensor_temperature\n\nif (temp >= 20 and temp < 30) {\n\n    (#AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n\n} else if (temp >= 30) {\n\n    (#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n\n}""}",,,1800000,"
+temp = (#TemperatureSensor).temperaturesensor_temperature
+
+if (temp >= 20 and temp < 30) {
+
+    (#AirConditioner).airconditioner_setairconditionermode(""auto"")
+
+} else if (temp >= 30) {
+
+    (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+
+}",False,61.8326,False,strict,False,0.858187,0.5,1.0,0.5,0.0,1.0,0.5,"[""dataflow"", ""enum_grounding"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""semantic"", ""service_match"", ""unknown_service:temperaturemeasurement_temperature""]","{""name"":""TemperatureBasedAirConditionerModeControl"",""cron"":"""",""period"":1800000,""code"":""temp = (#TemperatureSensor).temperaturemeasurement_temperature\nif (temp >= 20 and temp < 30) {\n  (#AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n} else if (temp >= 30) {\n  (#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n}""}",TemperatureBasedAirConditionerModeControl,,1800000,"temp = (#TemperatureSensor).temperaturemeasurement_temperature
+if (temp >= 20 and temp < 30) {
+  (#AirConditioner).airconditioner_setairconditionermode(""auto"")
+} else if (temp >= 30) {
+  (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+}",77723,20472,108,20580,4.2262,5.2014,4869.6228,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""TemperatureSensor"", ""Dishwasher"", ""LaundryDryer"", ""Dehumidifier"", ""WeatherProvider"", ""ArmRobot"", ""DimmerSwitch""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+183,7,7,Lock the doorlock every day at midnight.,매일 자정에 도어락을 잠궈줘.,"{""name"": """", 
+""cron"": ""0 0 * * *"", 
+""period"": 0, 
+""script"": ""\n(#DoorLock).doorlock_lock()""}",,0 0 * * *,0,"
+(#DoorLock).doorlock_lock()",False,94.75,True,strict,False,0.85,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""LockDoorlockAtMidnight"",""cron"":""0 0 * * *"",""period"":-1,""code"":""(#DoorLock).doorlock_lock()""}",LockDoorlockAtMidnight,0 0 * * *,-1,(#DoorLock).doorlock_lock(),78388,20733,48,20781,3.2885,4.202,6319.2945,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""DoorLock"", ""Door"", ""Safe"", ""Clock"", ""WindowCovering"", ""Plug"", ""Valve"", ""PresenceVitalSensor"", ""LaundryDryer"", ""Dishwasher""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+184,7,7,"On weekends at 3 PM, check for leakage; if detected, set the siren to emergency mode.",주말 오후 3시에 누수를 체크해서 감지되면 긴급 사이렌을 울려줘.,"{""name"": """", 
+""cron"": ""0 15 * * 6,7"", 
+""period"": 0, 
+""script"": ""\nif ((#LeakSensor).leaksensor_leakage == true) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n}""}",,"0 15 * * 6,7",0,"
+if ((#LeakSensor).leaksensor_leakage == true) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+}",False,69.9,False,strict,False,0.85,1.0,1.0,1.0,0.2,1.0,1.0,"[""dataflow"", ""gt_mismatch"", ""semantic""]","{""name"":""LeakageDetectionOnWeekends"",""cron"":""0 15 * * 6,0"",""period"":-1,""code"":""if ((#LeakSensor).leaksensor_leakage == true) {\n  (#Siren).siren_setsirenmode(\""emergency\"")\n}""}",LeakageDetectionOnWeekends,"0 15 * * 6,0",-1,"if ((#LeakSensor).leaksensor_leakage == true) {
+  (#Siren).siren_setsirenmode(""emergency"")
+}",75135,19789,75,19864,2.9959,3.9536,6630.3949,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""LeakSensor"", ""Siren"", ""Pump"", ""PresenceVitalSensor"", ""Plug"", ""Speaker"", ""Safe"", ""SoundSensor"", ""Charger"", ""Switch""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+185,7,7,Set the rice cooker to reheating mode every morning at 7 AM.,매일 아침 7시에 밥솥을 재가열 모드로 설정해줘.,"{""name"": """", 
+""cron"": ""0 7 * * *"", 
+""period"": 0, 
+""script"": ""\n(#RiceCooker).ricecooker_setricecookermode(\""reheating\"")""}",,0 7 * * *,0,"
+(#RiceCooker).ricecooker_setricecookermode(""reheating"")",False,94.6786,True,strict,False,0.85,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""SetRiceCookerReheatAt7AM"",""cron"":""0 7 * * *"",""period"":-1,""code"":""(#RiceCooker).ricecooker_setricecookermode(\""reheating\"")""}",SetRiceCookerReheatAt7AM,0 7 * * *,-1,"(#RiceCooker).ricecooker_setricecookermode(""reheating"")",75138,19858,60,19918,3.3775,4.333,5897.2613,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""RiceCooker"", ""Oven"", ""Dishwasher"", ""AirConditioner"", ""RobotVacuumCleaner"", ""Humidifier"", ""Dehumidifier"", ""AirPurifier"", ""Television"", ""LaundryDryer""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+186,7,7,"Every 30 minutes on weekend afternoons, set the robot vacuum cleaner to auto mode.",주말 오후에 30분마다 로봇청소기를 자동모드로 작동시켜줘.,"{""name"": """", 
+""cron"": ""0 12 * * 6,7"", 
+""period"": 1800000, 
+""script"": ""\nif ((#Clock).clock_hour == 0) {\n\n    break\n\n}\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")""}",,"0 12 * * 6,7",1800000,"
+if ((#Clock).clock_hour == 0) {
+
+    break
+
+}
+
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")",False,60.4594,False,strict,False,0.646429,0.5,1.0,0.5,0.0,0.0,1.0,"[""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic""]","{""name"":""SetRobotVacuumAutoModeWeekendAfternoon"",""cron"":""0,30 12-17 * * 6,0"",""period"":-1,""code"":""(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")""}",SetRobotVacuumAutoModeWeekendAfternoon,"0,30 12-17 * * 6,0",-1,"(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")",74803,19788,69,19857,3.2522,4.2344,6105.7131,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""RobotVacuumCleaner"", ""ArmRobot"", ""LaundryDryer"", ""Dishwasher"", ""AirPurifier"", ""Valve"", ""Pump"", ""Humidifier"", ""AirQualitySensor"", ""Charger""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+187,7,7,"From 10 PM to midnight every 10 minutes, sound the emergency siren.",밤10시부터 자정까지 10분마다 긴급 사이렌을 울려줘.,"{""name"": """", 
+""cron"": ""0 22 * * *"", 
+""period"": 600000, 
+""script"": ""\nif ((#Clock).clock_hour == 0) {\n\n    break\n\n}\n\n(#Siren).siren_setsirenmode(\""emergency\"")""}",,0 22 * * *,600000,"
+if ((#Clock).clock_hour == 0) {
+
+    break
+
+}
+
+(#Siren).siren_setsirenmode(""emergency"")",False,42.4734,False,strict,False,0.594672,0.5,1.0,0.5,0.0,0.0,0.0,"[""arg_type"", ""dataflow"", ""enum_grounding"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic"", ""service_match"", ""unknown_service:sirenmode_setsirenmode""]","{""name"":""EmergencySirenEvery10MinutesAtNight"",""cron"":"""",""period"":600000,""code"":""if ((#Clock).clock_hour >= 22 and (#Clock).clock_hour < 24) {\n  (#Siren).sirenmode_setsirenmode(\""emergency\"")\n} else {\n  break\n}""}",EmergencySirenEvery10MinutesAtNight,,600000,"if ((#Clock).clock_hour >= 22 and (#Clock).clock_hour < 24) {
+  (#Siren).sirenmode_setsirenmode(""emergency"")
+} else {
+  break
+}",82711,21729,82,21811,3.7242,4.6981,5856.5598,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Siren"", ""SoundSensor"", ""Speaker"", ""PresenceVitalSensor"", ""AudioRecorder"", ""ArmRobot"", ""WeatherProvider"", ""EmailProvider"", ""Clock"", ""Door""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+188,7,7,"On weekdays from 8 AM to midnight every hour, capture an image with the camera.",평일 오전 8시부터 자정까지 한 시간마다 카메라로 사진을 찍어줘.,"{""name"": """", 
+""cron"": ""0 0,8-23 * * 1-5"", 
+""period"": 0, 
+""script"": ""\n(#Camera).camera_captureimage()""}",,"0 0,8-23 * * 1-5",0,"
+(#Camera).camera_captureimage()",False,93.5,True,strict,False,0.85,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""CaptureImageEveryHourWeekdays"",""cron"":""0 8-23 * * 1-5"",""period"":-1,""code"":""(#Camera).camera_captureimage()""}",CaptureImageEveryHourWeekdays,0 8-23 * * 1-5,-1,(#Camera).camera_captureimage(),83865,22007,52,22059,3.1703,4.134,6958.0166,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Camera"", ""Clock"", ""PresenceVitalSensor"", ""Television"", ""AudioRecorder"", ""FaceRecognizer"", ""ArmRobot"", ""Charger"", ""AirQualitySensor"", ""Dehumidifier""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+189,7,7,"When the new year begins, make the arm robot say hello.",새해가 되면 로봇팔로 인사해줘.,"{""name"": """", 
+""cron"": ""0 0 1 1 *"", 
+""period"": 0, 
+""script"": ""\n(#ArmRobot).armrobot_hello()""}",,0 0 1 1 *,0,"
+(#ArmRobot).armrobot_hello()",False,89.9912,True,strict,False,0.548235,1.0,0.2,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch""]","{""name"":""NewYearArmRobotHello"",""cron"":"""",""period"":0,""code"":""wait until ((#Clock).clock_month == 1 and (#Clock).clock_day == 1 and (#Clock).clock_hour == 0 and (#Clock).clock_minute == 0)\n(#ArmRobot).armrobot_hello()""}",NewYearArmRobotHello,,0,"wait until ((#Clock).clock_month == 1 and (#Clock).clock_day == 1 and (#Clock).clock_hour == 0 and (#Clock).clock_minute == 0)
+(#ArmRobot).armrobot_hello()",81568,21460,81,21541,2.6801,3.6784,8037.3867,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""ArmRobot"", ""RobotVacuumCleaner"", ""PresenceVitalSensor"", ""FaceRecognizer"", ""AirConditioner"", ""Clock"", ""Button"", ""Valve"", ""AirQualitySensor"", ""AudioRecorder""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+190,7,7,"On weekdays at 7 AM, start the rice cooker in auto-cleaning mode.",평일 오전 7시에 밥솥을 자동청소 모드로 작동해줘.,"{""name"": """", 
+""cron"": ""0 7 * * 1-5"", 
+""period"": 0, 
+""script"": ""\n(#RiceCooker).ricecooker_setricecookermode(\""autoClean\"")""}",,0 7 * * 1-5,0,"
+(#RiceCooker).ricecooker_setricecookermode(""autoClean"")",False,93.5,True,strict,False,0.85,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""StartRiceCookerAutoCleanWeekdays7AM"",""cron"":""0 7 * * 1-5"",""period"":-1,""code"":""(#RiceCooker).ricecooker_setricecookermode(\""autoClean\"")""}",StartRiceCookerAutoCleanWeekdays7AM,0 7 * * 1-5,-1,"(#RiceCooker).ricecooker_setricecookermode(""autoClean"")",75982,20069,63,20132,2.1157,3.1054,9515.5268,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""RiceCooker"", ""RobotVacuumCleaner"", ""Dishwasher"", ""Oven"", ""FaceRecognizer"", ""AirPurifier"", ""ArmRobot"", ""LaundryDryer"", ""Charger"", ""Pump""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+191,7,7,"At 6 AM on Mondays and Wednesdays, announce the weather information through the speaker.",월요일과 수요일 오전 6시에 날씨 정보를 스피커로 알려줘.,"{""name"": """", 
+""cron"": ""0 6 * * 1,3"", 
+""period"": 0, 
+""script"": ""\n(#Speaker).speaker_speak(\""현재 날씨는 \"" + (#WeatherProvider).weatherprovider_weather + \""입니다\"")""}",,"0 6 * * 1,3",0,"
+(#Speaker).speaker_speak(""현재 날씨는 "" + (#WeatherProvider).weatherprovider_weather + ""입니다"")",False,62.8316,False,strict,False,0.49881,0.5,0.5,0.5,0.0,1.0,1.0,"[""arg_type"", ""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""semantic""]","{""name"":""AnnounceWeatherOnMonWed6AM"",""cron"":""0 6 * * 1,3"",""period"":-1,""code"":""weatherInfo = (#WeatherProvider).weatherprovider_getweatherinfo(0 | 0)\n(#Speaker).speaker_speak(weatherInfo)""}",AnnounceWeatherOnMonWed6AM,"0 6 * * 1,3",-1,"weatherInfo = (#WeatherProvider).weatherprovider_getweatherinfo(0 | 0)
+(#Speaker).speaker_speak(weatherInfo)",88567,23034,71,23105,2.5432,3.4923,9085.011,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""WeatherProvider"", ""Speaker"", ""RainSensor"", ""Switch"", ""Clock"", ""AirConditioner"", ""PresenceVitalSensor"", ""Television"", ""CloudServiceProvider"", ""AudioRecorder""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+192,7,7,"Every hour, increase the speaker volume by 10.",1시간마다 스피커 볼륨을 10씩 올려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 3600000, 
+""script"": ""\nnew = (#Speaker).speaker_volume + 10\n\nif (new > 100) {\n\n    new = 100\n\n}\n\n(#Speaker).speaker_setvolume(new)""}",,,3600000,"
+new = (#Speaker).speaker_volume + 10
+
+if (new > 100) {
+
+    new = 100
+
+}
+
+(#Speaker).speaker_setvolume(new)",False,96.2411,True,strict,False,0.8875,1.0,1.0,1.0,1.0,1.0,1.0,"[""arg_type"", ""gt_mismatch""]","{""name"":""IncreaseSpeakerVolumeEveryHour"",""cron"":"""",""period"":3600000,""code"":""currentVolume = (#Speaker).speaker_volume\nnewVolume = currentVolume + 10\nif (newVolume > 100) {\n  newVolume = 100\n}\n(#Speaker).speaker_setvolume(newVolume)""}",IncreaseSpeakerVolumeEveryHour,,3600000,"currentVolume = (#Speaker).speaker_volume
+newVolume = currentVolume + 10
+if (newVolume > 100) {
+  newVolume = 100
+}
+(#Speaker).speaker_setvolume(newVolume)",81735,21493,80,21573,2.3173,3.2147,9309.5413,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""AudioRecorder"", ""SoundSensor"", ""Siren"", ""Pump"", ""Clock"", ""Television"", ""PresenceVitalSensor"", ""AirPurifier"", ""WeatherProvider""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+193,7,7,"Every Monday at 8 AM, if both the safe and the door lock are locked, say 'It is safe' through the speaker","월요일 아침 8시마다 금고와 도어락이 모두 잠겨있으면 스피커로 ""안전합니다""라고 말해줘.","{""name"": """", 
+""cron"": ""0 8 * * 1"", 
+""period"": 0, 
+""script"": ""\nif ((#Safe).safe_safestate == \""locked\"" and (#DoorLock).doorlock_doorlockstate == \""locked\"") {\n\n    (#Speaker).speaker_speak(\""안전합니다\"")\n\n}""}",,0 8 * * 1,0,"
+if ((#Safe).safe_safestate == ""locked"" and (#DoorLock).doorlock_doorlockstate == ""locked"") {
+
+    (#Speaker).speaker_speak(""안전합니다"")
+
+}",False,69.9,False,strict,False,0.807407,1.0,1.0,1.0,0.2,1.0,1.0,"[""dataflow"", ""gt_mismatch"", ""semantic""]","{""name"":""Monday 8AM Safe and DoorLock Check"",""cron"":""0 8 * * 1"",""period"":-1,""code"":""if ((#Safe).safe_safestate == \""closed\"" and (#DoorLock).doorlock_doorlockstate == \""closed\"") {\n  (#Speaker).speaker_speak(\""It is safe\"")\n}""}",Monday 8AM Safe and DoorLock Check,0 8 * * 1,-1,"if ((#Safe).safe_safestate == ""closed"" and (#DoorLock).doorlock_doorlockstate == ""closed"") {
+  (#Speaker).speaker_speak(""It is safe"")
+}",80838,21340,87,21427,2.8843,3.8402,7428.8389,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Safe"", ""DoorLock"", ""Door"", ""Speaker"", ""PresenceVitalSensor"", ""AudioRecorder"", ""Siren"", ""TapDialSwitch"", ""Clock"", ""SoundSensor""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+194,7,7,"Every 30 minutes from 7 PM to 10 PM, check the robot vacuum cleaner and start it in auto mode if it is stopped.",저녁 7시부터 10시까지 30분마다 로봇청소기를 체크해서 멈춰있으면 자동 모드로 실행시켜줘.,"{""name"": """", 
+""cron"": ""0,30 19-21 * * *"", 
+""period"": 0, 
+""script"": ""\nif ((#RobotVacuumCleaner).robotvacuumcleaner_robotvacuumcleanermode == \""stop\"") {\n\n    (#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\n}""}",,"0,30 19-21 * * *",0,"
+if ((#RobotVacuumCleaner).robotvacuumcleaner_robotvacuumcleanermode == ""stop"") {
+
+    (#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+
+}",False,69.9,False,strict,False,0.744444,1.0,0.666667,1.0,0.2,1.0,1.0,"[""dataflow"", ""extraneous"", ""gt_mismatch"", ""semantic""]","{""name"":""AutoStartRobotVacuumEvery30MinEvening"",""cron"":"""",""period"":1800000,""code"":""currentHour = (#Clock).clock_hour\nif ((currentHour >= 19) and (currentHour < 22)) {\n  mode = (#RobotVacuumCleaner).robotvacuumcleaner_robotvacuumcleanermode\n  if (mode == \""stop\"") {\n    (#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n  }\n} else {\n  break\n}""}",AutoStartRobotVacuumEvery30MinEvening,,1800000,"currentHour = (#Clock).clock_hour
+if ((currentHour >= 19) and (currentHour < 22)) {
+  mode = (#RobotVacuumCleaner).robotvacuumcleaner_robotvacuumcleanermode
+  if (mode == ""stop"") {
+    (#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+  }
+} else {
+  break
+}",77476,20379,128,20507,3.3237,4.2794,6169.9311,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""RobotVacuumCleaner"", ""ArmRobot"", ""Dishwasher"", ""PresenceVitalSensor"", ""LaundryDryer"", ""AirPurifier"", ""Valve"", ""Pump"", ""AirQualitySensor"", ""FaceRecognizer""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+195,7,7,"At noon every day, announce the lunch menu of the 301 building cafeteria through the speaker.",정오마다 301동 식당의 점심 메뉴를 스피커로 말해줘.,"{""name"": """", 
+""cron"": ""0 12 * * *"", 
+""period"": 0, 
+""script"": ""\nmenu = (#MenuProvider).menuprovider_getmenu(\""오늘 301동식당 점심\"")\n\n(#Speaker).speaker_speak(\""오늘 301동식당의 점심 메뉴는\"" + menu + \""입니다\"")""}",,0 12 * * *,0,"
+menu = (#MenuProvider).menuprovider_getmenu(""오늘 301동식당 점심"")
+
+(#Speaker).speaker_speak(""오늘 301동식당의 점심 메뉴는"" + menu + ""입니다"")",False,94.4348,True,strict,False,0.7915,1.0,1.0,1.0,1.0,0.75,1.0,"[""gt_mismatch"", ""numeric_grounding""]","{""name"":""DailyLunchMenuAnnouncement"",""cron"":""0 12 * * *"",""period"":-1,""code"":""menu = (#MenuProvider).menuprovider_getmenu(\""오늘 301동식당 점심\"")\n(#Speaker).speaker_speak(menu)""}",DailyLunchMenuAnnouncement,0 12 * * *,-1,"menu = (#MenuProvider).menuprovider_getmenu(""오늘 301동식당 점심"")
+(#Speaker).speaker_speak(menu)",88278,23104,66,23170,3.1084,4.132,7453.9956,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""MenuProvider"", ""Charger"", ""CloudServiceProvider"", ""PresenceVitalSensor"", ""AudioRecorder"", ""Clock"", ""Television"", ""TapDialSwitch"", ""AirPurifier""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+196,7,7,"At 6 PM every day, announce the dinner menu of the student cafeteria through the speaker.",오후 6시에 학생 식당의 저녁 메뉴를 스피커로 알려줘.,"{""name"": """", 
+""cron"": ""0 18 * * *"", 
+""period"": 0, 
+""script"": ""\nmenu = (#MenuProvider).menuprovider_getmenu(\""오늘 학생식당 저녁\"")\n\n(#Speaker).speaker_speak(\""오늘 학생 식당의 저녁 메뉴는\"" + menu + \""입니다\"")""}",,0 18 * * *,0,"
+menu = (#MenuProvider).menuprovider_getmenu(""오늘 학생식당 저녁"")
+
+(#Speaker).speaker_speak(""오늘 학생 식당의 저녁 메뉴는"" + menu + ""입니다"")",False,93.1434,True,strict,False,0.792308,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""DailyDinnerMenuAnnouncement"",""cron"":""0 18 * * *"",""period"":-1,""code"":""menu = (#MenuProvider).menuprovider_getmenu(\""오늘 학생식당 저녁\"")\n(#Speaker).speaker_speak(menu)""}",DailyDinnerMenuAnnouncement,0 18 * * *,-1,"menu = (#MenuProvider).menuprovider_getmenu(""오늘 학생식당 저녁"")
+(#Speaker).speaker_speak(menu)",83941,22122,64,22186,2.3608,3.3414,9397.6618,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""MenuProvider"", ""Speaker"", ""Charger"", ""PresenceVitalSensor"", ""AudioRecorder"", ""Television"", ""Clock"", ""Oven"", ""RiceCooker"", ""EmailProvider""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+197,7,7,"At 11 PM, if safe is unlocked or the door lock is unlocked , speak 'Check the safe and door lock' through the speaker.","오후 11시에 금고가 열려있거나 도어락이 열려있으면, 스피커로 ""금고와 도어락을 확인하세요""라고 말해줘.","{""name"": """", 
+""cron"": ""0 23 * * *"", 
+""period"": 0, 
+""script"": ""\nif ((#Safe).safe_safestate == \""unlocked\"" or (#DoorLock).doorlock_doorlockstate == \""unlocked\"") {\n\n    (#Speaker).speaker_speak(\""금고와 도어락의 잠금 상태를 확인해 주세요.\"")\n\n}""}",,0 23 * * *,0,"
+if ((#Safe).safe_safestate == ""unlocked"" or (#DoorLock).doorlock_doorlockstate == ""unlocked"") {
+
+    (#Speaker).speaker_speak(""금고와 도어락의 잠금 상태를 확인해 주세요."")
+
+}",False,69.9,False,strict,False,0.756115,1.0,1.0,1.0,0.2,1.0,1.0,"[""dataflow"", ""gt_mismatch""]","{""name"":""SafeOrDoorUnlockAlertAt11PM"",""cron"":""0 23 * * *"",""period"":-1,""code"":""if ((#Safe).safe_safestate == \""open\"" or (#DoorLock).doorlock_doorlockstate == \""open\"") {\n  (#Speaker).speaker_speak(\""Check the safe and door lock\"")\n}""}",SafeOrDoorUnlockAlertAt11PM,0 23 * * *,-1,"if ((#Safe).safe_safestate == ""open"" or (#DoorLock).doorlock_doorlockstate == ""open"") {
+  (#Speaker).speaker_speak(""Check the safe and door lock"")
+}",82385,21716,88,21804,3.7166,4.8718,5866.6523,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Safe"", ""DoorLock"", ""Door"", ""Speaker"", ""PresenceVitalSensor"", ""WindowCovering"", ""AudioRecorder"", ""TapDialSwitch"", ""Clock"", ""SoundSensor""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+198,7,7,"Check every 30 minutes; if the temperature is 30 degrees or higher, set the target temperature to 25 degrees; if it's below 23 degrees, set it to 26 degrees.","30분마다 체크해서 온도가 30도 이상이면 목표 온도를 25도로 설정하고, 23도 미만이면 26도로 설정해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 1800000, 
+""script"": ""\ntemp = (#TemperatureSensor).temperaturesensor_temperature\n\nif (temp >= 30) {\n\n    (#AirConditioner).airconditioner_settargettemperature(25)\n\n} else if (temp < 23) {\n\n    (#AirConditioner).airconditioner_settargettemperature(26)\n\n}""}",,,1800000,"
+temp = (#TemperatureSensor).temperaturesensor_temperature
+
+if (temp >= 30) {
+
+    (#AirConditioner).airconditioner_settargettemperature(25)
+
+} else if (temp < 23) {
+
+    (#AirConditioner).airconditioner_settargettemperature(26)
+
+}",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,0.2,1.0,1.0,[],"{""name"":""TemperatureBasedTargetAdjustment"",""cron"":"""",""period"":1800000,""code"":""temp = (#TemperatureSensor).temperaturesensor_temperature\nif (temp >= 30) {\n  (#AirConditioner).airconditioner_settargettemperature(25)\n} else if (temp < 23) {\n  (#AirConditioner).airconditioner_settargettemperature(26)\n}""}",TemperatureBasedTargetAdjustment,,1800000,"temp = (#TemperatureSensor).temperaturesensor_temperature
+if (temp >= 30) {
+  (#AirConditioner).airconditioner_settargettemperature(25)
+} else if (temp < 23) {
+  (#AirConditioner).airconditioner_settargettemperature(26)
+}",78372,20645,96,20741,4.8875,5.8844,4243.6829,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""AirConditioner"", ""TemperatureSensor"", ""AirQualitySensor"", ""WeatherProvider"", ""LaundryDryer"", ""Oven"", ""Dishwasher"", ""Dehumidifier"", ""AirPurifier"", ""RiceCooker""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+199,7,7,"Check humidity every 10 minutes; if it's 50 or higher, turn off the humidifier; if it's 20 or lower, turn on the humidifier and set it to auto mode.",10분마다 습도를 체크해서 50 이상이면 가습기를 끄고 20 이하면 가습기를 켜고 자동모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 600000, 
+""script"": ""\nhum = (#HumiditySensor).humiditysensor_humidity\n\nif (hum >= 50) {\n\n    (#Humidifier).switch_off()\n\n} else if (hum <= 20) {\n\n    (#Humidifier).switch_on()\n\n    (#Humidifier).humidifier_sethumidifiermode(\""auto\"")\n\n}""}",,,600000,"
+hum = (#HumiditySensor).humiditysensor_humidity
+
+if (hum >= 50) {
+
+    (#Humidifier).switch_off()
+
+} else if (hum <= 20) {
+
+    (#Humidifier).switch_on()
+
+    (#Humidifier).humidifier_sethumidifiermode(""auto"")
+
+}",False,64.2216,False,strict,False,0.783537,0.5,1.0,0.5,0.2,1.0,0.0,"[""dataflow"", ""enum_grounding"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""semantic""]","{""name"":""HumidityControlEvery10Minutes"",""cron"":"""",""period"":600000,""code"":""humidity = (#HumiditySensor).humiditysensor_humidity\nif (humidity >= 50) {\n  (#Humidifier).humidifier_sethumidifiermode(\""off\"")\n} else if (humidity <= 20) {\n  (#Humidifier).humidifier_sethumidifiermode(\""auto\"")\n}""}",HumidityControlEvery10Minutes,,600000,"humidity = (#HumiditySensor).humiditysensor_humidity
+if (humidity >= 50) {
+  (#Humidifier).humidifier_sethumidifiermode(""off"")
+} else if (humidity <= 20) {
+  (#Humidifier).humidifier_sethumidifiermode(""auto"")
+}",76042,20033,101,20134,5.1323,6.1455,3922.9975,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Humidifier"", ""Dehumidifier"", ""HumiditySensor"", ""AirQualitySensor"", ""WeatherProvider"", ""AirPurifier"", ""AirConditioner"", ""Dishwasher"", ""LaundryDryer"", ""Pump""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+200,7,7,"Check the fine dust level every hour; if it's 200 or higher, set the air purifier to high speed; if it's 100 or lower, set it to low speed.",1시간마다 미세먼지 농도를 체크해서 200 이상이면 공기청정기를 강풍모드로 설정하고 100 이하이면 미풍모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 3600000, 
+""script"": ""\ndust = (#AirQualitySensor).airqualitysensor_finedustlevel\n\nif (dust >= 200) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n} else if (dust <= 100) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""low\"")\n\n}""}",,,3600000,"
+dust = (#AirQualitySensor).airqualitysensor_finedustlevel
+
+if (dust >= 200) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+} else if (dust <= 100) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""low"")
+
+}",False,69.9,False,strict,False,0.97995,1.0,1.0,1.0,0.2,1.0,0.5,"[""dataflow"", ""enum_grounding"", ""gt_mismatch""]","{""name"":""FineDustLevelAirPurifierControl"",""cron"":"""",""period"":3600000,""code"":""fineDust = (#AirQualitySensor).airqualitysensor_finedustlevel\nif (fineDust >= 200) {\n  (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n} else if (fineDust <= 100) {\n  (#AirPurifier).airpurifier_setairpurifiermode(\""low\"")\n}""}",FineDustLevelAirPurifierControl,,3600000,"fineDust = (#AirQualitySensor).airqualitysensor_finedustlevel
+if (fineDust >= 200) {
+  (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+} else if (fineDust <= 100) {
+  (#AirPurifier).airpurifier_setairpurifiermode(""low"")
+}",74952,19765,111,19876,4.0685,5.097,4885.3386,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""AirPurifier"", ""AirQualitySensor"", ""LaundryDryer"", ""AirConditioner"", ""Dishwasher"", ""RobotVacuumCleaner"", ""SmokeDetector"", ""Dehumidifier"", ""Humidifier"", ""LevelControl""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+201,7,7,"Check every 5 minutes; if the charger is fully charged, turn it off.",5분마다 체크해서 충전기가 완충됐으면 충전기를 꺼줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 300000, 
+""script"": ""\nif ((#Charger).charger_chargingstate == \""fullyCharged\"") {\n\n    (#Charger).switch_off()\n\n}""}",,,300000,"
+if ((#Charger).charger_chargingstate == ""fullyCharged"") {
+
+    (#Charger).switch_off()
+
+}",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,0.2,1.0,1.0,[],"{""name"":""ChargerAutoOffWhenFullyCharged"",""cron"":"""",""period"":300000,""code"":""if ((#Charger).charger_chargingstate == \""fullyCharged\"") {\n  (#Charger).switch_off()\n}""}",ChargerAutoOffWhenFullyCharged,,300000,"if ((#Charger).charger_chargingstate == ""fullyCharged"") {
+  (#Charger).switch_off()
+}",78890,20890,64,20954,2.6086,3.6084,8032.6612,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Charger"", ""PresenceVitalSensor"", ""Plug"", ""Switch"", ""Clock"", ""DimmerSwitch"", ""TapDialSwitch"", ""Dehumidifier"", ""Pump"", ""Humidifier""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+202,7,7,"When the Christmas arrives, change the light color to red.",크리스마스가 되면 불을 빨간색으로 바꿔줘.,"{""name"": """", 
+""cron"": ""0 0 25 12 *"", 
+""period"": 0, 
+""script"": ""\n(#Light).light_movetorgb(255, 0, 0)""}",,0 0 25 12 *,0,"
+(#Light).light_movetorgb(255, 0, 0)",False,90.5002,True,strict,False,0.660748,1.0,0.5,1.0,1.0,1.0,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch""]","{""name"":""ChristmasLightRed"",""cron"":"""",""period"":0,""code"":""wait until ((#Clock).clock_time == 1225)\n(#Light).light_movetorgb(255 | 0 | 0)""}",ChristmasLightRed,,0,"wait until ((#Clock).clock_time == 1225)
+(#Light).light_movetorgb(255 | 0 | 0)",80138,21018,58,21076,2.0241,3.0051,10412.529,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Light"", ""LightSensor"", ""ColorControl"", ""DimmerSwitch"", ""Switch"", ""Plug"", ""Television"", ""Charger"", ""PresenceVitalSensor"", ""LevelControl""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+203,7,7,"Every hour on Christmas, play 'Christmas.mp3' through the speaker.","크리스마스에 1시간마다 스피커로 ""Christmas.mp3""을 재생해줘.","{""name"": """", 
+""cron"": ""0 * 25 12 *"", 
+""period"": 0, 
+""script"": ""\n(#Speaker).speaker_play(\""Christmas.mp3\"")""}",,0 * 25 12 *,0,"
+(#Speaker).speaker_play(""Christmas.mp3"")",False,92.4664,True,strict,False,0.664706,1.0,0.333333,1.0,1.0,0.666667,1.0,"[""extraneous"", ""gt_mismatch"", ""numeric_grounding""]","{""name"":""PlayChristmasMusicEveryHourOnChristmas"",""cron"":""0 * 25 12 *"",""period"":-1,""code"":""if ((#Clock).clock_month == 12 and (#Clock).clock_day == 25) {\n  (#Speaker).speaker_play(\""Christmas.mp3\"")\n}""}",PlayChristmasMusicEveryHourOnChristmas,0 * 25 12 *,-1,"if ((#Clock).clock_month == 12 and (#Clock).clock_day == 25) {
+  (#Speaker).speaker_play(""Christmas.mp3"")
+}",80273,21103,78,21181,2.3897,3.4185,8863.4557,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""AudioRecorder"", ""Clock"", ""Switch"", ""SoundSensor"", ""Plug"", ""EmailProvider"", ""PresenceVitalSensor"", ""Siren"", ""Television""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+204,7,7,"Every 30 minutes from now until midnight, output the current time through the speaker.",지금부터 자정까지 30분마다 현재 시각을 스피커로 출력해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 1800000, 
+""script"": ""\nif ((#Clock).clock_hour == 0) {\n\n    break\n\n}\n\n(#Speaker).speaker_speak(\""현재 시각은 \"" + (#Clock).clock_hour + \""시\"" + (#Clock).clock_minute + \""분 입니다\"")""}",,,1800000,"
+if ((#Clock).clock_hour == 0) {
+
+    break
+
+}
+
+(#Speaker).speaker_speak(""현재 시각은 "" + (#Clock).clock_hour + ""시"" + (#Clock).clock_minute + ""분 입니다"")",False,63.807,False,strict,False,0.62807,0.333333,0.5,0.333333,1.0,0.0,1.0,"[""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic""]","{""name"":""PeriodicTimeAnnouncement"",""cron"":"""",""period"":1800000,""code"":""currentTime = (#Clock).clock_time\n(#Speaker).speaker_speak(currentTime)\nif ((#Clock).clock_time == \""0000\"") {\n  break\n}""}",PeriodicTimeAnnouncement,,1800000,"currentTime = (#Clock).clock_time
+(#Speaker).speaker_speak(currentTime)
+if ((#Clock).clock_time == ""0000"") {
+  break
+}",82475,21666,67,21733,2.3558,3.3186,9225.3162,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""Clock"", ""AudioRecorder"", ""PresenceVitalSensor"", ""SoundSensor"", ""Siren"", ""Plug"", ""Charger"", ""Television"", ""WeatherProvider""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+205,7,7,"Every 10 minutes from now until 3 PM, sound the emergency siren for 5 seconds and then turn it off.",지금부터 오후 3시까지 10분마다 긴급 사이렌을 5초간 울렸다 꺼줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 600000, 
+""script"": ""\nif ((#Clock).clock_hour == 15) {\n \n    break\n\n}\n\n(#Siren).siren_setsirenmode(\""emergency\"")\n\ndelay(5 SEC)\n\n(#Siren).switch_off()""}",,,600000,"
+if ((#Clock).clock_hour == 15) {
+ 
+    break
+
+}
+
+(#Siren).siren_setsirenmode(""emergency"")
+
+delay(5 SEC)
+
+(#Siren).switch_off()",False,27.2736,False,strict,False,0.602344,0.0,0.0,0.0,0.2,0.0,0.0,"[""arg_type"", ""dataflow"", ""enum_grounding"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic"", ""service_match"", ""unknown_service:sirenmode_setsirenmode""]","{""name"":""EmergencySirenEvery10MinutesUntil3PM"",""cron"":"""",""period"":600000,""code"":""if ((#Clock).clock_time < 1500) {\n  (#Siren).sirenmode_setsirenmode(\""emergency\"")\n  (#Clock).clock_delay(5000)\n  (#Siren).sirenmode_setsirenmode(\""off\"")\n} else {\n  break\n}""}",EmergencySirenEvery10MinutesUntil3PM,,600000,"if ((#Clock).clock_time < 1500) {
+  (#Siren).sirenmode_setsirenmode(""emergency"")
+  (#Clock).clock_delay(5000)
+  (#Siren).sirenmode_setsirenmode(""off"")
+} else {
+  break
+}",78665,20719,103,20822,3.3741,4.3267,6171.1271,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Siren"", ""SoundSensor"", ""PresenceVitalSensor"", ""AudioRecorder"", ""Speaker"", ""TapDialSwitch"", ""Switch"", ""ArmRobot"", ""EmailProvider"", ""Button""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+206,7,7,"At 6 PM, set the level of all blinds with odd tags on the wall to 50%.",오후 6시에 벽에 있는 홀수 태그가 붙은 블라인드 높이를 모두 50%로 조절해줘.,"{""name"": """", 
+""cron"": ""0 18 * * *"", 
+""period"": 0, 
+""script"": ""\nall(#Wall #Odd #Blind).windowcovering_setlevel(50)""}",,0 18 * * *,0,"
+all(#Wall #Odd #Blind).windowcovering_setlevel(50)",False,92.3405,True,strict,False,0.718103,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""SetOddWallBlindsLevelAt6PM"",""cron"":""0 18 * * *"",""period"":-1,""code"":""all(#WindowCovering #blind #odd #wall).windowcovering_setlevel(50)""}",SetOddWallBlindsLevelAt6PM,0 18 * * *,-1,all(#WindowCovering #blind #odd #wall).windowcovering_setlevel(50),63493,16795,61,16856,1.8891,1.8968,8922.7675,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+207,7,7,"Every 2 hours on weekends, set all robot vacuum cleaners in the living room to repeat mode.",주말에 2시간마다 거실에 있는 로봇 청소기들을 모두 반복 모드로 설정해줘.,"{""name"": """", 
+""cron"": ""0 */2 * * 6,7"", 
+""period"": 0, 
+""script"": ""\nall(#LivingRoom #RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""repeat\"")""}",,"0 */2 * * 6,7",0,"
+all(#LivingRoom #RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""repeat"")",False,92.5751,True,strict,False,0.635027,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""SetLivingRoomRobotVacuumRepeatModeOnWeekendsEvery2Hours"",""cron"":""0 */2 * * 6,0"",""period"":-1,""code"":""(#RobotVacuumCleaner #LivingRoom).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""repeat\"")""}",SetLivingRoomRobotVacuumRepeatModeOnWeekendsEvery2Hours,"0 */2 * * 6,0",-1,"(#RobotVacuumCleaner #LivingRoom).robotvacuumcleaner_setrobotvacuumcleanermodemode(""repeat"")",62345,16484,73,16557,1.9158,1.9228,8642.3426,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+208,7,7,"Every minute, if the humidity of all sensors in Group2 is 50% or higher, set all dehumidifiers to refresh mode.","그룹 2에 속한 습도 센서들을 1분마다 체크해서 모두 50% 이상이면, 모든 제습기를 리프레쉬 모드로 설정해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 60000, 
+""script"": ""\nif (all(#Group2 #HumiditySensor).humiditysensor_humidity >= 50) {\n\n    all(#Dehumidifier).dehumidifier_setdehumidifiermode(\""refreshing\"")\n\n}""}",,,60000,"
+if (all(#Group2 #HumiditySensor).humiditysensor_humidity >= 50) {
+
+    all(#Dehumidifier).dehumidifier_setdehumidifiermode(""refreshing"")
+
+}",False,69.9,False,strict,False,0.982955,1.0,1.0,0.5,0.2,0.416667,1.0,"[""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""numeric_grounding"", ""precondition"", ""semantic""]","{""name"":""Group2HumidityCheckAndDehumidifierRefresh"",""cron"":"""",""period"":60000,""code"":""if (all(#Group2 #HumiditySensor).humiditysensor_humidity >= 50.0) {\n  all(#Group2 #Dehumidifier).dehumidifier_setdehumidifiermode(\""refreshing\"")\n}""}",Group2HumidityCheckAndDehumidifierRefresh,,60000,"if (all(#Group2 #HumiditySensor).humiditysensor_humidity >= 50.0) {
+  all(#Group2 #Dehumidifier).dehumidifier_setdehumidifiermode(""refreshing"")
+}",64057,16942,82,17024,3.2113,3.2189,5301.2799,0.0,,False,,,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+209,7,7,"Every 11 PM, close all doors with even tags.",밤 11시에 짝수 태그가 붙은 모든 문을 닫아줘.,"{""name"": """", 
+""cron"": ""0 23 * * *"", 
+""period"": 0, 
+""script"": ""\nall(#Even #Door).door_close()""}",,0 23 * * *,0,"
+all(#Even #Door).door_close()",False,93.0345,True,strict,False,0.756897,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""CloseEvenDoorsAt11PM"",""cron"":""0 23 * * *"",""period"":-1,""code"":""all(#Door #even).door_close()""}",CloseEvenDoorsAt11PM,0 23 * * *,-1,all(#Door #even).door_close(),62102,16447,48,16495,3.0284,3.0353,5446.7706,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+210,7,7,"Every morning at 7 AM, open all blinds in Zone 1.",매일 아침 7시에 구역1에 있는 모든 블라인드를 올려줘.,"{""name"": """", 
+""cron"": ""0 7 * * *"", 
+""period"": 0, 
+""script"": ""\nall(#Sector1 #Blind).windowcovering_uporopen()""}",,0 7 * * *,0,"
+all(#Sector1 #Blind).windowcovering_uporopen()",False,69.9,False,strict,False,0.718182,1.0,1.0,0.0,1.0,1.0,1.0,"[""gt_mismatch"", ""gt_receiver_coverage"", ""semantic""]","{""name"":""OpenBlindsZone1At7AM"",""cron"":""0 7 * * *"",""period"":-1,""code"":""all(#WindowCovering #Zone1).windowcovering_uporopen()""}",OpenBlindsZone1At7AM,0 7 * * *,-1,all(#WindowCovering #Zone1).windowcovering_uporopen(),63472,16789,58,16847,1.7527,1.7605,9612.0272,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+211,7,7,"Every 7 PM, if no one is detected on the 1st floor, turn off all lights; for the 2nd floor, check at 8 PM and turn off all its lights if no one is present.",밤 7시에 1층에 사람이 없으면 불을 다 꺼주고 2층은 8시에 사람이 없으면 불을 다 꺼줘.,"{""name"": """", 
+""cron"": ""0 19 * * *"", 
+""period"": 0, 
+""script"": ""\nif ((#Floor1 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor1 #Light).switch_off()\n\n}\n\ndelay(1 HOUR)\n\nif ((#Floor2 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor2 #Light).switch_off()\n\n}""}",,0 19 * * *,0,"
+if ((#Floor1 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor1 #Light).switch_off()
+
+}
+
+delay(1 HOUR)
+
+if ((#Floor2 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor2 #Light).switch_off()
+
+}",False,0.0,False,strict,False,0.0,1.0,1.0,1.0,1.0,1.0,1.0,"[""invalid_json""]","{
+  ""name"": ""TurnOffLightsIfNoPresenceOnFloors"",
+  ""cron"": ""0 19 * * *"",
+  ""period"": -1,
+  ""code"": ""if ((#PresenceSensor #1stFloor).presenceSensor_presence == false) {\n  all(#Light #1stFloor).switch_off()\n}""
+}
+{
+  ""name"": ""TurnOffLightsIfNoPresenceOn2ndFloor"",
+  ""cron"": ""0 20 * * *"",
+  ""period"": -1,
+  ""code"": ""if ((#PresenceSensor #2ndFloor).presenceSensor_presence == false) {\n  all(#Light #2ndFloor).switch_off()\n}""
+}",,,,,69262,18234,147,18381,3.5377,3.5489,5195.7487,0.0,,False,,,connected_devices_only,5,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+212,7,7,"Check all door locks in Sector 1 every hour; if any one is open, change all lights in that sector to red.","섹터1의 모든 도어락을 1시간마다 확인해서, 하나라도 열려 있으면 해당 섹터의 모든 조명을 빨간색으로 바꿔줘.","{""name"": """", 
+""cron"": """", 
+""period"": 3600000, 
+""script"": ""\nif (all(#Sector1 #DoorLock).doorlock_doorlockstate ==| \""open\"") {\n\n    all(#Sector1 #Light).light_movetorgb(255, 0, 0)\n\n}""}",,,3600000,"
+if (all(#Sector1 #DoorLock).doorlock_doorlockstate ==| ""open"") {
+
+    all(#Sector1 #Light).light_movetorgb(255, 0, 0)
+
+}",False,83.8574,True,strict,False,0.754167,1.0,1.0,1.0,0.5,1.0,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""semantic""]","{""name"":""CheckDoorLocksAndSetLightsRed"",""cron"":""0 * * * *"",""period"":-1,""code"":""if (any(#DoorLock #Sector1).doorlock_doorlockstate == \""open\"") {\n  all(#Light #Sector1).light_movetorgb(255 | 0 | 0)\n}""}",CheckDoorLocksAndSetLightsRed,0 * * * *,-1,"if (any(#DoorLock #Sector1).doorlock_doorlockstate == ""open"") {
+  all(#Light #Sector1).light_movetorgb(255 | 0 | 0)
+}",69424,18287,83,18370,4.2396,4.2486,4332.9559,0.0,,False,,,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+213,7,7,"At 6 PM on weekdays, if presence sensors in the office show no presence, turn off all air conditioners and humidifiers in the office.",평일 오후 6시에 사무실의 재실 센서가 부재 상태를 나타내면 사무실 에어컨과 가습기를 전부 꺼줘.,"{""name"": """", 
+""cron"": ""0 18 * * 1-5"", 
+""period"": 0, 
+""script"": ""\nif ((#Office #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Office #AirConditioner).switch_off()\n\n    all(#Office #Humidifier).switch_off()\n\n}""}",,0 18 * * 1-5,0,"
+if ((#Office #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Office #AirConditioner).switch_off()
+
+    all(#Office #Humidifier).switch_off()
+
+}",False,69.9,False,strict,False,0.772857,1.0,1.0,1.0,0.2,1.0,1.0,"[""dataflow"", ""gt_mismatch"", ""precondition"", ""semantic""]","{""name"":""TurnOffACAndHumidifierWhenNoPresenceAt6PMWeekdays"",""cron"":""0 18 * * 1-5"",""period"":-1,""code"":""if ((#PresenceSensor #office).presencesensor_presence == false) {\n  all(#AirConditioner #office).switch_off()\n  all(#Humidifier #office).switch_off()\n}""}",TurnOffACAndHumidifierWhenNoPresenceAt6PMWeekdays,0 18 * * 1-5,-1,"if ((#PresenceSensor #office).presencesensor_presence == false) {
+  all(#AirConditioner #office).switch_off()
+  all(#Humidifier #office).switch_off()
+}",65523,17301,97,17398,2.5728,2.5817,6762.2823,0.0,,False,,,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+214,7,7,"Every 8 AM, open all blinds with odd tags, and at 9 AM, open all blinds with even tags.","아침 8시에 홀수 태그가 붙은 블라인드를 모두 열어주고, 9시에는 짝수 태그가 붙은 모든 블라인드를 열어줘.","{""name"": """", 
+""cron"": ""0 8 * * *"", 
+""period"": 0, 
+""script"": ""\nall(#Odd #Blind).windowcovering_uporopen()\n\ndelay(1 HOUR)\n\nall(#Even #Blind).windowcovering_uporopen()""}",,0 8 * * *,0,"
+all(#Odd #Blind).windowcovering_uporopen()
+
+delay(1 HOUR)
+
+all(#Even #Blind).windowcovering_uporopen()",False,69.9,False,strict,False,0.584144,1.0,0.5,1.0,1.0,0.0,1.0,"[""extraneous"", ""gt_mismatch"", ""numeric_grounding""]","{""name"":""OpenBlindsByOddEvenAtSpecificTimes"",""cron"":""0 8,9 * * *"",""period"":-1,""code"":""hour = (#Clock).clock_hour\nif (hour == 8) {\n  all(#WindowCovering #odd).windowcovering_uporopen()\n} else if (hour == 9) {\n  all(#WindowCovering #even).windowcovering_uporopen()\n}""}",OpenBlindsByOddEvenAtSpecificTimes,"0 8,9 * * *",-1,"hour = (#Clock).clock_hour
+if (hour == 8) {
+  all(#WindowCovering #odd).windowcovering_uporopen()
+} else if (hour == 9) {
+  all(#WindowCovering #even).windowcovering_uporopen()
+}",63510,16799,108,16907,2.1392,2.1471,7903.4218,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+215,7,7,"Every 30 minutes during weekends, check all pumps in the factory; if any one is turned on, turn off all pumps and send an email to ""test@example.com"" with the subject 'Risk' and message 'A pump is turned on'.","주말 동안 공장의 모든 펌프를 30분마다 확인해서, 켜진 펌프가 하나라도 있으면 모두 꺼주고 ""test@example.com""에게 ""위험"" 제목으로 ""펌프가 켜졌습니다""라는 내용의 메일 보내줘.","{""name"": """", 
+""cron"": ""0 0 * * 6-7"", 
+""period"": 1800000, 
+""script"": ""\nif ((#Clock).clock_weekday != \""saturday\"" and (#Clock).clock_weekday != \""sunday\"") {\n\n    break\n\n}\n\nif (all(#Factory #Pump).switch_switch ==| true) {\n\n    all(#Factory #Pump).switch_off()\n\n    (#EmailProvider).emailprovider_sendmail(\""test@example.com\"", \""위험\"", \""펌프가 켜졌습니다\"")\n\n}""}",,0 0 * * 6-7,1800000,"
+if ((#Clock).clock_weekday != ""saturday"" and (#Clock).clock_weekday != ""sunday"") {
+
+    break
+
+}
+
+if (all(#Factory #Pump).switch_switch ==| true) {
+
+    all(#Factory #Pump).switch_off()
+
+    (#EmailProvider).emailprovider_sendmail(""test@example.com"", ""위험"", ""펌프가 켜졌습니다"")
+
+}",False,81.8257,True,strict,False,0.460377,1.0,1.0,1.0,1.0,1.0,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic""]","{""name"":""WeekendPumpCheckAndAlert"",""cron"":"""",""period"":1800000,""code"":""weekday = (#Clock).clock_weekday\nif ((weekday == \""saturday\"") or (weekday == \""sunday\"")) {\n  if (any(#Pump).switch_switch == true) {\n    all(#Pump).switch_off()\n    (#EmailProvider).emailprovider_sendmail(\""test@example.com\"" | \""Risk\"" | \""A pump is turned on\"")\n  }\n} else {\n  break\n}""}",WeekendPumpCheckAndAlert,,1800000,"weekday = (#Clock).clock_weekday
+if ((weekday == ""saturday"") or (weekday == ""sunday"")) {
+  if (any(#Pump).switch_switch == true) {
+    all(#Pump).switch_off()
+    (#EmailProvider).emailprovider_sendmail(""test@example.com"" | ""Risk"" | ""A pump is turned on"")
+  }
+} else {
+  break
+}",64543,17051,124,17175,4.007,4.016,4286.2491,0.0,,False,,,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+216,7,7,"Every 10 PM, if presence is detected in the living room, turn on all lights.","밤 10시에 거실에 사람이 감지되면, 모든 불을 켜줘.","{""name"": """", 
+""cron"": ""0 22 * * *"", 
+""period"": 0, 
+""script"": ""\nif ((#LivingRoom #PresenceSensor).presencesensor_presence == true) {\n\n    all(#Light).light_movetobrightness(100, 0)\n\n}""}",,0 22 * * *,0,"
+if ((#LivingRoom #PresenceSensor).presencesensor_presence == true) {
+
+    all(#Light).light_movetobrightness(100, 0)
+
+}",False,60.2176,False,strict,False,0.572087,0.5,0.5,0.5,0.2,0.0,1.0,"[""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic""]","{""name"":""TurnOnLightsAt10PMIfPresence"",""cron"":""0 22 * * *"",""period"":-1,""code"":""if ((#PresenceSensor #LivingRoom).presencesensor_presence == true) {\n  all(#Light #LivingRoom).switch_on()\n}""}",TurnOnLightsAt10PMIfPresence,0 22 * * *,-1,"if ((#PresenceSensor #LivingRoom).presencesensor_presence == true) {
+  all(#Light #LivingRoom).switch_on()
+}",71100,18692,72,18764,2.7248,2.7345,6886.377,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+217,7,7,"At midnight, if motion is detected in the hallway, turn all hallway lights to 100% brightness.","자정에 복도에 움직임이 감지되면, 복도의 모든 조명을 100%로 켜줘.","{""name"": """", 
+""cron"": ""0 0 * * *"", 
+""period"": 0, 
+""script"": ""\nif ((#Hallway #MotionSensor).motionsensor_motion == true) {\n\n    all(#Hallway #Light).light_movetobrightness(100, 0)\n\n}""}",,0 0 * * *,0,"
+if ((#Hallway #MotionSensor).motionsensor_motion == true) {
+
+    all(#Hallway #Light).light_movetobrightness(100, 0)
+
+}",False,63.6313,False,strict,False,0.588761,0.5,0.5,0.5,0.5,0.5,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic""]","{""name"":""MidnightHallwayMotionLight"",""cron"":""0 0 * * *"",""period"":-1,""code"":""if ((#MotionSensor #hallway).motionsensor_motion == true) {\n  all(#Light #hallway).levelcontrol_movetolevel(100 | 100)\n}""}",MidnightHallwayMotionLight,0 0 * * *,-1,"if ((#MotionSensor #hallway).motionsensor_motion == true) {
+  all(#Light #hallway).levelcontrol_movetolevel(100 | 100)
+}",69850,18361,77,18438,2.4159,2.4254,7631.9384,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+218,7,7,"Every hour from midnight to 5 AM, if at least one door is open, turn all hallway lights to 50%.","자정부터 오전 5시까지 1시간마다 체크해서 문이 하나라도 열려있으면, 복도의 조명을 모두 50%로 켜줘.","{""name"": """", 
+""cron"": ""0 0-5 * * *"", 
+""period"": 0, 
+""script"": ""\nif (all(#Door).door_doorstate ==| \""open\"") {\n\n    all(#Hallway #Light).levelcontrol_movetolevel(50, 0)\n\n}""}",,0 0-5 * * *,0,"
+if (all(#Door).door_doorstate ==| ""open"") {
+
+    all(#Hallway #Light).levelcontrol_movetolevel(50, 0)
+
+}",False,85.0453,True,strict,False,0.693878,1.0,0.666667,1.0,0.5,0.75,1.0,"[""arg_type"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""HallwayLightsDimIfDoorOpen"",""cron"":""0 * * * *"",""period"":-1,""code"":""if (any(#Door).door_doorstate == \""open\"") {\n  all(#Light #Hallway).levelcontrol_movetolevel(50 | 10)\n}\nif (((#Clock).clock_hour < 0) or ((#Clock).clock_hour >= 5)) {\n  break\n}""}",HallwayLightsDimIfDoorOpen,0 * * * *,-1,"if (any(#Door).door_doorstate == ""open"") {
+  all(#Light #Hallway).levelcontrol_movetolevel(50 | 10)
+}
+if (((#Clock).clock_hour < 0) or ((#Clock).clock_hour >= 5)) {
+  break
+}",70472,18543,104,18647,4.259,4.2685,4378.2578,0.0,,False,,,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+219,7,7,"If no motion is detected between 10 PM and 11 PM, lock all door locks.","밤 10시부터 11시까지 움직임이 한번도 감지되지 않았으면, 모든 도어락을 잠궈줘.","{""name"": """", 
+""cron"": ""0 22 * * *"", 
+""period"": 100, 
+""script"": ""\nif ((#MotionSensor).motionsensor_motion == true) {\n\n    break\n\n}\n\nif ((#Clock).clock_hour == 23) {\n\n    all(#DoorLock).doorlock_lock()\n\n    break\n\n}""}",,0 22 * * *,100,"
+if ((#MotionSensor).motionsensor_motion == true) {
+
+    break
+
+}
+
+if ((#Clock).clock_hour == 23) {
+
+    all(#DoorLock).doorlock_lock()
+
+    break
+
+}",False,69.9,False,strict,False,0.506627,1.0,1.0,1.0,0.2,0.75,1.0,"[""dataflow"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""LockDoorsIfNoMotionAtNight"",""cron"":"""",""period"":1000,""code"":""if (((#Clock).clock_hour >= 22) and ((#Clock).clock_hour < 23)) {\n  if ((#MotionSensor).motionsensor_motion == false) {\n    (#DoorLock).doorlock_lock()\n  }\n}""}",LockDoorsIfNoMotionAtNight,,1000,"if (((#Clock).clock_hour >= 22) and ((#Clock).clock_hour < 23)) {
+  if ((#MotionSensor).motionsensor_motion == false) {
+    (#DoorLock).doorlock_lock()
+  }
+}",62526,16558,88,16646,2.5307,2.5379,6577.6267,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+220,7,7,"At 9 AM, open all blinds with even tags on the 3rd floor.",아침 9시에 3층의 짝수 태그가 붙은 블라인드를 모두 올려줘.,"{""name"": """", 
+""cron"": ""0 9 * * *"", 
+""period"": 0, 
+""script"": ""\nall(#Floor3 #Even #Blind).windowcovering_uporopen()""}",,0 9 * * *,0,"
+all(#Floor3 #Even #Blind).windowcovering_uporopen()",False,93.8942,True,strict,False,0.742478,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""OpenEvenBlindsAt9AM"",""cron"":""0 9 * * *"",""period"":-1,""code"":""all(#WindowCovering #even #3rdFloor).windowcovering_uporopen()""}",OpenEvenBlindsAt9AM,0 9 * * *,-1,all(#WindowCovering #even #3rdFloor).windowcovering_uporopen(),63480,16792,60,16852,1.5962,1.6033,10557.5742,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+221,7,7,Turn on the light every morning at 8 AM.,매일 아침 8시에 조명을 켜 줘.,"{""name"": """", 
+""cron"": ""0 8 * * *"", 
+""period"": 0, 
+""script"": ""\n(#Light).switch_on()""}",,0 8 * * *,0,"
+(#Light).switch_on()",False,91.25,True,strict,False,0.85,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""TurnOnLightAt8AM"",""cron"":""0 8 * * *"",""period"":-1,""code"":""(#Light).switch_on()""}",TurnOnLightAt8AM,0 8 * * *,-1,(#Light).switch_on(),68764,18105,45,18150,1.3056,1.3142,13901.6544,0.0,,False,,,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+222,7,7,"Every morning at 8 AM, make the speaker speak 'Get up'. Additionally, if the window is closed, open it.",매일 아침 8시에 스피커로 ‘일어나세요’라고 말해 줘. 그리고 창문이 닫혀있으면 열어줘.,"{""name"": """", 
+""cron"": ""0 8 * * *"", 
+""period"": 0, 
+""script"": ""\n(#Speaker).speaker_speak(\""일어나세요\"")\n\nif ((#Window).armrobot_currentposition == 0) {\n\n    (#Window).windowcovering_uporopen()\n\n}""}",,0 8 * * *,0,"
+(#Speaker).speaker_speak(""일어나세요"")
+
+if ((#Window).armrobot_currentposition == 0) {
+
+    (#Window).windowcovering_uporopen()
+
+}",False,69.9,False,strict,False,0.581156,0.666667,0.666667,0.666667,0.2,1.0,1.0,"[""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""semantic""]","{""name"":""MorningWakeUpRoutine"",""cron"":""0 8 * * *"",""period"":-1,""code"":""if ((#WindowCovering).windowcovering_currentposition == 0) {\n  (#WindowCovering).windowcovering_uporopen()\n}\n(#Speaker).speaker_speak(\""Get up\"")""}",MorningWakeUpRoutine,0 8 * * *,-1,"if ((#WindowCovering).windowcovering_currentposition == 0) {
+  (#WindowCovering).windowcovering_uporopen()
+}
+(#Speaker).speaker_speak(""Get up"")",68500,18075,82,18157,2.9407,2.9487,6174.3802,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+223,7,7,"Every 30 seconds from 10 PM to 11 PM, check for rain every 30 seconds; if it rains, close the window.",오후 10시부터 11시까지 30초마다 비를 감지해서 비가 오면 창문을 닫아줘.,"{""name"": """", 
+""cron"": ""0 22 * * *"", 
+""period"": 30000, 
+""script"": ""\nif ((#Clock).clock_hour == 23) {\n\n    break\n\n}\n\nif ((#RainSensor).rainsensor_rain == true) {\n\n    (#Window).windowcovering_downorclose()\n\n}""}",,0 22 * * *,30000,"
+if ((#Clock).clock_hour == 23) {
+
+    break
+
+}
+
+if ((#RainSensor).rainsensor_rain == true) {
+
+    (#Window).windowcovering_downorclose()
+
+}",False,69.9,False,strict,False,0.754647,1.0,1.0,1.0,0.2,0.75,1.0,"[""dataflow"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""RainCheckAndCloseWindowAtNight"",""cron"":"""",""period"":30000,""code"":""if (((#Clock).clock_hour >= 22) and ((#Clock).clock_hour < 23)) {\n  if ((#RainSensor).rainsensor_rain == true) {\n    (#WindowCovering).windowcovering_downorclose()\n  }\n} else {\n  break\n}""}",RainCheckAndCloseWindowAtNight,,30000,"if (((#Clock).clock_hour >= 22) and ((#Clock).clock_hour < 23)) {
+  if ((#RainSensor).rainsensor_rain == true) {
+    (#WindowCovering).windowcovering_downorclose()
+  }
+} else {
+  break
+}",64308,16997,99,17096,3.5205,3.5279,4856.1284,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+224,7,7,"Every 5 seconds on weekends, if the pump is off, turn it on; if it is on, turn it off.","주말에 5초마다 체크해서 펌프가 꺼져 있으면 켜고, 켜져 있으면 꺼줘.","{""name"": """", 
+""cron"": ""0 0 * * 6-7"", 
+""period"": 5000, 
+""script"": ""\nif ((#Clock).clock_weekday != \""saturday\"" and (#Clock).clock_weekday != \""sunday\"") {\n\n    break\n\n}\n\n(#Pump).switch_toggle()""}",,0 0 * * 6-7,5000,"
+if ((#Clock).clock_weekday != ""saturday"" and (#Clock).clock_weekday != ""sunday"") {
+
+    break
+
+}
+
+(#Pump).switch_toggle()",False,38.5676,False,strict,False,0.242093,0.0,0.0,0.0,0.2,1.0,1.0,"[""dataflow"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""precondition"", ""semantic""]","{""name"":""TogglePumpEvery5SecondsOnWeekends"",""cron"":""0 0 * * 0,6"",""period"":5000,""code"":""if ((#Pump).switch_switch == \""off\"") {\n  (#Pump).switch_on()\n} else if ((#Pump).switch_switch == \""on\"") {\n  (#Pump).switch_off()\n}""}",TogglePumpEvery5SecondsOnWeekends,"0 0 * * 0,6",5000,"if ((#Pump).switch_switch == ""off"") {
+  (#Pump).switch_on()
+} else if ((#Pump).switch_switch == ""on"") {
+  (#Pump).switch_off()
+}",64112,16980,92,17072,2.215,2.2248,7707.4492,0.0,,False,,,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+225,7,7,"Measure the temperature every 15 minutes; turn on the air conditioner in cool mode if it's 25 degrees or higher, and turn it off if it's below 25 degrees.","15분마다 온도를 측정해서 25도 이상이면 에어컨을 냉방 모드로 켜고, 25도 미만이면 꺼줘.","{""name"": """", 
+""cron"": """", 
+""period"": 900000, 
+""script"": ""\nif ((#TemperatureSensor).temperaturesensor_temperature >= 25) {\n\n    (#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n\n} else {\n\n    (#AirConditioner).switch_off()\n}""}",,,900000,"
+if ((#TemperatureSensor).temperaturesensor_temperature >= 25) {
+
+    (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+
+} else {
+
+    (#AirConditioner).switch_off()
+}",False,52.0,False,strict,False,0.733333,0.333333,1.0,0.333333,0.0,0.0,1.0,"[""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic"", ""service_match"", ""unknown_service:temperaturemeasurement_temperature""]","{""name"":""TemperatureBasedAirConditionerControl"",""cron"":"""",""period"":900000,""code"":""temp = (#TemperatureSensor).temperaturemeasurement_temperature\nif (temp >= 25.0) {\n  (#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n} else if (temp < 25.0) {\n  (#AirConditioner).airconditioner_setairconditionermode(\""off\"")\n}""}",TemperatureBasedAirConditionerControl,,900000,"temp = (#TemperatureSensor).temperaturemeasurement_temperature
+if (temp >= 25.0) {
+  (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+} else if (temp < 25.0) {
+  (#AirConditioner).airconditioner_setairconditionermode(""off"")
+}",65605,17305,105,17410,3.1941,3.2043,5450.6747,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+226,7,7,Check every 5 minutes from 10 PM to 11 PM and turn it off when charging is complete.,오후 10시부터 11시까지 5분마다 체크해서 충전이 완료되면 꺼줘.,"{""name"": """", 
+""cron"": ""*/5 22 * * *"", 
+""period"": 0, 
+""script"": ""\nif ((#Charger).charger_chargingstate == \""fullyCharged\"") {\n\n    (#Charger).switch_off()\n\n}""}",,*/5 22 * * *,0,"
+if ((#Charger).charger_chargingstate == ""fullyCharged"") {
+
+    (#Charger).switch_off()
+
+}",False,69.9,False,strict,False,0.82,1.0,1.0,1.0,0.2,1.0,1.0,"[""dataflow"", ""gt_mismatch"", ""precondition"", ""semantic""]","{""name"":""TurnOffChargerWhenFullyChargedAtNight"",""cron"":""0 22 * * *"",""period"":300000,""code"":""if ((#Charger).charger_chargingstate == \""fullyCharged\"") {\n  (#Charger).switch_off()\n} else {\n  break\n}""}",TurnOffChargerWhenFullyChargedAtNight,0 22 * * *,300000,"if ((#Charger).charger_chargingstate == ""fullyCharged"") {
+  (#Charger).switch_off()
+} else {
+  break
+}",63829,16894,80,16974,7.2193,7.2261,2351.1975,0.0,,False,,,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+227,7,7,"At 8 AM, turn on the high-efficiency tagged air purifier and set it to auto mode.",오전 8시에 고효율 태그가 붙은 공기청정기를 켜고 자동모드로 설정해줘.,"{""name"": """", 
+""cron"": ""0 8 * * *"", 
+""period"": 0, 
+""script"": ""\n(#HighEfficiency #AirPurifier).switch_on()\n\n(#HighEfficiency #AirPurifier).airpurifier_setairpurifiermode(\""auto\"")""}",,0 8 * * *,0,"
+(#HighEfficiency #AirPurifier).switch_on()
+
+(#HighEfficiency #AirPurifier).airpurifier_setairpurifiermode(""auto"")",False,77.9926,True,strict,False,0.665179,1.0,1.0,0.0,1.0,1.0,1.0,"[""gt_mismatch"", ""gt_receiver_coverage"", ""semantic""]","{""name"":""TurnOnHighEfficiencyAirPurifierAt8AM"",""cron"":""0 8 * * *"",""period"":-1,""code"":""(#AirPurifier #high-efficiency).airpurifier_setairpurifiermode(\""auto\"")\n(#AirPurifier #high-efficiency).switch_on()""}",TurnOnHighEfficiencyAirPurifierAt8AM,0 8 * * *,-1,"(#AirPurifier #high-efficiency).airpurifier_setairpurifiermode(""auto"")
+(#AirPurifier #high-efficiency).switch_on()",67325,17776,77,17853,4.0834,4.0922,4372.0919,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+228,7,7,"At 6 PM, if any window is open, close all of them.",오후 6시에 창문이 하나라도 열려있으면 모두 닫아줘.,"{""name"": """", 
+""cron"": ""0 18 * * *"", 
+""period"": 0, 
+""script"": ""\nif (all(#Window).armrobot_currentposition >| 0) {\n\n    all(#Window).windowcovering_downorclose()\n\n}""}",,0 18 * * *,0,"
+if (all(#Window).armrobot_currentposition >| 0) {
+
+    all(#Window).windowcovering_downorclose()
+
+}",False,66.8476,False,strict,False,0.633163,0.5,0.5,0.5,0.2,1.0,1.0,"[""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""semantic""]","{""name"":""CloseWindowsAt6PMIfAnyOpen"",""cron"":""0 18 * * *"",""period"":-1,""code"":""if (any(#WindowCovering).windowcovering_currentposition > 0) {\n  all(#WindowCovering).windowcovering_downorclose()\n}""}",CloseWindowsAt6PMIfAnyOpen,0 18 * * *,-1,"if (any(#WindowCovering).windowcovering_currentposition > 0) {
+  all(#WindowCovering).windowcovering_downorclose()
+}",64416,17051,76,17127,2.5548,2.5625,6703.8516,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+229,7,7,"At 1 PM, open all blinds.",오후 1시에 블라인드를 모두 열어줘.,"{""name"": """", 
+""cron"": ""0 13 * * *"", 
+""period"": 0, 
+""script"": ""\nall(#Blind).windowcovering_uporopen()""}",,0 13 * * *,0,"
+all(#Blind).windowcovering_uporopen()",False,94.3262,True,strict,False,0.779518,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""OpenAllBlindsAt1PM"",""cron"":""0 13 * * *"",""period"":-1,""code"":""all(#WindowCovering).windowcovering_uporopen()""}",OpenAllBlindsAt1PM,0 13 * * *,-1,all(#WindowCovering).windowcovering_uporopen(),63448,16783,54,16837,1.5994,1.6069,10527.0727,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+230,7,7,"Every hour from 6 PM to 8 PM, if someone is detected on the 1st floor, turn on all 1st floor lights.",오후 6시부터 8시까지 1층에 사람이 감지되면 1층 불을 다 켜줘.,"{""name"": """", 
+""cron"": ""0 18 * * *"", 
+""period"": 100, 
+""script"": ""\nif ((#Clock).clock_hour >= 20) {\n\n    break\n\n}\n\nif ((#Floor1 #PresenceSensor).presencesensor_presence == true) {\n\n    all(#Floor1 #Light).switch_on()\n\n}""}",,0 18 * * *,100,"
+if ((#Clock).clock_hour >= 20) {
+
+    break
+
+}
+
+if ((#Floor1 #PresenceSensor).presencesensor_presence == true) {
+
+    all(#Floor1 #Light).switch_on()
+
+}",False,68.1239,False,strict,False,0.624775,0.666667,1.0,0.666667,0.2,0.833333,1.0,"[""dataflow"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic""]","{""name"":""1stFloorPresenceLightControl"",""cron"":""0 18-19 * * *"",""period"":-1,""code"":""if ((#PresenceSensor #1stFloor).presencesensor_presence == true) {\n  all(#Light #1stFloor).switch_on()\n}""}",1stFloorPresenceLightControl,0 18-19 * * *,-1,"if ((#PresenceSensor #1stFloor).presencesensor_presence == true) {
+  all(#Light #1stFloor).switch_on()
+}",69207,18219,72,18291,2.4748,2.4829,7390.9003,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7

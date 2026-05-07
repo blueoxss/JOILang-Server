@@ -1,0 +1,246 @@
+{
+  "run_label": "g002_quick",
+  "genome": {
+    "id": "v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65",
+    "seed": 148510075,
+    "blocks": [
+      "01",
+      "02",
+      "03",
+      "06"
+    ],
+    "params": {
+      "model": "microsoft/Phi-3.5-mini-instruct",
+      "temperature": 0.0,
+      "max_tokens": 768,
+      "candidate_strategies": [
+        "explicit_preconditions",
+        "direct",
+        "canonical_names_first",
+        "minimal"
+      ]
+    },
+    "block_params": {
+      "01": {
+        "source_file": "generated/v13_gene_pool_ba3c7b2a33/01_v13_caution_compact.txt"
+      },
+      "02": {
+        "source_file": "generated/v13_gene_pool_ba3c7b2a33/02_v13_service_response_compact.txt",
+        "few_shot_count": 3,
+        "micro_rules": [
+          "Return exactly one JSON object only with keys name, cron, period, code.",
+          "Never invent service names outside the provided service_list_snippet."
+        ]
+      },
+      "03": {
+        "source_file": "generated/v13_gene_pool_ba3c7b2a33/03_v13_response_contract.txt"
+      },
+      "06": {
+        "source_file": "generated/v13_gene_pool_ba3c7b2a33/06_v13_grammar_tempo_compact.txt"
+      }
+    }
+  },
+  "metrics": {
+    "row_count": 2,
+    "avg_det_score": 0.0,
+    "variance": 0.0,
+    "det_pass_count": 0,
+    "det_pass_rate": 0.0,
+    "gt_exact_count": 0,
+    "gt_exact_rate": 0.0,
+    "elapsed_sec": 252.079,
+    "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat6/candidates/g002_quick_v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65_155490.csv",
+    "failure_summary": {
+      "invalid_json": 2
+    },
+    "failure_patterns": {
+      "top_failure_types": [
+        [
+          "invalid_json",
+          2
+        ]
+      ],
+      "count": 2
+    },
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0,
+    "llm_latency_sec": 0.0,
+    "pipeline_sec": 252.0763,
+    "peak_vram_gb": 0.0
+  },
+  "rows": [
+    {
+      "row_no": 154,
+      "category": "6",
+      "command_eng": "If the noise level is 70 or higher and no one is home, take a photo with the camera and sound the police siren.",
+      "det_score": 0.0,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.0,
+      "failure_reasons": [
+        "invalid_json"
+      ],
+      "output": "",
+      "gt": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"script\": \"\\nif ((#SoundSensor).soundsensor_sound >= 70 and (#PresenceSensor).presencesensor_presence == false) {\\n\\n    (#Camera).camera_captureimage()\\n\\n    (#Siren).siren_setsirenmode(\\\"police\\\")\\n\\n}\"}",
+      "service_list_snippet_source": "service_schema_fallback",
+      "service_list_retrieval_status": "error",
+      "service_list_retrieval_categories": "[]"
+    },
+    {
+      "row_no": 156,
+      "category": "6",
+      "command_eng": "If the fine dust level is 150 or higher and the door is open, close the door and set the air purifier to high.",
+      "det_score": 0.0,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.0,
+      "failure_reasons": [
+        "invalid_json"
+      ],
+      "output": "",
+      "gt": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"script\": \"\\nif ((#AirQualitySensor).airqualitysensor_finedustlevel >= 150 and (#Door).door_doorstate == \\\"open\\\") {\\n\\n    (#Door).door_close()\\n\\n    (#AirPurifier).airpurifier_setairpurifiermode(\\\"high\\\")\\n\\n}\"}",
+      "service_list_snippet_source": "service_schema_fallback",
+      "service_list_retrieval_status": "error",
+      "service_list_retrieval_categories": "[]"
+    }
+  ],
+  "generation_summary": {
+    "run_id": "g002_quick_v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65_155490",
+    "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat6/candidates/g002_quick_v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65_155490.csv",
+    "jsonl_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/candidates_g002_quick_v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65_155490.jsonl",
+    "row_count": 2,
+    "rows": [
+      {
+        "index": "4",
+        "category": "6",
+        "command_kor": "소음 수치가 70 이상이고 집에 아무도 없으면, 카메라로 사진을 찍고 경찰 사이렌을 울려줘.",
+        "command_eng": "If the noise level is 70 or higher and no one is home, take a photo with the camera and sound the police siren.",
+        "gt_raw": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"script\": \"\\nif ((#SoundSensor).Sound >= 70 and (#PresenceSensor).Presence == false) {\\n\\n    (#Camera).CaptureImage()\\n\\n    (#Siren).SetSirenMode(\\\"police\\\")\\n\\n}\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"script\": \"\\nif ((#SoundSensor).soundsensor_sound >= 70 and (#PresenceSensor).presencesensor_presence == false) {\\n\\n    (#Camera).camera_captureimage()\\n\\n    (#Siren).siren_setsirenmode(\\\"police\\\")\\n\\n}\"}",
+        "row_no": 154,
+        "profile": "version0_15_update20260413",
+        "genome_id": "v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65",
+        "genome_seed": 148510075,
+        "run_id": "g002_quick_v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65_155490",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_chars\": 781608, \"error\": \"CUDA out of memory. Tried to allocate 171.96 GiB. GPU 1 has a total capacity of 47.44 GiB of which 35.30 GiB is free. Including non-PyTorch memory, this process has 12.11 GiB memory in use. Of the allocated memory 8.36 GiB is allocated by PyTorch, and 3.44 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\", \"error_type\": \"cuda_oom\", \"oom_flag\": true, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_ba3c7b2a33/01_v13_caution_compact.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_caution_compact\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_ba3c7b2a33/02_v13_service_response_compact.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_service_response_compact\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_ba3c7b2a33/03_v13_response_contract.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_response_contract\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"06\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_ba3c7b2a33/06_v13_grammar_tempo_compact.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_grammar_tempo_compact\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/g002_quick_v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65_155490/row_154_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "generation_total_pipeline_sec": 126.0245,
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct",
+        "prompt_render_mode": "blocks",
+        "prompt_assets_dir": "",
+        "service_list_snippet_source": "service_schema_fallback",
+        "service_list_device_count": 50,
+        "service_list_retrieval_status": "error",
+        "service_list_retrieval_mode": "hybrid",
+        "service_list_retrieval_topk": 10,
+        "service_list_retrieval_device": "cpu",
+        "service_list_retrieval_categories": "[]",
+        "service_list_retrieval_scores": "[]",
+        "service_list_retrieval_fallback_reason": "retrieval worker timed out after 120.0s",
+        "generation_call_count": 1,
+        "generation_error_count": 1,
+        "generation_error_type": "cuda_oom",
+        "generation_error_types": "[\"cuda_oom\"]",
+        "generation_oom_flag": true,
+        "generation_prompt_chars_total": 781608,
+        "generation_prompt_tokens_total": 0,
+        "generation_completion_tokens_total": 0,
+        "generation_total_tokens_total": 0,
+        "generation_llm_latency_sec": 0.0,
+        "generation_peak_vram_gb": 0.0
+      },
+      {
+        "index": "6",
+        "category": "6",
+        "command_kor": "미세먼지 농도가 150 이상이고 문이 열려 있으면, 문을 닫고 공기청정기를 강풍으로 작동시켜줘.",
+        "command_eng": "If the fine dust level is 150 or higher and the door is open, close the door and set the air purifier to high.",
+        "gt_raw": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"script\": \"\\nif ((#AirQualitySensor).FineDustLevel >= 150 and (#Door).DoorState == \\\"open\\\") {\\n\\n    (#Door).Close()\\n\\n    (#AirPurifier).SetAirPurifierMode(\\\"high\\\")\\n\\n}\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"script\": \"\\nif ((#AirQualitySensor).airqualitysensor_finedustlevel >= 150 and (#Door).door_doorstate == \\\"open\\\") {\\n\\n    (#Door).door_close()\\n\\n    (#AirPurifier).airpurifier_setairpurifiermode(\\\"high\\\")\\n\\n}\"}",
+        "row_no": 156,
+        "profile": "version0_15_update20260413",
+        "genome_id": "v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65",
+        "genome_seed": 148510075,
+        "run_id": "g002_quick_v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65_155490",
+        "candidate_count": 1,
+        "candidates": "[\"\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_chars\": 781607, \"error\": \"CUDA out of memory. Tried to allocate 171.96 GiB. GPU 1 has a total capacity of 47.44 GiB of which 35.30 GiB is free. Including non-PyTorch memory, this process has 12.11 GiB memory in use. Of the allocated memory 8.36 GiB is allocated by PyTorch, and 3.44 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\", \"error_type\": \"cuda_oom\", \"oom_flag\": true, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_ba3c7b2a33/01_v13_caution_compact.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_caution_compact\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_ba3c7b2a33/02_v13_service_response_compact.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_service_response_compact\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_ba3c7b2a33/03_v13_response_contract.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_response_contract\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"06\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_ba3c7b2a33/06_v13_grammar_tempo_compact.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_grammar_tempo_compact\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/g002_quick_v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65_155490/row_156_cand_1.json\"]",
+        "generation_status": "partial_error",
+        "generation_total_pipeline_sec": 126.0518,
+        "llm_mode": "worker",
+        "llm_model": "microsoft/Phi-3.5-mini-instruct",
+        "prompt_render_mode": "blocks",
+        "prompt_assets_dir": "",
+        "service_list_snippet_source": "service_schema_fallback",
+        "service_list_device_count": 50,
+        "service_list_retrieval_status": "error",
+        "service_list_retrieval_mode": "hybrid",
+        "service_list_retrieval_topk": 10,
+        "service_list_retrieval_device": "cpu",
+        "service_list_retrieval_categories": "[]",
+        "service_list_retrieval_scores": "[]",
+        "service_list_retrieval_fallback_reason": "retrieval worker timed out after 120.0s",
+        "generation_call_count": 1,
+        "generation_error_count": 1,
+        "generation_error_type": "cuda_oom",
+        "generation_error_types": "[\"cuda_oom\"]",
+        "generation_oom_flag": true,
+        "generation_prompt_chars_total": 781607,
+        "generation_prompt_tokens_total": 0,
+        "generation_completion_tokens_total": 0,
+        "generation_total_tokens_total": 0,
+        "generation_llm_latency_sec": 0.0,
+        "generation_peak_vram_gb": 0.0
+      }
+    ],
+    "fieldnames": [
+      "index",
+      "category",
+      "command_kor",
+      "command_eng",
+      "gt_raw",
+      "connected_devices",
+      "gt",
+      "row_no",
+      "profile",
+      "genome_id",
+      "genome_seed",
+      "run_id",
+      "candidate_count",
+      "candidates",
+      "candidate_metadata",
+      "prompt_log_paths",
+      "generation_status",
+      "generation_total_pipeline_sec",
+      "llm_mode",
+      "llm_model",
+      "prompt_render_mode",
+      "prompt_assets_dir",
+      "service_list_snippet_source",
+      "service_list_device_count",
+      "service_list_retrieval_status",
+      "service_list_retrieval_mode",
+      "service_list_retrieval_topk",
+      "service_list_retrieval_device",
+      "service_list_retrieval_categories",
+      "service_list_retrieval_scores",
+      "service_list_retrieval_fallback_reason",
+      "generation_call_count",
+      "generation_error_count",
+      "generation_error_type",
+      "generation_error_types",
+      "generation_oom_flag",
+      "generation_prompt_chars_total",
+      "generation_prompt_tokens_total",
+      "generation_completion_tokens_total",
+      "generation_total_tokens_total",
+      "generation_llm_latency_sec",
+      "generation_peak_vram_gb"
+    ]
+  }
+}

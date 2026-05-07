@@ -57,6 +57,24 @@
   Use the variable as an argument:
   (#Speaker).mediaPlayback_speak(modes)
   This applies to all service calls: inner service outputs must first be stored in a variable before being passed as an argument to any other service.
+**Do not chain a function call after a value service access.**
+  Not Allowed:
+  (#HumiditySensor).humiditysensor_humidity.speaker_speak(string(humiditysensor_humidity))
+  Instead:
+  hum = (#HumiditySensor).humiditysensor_humidity
+  (#Speaker).speaker_speak(hum)
+  A value service access must end at the value itself. If another device must use that value, store it in a variable first and then call the second device's function on a new line.
+**Do not create dead reads or dead variables.**
+  If you read a service value into a variable, that variable must be used later in a condition, arithmetic update, assignment, or function argument.
+  Not Allowed:
+  power = (#Charger).charger_power
+  power_str = "Power consumption is "
+  (#Speaker).speaker_speak(power_str)
+  The measured value `power` is ignored, so this is incorrect.
+**For report/tell/announce/speak commands about current sensor readings, the final code must contain both steps below:**
+  1. Read the requested sensor value into a variable.
+  2. Call the speaker function using an argument that actually depends on that variable.
+  Never answer such commands with a label-only message that omits the measured variable.
 **Additional Constraint on Clock Delays**
   🚫 **Do NOT nest `(#Clock).clock_delay()` inside a `wait until` expression.**  
   - `(#Clock).clock_delay()` must only be used as a **standalone delay function**, not as a conditional trigger.

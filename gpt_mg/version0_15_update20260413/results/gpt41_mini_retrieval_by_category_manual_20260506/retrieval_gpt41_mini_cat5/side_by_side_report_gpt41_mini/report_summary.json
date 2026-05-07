@@ -1,0 +1,83 @@
+{
+  "results_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_by_category_manual_20260506/retrieval_gpt41_mini_cat5",
+  "output_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_by_category_manual_20260506/retrieval_gpt41_mini_cat5/side_by_side_report_gpt41_mini",
+  "model_key": "gpt41_mini",
+  "title": "JOICode Side-by-Side Report · gpt41_mini",
+  "row_count": 30,
+  "service_list_schema": "service_list_ver2.0.1.json",
+  "service_list_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+  "html_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_by_category_manual_20260506/retrieval_gpt41_mini_cat5/side_by_side_report_gpt41_mini/report.html",
+  "selected_rows_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_by_category_manual_20260506/retrieval_gpt41_mini_cat5/side_by_side_report_gpt41_mini/selected_rows.csv",
+  "prompt_context_rows_json": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_by_category_manual_20260506/retrieval_gpt41_mini_cat5/side_by_side_report_gpt41_mini/prompt_context_rows.json",
+  "filters": {
+    "category": [],
+    "row_no": [],
+    "start_row": 0,
+    "end_row": 0,
+    "limit": 0,
+    "failures_only": false,
+    "det_below": null
+  },
+  "summary": {
+    "row_count": 30,
+    "avg_det_score": 70.20049000000002,
+    "det_pass_rate": 0.13333333333333333,
+    "gt_exact_rate": 0.0,
+    "avg_similarity": 0.8425766666666666,
+    "avg_prompt_tokens": 18683.733333333334,
+    "avg_completion_tokens": 74.23333333333333,
+    "avg_total_tokens": 18757.966666666667,
+    "avg_latency_sec": 3.124733333333334,
+    "p50_latency_sec": 2.58705,
+    "avg_pipeline_sec": 3.7619133333333328,
+    "peak_vram_gb_max": 0.0,
+    "oom_count": 0,
+    "top_failures": [
+      [
+        "arg_type",
+        30
+      ],
+      [
+        "extraneous",
+        30
+      ],
+      [
+        "gt_mismatch",
+        30
+      ],
+      [
+        "numeric_grounding",
+        30
+      ],
+      [
+        "semantic",
+        19
+      ],
+      [
+        "dataflow",
+        11
+      ],
+      [
+        "gt_receiver_coverage",
+        7
+      ],
+      [
+        "enum_grounding",
+        6
+      ]
+    ],
+    "snippet_sources": {
+      "service_retrieval_fallback": 15,
+      "connected_devices_only": 15
+    },
+    "categories": {
+      "5": 30
+    },
+    "generation_errors": {}
+  },
+  "pdf": {
+    "ok": true,
+    "pdf_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_by_category_manual_20260506/retrieval_gpt41_mini_cat5/side_by_side_report_gpt41_mini/report.pdf",
+    "chrome_path": "/usr/bin/google-chrome"
+  }
+}

@@ -36,7 +36,7 @@ from utils.pipeline_common import (
     normalize_candidate_json_text,
     parse_connected_devices,
     read_csv_rows,
-    render_blocks_for_genome,
+    render_prompt_bundle,
     slugify,
     unique_fieldnames,
 )
@@ -107,6 +107,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--retrieval-bundle-dir", default=None)
     parser.add_argument("--retrieval-model-dir", default=None)
     parser.add_argument("--retrieval-device", default=None)
+    parser.add_argument("--prompt-render-mode", default=None, choices=["blocks", "legacy_v13_monolith"])
+    parser.add_argument("--prompt-assets-dir", default=None, help="Optional directory for legacy monolithic prompt assets.")
     return parser
 
 
@@ -215,6 +217,8 @@ def rerank_candidates_csv(
     model_override: str | None = None,
     llm_extra_payload: dict[str, Any] | None = None,
     service_context_kwargs: dict[str, Any] | None = None,
+    prompt_render_mode: str | None = None,
+    prompt_assets_dir: str | None = None,
 ) -> dict[str, Any]:
     ensure_workspace()
     input_rows = read_csv_rows(candidates_csv)
@@ -233,8 +237,6 @@ def rerank_candidates_csv(
     output_rows: list[dict[str, Any]] = []
     fieldnames: list[str] | None = None
     repaired_count = 0
-    system_prompt = _system_prompt()
-
     for row in input_rows:
         row_started = time.perf_counter()
         row_no = int(row.get("row_no") or 0)
@@ -276,8 +278,15 @@ def rerank_candidates_csv(
                     best_candidate=current_best_candidate if isinstance(current_best_candidate, str) else json.dumps(current_best_candidate, ensure_ascii=False),
                     failure_summary=", ".join(current_best_det.get("failure_reasons", [])),
                 )
-                rendered_prompt, manifest = render_blocks_for_genome(repair_genome, values=values)
-                repair_prompt = rendered_prompt + "\n\nReturn the repaired JSON object now."
+                system_prompt, repair_prompt, manifest = render_prompt_bundle(
+                    repair_genome,
+                    values=values,
+                    command_text=command_eng,
+                    prompt_render_mode=prompt_render_mode,
+                    prompt_assets_dir=prompt_assets_dir,
+                    phase="repair",
+                    default_system_prompt=_system_prompt(),
+                )
                 prompt_chars = len(system_prompt) + len(repair_prompt)
                 repair_log = rerank_logs_dir / f"row_{row_no:03d}_repair_{attempt + 1}.json"
                 repair_log_path = str(repair_log)
@@ -332,7 +341,7 @@ def rerank_candidates_csv(
                             "manifest": manifest,
                         }
                     )
-                    dump_json(repair_log, {"error": str(exc), "prompt": rendered_prompt, "manifest": manifest})
+                    dump_json(repair_log, {"error": str(exc), "prompt": repair_prompt, "manifest": manifest})
                     continue
                 repaired_det = evaluate_candidate(
                     command_eng,
@@ -418,6 +427,8 @@ def main() -> int:
         retries=args.retries,
         seed=args.seed,
         model_override=args.model,
+        prompt_render_mode=args.prompt_render_mode,
+        prompt_assets_dir=args.prompt_assets_dir,
         service_context_kwargs={
             "service_context_mode": _service_context_mode(args),
             "retrieval_topk": args.retrieval_topk,

@@ -1,0 +1,154 @@
+[
+  {
+    "generation": 1,
+    "genome_id": "v13mix-384efae3-b633-4eeb-62db-53a3d451e7ae",
+    "fitness": 46.5556,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 46.5556,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 0.7989,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke2/runs/qwen25_coder_7b/cat1/candidates/g001_quick_v13mix-384efae3-b633-4eeb-62db-53a3d451e7ae_159882.csv",
+      "failure_summary": {
+        "enum_grounding": 1,
+        "extraneous": 1,
+        "gt_mismatch": 1,
+        "gt_receiver_coverage": 1,
+        "gt_service_coverage": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "enum_grounding",
+            1
+          ],
+          [
+            "extraneous",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "gt_receiver_coverage",
+            1
+          ],
+          [
+            "gt_service_coverage",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 6
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 0.7966,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 1,
+      "avg_det_score": 46.5556,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 0.8009,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke2/runs/qwen25_coder_7b/cat1/candidates/g001_valid_v13mix-384efae3-b633-4eeb-62db-53a3d451e7ae_659882.csv",
+      "failure_summary": {
+        "enum_grounding": 1,
+        "extraneous": 1,
+        "gt_mismatch": 1,
+        "gt_receiver_coverage": 1,
+        "gt_service_coverage": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "enum_grounding",
+            1
+          ],
+          [
+            "extraneous",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "gt_receiver_coverage",
+            1
+          ],
+          [
+            "gt_service_coverage",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 6
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 0.7983,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "v13mix-384efae3-b633-4eeb-62db-53a3d451e7ae",
+      "seed": 640859468,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+        "temperature": 0.0,
+        "max_tokens": 1024,
+        "candidate_strategies": [
+          "minimal",
+          "direct",
+          "compact_json"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/01_v13_caution_full.txt"
+        },
+        "02": {
+          "source_file": "02_generator_prompt.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code.",
+            "Emit lowercase service/value member tokens after the receiver dot."
+          ]
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/03_v13_response_contract.txt"
+        },
+        "06": {
+          "source_file": "06_det_helper.txt"
+        }
+      }
+    }
+  }
+]

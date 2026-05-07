@@ -1,0 +1,62 @@
+{
+  "output_root": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke",
+  "dataset": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/JOICommands-280.csv",
+  "service_schema": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+  "prompt_assets_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13",
+  "gene_pool_manifest": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke/gene_pool_manifest.json",
+  "models": [
+    {
+      "key": "qwen25_coder_7b",
+      "label": "Qwen2.5-Coder-7B-Instruct",
+      "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "mode": "worker"
+    }
+  ],
+  "categories": [
+    "1"
+  ],
+  "args": {
+    "dataset": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/JOICommands-280.csv",
+    "service_schema": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "prompt_assets_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13",
+    "output_root": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke",
+    "profile": "version0_15_update20260413",
+    "model_key": [
+      "qwen25_coder_7b"
+    ],
+    "category": [
+      "1"
+    ],
+    "limit": null,
+    "limit_per_category": 1,
+    "population": 2,
+    "gens": 1,
+    "sample_size": 1,
+    "validation_size": 1,
+    "cheap_eval_limit": 2,
+    "candidate_k": 1,
+    "elites": 1,
+    "crossover_rate": 0.65,
+    "mutation_rate": 0.35,
+    "alpha": 0.25,
+    "det_profile": "strict",
+    "llm_mode": "mock",
+    "llm_endpoint": null,
+    "timeout_sec": 1800,
+    "retries": 1,
+    "temperature": null,
+    "max_tokens": null,
+    "service_context_mode": "retrieval_fallback",
+    "disable_retrieval_premapping": false,
+    "retrieval_topk": 10,
+    "retrieval_mode": "hybrid",
+    "retrieval_json": null,
+    "retrieval_bundle_dir": null,
+    "retrieval_model_dir": null,
+    "retrieval_device": "cpu",
+    "v13_detail": "mixed",
+    "skip_final_eval": true,
+    "dry_run": false,
+    "seed": 150413
+  }
+}

@@ -38,6 +38,8 @@ LOGS_DIR = VERSION_ROOT / "logs"
 CHECKPOINTS_DIR = VERSION_ROOT / "checkpoints"
 DATASET_DEFAULT = REPO_ROOT / "datasets" / "JOICommands-280.csv"
 SERVICE_SCHEMA_DEFAULT = REPO_ROOT / "datasets" / "service_list_ver2.0.1.json"
+LEGACY_V13_ROOT = VERSION_ROOT.parent / "version0_13"
+LEGACY_V13_PROMPT_DIR = LEGACY_V13_ROOT
 
 
 BLOCK_FILE_MAP = {
@@ -47,6 +49,14 @@ BLOCK_FILE_MAP = {
     "04": "04_reranker_prompt.txt",
     "05": "05_repair_prompt.txt",
     "06": "06_det_helper.txt",
+}
+
+LEGACY_V13_PROMPT_FILES = {
+    "grammar": "grammar_ver1.5.10.md",
+    "service_prompt": "service_prompt_10.md",
+    "tempo": "tempo_prompt_9.md",
+    "caution": "caution_prompt_8.md",
+    "response_prompt": "response_prompt_baseline_cot.md",
 }
 
 STOPWORDS = {
@@ -273,10 +283,12 @@ def resolve_schema_category(raw_category: Any, service_schema: dict[str, dict[st
 
 
 def build_service_record(category: str, service_name: str, meta: dict[str, Any]) -> dict[str, Any]:
+    canonical_name = canonical_service_name(category, service_name)
     record = {
-        "service": service_name,
-        "canonical_name": canonical_service_name(category, service_name),
-        "canonical_name_lower": lowercase_output_member_name(canonical_service_name(category, service_name)),
+        "service": canonical_name,
+        "raw_service": service_name,
+        "canonical_name": canonical_name,
+        "canonical_name_lower": lowercase_output_member_name(canonical_name),
         "type": meta.get("type", ""),
     }
     for key in (
@@ -721,6 +733,275 @@ def render_blocks_for_genome(
             "metadata": metadata,
         })
     return "\n\n".join(block for block in rendered_blocks if block.strip()), manifest
+
+
+def _resolve_prompt_render_mode(prompt_render_mode: str | None) -> str:
+    token = str(prompt_render_mode or os.getenv("JOI_V15_PROMPT_RENDER_MODE", "blocks")).strip().lower()
+    if token in {"legacy_v13_monolith", "v13_monolith", "monolith", "monolithic", "legacy"}:
+        return "legacy_v13_monolith"
+    return "blocks"
+
+
+def _resolve_prompt_assets_dir(prompt_assets_dir: str | None) -> Path:
+    token = str(prompt_assets_dir or os.getenv("JOI_V15_PROMPT_ASSETS_DIR", "")).strip()
+    if token:
+        path = Path(token)
+        if not path.is_absolute():
+            path = (VERSION_ROOT / token).resolve()
+        return path
+    return LEGACY_V13_PROMPT_DIR
+
+
+def _load_legacy_prompt_assets(prompt_assets_dir: str | None) -> tuple[dict[str, str], Path]:
+    prompt_dir = _resolve_prompt_assets_dir(prompt_assets_dir)
+    assets: dict[str, str] = {}
+    for key, filename in LEGACY_V13_PROMPT_FILES.items():
+        path = prompt_dir / filename
+        if not path.exists():
+            raise FileNotFoundError(f"Legacy prompt asset not found: {path}")
+        assets[key] = path.read_text(encoding="utf-8")
+    return assets, prompt_dir
+
+
+def _legacy_connected_device_summary(connected_devices: dict[str, Any]) -> str:
+    if not connected_devices:
+        return ""
+    categories: list[str] = []
+    for meta in connected_devices.values():
+        categories.extend(normalize_string_list(meta.get("category")))
+    categories = unique_preserve_order(categories)
+    if not categories:
+        return ""
+    category_tags_str = "[" + ", ".join(f"#{cat}" for cat in sorted(categories)) + "]"
+    return f"\n\n---\n[connected_devices]\n {category_tags_str}"
+
+
+def _legacy_userinfo_block(values: dict[str, Any]) -> str:
+    payload: dict[str, Any] = {}
+    cron = str(values.get("optional_cron", "") or "")
+    period = str(values.get("optional_period", "0") or "0")
+    if cron:
+        payload["cron"] = cron
+    if period not in {"", "0"}:
+        try:
+            payload["period"] = int(period)
+        except Exception:
+            payload["period"] = period
+    if not payload:
+        return ""
+    text = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    return f"\n\n---\n[userinfo]\n {text}"
+
+
+def _flatten_service_lists_from_snippet_payload(snippet_payload: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    value_rows: list[dict[str, Any]] = []
+    function_rows: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, str]] = set()
+    for group in snippet_payload.get("device_groups") or []:
+        for binding in group.get("capability_bindings") or []:
+            category = str(binding.get("category", "") or "")
+            for service in binding.get("services") or []:
+                raw_type = str(service.get("type", "") or "").strip().lower()
+                raw_service = str(service.get("raw_service", "") or service.get("service", "")).strip()
+                canonical_name = str(service.get("canonical_name", "") or service.get("service", "")).strip()
+                if not category or not canonical_name:
+                    continue
+                item = {
+                    "device": category,
+                    "service": canonical_name,
+                    "raw_service": raw_service,
+                    "canonical_name": canonical_name,
+                    "type": raw_type,
+                }
+                for key in (
+                    "descriptor",
+                    "argument_descriptor",
+                    "argument_type",
+                    "argument_bounds",
+                    "argument_format",
+                    "return_descriptor",
+                    "return_type",
+                    "return_bounds",
+                    "enums",
+                ):
+                    value = service.get(key)
+                    if value not in (None, "", []):
+                        item[key] = value
+                signature = (category, canonical_name, raw_type)
+                if signature in seen:
+                    continue
+                seen.add(signature)
+                if raw_type == "value":
+                    value_rows.append(item)
+                elif raw_type == "function":
+                    function_rows.append(item)
+    return value_rows, function_rows
+
+
+def render_legacy_v13_monolithic_prompt(
+    *,
+    values: dict[str, Any],
+    command_text: str,
+    prompt_assets_dir: str | None = None,
+    phase: str = "generate",
+) -> tuple[str, str, list[dict[str, Any]]]:
+    assets, prompt_dir = _load_legacy_prompt_assets(prompt_assets_dir)
+    connected_devices = parse_connected_devices(values.get("connected_devices", ""))
+    snippet_payload = json.loads(str(values.get("service_list_snippet", "{}") or "{}"))
+    service_list_value, service_list_function = _flatten_service_lists_from_snippet_payload(snippet_payload)
+    connected_devices_str = _legacy_connected_device_summary(connected_devices)
+    other_params_str = _legacy_userinfo_block(values)
+
+    phase = str(phase or "generate").strip().lower()
+    response_prompt = assets["response_prompt"]
+    if phase == "repair":
+        repair_tail = f"""
+---
+[Repair Task]
+- Below is the current best JOI JSON candidate.
+- Fix only the minimum needed issues described by the diagnostics.
+- Preserve intent, cron, period, and receiver tags unless a diagnostic requires a change.
+- Return exactly one repaired JSON object only.
+
+[Current Candidate]
+{values.get("best_candidate", "")}
+
+[DET Diagnostics]
+{values.get("det_diagnostics", "")}
+
+[Failure Summary]
+{values.get("failure_summary", "")}
+"""
+        response_prompt = response_prompt.rstrip() + "\n" + repair_tail.strip() + "\n"
+
+    reasoning_contract = """
+---
+[Baseline-CoT Internal Reasoning Contract]
+Before writing the final answer, reason step by step internally using this hidden checklist:
+[REASONING]
+INTENT: <one sentence>
+DEVICES_AND_SERVICES:
+- <device/service candidates>
+TIMING:
+- <cron/period implications or none>
+CONDITIONS:
+- <if / wait until logic or none>
+STATE:
+- <persistent vars, flags, reset rules, or none>
+PLAN:
+- <ordered JOILang construction plan>
+[/REASONING]
+
+Output rules:
+- Keep the reasoning completely hidden.
+- Return ONLY one final JOILang JSON object.
+- Do not print markdown fences, analysis, bullet lists, or explanations.
+- The final JSON must be directly parseable by Python json.loads().
+""".strip()
+
+    system_prompt = f"""
+You are a JOILang programmer. JOILang is a programming language used to control IoT devices.
+Use the following knowledge to convert natural language into valid JOILang code.
+This prompt uses a baseline-CoT style workflow, but the chain-of-thought must stay private.
+
+Make sure to follow syntax rules strictly. Only use allowed keywords:
+if, else if, else, >=, <=, ==, !=, not, and, or, wait until, (#Clock).clock_delay()
+The delay function (#Clock).clock_delay() only accepts values in milliseconds (ms).
+Do not use while or any unlisted constructs.
+**Never use `while` in code**
+
+---
+
+[Device and Service Mapping]
+IMPORTANT: You MUST extract all device tags mentioned as subjects or objects in the input sentence, including those connected by conjunctions.
+For each extracted device tag, retrieve all associated services exactly as defined in the service lists below.
+{assets["service_prompt"]}
+[service_list_value]
+{json.dumps(service_list_value, ensure_ascii=False, indent=2)}
+[service_list_function]
+{json.dumps(service_list_function, ensure_ascii=False, indent=2)}
+
+---
+[Grammar]
+{assets["grammar"]}
+
+---
+[Condition Combination Rules]
+{assets["tempo"]}
+
+---
+[Important Cautions]
+{assets["caution"]}
+{connected_devices_str}
+{other_params_str}
+
+---
+{response_prompt}
+{reasoning_contract}
+- **Never use `while` in code**
+
+--- JOILang Code Output Format Guide ---
+Every scenario generated will follow this structure:
+```json
+{{
+  "name": "<A brief and intuitive scenario name>",
+  "cron": "<Time-based trigger to start execution>",
+  "period": <Execution interval in milliseconds or -1>,
+  "code": "<Main logic block written in JOILang>"
+}}
+```
+""".strip()
+
+    manifest = [
+        {
+            "id": "legacy_v13_monolith",
+            "path": str(prompt_dir),
+            "metadata": {
+                "role": phase,
+                "prompt_render_mode": "legacy_v13_monolith",
+                "prompt_assets_dir": str(prompt_dir),
+                "component_files": json.dumps(LEGACY_V13_PROMPT_FILES, ensure_ascii=False),
+                "service_list_value_count": str(len(service_list_value)),
+                "service_list_function_count": str(len(service_list_function)),
+            },
+        }
+    ]
+    return system_prompt, str(command_text or ""), manifest
+
+
+def render_prompt_bundle(
+    genome: dict[str, Any],
+    *,
+    values: dict[str, Any],
+    command_text: str,
+    prompt_render_mode: str | None = None,
+    prompt_assets_dir: str | None = None,
+    phase: str = "generate",
+    default_system_prompt: str | None = None,
+    return_suffix: str | None = None,
+) -> tuple[str, str, list[dict[str, Any]]]:
+    mode = _resolve_prompt_render_mode(prompt_render_mode)
+    if mode == "legacy_v13_monolith":
+        return render_legacy_v13_monolithic_prompt(
+            values=values,
+            command_text=command_text,
+            prompt_assets_dir=prompt_assets_dir,
+            phase=phase,
+        )
+
+    rendered_prompt, manifest = render_blocks_for_genome(genome, values=values)
+    suffix = return_suffix if return_suffix is not None else (
+        "Return the repaired JSON object now." if str(phase).strip().lower() == "repair" else "Return the final JSON object now."
+    )
+    user_prompt = rendered_prompt.rstrip()
+    if suffix:
+        user_prompt = user_prompt + "\n\n" + suffix
+    system_prompt = default_system_prompt or (
+        "You are a deterministic JOILang repair engine. Return exactly one repaired JSON object only."
+        if str(phase).strip().lower() == "repair"
+        else "You are a deterministic JOILang generation engine. Follow the user instructions exactly and return only the requested JSON object."
+    )
+    return system_prompt, user_prompt, manifest
 
 
 def load_genome(genome_path: str | Path) -> dict[str, Any]:

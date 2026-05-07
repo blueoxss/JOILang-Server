@@ -1,0 +1,105 @@
+[
+  {
+    "generation": 1,
+    "genome_id": "v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 2,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 252.0729,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat6/candidates/g001_quick_v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65_155489.csv",
+      "failure_summary": {
+        "invalid_json": 2
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            2
+          ]
+        ],
+        "count": 2
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 252.0702,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 3,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 378.1038,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat6/candidates/g001_valid_v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65_655489.csv",
+      "failure_summary": {
+        "invalid_json": 3
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            3
+          ]
+        ],
+        "count": 3
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 378.0996,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "v13compact-a05075b5-a5f8-fe0f-46fa-b1fb1ceeab65",
+      "seed": 148510075,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "microsoft/Phi-3.5-mini-instruct",
+        "temperature": 0.0,
+        "max_tokens": 768,
+        "candidate_strategies": [
+          "explicit_preconditions",
+          "direct",
+          "canonical_names_first",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/02_v13_service_response_compact.txt",
+          "few_shot_count": 3,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code.",
+            "Never invent service names outside the provided service_list_snippet."
+          ]
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/03_v13_response_contract.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/06_v13_grammar_tempo_compact.txt"
+        }
+      }
+    }
+  }
+]

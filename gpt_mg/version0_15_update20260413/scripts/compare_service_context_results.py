@@ -73,11 +73,15 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def main() -> int:
-    args = build_parser().parse_args()
-    baseline_dir = Path(args.baseline_dir).resolve()
-    retrieval_dir = Path(args.retrieval_dir).resolve()
-    output_dir = Path(args.output_dir).resolve() if args.output_dir else RESULTS_DIR / f"context_compare_{baseline_dir.name}__vs__{retrieval_dir.name}"
+def compare_context_results(
+    baseline_dir: str | Path,
+    retrieval_dir: str | Path,
+    *,
+    output_dir: str | Path | None = None,
+) -> dict[str, Any]:
+    baseline_dir = Path(baseline_dir).resolve()
+    retrieval_dir = Path(retrieval_dir).resolve()
+    output_dir = Path(output_dir).resolve() if output_dir else RESULTS_DIR / f"context_compare_{baseline_dir.name}__vs__{retrieval_dir.name}"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     baseline_suite = _read_csv(baseline_dir / "suite_summary.csv")
@@ -110,10 +114,21 @@ def main() -> int:
         "category_rows": category_rows,
     }
     dump_json(output_dir / "context_comparison_summary.json", summary)
+    return summary
+
+
+def main() -> int:
+    args = build_parser().parse_args()
+    summary = compare_context_results(
+        args.baseline_dir,
+        args.retrieval_dir,
+        output_dir=args.output_dir or None,
+    )
 
     if args.print_json:
         print(json.dumps(summary, ensure_ascii=False, indent=2))
     else:
+        output_dir = Path(summary["output_dir"])
         print(f"Suite comparison CSV: {output_dir / 'suite_context_comparison.csv'}")
         print(f"Category comparison CSV: {output_dir / 'category_context_comparison.csv'}")
         print(f"Summary JSON: {output_dir / 'context_comparison_summary.json'}")

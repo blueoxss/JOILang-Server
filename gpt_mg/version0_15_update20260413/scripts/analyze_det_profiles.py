@@ -239,24 +239,27 @@ def analyze_results_dir(
     }
 
 
-def main() -> int:
-    parser = build_parser()
-    args = parser.parse_args()
-
-    if not args.results_dir:
+def analyze_det_profiles_for_dirs(
+    results_dirs: list[str | Path],
+    *,
+    dataset: str | Path = str(DATASET_DEFAULT),
+    out_dir: str | Path | None = None,
+    high_score_threshold: float = 85.0,
+) -> dict[str, Any]:
+    if not results_dirs:
         raise SystemExit("Provide at least one --results-dir")
 
-    dataset_rows = _dataset_map(args.dataset)
-    out_dir = _resolve_out_dir(args.out_dir)
+    dataset_rows = _dataset_map(dataset)
+    out_dir = _resolve_out_dir(str(out_dir) if out_dir else None)
     out_dir.mkdir(parents=True, exist_ok=True)
 
     all_rows: list[dict[str, Any]] = []
     all_summaries: list[dict[str, Any]] = []
     all_suspicious: list[dict[str, Any]] = []
     run_summaries: list[dict[str, Any]] = []
-    for raw_dir in args.results_dir:
+    for raw_dir in results_dirs:
         results_dir = Path(raw_dir).resolve()
-        analysis = analyze_results_dir(results_dir, dataset_rows, high_score_threshold=args.high_score_threshold)
+        analysis = analyze_results_dir(results_dir, dataset_rows, high_score_threshold=high_score_threshold)
         all_rows.extend(analysis["rows"])
         all_summaries.extend(analysis["summary_rows"])
         all_suspicious.extend(analysis["suspicious_rows"])
@@ -272,7 +275,9 @@ def main() -> int:
     synthetic_rows = _synthetic_suite(dataset_rows)
     summary = {
         "created_at": datetime.now().isoformat(),
-        "results_dirs": [str(Path(item).resolve()) for item in args.results_dir],
+        "results_dirs": [str(Path(item).resolve()) for item in results_dirs],
+        "output_dir": str(out_dir),
+        "high_score_threshold": high_score_threshold,
         "run_summaries": run_summaries,
         "profile_summary": all_summaries,
         "suspicious_high_nonexact_count": len(all_suspicious),
@@ -284,13 +289,27 @@ def main() -> int:
     atomic_write_csv(out_dir / "suspicious_high_legacy_rows.csv", list(all_suspicious[0].keys()) if all_suspicious else [], all_suspicious)
     atomic_write_csv(out_dir / "synthetic_det_suite.csv", list(synthetic_rows[0].keys()) if synthetic_rows else [], synthetic_rows)
     dump_json(out_dir / "analysis_summary.json", summary)
+    return summary
+
+
+def main() -> int:
+    parser = build_parser()
+    args = parser.parse_args()
+
+    summary = analyze_det_profiles_for_dirs(
+        args.results_dir,
+        dataset=args.dataset,
+        out_dir=args.out_dir,
+        high_score_threshold=args.high_score_threshold,
+    )
+    out_dir = Path(summary["output_dir"])
 
     if args.print_json:
-        print(json.dumps({"out_dir": str(out_dir), **summary}, ensure_ascii=False, indent=2))
+        print(json.dumps(summary, ensure_ascii=False, indent=2))
     else:
         print(f"DET profile analysis written to: {out_dir}")
-        print(f"- suspicious_high_nonexact_count: {len(all_suspicious)}")
-        print(f"- synthetic_suite_rows: {len(synthetic_rows)}")
+        print(f"- suspicious_high_nonexact_count: {summary['suspicious_high_nonexact_count']}")
+        print(f"- synthetic_suite_rows: {summary['synthetic_suite_rows']}")
     return 0
 
 

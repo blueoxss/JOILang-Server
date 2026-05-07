@@ -1,0 +1,38 @@
+{
+  "id": "v13compact-2e58e511-7bb2-4fdb-1dbd-3a0e2c39d58a",
+  "seed": 335029462,
+  "blocks": [
+    "01",
+    "02",
+    "03",
+    "06"
+  ],
+  "params": {
+    "model": "microsoft/Phi-3.5-mini-instruct",
+    "temperature": 0.05,
+    "max_tokens": 1024,
+    "candidate_strategies": [
+      "canonical_names_first",
+      "minimal"
+    ]
+  },
+  "block_params": {
+    "01": {
+      "source_file": "generated/v13_gene_pool_ba3c7b2a33/01_v13_caution_compact.txt"
+    },
+    "02": {
+      "source_file": "generated/v13_gene_pool_ba3c7b2a33/02_v13_service_response_compact.txt",
+      "few_shot_count": 3,
+      "micro_rules": [
+        "Never invent service names outside the provided service_list_snippet.",
+        "Use value entries in conditions and function entries in actions."
+      ]
+    },
+    "03": {
+      "source_file": "generated/v13_gene_pool_ba3c7b2a33/03_v13_response_contract.txt"
+    },
+    "06": {
+      "source_file": "generated/v13_gene_pool_ba3c7b2a33/06_v13_grammar_tempo_compact.txt"
+    }
+  }
+}

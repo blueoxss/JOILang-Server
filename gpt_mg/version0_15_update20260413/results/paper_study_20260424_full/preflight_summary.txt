@@ -1,0 +1,46 @@
+Preflight:
+ - phi35_mini (Phi-3.5-mini-instruct): backend=transformers_worker, status=ready
+   local_model_name: microsoft/Phi-3.5-mini-instruct
+   resolved_model_path: /home/mgjeong/.cache/huggingface/hub/models--microsoft--Phi-3.5-mini-instruct/snapshots/2fe192450127e6a83f7441aef6e3ca586c338b77
+   device=cuda:1 dtype=bf16 load_in_4bit=False local_files_only=True attn=-
+   cache_path: /home/mgjeong/.cache/huggingface/hub/models--microsoft--Phi-3.5-mini-instruct/snapshots/2fe192450127e6a83f7441aef6e3ca586c338b77
+   worker_python: /home/mgjeong/miniconda3/envs/l/bin/python
+   torch=2.9.1+cu128 transformers=4.57.3 cuda_available=True device_count=2
+   cuda_devices: NVIDIA RTX A6000, NVIDIA RTX A6000
+   note: cached locally (hf_cache, snapshots=1)
+ - qwen25_coder_7b (Qwen2.5-Coder-7B-Instruct): backend=transformers_worker, status=ready
+   local_model_name: Qwen/Qwen2.5-Coder-7B-Instruct
+   resolved_model_path: /home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242
+   device=cuda:1 dtype=bf16 load_in_4bit=False local_files_only=True attn=-
+   cache_path: /home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242
+   worker_python: /home/mgjeong/miniconda3/envs/l/bin/python
+   torch=2.9.1+cu128 transformers=4.57.3 cuda_available=True device_count=2
+   cuda_devices: NVIDIA RTX A6000, NVIDIA RTX A6000
+   note: cached locally (hf_cache, snapshots=1)
+ - llama31_8b (Llama-3.1-8B-Instruct): backend=transformers_worker, status=incomplete_cache
+   local_model_name: meta-llama/Llama-3.1-8B-Instruct
+   resolved_model_path: /home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659
+   device=cuda:1 dtype=bf16 load_in_4bit=False local_files_only=True attn=-
+   cache_path: /home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659
+   worker_python: /home/mgjeong/miniconda3/envs/l/bin/python
+   torch=2.9.1+cu128 transformers=4.57.3 cuda_available=True device_count=2
+   cuda_devices: NVIDIA RTX A6000, NVIDIA RTX A6000
+   note: Local cache snapshot exists but required model artifacts are missing.
+ - gemma2_9b_it (Gemma-2-9B-it): backend=transformers_worker, status=incomplete_cache
+   local_model_name: google/gemma-2-9b-it
+   resolved_model_path: /home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819
+   device=cuda:1 dtype=bf16 load_in_4bit=False local_files_only=True attn=-
+   cache_path: /home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819
+   worker_python: /home/mgjeong/miniconda3/envs/l/bin/python
+   torch=2.9.1+cu128 transformers=4.57.3 cuda_available=True device_count=2
+   cuda_devices: NVIDIA RTX A6000, NVIDIA RTX A6000
+   note: Local cache snapshot exists but required model artifacts are missing.
+ - qwen25_coder_14b (Qwen2.5-Coder-14B-Instruct): backend=transformers_worker, status=ready
+   local_model_name: Qwen/Qwen2.5-Coder-14B-Instruct
+   resolved_model_path: /home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-14B-Instruct/snapshots/aedcc2d42b622764e023cf882b6652e646b95671
+   device=cuda:1 dtype=bf16 load_in_4bit=False local_files_only=True attn=-
+   cache_path: /home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-14B-Instruct/snapshots/aedcc2d42b622764e023cf882b6652e646b95671
+   worker_python: /home/mgjeong/miniconda3/envs/l/bin/python
+   torch=2.9.1+cu128 transformers=4.57.3 cuda_available=True device_count=2
+   cuda_devices: NVIDIA RTX A6000, NVIDIA RTX A6000
+   note: cached locally (hf_cache, snapshots=1)

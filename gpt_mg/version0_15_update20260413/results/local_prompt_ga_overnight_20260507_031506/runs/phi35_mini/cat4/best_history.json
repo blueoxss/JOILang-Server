@@ -1,0 +1,308 @@
+[
+  {
+    "generation": 1,
+    "genome_id": "v13compact-1d030185-b5ba-840e-8157-d586e80ff46c",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 2,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 14.0878,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat4/candidates/g001_quick_v13compact-1d030185-b5ba-840e-8157-d586e80ff46c_162214.csv",
+      "failure_summary": {
+        "invalid_json": 2
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            2
+          ]
+        ],
+        "count": 2
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 14.0841,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 3,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 20.6949,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat4/candidates/g001_valid_v13compact-1d030185-b5ba-840e-8157-d586e80ff46c_662214.csv",
+      "failure_summary": {
+        "invalid_json": 3
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            3
+          ]
+        ],
+        "count": 3
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 20.6891,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "v13compact-1d030185-b5ba-840e-8157-d586e80ff46c",
+      "seed": 771898800,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "microsoft/Phi-3.5-mini-instruct",
+        "temperature": 0.05,
+        "max_tokens": 1024,
+        "candidate_strategies": [
+          "direct",
+          "canonical_names_first",
+          "explicit_preconditions",
+          "compact_json"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/02_v13_service_response_compact.txt",
+          "few_shot_count": 1
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/03_v13_response_contract.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/06_v13_grammar_tempo_compact.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 2,
+    "genome_id": "mut-8e9e4b29-1455-4e46-771a-ad112a53c995",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 2,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 13.6739,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat4/candidates/g002_quick_mut-8e9e4b29-1455-4e46-771a-ad112a53c995_156456.csv",
+      "failure_summary": {
+        "invalid_json": 2
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            2
+          ]
+        ],
+        "count": 2
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 13.6702,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 3,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 21.0984,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat4/candidates/g002_valid_mut-8e9e4b29-1455-4e46-771a-ad112a53c995_656456.csv",
+      "failure_summary": {
+        "invalid_json": 3
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            3
+          ]
+        ],
+        "count": 3
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 21.0925,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "mut-8e9e4b29-1455-4e46-771a-ad112a53c995",
+      "seed": 54813041,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "microsoft/Phi-3.5-mini-instruct",
+        "temperature": 0.05,
+        "max_tokens": 1024,
+        "candidate_strategies": [
+          "direct",
+          "canonical_names_first",
+          "explicit_preconditions",
+          "compact_json"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/02_v13_service_response_compact.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "The final answer must be a raw JSON object only; no markdown, prose, or code fences."
+          ]
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/03_v13_response_contract.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/06_v13_grammar_tempo_compact.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 3,
+    "genome_id": "mut-73b4f6d0-b560-6fce-1cab-66dd271fae58",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 2,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 252.1181,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat4/candidates/g003_quick_mut-73b4f6d0-b560-6fce-1cab-66dd271fae58_157863.csv",
+      "failure_summary": {
+        "invalid_json": 2
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            2
+          ]
+        ],
+        "count": 2
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 252.1153,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 3,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 378.0603,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat4/candidates/g003_valid_mut-73b4f6d0-b560-6fce-1cab-66dd271fae58_657863.csv",
+      "failure_summary": {
+        "invalid_json": 3
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            3
+          ]
+        ],
+        "count": 3
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 378.0562,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "mut-73b4f6d0-b560-6fce-1cab-66dd271fae58",
+      "seed": 23644447,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "microsoft/Phi-3.5-mini-instruct",
+        "temperature": 0.05,
+        "max_tokens": 1024,
+        "candidate_strategies": [
+          "direct",
+          "canonical_names_first",
+          "explicit_preconditions",
+          "compact_json"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/02_v13_service_response_compact.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "The final answer must be a raw JSON object only; no markdown, prose, or code fences."
+          ]
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/03_v13_response_contract.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/06_v13_grammar_tempo_compact.txt",
+          "micro_rules": [
+            "The final answer must be a raw JSON object only; no markdown, prose, or code fences."
+          ]
+        }
+      }
+    }
+  }
+]

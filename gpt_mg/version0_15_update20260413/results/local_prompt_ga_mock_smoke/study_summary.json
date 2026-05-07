@@ -1,0 +1,16 @@
+{
+  "output_root": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke",
+  "summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke/ga_best_by_model_category.csv",
+  "progress_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke/ga_progress_all.csv",
+  "population_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke/ga_population_all.csv",
+  "gene_pool_manifest": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke/gene_pool_manifest.json",
+  "markdown_report": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke/paper_report.md",
+  "html_report": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke/index.html",
+  "figures": {
+    "validation_det_by_generation": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke/figures/validation_det_by_generation.png",
+    "validation_pass_rate_by_generation": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke/figures/validation_pass_rate_by_generation.png",
+    "best_det_heatmap": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke/figures/best_det_heatmap.png",
+    "improvement_vs_generation1": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_mock_smoke/figures/improvement_vs_generation1.png"
+  },
+  "run_count": 1
+}

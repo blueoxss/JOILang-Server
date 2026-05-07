@@ -1,0 +1,15 @@
+model_key,model_label,failure_reason,count
+gpt41_mini,GPT-4.1-mini,gt_mismatch,47
+gpt41_mini,GPT-4.1-mini,semantic,39
+gpt41_mini,GPT-4.1-mini,dataflow,23
+gpt41_mini,GPT-4.1-mini,gt_receiver_coverage,18
+gpt41_mini,GPT-4.1-mini,numeric_grounding,16
+gpt41_mini,GPT-4.1-mini,extraneous,15
+gpt41_mini,GPT-4.1-mini,gt_service_coverage,15
+gpt41_mini,GPT-4.1-mini,arg_type,9
+gpt41_mini,GPT-4.1-mini,enum_grounding,5
+gpt41_mini,GPT-4.1-mini,precondition,5
+gpt41_mini,GPT-4.1-mini,service_match,5
+gpt41_mini,GPT-4.1-mini,unknown_service:temperaturemeasurement_temperature,3
+gpt41_mini,GPT-4.1-mini,unknown_service:sirenmode_setsirenmode,2
+gpt41_mini,GPT-4.1-mini,invalid_json,1

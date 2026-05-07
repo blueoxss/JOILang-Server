@@ -12,6 +12,12 @@
 - `admin_logs`가 없어도 benchmark + GA search만 단독으로 돌릴 수 있습니다.
 - `admin_logs`가 있으면 실패 명령을 replay해서 manual feedback rule로 흡수하고, benchmark non-regression을 확인한 뒤 `version0_15_updateYYYYMMDD*` 폴더로 승격할 수 있습니다.
 
+## 먼저 볼 문서
+
+- 실행 흐름, 스크립트 역할, 자동 후처리, DET 점수 체계, `failure_reasons` 해설은 [scripts/README.md](/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/scripts/README.md) 에 정리돼 있습니다.
+- 더 읽기 쉬운 시각화 버전은 [scripts/README.html](/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/scripts/README.html) 과 [scripts/README.pdf](/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/scripts/README.pdf) 에 있습니다.
+- 특히 어떤 스크립트를 직접 실행해야 하는지 헷갈릴 때는 `scripts/README.md`를 먼저 보는 것이 가장 빠릅니다.
+
 ## 자주 쓰는 환경 변수
 
 `demo.py` 또는 `gpt_mg/run.py gpt_mg.version0_15 ...` 경로:
@@ -89,6 +95,78 @@ python gpt_mg/version0_15_update20260413/scripts/inspect_service_context.py \
 
 - `results/service_context_inspection/service_context_summary.json`
 - `results/service_context_inspection/service_context_rows.csv`
+
+## Prompt Render Mode
+
+`version0_15_update20260413`는 기본적으로 현재 v15 방식의 `genome + blocks` prompt를 씁니다.  
+하지만 `version0_13`처럼 여러 prompt 파일을 합쳐 **하나의 큰 monolithic prompt**로도 돌릴 수 있습니다.
+
+지원 모드:
+
+- `blocks`
+  - 기본값
+  - `best_genome.json` 또는 지정한 genome의 `blocks`를 렌더링해서 prompt를 구성
+- `legacy_v13_monolith`
+  - `version0_13`의 prompt 자산을 읽어서 하나의 큰 prompt로 구성
+  - generation과 repair 모두 같은 모드로 동작
+
+중요:
+
+- 이 옵션은 **prompt의 모양**을 바꾸는 것입니다.
+- service schema 자체를 `version0_13`으로 되돌리는 것이 아닙니다.
+- 실제 service context는 여전히 현재 v15 runtime을 따라갑니다.
+  - `connected_devices`가 있으면 그 subset
+  - retrieval premapping을 켜면 top-k category shortlist
+  - 아니면 full schema fallback
+
+기본 prompt asset 경로:
+
+- `/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13`
+
+명시적으로 주고 싶으면:
+
+```bash
+--prompt-render-mode legacy_v13_monolith \
+--prompt-assets-dir /home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13
+```
+
+local smoke 예시:
+
+```bash
+python gpt_mg/version0_15_update20260413/scripts/run_benchmark.py \
+  --suite paper_local5 \
+  --model-key qwen25_coder_7b \
+  --row-no 1 \
+  --candidate-k 1 \
+  --repair-attempts 0 \
+  --det-profile strict \
+  --prompt-render-mode legacy_v13_monolith \
+  --prompt-assets-dir /home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13 \
+  --print-mode compare \
+  --strict-availability
+```
+
+cloud smoke 예시:
+
+```bash
+python gpt_mg/version0_15_update20260413/scripts/run_benchmark.py \
+  --suite paper_with_cloud_ref \
+  --model-key gpt41_mini \
+  --llm-mode openai \
+  --llm-endpoint "$JOI_V15_OPENAI_ENDPOINT" \
+  --row-no 1 \
+  --candidate-k 1 \
+  --repair-attempts 0 \
+  --det-profile strict \
+  --prompt-render-mode legacy_v13_monolith \
+  --prompt-assets-dir /home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13 \
+  --enable-retrieval-premapping \
+  --retrieval-topk 10 \
+  --retrieval-mode hybrid \
+  --retrieval-device cpu \
+  --print-mode compare \
+  --strict-availability
+```
 
 ## 빠른 benchmark + GA
 
@@ -365,7 +443,7 @@ python gpt_mg/version0_15_update20260413/scripts/run_model_suite_benchmark.py \
 category file:
 
 ```bash
-python gpt_mg/version0_15_update20260413/scripts/run_model_suite_benchmark.py \
+python gpt_mg/version0_15_update20260413/scripts/run_benchmark.py \
   --suite paper_local5 \
   --model-key qwen25_coder_7b \
   --category-file /tmp/joi_categories.txt \
@@ -378,14 +456,14 @@ python gpt_mg/version0_15_update20260413/scripts/run_model_suite_benchmark.py \
 available categories:
 
 ```bash
-python gpt_mg/version0_15_update20260413/scripts/run_model_suite_benchmark.py \
+python gpt_mg/version0_15_update20260413/scripts/run_benchmark.py \
   --list-categories
 ```
 
 full dataset:
 
 ```bash
-python gpt_mg/version0_15_update20260413/scripts/run_model_suite_benchmark.py \
+python gpt_mg/version0_15_update20260413/scripts/run_benchmark.py \
   --suite paper_local5 \
   --model-key qwen25_coder_7b \
   --model-key qwen25_coder_14b \
@@ -397,7 +475,7 @@ python gpt_mg/version0_15_update20260413/scripts/run_model_suite_benchmark.py \
 paper-fair mode:
 
 ```bash
-python gpt_mg/version0_15_update20260413/scripts/run_model_suite_benchmark.py \
+python gpt_mg/version0_15_update20260413/scripts/run_benchmark.py \
   --suite paper_local5 \
   --model-key qwen25_coder_7b \
   --model-key qwen25_coder_14b \
@@ -413,7 +491,7 @@ python gpt_mg/version0_15_update20260413/scripts/run_model_suite_benchmark.py \
 explicit warmup row:
 
 ```bash
-python gpt_mg/version0_15_update20260413/scripts/run_model_suite_benchmark.py \
+python gpt_mg/version0_15_update20260413/scripts/run_benchmark.py \
   --suite paper_local5 \
   --model-key qwen25_coder_7b \
   --start-row 1 \
@@ -429,7 +507,7 @@ python gpt_mg/version0_15_update20260413/scripts/run_model_suite_benchmark.py \
 wall-clock oriented parallel mode:
 
 ```bash
-python gpt_mg/version0_15_update20260413/scripts/run_model_suite_benchmark.py \
+python gpt_mg/version0_15_update20260413/scripts/run_benchmark.py \
   --suite paper_local5 \
   --model-key qwen25_coder_7b \
   --model-key qwen25_coder_14b \
@@ -453,7 +531,7 @@ python gpt_mg/version0_15_update20260413/scripts/export_paper_figures.py \
 GT code와 생성된 JOICode를 좌우 비교하는 HTML/PDF 리포트:
 
 ```bash
-python gpt_mg/version0_15_update20260413/scripts/export_joi_code_side_by_side_report.py \
+python gpt_mg/version0_15_update20260413/scripts/export_row_report.py \
   --results-dir /home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260423_222827 \
   --model-key qwen25_coder_14b \
   --category 1 \
@@ -474,6 +552,15 @@ python gpt_mg/version0_15_update20260413/scripts/export_joi_code_side_by_side_re
 - `results/model_suite_<timestamp>/side_by_side_report_<model_key>/report.pdf`
 - `results/model_suite_<timestamp>/side_by_side_report_<model_key>/report_summary.json`
 - `results/model_suite_<timestamp>/side_by_side_report_<model_key>/selected_rows.csv`
+
+자동 후처리:
+
+- `run_benchmark.py`는 single-model run이면 기본적으로 row report를 자동 export합니다.
+- `--skip-row-report`를 주면 이 자동 동작을 끌 수 있습니다.
+- multi-model run에서 row report를 자동으로 만들고 싶으면 `--export-row-report` 또는 `--row-report-model-key ...`를 사용합니다.
+- 이전 run과 자동 비교하려면 `--compare-to /abs/path/to/older/results_dir`
+- 현재 run에 대한 DET audit을 자동으로 돌리려면 `--analyze-det`
+- 긴 기존 이름의 `run_model_suite_benchmark.py`, `compare_service_context_results.py`, `export_joi_code_side_by_side_report.py`, `analyze_det_profiles.py`도 호환용으로 계속 동작합니다.
 
 ## 주요 산출물
 
@@ -509,7 +596,7 @@ python gpt_mg/version0_15_update20260413/scripts/export_joi_code_side_by_side_re
 DET legacy/strict 비교 분석:
 
 ```bash
-python gpt_mg/version0_15_update20260413/scripts/analyze_det_profiles.py \
+python gpt_mg/version0_15_update20260413/scripts/audit_det.py \
   --results-dir gpt_mg/version0_15_update20260413/results/model_suite_20260423_142658 \
   --results-dir gpt_mg/version0_15_update20260413/results/model_suite_20260423_143911 \
   --out-dir gpt_mg/version0_15_update20260413/results/det_profile_analysis_current \

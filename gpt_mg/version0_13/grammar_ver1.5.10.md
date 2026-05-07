@@ -294,6 +294,19 @@ if (any(#SectorA).temperatureMeasurement_temperature > 30.0) {
 
 - Whenever you use a service_value as a function argument, assign it to a variable first and then pass the variable as the argument.  
   (Do not pass service_value expressions directly in function calls.)
+- A service_value access must never be followed by another method call using dot chaining.
+  - Incorrect:
+    `(#HumiditySensor).humiditysensor_humidity.speaker_speak(string(humiditysensor_humidity))`
+  - Correct:
+    `hum = (#HumiditySensor).humiditysensor_humidity`
+    `(#Speaker).speaker_speak(hum)`
+- If a variable is created from a service_value, that variable must be consumed later.
+  - Incorrect:
+    `power = (#Charger).charger_power`
+    `(#Speaker).speaker_speak("Power consumption is ")`
+  - Correct:
+    `power = (#Charger).charger_power`
+    `(#Speaker).speaker_speak(power)`
 - For simple numbers or text, you can use literals directly, or assign to a variable first if desired.
 - Example:
     ```

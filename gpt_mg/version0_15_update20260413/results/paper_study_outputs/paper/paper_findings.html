@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>JOILang Prompt Context Study</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+      margin: 0 auto;
+      max-width: 1280px;
+      padding: 28px 34px 80px;
+      color: #1f2937;
+      background: #f7f8fa;
+      line-height: 1.55;
+    }
+    h1, h2, h3 { color: #102a43; }
+    .hero {
+      background: linear-gradient(135deg, #0f4c81, #2d6a4f);
+      color: white;
+      padding: 22px 24px;
+      border-radius: 18px;
+      box-shadow: 0 16px 35px rgba(16, 42, 67, 0.18);
+      margin-bottom: 20px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 18px 0 24px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e7edf5;
+    }
+    .metric {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-top: 4px;
+      color: #0f172a;
+    }
+    .label {
+      font-size: 0.9rem;
+      color: #52606d;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .section {
+      background: white;
+      border-radius: 18px;
+      padding: 20px 22px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+      margin-bottom: 18px;
+      border: 1px solid #e7edf5;
+    }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.93rem;
+    }
+    .table th, .table td {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 8px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+    .table th {
+      background: #f8fafc;
+    }
+    .figure-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+    }
+    .figure-card img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid #d7dee8;
+      background: white;
+    }
+    .muted { color: #6b7280; }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 980px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>JOILang Prompt Context Study</h1>
+    <p>This report aggregates full-dataset benchmark runs for baseline full-schema prompting and retrieval-premapped prompting under the same version0_15 prompt/search pipeline.</p>
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="label">Runnable Models</div><div class="metric">2</div></div>
+    <div class="card"><div class="label">Blocked Models</div><div class="metric">1</div></div>
+    <div class="card"><div class="label">Best Quality</div><div class="metric">qwen25_coder_14b</div><div class="muted">retrieval · DET 91.16</div></div>
+    <div class="card"><div class="label">Largest Prompt Reduction</div><div class="metric">qwen25_coder_14b</div><div class="muted">54.42% vs baseline</div></div>
+  </div>
+
+  <div class="section two-col">
+    <div>
+      <h2>Main Findings</h2>
+      <ul>
+        <li>Best quality condition: <strong>qwen25_coder_14b</strong> under <strong>retrieval</strong>.</li>
+        <li>Fastest condition: <strong>qwen25_coder_7b</strong> under <strong>retrieval</strong>.</li>
+        <li>Largest strict DET gain from retrieval: <strong>qwen25_coder_14b</strong> (6.45).</li>
+        <li>Strongest category-level gain: model <strong>qwen25_coder_14b</strong>, category <strong>1</strong>.</li>
+        <li>Largest category-level drop: model <strong>qwen25_coder_7b</strong>, category <strong>1</strong>.</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Readiness Assessment</h2>
+      <p><strong>Publication readiness:</strong> partial</p>
+      <h3>Strengths</h3>
+      <ul><li>At least two deployment-relevant local models completed both baseline and retrieval conditions.</li><li>Prompt compression effect is large enough to support a token-efficiency claim.</li><li>Retrieval premapping improves strict DET for at least one strong local model.</li></ul>
+      <h3>Limitations</h3>
+      <ul><li>The intended five-model local suite is not fully executable under the current environment; blocked models must be reported transparently.</li><li>The strongest claim should be framed around the runnable Qwen local subset unless the blocked models are fixed and rerun.</li></ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Availability Summary</h2>
+    <table class="dataframe table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>model_key</th>
+      <th>status</th>
+      <th>note</th>
+      <th>resolved_model_path</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>qwen25_coder_14b</td>
+      <td>ran_both</td>
+      <td></td>
+      <td>/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-14B-Instruct/snapshots/aedcc2d42b622764e023cf882b6652e646b95671</td>
+    </tr>
+    <tr>
+      <td>qwen25_coder_7b</td>
+      <td>ran_both</td>
+      <td></td>
+      <td>/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242</td>
+    </tr>
+    <tr>
+      <td>phi35_mini</td>
+      <td>blocked</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+  <div class="section">
+    <h2>Condition Summary</h2>
+    <table class="dataframe table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>model_key</th>
+      <th>condition</th>
+      <th>avg_det_score</th>
+      <th>det_pass_rate</th>
+      <th>warm_latency_p50</th>
+      <th>avg_prompt_tokens</th>
+      <th>peak_vram_gb_max</th>
+      <th>failure_rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>qwen25_coder_14b</td>
+      <td>baseline</td>
+      <td>84.7169</td>
+      <td>0.90</td>
+      <td>11.2178</td>
+      <td>18786.70</td>
+      <td>37.0617</td>
+      <td>0.10</td>
+    </tr>
+    <tr>
+      <td>qwen25_coder_14b</td>
+      <td>retrieval</td>
+      <td>91.1622</td>
+      <td>1.00</td>
+      <td>5.8714</td>
+      <td>8562.05</td>
+      <td>31.1208</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>qwen25_coder_7b</td>
+      <td>baseline</td>
+      <td>77.1301</td>
+      <td>0.75</td>
+      <td>4.5857</td>
+      <td>18786.70</td>
+      <td>20.1412</td>
+      <td>0.25</td>
+    </tr>
+    <tr>
+      <td>qwen25_coder_7b</td>
+      <td>retrieval</td>
+      <td>72.3424</td>
+      <td>0.70</td>
+      <td>2.5920</td>
+      <td>8562.05</td>
+      <td>16.4341</td>
+      <td>0.30</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+  <div class="section">
+    <h2>Retrieval vs Baseline Deltas</h2>
+    <table class="dataframe table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>model_key</th>
+      <th>delta_avg_det_score</th>
+      <th>delta_det_pass_rate</th>
+      <th>reduction_pct_avg_prompt_tokens</th>
+      <th>reduction_pct_warm_latency_p50</th>
+      <th>reduction_pct_peak_vram_gb_max</th>
+      <th>delta_failure_rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>qwen25_coder_14b</td>
+      <td>6.4453</td>
+      <td>0.10</td>
+      <td>54.424939</td>
+      <td>47.659969</td>
+      <td>16.029756</td>
+      <td>-0.10</td>
+    </tr>
+    <tr>
+      <td>qwen25_coder_7b</td>
+      <td>-4.7877</td>
+      <td>-0.05</td>
+      <td>54.424939</td>
+      <td>43.476459</td>
+      <td>18.405557</td>
+      <td>0.05</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+  <div class="section">
+    <h2>Figures</h2>
+    <div class="figure-grid">
+      <div class='figure-card'><h3>Strict DET vs Warm Latency</h3><img src='det_vs_warm_latency_by_condition.png' alt='Strict DET vs Warm Latency' /></div><div class='figure-card'><h3>Strict DET vs Prompt Tokens</h3><img src='det_vs_prompt_tokens_by_condition.png' alt='Strict DET vs Prompt Tokens' /></div><div class='figure-card'><h3>Strict DET vs Peak VRAM</h3><img src='det_vs_peak_vram_by_condition.png' alt='Strict DET vs Peak VRAM' /></div><div class='figure-card'><h3>Condition Metric Bars</h3><img src='condition_metric_bars.png' alt='Condition Metric Bars' /></div><div class='figure-card'><h3>Category DET Delta Heatmap</h3><img src='category_det_delta_heatmap.png' alt='Category DET Delta Heatmap' /></div><div class='figure-card'><h3>Category Prompt Reduction Heatmap</h3><img src='category_prompt_reduction_heatmap.png' alt='Category Prompt Reduction Heatmap' /></div><div class='figure-card'><h3>Row DET Delta Histogram</h3><img src='row_det_delta_hist.png' alt='Row DET Delta Histogram' /></div><div class='figure-card'><h3>Row Prompt Reduction Histogram</h3><img src='row_prompt_reduction_hist.png' alt='Row Prompt Reduction Histogram' /></div><div class='figure-card'><h3>Failure Reason Heatmap</h3><img src='failure_reason_heatmap.png' alt='Failure Reason Heatmap' /></div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,305 @@
+[
+  {
+    "generation": 1,
+    "genome_id": "v13compact-79ecd780-05b7-1df3-9473-af3bf23a8608",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 2,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 11.2103,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat2/candidates/g001_quick_v13compact-79ecd780-05b7-1df3-9473-af3bf23a8608_157001.csv",
+      "failure_summary": {
+        "invalid_json": 2
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            2
+          ]
+        ],
+        "count": 2
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 11.2061,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 3,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 15.5172,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat2/candidates/g001_valid_v13compact-79ecd780-05b7-1df3-9473-af3bf23a8608_657001.csv",
+      "failure_summary": {
+        "invalid_json": 3
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            3
+          ]
+        ],
+        "count": 3
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 15.511,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "v13compact-79ecd780-05b7-1df3-9473-af3bf23a8608",
+      "seed": 959055587,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "microsoft/Phi-3.5-mini-instruct",
+        "temperature": 0.0,
+        "max_tokens": 512,
+        "candidate_strategies": [
+          "canonical_names_first",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/02_v13_service_response_compact.txt",
+          "few_shot_count": 3,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code.",
+            "Never invent service names outside the provided service_list_snippet."
+          ]
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/03_v13_response_contract.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/06_v13_grammar_tempo_compact.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 2,
+    "genome_id": "clone-1cc10e2d-30dd-7b16-82b4-a894ccaa4724",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 2,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 10.5866,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat2/candidates/g002_quick_clone-1cc10e2d-30dd-7b16-82b4-a894ccaa4724_156008.csv",
+      "failure_summary": {
+        "invalid_json": 2
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            2
+          ]
+        ],
+        "count": 2
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 10.5824,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 3,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 15.2399,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat2/candidates/g002_valid_clone-1cc10e2d-30dd-7b16-82b4-a894ccaa4724_656008.csv",
+      "failure_summary": {
+        "invalid_json": 3
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            3
+          ]
+        ],
+        "count": 3
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 15.2337,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "clone-1cc10e2d-30dd-7b16-82b4-a894ccaa4724",
+      "seed": 327394593,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "microsoft/Phi-3.5-mini-instruct",
+        "temperature": 0.0,
+        "max_tokens": 512,
+        "candidate_strategies": [
+          "canonical_names_first",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/02_v13_service_response_compact.txt",
+          "few_shot_count": 3,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code.",
+            "Never invent service names outside the provided service_list_snippet."
+          ]
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/03_v13_response_contract.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/06_v13_grammar_tempo_compact.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 3,
+    "genome_id": "clone-1cc10e2d-30dd-7b16-82b4-a894ccaa4724",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 2,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 10.4255,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat2/candidates/g003_quick_clone-1cc10e2d-30dd-7b16-82b4-a894ccaa4724_156009.csv",
+      "failure_summary": {
+        "invalid_json": 2
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            2
+          ]
+        ],
+        "count": 2
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 10.4207,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 3,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 15.2013,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/local_prompt_ga_overnight_20260507_031506/runs/phi35_mini/cat2/candidates/g003_valid_clone-1cc10e2d-30dd-7b16-82b4-a894ccaa4724_656009.csv",
+      "failure_summary": {
+        "invalid_json": 3
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            3
+          ]
+        ],
+        "count": 3
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 15.1947,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "clone-1cc10e2d-30dd-7b16-82b4-a894ccaa4724",
+      "seed": 327394593,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "microsoft/Phi-3.5-mini-instruct",
+        "temperature": 0.0,
+        "max_tokens": 512,
+        "candidate_strategies": [
+          "canonical_names_first",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/02_v13_service_response_compact.txt",
+          "few_shot_count": 3,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code.",
+            "Never invent service names outside the provided service_list_snippet."
+          ]
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/03_v13_response_contract.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_ba3c7b2a33/06_v13_grammar_tempo_compact.txt"
+        }
+      }
+    }
+  }
+]

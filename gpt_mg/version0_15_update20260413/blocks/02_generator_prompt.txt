@@ -48,8 +48,8 @@ Hard generation rules:
 5. If the command does not mention a selector tag, prefer the base receiver `(#Category)`.
 6. If the command addresses a group such as "all", "every", or a plural target, prefer `all(...)` with the same selector tags instead of a single-target receiver.
 7. Never emit raw connected-device ids such as `tc1_...` in the JOILang code.
-8. Use `canonical_name` only as the schema-matching reference. In the final JOILang code, emit the lowercase form of that member token after the receiver dot. Example: canonical_name `Dishwasher_SetDishwasherMode` becomes `dishwasher_setdishwashermode` in code.
-9. Do not output bare raw service names when `canonical_name` is available, and do not preserve uppercase service casing in the final code.
+8. In `service_list_snippet`, the `service` field is already the canonical prefixed member name such as `Speaker_SetVolume` or `LevelControl_MoveToLevel`. Treat it as the authoritative member token.
+9. `raw_service` is informational only. In final JOILang code, emit the lowercase form of the canonical member token after the receiver dot. Example: `Dishwasher_SetDishwasherMode` becomes `dishwasher_setdishwashermode` in code.
 10. Use value entries in conditions and function entries in actions.
 11. Match argument counts and argument types exactly.
 12. For ENUM arguments, use only enum values explicitly present in the snippet.
@@ -109,9 +109,9 @@ Relevant capability snippet:
           "locations": [],
           "selector_tags": ["Smartthings", "platform__PhilipsHue"],
           "services": [
-            {"service": "Switch", "canonical_name": "Switch_Switch", "type": "value", "return_type": "BOOL"},
-            {"service": "On", "canonical_name": "Switch_On", "type": "function", "return_type": "VOID"},
-            {"service": "Off", "canonical_name": "Switch_Off", "type": "function", "return_type": "VOID"}
+            {"service": "Switch_Switch", "raw_service": "Switch", "canonical_name": "Switch_Switch", "type": "value", "return_type": "BOOL"},
+            {"service": "Switch_On", "raw_service": "On", "canonical_name": "Switch_On", "type": "function", "return_type": "VOID"},
+            {"service": "Switch_Off", "raw_service": "Off", "canonical_name": "Switch_Off", "type": "function", "return_type": "VOID"}
           ]
         }
       ]
@@ -147,8 +147,8 @@ Relevant capability snippet:
           "locations": ["LivingRoom"],
           "selector_tags": ["LivingRoom", "Smartthings", "platform__PhilipsHue"],
           "services": [
-            {"service": "CurrentRGB", "canonical_name": "Light_CurrentRGB", "type": "value", "return_type": "STRING"},
-            {"service": "MoveToRGB", "canonical_name": "Light_MoveToRGB", "type": "function", "argument_type": "INTEGER | INTEGER | INTEGER", "return_type": "VOID"}
+            {"service": "Light_CurrentRGB", "raw_service": "CurrentRGB", "canonical_name": "Light_CurrentRGB", "type": "value", "return_type": "STRING"},
+            {"service": "Light_MoveToRGB", "raw_service": "MoveToRGB", "canonical_name": "Light_MoveToRGB", "type": "function", "argument_type": "INTEGER | INTEGER | INTEGER", "return_type": "VOID"}
           ]
         }
       ]
@@ -189,7 +189,7 @@ Relevant capability snippet:
           "locations": ["BoilerRoom"],
           "selector_tags": ["BoilerRoom"],
           "services": [
-            {"service": "Leakage", "canonical_name": "LeakSensor_Leakage", "type": "value", "return_type": "BOOL"}
+            {"service": "LeakSensor_Leakage", "raw_service": "Leakage", "canonical_name": "LeakSensor_Leakage", "type": "value", "return_type": "BOOL"}
           ]
         }
       ]
@@ -203,7 +203,7 @@ Relevant capability snippet:
           "locations": ["BoilerRoom"],
           "selector_tags": ["BoilerRoom"],
           "services": [
-            {"service": "Close", "canonical_name": "Valve_Close", "type": "function", "return_type": "VOID"}
+            {"service": "Valve_Close", "raw_service": "Close", "canonical_name": "Valve_Close", "type": "function", "return_type": "VOID"}
           ]
         }
       ]
