@@ -271,6 +271,8 @@ def generate_candidates_for_rows(
                     str(response.get("content", "")).strip(),
                     default_cron=str(values.get("optional_cron", "") or ""),
                     default_period=int(str(values.get("optional_period", "0") or "0")),
+                    service_schema=service_schema,
+                    command_text=str(values.get("command_eng") or values.get("command_kor") or ""),
                 )
                 candidates.append(candidate_text)
                 candidate_meta.append(

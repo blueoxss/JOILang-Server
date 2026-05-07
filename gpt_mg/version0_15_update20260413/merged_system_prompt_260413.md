@@ -389,7 +389,7 @@ Inputs:
               "canonical_name_lower": "armrobot_sendcommand",
               "type": "function",
               "argument_type": "ENUM",
-              "argument_bounds": "Command to send to the arm robot. List of string, separated by '|'",
+              "argument_bounds": "Command to send to the arm robot. List of string, separated by ','",
               "argument_descriptor": "Send command to arm robot",
               "return_type": "VOID",
               "descriptor": "Allows for the control of the arm robot"
@@ -483,8 +483,8 @@ Inputs:
               "canonical_name_lower": "audiorecorder_recordwithduration",
               "type": "function",
               "argument_type": "STRING | DOUBLE",
-              "argument_bounds": "The file to record to | The duration to record for",
-              "argument_format": " | ",
+              "argument_bounds": "The file to record to, The duration to record for",
+              "argument_format": ",",
               "argument_descriptor": "Record audio with a specified duration",
               "return_type": "BINARY",
               "descriptor": "Record audio"
@@ -847,8 +847,8 @@ Inputs:
               "canonical_name_lower": "clock_delay",
               "type": "function",
               "argument_type": "INTEGER | INTEGER | INTEGER",
-              "argument_bounds": "hour | minute | second",
-              "argument_format": " | | ",
+              "argument_bounds": "hour, minute, second",
+              "argument_format": ",",
               "argument_descriptor": "delay for a given amount of time",
               "return_type": "VOID",
               "descriptor": "Provide current date and time"
@@ -1079,8 +1079,8 @@ Inputs:
               "canonical_name_lower": "cloudserviceprovider_savetofile",
               "type": "function",
               "argument_type": "BINARY | STRING",
-              "argument_bounds": "The base64 data to save to the file | Path of the file to save data to",
-              "argument_format": " | ",
+              "argument_bounds": "The base64 data to save to the file, Path of the file to save data to",
+              "argument_format": ",",
               "argument_descriptor": "Save data to a file in local",
               "return_type": "STRING",
               "descriptor": "Provides cloud service functionalities"
@@ -1183,7 +1183,7 @@ Inputs:
               "canonical_name_lower": "colorcontrol_setcolor",
               "type": "function",
               "argument_type": "STRING",
-              "argument_bounds": "RGB color value in format 'r|g|b' (0-255 for each)",
+              "argument_bounds": "RGB color value in format 'r,g,b' (0-255 for each)",
               "argument_descriptor": "Set the color of the device",
               "return_type": "VOID",
               "descriptor": "Allows for control of a color changing device"
@@ -1592,8 +1592,8 @@ Inputs:
               "canonical_name_lower": "emailprovider_sendmail",
               "type": "function",
               "argument_type": "STRING | STRING | STRING",
-              "argument_bounds": "The email address of the recipient | The title of the email | The body content of the email",
-              "argument_format": " | | ",
+              "argument_bounds": "The email address of the recipient, The title of the email, The body content of the email",
+              "argument_format": ",",
               "argument_descriptor": "Send an email to the specified recipient",
               "return_type": "VOID",
               "descriptor": "Provides email service"
@@ -1604,8 +1604,8 @@ Inputs:
               "canonical_name_lower": "emailprovider_sendmailwithfile",
               "type": "function",
               "argument_type": "STRING | STRING | STRING | STRING",
-              "argument_bounds": "The email address of the recipient | The title of the email | The body content of the email | The file path of the attachment or base64 encoded string",
-              "argument_format": " | | | ",
+              "argument_bounds": "The email address of the recipient, The title of the email, The body content of the email, The file path of the attachment or base64 encoded string",
+              "argument_format": ",",
               "argument_descriptor": "Send an email with an attachment to the specified recipient",
               "return_type": "VOID",
               "descriptor": "Provides email service"
@@ -1980,8 +1980,8 @@ Inputs:
               "canonical_name_lower": "levelcontrol_movetolevel",
               "type": "function",
               "argument_type": "DOUBLE | DOUBLE",
-              "argument_bounds": "The level value, usually 0-100 in percent | The rate at which to change the level",
-              "argument_format": " | ",
+              "argument_bounds": "The level value, usually 0-100 in percent, The rate at which to change the level",
+              "argument_format": ",",
               "argument_descriptor": "Move the level to the given value. If the device supports being turned on and off then it will be turned on if level is greater than 0 and turned off if level is equal to 0.",
               "return_type": "VOID",
               "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch"
@@ -2124,8 +2124,8 @@ Inputs:
               "canonical_name_lower": "light_movetobrightness",
               "type": "function",
               "argument_type": "DOUBLE | DOUBLE",
-              "argument_bounds": "The brightness value, usually 0-100 in percent | The rate at which to change the brightness",
-              "argument_format": " | ",
+              "argument_bounds": "The brightness value, usually 0-100 in percent, The rate at which to change the brightness",
+              "argument_format": ",",
               "argument_descriptor": "Move the Brightness to the given value. If the device supports being turned on and off then it will be turned on if brightness is greater than 0 and turned off if brightness is equal to 0.",
               "return_type": "VOID",
               "descriptor": "A numerical representation of the brightness intensity"
@@ -2158,8 +2158,8 @@ Inputs:
               "canonical_name_lower": "light_movetohueandsaturation",
               "type": "function",
               "argument_type": "DOUBLE | DOUBLE",
-              "argument_bounds": "hue value | saturation value",
-              "argument_format": " | ",
+              "argument_bounds": "hue value, saturation value",
+              "argument_format": ",",
               "argument_descriptor": "Gradually change to the set Hue and Saturation",
               "return_type": "VOID",
               "descriptor": "A numerical representation of the brightness intensity"
@@ -2170,8 +2170,8 @@ Inputs:
               "canonical_name_lower": "light_movetorgb",
               "type": "function",
               "argument_type": "INTEGER | INTEGER | INTEGER",
-              "argument_bounds": "red value | green value | blue value",
-              "argument_format": " | | ",
+              "argument_bounds": "red value, green value, blue value",
+              "argument_format": ",",
               "argument_descriptor": "Gradually change to the set RGB",
               "return_type": "VOID",
               "descriptor": "A numerical representation of the brightness intensity"
@@ -2193,8 +2193,8 @@ Inputs:
               "canonical_name_lower": "light_movetoxy",
               "type": "function",
               "argument_type": "DOUBLE | DOUBLE",
-              "argument_bounds": "color X value | color Y value",
-              "argument_format": " | ",
+              "argument_bounds": "color X value, color Y value",
+              "argument_format": ",",
               "argument_descriptor": "Gradually change to the set XY",
               "return_type": "VOID",
               "descriptor": "A numerical representation of the brightness intensity"
@@ -2432,8 +2432,8 @@ Inputs:
               "canonical_name_lower": "oven_setcookingparameters",
               "type": "function",
               "argument_type": "ENUM | DOUBLE",
-              "argument_bounds": "Set the mode of the oven | Set the cooking time of the oven",
-              "argument_format": " | ",
+              "argument_bounds": "Set the mode of the oven, Set the cooking time of the oven in seconds",
+              "argument_format": ",",
               "argument_descriptor": "Set the cooking parameters of the oven",
               "return_type": "VOID",
               "descriptor": "Allows for the control of the oven mode"
@@ -2859,8 +2859,8 @@ Inputs:
               "canonical_name_lower": "ricecooker_setcookingparameters",
               "type": "function",
               "argument_type": "ENUM | DOUBLE",
-              "argument_bounds": "The desired Rice Cooker mode | The cooking time",
-              "argument_format": " | ",
+              "argument_bounds": "The desired Rice Cooker mode, The cooking time in seconds",
+              "argument_format": ",",
               "argument_descriptor": "Set the cooking parameters for the Rice Cooker",
               "return_type": "VOID",
               "descriptor": "Allows for the control of the Rice Cooker"
@@ -3656,8 +3656,8 @@ Inputs:
               "canonical_name_lower": "weatherprovider_getweatherinfo",
               "type": "function",
               "argument_type": "DOUBLE | DOUBLE",
-              "argument_bounds": "The latitude of the location | The longitude of the location",
-              "argument_format": " | ",
+              "argument_bounds": "The latitude of the location, The longitude of the location",
+              "argument_format": ",",
               "argument_descriptor": "Get the current weather information - Return whole weather information, format: \"temperature, humidity, pressure, pm25, pm10, weather, weather_string, icon_id, location\"",
               "return_type": "STRING",
               "descriptor": "Provides weather information"
@@ -3886,9 +3886,12 @@ Hard generation rules:
 8. Use `canonical_name` only as the schema-matching reference. In the final JOILang code, emit the lowercase form of that member token after the receiver dot. Example: canonical_name `Dishwasher_SetDishwasherMode` becomes `dishwasher_setdishwashermode` in code.
 9. Do not output bare raw service names when `canonical_name` is available, and do not preserve uppercase service casing in the final code.
 10. Use value entries in conditions and function entries in actions.
+10a. Prefer the most specific schema-valid service: if the command supplies all required slots for a parameterized function in `argument_bounds`, use that function instead of a generic value service. If required slots are missing, do not hallucinate them; use the generic value service only when it is the best schema-supported fallback.
+10b. MenuProvider specificity rule: `MenuProvider_TodayMenu` is only for broad requests like "today's menu" with no specific place and no specific meal-time. If the command contains date/day, place, and meal-time, use `MenuProvider_GetMenu` with one STRING argument ordered as `"<date> <place> <meal>"`. Example: "오늘의 301동 점심 메뉴를 스피커로 알려줘" -> `menu = (#MenuProvider).menuprovider_getmenu("오늘 301동식당 점심")` then `(#Speaker).speaker_speak("오늘의 메뉴는 " + menu + "입니다")`. If the command says only "오늘 점심 메뉴" without a place, do not invent a cafeteria; fall back to `menuprovider_todaymenu`.
 11. Match argument counts and argument types exactly.
 12. For ENUM arguments, use only enum values explicitly present in the snippet.
 13. If the command implies time, convert to the service argument unit described by the snippet. `period` always uses milliseconds.
+13a. For `Oven_SetCookingParameters` and `RiceCooker_SetCookingParameters`, the cooking-time argument is seconds. Convert minutes to seconds, e.g. 30 minutes -> 1800. Do not use milliseconds and do not leave raw minutes.
 14. Insert a power-check only if the same capability binding shows both a switch-like value and a power-on function for the same target context.
 15. If the request is ambiguous, choose the smallest schema-valid program that best matches the command.
 16. If you cannot produce a schema-valid action with confidence, still return valid JSON with `code` as an empty string.

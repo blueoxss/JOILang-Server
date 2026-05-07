@@ -252,6 +252,9 @@ def _adapter_intro() -> str:
 - Treat [service_list_value] and [service_list_function] from version0_13 as the typed `services` entries inside {service_list_snippet}.
 - Use only the device categories, selector tags, values, functions, argument types, and enum values present in {service_list_snippet}.
 - In final JOILang code, keep receiver tags unchanged and lowercase only the service/value member token after the receiver dot.
+- Function call arguments are always comma-separated in final JOILang code. If `argument_type` contains `|`, treat it only as a schema type-list delimiter.
+- Prefer the most specific schema-valid service: if the command supplies all required slots for a parameterized function in `argument_bounds`, use that function instead of a generic value service. If required slots are missing, do not invent them; use the generic value service only when it is the best schema-supported fallback.
+- For `Oven_SetCookingParameters` and `RiceCooker_SetCookingParameters`, cooking-time arguments are seconds. Convert minutes to seconds, e.g. 30 minutes -> 1800. Do not use milliseconds and do not leave raw minutes.
 """
 
 

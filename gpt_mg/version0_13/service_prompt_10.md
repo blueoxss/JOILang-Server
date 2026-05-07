@@ -135,25 +135,30 @@ then use:
 ### For **function services**:
 Use **argument_type** or **argument_format** to determine the correct format.
 Use **argument_bounds** or **argument_descriptor** to determine the correct format.
-- The argument separator is **service-specific**. Never copy the separator of one function into another unrelated function.
-- Use `|` only when the current function explicitly says `argument_format: " | "`.
-- If a function takes normal positional arguments, keep comma-separated JOILang syntax.
+- Function call arguments are always comma-separated in JOILang.
+- If `argument_type` contains `|`, treat it only as a schema type-list delimiter, not as the function call separator.
+- If a function takes positional arguments, keep comma-separated JOILang syntax.
   - Correct: `(#Light).light_movetorgb(255, 255, 0)`
-  - Incorrect: `(#Light).light_movetorgb(255 | 255 | 0)`
-- RGB-like functions are **not automatically pipe-separated**. Always follow the exact signature of the current function in `[service_list_function]`.
+- RGB-like functions must also use comma-separated JOILang arguments.
+- For `Oven_SetCookingParameters` and `RiceCooker_SetCookingParameters`, the second argument is cooking time in seconds. Convert minutes to seconds, e.g. 30 minutes -> 1800. Do not use milliseconds and do not leave raw minutes.
 
 #### [Example1]
 - If "device": "Light", "service": "colorControl_setColor" has argument type DICT
-with bounds key/value pairs: "RED|GREEN|BLUE" and example "255|255|255",
+with bounds key/value pairs: "RED,GREEN,BLUE" and example "255,255,255",
 then use:
-(#Light).colorControl_setColor("255|0|0")
+(#Light).colorControl_setColor("255,0,0")
 
 #### [Example2]
 If "device": "Calculator", "service": "calculator_mod" function service has
   "argument_type": "DOUBLE | DOUBLE",
-  "argument_format": " | ",
+  "argument_format": ",",
 then use:
-- "code": {"name": "Scenario1", "cron": "", "period": -1, "code": "(#Calculator).calculator_mod(10 | 3)"}
+- "code": {"name": "Scenario1", "cron": "", "period": -1, "code": "(#Calculator).calculator_mod(10, 3)"}
+
+#### [Example3]
+If the command is "Start the rice cooker on cooking mode for 30 minutes" and the service is `RiceCooker_SetCookingParameters`,
+then use:
+- "code": {"name": "Scenario1", "cron": "", "period": 0, "code": "(#RiceCooker).ricecooker_setcookingparameters(\"cooking\", 1800)"}
 
 
 ---

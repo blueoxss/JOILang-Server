@@ -77,6 +77,13 @@ DEFAULT_CANDIDATE_STRATEGIES = [
 MEMBER_AFTER_RECEIVER_RE = re.compile(
     r"(?P<receiver>all\([^\n\r()]+\)|\([^\n\r()]+\))\.(?P<member>[A-Za-z_][A-Za-z0-9_]*)"
 )
+FUNCTION_CALL_OPEN_RE = re.compile(
+    r"(?P<head>(?:all\([^\n\r()]+\)|\([^\n\r()]+\))\.(?P<member>[A-Za-z_][A-Za-z0-9_]*)\()"
+)
+COOKING_TIME_SECONDS_FUNCTION_MEMBERS = {
+    "oven_setcookingparameters",
+    "ricecooker_setcookingparameters",
+}
 
 
 def ensure_workspace() -> None:
@@ -229,6 +236,226 @@ def lowercase_service_members_in_code(code: str) -> str:
         return f"{match.group('receiver')}.{lowercase_output_member_name(match.group('member'))}"
 
     return MEMBER_AFTER_RECEIVER_RE.sub(repl, text)
+
+
+def function_member_names_from_schema(service_schema: dict[str, Any] | None) -> set[str]:
+    if not service_schema:
+        return set()
+    names: set[str] = set()
+    for device_name, services in service_schema.items():
+        if not isinstance(services, dict):
+            continue
+        for service_name, metadata in services.items():
+            if not isinstance(metadata, dict):
+                continue
+            if str(metadata.get("type", "")).strip().lower() != "function":
+                continue
+            names.add(lowercase_output_member_name(canonical_service_name(str(device_name), str(service_name))))
+    return names
+
+
+def _find_call_close(text: str, open_index: int) -> int:
+    depth = 1
+    quote = ""
+    escaped = False
+    for index in range(open_index + 1, len(text)):
+        char = text[index]
+        if quote:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == quote:
+                quote = ""
+            continue
+        if char in ("'", '"'):
+            quote = char
+            continue
+        if char == "(":
+            depth += 1
+        elif char == ")":
+            depth -= 1
+            if depth == 0:
+                return index
+    return -1
+
+
+def _replace_top_level_pipe_separators(args: str) -> str:
+    output: list[str] = []
+    quote = ""
+    escaped = False
+    nested_depth = 0
+    index = 0
+    while index < len(args):
+        char = args[index]
+        if quote:
+            output.append(char)
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == quote:
+                quote = ""
+            index += 1
+            continue
+        if char in ("'", '"'):
+            quote = char
+            output.append(char)
+            index += 1
+            continue
+        if char in "([{":
+            nested_depth += 1
+            output.append(char)
+            index += 1
+            continue
+        if char in ")]}":
+            nested_depth = max(0, nested_depth - 1)
+            output.append(char)
+            index += 1
+            continue
+        if char == "|" and nested_depth == 0:
+            while output and output[-1].isspace():
+                output.pop()
+            output.append(",")
+            index += 1
+            while index < len(args) and args[index].isspace():
+                index += 1
+            if index < len(args):
+                output.append(" ")
+            continue
+        output.append(char)
+        index += 1
+    return "".join(output)
+
+
+def _split_top_level_args(args: str) -> list[str]:
+    parts: list[str] = []
+    start = 0
+    quote = ""
+    escaped = False
+    nested_depth = 0
+    for index, char in enumerate(args):
+        if quote:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == quote:
+                quote = ""
+            continue
+        if char in ("'", '"'):
+            quote = char
+            continue
+        if char in "([{":
+            nested_depth += 1
+            continue
+        if char in ")]}":
+            nested_depth = max(0, nested_depth - 1)
+            continue
+        if char == "," and nested_depth == 0:
+            parts.append(args[start:index].strip())
+            start = index + 1
+    parts.append(args[start:].strip())
+    return parts
+
+
+def _format_number(value: float) -> str:
+    if value.is_integer():
+        return str(int(value))
+    return str(value)
+
+
+def _extract_command_minutes(command_text: str) -> float | None:
+    text = str(command_text or "")
+    patterns = [
+        r"(\d+(?:\.\d+)?)\s*(?:minutes?|mins?|min)\b",
+        r"(\d+(?:\.\d+)?)\s*분",
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, text, flags=re.IGNORECASE)
+        if not match:
+            continue
+        try:
+            return float(match.group(1))
+        except Exception:
+            return None
+    return None
+
+
+def normalize_function_argument_separators_in_code(
+    code: str,
+    service_schema: dict[str, Any] | None = None,
+) -> str:
+    function_members = function_member_names_from_schema(service_schema)
+    if not function_members or "|" not in str(code or ""):
+        return str(code or "")
+
+    text = str(code or "")
+    pieces: list[str] = []
+    cursor = 0
+    for match in FUNCTION_CALL_OPEN_RE.finditer(text):
+        if match.start() < cursor:
+            continue
+        member = lowercase_output_member_name(match.group("member"))
+        if member not in function_members:
+            continue
+        open_index = match.end() - 1
+        close_index = _find_call_close(text, open_index)
+        if close_index < 0:
+            continue
+        args = text[open_index + 1 : close_index]
+        normalized_args = _replace_top_level_pipe_separators(args)
+        if normalized_args == args:
+            continue
+        pieces.append(text[cursor : open_index + 1])
+        pieces.append(normalized_args)
+        cursor = close_index
+    if not pieces:
+        return text
+    pieces.append(text[cursor:])
+    return "".join(pieces)
+
+
+def normalize_cooking_time_arguments_in_code(
+    code: str,
+    *,
+    command_text: str = "",
+) -> str:
+    minutes = _extract_command_minutes(command_text)
+    if minutes is None:
+        return str(code or "")
+
+    text = str(code or "")
+    pieces: list[str] = []
+    cursor = 0
+    for match in FUNCTION_CALL_OPEN_RE.finditer(text):
+        if match.start() < cursor:
+            continue
+        member = lowercase_output_member_name(match.group("member"))
+        if member not in COOKING_TIME_SECONDS_FUNCTION_MEMBERS:
+            continue
+        open_index = match.end() - 1
+        close_index = _find_call_close(text, open_index)
+        if close_index < 0:
+            continue
+        args = text[open_index + 1 : close_index]
+        parts = _split_top_level_args(args)
+        if len(parts) < 2:
+            continue
+        try:
+            observed = float(parts[1])
+        except Exception:
+            continue
+        if abs(observed - minutes) > 1e-9:
+            continue
+        parts[1] = _format_number(minutes * 60)
+        pieces.append(text[cursor : open_index + 1])
+        pieces.append(", ".join(parts))
+        cursor = close_index
+    if not pieces:
+        return text
+    pieces.append(text[cursor:])
+    return "".join(pieces)
 
 
 def load_service_schema(service_schema_path: str | Path = SERVICE_SCHEMA_DEFAULT) -> dict[str, dict[str, Any]]:
@@ -657,6 +884,8 @@ def normalize_candidate_json_text(
     *,
     default_cron: str = "",
     default_period: int = 0,
+    service_schema: dict[str, Any] | None = None,
+    command_text: str = "",
 ) -> str:
     raw = (text or "").strip()
     if not raw:
@@ -673,11 +902,14 @@ def normalize_candidate_json_text(
     if not isinstance(parsed, dict):
         return raw
 
+    code = lowercase_service_members_in_code(str(parsed.get("code", "") or ""))
+    code = normalize_function_argument_separators_in_code(code, service_schema)
+    code = normalize_cooking_time_arguments_in_code(code, command_text=command_text)
     normalized = {
         "name": str(parsed.get("name", "") or ""),
         "cron": str(parsed.get("cron", "") or ""),
         "period": parsed.get("period", default_period),
-        "code": lowercase_service_members_in_code(str(parsed.get("code", "") or "")),
+        "code": code,
     }
     try:
         normalized["period"] = int(normalized["period"])

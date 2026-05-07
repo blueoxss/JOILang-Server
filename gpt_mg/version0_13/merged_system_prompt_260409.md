@@ -158,16 +158,16 @@ Use **argument_bounds** or **argument_descriptor** to determine the correct form
 
 #### [Example1]
 - If "device": "Light", "service": "colorControl_setColor" has argument type DICT
-with bounds key/value pairs: "RED|GREEN|BLUE" and example "255|255|255",
+with bounds key/value pairs: "RED,GREEN,BLUE" and example "255,255,255",
 then use:
-(#Light).colorControl_setColor("255|0|0")
+(#Light).colorControl_setColor("255,0,0")
 
 #### [Example2]
 If "device": "Calculator", "service": "calculator_mod" function service has
   "argument_type": "DOUBLE | DOUBLE",
-  "argument_format": " | ",
+  "argument_format": ",",
 then use:
-- "code": {"name": "Scenario1", "cron": "", "period": -1, "code": "(#Calculator).calculator_mod(10 | 3)"}
+- "code": {"name": "Scenario1", "cron": "", "period": -1, "code": "(#Calculator).calculator_mod(10, 3)"}
 
 
 ---
@@ -1461,4 +1461,3 @@ Every scenario generated will follow this structure:
   "code": "<Main logic block written in JOILang>"
 }
 ```
-

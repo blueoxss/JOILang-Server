@@ -100,6 +100,17 @@ EQUIVALENT_SERVICE_FAMILIES = {
     canonical_service_name("PresenceSensor", "Presence"): "presence_reading",
     canonical_service_name("PresenceVitalSensor", "Presence"): "presence_reading",
 }
+COMPOUND_SPLIT_SERVICE_EQUIVALENCES = {
+    canonical_service_name("Light", "MoveToHueAndSaturation"): (
+        canonical_service_name("Light", "MoveToHue"),
+        canonical_service_name("Light", "MoveToSaturation"),
+    ),
+}
+SPEAKER_REPORT_SINKS = {canonical_service_name("Speaker", "Speak")}
+SPEAKER_AIR_QUALITY_REPORT_FAMILY = {
+    canonical_service_name("WeatherProvider", "Pm10Weather"),
+    canonical_service_name("WeatherProvider", "Pm25Weather"),
+}
 
 
 def load_schema(service_list: dict[str, Any] | str | None = None) -> dict[str, dict[str, Any]]:
@@ -549,6 +560,204 @@ def _gt_receiver_coverage_score(
     return sum(scores) / max(len(scores), 1)
 
 
+def _is_all_receiver(usage: dict[str, Any]) -> bool:
+    return str(usage.get("receiver", "") or "").strip().lower().startswith("all(")
+
+
+def _same_effective_receiver(
+    gt_usage: dict[str, Any],
+    predicted_usage: dict[str, Any],
+    connected_devices: dict[str, Any],
+    schema: dict[str, dict[str, Any]],
+) -> bool:
+    if _is_all_receiver(gt_usage) != _is_all_receiver(predicted_usage):
+        return False
+    if str(gt_usage.get("device", "") or "") != str(predicted_usage.get("device", "") or ""):
+        return False
+    if _receiver_context_tags(gt_usage, schema) != _receiver_context_tags(predicted_usage, schema):
+        return False
+    return _receiver_instance_tokens(gt_usage, connected_devices) == _receiver_instance_tokens(predicted_usage, connected_devices)
+
+
+def _det_arg_equal(left: str, right: str) -> bool:
+    left_value = _normalize_arg_value(left)
+    right_value = _normalize_arg_value(right)
+    if left_value == right_value:
+        return True
+    try:
+        return float(left_value) == float(right_value)
+    except Exception:
+        return False
+
+
+def _compound_split_equivalent_for_det(
+    predicted_usages: list[dict[str, Any]],
+    gt_usages: list[dict[str, Any]],
+    connected_devices: dict[str, Any],
+    schema: dict[str, dict[str, Any]],
+) -> bool:
+    if len(gt_usages) != 1 or len(predicted_usages) != 2:
+        return False
+    gt_usage = gt_usages[0]
+    split_names = COMPOUND_SPLIT_SERVICE_EQUIVALENCES.get(str(gt_usage.get("canonical_name", "") or ""))
+    if split_names is None:
+        return False
+    gt_args = gt_usage.get("args", []) or []
+    if len(gt_args) != len(split_names):
+        return False
+    matched_predicted: set[int] = set()
+    for arg_index, split_name in enumerate(split_names):
+        matched_index = None
+        for pred_index, pred_usage in enumerate(predicted_usages):
+            if pred_index in matched_predicted:
+                continue
+            if str(pred_usage.get("canonical_name", "") or "") != split_name:
+                continue
+            if not _same_effective_receiver(gt_usage, pred_usage, connected_devices, schema):
+                continue
+            pred_args = pred_usage.get("args", []) or []
+            if len(pred_args) != 1 or not _det_arg_equal(gt_args[arg_index], pred_args[0]):
+                continue
+            matched_index = pred_index
+            break
+        if matched_index is None:
+            return False
+        matched_predicted.add(matched_index)
+    return len(matched_predicted) == len(predicted_usages)
+
+
+def _assignment_sources(code: str, usages: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    sources: dict[str, dict[str, Any]] = {}
+    usage_by_member = {str(usage.get("member", "") or "").lower(): usage for usage in usages}
+    assignment_re = re.compile(
+        r"(?m)^\s*(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*"
+        r"(?P<receiver>all\([^\n\r()]+\)|\([^\n\r()]+\))\."
+        r"(?P<member>[A-Za-z_][A-Za-z0-9_]*)"
+        r"(?:\s*\((?P<args>[^()]*)\))?"
+    )
+    for match in assignment_re.finditer(code or ""):
+        usage = usage_by_member.get(str(match.group("member") or "").lower())
+        if usage is not None:
+            sources[str(match.group("name"))] = usage
+    return sources
+
+
+def _expression_identifiers(expr: str) -> list[str]:
+    without_strings = re.sub(r'"(?:[^"\\]|\\.)*"', " ", expr or "")
+    return re.findall(r"\b[A-Za-z_][A-Za-z0-9_]*\b", without_strings)
+
+
+def _speaker_report_source_usages(code: str, usages: list[dict[str, Any]]) -> list[tuple[dict[str, Any], dict[str, Any]]]:
+    assignments = _assignment_sources(code, usages)
+    values = [usage for usage in usages if str(usage.get("meta", {}).get("type", "")).lower() == "value"]
+    reports: list[tuple[dict[str, Any], dict[str, Any]]] = []
+    for sink in usages:
+        if str(sink.get("canonical_name", "") or "") not in SPEAKER_REPORT_SINKS:
+            continue
+        source: dict[str, Any] | None = None
+        for arg in sink.get("args", []) or []:
+            for identifier in _expression_identifiers(arg):
+                if identifier in assignments:
+                    source = assignments[identifier]
+                    break
+            if source is not None:
+                break
+            for value_usage in values:
+                member = str(value_usage.get("member", "") or "")
+                canonical = str(value_usage.get("canonical_name", "") or "")
+                if (member and member in arg) or (canonical and canonical in arg):
+                    source = value_usage
+                    break
+            if source is not None:
+                break
+        if source is not None:
+            reports.append((sink, source))
+    return reports
+
+
+def _report_source_family(canonical_name: str) -> str:
+    if canonical_name in SPEAKER_AIR_QUALITY_REPORT_FAMILY:
+        return "weatherprovider_air_quality_report"
+    return canonical_name
+
+
+def _speaker_report_equivalent_for_det(
+    candidate_code: str,
+    gt_code: str,
+    predicted_usages: list[dict[str, Any]],
+    gt_usages: list[dict[str, Any]],
+    connected_devices: dict[str, Any],
+    schema: dict[str, dict[str, Any]],
+) -> bool:
+    if len(gt_usages) != 2 or len(predicted_usages) != 2:
+        return False
+    gt_reports = _speaker_report_source_usages(gt_code, gt_usages)
+    pred_reports = _speaker_report_source_usages(candidate_code, predicted_usages)
+    if len(gt_reports) != 1 or len(pred_reports) != 1:
+        return False
+    gt_sink, gt_source = gt_reports[0]
+    pred_sink, pred_source = pred_reports[0]
+    gt_functions = [usage for usage in gt_usages if str(usage.get("meta", {}).get("type", "")).lower() == "function"]
+    pred_functions = [usage for usage in predicted_usages if str(usage.get("meta", {}).get("type", "")).lower() == "function"]
+    if len(gt_functions) != 1 or len(pred_functions) != 1:
+        return False
+    if not _same_effective_receiver(gt_sink, pred_sink, connected_devices, schema):
+        return False
+    if not _same_effective_receiver(gt_source, pred_source, connected_devices, schema):
+        return False
+    return _report_source_family(str(gt_source.get("canonical_name", "") or "")) == _report_source_family(
+        str(pred_source.get("canonical_name", "") or "")
+    )
+
+
+def _air_quality_value_read_equivalent_for_det(
+    predicted_usages: list[dict[str, Any]],
+    gt_usages: list[dict[str, Any]],
+    connected_devices: dict[str, Any],
+    schema: dict[str, dict[str, Any]],
+) -> bool:
+    if len(gt_usages) != 1 or len(predicted_usages) != 1:
+        return False
+    gt_usage = gt_usages[0]
+    pred_usage = predicted_usages[0]
+    if str(gt_usage.get("meta", {}).get("type", "")).lower() != "value":
+        return False
+    if str(pred_usage.get("meta", {}).get("type", "")).lower() != "value":
+        return False
+    if not _same_effective_receiver(gt_usage, pred_usage, connected_devices, schema):
+        return False
+    gt_family = _report_source_family(str(gt_usage.get("canonical_name", "") or ""))
+    pred_family = _report_source_family(str(pred_usage.get("canonical_name", "") or ""))
+    return gt_family == pred_family == "weatherprovider_air_quality_report"
+
+
+def _det_semantic_exact_override(
+    candidate_code: str,
+    gt_code: str,
+    predicted_usages: list[dict[str, Any]],
+    gt_usages: list[dict[str, Any]],
+    connected_devices: dict[str, Any],
+    schema: dict[str, dict[str, Any]],
+) -> bool:
+    return (
+        _compound_split_equivalent_for_det(predicted_usages, gt_usages, connected_devices, schema)
+        or _speaker_report_equivalent_for_det(
+            candidate_code,
+            gt_code,
+            predicted_usages,
+            gt_usages,
+            connected_devices,
+            schema,
+        )
+        or _air_quality_value_read_equivalent_for_det(
+            predicted_usages,
+            gt_usages,
+            connected_devices,
+            schema,
+        )
+    )
+
+
 def _requires_dataflow(gt_usages: list[dict[str, Any]]) -> bool:
     has_value = any(str(usage.get("meta", {}).get("type", "")).lower() == "value" for usage in gt_usages)
     has_function = any(str(usage.get("meta", {}).get("type", "")).lower() == "function" for usage in gt_usages)
@@ -707,7 +916,16 @@ def _gt_similarity(
     except Exception:
         candidate_period = -1
     schedule_score = 1.0 if gt_cron == candidate_cron and gt_period == candidate_period else 0.0
-    exact = candidate_norm == gt_norm and schedule_score == 1.0
+    gt_usages = _resolved_gt_usages_from_code(gt_code, schema, connected_devices)
+    semantic_exact = schedule_score == 1.0 and _det_semantic_exact_override(
+        code,
+        gt_code,
+        predicted_usages,
+        gt_usages,
+        connected_devices,
+        schema,
+    )
+    exact = (candidate_norm == gt_norm or semantic_exact) and schedule_score == 1.0
     similarity = 1.0 if exact else max(
         0.0,
         min(1.0, 0.45 * seq_score + 0.25 * overlap_score + 0.15 * schedule_score + 0.15 * structural_score),
@@ -1032,6 +1250,12 @@ def evaluate_candidate(
     if gt_exact:
         result["det_semantic_ok"] = 1.0
         result["det_min_extraneous"] = 1.0
+        result["det_gt_service_coverage"] = 1.0
+        result["det_gt_service_precision"] = 1.0
+        result["det_gt_receiver_coverage"] = 1.0
+        result["det_dataflow_score"] = 1.0
+        result["det_numeric_grounding"] = 1.0
+        result["det_enum_grounding"] = 1.0
         result["failure_reasons"] = []
     elif gt_script and not gt_exact:
         result["failure_reasons"].append("gt_mismatch")

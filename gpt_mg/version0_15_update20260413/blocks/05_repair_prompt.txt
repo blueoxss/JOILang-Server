@@ -47,6 +47,8 @@ Repair rules:
 22. If the candidate calls an action on the wrong device family, move the side effect to the proper actuator and keep the sensor only in the condition or expression.
 23. If the schema exposes an exact action like Camera_CaptureImage, DoorLock_Lock, Switch_Off, or Light_MoveToRGB, replace invented synonyms with that canonical action.
 24. If button-specific values exist, repair to the exact button-specific value service rather than generic pushed_2x style encodings.
+25. If the candidate used a generic value service but the command provides all slots for a parameterized function, repair toward the function. For MenuProvider, replace `menuprovider_todaymenu` with `menuprovider_getmenu("<date> <place> <meal>")` only when date/day, place, and meal-time are all explicitly present. If one of those slots is missing, do not invent it; keep the generic value fallback.
+26. If `Oven_SetCookingParameters` or `RiceCooker_SetCookingParameters` has a minutes value in the command, repair the second argument to seconds, e.g. 30 minutes -> 1800. Also replace any top-level `|` argument separator in function calls with comma.
 
 Self-check before final output:
 - JSON parses

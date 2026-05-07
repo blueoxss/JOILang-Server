@@ -153,7 +153,7 @@
       "descriptor": "Allows for the control of the arm robot",
       "argument_descriptor": "Send command to arm robot",
       "argument_type": "ENUM",
-      "argument_bounds": "Command to send to the arm robot. List of string, separated by '|'",
+      "argument_bounds": "Command to send to the arm robot. List of string, separated by ','",
       "return_type": "VOID"
     },
     "SetPosition": {
@@ -207,8 +207,8 @@
       "descriptor": "Record audio",
       "argument_descriptor": "Record audio with a specified duration",
       "argument_type": "STRING | DOUBLE",
-      "argument_format": " | ",
-      "argument_bounds": "The file to record to | The duration to record for",
+      "argument_format": ",",
+      "argument_bounds": "The file to record to, The duration to record for",
       "return_type": "BINARY"
     }
   },
@@ -460,8 +460,8 @@
       "descriptor": "Provide current date and time",
       "argument_descriptor": "delay for a given amount of time",
       "argument_type": "INTEGER | INTEGER | INTEGER",
-      "argument_format": " | | ",
-      "argument_bounds": "hour | minute | second",
+      "argument_format": ",",
+      "argument_bounds": "hour, minute, second",
       "return_type": "VOID"
     }
   },
@@ -557,8 +557,8 @@
       "descriptor": "Provides cloud service functionalities",
       "argument_descriptor": "Save data to a file in local",
       "argument_type": "BINARY | STRING",
-      "argument_format": " | ",
-      "argument_bounds": "The base64 data to save to the file | Path of the file to save data to",
+      "argument_format": ",",
+      "argument_bounds": "The base64 data to save to the file, Path of the file to save data to",
       "return_type": "STRING"
     },
     "UploadToCloudStorage": {
@@ -583,7 +583,7 @@
       "descriptor": "Allows for control of a color changing device",
       "argument_descriptor": "Set the color of the device",
       "argument_type": "STRING",
-      "argument_bounds": "RGB color value in format 'r|g|b' (0-255 for each)",
+      "argument_bounds": "RGB color value in format 'r,g,b' (0-255 for each)",
       "return_type": "VOID"
     }
   },
@@ -748,8 +748,8 @@
       "descriptor": "Provides email service",
       "argument_descriptor": "Send an email to the specified recipient",
       "argument_type": "STRING | STRING | STRING",
-      "argument_format": " | | ",
-      "argument_bounds": "The email address of the recipient | The title of the email | The body content of the email",
+      "argument_format": ",",
+      "argument_bounds": "The email address of the recipient, The title of the email, The body content of the email",
       "return_type": "VOID"
     },
     "SendMailWithFile": {
@@ -757,8 +757,8 @@
       "descriptor": "Provides email service",
       "argument_descriptor": "Send an email with an attachment to the specified recipient",
       "argument_type": "STRING | STRING | STRING | STRING",
-      "argument_format": " | | | ",
-      "argument_bounds": "The email address of the recipient | The title of the email | The body content of the email | The file path of the attachment or base64 encoded string",
+      "argument_format": ",",
+      "argument_bounds": "The email address of the recipient, The title of the email, The body content of the email, The file path of the attachment or base64 encoded string",
       "return_type": "VOID"
     }
   },
@@ -914,8 +914,8 @@
       "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch",
       "argument_descriptor": "Move the level to the given value. If the device supports being turned on and off then it will be turned on if level is greater than 0 and turned off if level is equal to 0.",
       "argument_type": "DOUBLE | DOUBLE",
-      "argument_format": " | ",
-      "argument_bounds": "The level value, usually 0-100 in percent | The rate at which to change the level",
+      "argument_format": ",",
+      "argument_bounds": "The level value, usually 0-100 in percent, The rate at which to change the level",
       "return_type": "VOID"
     }
   },
@@ -1004,8 +1004,8 @@
       "descriptor": "A numerical representation of the brightness intensity",
       "argument_descriptor": "Move the Brightness to the given value. If the device supports being turned on and off then it will be turned on if brightness is greater than 0 and turned off if brightness is equal to 0.",
       "argument_type": "DOUBLE | DOUBLE",
-      "argument_format": " | ",
-      "argument_bounds": "The brightness value, usually 0-100 in percent | The rate at which to change the brightness",
+      "argument_format": ",",
+      "argument_bounds": "The brightness value, usually 0-100 in percent, The rate at which to change the brightness",
       "return_type": "VOID"
     },
     "MoveToHue": {
@@ -1029,8 +1029,8 @@
       "descriptor": "A numerical representation of the brightness intensity",
       "argument_descriptor": "Gradually change to the set Hue and Saturation",
       "argument_type": "DOUBLE | DOUBLE",
-      "argument_format": " | ",
-      "argument_bounds": "hue value | saturation value",
+      "argument_format": ",",
+      "argument_bounds": "hue value, saturation value",
       "return_type": "VOID"
     },
     "MoveToRGB": {
@@ -1038,8 +1038,8 @@
       "descriptor": "A numerical representation of the brightness intensity",
       "argument_descriptor": "Gradually change to the set RGB",
       "argument_type": "INTEGER | INTEGER | INTEGER",
-      "argument_format": " | | ",
-      "argument_bounds": "red value | green value | blue value",
+      "argument_format": ",",
+      "argument_bounds": "red value, green value, blue value",
       "return_type": "VOID"
     },
     "MoveToXY": {
@@ -1047,8 +1047,8 @@
       "descriptor": "A numerical representation of the brightness intensity",
       "argument_descriptor": "Gradually change to the set XY",
       "argument_type": "DOUBLE | DOUBLE",
-      "argument_format": " | ",
-      "argument_bounds": "color X value | color Y value",
+      "argument_format": ",",
+      "argument_bounds": "color X value, color Y value",
       "return_type": "VOID"
     },
     "MoveToColorTemperature": {
@@ -1155,8 +1155,8 @@
       "descriptor": "Allows for the control of the oven mode",
       "argument_descriptor": "Set the cooking parameters of the oven",
       "argument_type": "ENUM | DOUBLE",
-      "argument_format": " | ",
-      "argument_bounds": "Set the mode of the oven | Set the cooking time of the oven",
+      "argument_format": ",",
+      "argument_bounds": "Set the mode of the oven, Set the cooking time of the oven in seconds",
       "return_type": "VOID"
     },
     "AddMoreTime": {
@@ -1337,8 +1337,8 @@
       "descriptor": "Allows for the control of the Rice Cooker",
       "argument_descriptor": "Set the cooking parameters for the Rice Cooker",
       "argument_type": "ENUM | DOUBLE",
-      "argument_format": " | ",
-      "argument_bounds": "The desired Rice Cooker mode | The cooking time",
+      "argument_format": ",",
+      "argument_bounds": "The desired Rice Cooker mode, The cooking time in seconds",
       "return_type": "VOID"
     }
   },
@@ -1743,8 +1743,8 @@
       "descriptor": "Provides weather information",
       "argument_descriptor": "Get the current weather information - Return whole weather information, format: \"temperature, humidity, pressure, pm25, pm10, weather, weather_string, icon_id, location\"",
       "argument_type": "DOUBLE | DOUBLE",
-      "argument_format": " | ",
-      "argument_bounds": "The latitude of the location | The longitude of the location",
+      "argument_format": ",",
+      "argument_bounds": "The latitude of the location, The longitude of the location",
       "return_type": "STRING"
     }
   },
