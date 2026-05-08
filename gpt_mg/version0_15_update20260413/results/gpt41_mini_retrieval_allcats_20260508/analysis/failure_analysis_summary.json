@@ -1,0 +1,57 @@
+{
+  "root_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508",
+  "out_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/analysis",
+  "condition": "retrieval",
+  "model_key": "gpt41_mini",
+  "result_dirs": [
+    "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/retrieval_gpt41_mini_cat1",
+    "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/retrieval_gpt41_mini_cat2",
+    "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/retrieval_gpt41_mini_cat3",
+    "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/retrieval_gpt41_mini_cat4",
+    "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/retrieval_gpt41_mini_cat5",
+    "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/retrieval_gpt41_mini_cat6",
+    "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/retrieval_gpt41_mini_cat7",
+    "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/retrieval_gpt41_mini_cat8"
+  ],
+  "category_count": 8,
+  "failure_count": 7,
+  "top_failure_reasons": [
+    [
+      "gt_mismatch",
+      7
+    ],
+    [
+      "gt_receiver_coverage",
+      6
+    ],
+    [
+      "gt_service_coverage",
+      6
+    ],
+    [
+      "semantic",
+      4
+    ],
+    [
+      "extraneous",
+      3
+    ],
+    [
+      "numeric_grounding",
+      1
+    ],
+    [
+      "enum_grounding",
+      1
+    ],
+    [
+      "dataflow",
+      1
+    ]
+  ],
+  "summary_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/analysis/category_run_summary.csv",
+  "failure_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/analysis/category_failure_rows.csv",
+  "failure_json": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/analysis/category_failure_rows.json",
+  "markdown": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/analysis/failure_analysis.md",
+  "html": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508/analysis/failure_analysis.html"
+}

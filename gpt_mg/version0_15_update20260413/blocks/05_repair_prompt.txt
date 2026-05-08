@@ -28,16 +28,27 @@ Repair rules:
 4. For unscheduled commands, normalize cron to "" and period to 0.
 4a. Treat `service_list_snippet` as the only authoritative capability scope. If the snippet is retrieval-scoped, do not invent categories outside the listed `device_groups`.
 5. In the snippet, `service` is already the canonical prefixed member name such as `Speaker_SetVolume` or `LevelControl_MoveToLevel`, and `raw_service` is only descriptive. If a function or value name is wrong, repair to that exact canonical member and emit its lowercase form in final code.
-6. If an argument type is wrong, coerce it to the correct literal type and unit.
+6. If an argument type or numeric comparison is wrong, coerce it to the correct literal type, descriptor-defined unit, and argument format. If a value service reports millivolts, convert user volts to millivolts, e.g. 220V -> 220000.
+6a. Repair source-selection drift narrowly: external/outdoor/weather air-quality phrases such as "outdoor dust", "outside fine dust", "외부 미세먼지", or "바깥 미세먼지" must use `WeatherProvider` values, not `AirQualitySensor`. Use `weatherprovider_pm10weather` for dust/fine-dust/미세먼지/PM10, and `weatherprovider_pm25weather` only when PM2.5/ultrafine/초미세먼지 is explicit.
+6b. In a rain sequence that checks again after a delay and then acts if it is not raining, repair the delayed recheck to `weatherprovider_weather != "rain"` while keeping the initial rain trigger as `rainsensor_rain == true`.
+6c. Repair general temperature to `temperaturesensor_temperature`, general humidity to `humiditysensor_humidity`, illuminance / lux / 조도 to `lightsensor_brightness`, and general carbon dioxide / CO2 / 이산화탄소 to `airqualitysensor_carbondioxide` when those services are available.
+6d. Repair cloud service availability / activation checks to `cloudserviceprovider_isavailable == true`; remove bogus arguments such as `cloudserviceprovider_isavailable(true)`, and do not use `cloudserviceprovider_chatsession` because it represents an AI chat session, not availability.
+6d. Repair PresenceSensor comparisons to BOOL: `presencesensor_presence == true` for detected/present and `presencesensor_presence == false` for no one/no person.
 7. If a condition uses a function where a value is required, rewrite the condition to use the correct value.
 8. Remove unrelated actions.
 9. Insert a power-check only when the snippet explicitly supports it for the same target context.
 10. If the candidate is irreparable from the snippet, return valid JSON with code as an empty string.
 11. If the command says to do something after a duration, reinsert delay(...) and keep the action order aligned with the command.
+11a. Repair `(#Clock).clock_delay(milliseconds)` into the JOILang helper form `delay(N SEC|MIN|HOUR)` when it is used as a between-action wait.
+11b. Repair "check/read/measure now and again after N minutes; if it changed by T or more" candidates to the snapshot pattern: original read, `delay(N MIN)`, second read from the same receiver tags, then `new >= original + T or new <= original - T`. Remove `wait until true`, `period`, or `prev/curr` edge-trigger rewrites for this one-shot recheck pattern.
 12. If the command describes threshold crossings or repeated alternation, restore the missing condition/state structure instead of collapsing it into a single immediate action.
 13. If grouped tags express the intent better than explicit instance IDs, rewrite to tag-based all(...) or tag-based receivers.
+13a. Match spaced or lowercase phrases in the command to CamelCase connected tags when their normalized text is the same. For example, repair `(#TemperatureSensor)` to `(#WineCellar #TemperatureSensor)` when the command says wine cellar/와인 셀러 and connected tags include `#WineCellar`.
 14. If diagnostics include a schema-valid gt_script, prefer its receiver style, schedule representation, and temporal structure over alias-like device ids or alternate syntax.
 15. If diagnostics include gt_script string literals for speaker or email actions, preserve those literals exactly.
+15a. For Korean speaker announcements that say a temperature changed rapidly (`온도가 급변`), repair toward the concise statement `"<target>의 온도가 급변했습니다"` without extra punctuation. If the target is wine cellar, use `"와인셀러의 온도가 급변했습니다"`.
+15b. Repair invented `mediaplayback_speak(...)` to `speaker_speak(...)` for speaker/report/notify/output commands.
+15c. If command_kor contains an explicit quoted Korean message, preserve that exact Korean message in `speaker_speak(...)`; do not translate it to English.
 16. If the command is a wall-clock schedule with a simple group action and the candidate code is empty, recover it using the direct tag-based action.
 17. If the command is a repeated event trigger, restore period 100 plus prev/curr or triggered-state logic instead of a one-shot action.
 18. If the command asks for maximum brightness and the schema supports LevelControl plus Switch, repair toward LevelControl_MoveToLevel(100, 0) followed by Switch_Off() after any requested delay.
@@ -46,15 +57,41 @@ Repair rules:
 21. If the candidate collapses multiple semantic tags into alias-like ids, rewrite the receiver using all(...) or explicit tag-based JOILang receivers that preserve the original tags.
 22. If the candidate calls an action on the wrong device family, move the side effect to the proper actuator and keep the sensor only in the condition or expression.
 23. If the schema exposes an exact action like Camera_CaptureImage, DoorLock_Lock, Switch_Off, or Light_MoveToRGB, replace invented synonyms with that canonical action.
+23a. For `#Light` color actions, repair `colorcontrol_setcolor("r,g,b")` to `light_movetorgb(r, g, b)` when `Light_MoveToRGB` is available.
 24. If button-specific values exist, repair to the exact button-specific value service rather than generic pushed_2x style encodings.
+24a. Repair invented `multibutton_button2 == "pressed"` to `dimmerswitch_button2 == "pushed"` when the snippet exposes `DimmerSwitch_Button2`.
 25. If the candidate used a generic value service but the command provides all slots for a parameterized function, repair toward the function. For MenuProvider, replace `menuprovider_todaymenu` with `menuprovider_getmenu("<date> <place> <meal>")` only when date/day, place, and meal-time are all explicitly present. If one of those slots is missing, do not invent it; keep the generic value fallback.
 26. If `Oven_SetCookingParameters` or `RiceCooker_SetCookingParameters` has a minutes value in the command, repair the second argument to seconds, e.g. 30 minutes -> 1800. Also replace any top-level `|` argument separator in function calls with comma.
+27. If the command is plain power control and the target exposes switch behavior, repair mode setters or state comparisons back to `switch_on()` or `switch_off()`. Use mode setters only when the command explicitly asks for a named mode.
+27a. For connected-device groups, repair plain power control to the semantic target receiver with the shared switch capability. Example: `(#Study #AirPurifier).airpurifier_setairpurifiermode("auto")` for "turn on the study air purifier" must become `(#Study #AirPurifier).switch_on()` when Switch_On is available in the same group.
+27b. For state preconditions such as "the AC/air conditioner is off" / "에어컨이 꺼져 있으면", repair mode-value checks such as `airconditioner_airconditionermode == "auto"` to the shared switch state: `switch_switch == false`.
+27c. If a candidate expands "if off then on, if on then off" into two branches and the target exposes `switch_toggle()`, repair it to the single toggle action.
+28. If the command says any/all/every sensor in a location, repair single sensor receivers to `all(#Location #SensorCategory)` and preserve the same location tag on the target action receiver.
+29. For WindowCovering/Blind/Shade actions, repair inverted direction: "raise/up/open/올려/열어" must use `windowcovering_uporopen()`, while "lower/down/close/내려/닫아" must use `windowcovering_downorclose()`.
+29a. If the command says blind/shade/window but the candidate used bare `(#WindowCovering)`, repair the receiver to the semantic tag from the command, e.g. `#Blind`, `#Shade`, or `#Window`, while keeping the valid `windowcovering_*` member.
+30. Repair invalid siren mode-off calls such as `siren_setsirenmode("off")` to `switch_off()` when a siren must stop after a duration.
+30a. Repair empty siren mode calls such as `siren_setsirenmode("")` to `switch_off()`.
+31. Repair dehumidifier "internal care" / "내부케어" to `dehumidifier_setdehumidifiermode("auto")` unless the snippet has an explicit internal-care enum.
+32. Repair weather reports through speaker to `weatherprovider_weather` unless explicit latitude/longitude arguments justify `weatherprovider_getweatherinfo(...)`.
+33. Repair current-time reports through speaker to use `clock_hour` and `clock_minute` in the spoken text, not only `clock_time`.
+34. Repair schedule fields so wall-clock start/day filters go in `cron`, explicit repeated intervals go in `period`, and code only keeps the necessary stop boundary such as `clock_hour == 0` for midnight.
+34a. Repair "until 3 PM" / "오후 3시까지" guards to `clock_hour == 15`, not `>= 15`.
+35. If a condition has a location but the action says global "all lights", remove the condition location from the action receiver unless the command explicitly scopes the action to that location.
+36. Repair floor aliases to canonical tags: `#FirstFloor`/`#1stFloor` -> `#Floor1`, `#SecondFloor` -> `#Floor2`, `#ThirdFloor` -> `#Floor3`, and remove duplicate aliases.
+37. Repair `#Window.door_doorstate == "open"` to the supported window position state, e.g. `#Window.armrobot_currentposition >| 0`, when the snippet uses position for open/closed.
+38. Repair later wall-clock actions inside one scenario to `delay(...)`; for example, an 8 AM action followed by a 9 AM action should use `delay(1 HOUR)`, not `wait until clock_hour == 9`.
+39. If the candidate is empty for a two-step scheduled command, reconstruct the two explicit `if` blocks separated by `delay(...)` rather than returning empty code.
+40. Repair weekend periodic checks to the weekend cron plus weekday guard pattern when the command says "during weekends" or "주말 동안".
+41. Repair "when/once X happens, then every N seconds/minutes do Y" to the `active := 0` skeleton: wait once inside `if (active == 0)`, set `active = 1`, then put the repeated action outside the block.
+42. Repair smoke/fire siren mode to `"fire"` unless the command explicitly says emergency.
+43. Repair `LaundryDryer` finished checks to `laundrydryer_spinspeed == 0`.
+44. Repair repeating open/close window actions to `windowcovering_uporopen()` / `windowcovering_downorclose()`.
 
 Self-check before final output:
 - JSON parses
 - required keys present
 - canonical_name preferred when available
-- receiver tags after # preserved, but member tokens after `).` or `all(...).` lowercased
+- receiver tags after # use uppercase-first title/Camel case, and member tokens after `).` or `all(...).` are lowercased
 - args and enums match schema
 - temporal structure matches the command when delay/repeat/trigger logic is requested
 - no commentary, no markdown, no code fence

@@ -28,25 +28,58 @@ Global rules:
   - grouped receiver: `all(#Location #CustomTag #Category)`
 - If the command does not mention a selector tag, `(#Category)` is valid.
 - If the command mentions a location, platform, brand, or custom tag, preserve only the selector tags that are explicitly supported by the matching capability binding.
-- Services listed under a capability binding can be used only on receivers whose final category tag matches that binding.
+- For schema fallback, services listed under a capability binding should use that binding category. For connected-device groups with multiple categories, sibling capabilities from the same physical device may be used on the semantic target receiver. Examples: if an AirPurifier group also exposes Switch, use `(#AirPurifier).switch_on()` for plain power control; if a Light group also exposes ColorControl, use `(#Light).colorcontrol_setcolor(...)` for color setting.
 - If `connected_devices` is empty, the snippet falls back to the full authoritative schema, so category-only receivers are allowed.
 - Never invent devices, categories, tags, locations, values, functions, enum values, helper methods, or argument formats.
 - Prefer `canonical_name` exactly when the snippet provides it.
-- Use `canonical_name` only as the schema-matching reference. In final JOILang code, keep receiver tags after `#` unchanged, but lowercase every member token after `).` or `all(...).`. Example: `(#Kitchen #Light).Light_MoveToRGB(255,255,0)` must be emitted as `(#Kitchen #Light).light_movetorgb(255,255,0)`.
+- Use `canonical_name` only as the schema-matching reference. In final JOILang code, every receiver tag after `#` must start with an uppercase English letter; schema category tags must use the exact schema CamelCase. Lowercase only the member token after `).` or `all(...).`. Example: `(#kitchen #light).Light_MoveToRGB(255,255,0)` must be emitted as `(#Kitchen #Light).light_movetorgb(255,255,0)`.
 - Never use raw connected-device ids such as `tc1_...` in the final JOILang code. Use tag-based receivers instead.
 - Treat JSON validity as mandatory. The final answer must be exactly one JSON object and nothing else.
 - Required JSON keys: `name`, `cron`, `period`, `code`.
 - If no schedule is given, use `cron` as an empty string and `period` as `0`. Treat period `0` as the dataset default for unscheduled commands.
 - Only insert a power-check when the provided capability binding clearly exposes a switch-like value and power-on function for the same target context. Otherwise do not invent one.
-- Convert human time phrases to the unit expected by the chosen service. Use milliseconds only for `period`. Use service-specific units for function arguments.
+- For plain on/off/start/stop commands, prefer the exact `Switch_On` or `Switch_Off` function when the same target device exposes switch behavior. Do not replace plain power control with mode setters such as `SetAirPurifierMode("auto")`, `SetAirConditionerMode("cool")`, `SetDehumidifierMode("dehumidifying")`, or value-state comparisons. Use mode setters only when the command explicitly asks to set a mode.
+- Treat categories inside the same connected-device group as shared capabilities of one physical device. If the user says "turn on/켜줘/start/activate" for a semantic target such as `#AirPurifier` and that group exposes `Switch_On`, emit `(#AirPurifier).switch_on()` or `(#Study #AirPurifier).switch_on()`. Do not add `#Switch` to the receiver unless the user explicitly names a switch, and do not use `SetAirPurifierMode("auto")` just because the enum says auto means the fan is on.
+- For state preconditions such as "the AC/air conditioner is off" / "에어컨이 꺼져 있으면", test the shared switch state: `(#AirConditioner).switch_switch == false`. Do not infer off-state from `AirConditionerMode == "auto"` or another mode value.
+- If the command says "if it is off turn it on, if it is on turn it off" and the target exposes `Switch_Toggle`, use the single toggle action instead of expanding to two branches.
+- Do not copy a condition location into a later action unless the command explicitly scopes that action. Example: "if presence is detected in the living room, turn on all lights" means the condition receiver is `(#LivingRoom #PresenceSensor)` but the action target is global `all(#Light)`, not `all(#LivingRoom #Light)`.
+- For WindowCovering/Blind/Shade actions, direction words are strict: "raise", "up", "open", "올려", "열어" -> `WindowCovering_UpOrOpen`; "lower", "down", "close", "내려", "닫아" -> `WindowCovering_DownOrClose`. Do not invert these for blinds.
+- If the command says blind/shade/window but the retrieved category is `WindowCovering`, keep the semantic receiver tag from the command: use `(#Blind).windowcovering_uporopen()`, `(#Shade).windowcovering_downorclose()`, or `(#Window).windowcovering_currentposition` rather than bare `(#WindowCovering)` when the natural-language target is specific.
+- Normalize floor selector tags: `first floor` -> `#Floor1`, `second floor` -> `#Floor2`, `third floor` -> `#Floor3`. Do not emit duplicate aliases such as `#ThirdFloor #Floor3`.
+- For a `#Window` receiver, use `armrobot_currentposition >| 0` for open and `armrobot_currentposition == 0` for closed when this value is available. Do not use `door_doorstate` on `#Window`.
+- Convert human time and measurement phrases to the unit expected by the chosen service. Use `descriptor`, `return_descriptor`, `argument_descriptor`, `argument_bounds`, and `argument_format` as authoritative unit/format hints. Use milliseconds only for `period`. Use service-specific units for function arguments and value comparisons.
+- Source selection is mandatory. External/outdoor/weather air-quality phrases such as "outdoor dust", "outside fine dust", "외부 미세먼지", or "바깥 미세먼지" must use `WeatherProvider` values, not `AirQualitySensor`. Use `WeatherProvider_Pm10Weather` for dust/fine-dust/미세먼지/PM10, and use `WeatherProvider_Pm25Weather` only when PM2.5/ultrafine/초미세먼지 is explicit. Use `AirQualitySensor` for local/indoor/room air quality.
+- General temperature phrases must use `TemperatureSensor_Temperature`, not `TemperatureMeasurement_Temperature`.
+- General humidity phrases must use `HumiditySensor_Humidity`, not `AirQualitySensor_Humidity`, unless the command explicitly says air-quality sensor humidity.
+- Illuminance / lux / 조도 phrases must use `LightSensor_Brightness`, not `Light_CurrentBrightness`, `Light_CurrentSaturation`, or another color/light actuator value.
+- General carbon dioxide / CO2 / 이산화탄소 concentration phrases must use `AirQualitySensor_CarbonDioxide` when it is available. Use `CarbonDioxideSensor_CarbonDioxide` only when the command explicitly names a carbon dioxide sensor device or connected_devices only provide that sensor.
+- Cloud service availability / activation phrases such as "cloud service is activated" or "cloud service is available" must use `CloudServiceProvider_IsAvailable == true` as a boolean condition. Emit it as `(#CloudServiceProvider).cloudserviceprovider_isavailable == true`; do not call it with an argument such as `isavailable(true)`. Do not use `CloudServiceProvider_ChatSession`; it only represents an AI chat session.
+- PresenceSensor values are BOOL. Use `presencesensor_presence == true` for someone/person detected and `presencesensor_presence == false` for no one/no person. Do not compare it to `"present"` or `"not_present"`.
+- For a rain-triggered sequence that says to check again after a delay and then act if it is not raining, keep the initial trigger as `RainSensor_Rain == true`, but use `WeatherProvider_Weather != "rain"` for the delayed recheck.
 - Keep the code minimal and directly aligned with the command.
 - Separate trigger devices from action devices. Read values from sensors, but call actions on the actual actuator. For example, read temperature from `TemperatureSensor` and speak through `Speaker_Speak`, not through a sensor device.
+- For weather reports through speaker, use `WeatherProvider_Weather` in a spoken sentence; do not call `WeatherProvider_GetWeatherInfo(0, 0)` without explicit latitude/longitude.
+- For current-time reports through speaker, use `Clock_Hour` and `Clock_Minute` in the spoken text rather than only `Clock_Time`.
+- Encode wall-clock start/day filters in `cron` and repeated intervals in `period`. Do not wrap the whole code in duplicate weekday/hour checks when `cron` already anchors the start/day. For time windows ending at midnight, use `if ((#Clock).clock_hour == 0) { break }`.
+- For "from now until 3 PM" / "오후 3시까지", use `if ((#Clock).clock_hour == 15) { break }`, not `>= 15`.
+- For two wall-clock actions in one scenario, use the first time as `cron` and a blocking `delay(...)` for the later action. Example: 8 AM odd blinds then 9 AM even blinds -> `delay(1 HOUR)`, not `wait until clock_hour == 9`.
 - If the command is a repeated event trigger such as "whenever", "each time", "every time", "button is pressed", "door is opened", or "fully charged", prefer `period = 100` and edge-trigger logic such as `prev/curr` or triggered-state guards. Do not collapse repeated triggers into a one-shot `wait until`.
 - If the command is a one-shot trigger introduced by a plain "when" without repeated wording, `wait until` is acceptable.
+- For "check/read/measure now and again after N minutes; if it changed by T or more" commands, use a snapshot pattern: read the original value into a variable, `delay(N MIN)`, read the same value service again from the same receiver tags, then compare `new >= original + T or new <= original - T`. Do not use `wait until true`, `period`, or `prev/curr` edge-trigger logic for this one-shot recheck pattern.
 - Prefer tag-based receivers that preserve every semantic tag in the command, such as `all(#Hallway #Light)`, `all(#Even #RobotVacuumCleaner)`, `(#Entrance #Light)`, or `(#MeetingRoom #Door)`. Do not compress tags into alias-like ids such as `#Hall_Light` or `#Even_Robot`.
+- Match spaced or lowercase phrases in the command to CamelCase connected tags when their normalized text is the same. For example, "wine cellar", "winecellar", and "와인 셀러" should preserve the connected tag `#WineCellar` when it is available.
+- Treat "any sensor", "any presence sensor", "all sensors", "every sensor", and Korean equivalents such as "아무/모든 센서" as group receiver requests. Use `all(#Location #SensorCategory)` for the trigger receiver instead of dropping the location or using a single `(#SensorCategory)`.
+- For Korean speaker announcements that say a temperature changed rapidly (`온도가 급변`), use the concise statement `"<target>의 온도가 급변했습니다"` without extra punctuation. If the target is wine cellar, use `"와인셀러의 온도가 급변했습니다"`.
+- For speaker/report/notify/output commands, call `Speaker_Speak(...)`; never invent `MediaPlayback_Speak`.
+- If command_kor contains an explicit quoted Korean message, preserve that exact Korean message in `speaker_speak(...)` rather than translating it to English. Prefer Korean output text when both command_eng and command_kor are provided.
+- For dehumidifier "internal care" / "내부케어" in this dataset, use `Dehumidifier_SetDehumidifierMode("auto")` unless the snippet has an explicit internal-care enum.
 - If a light color is specified by name and the snippet exposes `Light_MoveToRGB` or equivalent RGB control, convert the named color to explicit RGB values instead of drifting to a generic `SetColor` call.
 - If the schema exposes an exact capture or close or lock action such as `Camera_CaptureImage`, `Switch_Off`, `Valve_Close`, or `DoorLock_Lock`, prefer that exact canonical action over invented synonyms such as `TakePicture` or `SetChargingState`.
-- Never lowercase receiver tags such as `#Kitchen`, `#LivingRoom`, or `#DoorLock`. Only lowercase the service or value member token after the receiver dot.
+- For `#Light` color actions, prefer `Light_MoveToRGB(r, g, b)` over `ColorControl_SetColor("r,g,b")` when `Light_MoveToRGB` is available.
+- Do not use invalid off enums such as `Siren_SetSirenMode("off")`; use `Switch_Off()` when a siren must stop after a duration.
+- Do not use empty siren mode strings such as `siren_setsirenmode("")`; use `switch_off()` when the siren must stop.
+- For multi-button button 2, use `DimmerSwitch_Button2 == "pushed"` when available; do not invent `MultiButton_Button2` or `"pressed"`.
+- Never emit lowercase receiver tags such as `#bedroom`, `#sector1`, `#entrance`, or `#temperaturesensor`. Use `#Bedroom`, `#Sector1`, `#Entrance`, and schema category tags such as `#TemperatureSensor`. Only lowercase the service or value member token after the receiver dot.
 
 Task:
 Generate exactly one JOI JSON object for the input command.
@@ -60,7 +93,7 @@ Inputs:
 - authoritative service schema snippet:
 {
   "snippet_source": "service_schema_fallback",
-  "canonical_rule": "Resolve schema matches against canonical_name. In final JOILang code, keep receiver tags after # exactly as written, but lowercase the member token after ). or all(...). . For example, Switch_On becomes switch_on.",
+  "canonical_rule": "Resolve schema matches against canonical_name. In final JOILang code, receiver tags after # must be uppercase-first title/Camel case, schema category tags must match the schema CamelCase, and the member token after ). or all(...). must be lowercase. For example, #bedroom #temperaturesensor becomes #Bedroom #TemperatureSensor and Switch_On becomes switch_on.",
   "binding_rule": [
     "Each device_group is one connected-device group or one schema fallback group.",
     "Each capability_binding pairs one category with the full authoritative service list for that category.",
@@ -3857,7 +3890,8 @@ How to read the snippet:
 - Each `capability_binding` is one pair of:
   1. a `category` and the full service list allowed for that category
   2. the selector tags that may be combined with that category: `user_defined_tags`, `locations`, and `selector_tags`
-- A receiver must end with the binding category tag.
+- In schema fallback, a receiver normally ends with the binding category tag.
+- In connected-device groups with multiple categories, sibling capabilities may be invoked on the semantic target receiver from the same group. For example, `Switch_On` may be emitted as `(#AirPurifier).switch_on()` when the same AirPurifier device group exposes Switch, and `ColorControl_SetColor` may be emitted as `all(#Hallway #Light).colorcontrol_setcolor(...)` when the same Light group exposes ColorControl.
 - Valid receiver forms are:
   - `(#Category)`
   - `(#SelectorTag #Category)`
@@ -3878,10 +3912,10 @@ Output contract:
 Hard generation rules:
 1. Use only categories, values, functions, enum values, and receiver tags supported by the provided capability bindings.
 2. When `connected_devices` is non-empty, do not use categories that are absent from the snippet. When it is empty, the snippet is schema fallback and category-only receivers are allowed.
-3. A service may be used only through the category that owns it. If the receiver ends with `#Switch`, use only services listed under the `Switch` binding.
+3. In schema fallback, a service should be used through the category that owns it. In connected-device groups, sibling capabilities from the same physical device may be used through the semantic target receiver, e.g. `(#AirPurifier).switch_on()` or `all(#Light).colorcontrol_setcolor(...)`.
 4. If the command mentions a location, platform, brand, or custom tag, keep only the selector tags that are both explicitly implied by the command and present in the matching binding.
 5. If the command does not mention a selector tag, prefer the base receiver `(#Category)`.
-6. If the command addresses a group such as "all", "every", or a plural target, prefer `all(...)` with the same selector tags instead of a single-target receiver.
+6. If the command addresses a group such as "all", "every", "any", or a plural target, prefer `all(...)` with the same selector tags instead of a single-target receiver.
 7. Never emit raw connected-device ids such as `tc1_...` in the JOILang code.
 8. Use `canonical_name` only as the schema-matching reference. In the final JOILang code, emit the lowercase form of that member token after the receiver dot. Example: canonical_name `Dishwasher_SetDishwasherMode` becomes `dishwasher_setdishwashermode` in code.
 9. Do not output bare raw service names when `canonical_name` is available, and do not preserve uppercase service casing in the final code.
@@ -3890,19 +3924,22 @@ Hard generation rules:
 10b. MenuProvider specificity rule: `MenuProvider_TodayMenu` is only for broad requests like "today's menu" with no specific place and no specific meal-time. If the command contains date/day, place, and meal-time, use `MenuProvider_GetMenu` with one STRING argument ordered as `"<date> <place> <meal>"`. Example: "오늘의 301동 점심 메뉴를 스피커로 알려줘" -> `menu = (#MenuProvider).menuprovider_getmenu("오늘 301동식당 점심")` then `(#Speaker).speaker_speak("오늘의 메뉴는 " + menu + "입니다")`. If the command says only "오늘 점심 메뉴" without a place, do not invent a cafeteria; fall back to `menuprovider_todaymenu`.
 11. Match argument counts and argument types exactly.
 12. For ENUM arguments, use only enum values explicitly present in the snippet.
-13. If the command implies time, convert to the service argument unit described by the snippet. `period` always uses milliseconds.
+13. If the command implies time or measurement units, convert to the service unit described by `descriptor`, `return_descriptor`, `argument_descriptor`, `argument_bounds`, and `argument_format` in the snippet. `period` always uses milliseconds.
 13a. For `Oven_SetCookingParameters` and `RiceCooker_SetCookingParameters`, the cooking-time argument is seconds. Convert minutes to seconds, e.g. 30 minutes -> 1800. Do not use milliseconds and do not leave raw minutes.
+13b. If a value service reports millivolts, convert user volts to millivolts in comparisons, e.g. `220V` -> `220000`.
 14. Insert a power-check only if the same capability binding shows both a switch-like value and a power-on function for the same target context.
+14a. For plain power commands such as "turn on", "switch on", "start", "turn off", "switch off", "stop", or "stop charging", use `Switch_On` or `Switch_Off` when the target exposes switch behavior. Do not substitute mode setters or value comparisons for power control. Examples: "turn on the air purifier" -> `switch_on()`, not `airpurifier_setairpurifiermode("auto")`; "stop charging" -> `switch_off()`, not `charger_chargingstate == "stopped"`.
 15. If the request is ambiguous, choose the smallest schema-valid program that best matches the command.
 16. If you cannot produce a schema-valid action with confidence, still return valid JSON with `code` as an empty string.
 17. If the command says to do one action and then another action after some duration, keep the first action immediately, then use `delay(...)` with the requested duration, then emit the follow-up action.
+17a. Use the JOILang helper `delay(N SEC|MIN|HOUR)` for between-action waits. Do not emit `(#Clock).clock_delay(...)` for these delays.
 18. If the command describes a threshold crossing such as "drops below", "rises above", or "becomes X or higher", do not collapse it to a single unconditional action. Use an explicit condition, wait-until, or `prev/curr` edge-detection pattern that preserves the trigger semantics.
 19. If the command asks to repeat alternating actions over time, prefer period-based stateful logic over cron syntax unless the command refers to a wall-clock time like 7 AM or every Monday.
 20. If the command is a repeated event trigger using wording like "whenever", "each time", "every time", "button is pressed", "door is opened", or "becomes fully charged", default to `period = 100` and preserve edge-trigger semantics with `prev/curr` or a triggered flag. Do not reduce these commands to one-shot `wait until`.
 21. If the command is a one-shot trigger with plain "when" and no repeated wording, `wait until` is acceptable.
 22. For commands that say "every N minutes from X to Y" or "check every N minutes from X to Y", represent the repeated interval with `period` in milliseconds and preserve the time-window stop condition with `Clock` guards or break logic. Use `cron` only for wall-clock anchors that are explicitly stated.
 23. Read values from sensors and send side effects to actuators. Never call `Speaker_Speak` on a `TemperatureSensor`, never call camera functions on a `PresenceSensor`, and never set charging state through an invented service if the schema offers `Switch_Off` for the charger.
-24. Preserve every meaningful selector tag from the command in the receiver. Prefer `all(#Hallway #Light)`, `all(#LivingRoom #Window)`, `all(#Even #RobotVacuumCleaner)`, or `(#ParkingLot #Speaker)` over compressed aliases or single-instance ids.
+24. Preserve every meaningful selector tag from the command in the receiver. Every receiver tag after `#` must start with an uppercase English letter. Prefer `all(#Hallway #Light)`, `all(#LivingRoom #Window)`, `all(#Even #RobotVacuumCleaner)`, `(#Bedroom #TemperatureSensor)`, or `(#Sector1 #AirConditioner)` over compressed aliases, lowercase tags, or single-instance ids.
 25. If the schema offers an exact canonical function such as `Camera_CaptureImage`, `DoorLock_Lock`, `Valve_Close`, `Switch_Off`, or `Light_MoveToRGB`, use it exactly instead of a natural-language synonym like `TakePicture`, `CloseDoorlock`, `SetChargingState`, or `SetColor`.
 26. If the schema shows a button-specific value such as `DimmerSwitch_Button2`, use that exact value for button-2 events instead of generic `Button_Button` with `pushed_2x` or similar invented encodings.
 27. If the schema uses a nonobvious but canonical value for open or closed state, such as a current position or a specific door-state value, follow the schema exactly rather than substituting a more intuitive but unsupported service.
@@ -3919,7 +3956,8 @@ Self-check before final output:
 - no markdown, no commentary, no code fence
 
 CASE STYLE RULE
-- Keep receiver tags after `#` in their original tag case such as `#Kitchen`, `#LivingRoom`, or `#DoorLock`.
+- Keep receiver tags after `#` in canonical title/Camel case with an uppercase first English letter, such as `#Kitchen`, `#Bedroom`, `#Sector1`, `#LivingRoom`, or `#DoorLock`.
+- Never emit lowercase selector tags such as `#bedroom`, `#sector1`, or `#entrance`.
 - Lowercase only the member token after `).` or `all(...).`.
 - Example: `(#Kitchen #Light).Light_MoveToRGB(255, 255, 0)` -> `(#Kitchen #Light).light_movetorgb(255, 255, 0)`.
 
@@ -3971,7 +4009,7 @@ Finalization checklist:
 - For unscheduled commands, normalize cron to "" and period to 0.
 - Do not include script, reasoning, notes, explanation, markdown, or comments.
 - Make sure quotes and newlines inside code are JSON-escaped.
-- In the final `code`, keep receiver tags after `#` as written, but lowercase every value/function member token after `).` or `all(...).`.
+- In the final `code`, normalize receiver tags after `#` to uppercase-first title/Camel case, and lowercase every value/function member token after `).` or `all(...).`.
 - If the command describes a repeated event trigger, do not leave period at 0 unless the code already contains an equivalent repeated polling structure. Prefer period 100 with prev/curr or triggered-state logic.
 - If the command describes a simple wall-clock action with a valid cron, do not leave code empty when a direct schema-valid action exists.
 - If the command names locations or tags, prefer tag-based receivers over alias-like device ids in the final code.

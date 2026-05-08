@@ -1,2 +1,0 @@
-model_key,model_label,category,row_count,avg_det_score,avg_gt_similarity,gt_exact_count,gt_exact_rate,pass_count,det_pass_rate,fail_count,warm_latency_p50,avg_prompt_tokens,avg_total_tokens,peak_vram_gb_max,oom_count,generation_error_rate,failure_rate,row_success_rate,top_failure_types
-gpt41_mini,GPT-4.1-mini,5,30,70.2005,0.8426,0,0.0000,4,0.1333,26,2.5871,18683.7333,18757.9667,0.0000,0,0.0000,0.8667,0.1333,"[[""arg_type"", 30], [""extraneous"", 30], [""gt_mismatch"", 30], [""numeric_grounding"", 30], [""semantic"", 19], [""dataflow"", 11]]"

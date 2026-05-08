@@ -1,0 +1,135 @@
+{
+  "source_full_run": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_allcats_20260508",
+  "retry_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_failed_rows_retry_20260508",
+  "full_run_rows": 280,
+  "full_run_pass": 273,
+  "full_run_fail": 7,
+  "after_retry_rows": 280,
+  "after_retry_pass": 276,
+  "after_retry_fail": 4,
+  "after_retry_pass_rate": 0.9857,
+  "after_retry_avg_det": 97.0821,
+  "after_retry_gt_exact": 166,
+  "avg_prompt_tokens": 25463.0,
+  "avg_latency_sec": 2.3642,
+  "category_stats": [
+    {
+      "category": "1",
+      "rows": 30,
+      "pass": 30,
+      "fail": 0,
+      "pass_rate": 1.0,
+      "avg_det": 99.652,
+      "gt_exact": 25,
+      "avg_prompt_tokens": 26844.1,
+      "avg_latency_sec": 2.4103
+    },
+    {
+      "category": "2",
+      "rows": 30,
+      "pass": 30,
+      "fail": 0,
+      "pass_rate": 1.0,
+      "avg_det": 98.5588,
+      "gt_exact": 23,
+      "avg_prompt_tokens": 23754.6,
+      "avg_latency_sec": 2.0799
+    },
+    {
+      "category": "3",
+      "rows": 30,
+      "pass": 29,
+      "fail": 1,
+      "pass_rate": 0.9667,
+      "avg_det": 98.1758,
+      "gt_exact": 23,
+      "avg_prompt_tokens": 25244.4,
+      "avg_latency_sec": 2.1359
+    },
+    {
+      "category": "4",
+      "rows": 30,
+      "pass": 28,
+      "fail": 2,
+      "pass_rate": 0.9333,
+      "avg_det": 96.2227,
+      "gt_exact": 18,
+      "avg_prompt_tokens": 25184.3,
+      "avg_latency_sec": 2.1145
+    },
+    {
+      "category": "5",
+      "rows": 30,
+      "pass": 29,
+      "fail": 1,
+      "pass_rate": 0.9667,
+      "avg_det": 96.7384,
+      "gt_exact": 19,
+      "avg_prompt_tokens": 25433.8,
+      "avg_latency_sec": 2.3176
+    },
+    {
+      "category": "6",
+      "rows": 30,
+      "pass": 30,
+      "fail": 0,
+      "pass_rate": 1.0,
+      "avg_det": 98.4998,
+      "gt_exact": 20,
+      "avg_prompt_tokens": 25585.0,
+      "avg_latency_sec": 2.4562
+    },
+    {
+      "category": "7",
+      "rows": 50,
+      "pass": 50,
+      "fail": 0,
+      "pass_rate": 1.0,
+      "avg_det": 95.099,
+      "gt_exact": 18,
+      "avg_prompt_tokens": 25771.6,
+      "avg_latency_sec": 2.5738
+    },
+    {
+      "category": "8",
+      "rows": 50,
+      "pass": 50,
+      "fail": 0,
+      "pass_rate": 1.0,
+      "avg_det": 95.8522,
+      "gt_exact": 20,
+      "avg_prompt_tokens": 25593.3,
+      "avg_latency_sec": 2.557
+    }
+  ],
+  "remaining_failures": [
+    {
+      "row_no": "63",
+      "category": "3",
+      "command_eng": "If the cloud service is activated, upload test.png file to the cloud.",
+      "det_score": 69.9,
+      "failure_reasons": "[\"gt_mismatch\", \"gt_receiver_coverage\", \"gt_service_coverage\"]"
+    },
+    {
+      "row_no": "107",
+      "category": "4",
+      "command_eng": "When motion is detected in the bedroom, turn on the bedroom air conditioner.",
+      "det_score": 69.7752,
+      "failure_reasons": "[\"enum_grounding\", \"gt_mismatch\", \"gt_receiver_coverage\", \"gt_service_coverage\", \"semantic\"]"
+    },
+    {
+      "row_no": "118",
+      "category": "4",
+      "command_eng": "When any presence sensor in the hallway detects presence, set all hallway lights to purple.",
+      "det_score": 69.9,
+      "failure_reasons": "[\"extraneous\", \"gt_mismatch\", \"gt_receiver_coverage\", \"gt_service_coverage\"]"
+    },
+    {
+      "row_no": "150",
+      "category": "5",
+      "command_eng": "Check the wine cellar temperature now and again in 10 minutes. If it has changed by 1 degree or higher, announce through the speaker that the wine cellar temperature has changed rapidly.",
+      "det_score": 69.9,
+      "failure_reasons": "[\"dataflow\", \"gt_mismatch\", \"semantic\"]"
+    }
+  ]
+}

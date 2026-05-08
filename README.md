@@ -22,6 +22,7 @@
 | `gpt_cap/` | CAP 계열 생성기와 static analyzer 기반 후처리 |
 | `gpt_mg/version0_14/` | Prompt block + GA + DET 기반의 이전 PromptGA 워크스페이스 |
 | `gpt_mg/version0_15/` | connected_devices binding + schema fallback + admin feedback/GA update 워크스페이스 |
+| `gpt_mg/version0_15_update20260413/` | retrieval premapping, local/cloud benchmark, side-by-side report, strict DET 확장 실험 워크스페이스 |
 | `datasets/` | 테스트셋, 서비스 스키마, `things.json` 연결 디바이스 목록 |
 | `query_raw.sh` | 단일 문장/행 번호 기준으로 여러 모델 비교 + `version0_14` + DET 평가 |
 | `server_test_by_jmg.py` | WebSocket 디바이스 서버 + `static/index.html` UI |
@@ -390,6 +391,7 @@ bash query_raw.sh "불을 켜줘" "2026-03-31T12:00:00"
 - raw command가 dataset의 `command_kor` 또는 `command_eng`와 정확히 일치할 때
 
 정확히 매칭되지 않으면 generation은 수행되지만 DET는 건너뜁니다.
+DET 점수와 `failure_reasons`를 해석하는 방법은 아래 `10. DET 평가 구조` 섹션을 먼저 보면 됩니다.
 
 #### `query_raw.sh`에서 바꿔볼 수 있는 환경 변수
 
@@ -792,7 +794,386 @@ curl -s -X POST http://localhost:8000/run_admin_feedback_update \
 - `gpt_mg/version0_15/results/best_genome_after_feedback.json`
 - promotion이 성공하면 `gpt_mg/version0_15_updateYYYYMMDD*/`
 
-## 10. 결과 파일이 어디에 쌓이는가
+## 10. DET 평가 구조
+
+DET는 generated JOICode가 GT와 얼마나 같은지를 보는 deterministic evaluator입니다.  
+단순 문자열 exact match만 보는 것이 아니라, JSON 형식, schema service resolve, argument type, receiver scope, dataflow, numeric/enum grounding, GT coverage, 그리고 일부 좁은 semantic equivalence까지 단계적으로 봅니다.
+
+현재 가장 중요한 구현 파일은 아래입니다.
+
+| 파일 | 역할 |
+| --- | --- |
+| `gpt_mg/version0_15_update20260413/utils/det_evaluator.py` | DET 핵심 evaluator. score, failure reason, strict/legacy profile, semantic override 구현 |
+| `gpt_mg/version0_15_update20260413/utils/pipeline_common.py` | 후보 JSON/JOICode 정규화. 예: 잘못된 wrapper, legacy argument separator, one-shot trigger 형태 보정 |
+| `gpt_mg/version0_15_update20260413/tests/test_det_semantic_overrides.py` | DET semantic equivalence와 negative protection 테스트 |
+| `gpt_mg/version0_15_update20260413/tests/test_candidate_normalization.py` | candidate normalization 테스트 |
+| `gpt_mg/version0_15_update20260413/scripts/run_benchmark.py` | generation 이후 DET를 호출하고 `row_comparison.csv`, report를 생성 |
+| `gpt_mg/version0_15_update20260413/scripts/export_row_report.py` | GT와 generated JOICode를 나란히 보여주는 HTML/PDF report 생성 |
+
+### 10-1. DET 전체 흐름
+
+`evaluate_candidate()`는 대략 아래 순서로 실행됩니다.
+
+1. candidate가 JSON인지 확인
+2. `name`, `cron`, `period`, `code` 필수 필드 확인
+3. `(#Device).service(...)` 형태의 member access 추출
+4. service list schema 기준으로 device/service resolve
+5. service argument type과 enum 값 확인
+6. power/switch 관련 precondition 확인
+7. command와 generated service token의 semantic overlap 확인
+8. 명령에 없는 불필요한 service가 들어갔는지 확인
+9. GT에 필요한 service coverage 확인
+10. GT receiver, room, group, `all(...)` scope coverage 확인
+11. value read가 condition/action/speaker로 이어지는 dataflow 확인
+12. 숫자 값이 GT/command와 맞는지 numeric grounding 확인
+13. enum 값이 GT와 맞는지 enum grounding 확인
+14. GT similarity와 exact 여부 계산
+15. 좁게 정의된 semantic exact override 적용
+16. `legacy` 또는 `strict` profile weight로 최종 `det_score` 계산
+17. strict profile이면 핵심 실패에 대해 score cap 적용
+
+핵심 함수 위치:
+
+| 단계 | 함수 |
+| --- | --- |
+| entrypoint | `evaluate_candidate()` |
+| member access 추출 | `_extract_uses()` |
+| service resolve | `_resolve_service()` |
+| argument type score | `_score_args()`, `_score_single_arg()` |
+| precondition | `_precondition_score()` |
+| semantic overlap | `_semantic_score()` |
+| extraneous | `_extraneous_score()` |
+| GT service coverage | `_gt_service_coverage_score()`, `_gt_service_precision_score()` |
+| receiver coverage | `_gt_receiver_coverage_score()` |
+| dataflow | `_dataflow_score()` |
+| numeric grounding | `_numeric_grounding_score()` |
+| enum grounding | `_enum_grounding_score()` |
+| GT similarity/exact | `_gt_similarity()` |
+| semantic exact override | `_det_semantic_exact_override()` |
+
+### 10-2. legacy profile과 strict profile
+
+DET에는 `legacy`와 `strict` 두 profile이 있습니다.
+
+| profile | 목적 | 주요 특징 |
+| --- | --- | --- |
+| `legacy` | 기존 실험 호환 | `schema_ok`, `service_match`, `arg_type`, `precondition`, `semantic`, `extraneous`, `gt_similarity` 중심 |
+| `strict` | 논문/최종 검증 | legacy 축에 `gt_service_coverage`, `gt_receiver_coverage`, `dataflow`, `numeric_grounding`, `enum_grounding` 추가 |
+
+`strict` profile의 주요 weight는 아래와 같습니다.
+
+| 축 | weight | 의미 |
+| --- | ---: | --- |
+| `schema_ok` | 0.05 | JSON 구조와 필수 필드가 맞는지 |
+| `service_match` | 0.10 | 호출한 service가 schema에서 resolve되는지 |
+| `arg_type` | 0.05 | argument type, 개수, enum 후보가 맞는지 |
+| `precondition` | 0.05 | power/switch guard 또는 전제조건이 자연스러운지 |
+| `semantic` | 0.10 | command token과 service/action token이 맞는지 |
+| `extraneous` | 0.05 | 명령에 없는 불필요한 service가 없는지 |
+| `gt_similarity` | 0.05 | GT와 구조적으로 얼마나 비슷한지 |
+| `gt_service_coverage` | 0.20 | GT service가 빠지지 않았는지 |
+| `gt_receiver_coverage` | 0.15 | GT receiver scope와 tag가 맞는지 |
+| `dataflow` | 0.10 | value read가 condition/action/output에 쓰였는지 |
+| `numeric_grounding` | 0.05 | 숫자 값이 맞는지 |
+| `enum_grounding` | 0.05 | enum 값이 맞는지 |
+
+### 10-3. failure_reasons 해석
+
+`failure_reasons`는 어떤 축에서 감점됐는지 알려주는 태그입니다.  
+한 row에 여러 개가 동시에 붙을 수 있습니다.
+
+| failure reason | 의미 | 대표 예 |
+| --- | --- | --- |
+| `invalid_json` | 출력이 JSON으로 파싱되지 않음 | 설명 문장만 출력하거나 brace가 깨짐 |
+| `schema_missing_keys` | `name`, `cron`, `period`, `code` 중 필수 키 누락 | `script`만 있고 `code`가 없음 |
+| `no_parseable_member_access` | `(#Device).service(...)` 형태를 못 찾음 | JOILang이 아니라 자연어/의사코드 출력 |
+| `unknown_service:<member>` | service list schema에 없는 service 호출 | `speaker_talk(...)` 같은 invented service |
+| `service_match` | 일부 service가 schema resolve 실패 | 맞는 service와 틀린 service가 섞임 |
+| `arg_type` | service argument type 또는 개수가 틀림 | 숫자 자리에 문자열, enum 자리에 없는 값 |
+| `precondition` | power/switch 전제조건이 부족하거나 부자연스러움 | power control이 필요한데 action만 수행 |
+| `semantic` | command 의미와 service/action 의미가 약하게 맞음 | open/close, on/off, increase/decrease 반전 |
+| `extraneous` | 명령에 없는 service/action 추가 | speaker만 필요한데 light도 조작 |
+| `gt_service_coverage` | GT에 필요한 service가 생성 코드에 빠짐 | sensor read만 하고 speaker output 누락 |
+| `gt_receiver_coverage` | GT receiver/tag/group/all scope를 덜 덮음 | `all(#DoorLock)` 대신 일부 door만 처리 |
+| `dataflow` | 읽은 value가 실제 condition/action/output에 연결되지 않음 | sensor 값을 읽고 버림 |
+| `numeric_grounding` | 숫자/시간/채널/온도 값이 GT와 다름 | 30 대신 50 |
+| `enum_grounding` | enum 값이 GT와 다름 | `"dry"` 대신 `"auto"` |
+| `gt_mismatch` | GT exact 또는 semantic exact가 아님 | 여러 세부 reason과 함께 확인해야 함 |
+
+`gt_mismatch`는 가장 넓은 요약 태그입니다.  
+이 태그만 보고 원인을 판단하지 말고 `gt_service_coverage`, `gt_receiver_coverage`, `dataflow`, `numeric_grounding`, `enum_grounding`을 같이 봐야 합니다.
+
+### 10-4. 형식과 schema resolve 예시
+
+정상 예:
+
+```joi
+(#Speaker).speaker_speak("hello")
+```
+
+이 코드는 `Speaker/Speak`로 resolve됩니다.
+
+실패 예:
+
+```joi
+(#Speaker).speaker_talk("hello")
+```
+
+`speaker_talk`가 service list에 없으면 아래 reason이 붙을 수 있습니다.
+
+```text
+unknown_service:speaker_talk
+service_match
+```
+
+### 10-5. argument type과 enum grounding 예시
+
+정상 예:
+
+```joi
+(#AirPurifier).airpurifier_setairpurifiermode("high")
+```
+
+`SetAirPurifierMode`의 enum에 `high`가 있으면 통과합니다.
+
+실패 예:
+
+```joi
+(#AirPurifier).airpurifier_setairpurifiermode("on")
+```
+
+`on`이 enum 후보에 없으면 `arg_type` 또는 `enum_grounding`에서 감점됩니다.  
+이런 경우 “켜달라”는 명령은 mode enum보다 `Switch` 계열의 `switch_on()`으로 가는 것이 더 적합할 수 있습니다.
+
+### 10-6. GT service coverage 예시
+
+GT:
+
+```joi
+dust = (#WeatherProvider).weatherprovider_pm10weather
+(#Speaker).speaker_speak(dust)
+```
+
+Generated:
+
+```joi
+dust = (#WeatherProvider).weatherprovider_pm10weather
+```
+
+값은 읽었지만 speaker output이 빠졌으므로 `gt_service_coverage`가 떨어집니다.
+
+### 10-7. Receiver coverage 예시
+
+GT:
+
+```joi
+all(#Hallway #Light).light_on()
+```
+
+Generated:
+
+```joi
+(#Hallway #Light).light_on()
+```
+
+GT는 `all(...)` 범위인데 generated는 단일 receiver처럼 보이므로 `gt_receiver_coverage`가 떨어질 수 있습니다.
+
+장소 tag와 schema device tag가 섞인 경우에는 service list에 존재하는 장치 tag를 중심으로 비교합니다.  
+예를 들어 `#Bedroom` 같은 location tag가 service list device가 아니라면, DET는 핵심 service device coverage를 우선 보도록 보정되어 있습니다.
+
+### 10-8. Dataflow 예시
+
+좋은 예:
+
+```joi
+temp = (#TemperatureSensor).temperaturesensor_temperature
+if (temp >= 30) {
+  (#AirConditioner).airconditioner_settargettemperature(24)
+}
+```
+
+읽은 sensor value가 condition에 쓰였으므로 dataflow가 살아 있습니다.
+
+나쁜 예:
+
+```joi
+temp = (#TemperatureSensor).temperaturesensor_temperature
+(#AirConditioner).airconditioner_settargettemperature(24)
+```
+
+value를 읽었지만 조건이나 action argument에 연결되지 않으면 `dataflow` 감점이 생길 수 있습니다.
+
+### 10-9. Numeric grounding 예시
+
+GT:
+
+```joi
+(#Speaker).speaker_setvolume(30)
+```
+
+Generated:
+
+```joi
+(#Speaker).speaker_setvolume(50)
+```
+
+서비스는 맞아도 숫자가 다르므로 `numeric_grounding`이 떨어집니다.
+
+`100`과 `100.0`처럼 수치적으로 같은 값은 같은 값으로 정규화합니다.
+
+### 10-10. Semantic exact override
+
+일부 경우는 문자열이 달라도 의미상 맞다고 봐야 합니다.  
+이런 경우는 전역 fuzzy matching을 넓히지 않고, `_det_semantic_exact_override()` 안에 좁은 whitelist rule로 넣습니다.
+
+현재 들어간 override는 아래와 같습니다.
+
+| override | 동치로 보는 경우 | 보호 조건 |
+| --- | --- | --- |
+| compound/split service | `light_movetohueandsaturation(a,b)` == `light_movetohue(a)` + `light_movetosaturation(b)` | 두 split call이 모두 있고 receiver/arg가 맞아야 함 |
+| speaker report wrapper | `speaker_speak("문구" + value + "문구")` == `speaker_speak(value)` | `Speaker.Speak` sink에만 적용 |
+| air-quality report family | `pm10weather` == `pm25weather`, `DustLevel` == `FineDustLevel` == `VeryFineDustLevel` | 명시 whitelist family만 허용 |
+| RGB color service | `colorcontrol_setcolor("128,0,128")` == `light_movetorgb(128,0,128)` | RGB 값과 context가 맞아야 함 |
+| conditional RGB color | trigger wrapper가 있어도 같은 조건/색상 action이면 동치 | 나머지 service family도 일치해야 함 |
+| snapshot delta algebra | `new >= old + 1 or new <= old - 1` == `diff = new - old; diff >= 1 or diff <= -1` | 같은 value source, 같은 threshold, 같은 speaker sink여야 함 |
+
+예시 1, compound/split:
+
+```joi
+# GT
+(#Light).light_movetohueandsaturation(200, 50)
+
+# Generated
+(#Light).light_movetohue(200)
+(#Light).light_movetosaturation(50)
+```
+
+예시 2, speaker wrapper:
+
+```joi
+# GT
+dust = (#WeatherProvider).weatherprovider_pm10weather
+(#Speaker).speaker_speak("외부 미세먼지 농도는 " + dust + "입니다")
+
+# Generated
+x = (#WeatherProvider).weatherprovider_pm10weather
+(#Speaker).speaker_speak(x)
+```
+
+예시 3, color service:
+
+```joi
+# GT
+all(#Hallway #Light).colorcontrol_setcolor("128,0,128")
+
+# Generated
+all(#Hallway #Light).light_movetorgb(128, 0, 128)
+```
+
+예시 4, algebra/dataflow:
+
+```joi
+# GT
+original = (#WineCellar #TemperatureSensor).temperaturesensor_temperature
+delay(10 MIN)
+current = (#WineCellar #TemperatureSensor).temperaturesensor_temperature
+if (current >= original + 1 or current <= original - 1) {
+  (#Speaker).speaker_speak("와인셀러의 온도가 급변했습니다")
+}
+
+# Generated
+originalTemp = (#WineCellar #TemperatureSensor).temperaturesensor_temperature
+delay(10 MIN)
+newTemp = (#WineCellar #TemperatureSensor).temperaturesensor_temperature
+diff = newTemp - originalTemp
+if (diff >= 1 or diff <= -1) {
+  (#Speaker).speaker_speak("와인셀러의 온도가 급변했습니다")
+}
+```
+
+여기서 `algebra`는 독립 점수축이 아니라 semantic exact override 안의 좁은 규칙입니다.  
+반대로 `dataflow`는 strict profile의 정식 점수축입니다.
+
+### 10-11. strict cap과 69.9 점수
+
+`strict` profile에서는 핵심 실패가 있으면 최종 점수를 최대 `69.9`로 제한합니다.  
+리포트에서 `69.9`가 자주 보이면 “문자열이나 일부 구조는 비슷하지만 strict 핵심 기준이 깨졌다”는 뜻입니다.
+
+cap이 걸리는 대표 조건:
+
+- GT service coverage 부족
+- dataflow 부족
+- group receiver coverage 부족
+- numeric grounding 부족
+- enum grounding 부족
+
+예시:
+
+```text
+DET 69.9000
+failure_reasons ["gt_mismatch", "gt_service_coverage", "dataflow"]
+```
+
+이 경우 service가 빠졌거나 dataflow가 끊겨서 strict 기준으로 pass하기 어렵다는 의미입니다.
+
+### 10-12. 결과 CSV에서 먼저 볼 컬럼
+
+`run_benchmark.py` 결과의 `row_comparison.csv`에서는 아래 컬럼을 먼저 보면 됩니다.
+
+| 컬럼 suffix | 의미 |
+| --- | --- |
+| `__det_score` | 최종 DET 점수 |
+| `__det_pass` | pass 여부 |
+| `__det_profile` | `legacy` 또는 `strict` |
+| `__det_gt_exact` | 문자열 exact 또는 semantic exact 여부 |
+| `__det_gt_similarity` | GT와의 similarity |
+| `__det_gt_service_coverage` | 필요한 GT service가 들어왔는지 |
+| `__det_gt_service_precision` | 불필요하거나 다른 service가 섞이지 않았는지 |
+| `__det_gt_receiver_coverage` | receiver/tag/group coverage |
+| `__det_dataflow_score` | value read가 downstream으로 이어지는지 |
+| `__det_numeric_grounding` | 숫자 값 일치 |
+| `__det_enum_grounding` | enum 값 일치 |
+| `__failure_reasons` | 감점 reason list |
+| `__output_code` | generated JOICode |
+| `gt_code` | GT JOICode |
+
+row 단위로 눈으로 보고 싶으면 side-by-side report를 생성합니다.
+
+```bash
+python gpt_mg/version0_15_update20260413/scripts/export_row_report.py \
+  --results-dir /abs/path/to/results_dir \
+  --model-key gpt41_mini \
+  --failures-only
+```
+
+### 10-13. DET를 수정할 때의 원칙
+
+DET를 고칠 때는 점수를 쉽게 올리기보다 false positive를 늘리지 않는 것이 더 중요합니다.
+
+권장 원칙:
+
+1. parser나 schema를 크게 바꾸기 전에 evaluator의 좁은 삽입 지점을 먼저 찾기
+2. 전역 fuzzy matching보다 whitelist equivalence 선호
+3. GT와 generated의 receiver, argument, source value가 맞는지 확인
+4. positive test와 negative test를 같이 추가
+5. unrelated service family가 우연히 맞아지는지 반드시 막기
+
+좋은 수정 예:
+
+```text
+WeatherProvider.pm10weather == WeatherProvider.pm25weather
+단, speaker/report family에서만 허용
+```
+
+위험한 수정 예:
+
+```text
+모든 WeatherProvider value service를 서로 동일하게 처리
+```
+
+후자는 temperature와 dust까지 같다고 보는 문제가 생기므로 피해야 합니다.
+
+## 11. 결과 파일이 어디에 쌓이는가
 
 | 경로 | 내용 |
 | --- | --- |
@@ -808,7 +1189,7 @@ curl -s -X POST http://localhost:8000/run_admin_feedback_update \
 | `admin_logs/slack/YYYY-MM-DD.jsonl` | Slack DM 로그 |
 | `datasets/usr_rag/` | `/re_generate_joi_code` 확정 결과 저장 |
 
-## 11. 자주 겪는 문제
+## 12. 자주 겪는 문제
 
 ### `slack_server.py`가 import 에러로 시작 안 됨
 
@@ -849,12 +1230,26 @@ pip install slack-bolt
 raw command가 dataset row와 정확히 매칭되지 않으면 DET 평가를 건너뜁니다.  
 행 번호로 주거나, dataset의 `command_kor`/`command_eng`와 완전히 같은 문장을 써야 합니다.
 
+### strict DET에서 69.9 근처 점수가 반복됨
+
+`strict` profile의 cap에 걸렸을 가능성이 큽니다.  
+`row_comparison.csv`에서 아래 컬럼을 같이 확인하세요.
+
+- `__failure_reasons`
+- `__det_gt_service_coverage`
+- `__det_gt_receiver_coverage`
+- `__det_dataflow_score`
+- `__det_numeric_grounding`
+- `__det_enum_grounding`
+
+특히 `gt_service_coverage`, `dataflow`, `enum_grounding`이 깨지면 generated 코드가 얼핏 비슷해 보여도 strict 기준에서는 통과하기 어렵습니다.
+
 ### `device_gpt.py test` 또는 오래된 benchmark 코드가 에러남
 
 `gpt_mg/GPTBenchmark.py` 계열은 추가 패키지와 예전 파일 구조를 가정하는 부분이 있습니다.  
 메인 실행 경로는 `demo.py`, `gpt_mg/run.py`, `query_raw.sh`, `server_test_by_jmg.py`, `slack_server.py`부터 확인하는 것을 권장합니다.
 
-## 12. 추천 시작 순서
+## 13. 추천 시작 순서
 
 처음 저장소를 만졌다면 아래 순서가 가장 덜 헷갈립니다.
 

@@ -1,0 +1,8 @@
+model_key,model_label,failure_reason,count
+gpt41_mini,GPT-4.1-mini,gt_mismatch,27
+gpt41_mini,GPT-4.1-mini,numeric_grounding,8
+gpt41_mini,GPT-4.1-mini,gt_receiver_coverage,7
+gpt41_mini,GPT-4.1-mini,gt_service_coverage,7
+gpt41_mini,GPT-4.1-mini,semantic,6
+gpt41_mini,GPT-4.1-mini,extraneous,4
+gpt41_mini,GPT-4.1-mini,dataflow,1

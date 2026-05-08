@@ -1,0 +1,312 @@
+row_no,category,command_eng,command_kor,gt_name_display,service_list_schema,gt_code,generated_code,det_score,det_pass,det_profile,det_gt_exact,det_gt_similarity,det_gt_service_coverage,det_gt_receiver_coverage,det_dataflow_score,det_numeric_grounding,det_enum_grounding,failure_reasons,service_list_retrieval_categories_display,prompt_context_mode,prompt_context_note,prompt_context_effective_topk,prompt_context_injected_categories,prompt_context_displayed_categories,prompt_tokens,completion_tokens,total_tokens,llm_latency_sec,total_pipeline_sec,tokens_per_sec,peak_vram_gb,service_list_snippet_source,service_list_device_count,service_list_retrieval_status,service_list_retrieval_mode,service_list_retrieval_topk,service_list_retrieval_categories,generation_error_type
+151,6,"If the temperature is 28 degrees or higher and the humidity is 70% or higher, set the air conditioner to cool mode and 24 degrees.","온도가 28도 이상이고 습도가 70% 이상이면, 에어컨을 냉방 모드로 설정하고 온도를 24도로 맞춰줘.",IfTemperatureIs28DegreesOrHigher,service_list_ver2.0.1.json,"if ((#TemperatureSensor).temperaturesensor_temperature >= 28 and (#HumiditySensor).humiditysensor_humidity >= 70) {
+
+    (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+
+    (#AirConditioner).airconditioner_settargettemperature(24)
+ 
+}","if ((#TemperatureSensor).temperaturesensor_temperature >= 28 and (#HumiditySensor).humiditysensor_humidity >= 70) {
+  (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+  (#AirConditioner).airconditioner_settargettemperature(24)
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"HumiditySensor, TemperatureSensor, AirConditioner, AirPurifier, AirQualitySensor, WeatherProvider, Dehumidifier, Dishwasher, ArmRobot, LaundryDryer",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""HumiditySensor"", ""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""WeatherProvider"", ""Dehumidifier"", ""Dishwasher"", ""ArmRobot"", ""LaundryDryer""]","[""HumiditySensor"", ""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""WeatherProvider"", ""Dehumidifier"", ""Dishwasher"", ""ArmRobot"", ""LaundryDryer""]",26810,110,26920,2.1225,7.3988,12683.1567,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""WeatherProvider"", ""Dehumidifier"", ""Dishwasher"", ""ArmRobot"", ""LaundryDryer""]",
+152,6,"If the carbon dioxide concentration is 1200ppm or higher and person is being detected, set the air purifier to high mode and announce a warning using the speaker.","이산화탄소 농도가 1200ppm 이상이고 사람이 감지되고 있으면, 공기청정기를 강풍으로 바꾸고 스피커로 경고해줘.",IfCarbonDioxideConcentrationIs1200ppmOrHigher,service_list_ver2.0.1.json,"if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Speaker).speaker_speak(""이산화탄소 농도가 높습니다."")
+
+}","if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {
+  (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+  (#Speaker).speaker_speak(""경고"")
+}",95.6556,True,strict,False,0.981111,1.0,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch""]","PresenceSensor, Speaker, AirQualitySensor, CarbonDioxideSensor, AirPurifier, AirConditioner, RobotVacuumCleaner, Charger, PresenceVitalSensor, SmokeDetector",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""Speaker"", ""AirQualitySensor"", ""CarbonDioxideSensor"", ""AirPurifier"", ""AirConditioner"", ""RobotVacuumCleaner"", ""Charger"", ""PresenceVitalSensor"", ""SmokeDetector""]","[""PresenceSensor"", ""Speaker"", ""AirQualitySensor"", ""CarbonDioxideSensor"", ""AirPurifier"", ""AirConditioner"", ""RobotVacuumCleaner"", ""Charger"", ""PresenceVitalSensor"", ""SmokeDetector""]",26999,96,27095,2.1897,3.1738,12373.8412,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Speaker"", ""AirQualitySensor"", ""CarbonDioxideSensor"", ""AirPurifier"", ""AirConditioner"", ""RobotVacuumCleaner"", ""Charger"", ""PresenceVitalSensor"", ""SmokeDetector""]",
+153,6,"If it is raining and the humidity is 80% or higher, set the dehumidifier to drying mode and output ""It's raining and himidity is high"" through the speaker.","비가 오고 있고 습도가 80% 이상이면, 제습기를 건조 모드로 작동시키고 ""비가 오고 습도가 높습니다""라고 스피커로 출력해줘.",IfItIsRainingHumidityIs80Or,service_list_ver2.0.1.json,"if ((#RainSensor).rainsensor_rain == true and (#HumiditySensor).humiditysensor_humidity >= 80) {
+
+    (#Dehumidifier).dehumidifier_setdehumidifiermode(""drying"")
+
+    (#Speaker).speaker_speak(""비가 오고 습도가 높습니다."")
+
+}","if ((#RainSensor).rainsensor_rain == true and (#HumiditySensor).humiditysensor_humidity >= 80) {
+  (#Dehumidifier).dehumidifier_setdehumidifiermode(""drying"")
+  (#Speaker).speaker_speak(""비가 오고 습도가 높습니다"")
+}",96.1191,True,strict,False,0.998819,1.0,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch""]","HumiditySensor, Speaker, RainSensor, Dehumidifier, Humidifier, WeatherProvider, AirQualitySensor, Dishwasher, Pump, AirPurifier",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""HumiditySensor"", ""Speaker"", ""RainSensor"", ""Dehumidifier"", ""Humidifier"", ""WeatherProvider"", ""AirQualitySensor"", ""Dishwasher"", ""Pump"", ""AirPurifier""]","[""HumiditySensor"", ""Speaker"", ""RainSensor"", ""Dehumidifier"", ""Humidifier"", ""WeatherProvider"", ""AirQualitySensor"", ""Dishwasher"", ""Pump"", ""AirPurifier""]",26887,103,26990,2.375,3.363,11364.2105,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""Speaker"", ""RainSensor"", ""Dehumidifier"", ""Humidifier"", ""WeatherProvider"", ""AirQualitySensor"", ""Dishwasher"", ""Pump"", ""AirPurifier""]",
+154,6,"If the noise level is 70 or higher and no one is home, take a photo with the camera and sound the police siren.","소음 수치가 70 이상이고 집에 아무도 없으면, 카메라로 사진을 찍고 경찰 사이렌을 울려줘.",IfNoiseLevelIs70OrHigherNo,service_list_ver2.0.1.json,"if ((#SoundSensor).soundsensor_sound >= 70 and (#PresenceSensor).presencesensor_presence == false) {
+
+    (#Camera).camera_captureimage()
+
+    (#Siren).siren_setsirenmode(""police"")
+
+}","if ((#SoundSensor).soundsensor_sound >= 70 and (#PresenceSensor).presencesensor_presence == false) {
+  (#Camera).camera_captureimage()
+  (#Siren).siren_setsirenmode(""police"")
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"PresenceSensor, Siren, Camera, SoundSensor, PresenceVitalSensor, AudioRecorder, AirQualitySensor, ColorControl, PressureSensor, CarbonDioxideSensor",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""Siren"", ""Camera"", ""SoundSensor"", ""PresenceVitalSensor"", ""AudioRecorder"", ""AirQualitySensor"", ""ColorControl"", ""PressureSensor"", ""CarbonDioxideSensor""]","[""PresenceSensor"", ""Siren"", ""Camera"", ""SoundSensor"", ""PresenceVitalSensor"", ""AudioRecorder"", ""AirQualitySensor"", ""ColorControl"", ""PressureSensor"", ""CarbonDioxideSensor""]",26345,82,26427,1.9434,2.9368,13598.3328,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Siren"", ""Camera"", ""SoundSensor"", ""PresenceVitalSensor"", ""AudioRecorder"", ""AirQualitySensor"", ""ColorControl"", ""PressureSensor"", ""CarbonDioxideSensor""]",
+155,6,"If the illuminance is 100 lux or lower and a person is being detected, set the speaker volume to 30 and play relax.mp3 music.","조도가 100 럭스 이하이고 사람이 감지되고 있으면, 스피커 볼륨을 30으로 설정하고 relax.mp3 음악을 재생해줘.",IfIlluminanceIs100LuxOrLower,service_list_ver2.0.1.json,"if ((#LightSensor).lightsensor_brightness <= 100 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#Speaker).speaker_setvolume(30)
+
+    (#Speaker).speaker_play(""relax.mp3"")
+
+}","if ((#LightSensor).lightsensor_brightness <= 100 and (#PresenceSensor).presencesensor_presence == true) {
+  (#Speaker).speaker_setvolume(30)
+  (#Speaker).speaker_play(""relax.mp3"")
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"LightSensor, PresenceSensor, Speaker, PresenceVitalSensor, AudioRecorder, SoundSensor, Plug, Siren, Light, ArmRobot",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""LightSensor"", ""PresenceSensor"", ""Speaker"", ""PresenceVitalSensor"", ""AudioRecorder"", ""SoundSensor"", ""Plug"", ""Siren"", ""Light"", ""ArmRobot""]","[""LightSensor"", ""PresenceSensor"", ""Speaker"", ""PresenceVitalSensor"", ""AudioRecorder"", ""SoundSensor"", ""Plug"", ""Siren"", ""Light"", ""ArmRobot""]",27930,87,28017,2.5481,3.5245,10995.2514,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""LightSensor"", ""PresenceSensor"", ""Speaker"", ""PresenceVitalSensor"", ""AudioRecorder"", ""SoundSensor"", ""Plug"", ""Siren"", ""Light"", ""ArmRobot""]",
+156,6,"If the fine dust level is 150 or higher and the door is open, close the door and set the air purifier to high.","미세먼지 농도가 150 이상이고 문이 열려 있으면, 문을 닫고 공기청정기를 강풍으로 작동시켜줘.",IfFineDustLevelIs150OrHigher,service_list_ver2.0.1.json,"if ((#AirQualitySensor).airqualitysensor_finedustlevel >= 150 and (#Door).door_doorstate == ""open"") {
+
+    (#Door).door_close()
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+}","if ((#AirQualitySensor).airqualitysensor_finedustlevel >= 150 and (#Door).door_doorstate == ""open"") {
+  (#Door).door_close()
+  (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"Door, AirPurifier, AirQualitySensor, AirConditioner, DoorLock, Dishwasher, RobotVacuumCleaner, SmokeDetector, WindowCovering, LaundryDryer",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""Door"", ""AirPurifier"", ""AirQualitySensor"", ""AirConditioner"", ""DoorLock"", ""Dishwasher"", ""RobotVacuumCleaner"", ""SmokeDetector"", ""WindowCovering"", ""LaundryDryer""]","[""Door"", ""AirPurifier"", ""AirQualitySensor"", ""AirConditioner"", ""DoorLock"", ""Dishwasher"", ""RobotVacuumCleaner"", ""SmokeDetector"", ""WindowCovering"", ""LaundryDryer""]",26506,97,26603,2.1544,3.1262,12348.2176,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""Door"", ""AirPurifier"", ""AirQualitySensor"", ""AirConditioner"", ""DoorLock"", ""Dishwasher"", ""RobotVacuumCleaner"", ""SmokeDetector"", ""WindowCovering"", ""LaundryDryer""]",
+157,6,"If the weather is rainy and no one is being detected, lock the door and close the valve.","비가 오고 아무도 없는 상태면, 도어락을 잠그고 밸브를 차단해줘.",IfWeatherIsRainyNoOneIsBeing,service_list_ver2.0.1.json,"if ((#WeatherProvider).weatherprovider_weather == ""rain"" and (#PresenceSensor).presencesensor_presence == false) {
+
+    (#DoorLock).doorlock_lock()
+
+    (#Valve).valve_close()
+
+}","if ((#WeatherProvider).weatherprovider_weather == ""rain"" and (#PresenceSensor).presencesensor_presence == false) {
+  (#DoorLock).doorlock_lock()
+  (#Valve).valve_close()
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"PresenceSensor, RainSensor, Door, Valve, DoorLock, WeatherProvider, Pump, Safe, ArmRobot, WindowCovering",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""RainSensor"", ""Door"", ""Valve"", ""DoorLock"", ""WeatherProvider"", ""Pump"", ""Safe"", ""ArmRobot"", ""WindowCovering""]","[""PresenceSensor"", ""RainSensor"", ""Door"", ""Valve"", ""DoorLock"", ""WeatherProvider"", ""Pump"", ""Safe"", ""ArmRobot"", ""WindowCovering""]",26133,82,26215,1.9423,2.9219,13496.8851,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""RainSensor"", ""Door"", ""Valve"", ""DoorLock"", ""WeatherProvider"", ""Pump"", ""Safe"", ""ArmRobot"", ""WindowCovering""]",
+158,6,"If the oven is heating and no one is being detected, change the oven mode to warming and notify that the oven mode has been changed to warming.","오븐이 가열 중이고 아무도 없으면, 오븐을 보온 모드로 변경하고 스피커로 보온 모드로 변경했다고 알려줘.",IfOvenIsHeatingNoOneIsBeing,service_list_ver2.0.1.json,"if ((#Oven).oven_ovenmode == ""heating"" and (#PresenceSensor).presencesensor_presence == false) {
+
+    (#Oven).oven_setovenmode(""warming"")
+
+    (#Speaker).speaker_speak(""오븐을 보온 모드로 변경합니다."")
+
+}","if ((#Oven).oven_ovenmode == ""heating"" and (#PresenceSensor).presencesensor_presence == false) {
+  (#Oven).oven_setovenmode(""warming"")
+  (#Speaker).speaker_speak(""보온 모드로 변경했습니다"")
+}",92.9464,True,strict,False,0.989286,1.0,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""semantic""]","PresenceSensor, Speaker, Oven, RiceCooker, AirConditioner, Television, ArmRobot, Button, TemperatureSensor, Dishwasher",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""Speaker"", ""Oven"", ""RiceCooker"", ""AirConditioner"", ""Television"", ""ArmRobot"", ""Button"", ""TemperatureSensor"", ""Dishwasher""]","[""PresenceSensor"", ""Speaker"", ""Oven"", ""RiceCooker"", ""AirConditioner"", ""Television"", ""ArmRobot"", ""Button"", ""TemperatureSensor"", ""Dishwasher""]",26914,94,27008,2.086,3.0883,12947.2675,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Speaker"", ""Oven"", ""RiceCooker"", ""AirConditioner"", ""Television"", ""ArmRobot"", ""Button"", ""TemperatureSensor"", ""Dishwasher""]",
+159,6,"If the noise level is 80 or higher and no person is being detected, stop speaker playbackand sound the emergency siren.","소음이 80 이상이고 사람이 없으면, 스피커 재생을 멈추고 긴급 사이렌을 울려줘.",IfNoiseLevelIs80OrHigherNo,service_list_ver2.0.1.json,"if ((#SoundSensor).soundsensor_sound >= 80 and (#PresenceSensor).presencesensor_presence == false) {
+
+    (#Speaker).speaker_stop()
+
+    (#Siren).siren_setsirenmode(""emergency"")
+
+}","if ((#SoundSensor).soundsensor_sound >= 80 and (#PresenceSensor).presencesensor_presence == false) {
+  (#Speaker).speaker_stop()
+  (#Siren).siren_setsirenmode(""emergency"")
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"PresenceSensor, Speaker, Siren, SoundSensor, AudioRecorder, PresenceVitalSensor, ArmRobot, AirQualitySensor, PressureSensor, Television",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""Speaker"", ""Siren"", ""SoundSensor"", ""AudioRecorder"", ""PresenceVitalSensor"", ""ArmRobot"", ""AirQualitySensor"", ""PressureSensor"", ""Television""]","[""PresenceSensor"", ""Speaker"", ""Siren"", ""SoundSensor"", ""AudioRecorder"", ""PresenceVitalSensor"", ""ArmRobot"", ""AirQualitySensor"", ""PressureSensor"", ""Television""]",27183,86,27269,1.9214,2.9261,14192.2556,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Speaker"", ""Siren"", ""SoundSensor"", ""AudioRecorder"", ""PresenceVitalSensor"", ""ArmRobot"", ""AirQualitySensor"", ""PressureSensor"", ""Television""]",
+160,6,"If the carbon dioxide is 1500ppm or higher and the blind is closed, set the air purifier to auto and raise the blind.","이산화탄소가 1500ppm 이상이고 블라인드가 닫혀있으면, 공기청정기를 자동 모드로 켜고 블라인드를 올려줘.",IfCarbonDioxideIs1500ppmOrHigher,service_list_ver2.0.1.json,"if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1500 and (#Blind).armrobot_currentposition == 0) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""auto"")
+
+    (#Blind).windowcovering_uporopen()
+
+}","if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1500 and (#Blind).armrobot_currentposition == 0) {
+  (#AirPurifier).airpurifier_setairpurifiermode(""auto"")
+  (#Blind).windowcovering_uporopen()
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"AirQualitySensor, CarbonDioxideSensor, WindowCovering, ArmRobot, AirPurifier, AirConditioner, RobotVacuumCleaner, ColorControl, SmokeDetector, Dishwasher",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""AirQualitySensor"", ""CarbonDioxideSensor"", ""WindowCovering"", ""ArmRobot"", ""AirPurifier"", ""AirConditioner"", ""RobotVacuumCleaner"", ""ColorControl"", ""SmokeDetector"", ""Dishwasher""]","[""AirQualitySensor"", ""CarbonDioxideSensor"", ""WindowCovering"", ""ArmRobot"", ""AirPurifier"", ""AirConditioner"", ""RobotVacuumCleaner"", ""ColorControl"", ""SmokeDetector"", ""Dishwasher""]",26297,104,26401,2.0522,3.056,12864.7305,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""AirQualitySensor"", ""CarbonDioxideSensor"", ""WindowCovering"", ""ArmRobot"", ""AirPurifier"", ""AirConditioner"", ""RobotVacuumCleaner"", ""ColorControl"", ""SmokeDetector"", ""Dishwasher""]",
+161,6,"If the temperature is 18 degrees or below and someone is detected, set the air conditioner to heat mode and 22 degrees.","온도가 18도 이하이고 사람이 감지되고있으면, 에어컨을 난방 모드로 설정하고 22도로 조절해줘.",IfTemperatureIs18DegreesOrBelowSomeone,service_list_ver2.0.1.json,"if ((#TemperatureSensor).temperaturesensor_temperature <= 18 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#AirConditioner).airconditioner_setairconditionermode(""heat"")
+
+    (#AirConditioner).airconditioner_settargettemperature(22)
+
+}","if ((#TemperatureSensor).temperaturesensor_temperature <= 18 and (#PresenceSensor).presencesensor_presence == true) {
+  (#AirConditioner).airconditioner_setairconditionermode(""heat"")
+  (#AirConditioner).airconditioner_settargettemperature(22)
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"TemperatureSensor, PresenceSensor, AirConditioner, AirPurifier, AirQualitySensor, ArmRobot, LaundryDryer, Dishwasher, Oven, WeatherProvider",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""TemperatureSensor"", ""PresenceSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""ArmRobot"", ""LaundryDryer"", ""Dishwasher"", ""Oven"", ""WeatherProvider""]","[""TemperatureSensor"", ""PresenceSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""ArmRobot"", ""LaundryDryer"", ""Dishwasher"", ""Oven"", ""WeatherProvider""]",27087,101,27188,3.7031,4.6733,7341.9567,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""TemperatureSensor"", ""PresenceSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""ArmRobot"", ""LaundryDryer"", ""Dishwasher"", ""Oven"", ""WeatherProvider""]",
+162,6,"If it is raining and the door is open, close the door and set the dehumidifier to internal Care mode.","비가 오고 문이 열려 있으면, 문을 닫고 제습기를 내부케어 모드로 작동시켜줘.",IfItIsRainingDoorIsOpenClose,service_list_ver2.0.1.json,"if ((#RainSensor).rainsensor_rain == true and (#Door).door_doorstate == ""open"") {
+
+    (#Door).door_close()
+
+    (#Dehumidifier).dehumidifier_setdehumidifiermode(""auto"")
+
+}","if ((#RainSensor).rainsensor_rain == true and (#Door).door_doorstate == ""open"") {
+  (#Door).door_close()
+  (#Dehumidifier).dehumidifier_setdehumidifiermode(""auto"")
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"HumiditySensor, RainSensor, Door, Dehumidifier, Humidifier, AirConditioner, Dishwasher, DoorLock, WeatherProvider, LaundryDryer",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""HumiditySensor"", ""RainSensor"", ""Door"", ""Dehumidifier"", ""Humidifier"", ""AirConditioner"", ""Dishwasher"", ""DoorLock"", ""WeatherProvider"", ""LaundryDryer""]","[""HumiditySensor"", ""RainSensor"", ""Door"", ""Dehumidifier"", ""Humidifier"", ""AirConditioner"", ""Dishwasher"", ""DoorLock"", ""WeatherProvider"", ""LaundryDryer""]",26070,91,26161,2.4998,3.4734,10465.2372,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""RainSensor"", ""Door"", ""Dehumidifier"", ""Humidifier"", ""AirConditioner"", ""Dishwasher"", ""DoorLock"", ""WeatherProvider"", ""LaundryDryer""]",
+163,6,"If a person is detected and smoke is detected, sound the siren in fire mode and announce ""Evacuate"" through the speaker.","사람이 있는데 연기가 감지되고 있으면, 사이렌을 화재 모드로 울리고 스피커로 ""대피하세요""라고 해줘.",IfPersonIsDetectedSmokeIsDetectedSound,service_list_ver2.0.1.json,"if ((#PresenceSensor).presencesensor_presence == true and (#SmokeDetector).smokedetector_smoke == true) {
+
+    (#Siren).siren_setsirenmode(""fire"")
+
+    (#Speaker).speaker_speak(""대피하세요"")
+
+}","if ((#PresenceSensor).presencesensor_presence == true and (#SmokeDetector).smokedetector_smoke == true) {
+  (#Siren).siren_setsirenmode(""fire"")
+  (#Speaker).speaker_speak(""대피하세요"")
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"PresenceSensor, Speaker, Siren, SmokeDetector, SoundSensor, Oven, PresenceVitalSensor, CarbonDioxideSensor, RiceCooker, AirQualitySensor",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""Speaker"", ""Siren"", ""SmokeDetector"", ""SoundSensor"", ""Oven"", ""PresenceVitalSensor"", ""CarbonDioxideSensor"", ""RiceCooker"", ""AirQualitySensor""]","[""PresenceSensor"", ""Speaker"", ""Siren"", ""SmokeDetector"", ""SoundSensor"", ""Oven"", ""PresenceVitalSensor"", ""CarbonDioxideSensor"", ""RiceCooker"", ""AirQualitySensor""]",27073,90,27163,2.21,3.1763,12290.9502,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Speaker"", ""Siren"", ""SmokeDetector"", ""SoundSensor"", ""Oven"", ""PresenceVitalSensor"", ""CarbonDioxideSensor"", ""RiceCooker"", ""AirQualitySensor""]",
+164,6,"If the pressure is 100 or higher and no one is home, close the valve and sound emergency siren.","수압이 100 이상이고 사람이 없으면, 밸브를 잠그고 긴급 사이렌을 울려줘.",IfPressureIs100OrHigherNoOne,service_list_ver2.0.1.json,"if ((#PressureSensor).pressuresensor_pressure >= 100 and (#PresenceSensor).presencesensor_presence == false) {
+
+    (#Valve).valve_close()
+
+    (#Siren).siren_setsirenmode(""emergency"")
+
+}","if ((#PressureSensor).pressuresensor_pressure >= 100 and (#PresenceSensor).presencesensor_presence == false) {
+  (#Valve).valve_close()
+  (#Siren).siren_setsirenmode(""emergency"")
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"PresenceSensor, Siren, Valve, PressureSensor, ArmRobot, Pump, PresenceVitalSensor, SoundSensor, Door, Button",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""Siren"", ""Valve"", ""PressureSensor"", ""ArmRobot"", ""Pump"", ""PresenceVitalSensor"", ""SoundSensor"", ""Door"", ""Button""]","[""PresenceSensor"", ""Siren"", ""Valve"", ""PressureSensor"", ""ArmRobot"", ""Pump"", ""PresenceVitalSensor"", ""SoundSensor"", ""Door"", ""Button""]",25550,88,25638,4.6646,5.6494,5496.2912,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Siren"", ""Valve"", ""PressureSensor"", ""ArmRobot"", ""Pump"", ""PresenceVitalSensor"", ""SoundSensor"", ""Door"", ""Button""]",
+165,6,"If no motion is detected but the door is open, take a photo and output ""Warning"" through the speaker.","움직임이 감지되지 않는데 문이 열려 있으면, 사진을 찍고 스피커로 ""경고""라고 말해줘.",IfNoMotionIsDetectedButDoorIsOpen,service_list_ver2.0.1.json,"if ((#MotionSensor).motionsensor_motion == false and (#Door).door_doorstate == ""open"") {
+
+    (#Camera).camera_captureimage()
+
+    (#Speaker).speaker_speak(""경고"")
+
+}","if ((#MotionSensor).motionsensor_motion == false and (#Door).door_doorstate == ""open"") {
+  (#Camera).camera_captureimage()
+  (#Speaker).speaker_speak(""경고"")
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"PresenceSensor, Speaker, Door, Camera, MotionSensor, DoorLock, PresenceVitalSensor, ArmRobot, TapDialSwitch, Safe",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""Speaker"", ""Door"", ""Camera"", ""MotionSensor"", ""DoorLock"", ""PresenceVitalSensor"", ""ArmRobot"", ""TapDialSwitch"", ""Safe""]","[""PresenceSensor"", ""Speaker"", ""Door"", ""Camera"", ""MotionSensor"", ""DoorLock"", ""PresenceVitalSensor"", ""ArmRobot"", ""TapDialSwitch"", ""Safe""]",27417,79,27496,2.1639,3.1311,12706.687,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Speaker"", ""Door"", ""Camera"", ""MotionSensor"", ""DoorLock"", ""PresenceVitalSensor"", ""ArmRobot"", ""TapDialSwitch"", ""Safe""]",
+166,6,"If someone is in the living room and smoke is being detected in the kitchen, play an announcement in the living room and close the kitchen valve.","거실에 사람이 있고 주방에서 연기가 감지되고 있으면, 거실 스피커로 주방에 연기가 감지되었다고 출력하고 주방 밸브를 잠궈줘.",IfSomeoneIsInLivingRoomSmokeIs,service_list_ver2.0.1.json,"if ((#LivingRoom #PresenceSensor).presencesensor_presence == true and (#Kitchen #SmokeDetector).smokedetector_smoke == true) {
+
+    (#LivingRoom #Speaker).speaker_speak(""주방에 연기가 감지되었습니다."")
+
+    (#Kitchen #Valve).valve_close()
+
+}","if ((#LivingRoom #PresenceSensor).presencesensor_presence == true and (#Kitchen #SmokeDetector).smokedetector_smoke == true) {
+  (#LivingRoom #Speaker).speaker_speak(""주방에 연기가 감지되었습니다"")
+  (#Kitchen #Valve).valve_close()
+}",94.066,True,strict,False,0.99891,1.0,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 4 connected-device category group(s) were injected.",0,"[""PresenceSensor"", ""SmokeDetector"", ""Speaker"", ""Valve""]","[""PresenceSensor"", ""SmokeDetector"", ""Speaker"", ""Valve""]",24302,89,24391,2.0173,2.0294,12090.9136,0.0,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],
+167,6,"If the bedroom temperature is 26 degrees or higher and the bedroom window is open, close the window and turn on the air conditioner.","안방의 온도가 26도 이상이고 창문이 열려 있으면, 창문을 닫고 에어컨을 켜줘.",IfBedroomTemperatureIs26DegreesOrHigher,service_list_ver2.0.1.json,"if ((#Bedroom #TemperatureSensor).temperaturesensor_temperature >= 26 and (#Bedroom #Window).armrobot_currentposition > 0) {
+
+    (#Bedroom #Window).windowcovering_downorclose()
+
+    (#Bedroom #AirConditioner).switch_on()
+
+}","if ((#Bedroom #TemperatureSensor).temperaturesensor_temperature >= 26 and (#Bedroom #Window).armrobot_currentposition > 0) {
+  (#Bedroom #Window).windowcovering_downorclose()
+  (#Bedroom #AirConditioner).switch_on()
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 4 connected-device category group(s) were injected.",0,"[""TemperatureSensor"", ""WindowCovering"", ""AirConditioner"", ""Switch""]","[""TemperatureSensor"", ""WindowCovering"", ""AirConditioner"", ""Switch""]",24307,94,24401,1.9578,1.9716,12463.4794,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+168,6,"If motion is detected in the garage and the main siren is off, sound the siren in emergency and take a picture.","차고에서 움직임이 감지되고 있고 메인 사이렌이 꺼져있으면, 비상 사이렌을 울리고 차고 사진을 찍어줘.",IfMotionIsDetectedInGarageMain,service_list_ver2.0.1.json,"if ((#Garage #MotionSensor).motionsensor_motion == true and (#Main #Siren).switch_switch == false) {
+
+    (#Main #Siren).siren_setsirenmode(""emergency"")
+
+    (#Garage #Camera).camera_captureimage()
+
+}","if ((#Garage #MotionSensor).motionsensor_motion == true and (#Main #Siren).switch_switch == false) {
+  (#Main #Siren).siren_setsirenmode(""emergency"")
+  (#Garage #Camera).camera_captureimage()
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 4 connected-device category group(s) were injected.",0,"[""MotionSensor"", ""Siren"", ""Switch"", ""Camera""]","[""MotionSensor"", ""Siren"", ""Switch"", ""Camera""]",24192,89,24281,2.2172,2.2293,10951.1997,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+169,6,"If the study carbon dioxide is 1000ppm or higher and the air purifier is in sleep mode, switch to auto mode and say ""Switching the air purifier to auto mode"" through the speaker.","서재 이산화탄소가 1000ppm 이상이고 공기청정기가 수면 모드이면, 자동 모드로 바꾸고 스피커로 ""공기청정기를 자동모드로 변경합니다""라고 말해줘.",IfStudyCarbonDioxideIs1000ppmOrHigher,service_list_ver2.0.1.json,"if ((#Study #AirQualitySensor).airqualitysensor_carbondioxide >= 1000 and (#Study #AirPurifier).airpurifier_airpurifiermode == ""sleep"") {
+
+    (#Study #AirPurifier).airpurifier_setairpurifiermode(""auto"")
+
+    (#Study #Speaker).speaker_speak(""공기 청정기를 자동모드로 변경합니다"")
+
+}","if ((#Study #AirQualitySensor).airqualitysensor_carbondioxide >= 1000 and (#Study #AirPurifier).airpurifier_airpurifiermode == ""sleep"") {
+  (#Study #AirPurifier).airpurifier_setairpurifiermode(""auto"")
+  (#Study #Speaker).speaker_speak(""공기청정기를 자동모드로 변경합니다"")
+}",97.5954,True,strict,False,0.99908,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""AirQualitySensor"", ""AirPurifier"", ""Speaker""]","[""AirQualitySensor"", ""AirPurifier"", ""Speaker""]",24914,117,25031,4.435,4.4475,5643.9684,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+170,6,"If the bathroom humidity is 85% or higher and the bathroom door is closed, turn on the light and open the door.","욕실 습도가 85% 이상이고 욕실 문이 닫혀 있으면, 조명을 켜고 문을 열어줘.",IfBathroomHumidityIs85OrHigher,service_list_ver2.0.1.json,"if ((#Bathroom #HumiditySensor).humiditysensor_humidity >= 85 and (#Bathroom #Door).door_doorstate == ""closed"") {
+
+    (#Bathroom #Light).switch_on()
+
+    (#Bathroom #Door).door_open()
+
+}","if ((#Bathroom #HumiditySensor).humiditysensor_humidity >= 85 and (#Bathroom #Door).door_doorstate == ""closed"") {
+  (#Bathroom #Light).switch_on()
+  (#Bathroom #Door).door_open()
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 4 connected-device category group(s) were injected.",0,"[""HumiditySensor"", ""Door"", ""Light"", ""Switch""]","[""HumiditySensor"", ""Door"", ""Light"", ""Switch""]",25141,83,25224,2.4779,2.4895,10179.5876,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+171,6,"If the face ID 'family' is recognized at the entrance and the door lock is locked , unlock the door lock and open the door.","현관에서 인식된 얼굴 ID가 ""가족""이고 도어락이 잠겨 있으면, 도어락을 풀고 문을 열어줘.",IfFaceIDFamilyIsRecognizedAtEntrance,service_list_ver2.0.1.json,"if ((#Entrance #FaceRecognizer).facerecognizer_recognizedresult == ""family"" and (#Entrance #DoorLock).doorlock_doorlockstate == ""locked"") {
+
+    (#Entrance #DoorLock).doorlock_unlock()
+
+    (#Entrance #Door).door_open()
+
+}","prev := (#DoorLock).doorlock_doorlockstate
+
+curr = (#DoorLock).doorlock_doorlockstate
+
+if (prev != ""closed"" and curr == ""closed"") {
+
+    (#Entrance #Light).levelcontrol_movetolevel(100, 0)
+
+    delay(10 SEC)
+
+    (#Entrance #Light).switch_off()
+
+}
+
+prev = curr",64.278,False,strict,False,0.370991,0.25,0.25,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""FaceRecognizer"", ""DoorLock"", ""Door""]","[""FaceRecognizer"", ""DoorLock"", ""Door""]",23844,86,23930,1.9993,2.0096,11969.1892,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+172,6,"If the garden illuminance is below 50 and the terrace light is off, turn on the light and play an announcement in the garden.","정원 조도가 50 미만이고 테라스 조명이 꺼져 있으면, 조명을 켜고 정원 스피커로 조명을 켠다고 말해줘.",IfGardenIlluminanceIsBelow50Terrace,service_list_ver2.0.1.json,"if ((#Garden #LightSensor).lightsensor_brightness < 50 and (#Terrace #Light).switch_switch == false) {
+
+    (#Terrace #Light).switch_on()
+
+    (#Garden #Speaker).speaker_speak(""조명을 켭니다."")
+
+}","if ((#Garden #LightSensor).lightsensor_brightness < 50 and (#Terrace #Light).switch_switch == false) {
+  (#Terrace #Light).switch_on()
+  (#Garden #Speaker).speaker_speak(""조명을 켰습니다"")
+}",93.1097,True,strict,False,0.994675,1.0,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 4 connected-device category group(s) were injected.",0,"[""LightSensor"", ""Light"", ""Switch"", ""Speaker""]","[""LightSensor"", ""Light"", ""Switch"", ""Speaker""]",25880,93,25973,2.2384,2.2505,11603.3774,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+173,6,"If it's raining and the living room window is open, close the window and set the dehumidifier to drying mode.","비가 오고 거실 창문이 열려 있으면, 창문을 닫고 건조기를 건조 모드로 설정해줘.",IfItSRainingLivingRoomWindowIs,service_list_ver2.0.1.json,"if ((#RainSensor).rainsensor_rain == true and (#LivingRoom #Window).armrobot_currentposition == 0) {
+
+    (#LivingRoom #Window).windowcovering_downorclose()
+
+    (#Dehumidifier).dehumidifier_setdehumidifiermode(""drying"")
+
+}","if ((#RainSensor).rainsensor_rain == true and (#LivingRoom #Window).armrobot_currentposition > 0) {
+  (#LivingRoom #Window).windowcovering_downorclose()
+  (#Dehumidifier).dehumidifier_setdehumidifiermode(""drying"")
+}",94.2833,True,strict,False,0.99665,1.0,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""RainSensor"", ""WindowCovering"", ""Dehumidifier""]","[""RainSensor"", ""WindowCovering"", ""Dehumidifier""]",23845,106,23951,2.0058,2.022,11940.8715,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+174,6,"If the baby room sound is 50dB or higher and the living room speaker is stopped, say the baby is awake through the speaker and play ""lullaby.mp3"" file.","아기방 소리가 50dB 이상이고 거실 스피커가 멈춘 상태면, 거실 스피커로 아기가 깼다고 말하고 lullaby.mp3 파일 재생을 시작해줘.",IfBabyRoomSoundIs50dBOrHigher,service_list_ver2.0.1.json,"if ((#BabyRoom #SoundSensor).soundsensor_sound >= 50 and (#LivingRoom #Speaker).speaker_playbackstate == ""stopped"") {
+
+    (#LivingRoom #Speaker).speaker_speak(""아기가 깼습니다."")
+
+    (#LivingRoom #Speaker).speaker_play(""lullaby.mp3"")
+
+}","if ((#BabyRoom #SoundSensor).soundsensor_sound >= 50 and (#LivingRoom #Speaker).speaker_playbackstate == ""stopped"") {
+  (#LivingRoom #Speaker).speaker_speak(""아기가 깼습니다"")
+  (#LivingRoom #Speaker).speaker_play(""lullaby.mp3"")
+}",96.6196,True,strict,False,0.998926,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""SoundSensor"", ""Speaker""]","[""SoundSensor"", ""Speaker""]",23985,104,24089,1.914,1.9244,12585.6844,0.0,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],
+175,6,"If the server room temperature is 30 degrees or higher and the AC is off, turn it on and sound the main emergency siren.","서버실 온도가 30도 이상이고 에어컨이 꺼져 있으면, 에어컨을 냉방 모드로 켜고 메인 사이렌을 긴급 모드로 울려줘.",IfServerRoomTemperatureIs30DegreesOrHigher,service_list_ver2.0.1.json,"if ((#ServerRoom #TemperatureSensor).temperaturesensor_temperature >= 30 and (#ServerRoom #AirConditioner).switch_switch == false) {
+
+    (#ServerRoom #AirConditioner).airconditioner_setairconditionermode(""cool"")
+
+    (#Main #Siren).siren_setsirenmode(""emergency"")
+
+}","if ((#ServerRoom #TemperatureSensor).temperaturesensor_temperature >= 30 and (#ServerRoom #AirConditioner).switch_switch == false) {
+  (#ServerRoom #AirConditioner).airconditioner_setairconditionermode(""cool"")
+  (#Main #Siren).siren_setsirenmode(""emergency"")
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 4 connected-device category group(s) were injected.",0,"[""TemperatureSensor"", ""AirConditioner"", ""Switch"", ""Siren""]","[""TemperatureSensor"", ""AirConditioner"", ""Switch"", ""Siren""]",23947,96,24043,4.4104,4.4208,5451.433,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+176,6,"If the wine cellar temperature is 15 degrees or higher and humidity is 60% or higher, turn on the air conditioner and turn off the humidifier.","와인 셀러 온도가 15도 이상이고 습도가 60% 이상이면, 에어컨을 켜고 가습기를 꺼줘.",IfWineCellarTemperatureIs15DegreesOrHigher,service_list_ver2.0.1.json,"if ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {
+
+    (#AirConditioner).switch_on()
+
+    (#Humidifier).switch_off()
+
+}","if ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {
+  (#WineCellar #AirConditioner).switch_on()
+  (#WineCellar #Humidifier).switch_off()
+}",96.49,True,strict,False,0.973,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 5 connected-device category group(s) were injected.",0,"[""TemperatureSensor"", ""HumiditySensor"", ""AirConditioner"", ""Switch"", ""Humidifier""]","[""TemperatureSensor"", ""HumiditySensor"", ""AirConditioner"", ""Switch"", ""Humidifier""]",24088,100,24188,2.2189,2.2304,10900.8968,0.0,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],
+177,6,"If a water leak is detected in the basement and the main valve is open, close all main valves and sound the police siren.","지하에서 누수가 감지되고 메인 밸브가 열려 있으면, 모든 메인 밸브를 잠그고 경찰 사이렌을 울려줘.",IfWaterLeakIsDetectedInBasement,service_list_ver2.0.1.json,"if ((#Basement #LeakSensor).leaksensor_leakage == true and (#Main #Valve).valve_valvestate == true) {
+
+    all(#Main #Valve).valve_close()
+
+    (#Siren).siren_setsirenmode(""police"")
+
+}","if ((#Basement #LeakSensor).leaksensor_leakage == true and (#Main #Valve).valve_valvestate == true) {
+  all(#Main #Valve).valve_close()
+  (#Siren).siren_setsirenmode(""police"")
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""LeakSensor"", ""Valve"", ""Siren""]","[""LeakSensor"", ""Valve"", ""Siren""]",23413,88,23501,2.5025,2.5125,9391.009,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+178,6,"If the warehouse fine dust level is 100 or higher and the air purifier is in auto mode, switch it to high mode and say through the warehouse speaker ""Switching to high mode"".","창고 미세먼지가 100 이상이고 공기청정기가 자동 모드이면, 모드를 강풍 모드로 바꾸고 창고 스피커로 ""강풍 모드로 전환합니다""라고 말해줘.",IfWarehouseFineDustLevelIs100OrHigher,service_list_ver2.0.1.json,"if ((#Warehouse #AirQualitySensor).airqualitysensor_finedustlevel >= 100 and (#Warehouse #AirPurifier).airpurifier_airpurifiermode == ""auto"") {
+
+    (#Warehouse #AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Warehouse #Speaker).speaker_speak(""강풍 모드로 전환합니다"")
+
+}","if ((#Warehouse #AirQualitySensor).airqualitysensor_finedustlevel >= 100 and (#Warehouse #AirPurifier).airpurifier_airpurifiermode == ""auto"") {
+  (#Warehouse #AirPurifier).airpurifier_setairpurifiermode(""high"")
+  (#Warehouse #Speaker).speaker_speak(""강풍 모드로 전환합니다"")
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""AirQualitySensor"", ""AirPurifier"", ""Speaker""]","[""AirQualitySensor"", ""AirPurifier"", ""Speaker""]",24908,114,25022,2.1723,2.1845,11518.6669,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+179,6,"If the motion is detected in the guest room and the air conditioner is off, set the air conditioner to auto mode and set the target temperature to 24.","게스트룸에 움직임이 감지되고 있고 에어컨이 꺼져 있으면, 에어컨을 자동 모드로 설정하고 목표 온도를 24도로 설정해줘.",IfMotionIsDetectedInGuestRoom,service_list_ver2.0.1.json,"if ((#GuestRoom #MotionSensor).motionsensor_motion == true and (#GuestRoom #AirConditioner).switch_switch == false) {
+
+    (#GuestRoom #AirConditioner).airconditioner_setairconditionermode(""auto"")
+
+    (#GuestRoom #AirConditioner).airconditioner_settargettemperature(24)
+
+}","if ((#GuestRoom #MotionSensor).motionsensor_motion == true and (#GuestRoom #AirConditioner).switch_switch == false) {
+  (#GuestRoom #AirConditioner).airconditioner_setairconditionermode(""auto"")
+  (#GuestRoom #AirConditioner).airconditioner_settargettemperature(24)
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""MotionSensor"", ""AirConditioner"", ""Switch""]","[""MotionSensor"", ""AirConditioner"", ""Switch""]",23695,105,23800,2.4202,2.4306,9833.898,0.0,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],
+180,6,"If the living room light is on and the illuminance is 50 lux or higher, close the living room blind and set the AC to auto mode.","거실 조명이 켜져 있고 조도가 50 럭스 이상이면, 거실 블라인드를 닫고 에어컨을 자동 모드로 설정해줘.",IfLivingRoomLightIsOnIlluminance,service_list_ver2.0.1.json,"if ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {
+
+    (#LivingRoom #Blind).windowcovering_downorclose()
+
+    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(""auto"")
+
+}","if ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {
+  (#LivingRoom #Blind).windowcovering_downorclose()
+  (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(""auto"")
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 5 connected-device category group(s) were injected.",0,"[""Light"", ""Switch"", ""AirConditioner"", ""WindowCovering"", ""LightSensor""]","[""Light"", ""Switch"", ""AirConditioner"", ""WindowCovering"", ""LightSensor""]",25887,104,25991,2.3072,2.3235,11265.1699,0.0,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],

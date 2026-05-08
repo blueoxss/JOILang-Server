@@ -120,7 +120,7 @@ it should be interpreted as a **one-time condition trigger** is Dynamic transiti
    - **If the sentence explicitly mentions a specific repeating interval (such as "every 5 seconds", "5초마다"), always convert this interval to milliseconds and set it as the period value (e.g., period = 5000 for 5 seconds).**
    - **If the sentence describes a repeating, continuous, or monitoring action but does not mention a specific interval, or obviously requires a period but no interval is stated, always set the period to 100 (ms) by default.**
    - → Use with "period": 100 to continuously monitor state transitions and respond in real time.
-   - → Combine state change detection with loop { ... clock_delay(...) } to express repeated actions after the triggering condition.
+   - → Combine state change detection with `period` and state variables. For a between-action wait, use `delay(N SEC|MIN|HOUR)`.
    [example]
    ```
    "name": "Scenario",
@@ -234,7 +234,7 @@ it should be interpreted as a **one-time condition trigger** is Dynamic transiti
    - When using variables to count time or duration inside "code", such as lightOnTime = lightOnTime + 100, the period value directly determines the unit of increment.
    - Therefore, if no specific interval is given, **you must set `period": 100` as the default** to ensure accurate time tracking (e.g., 1800000ms = 30 minutes) as `real time` (`실시간`).
    - Important distinction: If the command describes a one-time event followed by a delay, 
-   - The `(#Clock).clock_delay(ms)` command suspends execution for the specified duration in milliseconds without needing to be used with `wait until`. It can be used as a standalone blocking statement.
+   - The `delay(N SEC|MIN|HOUR)` helper suspends execution for the specified duration without needing to be used with `wait until`. It must be a standalone blocking statement.
    - If a command includes a numeric time condition (e.g., "5초 내에, within 5 seconds"), you must ensure the logic enforces that constraint explicitly in code.
    - → This is not a repeating condition. It should be handled using "period": -1 and an explicit delay call like:
    - [Example]
@@ -251,4 +251,3 @@ it should be interpreted as a **one-time condition trigger** is Dynamic transiti
 - Use `wait until (...)` for **monitoring future state transitions**.
 - Combine `if (...)` and `wait until (...)` using `if-else` to **cover both present and future satisfaction**.
 - Use `"period": > 0` to **enable repeated detection** for expressions like "every time", "whenever", or “~할 때마다”.
-

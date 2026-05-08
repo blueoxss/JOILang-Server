@@ -1,9 +1,0 @@
-{
-  "row_count": 1,
-  "row_nos": [
-    1
-  ],
-  "candidate_count": 1,
-  "cold_load_sec": 12.3938,
-  "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_20260424_full/benchmarks/retrieval_qwen25_coder_7b/qwen25_coder_7b_warmup_candidates.csv"
-}

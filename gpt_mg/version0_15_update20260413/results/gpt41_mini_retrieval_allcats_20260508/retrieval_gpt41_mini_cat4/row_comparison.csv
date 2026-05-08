@@ -1,0 +1,296 @@
+row_no,category,row_category,command_eng,command_kor,gt,gt_name,gt_cron,gt_period,gt_code,warmup_excluded,gpt41_mini__det_score,gpt41_mini__det_pass,gpt41_mini__det_profile,gpt41_mini__det_gt_exact,gpt41_mini__det_gt_similarity,gpt41_mini__det_gt_service_coverage,gpt41_mini__det_gt_service_precision,gpt41_mini__det_gt_receiver_coverage,gpt41_mini__det_dataflow_score,gpt41_mini__det_numeric_grounding,gpt41_mini__det_enum_grounding,gpt41_mini__failure_reasons,gpt41_mini__output,gpt41_mini__output_name,gpt41_mini__output_cron,gpt41_mini__output_period,gpt41_mini__output_code,gpt41_mini__prompt_chars,gpt41_mini__prompt_tokens,gpt41_mini__completion_tokens,gpt41_mini__total_tokens,gpt41_mini__llm_latency_sec,gpt41_mini__total_pipeline_sec,gpt41_mini__tokens_per_sec,gpt41_mini__peak_vram_gb,gpt41_mini__generation_error_type,gpt41_mini__oom_flag,gpt41_mini__worker_python,gpt41_mini__resolved_model_path,gpt41_mini__service_list_snippet_source,gpt41_mini__service_list_device_count,gpt41_mini__service_list_retrieval_status,gpt41_mini__service_list_retrieval_mode,gpt41_mini__service_list_retrieval_topk,gpt41_mini__service_list_retrieval_categories,gpt41_mini__prompt_render_mode,gpt41_mini__prompt_assets_dir,gpt41_mini__warmup_excluded,gpt41_mini__row_category
+91,4,4,"When the contact sensor is detected, turn on the light.",접촉 센서가 감지되면 조명을 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#ContactSensor).contactsensor_contact == true)\n\n(#Light).switch_on()""}",,,0,"
+wait until ((#ContactSensor).contactsensor_contact == true)
+
+(#Light).switch_on()",False,93.6614,True,strict,False,0.532273,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]","{""name"":""ContactSensorTriggerLightOn"",""cron"":"""",""period"":100,""code"":""triggered := false\nif ((#ContactSensor).contactsensor_contact == true) {\n  if (triggered == false) {\n    (#Light).switch_on()\n    triggered = true\n  }\n} else {\n  triggered = false\n}""}",ContactSensorTriggerLightOn,,100,"triggered := false
+if ((#ContactSensor).contactsensor_contact == true) {
+  if (triggered == false) {
+    (#Light).switch_on()
+    triggered = true
+  }
+} else {
+  triggered = false
+}",100440,26191,85,26276,2.5116,8.0587,10461.857,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""ContactSensor"", ""LightSensor"", ""PresenceVitalSensor"", ""Light"", ""MotionSensor"", ""CarbonDioxideSensor"", ""TemperatureSensor"", ""Button"", ""ColorControl""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+92,4,4,"When the presence sensor detects someone, turn on the TV.",재실 센서가 감지되면 TV를 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#PresenceSensor).presencesensor_presence == true)\n\n(#Television).switch_on()""}",,,0,"
+wait until ((#PresenceSensor).presencesensor_presence == true)
+
+(#Television).switch_on()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""PresenceSensorTriggerTVOn"",""cron"":"""",""period"":0,""code"":""wait until ((#PresenceSensor).presencesensor_presence == true)\n(#Television).switch_on()""}",PresenceSensorTriggerTVOn,,0,"wait until ((#PresenceSensor).presencesensor_presence == true)
+(#Television).switch_on()",97020,25324,53,25377,1.5811,2.5556,16050.2182,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Television"", ""PresenceVitalSensor"", ""TemperatureSensor"", ""CarbonDioxideSensor"", ""Switch"", ""ContactSensor"", ""MotionSensor"", ""ArmRobot"", ""PressureSensor""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+93,4,4,"When the sound sensor value exceeds 50, stop speaker playback.",소리 센서의 수치가 50보다 커지면 스피커 재생을 멈춰줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#SoundSensor).soundsensor_sound > 50)\n\n(#Speaker).speaker_stop()""}",,,0,"
+wait until ((#SoundSensor).soundsensor_sound > 50)
+
+(#Speaker).speaker_stop()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""StopSpeakerWhenSoundHigh"",""cron"":"""",""period"":0,""code"":""wait until ((#SoundSensor).soundsensor_sound > 50)\n(#Speaker).speaker_stop()""}",StopSpeakerWhenSoundHigh,,0,"wait until ((#SoundSensor).soundsensor_sound > 50)
+(#Speaker).speaker_stop()",100658,26248,52,26300,1.8378,2.8411,14310.5887,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""SoundSensor"", ""AudioRecorder"", ""Siren"", ""PresenceSensor"", ""PressureSensor"", ""ContactSensor"", ""PresenceVitalSensor"", ""ArmRobot"", ""LeakSensor""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+94,4,4,"When it rains, turn on the dehumidifier.",비가 오면 제습기를 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#RainSensor).rainsensor_rain == true)\n\n(#Dehumidifier).switch_on()""}",,,0,"
+wait until ((#RainSensor).rainsensor_rain == true)
+
+(#Dehumidifier).switch_on()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""TurnOnDehumidifierWhenRains"",""cron"":"""",""period"":0,""code"":""wait until ((#RainSensor).rainsensor_rain == true)\n(#Dehumidifier).switch_on()""}",TurnOnDehumidifierWhenRains,,0,"wait until ((#RainSensor).rainsensor_rain == true)
+(#Dehumidifier).switch_on()",100318,26219,58,26277,2.0236,2.9962,12985.2738,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""RainSensor"", ""Dehumidifier"", ""Humidifier"", ""WeatherProvider"", ""ArmRobot"", ""Dishwasher"", ""AirConditioner"", ""Pump"", ""LaundryDryer""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+95,4,4,"When the brightness falls below 100 lux, turn on the light.",밝기가 100 럭스 미만이 되면 조명을 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#LightSensor).lightsensor_brightness < 100)\n\n(#Light).switch_on()""}",,,0,"
+wait until ((#LightSensor).lightsensor_brightness < 100)
+
+(#Light).switch_on()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""TurnOnLightWhenBrightnessLow"",""cron"":"""",""period"":0,""code"":""wait until ((#LightSensor).lightsensor_brightness < 100)\n(#Light).switch_on()""}",TurnOnLightWhenBrightnessLow,,0,"wait until ((#LightSensor).lightsensor_brightness < 100)
+(#Light).switch_on()",103292,26983,56,27039,1.9534,2.9395,13842.019,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""LightSensor"", ""Light"", ""ColorControl"", ""DimmerSwitch"", ""ArmRobot"", ""Switch"", ""Plug"", ""Charger"", ""SmokeDetector"", ""Television""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+96,4,4,"When the carbon dioxide concentration reaches 1000ppm or higher, sound the emergency siren.",이산화탄소 농도가 1000ppm 이상이 되면 긴급 사이렌을 울려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#CarbonDioxideSensor).carbondioxidesensor_carbondioxide >= 1000)\n\n(#Siren).siren_setsirenmode(\""emergency\"")""}",,,0,"
+wait until ((#CarbonDioxideSensor).carbondioxidesensor_carbondioxide >= 1000)
+
+(#Siren).siren_setsirenmode(""emergency"")",False,96.3018,True,strict,False,0.927027,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]","{""name"":""EmergencySirenOnHighCO2"",""cron"":"""",""period"":0,""code"":""wait until ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1000)\n(#Siren).siren_setsirenmode(\""emergency\"")""}",EmergencySirenOnHighCO2,,0,"wait until ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1000)
+(#Siren).siren_setsirenmode(""emergency"")",100900,26347,69,26416,2.3015,3.3023,11477.7319,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""AirQualitySensor"", ""CarbonDioxideSensor"", ""Siren"", ""ArmRobot"", ""Charger"", ""SoundSensor"", ""AirConditioner"", ""SmokeDetector"", ""PresenceVitalSensor"", ""ColorControl""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+97,4,4,"When smoke is detected, sound the fire alarm with the siren.",연기가 감지되면 사이렌으로 화재경보를 울려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#SmokeDetector).smokedetector_smoke == true)\n\n(#Siren).siren_setsirenmode(\""fire\"")""}",,,0,"
+wait until ((#SmokeDetector).smokedetector_smoke == true)
+
+(#Siren).siren_setsirenmode(""fire"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SmokeDetectedFireAlarm"",""cron"":"""",""period"":0,""code"":""wait until ((#SmokeDetector).smokedetector_smoke == true)\n(#Siren).siren_setsirenmode(\""fire\"")""}",SmokeDetectedFireAlarm,,0,"wait until ((#SmokeDetector).smokedetector_smoke == true)
+(#Siren).siren_setsirenmode(""fire"")",101373,26531,59,26590,2.1412,3.1214,12418.2701,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Siren"", ""SmokeDetector"", ""SoundSensor"", ""ArmRobot"", ""CarbonDioxideSensor"", ""Oven"", ""AirQualitySensor"", ""PresenceVitalSensor"", ""RiceCooker""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+98,4,4,"When the button is pushed 3 times, open the valve.",버튼이 세번 눌리면 벨브를 열어줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": 
+""wait until ((#Button).button_button == \""pushed_3x\"")\n\n(#Valve).valve_open()""}",,,0,"wait until ((#Button).button_button == ""pushed_3x"")
+
+(#Valve).valve_open()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""ButtonTriplePushOpenValve"",""cron"":"""",""period"":0,""code"":""wait until ((#Button).button_button == \""pushed_3x\"")\n(#Valve).valve_open()""}",ButtonTriplePushOpenValve,,0,"wait until ((#Button).button_button == ""pushed_3x"")
+(#Valve).valve_open()",102534,26951,56,27007,1.7416,2.719,15507.0051,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Valve"", ""Button"", ""ArmRobot"", ""TapDialSwitch"", ""Door"", ""Pump"", ""PresenceVitalSensor"", ""Oven"", ""Safe"", ""DimmerSwitch""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+99,4,4,"When the temperature reaches 35 degrees or higher, set the air conditioner to 30 degrees.",온도가 35도 이상이 되면 에어컨의 목표 온도를 30도로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)\n\n(#AirConditioner).airconditioner_settargettemperature(30)""}",,,0,"
+wait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)
+
+(#AirConditioner).airconditioner_settargettemperature(30)",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""Set AC Target Temp When Hot"",""cron"":"""",""period"":0,""code"":""wait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)\n(#AirConditioner).airconditioner_settargettemperature(30)""}",Set AC Target Temp When Hot,,0,"wait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)
+(#AirConditioner).airconditioner_settargettemperature(30)",104376,27282,65,27347,1.7296,2.7187,15811.1702,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""ArmRobot"", ""LaundryDryer"", ""Dishwasher"", ""WeatherProvider"", ""Oven"", ""Dehumidifier""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+100,4,4,"When the safe is unlocked, sound the police siren.",금고가 열리면 경찰 사이렌을 울려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Safe).safe_safestate == \""unlocked\"")\n\n(#Siren).siren_setsirenmode(\""police\"")""}",,,0,"
+wait until ((#Safe).safe_safestate == ""unlocked"")
+
+(#Siren).siren_setsirenmode(""police"")",False,97.4889,True,strict,False,0.977778,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]","{""name"":""SafeUnlockPoliceSiren"",""cron"":"""",""period"":0,""code"":""wait until ((#Safe).safe_safestate == \""open\"")\n(#Siren).siren_setsirenmode(\""police\"")""}",SafeUnlockPoliceSiren,,0,"wait until ((#Safe).safe_safestate == ""open"")
+(#Siren).siren_setsirenmode(""police"")",102418,26755,60,26815,2.6406,3.6174,10154.889,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Siren"", ""Safe"", ""SoundSensor"", ""ArmRobot"", ""DoorLock"", ""Door"", ""PresenceVitalSensor"", ""AudioRecorder"", ""PressureSensor"", ""Speaker""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+101,4,4,"When a leak is detected, close the valve.",누수가 감지되면 벨브를 차단해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#LeakSensor).leaksensor_leakage == true)\n\n(#Valve).valve_close()""}",,,0,"
+wait until ((#LeakSensor).leaksensor_leakage == true)
+
+(#Valve).valve_close()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""LeakDetectedCloseValve"",""cron"":"""",""period"":0,""code"":""wait until ((#LeakSensor).leaksensor_leakage == true)\n(#Valve).valve_close()""}",LeakDetectedCloseValve,,0,"wait until ((#LeakSensor).leaksensor_leakage == true)
+(#Valve).valve_close()",99065,25958,54,26012,1.4452,2.4008,17998.8929,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Valve"", ""LeakSensor"", ""Pump"", ""ArmRobot"", ""PresenceVitalSensor"", ""Door"", ""LevelControl"", ""Safe"", ""Button""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+102,4,4,"When the humidity exceeds 80%, start the dehumidifier in drying mode.",습도가 80%보다 커지면 제습기를 건조 모드로 작동시켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#HumiditySensor).humiditysensor_humidity > 80)\n\n(#Dehumidifier).dehumidifier_setdehumidifiermode(\""drying\"")""}",,,0,"
+wait until ((#HumiditySensor).humiditysensor_humidity > 80)
+
+(#Dehumidifier).dehumidifier_setdehumidifiermode(""drying"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""DehumidifierDryingModeOnHighHumidity"",""cron"":"""",""period"":0,""code"":""wait until ((#HumiditySensor).humiditysensor_humidity > 80)\n(#Dehumidifier).dehumidifier_setdehumidifiermode(\""drying\"")""}",DehumidifierDryingModeOnHighHumidity,,0,"wait until ((#HumiditySensor).humiditysensor_humidity > 80)
+(#Dehumidifier).dehumidifier_setdehumidifiermode(""drying"")",103036,26934,70,27004,2.1385,3.083,12627.5427,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""Dehumidifier"", ""Humidifier"", ""Dishwasher"", ""LaundryDryer"", ""AirConditioner"", ""WeatherProvider"", ""AirQualitySensor"", ""AirPurifier"", ""ArmRobot""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+103,4,4,"When motion is detected, turn on the light.",움직임이 감지되면 조명을 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#MotionSensor).motionsensor_motion == true)\n\n(#Light).switch_on()""}",,,0,"
+wait until ((#MotionSensor).motionsensor_motion == true)
+
+(#Light).switch_on()",False,92.8379,True,strict,False,0.52757,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""MotionDetectedTurnOnLight"",""cron"":"""",""period"":100,""code"":""triggered := false\nif ((#MotionSensor).motionsensor_motion == true) {\n  if (triggered == false) {\n    (#Light).switch_on()\n    triggered = true\n  }\n} else {\n  triggered = false\n}""}",MotionDetectedTurnOnLight,,100,"triggered := false
+if ((#MotionSensor).motionsensor_motion == true) {
+  if (triggered == false) {
+    (#Light).switch_on()
+    triggered = true
+  }
+} else {
+  triggered = false
+}",103338,26942,85,27027,2.2659,3.2319,11927.7108,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""LightSensor"", ""Light"", ""MotionSensor"", ""ColorControl"", ""DimmerSwitch"", ""ArmRobot"", ""Switch"", ""PresenceVitalSensor"", ""SmokeDetector""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+104,4,4,"When the indoor very fine dust level becomes 35 or higher, set the air purifier to high.",내부 초미세먼지 농도가 35 이상이 되면 공기청정기를 강하게 틀어줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#AirQualitySensor).airqualitysensor_veryfinedustlevel >= 35)\n\n(#AirPurifier).airpurifier_setairpurifiermode(\""high\"")""}",,,0,"
+wait until ((#AirQualitySensor).airqualitysensor_veryfinedustlevel >= 35)
+
+(#AirPurifier).airpurifier_setairpurifiermode(""high"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""IndoorVeryFineDustHighAirPurifierHigh"",""cron"":"""",""period"":0,""code"":""wait until ((#AirQualitySensor).airqualitysensor_veryfinedustlevel >= 35)\n(#AirPurifier).airpurifier_setairpurifiermode(\""high\"")""}",IndoorVeryFineDustHighAirPurifierHigh,,0,"wait until ((#AirQualitySensor).airqualitysensor_veryfinedustlevel >= 35)
+(#AirPurifier).airpurifier_setairpurifiermode(""high"")",99803,26119,73,26192,1.8525,2.8382,14138.7314,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Door"", ""AirPurifier"", ""AirQualitySensor"", ""AirConditioner"", ""Dishwasher"", ""RobotVacuumCleaner"", ""SmokeDetector"", ""LaundryDryer"", ""ColorControl"", ""Dehumidifier""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+105,4,4,"When the charging voltage exceeds 250V, stop charging.",충전 전압이 250V보다 높아지면 충전을 중단해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Charger).charger_voltage > 250000)\n\n(#Charger).switch_off()""}",,,0,"
+wait until ((#Charger).charger_voltage > 250000)
+
+(#Charger).switch_off()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""StopChargingWhenVoltageHigh"",""cron"":"""",""period"":0,""code"":""wait until ((#Charger).charger_voltage > 250000)\n(#Charger).switch_off()""}",StopChargingWhenVoltageHigh,,0,"wait until ((#Charger).charger_voltage > 250000)
+(#Charger).switch_off()",99805,26080,53,26133,1.9107,2.8846,13677.1864,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Charger"", ""Plug"", ""ArmRobot"", ""CarbonDioxideSensor"", ""PresenceVitalSensor"", ""Pump"", ""PressureSensor"", ""ColorControl"", ""Safe"", ""LevelControl""]",legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+106,4,4,"When the entrance door lock is unlocked, turn on the living room light.",현관 도어락이 잠금해제되면 거실 조명을 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Entrance #DoorLock).doorlock_doorlockstate == \""unlocked\"")\n\n(#LivingRoom #Light).switch_on()""}",,,0,"
+wait until ((#Entrance #DoorLock).doorlock_doorlockstate == ""unlocked"")
+
+(#LivingRoom #Light).switch_on()",False,69.9,False,strict,False,0.472833,0.5,0.333333,0.5,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""semantic""]","{""name"":""EntranceDoorUnlockTurnOnLivingRoomLight"",""cron"":"""",""period"":0,""code"":""prev := (#DoorLock).doorlock_doorlockstate\n\ncurr = (#DoorLock).doorlock_doorlockstate\n\nif (prev != \""closed\"" and curr == \""closed\"") {\n\n    (#Entrance #Light).levelcontrol_movetolevel(100, 0)\n\n    delay(10 SEC)\n\n    (#Entrance #Light).switch_off()\n\n}\n\nprev = curr""}",EntranceDoorUnlockTurnOnLivingRoomLight,,0,"prev := (#DoorLock).doorlock_doorlockstate
+
+curr = (#DoorLock).doorlock_doorlockstate
+
+if (prev != ""closed"" and curr == ""closed"") {
+
+    (#Entrance #Light).levelcontrol_movetolevel(100, 0)
+
+    delay(10 SEC)
+
+    (#Entrance #Light).switch_off()
+
+}
+
+prev = curr",95793,25029,62,25091,3.4955,3.5082,7178.0861,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+107,4,4,"When motion is detected in the bedroom, turn on the bedroom air conditioner.",침실에 움직임이 감지되면 침실 에어컨을 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Bedroom #MotionSensor).motionsensor_motion == true)\n\n(#Bedroom #AirConditioner).airconditioner_setairconditionermode(\""auto\"")""}",,,0,"
+wait until ((#Bedroom #MotionSensor).motionsensor_motion == true)
+
+(#Bedroom #AirConditioner).airconditioner_setairconditionermode(""auto"")",False,69.7752,False,strict,False,0.415033,0.5,0.5,0.5,1.0,1.0,0.0,"[""enum_grounding"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""semantic""]","{""name"":""BedroomMotionTurnOnAC"",""cron"":"""",""period"":100,""code"":""triggered := false\nif ((#Bedroom #MotionSensor).motionsensor_motion == true) {\n  if (triggered == false) {\n    (#Bedroom #AirConditioner).switch_on()\n    triggered = true\n  }\n} else {\n  triggered = false\n}""}",BedroomMotionTurnOnAC,,100,"triggered := false
+if ((#Bedroom #MotionSensor).motionsensor_motion == true) {
+  if (triggered == false) {
+    (#Bedroom #AirConditioner).switch_on()
+    triggered = true
+  }
+} else {
+  triggered = false
+}",89272,23335,91,23426,3.6872,3.6976,6353.3304,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+108,4,4,"When a smoke is detected in the kitchen, close the kitchen valve.",주방에 연기가 감지되면 주방 벨브를 잠궈줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Kitchen #SmokeDetector).smokedetector_smoke == true)\n\n(#Kitchen #Valve).valve_close()""}",,,0,"
+wait until ((#Kitchen #SmokeDetector).smokedetector_smoke == true)
+
+(#Kitchen #Valve).valve_close()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SmokeDetectedCloseKitchenValve"",""cron"":"""",""period"":0,""code"":""wait until ((#Kitchen #SmokeDetector).smokedetector_smoke == true)\n(#Kitchen #Valve).valve_close()""}",SmokeDetectedCloseKitchenValve,,0,"wait until ((#Kitchen #SmokeDetector).smokedetector_smoke == true)
+(#Kitchen #Valve).valve_close()",88372,23154,59,23213,1.8732,1.8828,12392.1631,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+109,4,4,"When the fine dust level in the study reaches 30 or higher, turn on the study air purifier.",서재 미세먼지 농도가 30 이상이 되면 서재 공기청정기를 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Study #AirQualitySensor).airqualitysensor_finedustlevel >= 30)\n\n(#Study #AirPurifier).switch_on()""}",,,0,"
+wait until ((#Study #AirQualitySensor).airqualitysensor_finedustlevel >= 30)
+
+(#Study #AirPurifier).switch_on()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""StudyFineDustAirPurifierOn"",""cron"":"""",""period"":0,""code"":""wait until ((#Study #AirQualitySensor).airqualitysensor_finedustlevel >= 30)\n(#Study #AirPurifier).switch_on()""}",StudyFineDustAirPurifierOn,,0,"wait until ((#Study #AirQualitySensor).airqualitysensor_finedustlevel >= 30)
+(#Study #AirPurifier).switch_on()",92248,24173,67,24240,1.5801,1.5908,15340.8012,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+110,4,4,"When a water leak is detected in the basement, sound the main siren in emergency mode.",지하에 누수가 감지되면 메인 사이렌을 비상모드로 울려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Basement #LeakSensor).leaksensor_leakage == true)\n\n(#Main #Siren).siren_setsirenmode(\""emergency\"")""}",,,0,"
+wait until ((#Basement #LeakSensor).leaksensor_leakage == true)
+
+(#Main #Siren).siren_setsirenmode(""emergency"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""BasementLeakEmergencySiren"",""cron"":"""",""period"":0,""code"":""wait until ((#Basement #LeakSensor).leaksensor_leakage == true)\n(#Main #Siren).siren_setsirenmode(\""emergency\"")""}",BasementLeakEmergencySiren,,0,"wait until ((#Basement #LeakSensor).leaksensor_leakage == true)
+(#Main #Siren).siren_setsirenmode(""emergency"")",88314,23156,62,23218,1.9064,1.9154,12178.9761,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+111,4,4,"When the terrace illuminance falls below 50, turn on the terrace light.",테라스 조도가 50 미만이 되면 테라스 조명을 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Terrace #LightSensor).lightsensor_brightness < 50)\n\n(#Terrace #Light).switch_on()""}",,,0,"
+wait until ((#Terrace #LightSensor).lightsensor_brightness < 50)
+
+(#Terrace #Light).switch_on()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""TerraceLightOnWhenIlluminanceLow"",""cron"":"""",""period"":0,""code"":""wait until ((#Terrace #LightSensor).lightsensor_brightness < 50)\n(#Terrace #Light).switch_on()""}",TerraceLightOnWhenIlluminanceLow,,0,"wait until ((#Terrace #LightSensor).lightsensor_brightness < 50)
+(#Terrace #Light).switch_on()",95138,24835,63,24898,2.0862,2.0966,11934.618,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+112,4,4,"When the garage door is opened, take a picture with the garage camera.",차고 문이 열리면 차고 카메라로 사진을 찍어줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Garage #Door).door_doorstate == \""open\"")\n\n(#Garage #Camera).camera_captureimage()""}",,,0,"
+wait until ((#Garage #Door).door_doorstate == ""open"")
+
+(#Garage #Camera).camera_captureimage()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""GarageDoorOpenTakePicture"",""cron"":"""",""period"":0,""code"":""wait until ((#Garage #Door).door_doorstate == \""open\"")\n(#Garage #Camera).camera_captureimage()""}",GarageDoorOpenTakePicture,,0,"wait until ((#Garage #Door).door_doorstate == ""open"")
+(#Garage #Camera).camera_captureimage()",90984,23795,54,23849,1.584,1.5933,15056.1869,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+113,4,4,"When the baby room sound exceeds 40 dB, output ""Noise detected in the baby room"" through the living room speaker.",아기방 소리가 40dB보다 커지면 거실 스피커로 아기방에 소음이 감지되었다고 말해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#BabyRoom #SoundSensor).soundsensor_sound > 40)\n\n(#LivingRoom #Speaker).speaker_speak(\""아기방에 소음이 감지되었습니다.\"")""}",,,0,"
+wait until ((#BabyRoom #SoundSensor).soundsensor_sound > 40)
+
+(#LivingRoom #Speaker).speaker_speak(""아기방에 소음이 감지되었습니다."")",False,95.7679,True,strict,False,0.984348,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""BabyRoomNoiseAlert"",""cron"":"""",""period"":0,""code"":""wait until ((#BabyRoom #SoundSensor).soundsensor_sound > 40)\n(#LivingRoom #Speaker).speaker_speak(\""아기방에 소음이 감지되었다고 말해줘\"")""}",BabyRoomNoiseAlert,,0,"wait until ((#BabyRoom #SoundSensor).soundsensor_sound > 40)
+(#LivingRoom #Speaker).speaker_speak(""아기방에 소음이 감지되었다고 말해줘"")",91624,23959,76,24035,3.5115,3.5217,6844.6533,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+114,4,4,"When the laundry room dryer's spin speed drops to 5 or below, announce through the living room speaker that the laundry is done.",세탁실 건조기 회전 속도가 5 이하가 되면 거실 스피커로 세탁이 끝났다고 알려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#LaundryRoom #LaundryDryer).laundrydryer_spinspeed <= 5)\n\n(#LivingRoom #Speaker).speaker_speak(\""세탁이 완료되었습니다.\"")""}",,,0,"
+wait until ((#LaundryRoom #LaundryDryer).laundrydryer_spinspeed <= 5)
+
+(#LivingRoom #Speaker).speaker_speak(""세탁이 완료되었습니다."")",False,96.6665,True,strict,False,0.973305,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]","{""name"":""LaundryDryerSpinSpeedLowAnnouncement"",""cron"":"""",""period"":0,""code"":""wait until ((#LaundryRoom #LaundryDryer).laundrydryer_spinspeed <= 5)\n(#LivingRoom #Speaker).speaker_speak(\""세탁이 끝났다고 알려줘\"")""}",LaundryDryerSpinSpeedLowAnnouncement,,0,"wait until ((#LaundryRoom #LaundryDryer).laundrydryer_spinspeed <= 5)
+(#LivingRoom #Speaker).speaker_speak(""세탁이 끝났다고 알려줘"")",93156,24363,68,24431,2.7073,2.717,9024.12,0.0,,False,,,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+115,4,4,"When the temperature in the pantry reaches 25 degrees or higher, turn on the pantry air conditioner.",창고 온도가 25도 이상이 되면 창고 에어컨을 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Pantry #TemperatureSensor).temperaturesensor_temperature >= 25)\n\n(#Pantry #AirConditioner).switch_on()""}",,,0,"
+wait until ((#Pantry #TemperatureSensor).temperaturesensor_temperature >= 25)
+
+(#Pantry #AirConditioner).switch_on()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""PantryTemperatureACOn"",""cron"":"""",""period"":0,""code"":""wait until ((#Pantry #TemperatureSensor).temperaturesensor_temperature >= 25)\n(#Pantry #AirConditioner).switch_on()""}",PantryTemperatureACOn,,0,"wait until ((#Pantry #TemperatureSensor).temperaturesensor_temperature >= 25)
+(#Pantry #AirConditioner).switch_on()",90658,23689,63,23752,2.5937,2.6038,9157.5741,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+116,4,4,"When the bathroom humidity exceeds 70%, set the bathroom dehumidifier to freeze protection mode.",욕실 습도가 70%보다 높아지면 욕실 제습기를 동결 방지 모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Bathroom #HumiditySensor).humiditysensor_humidity > 70)\n\n(#Bathroom #Dehumidifier).dehumidifier_setdehumidifiermode(\""freezeProtection\"")""}",,,0,"
+wait until ((#Bathroom #HumiditySensor).humiditysensor_humidity > 70)
+
+(#Bathroom #Dehumidifier).dehumidifier_setdehumidifiermode(""freezeProtection"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""BathroomHumidityFreezeProtection"",""cron"":"""",""period"":0,""code"":""wait until ((#Bathroom #HumiditySensor).humiditysensor_humidity > 70)\n(#Bathroom #Dehumidifier).dehumidifier_setdehumidifiermode(\""freezeProtection\"")""}",BathroomHumidityFreezeProtection,,0,"wait until ((#Bathroom #HumiditySensor).humiditysensor_humidity > 70)
+(#Bathroom #Dehumidifier).dehumidifier_setdehumidifiermode(""freezeProtection"")",88845,23263,69,23332,3.2838,3.2927,7105.183,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+117,4,4,"When the office button is pushed, turn on all humidifiers in office.",사무실 버튼이 눌리면 사무실 가습기를 모두 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Office #Button).button_button == \""pushed\"")\n\nall(#Office #Humidifier).switch_on()""}",,,0,"
+wait until ((#Office #Button).button_button == ""pushed"")
+
+all(#Office #Humidifier).switch_on()",False,93.625,True,strict,False,0.625,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""OfficeButtonHumidifierOn"",""cron"":"""",""period"":100,""code"":""triggered := false\nif ((#Office #Button).button_button == \""pushed\"") {\n  if (triggered == false) {\n    all(#Office #Humidifier).switch_on()\n    triggered = true\n  }\n} else {\n  triggered = false\n}""}",OfficeButtonHumidifierOn,,100,"triggered := false
+if ((#Office #Button).button_button == ""pushed"") {
+  if (triggered == false) {
+    all(#Office #Humidifier).switch_on()
+    triggered = true
+  }
+} else {
+  triggered = false
+}",90054,23665,93,23758,2.4293,2.4397,9779.772,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+118,4,4,"When any presence sensor in the hallway detects presence, set all hallway lights to purple.",복도에 재실 센서가 하나라도 감지되면 모든 복도 조명을 보라색으로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until (all(#Hallway #PresenceSensor).presencesensor_presence ==| true)\n\nall(#Hallway #Light).colorcontrol_setcolor(\""128,0,128\"")""}",,,0,"
+wait until (all(#Hallway #PresenceSensor).presencesensor_presence ==| true)
+
+all(#Hallway #Light).colorcontrol_setcolor(""128,0,128"")",False,69.9,False,strict,False,0.499051,0.5,0.5,0.5,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]","{""name"":""HallwayPresencePurpleLight"",""cron"":"""",""period"":100,""code"":""triggered := false\nif (all(#Hallway #PresenceSensor).presencesensor_presence ==| true) {\n  if (triggered == false) {\n    all(#Hallway #Light).light_movetorgb(128, 0, 128)\n    triggered = true\n  }\n} else {\n  triggered = false\n}""}",HallwayPresencePurpleLight,,100,"triggered := false
+if (all(#Hallway #PresenceSensor).presencesensor_presence ==| true) {
+  if (triggered == false) {
+    all(#Hallway #Light).light_movetorgb(128, 0, 128)
+    triggered = true
+  }
+} else {
+  triggered = false
+}",94770,24733,105,24838,2.6073,2.6182,9526.3299,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+119,4,4,"When the carbon monoxide level in the server room becomes 5000 ppm or above, sound all sirens in emergency mode.",서버실 일산화탄소 농도가 5000 ppm 이상이되면 모든 사이렌을 비상모드로 울려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)\n\nall(#Siren).siren_setsirenmode(\""emergency\"")""}",,,0,"
+wait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)
+
+all(#Siren).siren_setsirenmode(""emergency"")",False,94.9818,True,strict,False,0.919444,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""ServerRoomCOEmergencySiren"",""cron"":"""",""period"":0,""code"":""wait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)\n(#Siren).siren_setsirenmode(\""emergency\"")""}",ServerRoomCOEmergencySiren,,0,"wait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)
+(#Siren).siren_setsirenmode(""emergency"")",90948,23840,71,23911,1.7225,1.7329,13881.5675,0.0,,False,,,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+120,4,4,"When the bedroom shade button is pushed, lower the shade.",안방 쉐이드 버튼이 눌리면 쉐이드를 내려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Bedroom #Shade #Button).button_button == \""pushed\"")\n\n(#Bedroom #Shade).windowcovering_downorclose()""}",,,0,"
+wait until ((#Bedroom #Shade #Button).button_button == ""pushed"")
+
+(#Bedroom #Shade).windowcovering_downorclose()",False,90.434,True,strict,False,0.546809,1.0,1.0,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""semantic""]","{""name"":""BedroomShadeButtonLowerShade"",""cron"":"""",""period"":100,""code"":""triggered := false\nif ((#Bedroom #Button #Shade).button_button == \""pushed\"") {\n  if (triggered == false) {\n    (#Bedroom #Shade).windowcovering_downorclose()\n    triggered = true\n  }\n} else {\n  triggered = false\n}""}",BedroomShadeButtonLowerShade,,100,"triggered := false
+if ((#Bedroom #Button #Shade).button_button == ""pushed"") {
+  if (triggered == false) {
+    (#Bedroom #Shade).windowcovering_downorclose()
+    triggered = true
+  }
+} else {
+  triggered = false
+}",90221,23676,99,23775,2.8764,2.8864,8265.5403,0.0,,False,,,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],legacy_v13_monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4

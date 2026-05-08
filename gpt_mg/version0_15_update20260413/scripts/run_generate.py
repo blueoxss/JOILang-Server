@@ -36,6 +36,7 @@ from utils.pipeline_common import (
     load_service_schema,
     make_run_id,
     normalize_candidate_json_text,
+    parse_connected_devices,
     render_prompt_bundle,
     select_rows,
     slugify,
@@ -243,7 +244,7 @@ def generate_candidates_for_rows(
             system_prompt, user_prompt, manifest = render_prompt_bundle(
                 genome,
                 values=values,
-                command_text=row.get("command_eng") or row.get("command_kor", ""),
+                command_text=str(values.get("command_text") or values.get("command_eng") or values.get("command_kor") or ""),
                 prompt_render_mode=prompt_render_mode,
                 prompt_assets_dir=prompt_assets_dir,
                 phase="generate",
@@ -273,6 +274,7 @@ def generate_candidates_for_rows(
                     default_period=int(str(values.get("optional_period", "0") or "0")),
                     service_schema=service_schema,
                     command_text=str(values.get("command_eng") or values.get("command_kor") or ""),
+                    connected_devices=parse_connected_devices(row.get("connected_devices", "")),
                 )
                 candidates.append(candidate_text)
                 candidate_meta.append(

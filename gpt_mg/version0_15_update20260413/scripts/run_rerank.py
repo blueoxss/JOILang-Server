@@ -281,7 +281,7 @@ def rerank_candidates_csv(
                 system_prompt, repair_prompt, manifest = render_prompt_bundle(
                     repair_genome,
                     values=values,
-                    command_text=command_eng,
+                    command_text=str(values.get("command_text") or values.get("command_eng") or values.get("command_kor") or command_eng),
                     prompt_render_mode=prompt_render_mode,
                     prompt_assets_dir=prompt_assets_dir,
                     phase="repair",
@@ -330,6 +330,7 @@ def rerank_candidates_csv(
                         default_period=int(str(values.get("optional_period", "0") or "0")),
                         service_schema=service_schema,
                         command_text=str(values.get("command_eng") or values.get("command_kor") or ""),
+                        connected_devices=parse_connected_devices(row.get("connected_devices", "")),
                     )
                 except Exception as exc:
                     error_type = _error_type_from_exception(exc)

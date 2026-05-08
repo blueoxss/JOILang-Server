@@ -17,11 +17,11 @@ This step is critical to ensure accurate JoILang code generation for all mention
     - `alarm_siren()`
     - `strobe_on()`
   - `"사이렌"` device supports:
-    - `sirenMode_setSirenMode("siren")`
+    - `siren_setsirenmode("siren")`
     - `strobe_on()`
   → Final extraction:
     - `#Alarm` → `[alarm_siren(), strobe_on()]`
-    - `#Siren` → `[sirenMode_setSirenMode("siren"), strobe_on()]`
+    - `#Siren` → `[siren_setsirenmode("siren"), strobe_on()]`
 
 ---
 
@@ -29,6 +29,21 @@ This step is critical to ensure accurate JoILang code generation for all mention
 
 - **Exact service name match** required:  
   Service names must match **exactly** those defined in `[service_list]`.
+
+- **Exact connected tag preservation required:**
+  - If the user mentions a room, group, sector, top/bottom, odd/even, or other qualifier that appears in `[connected_devices]`, include the exact connected tag in the receiver.
+  - Every receiver tag after `#` must start with an uppercase English letter. Use `#Bedroom`, `#Sector1`, `#Entrance`, and `#TemperatureSensor`, never `#bedroom`, `#sector1`, `#entrance`, or `#temperaturesensor`.
+  - Use `all(...)` whenever the user says all/every/모든/모두.
+  - Do not replace connected tags with synonyms. Use `#Top` if the connected tag is `Top`, not `#Upper`.
+
+- **Descriptor/unit grounding required:**
+  - Read `descriptor`, `return_descriptor`, `argument_descriptor`, `argument_bounds`, and `argument_format` before writing values.
+  - If the service descriptor says millivolts, convert volts to millivolts: `220V` -> `220000`.
+  - If the function argument is seconds, convert minutes to seconds.
+  - If the argument format is comma, do not use `|`.
+  - For plain "turn on/off", "start", or "stop charging" commands, use `switch_on()` or `switch_off()` when supported. Do not use mode setters or value comparisons as substitutes for power control.
+  - If the command says "any/all/every sensor in <location>", keep the location and use `all(#Location #SensorCategory)` for the condition receiver.
+  - If the connected target device exposes multiple categories, attach sibling capability members to the semantic receiver when that matches the GT style: `(#AirPurifier).switch_on()` and `all(#Light).colorcontrol_setcolor(...)` are valid when those capabilities belong to the same physical device group.
 
 - **No omission allowed**:  
   - Never omit a device or its associated service when mentioned.
@@ -60,7 +75,7 @@ Devices list:
 Fact all service (value or function) list:
   - (#Alarm).alarm_siren()
   - (#Alarm).strobe_on()
-  - (#Siren).sirenMode_setSirenMode("siren")
+  - (#Siren).siren_setsirenmode("siren")
   - (#Siren).strobe_on()
 
 ### **[connected_device] input Logic**

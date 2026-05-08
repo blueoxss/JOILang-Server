@@ -144,10 +144,14 @@ Declared using :=, and persist across period executions within the same cron cyc
 # Device Control
 ## Device Selection
 - **Every tag name is english**
+- Every receiver tag after `#` must start with an uppercase English letter.
+  - Correct: `#Bedroom`, `#Sector1`, `#Entrance`, `#TemperatureSensor`
+  - Incorrect: `#bedroom`, `#sector1`, `#entrance`, `#temperaturesensor`
 - The tags can be combined from command.
 - Each device has pre-defined Tags (**device**, **location**, **group**...).
 - (#Tag1 #Tag2 ...) selects devices with ALL specified tags (AND logic, separated by spaces).
 - Access: `(#Tags).service_value` (read-only) or `(#Tags).service_function(args)` (control)
+- When using numeric comparisons or function arguments, follow the service descriptor units exactly. For example, if a voltage value has `return_descriptor` saying millivolts, compare `220V` as `220000`.
 - Tags must be accurately **extracted from the command**, typically consisting of one device tag and a combination of user-defined tags like location, group, or multiple user-defined tags only.
 - A valid device selection typically consists of one device tag (e.g., #Light) and one or more user-defined tags such as #location, #group, etc.
 ### [Example]
@@ -257,7 +261,7 @@ Use `all(...)` or `any(...)` **only if** explicitly requested for all/any device
 - `any(#Tag).attribute == value`: True if ANY device matches condition
 - If any temperature sensor in sector A reads above 30 degrees, turn on all fans.
 ```
-if (any(#SectorA).temperatureMeasurement_temperature > 30.0) {
+if (any(#SectorA).temperaturesensor_temperature > 30.0) {
   all(#Fan).switch_on()
 }
 ```
@@ -280,7 +284,7 @@ if (any(#SectorA).temperatureMeasurement_temperature > 30.0) {
 
 ## Blocking Operations
 - `wait until(condition)`: Pauses the execution of all subsequent statements in the current period until the specified condition becomes true. Once the condition is satisfied, the next lines are executed sequentially. While waiting, no other commands run, even if the period interval elapses. New triggers within the same cron cycle are ignored during this wait.
-- `(#Clock).clock_delay(ms: int)`: Delays execution for the specified number of milliseconds, then continues with the next statement. This must be written as a standalone statement and must not be used with wait until or passed as an argument to it.
+- `delay(N SEC|MIN|HOUR)`: Delays execution for the specified duration, then continues with the next statement. Use this helper for between-action waits in dataset JOICode. It must be a standalone statement and must not be used with `wait until` or passed as an argument.
 - This enables event-driven behavior in periodic scenarios (period >= 100).
 
 
@@ -310,23 +314,23 @@ if (any(#SectorA).temperatureMeasurement_temperature > 30.0) {
 - For simple numbers or text, you can use literals directly, or assign to a variable first if desired.
 - Example:
     ```
-    temp = (#TemperatureSensor).temperatureMeasurement_temperature
-    (#AirConditioner).airConditionerMode_setTemperature(temp)
-    (#Speaker).mediaPlayback_speak("Hello")
+    temp = (#TemperatureSensor).temperaturesensor_temperature
+    (#AirConditioner).airconditioner_settargettemperature(temp)
+    (#Speaker).speaker_speak("Hello")
     ```
 
 ### [Example]
 #### Valid Case:
 ```
-temp = (#TemperatureSensor).temperatureMeasurement_temperature
+temp = (#TemperatureSensor).temperaturesensor_temperature
 adjusted = temp - 5
-(#AirConditioner).airConditionerMode_setTemperature(adjusted)
+(#AirConditioner).airconditioner_settargettemperature(adjusted)
 ```
 
 #### Invalid Case:
 ```
-temperature = (#TemperatureSensor).temperatureMeasurement_temperature + 5
-(#AirConditioner).airConditionerMode_setTemperature( temperature )
+temperature = (#TemperatureSensor).temperaturesensor_temperature + 5
+(#AirConditioner).airconditioner_settargettemperature( temperature )
 ```
 
 
@@ -356,13 +360,13 @@ if ((#Tag).booleanService) {
 ## Error Handling & Communication
 
 ### User Feedback
-- Use `(#Speaker).mediaPlayback_speak("message")` to explain issues
+- Use `(#Speaker).speaker_speak("message")` to explain issues
 - Handle missing or unsupported devices gracefully
 
 ### Device Alternatives
 - Multiple devices may provide same functionality:
-  - Alerts: `(#Alarm).alarm_siren()` or `(#Siren).sirenMode_setSirenMode('siren')`
-  - Presence: `(#PresenceSensor).presenceSensor_presence` or `(#OccupancySensor).presenceSensor_presence`
+  - Alerts: `(#Alarm).alarm_siren()` or `(#Siren).siren_setsirenmode('siren')`
+  - Presence: `(#PresenceSensor).presencesensor_presence` or an equivalent current presence service from the injected schema
 
 ## Best Practices
 - Declare `name`, `cron`, `period` first.

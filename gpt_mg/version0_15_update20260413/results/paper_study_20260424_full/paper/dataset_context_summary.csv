@@ -1,9 +1,0 @@
-category,row_count,empty_connected_devices_count,nonempty_connected_devices_count,empty_connected_devices_ratio
-1,30,30,0,1.0
-2,30,0,30,0.0
-3,30,15,15,0.5
-4,30,15,15,0.5
-5,30,15,15,0.5
-6,30,15,15,0.5
-7,50,25,25,0.5
-8,50,25,25,0.5

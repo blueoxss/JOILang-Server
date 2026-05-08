@@ -1,0 +1,2 @@
+model_key,model_label,cold_load_sec,warm_latency_mean,warm_latency_p50,warm_latency_p95,row_success_rate
+gpt41_mini,GPT-4.1-mini,0.0000,2.5570,2.3049,4.3102,1.0000

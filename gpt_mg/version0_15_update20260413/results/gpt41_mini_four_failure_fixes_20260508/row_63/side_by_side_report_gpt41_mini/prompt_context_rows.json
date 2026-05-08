@@ -1,0 +1,587 @@
+[
+  {
+    "row_no": "63",
+    "service_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "service_schema_label": "service_list_ver2.0.1.json",
+    "snippet_source": "service_retrieval_fallback",
+    "mode_label": "retrieval premapping",
+    "retrieval_status": "used",
+    "retrieval_mode": "hybrid",
+    "requested_topk": 10,
+    "effective_topk": 10,
+    "device_count": 10,
+    "all_injected_category_count": 10,
+    "all_injected_categories": [
+      "RainSensor",
+      "CloudServiceProvider",
+      "MenuProvider",
+      "LevelControl",
+      "EmailProvider",
+      "WeatherProvider",
+      "Charger",
+      "ColorControl",
+      "Button",
+      "AirQualitySensor"
+    ],
+    "displayed_categories": [
+      "RainSensor",
+      "CloudServiceProvider",
+      "MenuProvider",
+      "LevelControl",
+      "EmailProvider",
+      "WeatherProvider",
+      "Charger",
+      "ColorControl",
+      "Button",
+      "AirQualitySensor"
+    ],
+    "retrieval_categories": [
+      "RainSensor",
+      "CloudServiceProvider",
+      "MenuProvider",
+      "LevelControl",
+      "EmailProvider",
+      "WeatherProvider",
+      "Charger",
+      "ColorControl",
+      "Button",
+      "AirQualitySensor"
+    ],
+    "connected_categories": [],
+    "relevant_categories": [
+      "CloudServiceProvider"
+    ],
+    "note": "Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.",
+    "category_cards": [
+      {
+        "category": "RainSensor",
+        "role": "retrieved",
+        "rank": 1,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "RainSensor_Rain",
+            "raw_service": "Rain",
+            "canonical_name": "RainSensor_Rain",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "A Device that senses rain"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "CloudServiceProvider",
+        "role": "retrieved",
+        "rank": 2,
+        "service_count": 14,
+        "value_count": 5,
+        "function_count": 9,
+        "values": [
+          {
+            "service": "CloudServiceProvider_ChatSession",
+            "raw_service": "ChatSession",
+            "canonical_name": "CloudServiceProvider_ChatSession",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Provides cloud service functionalities"
+          },
+          {
+            "service": "CloudServiceProvider_GeneratedImage",
+            "raw_service": "GeneratedImage",
+            "canonical_name": "CloudServiceProvider_GeneratedImage",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BINARY",
+            "descriptor": "Provides cloud service functionalities"
+          },
+          {
+            "service": "CloudServiceProvider_ImageExplanation",
+            "raw_service": "ImageExplanation",
+            "canonical_name": "CloudServiceProvider_ImageExplanation",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Provides cloud service functionalities"
+          },
+          {
+            "service": "CloudServiceProvider_LLMModels",
+            "raw_service": "LLMModels",
+            "canonical_name": "CloudServiceProvider_LLMModels",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "LIST",
+            "descriptor": "Provides cloud service functionalities"
+          },
+          {
+            "service": "CloudServiceProvider_UploadedFile",
+            "raw_service": "UploadedFile",
+            "canonical_name": "CloudServiceProvider_UploadedFile",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BINARY",
+            "descriptor": "Provides cloud service functionalities"
+          }
+        ],
+        "functions": [
+          {
+            "service": "CloudServiceProvider_ChatWithAI",
+            "raw_service": "ChatWithAI",
+            "canonical_name": "CloudServiceProvider_ChatWithAI",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "STRING",
+            "descriptor": "Provides cloud service functionalities"
+          },
+          {
+            "service": "CloudServiceProvider_ExplainImage",
+            "raw_service": "ExplainImage",
+            "canonical_name": "CloudServiceProvider_ExplainImage",
+            "type": "function",
+            "argument_type": "BINARY",
+            "return_type": "STRING",
+            "descriptor": "Provides cloud service functionalities"
+          },
+          {
+            "service": "CloudServiceProvider_GenerateImage",
+            "raw_service": "GenerateImage",
+            "canonical_name": "CloudServiceProvider_GenerateImage",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "BINARY",
+            "descriptor": "Provides cloud service functionalities"
+          },
+          {
+            "service": "CloudServiceProvider_IsAvailable",
+            "raw_service": "IsAvailable",
+            "canonical_name": "CloudServiceProvider_IsAvailable",
+            "type": "function",
+            "argument_type": "BOOL",
+            "return_type": "BOOL",
+            "descriptor": "Provides cloud service functionalities"
+          },
+          {
+            "service": "CloudServiceProvider_SaveToFile",
+            "raw_service": "SaveToFile",
+            "canonical_name": "CloudServiceProvider_SaveToFile",
+            "type": "function",
+            "argument_type": "BINARY | STRING",
+            "return_type": "STRING",
+            "descriptor": "Provides cloud service functionalities"
+          },
+          {
+            "service": "CloudServiceProvider_SpeechToText",
+            "raw_service": "SpeechToText",
+            "canonical_name": "CloudServiceProvider_SpeechToText",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "STRING",
+            "descriptor": "Provides cloud service functionalities"
+          },
+          {
+            "service": "CloudServiceProvider_TextToSpeech",
+            "raw_service": "TextToSpeech",
+            "canonical_name": "CloudServiceProvider_TextToSpeech",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "BINARY",
+            "descriptor": "Provides cloud service functionalities"
+          },
+          {
+            "service": "CloudServiceProvider_UploadFile",
+            "raw_service": "UploadFile",
+            "canonical_name": "CloudServiceProvider_UploadFile",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "BINARY",
+            "descriptor": "Provides cloud service functionalities"
+          },
+          {
+            "service": "CloudServiceProvider_UploadToCloudStorage",
+            "raw_service": "UploadToCloudStorage",
+            "canonical_name": "CloudServiceProvider_UploadToCloudStorage",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "STRING",
+            "descriptor": "Provides cloud service functionalities"
+          }
+        ]
+      },
+      {
+        "category": "MenuProvider",
+        "role": "retrieved",
+        "rank": 3,
+        "service_count": 4,
+        "value_count": 3,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "MenuProvider_Menu",
+            "raw_service": "Menu",
+            "canonical_name": "MenuProvider_Menu",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Provides menu information services"
+          },
+          {
+            "service": "MenuProvider_TodayMenu",
+            "raw_service": "TodayMenu",
+            "canonical_name": "MenuProvider_TodayMenu",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Provides menu information services"
+          },
+          {
+            "service": "MenuProvider_TodayPlace",
+            "raw_service": "TodayPlace",
+            "canonical_name": "MenuProvider_TodayPlace",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Provides menu information services"
+          }
+        ],
+        "functions": [
+          {
+            "service": "MenuProvider_GetMenu",
+            "raw_service": "GetMenu",
+            "canonical_name": "MenuProvider_GetMenu",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "STRING",
+            "descriptor": "Provides menu information services"
+          }
+        ]
+      },
+      {
+        "category": "LevelControl",
+        "role": "retrieved",
+        "rank": 4,
+        "service_count": 4,
+        "value_count": 3,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "LevelControl_CurrentLevel",
+            "raw_service": "CurrentLevel",
+            "canonical_name": "LevelControl_CurrentLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch"
+          },
+          {
+            "service": "LevelControl_MaxLevel",
+            "raw_service": "MaxLevel",
+            "canonical_name": "LevelControl_MaxLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch"
+          },
+          {
+            "service": "LevelControl_MinLevel",
+            "raw_service": "MinLevel",
+            "canonical_name": "LevelControl_MinLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch"
+          }
+        ],
+        "functions": [
+          {
+            "service": "LevelControl_MoveToLevel",
+            "raw_service": "MoveToLevel",
+            "canonical_name": "LevelControl_MoveToLevel",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch"
+          }
+        ]
+      },
+      {
+        "category": "EmailProvider",
+        "role": "retrieved",
+        "rank": 5,
+        "service_count": 2,
+        "value_count": 0,
+        "function_count": 2,
+        "values": [],
+        "functions": [
+          {
+            "service": "EmailProvider_SendMail",
+            "raw_service": "SendMail",
+            "canonical_name": "EmailProvider_SendMail",
+            "type": "function",
+            "argument_type": "STRING | STRING | STRING",
+            "return_type": "VOID",
+            "descriptor": "Provides email service"
+          },
+          {
+            "service": "EmailProvider_SendMailWithFile",
+            "raw_service": "SendMailWithFile",
+            "canonical_name": "EmailProvider_SendMailWithFile",
+            "type": "function",
+            "argument_type": "STRING | STRING | STRING | STRING",
+            "return_type": "VOID",
+            "descriptor": "Provides email service"
+          }
+        ]
+      },
+      {
+        "category": "WeatherProvider",
+        "role": "retrieved",
+        "rank": 6,
+        "service_count": 7,
+        "value_count": 6,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "WeatherProvider_HumidityWeather",
+            "raw_service": "HumidityWeather",
+            "canonical_name": "WeatherProvider_HumidityWeather",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Provides weather information"
+          },
+          {
+            "service": "WeatherProvider_Pm10Weather",
+            "raw_service": "Pm10Weather",
+            "canonical_name": "WeatherProvider_Pm10Weather",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Provides weather information"
+          },
+          {
+            "service": "WeatherProvider_Pm25Weather",
+            "raw_service": "Pm25Weather",
+            "canonical_name": "WeatherProvider_Pm25Weather",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Provides weather information"
+          },
+          {
+            "service": "WeatherProvider_PressureWeather",
+            "raw_service": "PressureWeather",
+            "canonical_name": "WeatherProvider_PressureWeather",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Provides weather information"
+          },
+          {
+            "service": "WeatherProvider_TemperatureWeather",
+            "raw_service": "TemperatureWeather",
+            "canonical_name": "WeatherProvider_TemperatureWeather",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Provides weather information"
+          },
+          {
+            "service": "WeatherProvider_Weather",
+            "raw_service": "Weather",
+            "canonical_name": "WeatherProvider_Weather",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Provides weather information"
+          }
+        ],
+        "functions": [
+          {
+            "service": "WeatherProvider_GetWeatherInfo",
+            "raw_service": "GetWeatherInfo",
+            "canonical_name": "WeatherProvider_GetWeatherInfo",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "STRING",
+            "descriptor": "Provides weather information"
+          }
+        ]
+      },
+      {
+        "category": "Charger",
+        "role": "retrieved",
+        "rank": 7,
+        "service_count": 4,
+        "value_count": 4,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "Charger_ChargingState",
+            "raw_service": "ChargingState",
+            "canonical_name": "Charger_ChargingState",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "The current status of battery charging"
+          },
+          {
+            "service": "Charger_Current",
+            "raw_service": "Current",
+            "canonical_name": "Charger_Current",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "The current status of battery charging"
+          },
+          {
+            "service": "Charger_Power",
+            "raw_service": "Power",
+            "canonical_name": "Charger_Power",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "The current status of battery charging"
+          },
+          {
+            "service": "Charger_Voltage",
+            "raw_service": "Voltage",
+            "canonical_name": "Charger_Voltage",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "The current status of battery charging"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "ColorControl",
+        "role": "retrieved",
+        "rank": 8,
+        "service_count": 2,
+        "value_count": 1,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "ColorControl_Color",
+            "raw_service": "Color",
+            "canonical_name": "ColorControl_Color",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Allows for control of a color changing device"
+          }
+        ],
+        "functions": [
+          {
+            "service": "ColorControl_SetColor",
+            "raw_service": "SetColor",
+            "canonical_name": "ColorControl_SetColor",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "VOID",
+            "descriptor": "Allows for control of a color changing device"
+          }
+        ]
+      },
+      {
+        "category": "Button",
+        "role": "retrieved",
+        "rank": 9,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "Button_Button",
+            "raw_service": "Button",
+            "canonical_name": "Button_Button",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "A device with one or more buttons"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "AirQualitySensor",
+        "role": "retrieved",
+        "rank": 10,
+        "service_count": 7,
+        "value_count": 7,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "AirQualitySensor_CarbonDioxide",
+            "raw_service": "CarbonDioxide",
+            "canonical_name": "AirQualitySensor_CarbonDioxide",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          },
+          {
+            "service": "AirQualitySensor_DustLevel",
+            "raw_service": "DustLevel",
+            "canonical_name": "AirQualitySensor_DustLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          },
+          {
+            "service": "AirQualitySensor_FineDustLevel",
+            "raw_service": "FineDustLevel",
+            "canonical_name": "AirQualitySensor_FineDustLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          },
+          {
+            "service": "AirQualitySensor_Humidity",
+            "raw_service": "Humidity",
+            "canonical_name": "AirQualitySensor_Humidity",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          },
+          {
+            "service": "AirQualitySensor_Temperature",
+            "raw_service": "Temperature",
+            "canonical_name": "AirQualitySensor_Temperature",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          },
+          {
+            "service": "AirQualitySensor_TvocLevel",
+            "raw_service": "TvocLevel",
+            "canonical_name": "AirQualitySensor_TvocLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          },
+          {
+            "service": "AirQualitySensor_VeryFineDustLevel",
+            "raw_service": "VeryFineDustLevel",
+            "canonical_name": "AirQualitySensor_VeryFineDustLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          }
+        ],
+        "functions": []
+      }
+    ]
+  }
+]

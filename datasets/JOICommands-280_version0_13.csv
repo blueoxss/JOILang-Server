@@ -268,10 +268,10 @@ answer = (#CloudServiceProvider).CloudServiceProvider_ChatWithAI(""What is LLM?"
 1,2,거실 조명을 노란색으로 설정해줘.,Set the living room light to yellow.,"{""name"": """", 
 ""cron"": """", 
 ""period"": 0, 
-""script"": ""(#LivingRoom #Light).SetColor(\""255|255|0\"")""}","{'LivingRoom_Light': {'category': ['Light', 'ColorControl'], 'tags': ['LivingRoom', 'Light', 'ColorControl']}, 'Kitchen_Light': {'category': ['Light', 'ColorControl'], 'tags': ['Kitchen', 'Light', 'ColorControl']}}","{""name"": """", 
+""script"": ""(#LivingRoom #Light).SetColor(\""255,255,0\"")""}","{'LivingRoom_Light': {'category': ['Light', 'ColorControl'], 'tags': ['LivingRoom', 'Light', 'ColorControl']}, 'Kitchen_Light': {'category': ['Light', 'ColorControl'], 'tags': ['Kitchen', 'Light', 'ColorControl']}}","{""name"": """", 
 ""cron"": """", 
 ""period"": 0, 
-""script"": ""(#LivingRoom #Light).ColorControl_SetColor(\""255|255|0\"")""}",version0_13,"{""name"": ""SetLivingRoomLightYellow"", ""cron"": """", ""period"": -1, ""code"": ""(#Light).colorControl_setColor({\""h\"": 50, \""s\"": 100})""}",SetLivingRoomLightYellow,,-1,"(#Light).colorControl_setColor({""h"": 50, ""s"": 100})",local_8b (version0_13),gpt_mg.version0_13,local_8b,"임의의 조명의 색상을 색상 값 50, 채도 100으로 설정한다.",,14.5270 seconds,45830,58,45888,31,1,거실 조명을 노란색으로 설정해줘.,True,0.666667,0.666667,,colorControl_setColor,"(#LivingRoom #Light).ColorControl_SetColor(""255|255|0"")","(#Light).colorControl_setColor({""h"": 50, ""s"": 100})"
+""script"": ""(#LivingRoom #Light).ColorControl_SetColor(\""255,255,0\"")""}",version0_13,"{""name"": ""SetLivingRoomLightYellow"", ""cron"": """", ""period"": -1, ""code"": ""(#Light).colorControl_setColor({\""h\"": 50, \""s\"": 100})""}",SetLivingRoomLightYellow,,-1,"(#Light).colorControl_setColor({""h"": 50, ""s"": 100})",local_8b (version0_13),gpt_mg.version0_13,local_8b,"임의의 조명의 색상을 색상 값 50, 채도 100으로 설정한다.",,14.5270 seconds,45830,58,45888,31,1,거실 조명을 노란색으로 설정해줘.,True,0.666667,0.666667,,colorControl_setColor,"(#LivingRoom #Light).ColorControl_SetColor(""255,255,0"")","(#Light).colorControl_setColor({""h"": 50, ""s"": 100})"
 2,2,카메라로 회의실 사진을 촬영해줘.,Capture an image of the meeting room with the camera.,"{""name"": """", 
 ""cron"": """", 
 ""period"": 0, 
@@ -439,11 +439,11 @@ all(#Group1 #Top #Light).Light_MoveToRGB(0, 0, 255)","all(#Group1_upper).colorCo
 24,2,섹터10의 모든 조명을 흰색으로 바꿔줘.,Change all lights in Sector 10 to white.,"{""name"": """", 
 ""cron"": """", 
 ""period"": 0, 
-""script"": ""\nall(#Sector10 #Light).SetColor(\""255|255|255\"")""}","{'S10_Light_1': {'category': ['Light', 'ColorControl', 'Switch'], 'tags': ['Sector10', 'Light', 'ColorControl', 'Switch']}, 'S10_Light_2': {'category': ['Light', 'ColorControl', 'Switch'], 'tags': ['Sector10', 'Light', 'ColorControl', 'Switch']}, 'S11_Light': {'category': ['Light', 'ColorControl', 'Switch'], 'tags': ['Sector11', 'Light', 'ColorControl', 'Switch']}}","{""name"": """", 
+""script"": ""\nall(#Sector10 #Light).SetColor(\""255,255,255\"")""}","{'S10_Light_1': {'category': ['Light', 'ColorControl', 'Switch'], 'tags': ['Sector10', 'Light', 'ColorControl', 'Switch']}, 'S10_Light_2': {'category': ['Light', 'ColorControl', 'Switch'], 'tags': ['Sector10', 'Light', 'ColorControl', 'Switch']}, 'S11_Light': {'category': ['Light', 'ColorControl', 'Switch'], 'tags': ['Sector11', 'Light', 'ColorControl', 'Switch']}}","{""name"": """", 
 ""cron"": """", 
 ""period"": 0, 
-""script"": ""\nall(#Sector10 #Light).ColorControl_SetColor(\""255|255|255\"")""}",version0_13,"{""name"": ""ChangeLightsToWhite"", ""cron"": """", ""period"": -1, ""code"": ""all(#Sector10_Light).colorControl_setColor({\""RED\"": 255, \""GREEN\"": 255, \""BLUE\"": 255})""}",ChangeLightsToWhite,,-1,"all(#Sector10_Light).colorControl_setColor({""RED"": 255, ""GREEN"": 255, ""BLUE"": 255})",local_8b (version0_13),gpt_mg.version0_13,local_8b,모든 Sector10 조명의 색상을 흰색으로 변경한다.,,15.0076 seconds,45836,71,45907,54,24,섹터10의 모든 조명을 흰색으로 바꿔줘.,True,0.755556,0.755556,,colorControl_setColor,"
-all(#Sector10 #Light).ColorControl_SetColor(""255|255|255"")","all(#Sector10_Light).colorControl_setColor({""RED"": 255, ""GREEN"": 255, ""BLUE"": 255})"
+""script"": ""\nall(#Sector10 #Light).ColorControl_SetColor(\""255,255,255\"")""}",version0_13,"{""name"": ""ChangeLightsToWhite"", ""cron"": """", ""period"": -1, ""code"": ""all(#Sector10_Light).colorControl_setColor({\""RED\"": 255, \""GREEN\"": 255, \""BLUE\"": 255})""}",ChangeLightsToWhite,,-1,"all(#Sector10_Light).colorControl_setColor({""RED"": 255, ""GREEN"": 255, ""BLUE"": 255})",local_8b (version0_13),gpt_mg.version0_13,local_8b,모든 Sector10 조명의 색상을 흰색으로 변경한다.,,15.0076 seconds,45836,71,45907,54,24,섹터10의 모든 조명을 흰색으로 바꿔줘.,True,0.755556,0.755556,,colorControl_setColor,"
+all(#Sector10 #Light).ColorControl_SetColor(""255,255,255"")","all(#Sector10_Light).colorControl_setColor({""RED"": 255, ""GREEN"": 255, ""BLUE"": 255})"
 25,2,안방에 있는 짝수 태그 블라인드를 모두 내려줘.,Lower all even-tagged blinds in the bedroom.,"{""name"": """", 
 ""cron"": """", 
 ""period"": 0, 
@@ -1388,15 +1388,15 @@ all(#Office #Humidifier).Switch_On()",(#OfficeHeater).heater_switch_on()
 28,4,복도에 재실 센서가 하나라도 감지되면 모든 복도 조명을 보라색으로 설정해줘.,"When any presence sensor in the hallway detects presence, set all hallway lights to purple.","{""name"": """", 
 ""cron"": """", 
 ""period"": 0, 
-""script"": ""\nwait until (all(#Hallway #PresenceSensor).Presence ==| true)\n\nall(#Hallway #Light).SetColor(\""128|0|128\"")""}","{'Hallway_Presence': {'category': 'PresenceSensor', 'tags': ['Hallway', 'PresenceSensor']}, 'Porch_Presence': {'category': 'PresenceSensor', 'tags': ['Porch', 'PresenceSensor']}, 'Hallway_Light': {'category': ['Light', 'ColorControl'], 'tags': ['Hallway', 'Light', 'ColorControl']}}","{""name"": """", 
+""script"": ""\nwait until (all(#Hallway #PresenceSensor).Presence ==| true)\n\nall(#Hallway #Light).SetColor(\""128,0,128\"")""}","{'Hallway_Presence': {'category': 'PresenceSensor', 'tags': ['Hallway', 'PresenceSensor']}, 'Porch_Presence': {'category': 'PresenceSensor', 'tags': ['Porch', 'PresenceSensor']}, 'Hallway_Light': {'category': ['Light', 'ColorControl'], 'tags': ['Hallway', 'Light', 'ColorControl']}}","{""name"": """", 
 ""cron"": """", 
 ""period"": 0, 
-""script"": ""\nwait until (all(#Hallway #PresenceSensor).PresenceSensor_Presence ==| true)\n\nall(#Hallway #Light).ColorControl_SetColor(\""128|0|128\"")""}",version0_13,"{""name"": ""SetRoomLightsPurple"", ""cron"": """", ""period"": -1, ""code"": ""if (any(#Floor).presenceSensor_presence == \""present\"") {\n  all(#Floor).colorControl_setColor({\""h\"": 270, \""s\"": 100, \""l\"": 50})\n}""}",SetRoomLightsPurple,,-1,"if (any(#Floor).presenceSensor_presence == ""present"") {
+""script"": ""\nwait until (all(#Hallway #PresenceSensor).PresenceSensor_Presence ==| true)\n\nall(#Hallway #Light).ColorControl_SetColor(\""128,0,128\"")""}",version0_13,"{""name"": ""SetRoomLightsPurple"", ""cron"": """", ""period"": -1, ""code"": ""if (any(#Floor).presenceSensor_presence == \""present\"") {\n  all(#Floor).colorControl_setColor({\""h\"": 270, \""s\"": 100, \""l\"": 50})\n}""}",SetRoomLightsPurple,,-1,"if (any(#Floor).presenceSensor_presence == ""present"") {
   all(#Floor).colorControl_setColor({""h"": 270, ""s"": 100, ""l"": 50})
 }",local_8b (version0_13),gpt_mg.version0_13,local_8b,"전체 중 하나의 Floor에 사람이 있으면, 모든 Floor의 조명을 보라색으로 설정한다.",,15.6840 seconds,45847,85,45932,118,28,복도에 재실 센서가 하나라도 감지되면 모든 복도 조명을 보라색으로 설정해줘.,True,0.578723,0.578723,,"colorControl_setColor, presenceSensor_presence","
 wait until (all(#Hallway #PresenceSensor).PresenceSensor_Presence ==| true)
 
-all(#Hallway #Light).ColorControl_SetColor(""128|0|128"")","if (any(#Floor).presenceSensor_presence == ""present"") {
+all(#Hallway #Light).ColorControl_SetColor(""128,0,128"")","if (any(#Floor).presenceSensor_presence == ""present"") {
   all(#Floor).colorControl_setColor({""h"": 270, ""s"": 100, ""l"": 50})
 }"
 29,4,서버실 일산화탄소 농도가 5000 ppm 이상이되면 모든 사이렌을 비상모드로 울려줘.,"When the carbon monoxide level in the server room becomes 5000 ppm or above, sound all sirens in emergency mode.","{""name"": """", 

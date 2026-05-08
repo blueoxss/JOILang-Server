@@ -1,0 +1,54 @@
+{
+  "results_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_four_failure_fixes_20260508/row_63",
+  "output_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_four_failure_fixes_20260508/row_63/side_by_side_report_gpt41_mini",
+  "model_key": "gpt41_mini",
+  "title": "JOICode Side-by-Side Report · gpt41_mini",
+  "row_count": 1,
+  "service_list_schema": "service_list_ver2.0.1.json",
+  "service_list_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+  "html_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_four_failure_fixes_20260508/row_63/side_by_side_report_gpt41_mini/report.html",
+  "selected_rows_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_four_failure_fixes_20260508/row_63/side_by_side_report_gpt41_mini/selected_rows.csv",
+  "prompt_context_rows_json": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_four_failure_fixes_20260508/row_63/side_by_side_report_gpt41_mini/prompt_context_rows.json",
+  "filters": {
+    "category": [],
+    "row_no": [],
+    "start_row": 0,
+    "end_row": 0,
+    "limit": 0,
+    "failures_only": false,
+    "det_below": null
+  },
+  "summary": {
+    "row_count": 1,
+    "avg_det_score": 99.0939,
+    "det_pass_rate": 1.0,
+    "gt_exact_rate": 0.0,
+    "avg_similarity": 0.990217,
+    "avg_prompt_tokens": 28051.0,
+    "avg_completion_tokens": 68.0,
+    "avg_total_tokens": 28119.0,
+    "avg_latency_sec": 4.9346,
+    "p50_latency_sec": 4.9346,
+    "avg_pipeline_sec": 10.1882,
+    "peak_vram_gb_max": 0.0,
+    "oom_count": 0,
+    "top_failures": [
+      [
+        "gt_mismatch",
+        1
+      ]
+    ],
+    "snippet_sources": {
+      "service_retrieval_fallback": 1
+    },
+    "categories": {
+      "3": 1
+    },
+    "generation_errors": {}
+  },
+  "pdf": {
+    "ok": true,
+    "pdf_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_four_failure_fixes_20260508/row_63/side_by_side_report_gpt41_mini/report.pdf",
+    "chrome_path": "/usr/bin/google-chrome"
+  }
+}

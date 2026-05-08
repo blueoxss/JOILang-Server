@@ -1,4 +1,0 @@
-model_key,status,note,resolved_model_path
-qwen25_coder_14b,ran_both,,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-14B-Instruct/snapshots/aedcc2d42b622764e023cf882b6652e646b95671
-qwen25_coder_7b,ran_both,,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242
-phi35_mini,blocked,,

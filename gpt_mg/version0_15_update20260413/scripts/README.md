@@ -800,7 +800,7 @@ DET는 이 워크스페이스에서 candidate JOICode를 정량 평가하는 내
 
 예:
 
-- GT: `ColorControl_SetColor("255|255|0")`
+- GT: `ColorControl_SetColor("255,255,0")`
 - generated: `light_movetorgb(255, 255, 0)`
 
 이 경우 strict는 `gt_service_coverage` 쪽에서 보수적으로 볼 수 있습니다.

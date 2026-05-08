@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import re
 from collections import Counter
+from decimal import Decimal, InvalidOperation
 from difflib import SequenceMatcher
 from typing import Any
 
@@ -107,10 +108,21 @@ COMPOUND_SPLIT_SERVICE_EQUIVALENCES = {
     ),
 }
 SPEAKER_REPORT_SINKS = {canonical_service_name("Speaker", "Speak")}
-SPEAKER_AIR_QUALITY_REPORT_FAMILY = {
-    canonical_service_name("WeatherProvider", "Pm10Weather"),
-    canonical_service_name("WeatherProvider", "Pm25Weather"),
+SPEAKER_REPORT_SOURCE_FAMILY_OVERRIDES = {
+    canonical_service_name("WeatherProvider", "Pm10Weather"): "weatherprovider_air_quality_report",
+    canonical_service_name("WeatherProvider", "Pm25Weather"): "weatherprovider_air_quality_report",
+    canonical_service_name("AirQualitySensor", "DustLevel"): "airqualitysensor_dust_report",
+    canonical_service_name("AirQualitySensor", "FineDustLevel"): "airqualitysensor_dust_report",
+    canonical_service_name("AirQualitySensor", "VeryFineDustLevel"): "airqualitysensor_dust_report",
 }
+SPEAKER_REPORT_EQUIVALENT_FAMILY_NAMES = {
+    "weatherprovider_air_quality_report",
+    "airqualitysensor_dust_report",
+}
+RGB_COLOR_FUNCTION_EQUIVALENCE = (
+    canonical_service_name("Light", "MoveToRGB"),
+    canonical_service_name("ColorControl", "SetColor"),
+)
 
 
 def load_schema(service_list: dict[str, Any] | str | None = None) -> dict[str, dict[str, Any]]:
@@ -466,10 +478,12 @@ def _usage_family_name(usage: dict[str, Any]) -> str:
 def _receiver_context_tags(usage: dict[str, Any], schema: dict[str, dict[str, Any]]) -> set[str]:
     schema_devices = {device.lower() for device in schema}
     device_name = str(usage.get("device", "") or "").lower()
+    inferred_devices = {str(item).lower() for item in usage.get("inferred_devices", []) if item}
+    service_list_tags = {device_name, *inferred_devices} - {""}
     return {
         str(tag).lower()
         for tag in usage.get("tags", []) or []
-        if str(tag).lower() and str(tag).lower() not in schema_devices and str(tag).lower() != device_name
+        if str(tag).lower() in schema_devices and str(tag).lower() not in service_list_tags
     }
 
 
@@ -493,8 +507,10 @@ def _receiver_instance_tokens(
     usage: dict[str, Any],
     connected_devices: dict[str, Any],
 ) -> set[str]:
-    tags = {str(tag).lower() for tag in usage.get("tags", []) if tag}
     device_name = str(usage.get("device", "") or "").lower()
+    inferred_devices = {str(item).lower() for item in usage.get("inferred_devices", []) if item}
+    service_list_tags = {device_name, *inferred_devices} - {""}
+    tags = {str(tag).lower() for tag in usage.get("tags", []) if str(tag).lower() in service_list_tags}
     if connected_devices:
         matched: set[str] = set()
         for device_key, meta in connected_devices.items():
@@ -626,6 +642,123 @@ def _compound_split_equivalent_for_det(
     return len(matched_predicted) == len(predicted_usages)
 
 
+def _rgb_args_for_det(usage: dict[str, Any]) -> list[str] | None:
+    canonical_name = str(usage.get("canonical_name", "") or "")
+    args = usage.get("args", []) or []
+    if canonical_name == canonical_service_name("Light", "MoveToRGB"):
+        if len(args) != 3:
+            return None
+        return [_normalize_arg_value(arg) for arg in args]
+    if canonical_name == canonical_service_name("ColorControl", "SetColor"):
+        if len(args) != 1:
+            return None
+        raw = _normalize_arg_value(args[0])
+        if "|" in raw:
+            return None
+        parts = [part.strip() for part in raw.split(",") if part.strip()]
+        if len(parts) != 3:
+            return None
+        return parts
+    return None
+
+
+def _same_color_control_context(
+    gt_usage: dict[str, Any],
+    pred_usage: dict[str, Any],
+    schema: dict[str, dict[str, Any]],
+) -> bool:
+    if _is_all_receiver(gt_usage) != _is_all_receiver(pred_usage):
+        return False
+    return _receiver_context_tags(gt_usage, schema) == _receiver_context_tags(pred_usage, schema)
+
+
+def _rgb_color_function_equivalent_for_det(
+    predicted_usages: list[dict[str, Any]],
+    gt_usages: list[dict[str, Any]],
+    schema: dict[str, dict[str, Any]],
+) -> bool:
+    if len(gt_usages) != 1 or len(predicted_usages) != 1:
+        return False
+    gt_usage = gt_usages[0]
+    pred_usage = predicted_usages[0]
+    canonical_pair = {
+        str(gt_usage.get("canonical_name", "") or ""),
+        str(pred_usage.get("canonical_name", "") or ""),
+    }
+    if canonical_pair != set(RGB_COLOR_FUNCTION_EQUIVALENCE):
+        return False
+    if not _same_color_control_context(gt_usage, pred_usage, schema):
+        return False
+    gt_rgb = _rgb_args_for_det(gt_usage)
+    pred_rgb = _rgb_args_for_det(pred_usage)
+    if gt_rgb is None or pred_rgb is None:
+        return False
+    return all(_det_arg_equal(gt_arg, pred_arg) for gt_arg, pred_arg in zip(gt_rgb, pred_rgb, strict=True))
+
+
+def _same_service_family_usage_for_det(
+    gt_usage: dict[str, Any],
+    pred_usage: dict[str, Any],
+    connected_devices: dict[str, Any],
+    schema: dict[str, dict[str, Any]],
+) -> bool:
+    if _usage_family_name(gt_usage) != _usage_family_name(pred_usage):
+        return False
+    if not _same_effective_receiver(gt_usage, pred_usage, connected_devices, schema):
+        return False
+    gt_args = gt_usage.get("args", []) or []
+    pred_args = pred_usage.get("args", []) or []
+    if len(gt_args) != len(pred_args):
+        return False
+    return all(_det_arg_equal(gt_arg, pred_arg) for gt_arg, pred_arg in zip(gt_args, pred_args, strict=True))
+
+
+def _conditional_rgb_color_action_equivalent_for_det(
+    predicted_usages: list[dict[str, Any]],
+    gt_usages: list[dict[str, Any]],
+    connected_devices: dict[str, Any],
+    schema: dict[str, dict[str, Any]],
+) -> bool:
+    if len(gt_usages) != len(predicted_usages) or len(gt_usages) < 2:
+        return False
+    gt_rgb_usages = [usage for usage in gt_usages if _rgb_args_for_det(usage) is not None]
+    pred_rgb_usages = [usage for usage in predicted_usages if _rgb_args_for_det(usage) is not None]
+    if len(gt_rgb_usages) != 1 or len(pred_rgb_usages) != 1:
+        return False
+    gt_rgb_usage = gt_rgb_usages[0]
+    pred_rgb_usage = pred_rgb_usages[0]
+    canonical_pair = {
+        str(gt_rgb_usage.get("canonical_name", "") or ""),
+        str(pred_rgb_usage.get("canonical_name", "") or ""),
+    }
+    if canonical_pair != set(RGB_COLOR_FUNCTION_EQUIVALENCE):
+        return False
+    if not _same_color_control_context(gt_rgb_usage, pred_rgb_usage, schema):
+        return False
+    gt_rgb = _rgb_args_for_det(gt_rgb_usage)
+    pred_rgb = _rgb_args_for_det(pred_rgb_usage)
+    if gt_rgb is None or pred_rgb is None:
+        return False
+    if not all(_det_arg_equal(gt_arg, pred_arg) for gt_arg, pred_arg in zip(gt_rgb, pred_rgb, strict=True)):
+        return False
+
+    remaining_gt = [usage for usage in gt_usages if usage is not gt_rgb_usage]
+    remaining_pred = [usage for usage in predicted_usages if usage is not pred_rgb_usage]
+    matched_predicted: set[int] = set()
+    for gt_usage in remaining_gt:
+        matched_index = None
+        for pred_index, pred_usage in enumerate(remaining_pred):
+            if pred_index in matched_predicted:
+                continue
+            if _same_service_family_usage_for_det(gt_usage, pred_usage, connected_devices, schema):
+                matched_index = pred_index
+                break
+        if matched_index is None:
+            return False
+        matched_predicted.add(matched_index)
+    return len(matched_predicted) == len(remaining_pred)
+
+
 def _assignment_sources(code: str, usages: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
     sources: dict[str, dict[str, Any]] = {}
     usage_by_member = {str(usage.get("member", "") or "").lower(): usage for usage in usages}
@@ -640,6 +773,25 @@ def _assignment_sources(code: str, usages: list[dict[str, Any]]) -> dict[str, di
         if usage is not None:
             sources[str(match.group("name"))] = usage
     return sources
+
+
+def _ordered_value_assignments(code: str, usages: list[dict[str, Any]]) -> list[tuple[str, dict[str, Any]]]:
+    assignments: list[tuple[str, dict[str, Any]]] = []
+    usage_by_member = {str(usage.get("member", "") or "").lower(): usage for usage in usages}
+    assignment_re = re.compile(
+        r"(?m)^\s*(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*"
+        r"(?P<receiver>all\([^\n\r()]+\)|\([^\n\r()]+\))\."
+        r"(?P<member>[A-Za-z_][A-Za-z0-9_]*)"
+        r"(?:\s*\((?P<args>[^()]*)\))?"
+    )
+    for match in assignment_re.finditer(code or ""):
+        usage = usage_by_member.get(str(match.group("member") or "").lower())
+        if usage is None:
+            continue
+        if str(usage.get("meta", {}).get("type", "")).lower() != "value":
+            continue
+        assignments.append((str(match.group("name") or ""), usage))
+    return assignments
 
 
 def _expression_identifiers(expr: str) -> list[str]:
@@ -676,9 +828,7 @@ def _speaker_report_source_usages(code: str, usages: list[dict[str, Any]]) -> li
 
 
 def _report_source_family(canonical_name: str) -> str:
-    if canonical_name in SPEAKER_AIR_QUALITY_REPORT_FAMILY:
-        return "weatherprovider_air_quality_report"
-    return canonical_name
+    return SPEAKER_REPORT_SOURCE_FAMILY_OVERRIDES.get(canonical_name, canonical_name)
 
 
 def _speaker_report_equivalent_for_det(
@@ -728,7 +878,74 @@ def _air_quality_value_read_equivalent_for_det(
         return False
     gt_family = _report_source_family(str(gt_usage.get("canonical_name", "") or ""))
     pred_family = _report_source_family(str(pred_usage.get("canonical_name", "") or ""))
-    return gt_family == pred_family == "weatherprovider_air_quality_report"
+    return gt_family == pred_family and gt_family in SPEAKER_REPORT_EQUIVALENT_FAMILY_NAMES
+
+
+def _speaker_sinks(usages: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [usage for usage in usages if str(usage.get("canonical_name", "") or "") in SPEAKER_REPORT_SINKS]
+
+
+def _snapshot_delta_thresholds(code: str, first_var: str, second_var: str) -> set[str]:
+    normalized = ";".join(
+        re.sub(r"\s+", "", line.lower())
+        for line in str(code or "").splitlines()
+        if line.strip()
+    )
+    first = re.escape(str(first_var or "").lower())
+    second = re.escape(str(second_var or "").lower())
+    direct_thresholds: set[str] = set()
+    high_pattern = re.compile(rf"{second}>={first}\+(?P<n>-?\d+(?:\.\d+)?)")
+    for match in high_pattern.finditer(normalized):
+        value = _normalize_det_number(match.group("n"))
+        low_pattern = re.compile(rf"{second}<={first}-(?:{re.escape(match.group('n'))}|{re.escape(value)})")
+        if low_pattern.search(normalized):
+            direct_thresholds.add(value)
+    diff_match = re.search(rf"(?:^|[;{{}}])(?P<diff>[a-z_][a-z0-9_]*)={second}-{first}", normalized)
+    if diff_match:
+        diff_var = re.escape(diff_match.group("diff"))
+        for match in re.finditer(rf"{diff_var}>=(?P<n>-?\d+(?:\.\d+)?)", normalized):
+            value = _normalize_det_number(match.group("n"))
+            low_pattern = re.compile(rf"{diff_var}<=-(?:{re.escape(match.group('n'))}|{re.escape(value)})")
+            if low_pattern.search(normalized):
+                direct_thresholds.add(value)
+    return direct_thresholds
+
+
+def _snapshot_delta_report_equivalent_for_det(
+    candidate_code: str,
+    gt_code: str,
+    predicted_usages: list[dict[str, Any]],
+    gt_usages: list[dict[str, Any]],
+    connected_devices: dict[str, Any],
+    schema: dict[str, dict[str, Any]],
+) -> bool:
+    gt_sinks = _speaker_sinks(gt_usages)
+    pred_sinks = _speaker_sinks(predicted_usages)
+    if len(gt_sinks) != 1 or len(pred_sinks) != 1:
+        return False
+    if not _same_effective_receiver(gt_sinks[0], pred_sinks[0], connected_devices, schema):
+        return False
+    if [_normalize_arg_value(arg) for arg in gt_sinks[0].get("args", []) or []] != [
+        _normalize_arg_value(arg) for arg in pred_sinks[0].get("args", []) or []
+    ]:
+        return False
+    gt_assignments = _ordered_value_assignments(gt_code, gt_usages)
+    pred_assignments = _ordered_value_assignments(candidate_code, predicted_usages)
+    if len(gt_assignments) < 2 or len(pred_assignments) < 2:
+        return False
+    gt_first_var, gt_first_usage = gt_assignments[0]
+    gt_second_var, gt_second_usage = gt_assignments[1]
+    pred_first_var, pred_first_usage = pred_assignments[0]
+    pred_second_var, pred_second_usage = pred_assignments[1]
+    if not _same_service_family_usage_for_det(gt_first_usage, pred_first_usage, connected_devices, schema):
+        return False
+    if not _same_service_family_usage_for_det(gt_second_usage, pred_second_usage, connected_devices, schema):
+        return False
+    if not _same_service_family_usage_for_det(gt_first_usage, gt_second_usage, connected_devices, schema):
+        return False
+    gt_thresholds = _snapshot_delta_thresholds(gt_code, gt_first_var, gt_second_var)
+    pred_thresholds = _snapshot_delta_thresholds(candidate_code, pred_first_var, pred_second_var)
+    return bool(gt_thresholds and pred_thresholds and gt_thresholds == pred_thresholds)
 
 
 def _det_semantic_exact_override(
@@ -750,6 +967,25 @@ def _det_semantic_exact_override(
             schema,
         )
         or _air_quality_value_read_equivalent_for_det(
+            predicted_usages,
+            gt_usages,
+            connected_devices,
+            schema,
+        )
+        or _rgb_color_function_equivalent_for_det(
+            predicted_usages,
+            gt_usages,
+            schema,
+        )
+        or _conditional_rgb_color_action_equivalent_for_det(
+            predicted_usages,
+            gt_usages,
+            connected_devices,
+            schema,
+        )
+        or _snapshot_delta_report_equivalent_for_det(
+            candidate_code,
+            gt_code,
             predicted_usages,
             gt_usages,
             connected_devices,
@@ -790,10 +1026,24 @@ def _dataflow_score(code: str, predicted_usages: list[dict[str, Any]], gt_usages
         source_markers.update(str(tag).lower() for tag in usage.get("tags", []) if tag)
     source_mentioned_in_args = any(marker and marker in function_args for marker in source_markers)
     source_mentioned_in_condition = any(marker and marker in condition_text for marker in source_markers)
+    source_vars: set[str] = set()
+    for line in (code or "").splitlines():
+        match = re.match(r"\s*([A-Za-z_][A-Za-z0-9_]*)\s*(?::=|=)\s*(.+?)\s*$", line)
+        if not match:
+            continue
+        rhs = match.group(2).lower()
+        if any(marker and marker in rhs for marker in source_markers):
+            source_vars.add(match.group(1).lower())
+    source_var_mentioned_in_condition = any(
+        re.search(rf"\b{re.escape(variable)}\b", condition_text)
+        for variable in source_vars
+    )
     if assignment_like and arg_has_expression:
         return 1.0
     if source_mentioned_in_args and arg_has_expression:
         return 0.85
+    if source_var_mentioned_in_condition and ("if (" in lowered_code or "wait until" in lowered_code):
+        return 1.0
     if source_mentioned_in_condition and ("if (" in lowered_code or "wait until" in lowered_code):
         return 1.0
     if arg_has_expression:
@@ -808,8 +1058,8 @@ def _requires_numeric_grounding(command_eng: str, gt_code: str) -> bool:
 def _numeric_grounding_score(command_eng: str, code: str, gt_code: str) -> float:
     if not _requires_numeric_grounding(command_eng, gt_code):
         return 1.0
-    gt_numbers = extract_command_numbers(gt_code)
-    candidate_numbers = extract_command_numbers(code)
+    gt_numbers = [_normalize_det_number(value) for value in extract_command_numbers(gt_code)]
+    candidate_numbers = [_normalize_det_number(value) for value in extract_command_numbers(code)]
     if not gt_numbers:
         return 1.0
     if not candidate_numbers:
@@ -822,6 +1072,17 @@ def _numeric_grounding_score(command_eng: str, code: str, gt_code: str) -> float
     precision = matched / max(sum(candidate_counter.values()), 1)
     recall = matched / max(sum(gt_counter.values()), 1)
     return max(0.0, min(1.0, 0.5 * precision + 0.5 * recall))
+
+
+def _normalize_det_number(value: str) -> str:
+    text = str(value or "").strip()
+    try:
+        decimal_value = Decimal(text)
+    except (InvalidOperation, ValueError):
+        return text
+    if decimal_value == decimal_value.to_integral_value():
+        return str(decimal_value.quantize(Decimal(1)))
+    return format(decimal_value.normalize(), "f")
 
 
 def _normalize_arg_value(text: str) -> str:

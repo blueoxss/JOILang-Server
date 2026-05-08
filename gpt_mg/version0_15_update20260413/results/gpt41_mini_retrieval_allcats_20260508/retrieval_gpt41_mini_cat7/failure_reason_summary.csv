@@ -1,0 +1,8 @@
+model_key,model_label,failure_reason,count
+gpt41_mini,GPT-4.1-mini,gt_mismatch,32
+gpt41_mini,GPT-4.1-mini,semantic,23
+gpt41_mini,GPT-4.1-mini,extraneous,14
+gpt41_mini,GPT-4.1-mini,numeric_grounding,8
+gpt41_mini,GPT-4.1-mini,precondition,4
+gpt41_mini,GPT-4.1-mini,enum_grounding,2
+gpt41_mini,GPT-4.1-mini,arg_type,1

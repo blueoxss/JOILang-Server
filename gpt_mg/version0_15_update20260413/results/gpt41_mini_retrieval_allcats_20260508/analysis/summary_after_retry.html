@@ -1,0 +1,26 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>GPT-4.1 mini Retrieval Summary</title>
+<style>
+body{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:40px;background:#f8fafc;color:#0f172a;line-height:1.5}
+h1{font-size:28px;margin-bottom:18px}h2{font-size:20px;margin-top:32px}.card{background:white;border:1px solid #e2e8f0;border-radius:18px;padding:24px;box-shadow:0 10px 30px rgba(15,23,42,.06)}
+table{border-collapse:collapse;width:100%;background:white;margin:18px 0;border-radius:14px;overflow:hidden}th,td{padding:10px 12px;border-bottom:1px solid #e2e8f0;text-align:right}th{background:#0f172a;color:white}td:first-child,th:first-child{text-align:center}.bullet{background:white;border-left:4px solid #2563eb;padding:10px 14px;margin:8px 0;border-radius:10px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+</style></head><body><div class="card"><h1>GPT-4.1 mini Retrieval Category Study Summary</h1>
+<div class="bullet">Full-run pass: 273/280 (97.50%)</div>
+<div class="bullet">After targeted retry pass: 276/280 (98.57%)</div>
+<div class="bullet">After targeted retry avg DET: 97.0821</div>
+<div class="bullet">Remaining failures: 4</div>
+<table><thead><tr><th>Cat</th><th>Rows</th><th>Pass</th><th>Fail</th><th>Pass rate</th><th>Avg DET</th><th>GT exact</th><th>Avg prompt tok</th><th>Avg latency</th></tr></thead><tbody>
+<tr><td>1</td><td>30</td><td>30</td><td>0</td><td>100.00%</td><td>99.652</td><td>25/30</td><td>26844.1</td><td>2.4103s</td></tr>
+<tr><td>2</td><td>30</td><td>30</td><td>0</td><td>100.00%</td><td>98.5588</td><td>23/30</td><td>23754.6</td><td>2.0799s</td></tr>
+<tr><td>3</td><td>30</td><td>29</td><td>1</td><td>96.67%</td><td>98.1758</td><td>23/30</td><td>25244.4</td><td>2.1359s</td></tr>
+<tr><td>4</td><td>30</td><td>28</td><td>2</td><td>93.33%</td><td>96.2227</td><td>18/30</td><td>25184.3</td><td>2.1145s</td></tr>
+<tr><td>5</td><td>30</td><td>29</td><td>1</td><td>96.67%</td><td>96.7384</td><td>19/30</td><td>25433.8</td><td>2.3176s</td></tr>
+<tr><td>6</td><td>30</td><td>30</td><td>0</td><td>100.00%</td><td>98.4998</td><td>20/30</td><td>25585.0</td><td>2.4562s</td></tr>
+<tr><td>7</td><td>50</td><td>50</td><td>0</td><td>100.00%</td><td>95.099</td><td>18/50</td><td>25771.6</td><td>2.5738s</td></tr>
+<tr><td>8</td><td>50</td><td>50</td><td>0</td><td>100.00%</td><td>95.8522</td><td>20/50</td><td>25593.3</td><td>2.557s</td></tr>
+</tbody></table>
+<h2>Remaining failures</h2>
+<div class="bullet">Row 63 / Cat 3: DET 69.9000, reasons [&quot;gt_mismatch&quot;, &quot;gt_receiver_coverage&quot;, &quot;gt_service_coverage&quot;]. If the cloud service is activated, upload test.png file to the cloud.</div>
+<div class="bullet">Row 107 / Cat 4: DET 69.7752, reasons [&quot;enum_grounding&quot;, &quot;gt_mismatch&quot;, &quot;gt_receiver_coverage&quot;, &quot;gt_service_coverage&quot;, &quot;semantic&quot;]. When motion is detected in the bedroom, turn on the bedroom air conditioner.</div>
+<div class="bullet">Row 118 / Cat 4: DET 69.9000, reasons [&quot;extraneous&quot;, &quot;gt_mismatch&quot;, &quot;gt_receiver_coverage&quot;, &quot;gt_service_coverage&quot;]. When any presence sensor in the hallway detects presence, set all hallway lights to purple.</div>
+<div class="bullet">Row 150 / Cat 5: DET 69.9000, reasons [&quot;dataflow&quot;, &quot;gt_mismatch&quot;, &quot;semantic&quot;]. Check the wine cellar temperature now and again in 10 minutes. If it has changed by 1 degree or higher, announce through the speaker that the wine cellar temperature has changed rapidly.</div></div></body></html>

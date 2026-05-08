@@ -1,0 +1,174 @@
+[
+  {
+    "row_no": "171",
+    "service_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "service_schema_label": "service_list_ver2.0.1.json",
+    "snippet_source": "connected_devices_only",
+    "mode_label": "connected_devices scope",
+    "retrieval_status": "skipped_connected_devices_present",
+    "retrieval_mode": "hybrid",
+    "requested_topk": 10,
+    "effective_topk": 0,
+    "device_count": 3,
+    "all_injected_category_count": 3,
+    "all_injected_categories": [
+      "FaceRecognizer",
+      "DoorLock",
+      "Door"
+    ],
+    "displayed_categories": [
+      "FaceRecognizer",
+      "DoorLock",
+      "Door"
+    ],
+    "retrieval_categories": [],
+    "connected_categories": [
+      "FaceRecognizer",
+      "DoorLock",
+      "Door"
+    ],
+    "relevant_categories": [
+      "FaceRecognizer",
+      "DoorLock",
+      "Door"
+    ],
+    "note": "Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",
+    "category_cards": [
+      {
+        "category": "FaceRecognizer",
+        "role": "connected",
+        "rank": null,
+        "service_count": 5,
+        "value_count": 1,
+        "function_count": 4,
+        "values": [
+          {
+            "service": "FaceRecognizer_RecognizedResult",
+            "raw_service": "RecognizedResult",
+            "canonical_name": "FaceRecognizer_RecognizedResult",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Controls face recognition features"
+          }
+        ],
+        "functions": [
+          {
+            "service": "FaceRecognizer_AddFace",
+            "raw_service": "AddFace",
+            "canonical_name": "FaceRecognizer_AddFace",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "BOOL",
+            "descriptor": "Controls face recognition features"
+          },
+          {
+            "service": "FaceRecognizer_DeleteFace",
+            "raw_service": "DeleteFace",
+            "canonical_name": "FaceRecognizer_DeleteFace",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "BOOL",
+            "descriptor": "Controls face recognition features"
+          },
+          {
+            "service": "FaceRecognizer_End",
+            "raw_service": "End",
+            "canonical_name": "FaceRecognizer_End",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "Controls face recognition features"
+          },
+          {
+            "service": "FaceRecognizer_Start",
+            "raw_service": "Start",
+            "canonical_name": "FaceRecognizer_Start",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "Controls face recognition features"
+          }
+        ]
+      },
+      {
+        "category": "DoorLock",
+        "role": "connected",
+        "rank": null,
+        "service_count": 3,
+        "value_count": 1,
+        "function_count": 2,
+        "values": [
+          {
+            "service": "DoorLock_DoorLockState",
+            "raw_service": "DoorLockState",
+            "canonical_name": "DoorLock_DoorLockState",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allow for the control of a door lock"
+          }
+        ],
+        "functions": [
+          {
+            "service": "DoorLock_Lock",
+            "raw_service": "Lock",
+            "canonical_name": "DoorLock_Lock",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allow for the control of a door lock"
+          },
+          {
+            "service": "DoorLock_Unlock",
+            "raw_service": "Unlock",
+            "canonical_name": "DoorLock_Unlock",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allow for the control of a door lock"
+          }
+        ]
+      },
+      {
+        "category": "Door",
+        "role": "connected",
+        "rank": null,
+        "service_count": 3,
+        "value_count": 1,
+        "function_count": 2,
+        "values": [
+          {
+            "service": "Door_DoorState",
+            "raw_service": "DoorState",
+            "canonical_name": "Door_DoorState",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allow for the control of a door"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Door_Close",
+            "raw_service": "Close",
+            "canonical_name": "Door_Close",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allow for the control of a door"
+          },
+          {
+            "service": "Door_Open",
+            "raw_service": "Open",
+            "canonical_name": "Door_Open",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allow for the control of a door"
+          }
+        ]
+      }
+    ]
+  }
+]

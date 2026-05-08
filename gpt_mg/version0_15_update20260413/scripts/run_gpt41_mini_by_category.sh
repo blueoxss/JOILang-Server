@@ -94,6 +94,7 @@ if [[ -z "$OUTPUT_ROOT" ]]; then
 fi
 
 mkdir -p "$OUTPUT_ROOT"
+OUTPUT_ROOT="$(cd "$OUTPUT_ROOT" && pwd)"
 
 echo "[info] output_root=$OUTPUT_ROOT"
 echo "[info] model_key=$MODEL_KEY"
