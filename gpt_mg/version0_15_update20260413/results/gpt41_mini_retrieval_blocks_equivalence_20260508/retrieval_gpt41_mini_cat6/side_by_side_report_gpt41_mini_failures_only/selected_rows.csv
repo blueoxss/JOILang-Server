@@ -1,0 +1,30 @@
+row_no,category,command_eng,command_kor,gt_name_display,service_list_schema,gt_code,generated_code,det_score,det_pass,det_profile,det_gt_exact,det_gt_similarity,det_gt_service_coverage,det_gt_receiver_coverage,det_dataflow_score,det_numeric_grounding,det_enum_grounding,failure_reasons,service_list_retrieval_categories_display,prompt_context_mode,prompt_context_note,prompt_context_effective_topk,prompt_context_injected_categories,prompt_context_displayed_categories,prompt_tokens,completion_tokens,total_tokens,llm_latency_sec,total_pipeline_sec,tokens_per_sec,peak_vram_gb,service_list_snippet_source,service_list_device_count,service_list_retrieval_status,service_list_retrieval_mode,service_list_retrieval_topk,service_list_retrieval_categories,generation_error_type
+157,6,"If the weather is rainy and no one is being detected, lock the door and close the valve.","비가 오고 아무도 없는 상태면, 도어락을 잠그고 밸브를 차단해줘.",IfWeatherIsRainyNoOneIsBeing,service_list_ver2.0.1.json,"if ((#WeatherProvider).weatherprovider_weather == ""rain"" and (#PresenceSensor).presencesensor_presence == false) {
+
+    (#DoorLock).doorlock_lock()
+
+    (#Valve).valve_close()
+
+}","if ((#RainSensor).rainsensor_rain == true and (#PresenceSensor).presencesensor_presence == false) {
+    (#DoorLock).doorlock_lock()
+    (#Valve).valve_close()
+}",69.9,False,strict,False,0.845694,0.75,0.75,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]","PresenceSensor, RainSensor, Door, Valve, DoorLock, WeatherProvider, Pump, Safe, ArmRobot, WindowCovering",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""RainSensor"", ""Door"", ""Valve"", ""DoorLock"", ""WeatherProvider"", ""Pump"", ""Safe"", ""ArmRobot"", ""WindowCovering""]","[""PresenceSensor"", ""RainSensor"", ""Door"", ""Valve"", ""DoorLock"", ""WeatherProvider"", ""Pump"", ""Safe"", ""ArmRobot"", ""WindowCovering""]",17529,70,17599,3.4197,4.4047,5146.3579,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""RainSensor"", ""Door"", ""Valve"", ""DoorLock"", ""WeatherProvider"", ""Pump"", ""Safe"", ""ArmRobot"", ""WindowCovering""]",
+175,6,"If the server room temperature is 30 degrees or higher and the AC is off, turn it on and sound the main emergency siren.","서버실 온도가 30도 이상이고 에어컨이 꺼져 있으면, 에어컨을 냉방 모드로 켜고 메인 사이렌을 긴급 모드로 울려줘.",IfServerRoomTemperatureIs30DegreesOrHigher,service_list_ver2.0.1.json,"if ((#ServerRoom #TemperatureSensor).temperaturesensor_temperature >= 30 and (#ServerRoom #AirConditioner).switch_switch == false) {
+
+    (#ServerRoom #AirConditioner).airconditioner_setairconditionermode(""cool"")
+
+    (#Main #Siren).siren_setsirenmode(""emergency"")
+
+}","wait until ((#ServerRoom #TemperatureSensor).temperaturesensor_temperature >= 30 and (#ServerRoom #Switch).switch_switch == false)
+(#ServerRoom #Switch).switch_on()
+(#Main #Siren).siren_setsirenmode(""emergency"")",69.9,False,strict,False,0.826253,0.75,0.75,1.0,1.0,0.5,"[""enum_grounding"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""precondition""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 4 connected-device category group(s) were injected.",0,"[""TemperatureSensor"", ""AirConditioner"", ""Switch"", ""Siren""]","[""TemperatureSensor"", ""AirConditioner"", ""Switch"", ""Siren""]",12864,76,12940,4.8354,4.8452,2676.0971,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+178,6,"If the warehouse fine dust level is 100 or higher and the air purifier is in auto mode, switch it to high mode and say through the warehouse speaker ""Switching to high mode"".","창고 미세먼지가 100 이상이고 공기청정기가 자동 모드이면, 모드를 강풍 모드로 바꾸고 창고 스피커로 ""강풍 모드로 전환합니다""라고 말해줘.",IfWarehouseFineDustLevelIs100OrHigher,service_list_ver2.0.1.json,"if ((#Warehouse #AirQualitySensor).airqualitysensor_finedustlevel >= 100 and (#Warehouse #AirPurifier).airpurifier_airpurifiermode == ""auto"") {
+
+    (#Warehouse #AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Warehouse #Speaker).speaker_speak(""강풍 모드로 전환합니다"")
+
+}","if ((#Warehouse #AirQualitySensor).airqualitysensor_dustlevel >= 100 and (#Warehouse #AirPurifier).airpurifier_airpurifiermode == ""auto"") {
+    (#Warehouse #AirPurifier).airpurifier_setairpurifiermode(""high"")
+    (#Warehouse #Speaker).speaker_speak(""강풍 모드로 전환합니다"")
+}",69.9,False,strict,False,0.9339,0.75,0.75,1.0,1.0,1.0,"[""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""AirQualitySensor"", ""AirPurifier"", ""Speaker""]","[""AirQualitySensor"", ""AirPurifier"", ""Speaker""]",13696,103,13799,2.4831,2.4938,5557.1664,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],

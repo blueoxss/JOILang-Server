@@ -1,0 +1,925 @@
+[
+  {
+    "row_no": "157",
+    "service_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "service_schema_label": "service_list_ver2.0.1.json",
+    "snippet_source": "service_retrieval_fallback",
+    "mode_label": "retrieval premapping",
+    "retrieval_status": "used",
+    "retrieval_mode": "hybrid",
+    "requested_topk": 10,
+    "effective_topk": 10,
+    "device_count": 10,
+    "all_injected_category_count": 10,
+    "all_injected_categories": [
+      "PresenceSensor",
+      "RainSensor",
+      "Door",
+      "Valve",
+      "DoorLock",
+      "WeatherProvider",
+      "Pump",
+      "Safe",
+      "ArmRobot",
+      "WindowCovering"
+    ],
+    "displayed_categories": [
+      "PresenceSensor",
+      "RainSensor",
+      "Door",
+      "Valve",
+      "DoorLock",
+      "WeatherProvider",
+      "Pump",
+      "Safe",
+      "ArmRobot",
+      "WindowCovering"
+    ],
+    "retrieval_categories": [
+      "PresenceSensor",
+      "RainSensor",
+      "Door",
+      "Valve",
+      "DoorLock",
+      "WeatherProvider",
+      "Pump",
+      "Safe",
+      "ArmRobot",
+      "WindowCovering"
+    ],
+    "connected_categories": [],
+    "relevant_categories": [
+      "WeatherProvider",
+      "PresenceSensor",
+      "DoorLock",
+      "Valve",
+      "RainSensor"
+    ],
+    "note": "Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.",
+    "category_cards": [
+      {
+        "category": "PresenceSensor",
+        "role": "retrieved",
+        "rank": 1,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "PresenceSensor_Presence",
+            "raw_service": "Presence",
+            "canonical_name": "PresenceSensor_Presence",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "The ability to see the current status of a presence sensor device"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "RainSensor",
+        "role": "retrieved",
+        "rank": 2,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "RainSensor_Rain",
+            "raw_service": "Rain",
+            "canonical_name": "RainSensor_Rain",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "A Device that senses rain"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "Door",
+        "role": "retrieved",
+        "rank": 3,
+        "service_count": 3,
+        "value_count": 1,
+        "function_count": 2,
+        "values": [
+          {
+            "service": "Door_DoorState",
+            "raw_service": "DoorState",
+            "canonical_name": "Door_DoorState",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allow for the control of a door"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Door_Close",
+            "raw_service": "Close",
+            "canonical_name": "Door_Close",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allow for the control of a door"
+          },
+          {
+            "service": "Door_Open",
+            "raw_service": "Open",
+            "canonical_name": "Door_Open",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allow for the control of a door"
+          }
+        ]
+      },
+      {
+        "category": "Valve",
+        "role": "retrieved",
+        "rank": 4,
+        "service_count": 3,
+        "value_count": 1,
+        "function_count": 2,
+        "values": [
+          {
+            "service": "Valve_ValveState",
+            "raw_service": "ValveState",
+            "canonical_name": "Valve_ValveState",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "Controls a valve to open or close it"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Valve_Close",
+            "raw_service": "Close",
+            "canonical_name": "Valve_Close",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Controls a valve to open or close it"
+          },
+          {
+            "service": "Valve_Open",
+            "raw_service": "Open",
+            "canonical_name": "Valve_Open",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Controls a valve to open or close it"
+          }
+        ]
+      },
+      {
+        "category": "DoorLock",
+        "role": "retrieved",
+        "rank": 5,
+        "service_count": 3,
+        "value_count": 1,
+        "function_count": 2,
+        "values": [
+          {
+            "service": "DoorLock_DoorLockState",
+            "raw_service": "DoorLockState",
+            "canonical_name": "DoorLock_DoorLockState",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allow for the control of a door lock"
+          }
+        ],
+        "functions": [
+          {
+            "service": "DoorLock_Lock",
+            "raw_service": "Lock",
+            "canonical_name": "DoorLock_Lock",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allow for the control of a door lock"
+          },
+          {
+            "service": "DoorLock_Unlock",
+            "raw_service": "Unlock",
+            "canonical_name": "DoorLock_Unlock",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allow for the control of a door lock"
+          }
+        ]
+      },
+      {
+        "category": "WeatherProvider",
+        "role": "retrieved",
+        "rank": 6,
+        "service_count": 7,
+        "value_count": 6,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "WeatherProvider_HumidityWeather",
+            "raw_service": "HumidityWeather",
+            "canonical_name": "WeatherProvider_HumidityWeather",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Provides weather information"
+          },
+          {
+            "service": "WeatherProvider_Pm10Weather",
+            "raw_service": "Pm10Weather",
+            "canonical_name": "WeatherProvider_Pm10Weather",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Provides weather information"
+          },
+          {
+            "service": "WeatherProvider_Pm25Weather",
+            "raw_service": "Pm25Weather",
+            "canonical_name": "WeatherProvider_Pm25Weather",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Provides weather information"
+          },
+          {
+            "service": "WeatherProvider_PressureWeather",
+            "raw_service": "PressureWeather",
+            "canonical_name": "WeatherProvider_PressureWeather",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Provides weather information"
+          },
+          {
+            "service": "WeatherProvider_TemperatureWeather",
+            "raw_service": "TemperatureWeather",
+            "canonical_name": "WeatherProvider_TemperatureWeather",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Provides weather information"
+          },
+          {
+            "service": "WeatherProvider_Weather",
+            "raw_service": "Weather",
+            "canonical_name": "WeatherProvider_Weather",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Provides weather information"
+          }
+        ],
+        "functions": [
+          {
+            "service": "WeatherProvider_GetWeatherInfo",
+            "raw_service": "GetWeatherInfo",
+            "canonical_name": "WeatherProvider_GetWeatherInfo",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "STRING",
+            "descriptor": "Provides weather information"
+          }
+        ]
+      },
+      {
+        "category": "Pump",
+        "role": "retrieved",
+        "rank": 7,
+        "service_count": 2,
+        "value_count": 1,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "Pump_PumpMode",
+            "raw_service": "PumpMode",
+            "canonical_name": "Pump_PumpMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of a pump device"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Pump_SetPumpMode",
+            "raw_service": "SetPumpMode",
+            "canonical_name": "Pump_SetPumpMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of a pump device"
+          }
+        ]
+      },
+      {
+        "category": "Safe",
+        "role": "retrieved",
+        "rank": 8,
+        "service_count": 3,
+        "value_count": 1,
+        "function_count": 2,
+        "values": [
+          {
+            "service": "Safe_SafeState",
+            "raw_service": "SafeState",
+            "canonical_name": "Safe_SafeState",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of the Safe"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Safe_Lock",
+            "raw_service": "Lock",
+            "canonical_name": "Safe_Lock",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the Safe"
+          },
+          {
+            "service": "Safe_Unlock",
+            "raw_service": "Unlock",
+            "canonical_name": "Safe_Unlock",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the Safe"
+          }
+        ]
+      },
+      {
+        "category": "ArmRobot",
+        "role": "retrieved",
+        "rank": 9,
+        "service_count": 5,
+        "value_count": 2,
+        "function_count": 3,
+        "values": [
+          {
+            "service": "ArmRobot_ArmRobotType",
+            "raw_service": "ArmRobotType",
+            "canonical_name": "ArmRobot_ArmRobotType",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of the arm robot"
+          },
+          {
+            "service": "ArmRobot_CurrentPosition",
+            "raw_service": "CurrentPosition",
+            "canonical_name": "ArmRobot_CurrentPosition",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Allows for the control of the arm robot"
+          }
+        ],
+        "functions": [
+          {
+            "service": "ArmRobot_Hello",
+            "raw_service": "Hello",
+            "canonical_name": "ArmRobot_Hello",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the arm robot"
+          },
+          {
+            "service": "ArmRobot_SendCommand",
+            "raw_service": "SendCommand",
+            "canonical_name": "ArmRobot_SendCommand",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the arm robot"
+          },
+          {
+            "service": "ArmRobot_SetPosition",
+            "raw_service": "SetPosition",
+            "canonical_name": "ArmRobot_SetPosition",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the arm robot"
+          }
+        ]
+      },
+      {
+        "category": "WindowCovering",
+        "role": "retrieved",
+        "rank": 10,
+        "service_count": 6,
+        "value_count": 2,
+        "function_count": 4,
+        "values": [
+          {
+            "service": "WindowCovering_CurrentPosition",
+            "raw_service": "CurrentPosition",
+            "canonical_name": "WindowCovering_CurrentPosition",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "Controls a window covering to open or close it"
+          },
+          {
+            "service": "WindowCovering_WindowCoveringType",
+            "raw_service": "WindowCoveringType",
+            "canonical_name": "WindowCovering_WindowCoveringType",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Controls a window covering to open or close it"
+          }
+        ],
+        "functions": [
+          {
+            "service": "WindowCovering_DownOrClose",
+            "raw_service": "DownOrClose",
+            "canonical_name": "WindowCovering_DownOrClose",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Controls a window covering to open or close it"
+          },
+          {
+            "service": "WindowCovering_SetLevel",
+            "raw_service": "SetLevel",
+            "canonical_name": "WindowCovering_SetLevel",
+            "type": "function",
+            "argument_type": "INTEGER",
+            "return_type": "INTEGER",
+            "descriptor": "Controls a window covering to open or close it"
+          },
+          {
+            "service": "WindowCovering_Stop",
+            "raw_service": "Stop",
+            "canonical_name": "WindowCovering_Stop",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Controls a window covering to open or close it"
+          },
+          {
+            "service": "WindowCovering_UpOrOpen",
+            "raw_service": "UpOrOpen",
+            "canonical_name": "WindowCovering_UpOrOpen",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Controls a window covering to open or close it"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "row_no": "175",
+    "service_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "service_schema_label": "service_list_ver2.0.1.json",
+    "snippet_source": "connected_devices_only",
+    "mode_label": "connected_devices scope",
+    "retrieval_status": "skipped_connected_devices_present",
+    "retrieval_mode": "hybrid",
+    "requested_topk": 10,
+    "effective_topk": 0,
+    "device_count": 3,
+    "all_injected_category_count": 4,
+    "all_injected_categories": [
+      "TemperatureSensor",
+      "AirConditioner",
+      "Switch",
+      "Siren"
+    ],
+    "displayed_categories": [
+      "TemperatureSensor",
+      "AirConditioner",
+      "Switch",
+      "Siren"
+    ],
+    "retrieval_categories": [],
+    "connected_categories": [
+      "TemperatureSensor",
+      "AirConditioner",
+      "Switch",
+      "Siren"
+    ],
+    "relevant_categories": [
+      "TemperatureSensor",
+      "AirConditioner",
+      "Siren",
+      "Switch"
+    ],
+    "note": "Prompt context came from connected_devices, so retrieval was skipped. 4 connected-device category group(s) were injected.",
+    "category_cards": [
+      {
+        "category": "TemperatureSensor",
+        "role": "connected",
+        "rank": null,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "TemperatureSensor_Temperature",
+            "raw_service": "Temperature",
+            "canonical_name": "TemperatureSensor_Temperature",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Get the temperature from a Device that reports current temperature"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "AirConditioner",
+        "role": "connected",
+        "rank": null,
+        "service_count": 4,
+        "value_count": 2,
+        "function_count": 2,
+        "values": [
+          {
+            "service": "AirConditioner_AirConditionerMode",
+            "raw_service": "AirConditionerMode",
+            "canonical_name": "AirConditioner_AirConditionerMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Controls air conditioner mode and temperature settings"
+          },
+          {
+            "service": "AirConditioner_TargetTemperature",
+            "raw_service": "TargetTemperature",
+            "canonical_name": "AirConditioner_TargetTemperature",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Controls air conditioner mode and temperature settings"
+          }
+        ],
+        "functions": [
+          {
+            "service": "AirConditioner_SetAirConditionerMode",
+            "raw_service": "SetAirConditionerMode",
+            "canonical_name": "AirConditioner_SetAirConditionerMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Controls air conditioner mode and temperature settings"
+          },
+          {
+            "service": "AirConditioner_SetTargetTemperature",
+            "raw_service": "SetTargetTemperature",
+            "canonical_name": "AirConditioner_SetTargetTemperature",
+            "type": "function",
+            "argument_type": "DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "Controls air conditioner mode and temperature settings"
+          }
+        ]
+      },
+      {
+        "category": "Switch",
+        "role": "connected",
+        "rank": null,
+        "service_count": 4,
+        "value_count": 1,
+        "function_count": 3,
+        "values": [
+          {
+            "service": "Switch_Switch",
+            "raw_service": "Switch",
+            "canonical_name": "Switch_Switch",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "Allows for the control of a Switch device"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Switch_Off",
+            "raw_service": "Off",
+            "canonical_name": "Switch_Off",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of a Switch device"
+          },
+          {
+            "service": "Switch_On",
+            "raw_service": "On",
+            "canonical_name": "Switch_On",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of a Switch device"
+          },
+          {
+            "service": "Switch_Toggle",
+            "raw_service": "Toggle",
+            "canonical_name": "Switch_Toggle",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "Allows for the control of a Switch device"
+          }
+        ]
+      },
+      {
+        "category": "Siren",
+        "role": "connected",
+        "rank": null,
+        "service_count": 2,
+        "value_count": 1,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "Siren_SirenMode",
+            "raw_service": "SirenMode",
+            "canonical_name": "Siren_SirenMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of the Siren"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Siren_SetSirenMode",
+            "raw_service": "SetSirenMode",
+            "canonical_name": "Siren_SetSirenMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the Siren"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "row_no": "178",
+    "service_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "service_schema_label": "service_list_ver2.0.1.json",
+    "snippet_source": "connected_devices_only",
+    "mode_label": "connected_devices scope",
+    "retrieval_status": "skipped_connected_devices_present",
+    "retrieval_mode": "hybrid",
+    "requested_topk": 10,
+    "effective_topk": 0,
+    "device_count": 3,
+    "all_injected_category_count": 3,
+    "all_injected_categories": [
+      "AirQualitySensor",
+      "AirPurifier",
+      "Speaker"
+    ],
+    "displayed_categories": [
+      "AirQualitySensor",
+      "AirPurifier",
+      "Speaker"
+    ],
+    "retrieval_categories": [],
+    "connected_categories": [
+      "AirQualitySensor",
+      "AirPurifier",
+      "Speaker"
+    ],
+    "relevant_categories": [
+      "AirQualitySensor",
+      "AirPurifier",
+      "Speaker"
+    ],
+    "note": "Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",
+    "category_cards": [
+      {
+        "category": "AirQualitySensor",
+        "role": "connected",
+        "rank": null,
+        "service_count": 7,
+        "value_count": 7,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "AirQualitySensor_CarbonDioxide",
+            "raw_service": "CarbonDioxide",
+            "canonical_name": "AirQualitySensor_CarbonDioxide",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          },
+          {
+            "service": "AirQualitySensor_DustLevel",
+            "raw_service": "DustLevel",
+            "canonical_name": "AirQualitySensor_DustLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          },
+          {
+            "service": "AirQualitySensor_FineDustLevel",
+            "raw_service": "FineDustLevel",
+            "canonical_name": "AirQualitySensor_FineDustLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          },
+          {
+            "service": "AirQualitySensor_Humidity",
+            "raw_service": "Humidity",
+            "canonical_name": "AirQualitySensor_Humidity",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          },
+          {
+            "service": "AirQualitySensor_Temperature",
+            "raw_service": "Temperature",
+            "canonical_name": "AirQualitySensor_Temperature",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          },
+          {
+            "service": "AirQualitySensor_TvocLevel",
+            "raw_service": "TvocLevel",
+            "canonical_name": "AirQualitySensor_TvocLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          },
+          {
+            "service": "AirQualitySensor_VeryFineDustLevel",
+            "raw_service": "VeryFineDustLevel",
+            "canonical_name": "AirQualitySensor_VeryFineDustLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Air quality detector device for comprehensive air quality monitoring"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "AirPurifier",
+        "role": "connected",
+        "rank": null,
+        "service_count": 2,
+        "value_count": 1,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "AirPurifier_AirPurifierMode",
+            "raw_service": "AirPurifierMode",
+            "canonical_name": "AirPurifier_AirPurifierMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Controls air purifier mode"
+          }
+        ],
+        "functions": [
+          {
+            "service": "AirPurifier_SetAirPurifierMode",
+            "raw_service": "SetAirPurifierMode",
+            "canonical_name": "AirPurifier_SetAirPurifierMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Controls air purifier mode"
+          }
+        ]
+      },
+      {
+        "category": "Speaker",
+        "role": "connected",
+        "rank": null,
+        "service_count": 11,
+        "value_count": 2,
+        "function_count": 9,
+        "values": [
+          {
+            "service": "Speaker_PlaybackState",
+            "raw_service": "PlaybackState",
+            "canonical_name": "Speaker_PlaybackState",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_Volume",
+            "raw_service": "Volume",
+            "canonical_name": "Speaker_Volume",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "Speaker device for audio playback and media control"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Speaker_FastForward",
+            "raw_service": "FastForward",
+            "canonical_name": "Speaker_FastForward",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_Pause",
+            "raw_service": "Pause",
+            "canonical_name": "Speaker_Pause",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_Play",
+            "raw_service": "Play",
+            "canonical_name": "Speaker_Play",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "VOID",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_Rewind",
+            "raw_service": "Rewind",
+            "canonical_name": "Speaker_Rewind",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_SetVolume",
+            "raw_service": "SetVolume",
+            "canonical_name": "Speaker_SetVolume",
+            "type": "function",
+            "argument_type": "INTEGER",
+            "return_type": "INTEGER",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_Speak",
+            "raw_service": "Speak",
+            "canonical_name": "Speaker_Speak",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "VOID",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_Stop",
+            "raw_service": "Stop",
+            "canonical_name": "Speaker_Stop",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_VolumeDown",
+            "raw_service": "VolumeDown",
+            "canonical_name": "Speaker_VolumeDown",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_VolumeUp",
+            "raw_service": "VolumeUp",
+            "canonical_name": "Speaker_VolumeUp",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "Speaker device for audio playback and media control"
+          }
+        ]
+      }
+    ]
+  }
+]

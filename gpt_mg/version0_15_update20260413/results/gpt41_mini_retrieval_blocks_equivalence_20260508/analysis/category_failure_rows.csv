@@ -1,0 +1,138 @@
+result_dir,category,row_no,command_eng,command_kor,det_score,failure_reasons,gt_code,generated_code,recommended_prompt_files,analysis,retrieval_categories,prompt_tokens,llm_latency_sec
+/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_blocks_equivalence_20260508/retrieval_gpt41_mini_cat1,1,2,Add 5 minutes to the oven.,오븐의 작동 시간을 5분 늘려줘.,69.9,"[""gt_mismatch"", ""numeric_grounding""]",(#Oven).oven_addmoretime(300),(#Oven).oven_addmoretime(5),"tempo_prompt_9.md, grammar_ver1.5.10.md",Add 5 minutes to the oven.: 명령의 숫자나 단위가 코드에 정확히 grounding되지 않았습니다,"[""Oven"", ""RiceCooker"", ""ArmRobot"", ""MenuProvider"", ""Button"", ""Dishwasher"", ""Door"", ""Television"", ""SmokeDetector"", ""LaundryDryer""]",17973.0,1.2448
+/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_blocks_equivalence_20260508/retrieval_gpt41_mini_cat1,1,13,Announce the fine dust level through the speaker.,미세먼지 농도를 스피커로 알려줘.,69.9,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]","dust = (#AirQualitySensor).airqualitysensor_dustlevel
+
+(#Speaker).speaker_speak(""미세먼지 농도는 "" + dust + ""입니다"")","level = (#WeatherProvider).weatherprovider_pm10weather
+(#Speaker).speaker_speak(""현재 미세먼지 농도는 "" + level + ""입니다"")","response_prompt_baseline_cot.md, caution_prompt_8.md",Announce the fine dust level through the speaker.: GT에 필요한 서비스 호출 일부가 빠졌거나 evaluator가 독립 호출로 인식하지 못했습니다; GT가 요구한 receiver scope를 충분히 덮지 못했습니다,"[""Speaker"", ""AirQualitySensor"", ""SmokeDetector"", ""AirPurifier"", ""SoundSensor"", ""WeatherProvider"", ""Siren"", ""AudioRecorder"", ""CarbonDioxideSensor"", ""RobotVacuumCleaner""]",18415.0,2.0555
+/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_blocks_equivalence_20260508/retrieval_gpt41_mini_cat4,4,94,"When it rains, turn on the dehumidifier.",비가 오면 제습기를 켜줘.,69.9,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]","wait until ((#RainSensor).rainsensor_rain == true)
+
+(#Dehumidifier).switch_on()","prev := (#RainSensor).rainsensor_rain
+curr = (#RainSensor).rainsensor_rain
+if (prev == false and curr == true) {
+    (#Dehumidifier).dehumidifier_setdehumidifiermode(""dehumidifying"")
+}
+prev = curr","response_prompt_baseline_cot.md, caution_prompt_8.md","When it rains, turn on the dehumidifier.: GT에 필요한 서비스 호출 일부가 빠졌거나 evaluator가 독립 호출로 인식하지 못했습니다; GT가 요구한 receiver scope를 충분히 덮지 못했습니다","[""HumiditySensor"", ""RainSensor"", ""Dehumidifier"", ""Humidifier"", ""WeatherProvider"", ""ArmRobot"", ""Dishwasher"", ""AirConditioner"", ""Pump"", ""LaundryDryer""]",17697.0,2.1913
+/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_blocks_equivalence_20260508/retrieval_gpt41_mini_cat4,4,118,"When any presence sensor in the hallway detects presence, set all hallway lights to purple.",복도에 재실 센서가 하나라도 감지되면 모든 복도 조명을 보라색으로 설정해줘.,69.9,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]","wait until (all(#Hallway #PresenceSensor).presencesensor_presence ==| true)
+
+all(#Hallway #Light).colorcontrol_setcolor(""128,0,128"")","prev := all(#Hallway #PresenceSensor).presencesensor_presence
+curr = all(#Hallway #PresenceSensor).presencesensor_presence
+if (prev == false and curr == true) {
+    all(#Hallway #Light).light_movetorgb(128, 0, 128)
+}
+prev = curr","response_prompt_baseline_cot.md, caution_prompt_8.md","When any presence sensor in the hallway detects presence, set all hallway lights to purple.: GT에 필요한 서비스 호출 일부가 빠졌거나 evaluator가 독립 호출로 인식하지 못했습니다; GT가 요구한 receiver scope를 충분히 덮지 못했습니다",[],13804.0,2.4846
+/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_blocks_equivalence_20260508/retrieval_gpt41_mini_cat6,6,157,"If the weather is rainy and no one is being detected, lock the door and close the valve.","비가 오고 아무도 없는 상태면, 도어락을 잠그고 밸브를 차단해줘.",69.9,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]","if ((#WeatherProvider).weatherprovider_weather == ""rain"" and (#PresenceSensor).presencesensor_presence == false) {
+
+    (#DoorLock).doorlock_lock()
+
+    (#Valve).valve_close()
+
+}","if ((#RainSensor).rainsensor_rain == true and (#PresenceSensor).presencesensor_presence == false) {
+    (#DoorLock).doorlock_lock()
+    (#Valve).valve_close()
+}","response_prompt_baseline_cot.md, caution_prompt_8.md","If the weather is rainy and no one is being detected, lock the door and close the valve.: GT에 필요한 서비스 호출 일부가 빠졌거나 evaluator가 독립 호출로 인식하지 못했습니다; GT가 요구한 receiver scope를 충분히 덮지 못했습니다","[""PresenceSensor"", ""RainSensor"", ""Door"", ""Valve"", ""DoorLock"", ""WeatherProvider"", ""Pump"", ""Safe"", ""ArmRobot"", ""WindowCovering""]",17529.0,3.4197
+/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_blocks_equivalence_20260508/retrieval_gpt41_mini_cat6,6,175,"If the server room temperature is 30 degrees or higher and the AC is off, turn it on and sound the main emergency siren.","서버실 온도가 30도 이상이고 에어컨이 꺼져 있으면, 에어컨을 냉방 모드로 켜고 메인 사이렌을 긴급 모드로 울려줘.",69.9,"[""enum_grounding"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""precondition""]","if ((#ServerRoom #TemperatureSensor).temperaturesensor_temperature >= 30 and (#ServerRoom #AirConditioner).switch_switch == false) {
+
+    (#ServerRoom #AirConditioner).airconditioner_setairconditionermode(""cool"")
+
+    (#Main #Siren).siren_setsirenmode(""emergency"")
+
+}","wait until ((#ServerRoom #TemperatureSensor).temperaturesensor_temperature >= 30 and (#ServerRoom #Switch).switch_switch == false)
+(#ServerRoom #Switch).switch_on()
+(#Main #Siren).siren_setsirenmode(""emergency"")","response_prompt_baseline_cot.md, caution_prompt_8.md, service_prompt_10.md","If the server room temperature is 30 degrees or higher and the AC is off, turn it on and sound the main emergency siren.: GT에 필요한 서비스 호출 일부가 빠졌거나 evaluator가 독립 호출로 인식하지 못했습니다; GT가 요구한 receiver scope를 충분히 덮지 못했습니다; mode/enum 값이 GT와 다르게 선택됐습니다",[],12864.0,4.8354
+/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_blocks_equivalence_20260508/retrieval_gpt41_mini_cat6,6,178,"If the warehouse fine dust level is 100 or higher and the air purifier is in auto mode, switch it to high mode and say through the warehouse speaker ""Switching to high mode"".","창고 미세먼지가 100 이상이고 공기청정기가 자동 모드이면, 모드를 강풍 모드로 바꾸고 창고 스피커로 ""강풍 모드로 전환합니다""라고 말해줘.",69.9,"[""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]","if ((#Warehouse #AirQualitySensor).airqualitysensor_finedustlevel >= 100 and (#Warehouse #AirPurifier).airpurifier_airpurifiermode == ""auto"") {
+
+    (#Warehouse #AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Warehouse #Speaker).speaker_speak(""강풍 모드로 전환합니다"")
+
+}","if ((#Warehouse #AirQualitySensor).airqualitysensor_dustlevel >= 100 and (#Warehouse #AirPurifier).airpurifier_airpurifiermode == ""auto"") {
+    (#Warehouse #AirPurifier).airpurifier_setairpurifiermode(""high"")
+    (#Warehouse #Speaker).speaker_speak(""강풍 모드로 전환합니다"")
+}","response_prompt_baseline_cot.md, caution_prompt_8.md","If the warehouse fine dust level is 100 or higher and the air purifier is in auto mode, switch it to high mode and say through the warehouse speaker ""Switching to high mode"".: GT에 필요한 서비스 호출 일부가 빠졌거나 evaluator가 독립 호출로 인식하지 못했습니다; GT가 요구한 receiver scope를 충분히 덮지 못했습니다",[],13696.0,2.4831
+/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_blocks_equivalence_20260508/retrieval_gpt41_mini_cat7,7,187,"From 10 PM to midnight every 10 minutes, sound the emergency siren.",밤10시부터 자정까지 10분마다 긴급 사이렌을 울려줘.,58.8013,"[""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic""]","if ((#Clock).clock_hour == 0) {
+
+    break
+
+}
+
+(#Siren).siren_setsirenmode(""emergency"")","(#Siren).siren_setsirenmode(""emergency"")","caution_prompt_8.md, grammar_ver1.5.10.md, response_prompt_baseline_cot.md, tempo_prompt_9.md","From 10 PM to midnight every 10 minutes, sound the emergency siren.: 읽은 센서값이 독립 변수 흐름으로 downstream call에 전달되지 않았습니다; GT에 필요한 서비스 호출 일부가 빠졌거나 evaluator가 독립 호출로 인식하지 못했습니다; GT가 요구한 receiver scope를 충분히 덮지 못했습니다; 명령의 숫자나 단위가 코드에 정확히 grounding되지 않았습니다","[""Siren"", ""ArmRobot"", ""SoundSensor"", ""Charger"", ""Clock"", ""PresenceVitalSensor"", ""AudioRecorder"", ""Speaker"", ""Button"", ""Oven""]",19852.0,1.5113
+/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_blocks_equivalence_20260508/retrieval_gpt41_mini_cat7,7,212,"Check all door locks in Sector 1 every hour; if any one is open, change all lights in that sector to red.","섹터1의 모든 도어락을 1시간마다 확인해서, 하나라도 열려 있으면 해당 섹터의 모든 조명을 빨간색으로 바꿔줘.",69.9,"[""dataflow"", ""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","if (all(#Sector1 #DoorLock).doorlock_doorlockstate ==| ""open"") {
+
+    all(#Sector1 #Light).light_movetorgb(255, 0, 0)
+
+}","doorlockStates := [
+    (#Sector1 #DoorLock).doorlock_doorlockstate,
+    (#Sector1 #DoorLock).doorlock_doorlockstate
+]
+anyOpen := false
+for state in doorlockStates {
+    if (state == ""open"" or state == ""opening"") {
+        anyOpen = true
+        break
+    }
+}
+if (anyOpen) {
+    all(#Sector1 #Light).light_movetorgb(255, 0, 0)
+}","caution_prompt_8.md, grammar_ver1.5.10.md, response_prompt_baseline_cot.md, tempo_prompt_9.md","Check all door locks in Sector 1 every hour; if any one is open, change all lights in that sector to red.: 읽은 센서값이 독립 변수 흐름으로 downstream call에 전달되지 않았습니다; 명령의 숫자나 단위가 코드에 정확히 grounding되지 않았습니다",[],14777.0,2.6676
+/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_blocks_equivalence_20260508/retrieval_gpt41_mini_cat7,7,218,"Every hour from midnight to 5 AM, if at least one door is open, turn all hallway lights to 50%.","자정부터 오전 5시까지 1시간마다 체크해서 문이 하나라도 열려있으면, 복도의 조명을 모두 50%로 켜줘.",69.9,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic""]","if (all(#Door).door_doorstate ==| ""open"") {
+
+    all(#Hallway #Light).levelcontrol_movetolevel(50, 0)
+
+}","if ((#Clock).clock_hour == 5) {
+    break
+}
+if (all(#Door).door_doorstate == ""open"" or all(#Door).door_doorstate == ""opening"") {
+    all(#Hallway #Light).light_movetobrightness(50, 0)
+}","response_prompt_baseline_cot.md, caution_prompt_8.md, tempo_prompt_9.md, grammar_ver1.5.10.md","Every hour from midnight to 5 AM, if at least one door is open, turn all hallway lights to 50%.: GT에 필요한 서비스 호출 일부가 빠졌거나 evaluator가 독립 호출로 인식하지 못했습니다; GT가 요구한 receiver scope를 충분히 덮지 못했습니다; 명령의 숫자나 단위가 코드에 정확히 grounding되지 않았습니다",[],16359.0,2.235
+/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_blocks_equivalence_20260508/retrieval_gpt41_mini_cat8,8,247,"When the contact sensor is closed, sound the police siren every 10 seconds.",접촉센서가 닫히면 10초마다 경찰 사이렌을 울려줘.,69.9,"[""gt_mismatch"", ""numeric_grounding""]","active := 0
+
+if (active == 0) {
+
+    wait until ((#ContactSensor).contactsensor_contact == true)
+
+    active = 1
+
+}
+
+(#Siren).siren_setsirenmode(""police"")","prev := (#ContactSensor).contactsensor_contact
+curr = (#ContactSensor).contactsensor_contact
+if (prev == false and curr == true) {
+    active = 1
+}
+if (active == 1) {
+    (#Siren).siren_setsirenmode(""police"")
+    delay(10 SEC)
+}
+prev = curr","tempo_prompt_9.md, grammar_ver1.5.10.md","When the contact sensor is closed, sound the police siren every 10 seconds.: 명령의 숫자나 단위가 코드에 정확히 grounding되지 않았습니다","[""Siren"", ""ContactSensor"", ""SoundSensor"", ""PresenceSensor"", ""PresenceVitalSensor"", ""MotionSensor"", ""PressureSensor"", ""CarbonDioxideSensor"", ""ArmRobot"", ""Button""]",16545.0,4.1883
+/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_blocks_equivalence_20260508/retrieval_gpt41_mini_cat8,8,259,"Whenever the button with the 'Light' tag is pressed, set the brightness of all lights with 'Odd' tags to maximum.","조명 태그가 붙은 버튼이 눌릴때마다, 홀수 태그가 붙은 모든 조명의 밝기를 최대로 밝혀줘.",69.9,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""semantic""]","prev := (#Light #Button).button_button
+
+curr = (#Light #Button).button_button
+
+if (prev != ""pushed"" and curr == ""pushed"") {
+
+    all(#Odd #Light).light_movetobrightness(100, 0)
+
+}
+
+prev = curr","prev := (#Light #Button).button_button
+curr = (#Light #Button).button_button
+if (prev != ""pushed"" and curr == ""pushed"") {
+    all(#Odd #Light).levelcontrol_movetolevel(100, 0)
+}
+prev = curr","response_prompt_baseline_cot.md, caution_prompt_8.md","Whenever the button with the 'Light' tag is pressed, set the brightness of all lights with 'Odd' tags to maximum.: GT에 필요한 서비스 호출 일부가 빠졌거나 evaluator가 독립 호출로 인식하지 못했습니다; GT가 요구한 receiver scope를 충분히 덮지 못했습니다",[],16458.0,2.1178
+/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/gpt41_mini_retrieval_blocks_equivalence_20260508/retrieval_gpt41_mini_cat8,8,271,"When motion is detected in the lobby, capture an image of the lobby every 30 seconds.",로비에서 움직임이 감지되면 30초마다 로비 사진을 찍어줘.,69.9,"[""gt_mismatch"", ""numeric_grounding"", ""semantic""]","active := 0
+
+if (active == 0) {
+
+    wait until ((#Lobby #MotionSensor).motionsensor_motion == true)
+
+    active = 1
+
+}
+
+(#Lobby #Camera).camera_captureimage()","prev := (#Lobby #MotionSensor).motionsensor_motion
+curr = (#Lobby #MotionSensor).motionsensor_motion
+if (prev == false and curr == true) {
+    (#Lobby #Camera).camera_captureimage()
+}
+prev = curr","tempo_prompt_9.md, grammar_ver1.5.10.md, caution_prompt_8.md, response_prompt_baseline_cot.md","When motion is detected in the lobby, capture an image of the lobby every 30 seconds.: 명령의 숫자나 단위가 코드에 정확히 grounding되지 않았습니다",[],12102.0,1.6932

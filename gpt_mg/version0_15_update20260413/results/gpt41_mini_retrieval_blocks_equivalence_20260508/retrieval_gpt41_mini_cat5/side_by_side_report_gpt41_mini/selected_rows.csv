@@ -1,0 +1,259 @@
+row_no,category,command_eng,command_kor,gt_name_display,service_list_schema,gt_code,generated_code,det_score,det_pass,det_profile,det_gt_exact,det_gt_similarity,det_gt_service_coverage,det_gt_receiver_coverage,det_dataflow_score,det_numeric_grounding,det_enum_grounding,failure_reasons,service_list_retrieval_categories_display,prompt_context_mode,prompt_context_note,prompt_context_effective_topk,prompt_context_injected_categories,prompt_context_displayed_categories,prompt_tokens,completion_tokens,total_tokens,llm_latency_sec,total_pipeline_sec,tokens_per_sec,peak_vram_gb,service_list_snippet_source,service_list_device_count,service_list_retrieval_status,service_list_retrieval_mode,service_list_retrieval_topk,service_list_retrieval_categories,generation_error_type
+121,5,Switch the TV to channel 7 and switch to channel 11 after 1 hour.,TV 채널을 7번으로 바꾸고 1시간 뒤에 11번으로 바꿔줘.,SwitchTVToChannel7SwitchToChannel,service_list_ver2.0.1.json,"(#Television).television_setchannel(7)
+
+delay(1 HOUR)
+
+(#Television).television_setchannel(11)","(#Television).television_setchannel(7)
+delay(1 HOUR)
+(#Television).television_setchannel(11)",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"Television, Switch, TapDialSwitch, LevelControl, Clock, ArmRobot, DimmerSwitch, Oven, Speaker, Dishwasher",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""Television"", ""Switch"", ""TapDialSwitch"", ""LevelControl"", ""Clock"", ""ArmRobot"", ""DimmerSwitch"", ""Oven"", ""Speaker"", ""Dishwasher""]","[""Television"", ""Switch"", ""TapDialSwitch"", ""LevelControl"", ""Clock"", ""ArmRobot"", ""DimmerSwitch"", ""Oven"", ""Speaker"", ""Dishwasher""]",20175,53,20228,1.6532,6.9044,12235.6642,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""Television"", ""Switch"", ""TapDialSwitch"", ""LevelControl"", ""Clock"", ""ArmRobot"", ""DimmerSwitch"", ""Oven"", ""Speaker"", ""Dishwasher""]",
+122,5,Set the air conditioner to cool mode and switch to auto mode after 30 minutes.,에어컨을 냉방 모드로 설정하고 30분 뒤에 자동 모드로 설정해줘.,SetAirConditionerToCoolModeSwitchTo,service_list_ver2.0.1.json,"(#AirConditioner).airconditioner_setairconditionermode(""cool"")
+
+delay(30 MIN)
+
+(#AirConditioner).airconditioner_setairconditionermode(""auto"")","(#AirConditioner).airconditioner_setairconditionermode(""cool"")
+delay(30 MIN)
+(#AirConditioner).airconditioner_setairconditionermode(""auto"")",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"AirConditioner, AirPurifier, ArmRobot, AirQualitySensor, Dishwasher, Oven, LaundryDryer, Dehumidifier, TemperatureSensor, RobotVacuumCleaner",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""AirConditioner"", ""AirPurifier"", ""ArmRobot"", ""AirQualitySensor"", ""Dishwasher"", ""Oven"", ""LaundryDryer"", ""Dehumidifier"", ""TemperatureSensor"", ""RobotVacuumCleaner""]","[""AirConditioner"", ""AirPurifier"", ""ArmRobot"", ""AirQualitySensor"", ""Dishwasher"", ""Oven"", ""LaundryDryer"", ""Dehumidifier"", ""TemperatureSensor"", ""RobotVacuumCleaner""]",18371,60,18431,1.6702,2.646,11035.2054,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""AirConditioner"", ""AirPurifier"", ""ArmRobot"", ""AirQualitySensor"", ""Dishwasher"", ""Oven"", ""LaundryDryer"", ""Dehumidifier"", ""TemperatureSensor"", ""RobotVacuumCleaner""]",
+123,5,Set the air purifier to auto mode and switch to sleep mode after 2 hours.,공기청정기를 자동 모드로 설정하고 2시간 뒤에 수면 모드로 설정해줘.,SetAirPurifierToAutoModeSwitchTo,service_list_ver2.0.1.json,"(#AirPurifier).airpurifier_setairpurifiermode(""auto"")
+
+delay(2 HOUR)
+
+(#AirPurifier).airpurifier_setairpurifiermode(""sleep"")","(#AirPurifier).airpurifier_setairpurifiermode(""auto"")
+delay(2 HOUR)
+(#AirPurifier).airpurifier_setairpurifiermode(""sleep"")",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"AirPurifier, AirConditioner, Dishwasher, AirQualitySensor, RobotVacuumCleaner, LaundryDryer, ArmRobot, Dehumidifier, Pump, Humidifier",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""AirPurifier"", ""AirConditioner"", ""Dishwasher"", ""AirQualitySensor"", ""RobotVacuumCleaner"", ""LaundryDryer"", ""ArmRobot"", ""Dehumidifier"", ""Pump"", ""Humidifier""]","[""AirPurifier"", ""AirConditioner"", ""Dishwasher"", ""AirQualitySensor"", ""RobotVacuumCleaner"", ""LaundryDryer"", ""ArmRobot"", ""Dehumidifier"", ""Pump"", ""Humidifier""]",18137,61,18198,1.7691,2.7489,10286.5864,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""AirPurifier"", ""AirConditioner"", ""Dishwasher"", ""AirQualitySensor"", ""RobotVacuumCleaner"", ""LaundryDryer"", ""ArmRobot"", ""Dehumidifier"", ""Pump"", ""Humidifier""]",
+124,5,Set the air conditioner temperature to 24 degrees and change it to 26 degrees after 1 hour.,에어컨 온도를 24도로 설정하고 1시간 뒤에 26도로 설정해줘.,SetAirConditionerTemperatureTo24DegreesChange,service_list_ver2.0.1.json,"(#AirConditioner).airconditioner_settargettemperature(24)
+
+delay(1 HOUR)
+
+(#AirConditioner).airconditioner_settargettemperature(26)","(#AirConditioner).airconditioner_settargettemperature(24)
+delay(1 HOUR)
+(#AirConditioner).airconditioner_settargettemperature(26)",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"TemperatureSensor, AirConditioner, AirPurifier, AirQualitySensor, ArmRobot, Dishwasher, LaundryDryer, Oven, WeatherProvider, Dehumidifier",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""ArmRobot"", ""Dishwasher"", ""LaundryDryer"", ""Oven"", ""WeatherProvider"", ""Dehumidifier""]","[""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""ArmRobot"", ""Dishwasher"", ""LaundryDryer"", ""Oven"", ""WeatherProvider"", ""Dehumidifier""]",18869,59,18928,1.6742,2.6463,11305.6982,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""ArmRobot"", ""Dishwasher"", ""LaundryDryer"", ""Oven"", ""WeatherProvider"", ""Dehumidifier""]",
+125,5,Set the oven mode to Bake and change it to warming mode after 10 minutes.,오븐 모드를 베이크로 설정하고 10분 뒤에 데우기 모드로 바꿔줘.,SetOvenModeToBakeChangeItTo,service_list_ver2.0.1.json,"(#Oven).oven_setovenmode(""Bake"")
+
+delay(10 MIN)
+
+(#Oven).oven_setovenmode(""warming"")","(#Oven).oven_setovenmode(""Bake"")
+delay(10 MIN)
+(#Oven).oven_setovenmode(""warming"")",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"Oven, RiceCooker, AirConditioner, ArmRobot, Dishwasher, LaundryDryer, Pump, MenuProvider, Button, SmokeDetector",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""Oven"", ""RiceCooker"", ""AirConditioner"", ""ArmRobot"", ""Dishwasher"", ""LaundryDryer"", ""Pump"", ""MenuProvider"", ""Button"", ""SmokeDetector""]","[""Oven"", ""RiceCooker"", ""AirConditioner"", ""ArmRobot"", ""Dishwasher"", ""LaundryDryer"", ""Pump"", ""MenuProvider"", ""Button"", ""SmokeDetector""]",18049,51,18100,1.5694,2.5423,11533.07,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""Oven"", ""RiceCooker"", ""AirConditioner"", ""ArmRobot"", ""Dishwasher"", ""LaundryDryer"", ""Pump"", ""MenuProvider"", ""Button"", ""SmokeDetector""]",
+126,5,"When the presence sensor detects someone, take a picture after 1 minute.",재실 센서에 감지가 되면 1분 뒤에 사진을 찍어줘.,WhenPresenceSensorDetectsSomeoneTakePictureAfter,service_list_ver2.0.1.json,"wait until ((#PresenceSensor).presencesensor_presence == true)
+
+delay(1 MIN)
+
+(#Camera).camera_captureimage()","prev := (#PresenceSensor).presencesensor_presence
+curr = (#PresenceSensor).presencesensor_presence
+if (prev == false and curr == true) {
+    delay(1 MIN)
+    (#Camera).camera_captureimage()
+}
+prev = curr",91.6156,True,strict,False,0.616459,1.0,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""semantic""]","PresenceSensor, Camera, PresenceVitalSensor, MotionSensor, ContactSensor, CarbonDioxideSensor, ArmRobot, TemperatureSensor, RainSensor, PressureSensor",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""Camera"", ""PresenceVitalSensor"", ""MotionSensor"", ""ContactSensor"", ""CarbonDioxideSensor"", ""ArmRobot"", ""TemperatureSensor"", ""RainSensor"", ""PressureSensor""]","[""PresenceSensor"", ""Camera"", ""PresenceVitalSensor"", ""MotionSensor"", ""ContactSensor"", ""CarbonDioxideSensor"", ""ArmRobot"", ""TemperatureSensor"", ""RainSensor"", ""PressureSensor""]",16892,73,16965,1.73,2.6973,9806.3584,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Camera"", ""PresenceVitalSensor"", ""MotionSensor"", ""ContactSensor"", ""CarbonDioxideSensor"", ""ArmRobot"", ""TemperatureSensor"", ""RainSensor"", ""PressureSensor""]",
+127,5,"When the oven enters heating mode, switch it to microwave mode after 3 seconds.",오븐이 가열 모드가 되면 3초 뒤에 전자레인지 모드로 바꿔줘.,WhenOvenEntersHeatingModeSwitchItToMicrowave,service_list_ver2.0.1.json,"wait until ((#Oven).oven_ovenmode == ""heating"")
+
+delay(3 SEC)
+
+(#Oven).oven_setovenmode(""Microwave"")","wait until ((#Oven).oven_ovenmode == ""heating"")
+delay(3 SEC)
+(#Oven).oven_setovenmode(""Microwave"")",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"Oven, RiceCooker, Dishwasher, ArmRobot, AirConditioner, LaundryDryer, MenuProvider, DimmerSwitch, TapDialSwitch, Pump",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""Oven"", ""RiceCooker"", ""Dishwasher"", ""ArmRobot"", ""AirConditioner"", ""LaundryDryer"", ""MenuProvider"", ""DimmerSwitch"", ""TapDialSwitch"", ""Pump""]","[""Oven"", ""RiceCooker"", ""Dishwasher"", ""ArmRobot"", ""AirConditioner"", ""LaundryDryer"", ""MenuProvider"", ""DimmerSwitch"", ""TapDialSwitch"", ""Pump""]",18894,57,18951,3.8644,4.8501,4903.9954,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""Oven"", ""RiceCooker"", ""Dishwasher"", ""ArmRobot"", ""AirConditioner"", ""LaundryDryer"", ""MenuProvider"", ""DimmerSwitch"", ""TapDialSwitch"", ""Pump""]",
+128,5,"When the humidity falls below 30%, output ""Humidity is low"" through the speaker after 3 seconds.","습도가 30%보다 낮아지면 3초 뒤에 스피커로 ""습도가 낮습니다""를 출력해.",WhenHumidityFallsBelow30OutputHumidityIsLow,service_list_ver2.0.1.json,"wait until ((#HumiditySensor).humiditysensor_humidity < 30)
+
+delay(3 SEC)
+
+(#Speaker).speaker_speak(""습도가 낮습니다"")","wait until ((#HumiditySensor).humiditysensor_humidity < 30)
+delay(3 SEC)
+(#Speaker).speaker_speak(""습도가 낮습니다"")",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"HumiditySensor, Speaker, AirQualitySensor, Humidifier, WeatherProvider, Dehumidifier, ArmRobot, PresenceVitalSensor, AudioRecorder, AirPurifier",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""HumiditySensor"", ""Speaker"", ""AirQualitySensor"", ""Humidifier"", ""WeatherProvider"", ""Dehumidifier"", ""ArmRobot"", ""PresenceVitalSensor"", ""AudioRecorder"", ""AirPurifier""]","[""HumiditySensor"", ""Speaker"", ""AirQualitySensor"", ""Humidifier"", ""WeatherProvider"", ""Dehumidifier"", ""ArmRobot"", ""PresenceVitalSensor"", ""AudioRecorder"", ""AirPurifier""]",19690,54,19744,1.6088,2.6117,12272.5012,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""Speaker"", ""AirQualitySensor"", ""Humidifier"", ""WeatherProvider"", ""Dehumidifier"", ""ArmRobot"", ""PresenceVitalSensor"", ""AudioRecorder"", ""AirPurifier""]",
+129,5,"When it rains, close the door and check again after 1 hour; if it's not raining then, open the door again.",비가 오면 문을 닫고 1시간 뒤에 체크해서 비가 안오면 문을 다시 열어줘.,WhenItRainsCloseDoorCheckAgainAfter,service_list_ver2.0.1.json,"wait until ((#RainSensor).rainsensor_rain == true)
+
+(#Door).door_close()
+delay(1 HOUR)
+
+if ((#WeatherProvider).weatherprovider_weather != ""rain"") {
+
+    (#Door).door_open()
+
+}","wait until ((#RainSensor).rainsensor_rain == true)
+(#Door).door_close()
+delay(1 HOUR)
+if ((#WeatherProvider).weatherprovider_weather != ""rain"") {
+    (#Door).door_open()
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"RainSensor, WeatherProvider, Door, DoorLock, Clock, WindowCovering, Pump, Valve, ArmRobot, Humidifier",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""RainSensor"", ""WeatherProvider"", ""Door"", ""DoorLock"", ""Clock"", ""WindowCovering"", ""Pump"", ""Valve"", ""ArmRobot"", ""Humidifier""]","[""RainSensor"", ""WeatherProvider"", ""Door"", ""DoorLock"", ""Clock"", ""WindowCovering"", ""Pump"", ""Valve"", ""ArmRobot"", ""Humidifier""]",18664,80,18744,3.1547,4.147,5941.6109,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""RainSensor"", ""WeatherProvider"", ""Door"", ""DoorLock"", ""Clock"", ""WindowCovering"", ""Pump"", ""Valve"", ""ArmRobot"", ""Humidifier""]",
+130,5,"If the dust level concentration is 2000ppm or above, close the door and close the valve after 4 hours.",외부 미세먼지 농도가 2000 이상이면 문을 닫고 4시간 뒤에 밸브를 잠궈줘.,IfDustLevelConcentrationIs2000ppmOrAboveClose,service_list_ver2.0.1.json,"if ((#WeatherProvider).weatherprovider_pm10weather >= 2000) {
+
+    (#Door).door_close()
+
+    delay(4 HOUR)
+
+    (#Valve).valve_close()
+ 
+}","wait until ((#WeatherProvider).weatherprovider_pm10weather >= 2000)
+(#Door).door_close()
+delay(4 HOUR)
+(#Valve).valve_close()",94.9862,True,strict,False,0.976724,1.0,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch""]","WeatherProvider, Door, AirQualitySensor, Valve, RobotVacuumCleaner, WindowCovering, AirPurifier, SmokeDetector, DoorLock, Dishwasher",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""WeatherProvider"", ""Door"", ""AirQualitySensor"", ""Valve"", ""RobotVacuumCleaner"", ""WindowCovering"", ""AirPurifier"", ""SmokeDetector"", ""DoorLock"", ""Dishwasher""]","[""WeatherProvider"", ""Door"", ""AirQualitySensor"", ""Valve"", ""RobotVacuumCleaner"", ""WindowCovering"", ""AirPurifier"", ""SmokeDetector"", ""DoorLock"", ""Dishwasher""]",18112,59,18171,1.5681,2.5585,11587.9089,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""WeatherProvider"", ""Door"", ""AirQualitySensor"", ""Valve"", ""RobotVacuumCleaner"", ""WindowCovering"", ""AirPurifier"", ""SmokeDetector"", ""DoorLock"", ""Dishwasher""]",
+131,5,Sound the siren in emergency mode and change it to fire mode after 5 seconds.,사이렌을 응급 모드로 울리고 5초 뒤에 사이렌 모드를 화재 모드로 바꿔줘.,SoundSirenInEmergencyModeChangeItTo,service_list_ver2.0.1.json,"(#Siren).siren_setsirenmode(""emergency"")
+
+delay(5 SEC)
+
+(#Siren).siren_setsirenmode(""fire"")","(#Siren).siren_setsirenmode(""fire"")
+delay(5 SEC)
+(#Siren).siren_setsirenmode(""fire"")",93.3802,True,strict,False,0.976036,1.0,1.0,1.0,1.0,0.5,"[""enum_grounding"", ""gt_mismatch""]","Siren, SoundSensor, ArmRobot, Oven, PresenceVitalSensor, RiceCooker, Speaker, SmokeDetector, Charger, Pump",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""Siren"", ""SoundSensor"", ""ArmRobot"", ""Oven"", ""PresenceVitalSensor"", ""RiceCooker"", ""Speaker"", ""SmokeDetector"", ""Charger"", ""Pump""]","[""Siren"", ""SoundSensor"", ""ArmRobot"", ""Oven"", ""PresenceVitalSensor"", ""RiceCooker"", ""Speaker"", ""SmokeDetector"", ""Charger"", ""Pump""]",18738,52,18790,1.7248,2.7264,10894.0167,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""Siren"", ""SoundSensor"", ""ArmRobot"", ""Oven"", ""PresenceVitalSensor"", ""RiceCooker"", ""Speaker"", ""SmokeDetector"", ""Charger"", ""Pump""]",
+132,5,"Set the light brightness to 30, then increase it to 80 after 10 minutes.",조명 밝기를 30으로 설정했다가 10분 뒤에 80으로 올려줘.,SetLightBrightnessTo30ThenIncreaseItTo,service_list_ver2.0.1.json,"(#Light).light_movetobrightness(30, 0)
+
+delay(10 MIN)
+
+(#Light).light_movetobrightness(80, 0)","(#Light).light_movetobrightness(30, 0)
+delay(10 MIN)
+(#Light).light_movetobrightness(80, 0)",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"Light, LightSensor, ColorControl, DimmerSwitch, Television, ArmRobot, Plug, LevelControl, Charger, Button",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""Light"", ""LightSensor"", ""ColorControl"", ""DimmerSwitch"", ""Television"", ""ArmRobot"", ""Plug"", ""LevelControl"", ""Charger"", ""Button""]","[""Light"", ""LightSensor"", ""ColorControl"", ""DimmerSwitch"", ""Television"", ""ArmRobot"", ""Plug"", ""LevelControl"", ""Charger"", ""Button""]",18858,56,18914,1.447,2.4108,13071.1818,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""Light"", ""LightSensor"", ""ColorControl"", ""DimmerSwitch"", ""Television"", ""ArmRobot"", ""Plug"", ""LevelControl"", ""Charger"", ""Button""]",
+133,5,Start the robot vacuum cleaner in auto mode and switch to manual mode after 30 minutes.,로봇 청소기를 자동 모드로 시작하고 30분 뒤에 수동 모드로 바꿔줘.,StartRobotVacuumCleanerInAutoModeSwitch,service_list_ver2.0.1.json,"(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+
+delay(30 MIN)
+
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""manual"")","(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+delay(30 MIN)
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""manual"")",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"RobotVacuumCleaner, ArmRobot, LaundryDryer, Dishwasher, AirPurifier, Pump, Valve, FaceRecognizer, RiceCooker, Button",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""RobotVacuumCleaner"", ""ArmRobot"", ""LaundryDryer"", ""Dishwasher"", ""AirPurifier"", ""Pump"", ""Valve"", ""FaceRecognizer"", ""RiceCooker"", ""Button""]","[""RobotVacuumCleaner"", ""ArmRobot"", ""LaundryDryer"", ""Dishwasher"", ""AirPurifier"", ""Pump"", ""Valve"", ""FaceRecognizer"", ""RiceCooker"", ""Button""]",17736,74,17810,2.1875,3.1558,8141.7143,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""RobotVacuumCleaner"", ""ArmRobot"", ""LaundryDryer"", ""Dishwasher"", ""AirPurifier"", ""Pump"", ""Valve"", ""FaceRecognizer"", ""RiceCooker"", ""Button""]",
+134,5,Set the speaker volume to 20 and increase it to 40 after 10 minutes.,스피커 볼륨을 20으로 설정하고 10분 뒤에 40으로 높여줘.,SetSpeakerVolumeTo20IncreaseItTo,service_list_ver2.0.1.json,"(#Speaker).speaker_setvolume(20)
+
+delay(10 MIN)
+
+(#Speaker).speaker_setvolume(40)","(#Speaker).speaker_setvolume(20)
+delay(10 MIN)
+(#Speaker).speaker_setvolume(40)",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"Speaker, SoundSensor, Siren, AudioRecorder, ArmRobot, Television, Pump, LevelControl, AirPurifier, TapDialSwitch",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""Speaker"", ""SoundSensor"", ""Siren"", ""AudioRecorder"", ""ArmRobot"", ""Television"", ""Pump"", ""LevelControl"", ""AirPurifier"", ""TapDialSwitch""]","[""Speaker"", ""SoundSensor"", ""Siren"", ""AudioRecorder"", ""ArmRobot"", ""Television"", ""Pump"", ""LevelControl"", ""AirPurifier"", ""TapDialSwitch""]",18550,46,18596,1.6347,2.5915,11375.7876,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""SoundSensor"", ""Siren"", ""AudioRecorder"", ""ArmRobot"", ""Television"", ""Pump"", ""LevelControl"", ""AirPurifier"", ""TapDialSwitch""]",
+135,5,Start the dehumidifier in drying mode and change to refreshing mode after 1 hour.,제습기를 건조 모드로 작동시키고 1시간 뒤에 리프레쉬 모드로 바꿔줘.,StartDehumidifierInDryingModeChangeToRefreshing,service_list_ver2.0.1.json,"(#Dehumidifier).dehumidifier_setdehumidifiermode(""drying"")
+
+delay(1 HOUR)
+
+(#Dehumidifier).dehumidifier_setdehumidifiermode(""refreshing"")","(#Dehumidifier).dehumidifier_setdehumidifiermode(""drying"")
+delay(1 HOUR)
+(#Dehumidifier).dehumidifier_setdehumidifiermode(""refreshing"")",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"HumiditySensor, Dehumidifier, LaundryDryer, Dishwasher, Humidifier, AirConditioner, AirPurifier, ArmRobot, Pump, Oven",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""HumiditySensor"", ""Dehumidifier"", ""LaundryDryer"", ""Dishwasher"", ""Humidifier"", ""AirConditioner"", ""AirPurifier"", ""ArmRobot"", ""Pump"", ""Oven""]","[""HumiditySensor"", ""Dehumidifier"", ""LaundryDryer"", ""Dishwasher"", ""Humidifier"", ""AirConditioner"", ""AirPurifier"", ""ArmRobot"", ""Pump"", ""Oven""]",17718,64,17782,4.1555,5.1356,4279.1481,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""Dehumidifier"", ""LaundryDryer"", ""Dishwasher"", ""Humidifier"", ""AirConditioner"", ""AirPurifier"", ""ArmRobot"", ""Pump"", ""Oven""]",
+136,5,Turn on all lights in the living room and turn them off after 1 hour.,거실의 모든 전등을 켜고 1시간 뒤에 꺼줘.,TurnOnAllLightsInLivingRoomTurn,service_list_ver2.0.1.json,"all(#LivingRoom #Light).switch_on()
+
+delay(1 HOUR)
+
+all(#LivingRoom #Light).switch_off()","all(#LivingRoom #Switch).switch_on()
+delay(1 HOUR)
+all(#LivingRoom #Switch).switch_off()",94.6718,True,strict,False,0.962941,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""Light"", ""Switch""]","[""Light"", ""Switch""]",18033,51,18084,1.4305,1.4455,12641.7337,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+137,5,"When any presence sensor in the house detects presence, sound all emergency sirens after 10 seconds.",집안의 재실 센서가 하나라도 감지되면 10초 뒤에 모든 긴급 사이렌을 울려줘.,WhenAnyPresenceSensorInHouseDetectsPresenceSound,service_list_ver2.0.1.json,"wait until (all(#House #PresenceSensor).presencesensor_presence ==| true)
+
+delay(10 SEC)
+
+all(#Siren).siren_setsirenmode(""emergency"")","prev := all(#House #PresenceSensor).presencesensor_presence
+curr = all(#House #PresenceSensor).presencesensor_presence
+if (prev == false and curr == true) {
+    delay(10 SEC)
+    all(#House #Siren).siren_setsirenmode(""emergency"")
+}
+prev = curr",92.2154,True,strict,False,0.649133,1.0,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""PresenceSensor"", ""Siren""]","[""PresenceSensor"", ""Siren""]",12455,91,12546,1.6999,1.7102,7380.4341,0.0,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],
+138,5,Open all valves in the kitchen and close them again after 5 minutes.,주방의 모든 벨브를 열고 5분 뒤에 다시 잠궈줘.,OpenAllValvesInKitchenCloseThemAgain,service_list_ver2.0.1.json,"all(#Kitchen #Valve).valve_open()
+
+delay(5 MIN)
+
+all(#Kitchen #Valve).valve_close()","all(#Kitchen #Valve).valve_open()
+delay(5 MIN)
+all(#Kitchen #Valve).valve_close()",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 1 connected-device category group(s) were injected.",0,"[""Valve""]","[""Valve""]",12259,47,12306,1.7662,1.7747,6967.5008,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+139,5,Close all blinds in the bedroom and open them again after 2 hours.,안방의 모든 블라인드를 닫고 2시간 뒤에 다시 열어줘.,CloseAllBlindsInBedroomOpenThemAgain,service_list_ver2.0.1.json,"all(#Bedroom #Blind).windowcovering_downorclose()
+
+delay(2 HOUR)
+
+all(#Bedroom #Blind).windowcovering_uporopen()","all(#Bedroom #Bllind #Blind).windowcovering_downorclose()
+delay(2 HOUR)
+all(#Bedroom #Bllind #Blind).windowcovering_uporopen()",97.0756,True,strict,False,0.968966,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 1 connected-device category group(s) were injected.",0,"[""WindowCovering""]","[""WindowCovering""]",13571,68,13639,1.5218,1.5324,8962.4129,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+140,5,"When any light in the hallway is turned on, turn off all lights in the living room after 5 minutes.",복도의 조명이 하나라도 켜지면 5분 뒤에 거실의 모든 조명을 꺼줘.,WhenAnyLightInHallwayIsTurnedOnTurn,service_list_ver2.0.1.json,"wait until (all(#Hallway #Light).switch_switch ==| true)
+
+delay(5 MIN)
+
+all(#LivingRoom #Light).switch_off()","prev := all(#Hallway #LivingRoom #Light #Switch).switch_switch
+curr = all(#Hallway #LivingRoom #Light #Switch).switch_switch
+if (prev == false and curr == true) {
+    delay(5 MIN)
+    all(#LivingRoom #Hallway #Light #Switch).switch_off()
+}
+prev = curr",84.1092,True,strict,False,0.596201,1.0,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""precondition"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""Light"", ""Switch""]","[""Light"", ""Switch""]",18057,89,18146,2.1683,2.1813,8368.7682,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+141,5,Turn on all dehumidifiers in the lab and turn them off after 4 hours.,연구실의 모든 제습기를 켜고 4시간 뒤에 꺼줘.,TurnOnAllDehumidifiersInLabTurnThem,service_list_ver2.0.1.json,"all(#Lab #Dehumidifier).switch_on()
+
+delay(4 HOUR)
+
+all(#Lab #Dehumidifier).switch_off()","all(#Lab #Switch).switch_on()
+delay(4 HOUR)
+all(#Lab #Switch).switch_off()",94.5385,True,strict,False,0.907692,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""Dehumidifier"", ""Switch""]","[""Dehumidifier"", ""Switch""]",13993,50,14043,1.8336,1.8445,7658.7042,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+142,5,"When any air purifier in the office switches to sleep mode, turn off the light after 10 minutes.",사무실의 공기청정기가 하나라도 수면모드로 바뀌면 10분 뒤에 조명을 꺼줘.,WhenAnyAirPurifierInOfficeSwitchesToSleep,service_list_ver2.0.1.json,"wait until (all(#Office #AirPurifier).airpurifier_airpurifiermode ==| ""sleep"")
+
+delay(10 MIN)
+
+(#Office #Light).switch_off()","prev := all(#Office #AirPurifier).airpurifier_airpurifiermode
+curr = all(#Office #AirPurifier).airpurifier_airpurifiermode
+if (prev != ""sleep"" and curr == ""sleep"") {
+    delay(10 MIN)
+    (#Office #Switch).switch_off()
+}
+prev = curr",88.8723,True,strict,False,0.631595,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""precondition"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""AirPurifier"", ""Light"", ""Switch""]","[""AirPurifier"", ""Light"", ""Switch""]",14233,93,14326,2.1276,2.1381,6733.4085,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+143,5,Lock all warehouse door locks and sound the emergency siren 1 minute later.,창고의 모든 도어락을 잠그고 1분 뒤에 긴급 사이렌을 울려줘.,LockAllWarehouseDoorLocksSoundEmergencySiren,service_list_ver2.0.1.json,"all(#Warehouse #DoorLock).doorlock_lock()
+
+delay(1 MIN)
+
+(#Siren).siren_setsirenmode(""emergency"")","all(#Warehouse #DoorLock).doorlock_lock()
+delay(1 MIN)
+(#Warehouse #Siren).siren_setsirenmode(""emergency"")",95.8744,True,strict,False,0.974873,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""DoorLock"", ""Siren""]","[""DoorLock"", ""Siren""]",12360,56,12416,1.3143,1.3231,9446.8538,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+144,5,"When any illuminance sensor on the terrace reaches 100 lux or higher, raise all blinds after 5 seconds.",테라스의 어느 조도 센서라도 100 럭스 이상이 되면 5초 뒤에 모든 블라인드를 올려줘.,WhenAnyIlluminanceSensorOnTerraceReaches100Lux,service_list_ver2.0.1.json,"wait until (all(#Terrace #LightSensor).lightsensor_brightness >=| 100)
+
+delay(5 SEC)
+
+all(#Terrace #Blind).windowcovering_uporopen()","prev := all(#Terrace #LightSensor).lightsensor_brightness >= 100
+curr = all(#Terrace #LightSensor).lightsensor_brightness >= 100
+if (prev == false and curr == true) {
+    delay(5 SEC)
+    all(#Terrace #Blind).windowcovering_uporopen()
+}
+prev = curr",90.1812,True,strict,False,0.643931,1.0,1.0,1.0,0.833333,1.0,"[""extraneous"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""LightSensor"", ""WindowCovering""]","[""LightSensor"", ""WindowCovering""]",13357,102,13459,2.0038,2.0151,6716.7382,0.0,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],
+145,5,"When any temperature sensor in the data center reaches 30 degrees or higher, set all air conditioners to cool mode after 1 minute.",데이터 센터의 어느 온도 센서라도 30도 이상이 되면 1분 뒤에 모든 에어컨을 냉방 모드로 작동시켜줘.,WhenAnyTemperatureSensorInDataCenterReaches30,service_list_ver2.0.1.json,"wait until (all(#DataCenter #TemperatureSensor).temperaturesensor_temperature >=| 30)
+
+delay(1 MIN)
+
+all(#DataCenter #AirConditioner).airconditioner_setairconditionermode(""cool"")","prev1 := (#DataCenter #TemperatureSensor).temperaturesensor_temperature
+prev2 := (#DataCenter #TemperatureSensor).temperaturesensor_temperature
+curr1 = (#DataCenter #TemperatureSensor).temperaturesensor_temperature
+curr2 = (#DataCenter #TemperatureSensor).temperaturesensor_temperature
+if ((prev1 < 30 and curr1 >= 30) or (prev2 < 30 and curr2 >= 30)) {
+    delay(1 MIN)
+    all(#DataCenter #AirConditioner).airconditioner_setairconditionermode(""cool"")
+}
+prev1 = curr1
+prev2 = curr2",92.0134,True,strict,False,0.577184,1.0,1.0,1.0,0.558824,1.0,"[""gt_mismatch"", ""numeric_grounding""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""TemperatureSensor"", ""AirConditioner""]","[""TemperatureSensor"", ""AirConditioner""]",12954,156,13110,3.1236,3.1344,4197.0803,0.0,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],
+146,5,Turn on the kitchen light and turn on the kitchen dehumidifier 10 seconds later.,주방 조명을 켜고 10초 뒤에 주방 제습기를 켜줘.,TurnOnKitchenLightTurnOnKitchen,service_list_ver2.0.1.json,"(#Kitchen #Light).switch_on()
+
+delay(10 SEC)
+
+(#Kitchen #Dehumidifier).switch_on()","(#Kitchen #Light).switch_on()
+delay(10 SEC)
+(#Kitchen #Dehumidifier #Switch).switch_on()",93.8902,True,strict,False,0.978049,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""Light"", ""Switch""]","[""Light"", ""Switch""]",16234,48,16282,1.3801,1.3912,11797.6958,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+147,5,Set the study air purifier to high and turn it off after 2 hours.,서재 공기청정기를 강풍으로 틀고 2시간 뒤에 꺼줘.,SetStudyAirPurifierToHighTurnIt,service_list_ver2.0.1.json,"(#Study #AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+delay(2 HOUR)
+
+(#Study #AirPurifier).switch_off()","(#Study #AirPurifier).airpurifier_setairpurifiermode(""high"")
+delay(2 HOUR)
+(#Study #AirPurifier).switch_off()",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 1 connected-device category group(s) were injected.",0,"[""AirPurifier""]","[""AirPurifier""]",11812,69,11881,1.3028,1.3108,9119.5886,0.0,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],
+148,5,Turn off the bathroom light and turn on after 5 minutes.,욕실 조명을 끄고 5분 뒤에 켜줘.,TurnOffBathroomLightTurnOnAfter5,service_list_ver2.0.1.json,"(#Bathroom #Light).switch_off()
+
+delay(5 MIN)
+
+(#Bathroom #Light).switch_on()","(#Bathroom #Switch).switch_off()
+delay(5 MIN)
+(#Bathroom #Switch).switch_on()",94.4538,True,strict,False,0.957432,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""Light"", ""Switch"", ""Dehumidifier""]","[""Light"", ""Switch"", ""Dehumidifier""]",14256,45,14301,1.4792,1.4882,9668.0638,0.0,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],
+149,5,Close the meeting room door. After 3 seconds take a picture with the meeting room camera.,회의실 문을 닫고 3초 뒤에 회의실 카메라로 촬영해줘.,CloseMeetingRoomDoorAfter3SecondsTake,service_list_ver2.0.1.json,"(#MeetingRoom #Door).door_close()
+
+delay(3 SEC)
+
+(#MeetingRoom #Camera).camera_captureimage()","(#MeetingRoom #Door).door_close()
+delay(3 SEC)
+(#MeetingRoom #Camera).camera_captureimage()",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""Door"", ""Camera""]","[""Door"", ""Camera""]",12300,46,12346,1.5891,1.5976,7769.1775,0.0,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],
+150,5,"Check the wine cellar temperature now and again in 10 minutes. If it has changed by 1 degree or higher, announce through the speaker that the wine cellar temperature has changed rapidly.","지금 와인 셀러 온도를 체크하고 10분뒤에 다시 체크해서 1도 이상 차이가 나면, 스피커로 온도가 급변했다고 안내해줘. ",CheckWineCellarTemperatureNowAgainIn10,service_list_ver2.0.1.json,"original_temp = (#WineCellar #TemperatureSensor).temperaturesensor_temperature
+
+delay(10 MIN)
+
+temp = (#WineCellar #TemperatureSensor).temperaturesensor_temperature
+
+if (temp >= original_temp + 1 or temp <= original_temp - 1) {
+
+    (#Speaker).speaker_speak(""와인셀러의 온도가 급변했습니다"")
+}","original = (#WineCellar #TemperatureSensor).temperaturesensor_temperature
+delay(10 MIN)
+new = (#WineCellar #TemperatureSensor).temperaturesensor_temperature
+if (new >= original + 1 or new <= original - 1) {
+    (#Speaker).speaker_speak(""와인셀러의 온도가 급변했습니다"")
+}",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""TemperatureSensor"", ""HumiditySensor"", ""Speaker""]","[""TemperatureSensor"", ""HumiditySensor"", ""Speaker""]",12839,97,12936,2.0538,2.0643,6298.5685,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],

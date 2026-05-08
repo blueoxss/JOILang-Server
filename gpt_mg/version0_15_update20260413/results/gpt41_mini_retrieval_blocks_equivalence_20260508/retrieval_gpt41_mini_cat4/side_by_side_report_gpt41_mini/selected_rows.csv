@@ -1,0 +1,213 @@
+row_no,category,command_eng,command_kor,gt_name_display,service_list_schema,gt_code,generated_code,det_score,det_pass,det_profile,det_gt_exact,det_gt_similarity,det_gt_service_coverage,det_gt_receiver_coverage,det_dataflow_score,det_numeric_grounding,det_enum_grounding,failure_reasons,service_list_retrieval_categories_display,prompt_context_mode,prompt_context_note,prompt_context_effective_topk,prompt_context_injected_categories,prompt_context_displayed_categories,prompt_tokens,completion_tokens,total_tokens,llm_latency_sec,total_pipeline_sec,tokens_per_sec,peak_vram_gb,service_list_snippet_source,service_list_device_count,service_list_retrieval_status,service_list_retrieval_mode,service_list_retrieval_topk,service_list_retrieval_categories,generation_error_type
+91,4,"When the contact sensor is detected, turn on the light.",접촉 센서가 감지되면 조명을 켜줘.,WhenContactSensorIsDetectedTurnOnLight,service_list_ver2.0.1.json,"wait until ((#ContactSensor).contactsensor_contact == true)
+
+(#Light).switch_on()","prev := (#ContactSensor).contactsensor_contact
+curr = (#ContactSensor).contactsensor_contact
+if (prev == false and curr == true) {
+    (#Light).switch_on()
+}
+prev = curr",93.5443,True,strict,False,0.50885,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]","PresenceSensor, ContactSensor, LightSensor, PresenceVitalSensor, Light, MotionSensor, CarbonDioxideSensor, TemperatureSensor, Button, ColorControl",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""ContactSensor"", ""LightSensor"", ""PresenceVitalSensor"", ""Light"", ""MotionSensor"", ""CarbonDioxideSensor"", ""TemperatureSensor"", ""Button"", ""ColorControl""]","[""PresenceSensor"", ""ContactSensor"", ""LightSensor"", ""PresenceVitalSensor"", ""Light"", ""MotionSensor"", ""CarbonDioxideSensor"", ""TemperatureSensor"", ""Button"", ""ColorControl""]",17715,64,17779,2.4425,7.7338,7279.0174,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""ContactSensor"", ""LightSensor"", ""PresenceVitalSensor"", ""Light"", ""MotionSensor"", ""CarbonDioxideSensor"", ""TemperatureSensor"", ""Button"", ""ColorControl""]",
+92,4,"When the presence sensor detects someone, turn on the TV.",재실 센서가 감지되면 TV를 켜줘.,WhenPresenceSensorDetectsSomeoneTurnOnTV,service_list_ver2.0.1.json,"wait until ((#PresenceSensor).presencesensor_presence == true)
+
+(#Television).switch_on()","prev := (#PresenceSensor).presencesensor_presence
+curr = (#PresenceSensor).presencesensor_presence
+if (prev == false and curr == true) {
+    (#Television).switch_on()
+}
+prev = curr",93.3051,True,strict,False,0.518163,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","PresenceSensor, Television, PresenceVitalSensor, TemperatureSensor, CarbonDioxideSensor, Switch, ContactSensor, MotionSensor, ArmRobot, PressureSensor",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""Television"", ""PresenceVitalSensor"", ""TemperatureSensor"", ""CarbonDioxideSensor"", ""Switch"", ""ContactSensor"", ""MotionSensor"", ""ArmRobot"", ""PressureSensor""]","[""PresenceSensor"", ""Television"", ""PresenceVitalSensor"", ""TemperatureSensor"", ""CarbonDioxideSensor"", ""Switch"", ""ContactSensor"", ""MotionSensor"", ""ArmRobot"", ""PressureSensor""]",16779,67,16846,3.8945,4.8644,4325.5874,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Television"", ""PresenceVitalSensor"", ""TemperatureSensor"", ""CarbonDioxideSensor"", ""Switch"", ""ContactSensor"", ""MotionSensor"", ""ArmRobot"", ""PressureSensor""]",
+93,4,"When the sound sensor value exceeds 50, stop speaker playback.",소리 센서의 수치가 50보다 커지면 스피커 재생을 멈춰줘.,WhenSoundSensorValueExceeds50StopSpeakerPlayback,service_list_ver2.0.1.json,"wait until ((#SoundSensor).soundsensor_sound > 50)
+
+(#Speaker).speaker_stop()","prev := (#SoundSensor).soundsensor_sound
+curr = (#SoundSensor).soundsensor_sound
+if (prev <= 50 and curr > 50) {
+    (#Speaker).speaker_stop()
+}
+prev = curr",93.9134,True,strict,False,0.512679,1.0,1.0,1.0,0.75,1.0,"[""gt_mismatch"", ""numeric_grounding""]","Speaker, SoundSensor, AudioRecorder, Siren, PresenceSensor, PressureSensor, ContactSensor, PresenceVitalSensor, ArmRobot, LeakSensor",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""Speaker"", ""SoundSensor"", ""AudioRecorder"", ""Siren"", ""PresenceSensor"", ""PressureSensor"", ""ContactSensor"", ""PresenceVitalSensor"", ""ArmRobot"", ""LeakSensor""]","[""Speaker"", ""SoundSensor"", ""AudioRecorder"", ""Siren"", ""PresenceSensor"", ""PressureSensor"", ""ContactSensor"", ""PresenceVitalSensor"", ""ArmRobot"", ""LeakSensor""]",17740,67,17807,4.3664,5.3381,4078.188,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""SoundSensor"", ""AudioRecorder"", ""Siren"", ""PresenceSensor"", ""PressureSensor"", ""ContactSensor"", ""PresenceVitalSensor"", ""ArmRobot"", ""LeakSensor""]",
+94,4,"When it rains, turn on the dehumidifier.",비가 오면 제습기를 켜줘.,WhenItRainsTurnOnDehumidifier,service_list_ver2.0.1.json,"wait until ((#RainSensor).rainsensor_rain == true)
+
+(#Dehumidifier).switch_on()","prev := (#RainSensor).rainsensor_rain
+curr = (#RainSensor).rainsensor_rain
+if (prev == false and curr == true) {
+    (#Dehumidifier).dehumidifier_setdehumidifiermode(""dehumidifying"")
+}
+prev = curr",69.9,False,strict,False,0.329382,0.5,0.5,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]","HumiditySensor, RainSensor, Dehumidifier, Humidifier, WeatherProvider, ArmRobot, Dishwasher, AirConditioner, Pump, LaundryDryer",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""HumiditySensor"", ""RainSensor"", ""Dehumidifier"", ""Humidifier"", ""WeatherProvider"", ""ArmRobot"", ""Dishwasher"", ""AirConditioner"", ""Pump"", ""LaundryDryer""]","[""HumiditySensor"", ""RainSensor"", ""Dehumidifier"", ""Humidifier"", ""WeatherProvider"", ""ArmRobot"", ""Dishwasher"", ""AirConditioner"", ""Pump"", ""LaundryDryer""]",17697,83,17780,2.1913,3.1251,8113.905,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""RainSensor"", ""Dehumidifier"", ""Humidifier"", ""WeatherProvider"", ""ArmRobot"", ""Dishwasher"", ""AirConditioner"", ""Pump"", ""LaundryDryer""]",
+95,4,"When the brightness falls below 100 lux, turn on the light.",밝기가 100 럭스 미만이 되면 조명을 켜줘.,WhenBrightnessFallsBelow100LuxTurnOn,service_list_ver2.0.1.json,"wait until ((#LightSensor).lightsensor_brightness < 100)
+
+(#Light).switch_on()","prev := (#LightSensor).lightsensor_brightness
+curr = (#LightSensor).lightsensor_brightness
+if (prev >= 100 and curr < 100) {
+    (#Light).switch_on()
+}
+prev = curr",92.8571,True,strict,False,0.507143,1.0,1.0,1.0,0.75,1.0,"[""gt_mismatch"", ""numeric_grounding""]","LightSensor, Light, ColorControl, DimmerSwitch, ArmRobot, Switch, Plug, Charger, SmokeDetector, Television",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""LightSensor"", ""Light"", ""ColorControl"", ""DimmerSwitch"", ""ArmRobot"", ""Switch"", ""Plug"", ""Charger"", ""SmokeDetector"", ""Television""]","[""LightSensor"", ""Light"", ""ColorControl"", ""DimmerSwitch"", ""ArmRobot"", ""Switch"", ""Plug"", ""Charger"", ""SmokeDetector"", ""Television""]",18501,70,18571,2.8174,3.7747,6591.5383,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""LightSensor"", ""Light"", ""ColorControl"", ""DimmerSwitch"", ""ArmRobot"", ""Switch"", ""Plug"", ""Charger"", ""SmokeDetector"", ""Television""]",
+96,4,"When the carbon dioxide concentration reaches 1000ppm or higher, sound the emergency siren.",이산화탄소 농도가 1000ppm 이상이 되면 긴급 사이렌을 울려줘.,WhenCarbonDioxideConcentrationReaches1000ppmOrHigh,service_list_ver2.0.1.json,"wait until ((#CarbonDioxideSensor).carbondioxidesensor_carbondioxide >= 1000)
+
+(#Siren).siren_setsirenmode(""emergency"")","prev := (#CarbonDioxideSensor).carbondioxidesensor_carbondioxide
+curr = (#CarbonDioxideSensor).carbondioxidesensor_carbondioxide
+if (prev < 1000 and curr >= 1000) {
+    (#Siren).siren_setsirenmode(""emergency"")
+}
+prev = curr",93.1242,True,strict,False,0.541509,1.0,1.0,1.0,0.75,1.0,"[""gt_mismatch"", ""numeric_grounding""]","AirQualitySensor, CarbonDioxideSensor, Siren, ArmRobot, Charger, SoundSensor, AirConditioner, SmokeDetector, PresenceVitalSensor, ColorControl",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""AirQualitySensor"", ""CarbonDioxideSensor"", ""Siren"", ""ArmRobot"", ""Charger"", ""SoundSensor"", ""AirConditioner"", ""SmokeDetector"", ""PresenceVitalSensor"", ""ColorControl""]","[""AirQualitySensor"", ""CarbonDioxideSensor"", ""Siren"", ""ArmRobot"", ""Charger"", ""SoundSensor"", ""AirConditioner"", ""SmokeDetector"", ""PresenceVitalSensor"", ""ColorControl""]",17854,94,17948,1.9858,2.9513,9038.171,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""AirQualitySensor"", ""CarbonDioxideSensor"", ""Siren"", ""ArmRobot"", ""Charger"", ""SoundSensor"", ""AirConditioner"", ""SmokeDetector"", ""PresenceVitalSensor"", ""ColorControl""]",
+97,4,"When smoke is detected, sound the fire alarm with the siren.",연기가 감지되면 사이렌으로 화재경보를 울려줘.,WhenSmokeIsDetectedSoundFireAlarmWith,service_list_ver2.0.1.json,"wait until ((#SmokeDetector).smokedetector_smoke == true)
+
+(#Siren).siren_setsirenmode(""fire"")","prev := (#SmokeDetector).smokedetector_smoke
+curr = (#SmokeDetector).smokedetector_smoke
+if (prev == false and curr == true) {
+    (#Siren).siren_setsirenmode(""fire"")
+}
+prev = curr",94.654,True,strict,False,0.5308,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]","PresenceSensor, Siren, SmokeDetector, SoundSensor, ArmRobot, CarbonDioxideSensor, Oven, AirQualitySensor, PresenceVitalSensor, RiceCooker",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""Siren"", ""SmokeDetector"", ""SoundSensor"", ""ArmRobot"", ""CarbonDioxideSensor"", ""Oven"", ""AirQualitySensor"", ""PresenceVitalSensor"", ""RiceCooker""]","[""PresenceSensor"", ""Siren"", ""SmokeDetector"", ""SoundSensor"", ""ArmRobot"", ""CarbonDioxideSensor"", ""Oven"", ""AirQualitySensor"", ""PresenceVitalSensor"", ""RiceCooker""]",18089,77,18166,1.9093,2.8476,9514.4817,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Siren"", ""SmokeDetector"", ""SoundSensor"", ""ArmRobot"", ""CarbonDioxideSensor"", ""Oven"", ""AirQualitySensor"", ""PresenceVitalSensor"", ""RiceCooker""]",
+98,4,"When the button is pushed 3 times, open the valve.",버튼이 세번 눌리면 벨브를 열어줘.,WhenButtonIsPushed3TimesOpenValve,service_list_ver2.0.1.json,"wait until ((#Button).button_button == ""pushed_3x"")
+
+(#Valve).valve_open()","prev := (#Button).button_button
+curr = (#Button).button_button
+if (prev != ""pushed_3x"" and curr == ""pushed_3x"") {
+    (#Valve).valve_open()
+}
+prev = curr",94.4857,True,strict,False,0.507143,1.0,1.0,1.0,0.75,1.0,"[""gt_mismatch"", ""numeric_grounding""]","Valve, Button, ArmRobot, TapDialSwitch, Door, Pump, PresenceVitalSensor, Oven, Safe, DimmerSwitch",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""Valve"", ""Button"", ""ArmRobot"", ""TapDialSwitch"", ""Door"", ""Pump"", ""PresenceVitalSensor"", ""Oven"", ""Safe"", ""DimmerSwitch""]","[""Valve"", ""Button"", ""ArmRobot"", ""TapDialSwitch"", ""Door"", ""Pump"", ""PresenceVitalSensor"", ""Oven"", ""Safe"", ""DimmerSwitch""]",18509,72,18581,2.0636,3.0311,9004.1675,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""Valve"", ""Button"", ""ArmRobot"", ""TapDialSwitch"", ""Door"", ""Pump"", ""PresenceVitalSensor"", ""Oven"", ""Safe"", ""DimmerSwitch""]",
+99,4,"When the temperature reaches 35 degrees or higher, set the air conditioner to 30 degrees.",온도가 35도 이상이 되면 에어컨의 목표 온도를 30도로 설정해줘.,WhenTemperatureReaches35DegreesOrHigherSet,service_list_ver2.0.1.json,"wait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)
+
+(#AirConditioner).airconditioner_settargettemperature(30)","wait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)
+(#AirConditioner).airconditioner_settargettemperature(30)",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"TemperatureSensor, AirConditioner, AirPurifier, AirQualitySensor, ArmRobot, LaundryDryer, Dishwasher, WeatherProvider, Oven, Dehumidifier",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""ArmRobot"", ""LaundryDryer"", ""Dishwasher"", ""WeatherProvider"", ""Oven"", ""Dehumidifier""]","[""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""ArmRobot"", ""LaundryDryer"", ""Dishwasher"", ""WeatherProvider"", ""Oven"", ""Dehumidifier""]",18868,53,18921,3.1784,4.1416,5952.9952,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""ArmRobot"", ""LaundryDryer"", ""Dishwasher"", ""WeatherProvider"", ""Oven"", ""Dehumidifier""]",
+100,4,"When the safe is unlocked, sound the police siren.",금고가 열리면 경찰 사이렌을 울려줘.,WhenSafeIsUnlockedSoundPoliceSiren,service_list_ver2.0.1.json,"wait until ((#Safe).safe_safestate == ""unlocked"")
+
+(#Siren).siren_setsirenmode(""police"")","prev := (#Safe).safe_safestate
+curr = (#Safe).safe_safestate
+if (prev != ""open"" and curr == ""open"") {
+    (#Siren).siren_setsirenmode(""police"")
+}
+prev = curr",95.1939,True,strict,False,0.518778,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]","Siren, Safe, SoundSensor, ArmRobot, DoorLock, Door, PresenceVitalSensor, AudioRecorder, PressureSensor, Speaker",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""Siren"", ""Safe"", ""SoundSensor"", ""ArmRobot"", ""DoorLock"", ""Door"", ""PresenceVitalSensor"", ""AudioRecorder"", ""PressureSensor"", ""Speaker""]","[""Siren"", ""Safe"", ""SoundSensor"", ""ArmRobot"", ""DoorLock"", ""Door"", ""PresenceVitalSensor"", ""AudioRecorder"", ""PressureSensor"", ""Speaker""]",18270,76,18346,2.5498,3.5258,7195.0741,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""Siren"", ""Safe"", ""SoundSensor"", ""ArmRobot"", ""DoorLock"", ""Door"", ""PresenceVitalSensor"", ""AudioRecorder"", ""PressureSensor"", ""Speaker""]",
+101,4,"When a leak is detected, close the valve.",누수가 감지되면 벨브를 차단해줘.,WhenLeakIsDetectedCloseValve,service_list_ver2.0.1.json,"wait until ((#LeakSensor).leaksensor_leakage == true)
+
+(#Valve).valve_close()","wait until ((#LeakSensor).leaksensor_leakage == true)
+(#Valve).valve_close()",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"PresenceSensor, Valve, LeakSensor, Pump, ArmRobot, PresenceVitalSensor, Door, LevelControl, Safe, Button",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""Valve"", ""LeakSensor"", ""Pump"", ""ArmRobot"", ""PresenceVitalSensor"", ""Door"", ""LevelControl"", ""Safe"", ""Button""]","[""PresenceSensor"", ""Valve"", ""LeakSensor"", ""Pump"", ""ArmRobot"", ""PresenceVitalSensor"", ""Door"", ""LevelControl"", ""Safe"", ""Button""]",17384,42,17426,1.4375,2.4212,12122.4348,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Valve"", ""LeakSensor"", ""Pump"", ""ArmRobot"", ""PresenceVitalSensor"", ""Door"", ""LevelControl"", ""Safe"", ""Button""]",
+102,4,"When the humidity exceeds 80%, start the dehumidifier in drying mode.",습도가 80%보다 커지면 제습기를 건조 모드로 작동시켜줘.,WhenHumidityExceeds80StartDehumidifierInDrying,service_list_ver2.0.1.json,"wait until ((#HumiditySensor).humiditysensor_humidity > 80)
+
+(#Dehumidifier).dehumidifier_setdehumidifiermode(""drying"")","prev := (#HumiditySensor).humiditysensor_humidity
+curr = (#HumiditySensor).humiditysensor_humidity
+if (prev <= 80 and curr > 80) {
+    (#Dehumidifier).dehumidifier_setdehumidifiermode(""drying"")
+}
+prev = curr",95.0348,True,strict,False,0.556954,1.0,1.0,1.0,0.75,1.0,"[""gt_mismatch"", ""numeric_grounding""]","HumiditySensor, Dehumidifier, Humidifier, Dishwasher, LaundryDryer, AirConditioner, WeatherProvider, AirQualitySensor, AirPurifier, ArmRobot",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""HumiditySensor"", ""Dehumidifier"", ""Humidifier"", ""Dishwasher"", ""LaundryDryer"", ""AirConditioner"", ""WeatherProvider"", ""AirQualitySensor"", ""AirPurifier"", ""ArmRobot""]","[""HumiditySensor"", ""Dehumidifier"", ""Humidifier"", ""Dishwasher"", ""LaundryDryer"", ""AirConditioner"", ""WeatherProvider"", ""AirQualitySensor"", ""AirPurifier"", ""ArmRobot""]",18519,84,18603,3.1368,4.1351,5930.5662,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""Dehumidifier"", ""Humidifier"", ""Dishwasher"", ""LaundryDryer"", ""AirConditioner"", ""WeatherProvider"", ""AirQualitySensor"", ""AirPurifier"", ""ArmRobot""]",
+103,4,"When motion is detected, turn on the light.",움직임이 감지되면 조명을 켜줘.,WhenMotionIsDetectedTurnOnLight,service_list_ver2.0.1.json,"wait until ((#MotionSensor).motionsensor_motion == true)
+
+(#Light).switch_on()","prev := (#MotionSensor).motionsensor_motion
+curr = (#MotionSensor).motionsensor_motion
+if (prev == false and curr == true) {
+    (#Light).switch_on()
+}
+prev = curr",92.7357,True,strict,False,0.507143,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","PresenceSensor, LightSensor, Light, MotionSensor, ColorControl, DimmerSwitch, ArmRobot, Switch, PresenceVitalSensor, SmokeDetector",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""PresenceSensor"", ""LightSensor"", ""Light"", ""MotionSensor"", ""ColorControl"", ""DimmerSwitch"", ""ArmRobot"", ""Switch"", ""PresenceVitalSensor"", ""SmokeDetector""]","[""PresenceSensor"", ""LightSensor"", ""Light"", ""MotionSensor"", ""ColorControl"", ""DimmerSwitch"", ""ArmRobot"", ""Switch"", ""PresenceVitalSensor"", ""SmokeDetector""]",18534,64,18598,1.9307,2.8965,9632.7757,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""LightSensor"", ""Light"", ""MotionSensor"", ""ColorControl"", ""DimmerSwitch"", ""ArmRobot"", ""Switch"", ""PresenceVitalSensor"", ""SmokeDetector""]",
+104,4,"When the indoor very fine dust level becomes 35 or higher, set the air purifier to high.",내부 초미세먼지 농도가 35 이상이 되면 공기청정기를 강하게 틀어줘.,WhenIndoorVeryFineDustLevelBecomes35Or,service_list_ver2.0.1.json,"wait until ((#AirQualitySensor).airqualitysensor_veryfinedustlevel >= 35)
+
+(#AirPurifier).airpurifier_setairpurifiermode(""high"")","prev := (#AirQualitySensor).airqualitysensor_veryfinedustlevel
+curr = (#AirQualitySensor).airqualitysensor_veryfinedustlevel
+if (prev < 35 and curr >= 35) {
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+}
+prev = curr",94.3362,True,strict,False,0.553614,1.0,1.0,1.0,0.75,1.0,"[""gt_mismatch"", ""numeric_grounding""]","Door, AirPurifier, AirQualitySensor, AirConditioner, Dishwasher, RobotVacuumCleaner, SmokeDetector, LaundryDryer, ColorControl, Dehumidifier",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""Door"", ""AirPurifier"", ""AirQualitySensor"", ""AirConditioner"", ""Dishwasher"", ""RobotVacuumCleaner"", ""SmokeDetector"", ""LaundryDryer"", ""ColorControl"", ""Dehumidifier""]","[""Door"", ""AirPurifier"", ""AirQualitySensor"", ""AirConditioner"", ""Dishwasher"", ""RobotVacuumCleaner"", ""SmokeDetector"", ""LaundryDryer"", ""ColorControl"", ""Dehumidifier""]",17650,95,17745,5.3192,6.2646,3336.028,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""Door"", ""AirPurifier"", ""AirQualitySensor"", ""AirConditioner"", ""Dishwasher"", ""RobotVacuumCleaner"", ""SmokeDetector"", ""LaundryDryer"", ""ColorControl"", ""Dehumidifier""]",
+105,4,"When the charging voltage exceeds 250V, stop charging.",충전 전압이 250V보다 높아지면 충전을 중단해줘.,WhenChargingVoltageExceeds250VStopCharging,service_list_ver2.0.1.json,"wait until ((#Charger).charger_voltage > 250000)
+
+(#Charger).switch_off()","wait until ((#Charger).charger_voltage > 250000)
+(#Charger).switch_off()",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"Charger, Plug, ArmRobot, CarbonDioxideSensor, PresenceVitalSensor, Pump, PressureSensor, ColorControl, Safe, LevelControl",retrieval premapping,Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.,10,"[""Charger"", ""Plug"", ""ArmRobot"", ""CarbonDioxideSensor"", ""PresenceVitalSensor"", ""Pump"", ""PressureSensor"", ""ColorControl"", ""Safe"", ""LevelControl""]","[""Charger"", ""Plug"", ""ArmRobot"", ""CarbonDioxideSensor"", ""PresenceVitalSensor"", ""Pump"", ""PressureSensor"", ""ColorControl"", ""Safe"", ""LevelControl""]",17560,43,17603,1.4006,2.3627,12568.1851,0.0,service_retrieval_fallback,10,used,hybrid,10,"[""Charger"", ""Plug"", ""ArmRobot"", ""CarbonDioxideSensor"", ""PresenceVitalSensor"", ""Pump"", ""PressureSensor"", ""ColorControl"", ""Safe"", ""LevelControl""]",
+106,4,"When the entrance door lock is unlocked, turn on the living room light.",현관 도어락이 잠금해제되면 거실 조명을 켜줘.,WhenEntranceDoorLockIsUnlockedTurnOn,service_list_ver2.0.1.json,"wait until ((#Entrance #DoorLock).doorlock_doorlockstate == ""unlocked"")
+
+(#LivingRoom #Light).switch_on()","prev := (#Entrance #DoorLock).doorlock_doorlockstate
+curr = (#Entrance #DoorLock).doorlock_doorlockstate
+if (prev != ""open"" and curr == ""open"") {
+    (#LivingRoom #Switch).switch_on()
+}
+prev = curr",92.9107,True,strict,False,0.515468,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""DoorLock"", ""Light"", ""Switch""]","[""DoorLock"", ""Light"", ""Switch""]",14294,83,14377,1.8743,1.886,7670.597,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+107,4,"When motion is detected in the bedroom, turn on the bedroom air conditioner.",침실에 움직임이 감지되면 침실 에어컨을 켜줘.,WhenMotionIsDetectedInBedroomTurnOn,service_list_ver2.0.1.json,"wait until ((#Bedroom #MotionSensor).motionsensor_motion == true)
+
+(#Bedroom #AirConditioner).switch_on()","prev := (#Bedroom #MotionSensor).motionsensor_motion
+curr = (#Bedroom #MotionSensor).motionsensor_motion
+if (prev == false and curr == true) {
+    (#Bedroom #AirConditioner).switch_on()
+}
+prev = curr",92.8804,True,strict,False,0.536071,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""MotionSensor"", ""AirConditioner""]","[""MotionSensor"", ""AirConditioner""]",12188,72,12260,1.8386,1.8487,6668.117,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+108,4,"When a smoke is detected in the kitchen, close the kitchen valve.",주방에 연기가 감지되면 주방 벨브를 잠궈줘.,WhenSmokeIsDetectedInKitchenClose,service_list_ver2.0.1.json,"wait until ((#Kitchen #SmokeDetector).smokedetector_smoke == true)
+
+(#Kitchen #Valve).valve_close()","prev := (#Kitchen #SmokeDetector).smokedetector_smoke
+curr = (#Kitchen #SmokeDetector).smokedetector_smoke
+if (prev == false and curr == true) {
+    (#Kitchen #Valve).valve_close()
+}
+prev = curr",96.1385,True,strict,False,0.527695,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""SmokeDetector"", ""Valve""]","[""SmokeDetector"", ""Valve""]",11967,76,12043,1.8547,1.8637,6493.2334,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+109,4,"When the fine dust level in the study reaches 30 or higher, turn on the study air purifier.",서재 미세먼지 농도가 30 이상이 되면 서재 공기청정기를 켜줘.,WhenFineDustLevelInStudyReaches30,service_list_ver2.0.1.json,"wait until ((#Study #AirQualitySensor).airqualitysensor_finedustlevel >= 30)
+
+(#Study #AirPurifier).switch_on()","wait until ((#Study #AirQualitySensor).airqualitysensor_finedustlevel >= 30)
+(#Study #AirPurifier).switch_on()",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""AirQualitySensor"", ""AirPurifier"", ""Switch""]","[""AirQualitySensor"", ""AirPurifier"", ""Switch""]",13910,55,13965,1.4355,1.4453,9728.3177,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+110,4,"When a water leak is detected in the basement, sound the main siren in emergency mode.",지하에 누수가 감지되면 메인 사이렌을 비상모드로 울려줘.,WhenWaterLeakIsDetectedInBasementSound,service_list_ver2.0.1.json,"wait until ((#Basement #LeakSensor).leaksensor_leakage == true)
+
+(#Main #Siren).siren_setsirenmode(""emergency"")","prev := (#Basement #LeakSensor).leaksensor_leakage
+curr = (#Basement #LeakSensor).leaksensor_leakage
+if (prev == false and curr == true) {
+    (#Main #Siren).siren_setsirenmode(""emergency"")
+}
+prev = curr",94.9969,True,strict,False,0.544828,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""LeakSensor"", ""Siren""]","[""LeakSensor"", ""Siren""]",11969,89,12058,2.0546,2.0637,5868.7822,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+111,4,"When the terrace illuminance falls below 50, turn on the terrace light.",테라스 조도가 50 미만이 되면 테라스 조명을 켜줘.,WhenTerraceIlluminanceFallsBelow50TurnOn,service_list_ver2.0.1.json,"wait until ((#Terrace #LightSensor).lightsensor_brightness < 50)
+
+(#Terrace #Light).switch_on()","wait until ((#Terrace #LightSensor).lightsensor_brightness < 50)
+(#Terrace #Switch).switch_on()",96.163,True,strict,False,0.982597,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""LightSensor"", ""Light"", ""Switch""]","[""LightSensor"", ""Light"", ""Switch""]",13888,51,13939,1.7055,1.7152,8172.9698,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+112,4,"When the garage door is opened, take a picture with the garage camera.",차고 문이 열리면 차고 카메라로 사진을 찍어줘.,WhenGarageDoorIsOpenedTakePictureWith,service_list_ver2.0.1.json,"wait until ((#Garage #Door).door_doorstate == ""open"")
+
+(#Garage #Camera).camera_captureimage()","prev := (#Garage #Door).door_doorstate
+curr = (#Garage #Door).door_doorstate
+if (prev != ""open"" and curr == ""open"") {
+    (#Garage #Camera).camera_captureimage()
+}
+prev = curr",93.6827,True,strict,False,0.536531,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""Door"", ""Camera""]","[""Door"", ""Camera""]",12779,75,12854,1.5701,1.5795,8186.7397,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+113,4,"When the baby room sound exceeds 40 dB, output ""Noise detected in the baby room"" through the living room speaker.",아기방 소리가 40dB보다 커지면 거실 스피커로 아기방에 소음이 감지되었다고 말해줘.,WhenBabyRoomSoundExceeds40DBOutputNoise,service_list_ver2.0.1.json,"wait until ((#BabyRoom #SoundSensor).soundsensor_sound > 40)
+
+(#LivingRoom #Speaker).speaker_speak(""아기방에 소음이 감지되었습니다."")","prev := (#BabyRoom #SoundSensor).soundsensor_sound
+curr = (#BabyRoom #SoundSensor).soundsensor_sound
+if (prev <= 40 and curr > 40) {
+    (#LivingRoom #Speaker).speaker_speak(""아기방에 소음이 감지되었습니다"")
+}
+prev = curr",92.366,True,strict,False,0.553974,1.0,1.0,1.0,0.75,1.0,"[""gt_mismatch"", ""numeric_grounding"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""SoundSensor"", ""Speaker""]","[""SoundSensor"", ""Speaker""]",12794,91,12885,2.2792,2.2888,5653.2994,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+114,4,"When the laundry room dryer's spin speed drops to 5 or below, announce through the living room speaker that the laundry is done.",세탁실 건조기 회전 속도가 5 이하가 되면 거실 스피커로 세탁이 끝났다고 알려줘.,WhenLaundryRoomDryerSSpinSpeedDropsTo,service_list_ver2.0.1.json,"wait until ((#LaundryRoom #LaundryDryer).laundrydryer_spinspeed <= 5)
+
+(#LivingRoom #Speaker).speaker_speak(""세탁이 완료되었습니다."")","prev := (#LaundryRoom #LaundryDryer).laundrydryer_spinspeed
+curr = (#LaundryRoom #LaundryDryer).laundrydryer_spinspeed
+if (prev > 5 and curr <= 5) {
+    (#LivingRoom #Speaker).speaker_speak(""세탁이 끝났다고 알려줘"")
+}
+prev = curr",93.2151,True,strict,False,0.533019,1.0,1.0,1.0,0.75,1.0,"[""gt_mismatch"", ""numeric_grounding""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""LaundryDryer"", ""Speaker""]","[""LaundryDryer"", ""Speaker""]",12896,96,12992,3.8897,3.899,3340.1033,0.0,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],
+115,4,"When the temperature in the pantry reaches 25 degrees or higher, turn on the pantry air conditioner.",창고 온도가 25도 이상이 되면 창고 에어컨을 켜줘.,WhenTemperatureInPantryReaches25DegreesOr,service_list_ver2.0.1.json,"wait until ((#Pantry #TemperatureSensor).temperaturesensor_temperature >= 25)
+
+(#Pantry #AirConditioner).switch_on()","wait until ((#Pantry #TemperatureSensor).temperaturesensor_temperature >= 25)
+(#Pantry #Switch).switch_on()",95.6318,True,strict,False,0.966355,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""TemperatureSensor"", ""AirConditioner"", ""Switch""]","[""TemperatureSensor"", ""AirConditioner"", ""Switch""]",12729,51,12780,1.2274,1.2361,10412.2535,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+116,4,"When the bathroom humidity exceeds 70%, set the bathroom dehumidifier to freeze protection mode.",욕실 습도가 70%보다 높아지면 욕실 제습기를 동결 방지 모드로 설정해줘.,WhenBathroomHumidityExceeds70SetBathroomDehumidifi,service_list_ver2.0.1.json,"wait until ((#Bathroom #HumiditySensor).humiditysensor_humidity > 70)
+
+(#Bathroom #Dehumidifier).dehumidifier_setdehumidifiermode(""freezeProtection"")","wait until ((#Bathroom #HumiditySensor).humiditysensor_humidity > 70)
+(#Bathroom #Dehumidifier).dehumidifier_setdehumidifiermode(""freezeProtection"")",100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,[],not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""HumiditySensor"", ""Dehumidifier""]","[""HumiditySensor"", ""Dehumidifier""]",12115,60,12175,2.0206,2.0295,6025.438,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+117,4,"When the office button is pushed, turn on all humidifiers in office.",사무실 버튼이 눌리면 사무실 가습기를 모두 켜줘.,WhenOfficeButtonIsPushedTurnOnAllHumidifiers,service_list_ver2.0.1.json,"wait until ((#Office #Button).button_button == ""pushed"")
+
+all(#Office #Humidifier).switch_on()","prev := (#Office #Button).button_button
+curr = (#Office #Button).button_button
+if (prev != ""pushed"" and curr == ""pushed"") {
+    all(#Office #Humidifier).switch_on()
+}
+prev = curr",93.5403,True,strict,False,0.608065,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""Button"", ""Switch"", ""Humidifier""]","[""Button"", ""Switch"", ""Humidifier""]",12784,78,12862,1.9596,1.9787,6563.5844,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+118,4,"When any presence sensor in the hallway detects presence, set all hallway lights to purple.",복도에 재실 센서가 하나라도 감지되면 모든 복도 조명을 보라색으로 설정해줘.,WhenAnyPresenceSensorInHallwayDetectsPresenceSet,service_list_ver2.0.1.json,"wait until (all(#Hallway #PresenceSensor).presencesensor_presence ==| true)
+
+all(#Hallway #Light).colorcontrol_setcolor(""128,0,128"")","prev := all(#Hallway #PresenceSensor).presencesensor_presence
+curr = all(#Hallway #PresenceSensor).presencesensor_presence
+if (prev == false and curr == true) {
+    all(#Hallway #Light).light_movetorgb(128, 0, 128)
+}
+prev = curr",69.9,False,strict,False,0.468657,0.5,0.5,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",0,"[""PresenceSensor"", ""Light"", ""ColorControl""]","[""PresenceSensor"", ""Light"", ""ColorControl""]",13804,91,13895,2.4846,2.4949,5592.4495,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],
+119,4,"When the carbon monoxide level in the server room becomes 5000 ppm or above, sound all sirens in emergency mode.",서버실 일산화탄소 농도가 5000 ppm 이상이되면 모든 사이렌을 비상모드로 울려줘.,WhenCarbonMonoxideLevelInServerRoomBecomes,service_list_ver2.0.1.json,"wait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)
+
+all(#Siren).siren_setsirenmode(""emergency"")","prev := (#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide
+curr = (#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide
+if (prev < 5000 and curr >= 5000) {
+    all(#Siren).siren_setsirenmode(""emergency"")
+}
+prev = curr",92.2333,True,strict,False,0.619737,1.0,1.0,1.0,0.75,1.0,"[""gt_mismatch"", ""numeric_grounding"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""AirQualitySensor"", ""Siren""]","[""AirQualitySensor"", ""Siren""]",13879,97,13976,4.1053,4.1151,3404.3797,0.0,connected_devices_only,4,skipped_connected_devices_present,hybrid,10,[],
+120,4,"When the bedroom shade button is pushed, lower the shade.",안방 쉐이드 버튼이 눌리면 쉐이드를 내려줘.,WhenBedroomShadeButtonIsPushedLowerShade,service_list_ver2.0.1.json,"wait until ((#Bedroom #Shade #Button).button_button == ""pushed"")
+
+(#Bedroom #Shade).windowcovering_downorclose()","prev := (#Bedroom #Button #Shade).button_button
+curr = (#Bedroom #Button #Shade).button_button
+if (prev != ""pushed"" and curr == ""pushed"") {
+    (#Bedroom #Shade).windowcovering_downorclose()
+}
+prev = curr",91.1549,True,strict,False,0.524315,1.0,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""semantic""]",not used (connected_devices scope),connected_devices scope,"Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",0,"[""Button"", ""WindowCovering""]","[""Button"", ""WindowCovering""]",12752,79,12831,1.9761,1.9857,6493.0925,0.0,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],

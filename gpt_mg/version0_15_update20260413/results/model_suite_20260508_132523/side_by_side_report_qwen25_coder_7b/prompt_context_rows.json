@@ -1,0 +1,509 @@
+[
+  {
+    "row_no": "5",
+    "service_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "service_schema_label": "service_list_ver2.0.1.json",
+    "snippet_source": "service_retrieval_fallback",
+    "mode_label": "retrieval premapping",
+    "retrieval_status": "used",
+    "retrieval_mode": "hybrid",
+    "requested_topk": 10,
+    "effective_topk": 10,
+    "device_count": 10,
+    "all_injected_category_count": 10,
+    "all_injected_categories": [
+      "Speaker",
+      "SoundSensor",
+      "Siren",
+      "AudioRecorder",
+      "ArmRobot",
+      "Television",
+      "PressureSensor",
+      "Pump",
+      "ColorControl",
+      "LevelControl"
+    ],
+    "displayed_categories": [
+      "Speaker",
+      "SoundSensor",
+      "Siren",
+      "AudioRecorder",
+      "ArmRobot",
+      "Television",
+      "PressureSensor",
+      "Pump",
+      "ColorControl",
+      "LevelControl"
+    ],
+    "retrieval_categories": [
+      "Speaker",
+      "SoundSensor",
+      "Siren",
+      "AudioRecorder",
+      "ArmRobot",
+      "Television",
+      "PressureSensor",
+      "Pump",
+      "ColorControl",
+      "LevelControl"
+    ],
+    "connected_categories": [],
+    "relevant_categories": [
+      "Speaker"
+    ],
+    "note": "Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.",
+    "category_cards": [
+      {
+        "category": "Speaker",
+        "role": "retrieved",
+        "rank": 1,
+        "service_count": 11,
+        "value_count": 2,
+        "function_count": 9,
+        "values": [
+          {
+            "service": "Speaker_PlaybackState",
+            "raw_service": "PlaybackState",
+            "canonical_name": "Speaker_PlaybackState",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_Volume",
+            "raw_service": "Volume",
+            "canonical_name": "Speaker_Volume",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "Speaker device for audio playback and media control"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Speaker_FastForward",
+            "raw_service": "FastForward",
+            "canonical_name": "Speaker_FastForward",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_Pause",
+            "raw_service": "Pause",
+            "canonical_name": "Speaker_Pause",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_Play",
+            "raw_service": "Play",
+            "canonical_name": "Speaker_Play",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "VOID",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_Rewind",
+            "raw_service": "Rewind",
+            "canonical_name": "Speaker_Rewind",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_SetVolume",
+            "raw_service": "SetVolume",
+            "canonical_name": "Speaker_SetVolume",
+            "type": "function",
+            "argument_type": "INTEGER",
+            "return_type": "INTEGER",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_Speak",
+            "raw_service": "Speak",
+            "canonical_name": "Speaker_Speak",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "VOID",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_Stop",
+            "raw_service": "Stop",
+            "canonical_name": "Speaker_Stop",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_VolumeDown",
+            "raw_service": "VolumeDown",
+            "canonical_name": "Speaker_VolumeDown",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "Speaker device for audio playback and media control"
+          },
+          {
+            "service": "Speaker_VolumeUp",
+            "raw_service": "VolumeUp",
+            "canonical_name": "Speaker_VolumeUp",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "Speaker device for audio playback and media control"
+          }
+        ]
+      },
+      {
+        "category": "SoundSensor",
+        "role": "retrieved",
+        "rank": 2,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "SoundSensor_Sound",
+            "raw_service": "Sound",
+            "canonical_name": "SoundSensor_Sound",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Sound sensor device for measuring sound levels"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "Siren",
+        "role": "retrieved",
+        "rank": 3,
+        "service_count": 2,
+        "value_count": 1,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "Siren_SirenMode",
+            "raw_service": "SirenMode",
+            "canonical_name": "Siren_SirenMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of the Siren"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Siren_SetSirenMode",
+            "raw_service": "SetSirenMode",
+            "canonical_name": "Siren_SetSirenMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the Siren"
+          }
+        ]
+      },
+      {
+        "category": "AudioRecorder",
+        "role": "retrieved",
+        "rank": 4,
+        "service_count": 5,
+        "value_count": 2,
+        "function_count": 3,
+        "values": [
+          {
+            "service": "AudioRecorder_AudioFile",
+            "raw_service": "AudioFile",
+            "canonical_name": "AudioRecorder_AudioFile",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BINARY",
+            "descriptor": "Record audio"
+          },
+          {
+            "service": "AudioRecorder_RecordStatus",
+            "raw_service": "RecordStatus",
+            "canonical_name": "AudioRecorder_RecordStatus",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Record audio"
+          }
+        ],
+        "functions": [
+          {
+            "service": "AudioRecorder_RecordStart",
+            "raw_service": "RecordStart",
+            "canonical_name": "AudioRecorder_RecordStart",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Record audio"
+          },
+          {
+            "service": "AudioRecorder_RecordStop",
+            "raw_service": "RecordStop",
+            "canonical_name": "AudioRecorder_RecordStop",
+            "type": "function",
+            "argument_type": "BINARY",
+            "return_type": "VOID",
+            "descriptor": "Record audio"
+          },
+          {
+            "service": "AudioRecorder_RecordWithDuration",
+            "raw_service": "RecordWithDuration",
+            "canonical_name": "AudioRecorder_RecordWithDuration",
+            "type": "function",
+            "argument_type": "STRING | DOUBLE",
+            "return_type": "BINARY",
+            "descriptor": "Record audio"
+          }
+        ]
+      },
+      {
+        "category": "ArmRobot",
+        "role": "retrieved",
+        "rank": 5,
+        "service_count": 5,
+        "value_count": 2,
+        "function_count": 3,
+        "values": [
+          {
+            "service": "ArmRobot_ArmRobotType",
+            "raw_service": "ArmRobotType",
+            "canonical_name": "ArmRobot_ArmRobotType",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of the arm robot"
+          },
+          {
+            "service": "ArmRobot_CurrentPosition",
+            "raw_service": "CurrentPosition",
+            "canonical_name": "ArmRobot_CurrentPosition",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Allows for the control of the arm robot"
+          }
+        ],
+        "functions": [
+          {
+            "service": "ArmRobot_Hello",
+            "raw_service": "Hello",
+            "canonical_name": "ArmRobot_Hello",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the arm robot"
+          },
+          {
+            "service": "ArmRobot_SendCommand",
+            "raw_service": "SendCommand",
+            "canonical_name": "ArmRobot_SendCommand",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the arm robot"
+          },
+          {
+            "service": "ArmRobot_SetPosition",
+            "raw_service": "SetPosition",
+            "canonical_name": "ArmRobot_SetPosition",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the arm robot"
+          }
+        ]
+      },
+      {
+        "category": "Television",
+        "role": "retrieved",
+        "rank": 6,
+        "service_count": 4,
+        "value_count": 1,
+        "function_count": 3,
+        "values": [
+          {
+            "service": "Television_Channel",
+            "raw_service": "Channel",
+            "canonical_name": "Television_Channel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "A television device"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Television_ChannelDown",
+            "raw_service": "ChannelDown",
+            "canonical_name": "Television_ChannelDown",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "A television device"
+          },
+          {
+            "service": "Television_ChannelUp",
+            "raw_service": "ChannelUp",
+            "canonical_name": "Television_ChannelUp",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "A television device"
+          },
+          {
+            "service": "Television_SetChannel",
+            "raw_service": "SetChannel",
+            "canonical_name": "Television_SetChannel",
+            "type": "function",
+            "argument_type": "INTEGER",
+            "return_type": "VOID",
+            "descriptor": "A television device"
+          }
+        ]
+      },
+      {
+        "category": "PressureSensor",
+        "role": "retrieved",
+        "rank": 7,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "PressureSensor_Pressure",
+            "raw_service": "Pressure",
+            "canonical_name": "PressureSensor_Pressure",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "The ability to see the current status of a pressure sensor device"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "Pump",
+        "role": "retrieved",
+        "rank": 8,
+        "service_count": 2,
+        "value_count": 1,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "Pump_PumpMode",
+            "raw_service": "PumpMode",
+            "canonical_name": "Pump_PumpMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of a pump device"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Pump_SetPumpMode",
+            "raw_service": "SetPumpMode",
+            "canonical_name": "Pump_SetPumpMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of a pump device"
+          }
+        ]
+      },
+      {
+        "category": "ColorControl",
+        "role": "retrieved",
+        "rank": 9,
+        "service_count": 2,
+        "value_count": 1,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "ColorControl_Color",
+            "raw_service": "Color",
+            "canonical_name": "ColorControl_Color",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Allows for control of a color changing device"
+          }
+        ],
+        "functions": [
+          {
+            "service": "ColorControl_SetColor",
+            "raw_service": "SetColor",
+            "canonical_name": "ColorControl_SetColor",
+            "type": "function",
+            "argument_type": "STRING",
+            "return_type": "VOID",
+            "descriptor": "Allows for control of a color changing device"
+          }
+        ]
+      },
+      {
+        "category": "LevelControl",
+        "role": "retrieved",
+        "rank": 10,
+        "service_count": 4,
+        "value_count": 3,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "LevelControl_CurrentLevel",
+            "raw_service": "CurrentLevel",
+            "canonical_name": "LevelControl_CurrentLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch"
+          },
+          {
+            "service": "LevelControl_MaxLevel",
+            "raw_service": "MaxLevel",
+            "canonical_name": "LevelControl_MaxLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch"
+          },
+          {
+            "service": "LevelControl_MinLevel",
+            "raw_service": "MinLevel",
+            "canonical_name": "LevelControl_MinLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch"
+          }
+        ],
+        "functions": [
+          {
+            "service": "LevelControl_MoveToLevel",
+            "raw_service": "MoveToLevel",
+            "canonical_name": "LevelControl_MoveToLevel",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch"
+          }
+        ]
+      }
+    ]
+  }
+]

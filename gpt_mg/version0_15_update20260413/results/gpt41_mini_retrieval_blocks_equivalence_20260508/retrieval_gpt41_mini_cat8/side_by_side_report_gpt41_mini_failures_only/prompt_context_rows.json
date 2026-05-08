@@ -1,0 +1,748 @@
+[
+  {
+    "row_no": "247",
+    "service_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "service_schema_label": "service_list_ver2.0.1.json",
+    "snippet_source": "service_retrieval_fallback",
+    "mode_label": "retrieval premapping",
+    "retrieval_status": "used",
+    "retrieval_mode": "hybrid",
+    "requested_topk": 10,
+    "effective_topk": 10,
+    "device_count": 10,
+    "all_injected_category_count": 10,
+    "all_injected_categories": [
+      "Siren",
+      "ContactSensor",
+      "SoundSensor",
+      "PresenceSensor",
+      "PresenceVitalSensor",
+      "MotionSensor",
+      "PressureSensor",
+      "CarbonDioxideSensor",
+      "ArmRobot",
+      "Button"
+    ],
+    "displayed_categories": [
+      "Siren",
+      "ContactSensor",
+      "SoundSensor",
+      "PresenceSensor",
+      "PresenceVitalSensor",
+      "MotionSensor",
+      "PressureSensor",
+      "CarbonDioxideSensor",
+      "ArmRobot",
+      "Button"
+    ],
+    "retrieval_categories": [
+      "Siren",
+      "ContactSensor",
+      "SoundSensor",
+      "PresenceSensor",
+      "PresenceVitalSensor",
+      "MotionSensor",
+      "PressureSensor",
+      "CarbonDioxideSensor",
+      "ArmRobot",
+      "Button"
+    ],
+    "connected_categories": [],
+    "relevant_categories": [
+      "ContactSensor",
+      "Siren"
+    ],
+    "note": "Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.",
+    "category_cards": [
+      {
+        "category": "Siren",
+        "role": "retrieved",
+        "rank": 1,
+        "service_count": 2,
+        "value_count": 1,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "Siren_SirenMode",
+            "raw_service": "SirenMode",
+            "canonical_name": "Siren_SirenMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of the Siren"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Siren_SetSirenMode",
+            "raw_service": "SetSirenMode",
+            "canonical_name": "Siren_SetSirenMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the Siren"
+          }
+        ]
+      },
+      {
+        "category": "ContactSensor",
+        "role": "retrieved",
+        "rank": 2,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "ContactSensor_Contact",
+            "raw_service": "Contact",
+            "canonical_name": "ContactSensor_Contact",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "Allows reading the value of a contact sensor device"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "SoundSensor",
+        "role": "retrieved",
+        "rank": 3,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "SoundSensor_Sound",
+            "raw_service": "Sound",
+            "canonical_name": "SoundSensor_Sound",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Sound sensor device for measuring sound levels"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "PresenceSensor",
+        "role": "retrieved",
+        "rank": 4,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "PresenceSensor_Presence",
+            "raw_service": "Presence",
+            "canonical_name": "PresenceSensor_Presence",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "The ability to see the current status of a presence sensor device"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "PresenceVitalSensor",
+        "role": "retrieved",
+        "rank": 5,
+        "service_count": 7,
+        "value_count": 7,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "PresenceVitalSensor_Awakeness",
+            "raw_service": "Awakeness",
+            "canonical_name": "PresenceVitalSensor_Awakeness",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Presence and vital signs sensor with heart rate, respiratory rate, movement detection"
+          },
+          {
+            "service": "PresenceVitalSensor_Distance",
+            "raw_service": "Distance",
+            "canonical_name": "PresenceVitalSensor_Distance",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Presence and vital signs sensor with heart rate, respiratory rate, movement detection"
+          },
+          {
+            "service": "PresenceVitalSensor_DwellTime",
+            "raw_service": "DwellTime",
+            "canonical_name": "PresenceVitalSensor_DwellTime",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Presence and vital signs sensor with heart rate, respiratory rate, movement detection"
+          },
+          {
+            "service": "PresenceVitalSensor_HeartRate",
+            "raw_service": "HeartRate",
+            "canonical_name": "PresenceVitalSensor_HeartRate",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Presence and vital signs sensor with heart rate, respiratory rate, movement detection"
+          },
+          {
+            "service": "PresenceVitalSensor_MovementIndex",
+            "raw_service": "MovementIndex",
+            "canonical_name": "PresenceVitalSensor_MovementIndex",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Presence and vital signs sensor with heart rate, respiratory rate, movement detection"
+          },
+          {
+            "service": "PresenceVitalSensor_Presence",
+            "raw_service": "Presence",
+            "canonical_name": "PresenceVitalSensor_Presence",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "Presence and vital signs sensor with heart rate, respiratory rate, movement detection"
+          },
+          {
+            "service": "PresenceVitalSensor_RespiratoryRate",
+            "raw_service": "RespiratoryRate",
+            "canonical_name": "PresenceVitalSensor_RespiratoryRate",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Presence and vital signs sensor with heart rate, respiratory rate, movement detection"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "MotionSensor",
+        "role": "retrieved",
+        "rank": 6,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "MotionSensor_Motion",
+            "raw_service": "Motion",
+            "canonical_name": "MotionSensor_Motion",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "Motion sensor device"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "PressureSensor",
+        "role": "retrieved",
+        "rank": 7,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "PressureSensor_Pressure",
+            "raw_service": "Pressure",
+            "canonical_name": "PressureSensor_Pressure",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "The ability to see the current status of a pressure sensor device"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "CarbonDioxideSensor",
+        "role": "retrieved",
+        "rank": 8,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "CarbonDioxideSensor_CarbonDioxide",
+            "raw_service": "CarbonDioxide",
+            "canonical_name": "CarbonDioxideSensor_CarbonDioxide",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Measure carbon dioxide levels"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "ArmRobot",
+        "role": "retrieved",
+        "rank": 9,
+        "service_count": 5,
+        "value_count": 2,
+        "function_count": 3,
+        "values": [
+          {
+            "service": "ArmRobot_ArmRobotType",
+            "raw_service": "ArmRobotType",
+            "canonical_name": "ArmRobot_ArmRobotType",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of the arm robot"
+          },
+          {
+            "service": "ArmRobot_CurrentPosition",
+            "raw_service": "CurrentPosition",
+            "canonical_name": "ArmRobot_CurrentPosition",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Allows for the control of the arm robot"
+          }
+        ],
+        "functions": [
+          {
+            "service": "ArmRobot_Hello",
+            "raw_service": "Hello",
+            "canonical_name": "ArmRobot_Hello",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the arm robot"
+          },
+          {
+            "service": "ArmRobot_SendCommand",
+            "raw_service": "SendCommand",
+            "canonical_name": "ArmRobot_SendCommand",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the arm robot"
+          },
+          {
+            "service": "ArmRobot_SetPosition",
+            "raw_service": "SetPosition",
+            "canonical_name": "ArmRobot_SetPosition",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the arm robot"
+          }
+        ]
+      },
+      {
+        "category": "Button",
+        "role": "retrieved",
+        "rank": 10,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "Button_Button",
+            "raw_service": "Button",
+            "canonical_name": "Button_Button",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "A device with one or more buttons"
+          }
+        ],
+        "functions": []
+      }
+    ]
+  },
+  {
+    "row_no": "259",
+    "service_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "service_schema_label": "service_list_ver2.0.1.json",
+    "snippet_source": "connected_devices_only",
+    "mode_label": "connected_devices scope",
+    "retrieval_status": "skipped_connected_devices_present",
+    "retrieval_mode": "hybrid",
+    "requested_topk": 10,
+    "effective_topk": 0,
+    "device_count": 3,
+    "all_injected_category_count": 3,
+    "all_injected_categories": [
+      "Button",
+      "Light",
+      "LevelControl"
+    ],
+    "displayed_categories": [
+      "Button",
+      "Light",
+      "LevelControl"
+    ],
+    "retrieval_categories": [],
+    "connected_categories": [
+      "Button",
+      "Light",
+      "LevelControl"
+    ],
+    "relevant_categories": [
+      "Light",
+      "Button"
+    ],
+    "note": "Prompt context came from connected_devices, so retrieval was skipped. 3 connected-device category group(s) were injected.",
+    "category_cards": [
+      {
+        "category": "Button",
+        "role": "connected",
+        "rank": null,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "Button_Button",
+            "raw_service": "Button",
+            "canonical_name": "Button_Button",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "A device with one or more buttons"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "Light",
+        "role": "connected",
+        "rank": null,
+        "service_count": 15,
+        "value_count": 8,
+        "function_count": 7,
+        "values": [
+          {
+            "service": "Light_ColorMode",
+            "raw_service": "ColorMode",
+            "canonical_name": "Light_ColorMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentBrightness",
+            "raw_service": "CurrentBrightness",
+            "canonical_name": "Light_CurrentBrightness",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentColorTemperature",
+            "raw_service": "CurrentColorTemperature",
+            "canonical_name": "Light_CurrentColorTemperature",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentHue",
+            "raw_service": "CurrentHue",
+            "canonical_name": "Light_CurrentHue",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentRGB",
+            "raw_service": "CurrentRGB",
+            "canonical_name": "Light_CurrentRGB",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentSaturation",
+            "raw_service": "CurrentSaturation",
+            "canonical_name": "Light_CurrentSaturation",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentX",
+            "raw_service": "CurrentX",
+            "canonical_name": "Light_CurrentX",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_CurrentY",
+            "raw_service": "CurrentY",
+            "canonical_name": "Light_CurrentY",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "A numerical representation of the brightness intensity"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Light_MoveToBrightness",
+            "raw_service": "MoveToBrightness",
+            "canonical_name": "Light_MoveToBrightness",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToColorTemperature",
+            "raw_service": "MoveToColorTemperature",
+            "canonical_name": "Light_MoveToColorTemperature",
+            "type": "function",
+            "argument_type": "INTEGER",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToHue",
+            "raw_service": "MoveToHue",
+            "canonical_name": "Light_MoveToHue",
+            "type": "function",
+            "argument_type": "DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToHueAndSaturation",
+            "raw_service": "MoveToHueAndSaturation",
+            "canonical_name": "Light_MoveToHueAndSaturation",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToRGB",
+            "raw_service": "MoveToRGB",
+            "canonical_name": "Light_MoveToRGB",
+            "type": "function",
+            "argument_type": "INTEGER | INTEGER | INTEGER",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToSaturation",
+            "raw_service": "MoveToSaturation",
+            "canonical_name": "Light_MoveToSaturation",
+            "type": "function",
+            "argument_type": "DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          },
+          {
+            "service": "Light_MoveToXY",
+            "raw_service": "MoveToXY",
+            "canonical_name": "Light_MoveToXY",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "A numerical representation of the brightness intensity"
+          }
+        ]
+      },
+      {
+        "category": "LevelControl",
+        "role": "connected",
+        "rank": null,
+        "service_count": 4,
+        "value_count": 3,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "LevelControl_CurrentLevel",
+            "raw_service": "CurrentLevel",
+            "canonical_name": "LevelControl_CurrentLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch"
+          },
+          {
+            "service": "LevelControl_MaxLevel",
+            "raw_service": "MaxLevel",
+            "canonical_name": "LevelControl_MaxLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch"
+          },
+          {
+            "service": "LevelControl_MinLevel",
+            "raw_service": "MinLevel",
+            "canonical_name": "LevelControl_MinLevel",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch"
+          }
+        ],
+        "functions": [
+          {
+            "service": "LevelControl_MoveToLevel",
+            "raw_service": "MoveToLevel",
+            "canonical_name": "LevelControl_MoveToLevel",
+            "type": "function",
+            "argument_type": "DOUBLE | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the level of a device like a light or a dimmer switch"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "row_no": "271",
+    "service_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "service_schema_label": "service_list_ver2.0.1.json",
+    "snippet_source": "connected_devices_only",
+    "mode_label": "connected_devices scope",
+    "retrieval_status": "skipped_connected_devices_present",
+    "retrieval_mode": "hybrid",
+    "requested_topk": 10,
+    "effective_topk": 0,
+    "device_count": 2,
+    "all_injected_category_count": 2,
+    "all_injected_categories": [
+      "MotionSensor",
+      "Camera"
+    ],
+    "displayed_categories": [
+      "MotionSensor",
+      "Camera"
+    ],
+    "retrieval_categories": [],
+    "connected_categories": [
+      "MotionSensor",
+      "Camera"
+    ],
+    "relevant_categories": [
+      "MotionSensor",
+      "Camera"
+    ],
+    "note": "Prompt context came from connected_devices, so retrieval was skipped. 2 connected-device category group(s) were injected.",
+    "category_cards": [
+      {
+        "category": "MotionSensor",
+        "role": "connected",
+        "rank": null,
+        "service_count": 1,
+        "value_count": 1,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "MotionSensor_Motion",
+            "raw_service": "Motion",
+            "canonical_name": "MotionSensor_Motion",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "Motion sensor device"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "Camera",
+        "role": "connected",
+        "rank": null,
+        "service_count": 8,
+        "value_count": 4,
+        "function_count": 4,
+        "values": [
+          {
+            "service": "Camera_CameraState",
+            "raw_service": "CameraState",
+            "canonical_name": "Camera_CameraState",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Controls camera device for image/video capture and streaming"
+          },
+          {
+            "service": "Camera_Image",
+            "raw_service": "Image",
+            "canonical_name": "Camera_Image",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BINARY",
+            "descriptor": "Controls camera device for image/video capture and streaming"
+          },
+          {
+            "service": "Camera_Stream",
+            "raw_service": "Stream",
+            "canonical_name": "Camera_Stream",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Controls camera device for image/video capture and streaming"
+          },
+          {
+            "service": "Camera_Video",
+            "raw_service": "Video",
+            "canonical_name": "Camera_Video",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BINARY",
+            "descriptor": "Controls camera device for image/video capture and streaming"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Camera_CaptureImage",
+            "raw_service": "CaptureImage",
+            "canonical_name": "Camera_CaptureImage",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "BINARY",
+            "descriptor": "Controls camera device for image/video capture and streaming"
+          },
+          {
+            "service": "Camera_CaptureVideo",
+            "raw_service": "CaptureVideo",
+            "canonical_name": "Camera_CaptureVideo",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "BINARY",
+            "descriptor": "Controls camera device for image/video capture and streaming"
+          },
+          {
+            "service": "Camera_StartStream",
+            "raw_service": "StartStream",
+            "canonical_name": "Camera_StartStream",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Controls camera device for image/video capture and streaming"
+          },
+          {
+            "service": "Camera_StopStream",
+            "raw_service": "StopStream",
+            "canonical_name": "Camera_StopStream",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Controls camera device for image/video capture and streaming"
+          }
+        ]
+      }
+    ]
+  }
+]

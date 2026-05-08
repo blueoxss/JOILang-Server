@@ -1,0 +1,180 @@
+row_no,category,row_category,command_eng,command_kor,gt,gt_name,gt_cron,gt_period,gt_code,warmup_excluded,gpt41_mini__det_score,gpt41_mini__det_pass,gpt41_mini__det_profile,gpt41_mini__det_gt_exact,gpt41_mini__det_gt_similarity,gpt41_mini__det_gt_service_coverage,gpt41_mini__det_gt_service_precision,gpt41_mini__det_gt_receiver_coverage,gpt41_mini__det_dataflow_score,gpt41_mini__det_numeric_grounding,gpt41_mini__det_enum_grounding,gpt41_mini__failure_reasons,gpt41_mini__output,gpt41_mini__output_name,gpt41_mini__output_cron,gpt41_mini__output_period,gpt41_mini__output_code,gpt41_mini__prompt_chars,gpt41_mini__prompt_tokens,gpt41_mini__completion_tokens,gpt41_mini__total_tokens,gpt41_mini__llm_latency_sec,gpt41_mini__total_pipeline_sec,gpt41_mini__tokens_per_sec,gpt41_mini__peak_vram_gb,gpt41_mini__generation_error_type,gpt41_mini__oom_flag,gpt41_mini__worker_python,gpt41_mini__resolved_model_path,gpt41_mini__service_list_snippet_source,gpt41_mini__service_list_device_count,gpt41_mini__service_list_retrieval_status,gpt41_mini__service_list_retrieval_mode,gpt41_mini__service_list_retrieval_topk,gpt41_mini__service_list_retrieval_categories,gpt41_mini__prompt_render_mode,gpt41_mini__prompt_assets_dir,gpt41_mini__warmup_excluded,gpt41_mini__row_category
+1,1,1,Switch the dishwasher to dry mode.,식기세척기를 건조 모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Dishwasher).dishwasher_setdishwashermode(\""dry\"")""}",,,0,"(#Dishwasher).dishwasher_setdishwashermode(""dry"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetDishwasherToDryMode"",""cron"":"""",""period"":0,""code"":""(#Dishwasher).dishwasher_setdishwashermode(\""dry\"")""}",SetDishwasherToDryMode,,0,"(#Dishwasher).dishwasher_setdishwashermode(""dry"")",78486,18412,32,18444,2.6615,7.9488,6929.9267,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Dishwasher"", ""LaundryDryer"", ""RiceCooker"", ""Dehumidifier"", ""AirConditioner"", ""Oven"", ""DimmerSwitch"", ""Switch"", ""AirPurifier"", ""ArmRobot""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+2,1,1,Add 5 minutes to the oven.,오븐의 작동 시간을 5분 늘려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Oven).oven_addmoretime(300)""}",,,0,(#Oven).oven_addmoretime(300),False,69.9,False,strict,False,0.967857,1.0,1.0,1.0,1.0,0.0,1.0,"[""gt_mismatch"", ""numeric_grounding""]","{""name"":""Add5MinutesToOven"",""cron"":"""",""period"":0,""code"":""(#Oven).oven_addmoretime(5)""}",Add5MinutesToOven,,0,(#Oven).oven_addmoretime(5),76006,17973,30,18003,1.2448,2.2234,14462.5643,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Oven"", ""RiceCooker"", ""ArmRobot"", ""MenuProvider"", ""Button"", ""Dishwasher"", ""Door"", ""Television"", ""SmokeDetector"", ""LaundryDryer""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+3,1,1,Start the rice cooker on cooking mode for 30 minutes.,밥솥을 조리 모드로 30분 작동시켜.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#RiceCooker).ricecooker_setcookingparameters(\""cooking\"", 1800)""}",,,0,"(#RiceCooker).ricecooker_setcookingparameters(""cooking"", 1800)",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""StartRiceCookerCooking30Minutes"",""cron"":"""",""period"":0,""code"":""(#RiceCooker).ricecooker_setcookingparameters(\""cooking\"",1800)""}",StartRiceCookerCooking30Minutes,,0,"(#RiceCooker).ricecooker_setcookingparameters(""cooking"",1800)",77893,18285,39,18324,1.7343,2.7019,10565.6461,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""RiceCooker"", ""Oven"", ""ArmRobot"", ""Dishwasher"", ""RobotVacuumCleaner"", ""MenuProvider"", ""Charger"", ""CarbonDioxideSensor"", ""AirConditioner"", ""FaceRecognizer""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+4,1,1,Set the siren to emergency mode.,사이렌을 응급모드로 울려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Siren).siren_setsirenmode(\""emergency\"")""}",,,0,"(#Siren).siren_setsirenmode(""emergency"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetSirenToEmergencyMode"",""cron"":"""",""period"":0,""code"":""(#Siren).siren_setsirenmode(\""emergency\"")""}",SetSirenToEmergencyMode,,0,"(#Siren).siren_setsirenmode(""emergency"")",79203,18494,32,18526,1.9826,2.9472,9344.2954,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Siren"", ""ArmRobot"", ""SoundSensor"", ""Oven"", ""Speaker"", ""AudioRecorder"", ""RiceCooker"", ""Pump"", ""Button"", ""Charger""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+5,1,1,Set the speaker volume to 30.,스피커의 볼륨을 30으로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Speaker).speaker_setvolume(30)""}",,,0,(#Speaker).speaker_setvolume(30),False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetSpeakerVolumeTo30"",""cron"":"""",""period"":0,""code"":""(#Speaker).speaker_setvolume(30)""}",SetSpeakerVolumeTo30,,0,(#Speaker).speaker_setvolume(30),76383,17861,27,17888,1.6404,2.601,10904.6574,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""SoundSensor"", ""Siren"", ""AudioRecorder"", ""ArmRobot"", ""Television"", ""PressureSensor"", ""Pump"", ""ColorControl"", ""LevelControl""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+6,1,1,Turn the TV channel down by one.,TV 채널을 하나 내려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Television).television_channeldown()""}",,,0,(#Television).television_channeldown(),False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""TurnTvChannelDownByOne"",""cron"":"""",""period"":0,""code"":""(#Television).television_channeldown()""}",TurnTvChannelDownByOne,,0,(#Television).television_channeldown(),82047,19080,30,19110,1.6633,2.6186,11489.2082,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Television"", ""ArmRobot"", ""LevelControl"", ""TapDialSwitch"", ""ColorControl"", ""Dishwasher"", ""Speaker"", ""EmailProvider"", ""MenuProvider"", ""Oven""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+7,1,1,Switch the TV to channel 7.,TV로 7번 채널을 틀어줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Television).television_setchannel(7)""}",,,0,(#Television).television_setchannel(7),False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SwitchTvToChannel7"",""cron"":"""",""period"":0,""code"":""(#Television).television_setchannel(7)""}",SwitchTvToChannel7,,0,(#Television).television_setchannel(7),78802,18524,29,18553,1.3619,2.3259,13622.8798,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Television"", ""Switch"", ""ArmRobot"", ""TapDialSwitch"", ""LevelControl"", ""ColorControl"", ""Dishwasher"", ""MenuProvider"", ""Oven"", ""DimmerSwitch""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+8,1,1,Announce the temperature through the speaker.,현재 온도를 스피커로 알려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\ntemp = (#TemperatureSensor).temperaturesensor_temperature\n\n(#Speaker).speaker_speak(\""현재 온도는 \"" + temp + \""도입니다\"")""}",,,0,"
+temp = (#TemperatureSensor).temperaturesensor_temperature
+
+(#Speaker).speaker_speak(""현재 온도는 "" + temp + ""도입니다"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""AnnounceTemperature"",""cron"":"""",""period"":0,""code"":""temp = (#TemperatureSensor).temperaturesensor_temperature\n(#Speaker).speaker_speak(\""현재 온도는 \"" + temp + \""도입니다\"")""}",AnnounceTemperature,,0,"temp = (#TemperatureSensor).temperaturesensor_temperature
+(#Speaker).speaker_speak(""현재 온도는 "" + temp + ""도입니다"")",82577,18908,46,18954,1.8606,2.826,10187.0364,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""TemperatureSensor"", ""Speaker"", ""AirConditioner"", ""ArmRobot"", ""WeatherProvider"", ""AudioRecorder"", ""SoundSensor"", ""Television"", ""ContactSensor"", ""AirQualitySensor""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+9,1,1,Tell me the outdoor temperature through the speaker.,외부 온도를 스피커로 출력해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\ntemp = (#WeatherProvider).weatherprovider_temperatureweather\n\n(#Speaker).speaker_speak(\""외부 온도는 \"" + temp + \""도입니다\"")""}",,,0,"
+temp = (#WeatherProvider).weatherprovider_temperatureweather
+
+(#Speaker).speaker_speak(""외부 온도는 "" + temp + ""도입니다"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""AnnounceOutdoorTemperature"",""cron"":"""",""period"":0,""code"":""temp = (#WeatherProvider).weatherprovider_temperatureweather\n(#Speaker).speaker_speak(\""외부 온도는 \"" + temp + \""도입니다\"")""}",AnnounceOutdoorTemperature,,0,"temp = (#WeatherProvider).weatherprovider_temperatureweather
+(#Speaker).speaker_speak(""외부 온도는 "" + temp + ""도입니다"")",80193,18479,48,18527,2.2691,3.2532,8164.9112,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""Door"", ""TemperatureSensor"", ""AirConditioner"", ""WeatherProvider"", ""ArmRobot"", ""SoundSensor"", ""AudioRecorder"", ""Siren"", ""Television""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+10,1,1,Tell me the current humidity through the speaker.,현재 습도를 스피커로 말해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nhum = (#HumiditySensor).humiditysensor_humidity\n\n(#Speaker).speaker_speak(\""현재 습도는 \"" + hum + \""%입니다\"")""}",,,0,"
+hum = (#HumiditySensor).humiditysensor_humidity
+
+(#Speaker).speaker_speak(""현재 습도는 "" + hum + ""%입니다"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""AnnounceCurrentHumidity"",""cron"":"""",""period"":0,""code"":""hum = (#HumiditySensor).humiditysensor_humidity\n(#Speaker).speaker_speak(\""현재 습도는 \"" + hum + \""%입니다\"")""}",AnnounceCurrentHumidity,,0,"hum = (#HumiditySensor).humiditysensor_humidity
+(#Speaker).speaker_speak(""현재 습도는 "" + hum + ""%입니다"")",81782,18867,48,18915,4.1376,5.142,4571.4907,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""Speaker"", ""Humidifier"", ""WeatherProvider"", ""AirQualitySensor"", ""ArmRobot"", ""AudioRecorder"", ""SoundSensor"", ""Dehumidifier"", ""AirPurifier""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+11,1,1,Tell me the outdoor humidity through the speaker.,외부 습도를 스피커로 말해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nhum = (#WeatherProvider).weatherprovider_humidityweather\n\n(#Speaker).speaker_speak(\""외부 습도는 \"" + hum + \""%입니다\"")""}",,,0,"
+hum = (#WeatherProvider).weatherprovider_humidityweather
+
+(#Speaker).speaker_speak(""외부 습도는 "" + hum + ""%입니다"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""AnnounceOutdoorHumidity"",""cron"":"""",""period"":0,""code"":""humidity = (#WeatherProvider).weatherprovider_humidityweather\n(#Speaker).speaker_speak(\""외부 습도는 \"" + humidity + \""% 입니다\"")""}",AnnounceOutdoorHumidity,,0,"humidity = (#WeatherProvider).weatherprovider_humidityweather
+(#Speaker).speaker_speak(""외부 습도는 "" + humidity + ""% 입니다"")",81771,18850,50,18900,1.7336,2.7003,10902.1689,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""Speaker"", ""Door"", ""WeatherProvider"", ""Humidifier"", ""AirQualitySensor"", ""ArmRobot"", ""SoundSensor"", ""AudioRecorder"", ""Dehumidifier""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+12,1,1,Output today's weather through the speaker.,오늘의 날씨를 스피커로 출력해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nweather = (#WeatherProvider).weatherprovider_weather\n\n(#Speaker).speaker_speak(\""오늘 날씨는 \"" + weather + \""입니다\"")""}",,,0,"
+weather = (#WeatherProvider).weatherprovider_weather
+
+(#Speaker).speaker_speak(""오늘 날씨는 "" + weather + ""입니다"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""AnnounceTodaysWeather"",""cron"":"""",""period"":0,""code"":""weather = (#WeatherProvider).weatherprovider_weather\n(#Speaker).speaker_speak(\""오늘의 날씨는 \"" + weather + \""입니다\"")""}",AnnounceTodaysWeather,,0,"weather = (#WeatherProvider).weatherprovider_weather
+(#Speaker).speaker_speak(""오늘의 날씨는 "" + weather + ""입니다"")",80631,18659,47,18706,1.799,2.7702,10397.9989,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""WeatherProvider"", ""ArmRobot"", ""SoundSensor"", ""AudioRecorder"", ""Siren"", ""MenuProvider"", ""Television"", ""AirConditioner"", ""RainSensor""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+13,1,1,Announce the fine dust level through the speaker.,미세먼지 농도를 스피커로 알려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\ndust = (#AirQualitySensor).airqualitysensor_dustlevel\n\n(#Speaker).speaker_speak(\""미세먼지 농도는 \"" + dust + \""입니다\"")""}",,,0,"
+dust = (#AirQualitySensor).airqualitysensor_dustlevel
+
+(#Speaker).speaker_speak(""미세먼지 농도는 "" + dust + ""입니다"")",False,69.9,False,strict,False,0.642241,0.5,0.5,0.5,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]","{""name"":""AnnounceFineDustLevel"",""cron"":"""",""period"":0,""code"":""level = (#WeatherProvider).weatherprovider_pm10weather\n(#Speaker).speaker_speak(\""현재 미세먼지 농도는 \"" + level + \""입니다\"")""}",AnnounceFineDustLevel,,0,"level = (#WeatherProvider).weatherprovider_pm10weather
+(#Speaker).speaker_speak(""현재 미세먼지 농도는 "" + level + ""입니다"")",79438,18415,52,18467,2.0555,3.039,8984.1888,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""AirQualitySensor"", ""SmokeDetector"", ""AirPurifier"", ""SoundSensor"", ""WeatherProvider"", ""Siren"", ""AudioRecorder"", ""CarbonDioxideSensor"", ""RobotVacuumCleaner""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+14,1,1,Announce the outdoor fine dust level using the speaker.,외부 미세먼지 농도를 스피커로 알려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\ndust = (#WeatherProvider).weatherprovider_pm10weather\n\n(#Speaker).speaker_speak(\""외부 미세먼지 농도는 \"" + dust + \""입니다\"")""}",,,0,"
+dust = (#WeatherProvider).weatherprovider_pm10weather
+
+(#Speaker).speaker_speak(""외부 미세먼지 농도는 "" + dust + ""입니다"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""AnnounceOutdoorFineDustLevel"",""cron"":"""",""period"":0,""code"":""pm10 = (#WeatherProvider).weatherprovider_pm10weather\n(#Speaker).speaker_speak(\""외부 미세먼지 농도는 \"" + pm10 + \""입니다\"")""}",AnnounceOutdoorFineDustLevel,,0,"pm10 = (#WeatherProvider).weatherprovider_pm10weather
+(#Speaker).speaker_speak(""외부 미세먼지 농도는 "" + pm10 + ""입니다"")",78975,18307,56,18363,1.8067,2.7909,10163.8346,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""WeatherProvider"", ""Speaker"", ""Door"", ""AirQualitySensor"", ""SmokeDetector"", ""AirPurifier"", ""SoundSensor"", ""CarbonDioxideSensor"", ""Siren"", ""AudioRecorder""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+15,1,1,"Generate a cat image using cloud service and save it as ""cat.png"".","클라우드로 고양이 사진을 생성하고 ""cat.png""로 저장해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nimg = (#CloudServiceProvider).cloudserviceprovider_generateimage(\""Generate a cat image\"")\n\n(#CloudServiceProvider).cloudserviceprovider_savetofile(img, \""cat.png\"")""}",,,0,"
+img = (#CloudServiceProvider).cloudserviceprovider_generateimage(""Generate a cat image"")
+
+(#CloudServiceProvider).cloudserviceprovider_savetofile(img, ""cat.png"")",False,99.1203,True,strict,False,0.974068,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]","{""name"":""GenerateCatImageAndSave"",""cron"":"""",""period"":0,""code"":""img = (#CloudServiceProvider).cloudserviceprovider_generateimage(\""cat\"")\n(#CloudServiceProvider).cloudserviceprovider_savetofile(img,\""cat.png\"")""}",GenerateCatImageAndSave,,0,"img = (#CloudServiceProvider).cloudserviceprovider_generateimage(""cat"")
+(#CloudServiceProvider).cloudserviceprovider_savetofile(img,""cat.png"")",82924,19075,51,19126,3.6695,4.6749,5212.1542,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Camera"", ""CloudServiceProvider"", ""Button"", ""ArmRobot"", ""ColorControl"", ""CarbonDioxideSensor"", ""Charger"", ""RobotVacuumCleaner"", ""Television"", ""FaceRecognizer""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+16,1,1,Output the charger's power consumption through the speaker.,충전기의 전력소모량을 스피커로 출력해줘.,"{""name"": """",
+""cron"": """", 
+""period"": 0, 
+""script"": ""\npower = (#Charger).charger_power\n\n(#Speaker).speaker_speak(\""전력소모량은 \"" + power + \""입니다\"")""}",,,0,"
+power = (#Charger).charger_power
+
+(#Speaker).speaker_speak(""전력소모량은 "" + power + ""입니다"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""AnnounceChargerPowerConsumption"",""cron"":"""",""period"":0,""code"":""power = (#Charger).charger_power\n(#Speaker).speaker_speak(\""충전기의 전력소모량은 \"" + power + \"" 와트입니다\"")""}",AnnounceChargerPowerConsumption,,0,"power = (#Charger).charger_power
+(#Speaker).speaker_speak(""충전기의 전력소모량은 "" + power + "" 와트입니다"")",78546,18216,53,18269,2.0492,3.0363,8915.1864,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""Charger"", ""Plug"", ""ArmRobot"", ""SoundSensor"", ""AudioRecorder"", ""Pump"", ""PresenceVitalSensor"", ""CarbonDioxideSensor"", ""ContactSensor""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+17,1,1,Tell me today's menu using the speaker.,오늘의 메뉴를 스피커로 출력해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nmenu = (#MenuProvider).menuprovider_todaymenu\n\n(#Speaker).speaker_speak(\""오늘의 메뉴는 \"" + menu + \""입니다\"")""}",,,0,"
+menu = (#MenuProvider).menuprovider_todaymenu
+
+(#Speaker).speaker_speak(""오늘의 메뉴는 "" + menu + ""입니다"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SpeakTodaysMenu"",""cron"":"""",""period"":0,""code"":""menu = (#MenuProvider).menuprovider_todaymenu\n(#Speaker).speaker_speak(\""오늘의 메뉴는 \"" + menu + \""입니다\"")""}",SpeakTodaysMenu,,0,"menu = (#MenuProvider).menuprovider_todaymenu
+(#Speaker).speaker_speak(""오늘의 메뉴는 "" + menu + ""입니다"")",80360,18733,47,18780,1.6843,2.8303,11150.0327,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""MenuProvider"", ""ArmRobot"", ""Oven"", ""SoundSensor"", ""Siren"", ""AudioRecorder"", ""Television"", ""RiceCooker"", ""EmailProvider""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+18,1,1,Tell me the lunch menu for Building 301 today through the speaker.,오늘의 301동 점심 메뉴를 스피커로 알려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nmenu = (#MenuProvider).menuprovider_getmenu(\""오늘 301동식당 점심\"")\n\n(#Speaker).speaker_speak(\""오늘의 메뉴는 \"" + menu + \""입니다\"")""}",,,0,"
+menu = (#MenuProvider).menuprovider_getmenu(""오늘 301동식당 점심"")
+
+(#Speaker).speaker_speak(""오늘의 메뉴는 "" + menu + ""입니다"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""AnnounceLunchMenuBuilding301Today"",""cron"":"""",""period"":0,""code"":""menu = (#MenuProvider).menuprovider_getmenu(\""오늘 301동식당 점심\"")\n(#Speaker).speaker_speak(\""오늘의 메뉴는 \"" + menu + \""입니다\"")""}",AnnounceLunchMenuBuilding301Today,,0,"menu = (#MenuProvider).menuprovider_getmenu(""오늘 301동식당 점심"")
+(#Speaker).speaker_speak(""오늘의 메뉴는 "" + menu + ""입니다"")",80855,18843,61,18904,2.3684,3.3336,7981.7598,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""MenuProvider"", ""ArmRobot"", ""Television"", ""Oven"", ""SoundSensor"", ""Siren"", ""RiceCooker"", ""AudioRecorder"", ""Charger""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+19,1,1,"Ask the cloud AI what an LLM is, and output its answer through the speaker.",클라우드 AI한테 llm이 무엇인지 질문하고 답을 스피커로 출력해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nanswer = (#CloudServiceProvider).cloudserviceprovider_chatwithai(\""What is LLM?\"")\n\n(#Speaker).speaker_speak(answer)""}",,,0,"
+answer = (#CloudServiceProvider).cloudserviceprovider_chatwithai(""What is LLM?"")
+
+(#Speaker).speaker_speak(answer)",False,98.1697,True,strict,False,0.993946,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]","{""name"":""AskCloudAIAndSpeakLLM"",""cron"":"""",""period"":0,""code"":""answer = (#CloudServiceProvider).cloudserviceprovider_chatwithai(\""What is an LLM?\"")\n(#Speaker).speaker_speak(answer)""}",AskCloudAIAndSpeakLLM,,0,"answer = (#CloudServiceProvider).cloudserviceprovider_chatwithai(""What is an LLM?"")
+(#Speaker).speaker_speak(answer)",87956,20144,51,20195,1.5582,2.5238,12960.4672,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""Door"", ""CloudServiceProvider"", ""ArmRobot"", ""LevelControl"", ""MenuProvider"", ""RobotVacuumCleaner"", ""AirPurifier"", ""AirQualitySensor"", ""Plug""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+20,1,1,Set the hue of the light to 200 and the saturation to 50.,"조명의 색조를 200, 채도는 50으로 설정해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Light).light_movetohueandsaturation(200, 50)""}",,,0,"
+(#Light).light_movetohueandsaturation(200, 50)",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetLightHueAndSaturation"",""cron"":"""",""period"":0,""code"":""(#Light).light_movetohueandsaturation(200, 50)""}",SetLightHueAndSaturation,,0,"(#Light).light_movetohueandsaturation(200, 50)",79451,18484,35,18519,1.406,2.3899,13171.4083,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Light"", ""ColorControl"", ""LightSensor"", ""DimmerSwitch"", ""Charger"", ""Television"", ""LevelControl"", ""Plug"", ""CarbonDioxideSensor"", ""Dishwasher""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+21,1,1, Change the light color to yellow.,조명 색을 노란색으로 바꿔줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Light).light_movetorgb(255, 255, 0)""}",,,0,"
+(#Light).light_movetorgb(255, 255, 0)",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""ChangeLightColorToYellow"",""cron"":"""",""period"":0,""code"":""(#Light).light_movetorgb(255,255,0)""}",ChangeLightColorToYellow,,0,"(#Light).light_movetorgb(255,255,0)",81151,18836,33,18869,1.5788,2.5649,11951.4821,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Light"", ""ColorControl"", ""LightSensor"", ""LevelControl"", ""DimmerSwitch"", ""ArmRobot"", ""Plug"", ""Television"", ""Button"", ""Charger""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+22,1,1,Lock the safe.,금고를 잠그어줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Safe).safe_lock()""}",,,0,"
+(#Safe).safe_lock()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""LockTheSafe"",""cron"":"""",""period"":0,""code"":""(#Safe).safe_lock()""}",LockTheSafe,,0,(#Safe).safe_lock(),72828,17256,22,17278,1.3137,2.2811,13152.1656,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Safe"", ""DoorLock"", ""ArmRobot"", ""Door"", ""Valve"", ""Charger"", ""Plug"", ""Button"", ""Pump"", ""LevelControl""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+23,1,1,Close the door.,문을 닫아줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Door).door_close()""}",,,0,"
+(#Door).door_close()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""CloseTheDoor"",""cron"":"""",""period"":0,""code"":""(#Door).door_close()""}",CloseTheDoor,,0,(#Door).door_close(),74605,17634,22,17656,1.2636,2.2267,13972.7762,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Door"", ""DoorLock"", ""ArmRobot"", ""Safe"", ""Valve"", ""Button"", ""WindowCovering"", ""AirConditioner"", ""ColorControl"", ""MenuProvider""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+24,1,1,Set the pump to normal mode.,펌프를 일반 모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Pump).pump_setpumpmode(\""normal\"")""}",,,0,"
+(#Pump).pump_setpumpmode(""normal"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetPumpToNormalMode"",""cron"":"""",""period"":0,""code"":""(#Pump).pump_setpumpmode(\""normal\"")""}",SetPumpToNormalMode,,0,"(#Pump).pump_setpumpmode(""normal"")",72158,17142,28,17170,1.3627,2.3205,12599.9853,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Pump"", ""ArmRobot"", ""Button"", ""Oven"", ""Plug"", ""PressureSensor"", ""Valve"", ""RobotVacuumCleaner"", ""AirPurifier"", ""Dishwasher""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+25,1,1,Stop the robot vacuum cleaner.,로봇 청소기를 멈춰줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""stop\"")""}",,,0,"
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""stop"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""StopRobotVacuumCleaner"",""cron"":"""",""period"":0,""code"":""(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""stop\"")""}",StopRobotVacuumCleaner,,0,"(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""stop"")",73424,17428,40,17468,2.0517,3.0072,8513.9153,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""RobotVacuumCleaner"", ""ArmRobot"", ""LaundryDryer"", ""Dishwasher"", ""Pump"", ""AirPurifier"", ""RiceCooker"", ""Valve"", ""ColorControl"", ""Button""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+26,1,1,"Play ""music.mp3"" through the speaker.","스피커로 ""music.mp3"" 재생해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Speaker).speaker_play(\""music.mp3\"")""}",,,0,"
+(#Speaker).speaker_play(""music.mp3"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""PlayMusicOnSpeaker"",""cron"":"""",""period"":0,""code"":""(#Speaker).speaker_play(\""music.mp3\"")""}",PlayMusicOnSpeaker,,0,"(#Speaker).speaker_play(""music.mp3"")",77568,18152,27,18179,1.3685,2.329,13283.8875,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""AudioRecorder"", ""SoundSensor"", ""ArmRobot"", ""Plug"", ""Siren"", ""Pump"", ""Charger"", ""Television"", ""MenuProvider""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+27,1,1,Set the speaker volume to maximum.,스피커 볼륨을 최대로 해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Speaker).speaker_setvolume(100)""}",,,0,"
+(#Speaker).speaker_setvolume(100)",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetSpeakerVolumeToMaximum"",""cron"":"""",""period"":0,""code"":""(#Speaker).speaker_setvolume(100)""}",SetSpeakerVolumeToMaximum,,0,(#Speaker).speaker_setvolume(100),74635,17504,27,17531,1.4107,2.3696,12427.1638,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""SoundSensor"", ""Siren"", ""AudioRecorder"", ""ArmRobot"", ""Television"", ""Pump"", ""AirPurifier"", ""PressureSensor"", ""PresenceSensor""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+28,1,1,Lower the speaker volume by one.,스피커 볼륨을 하나 낮춰줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Speaker).speaker_volumedown()""}",,,0,"
+(#Speaker).speaker_volumedown()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""LowerSpeakerVolumeByOne"",""cron"":"""",""period"":0,""code"":""(#Speaker).speaker_volumedown()""}",LowerSpeakerVolumeByOne,,0,(#Speaker).speaker_volumedown(),74607,17500,26,17526,1.2383,2.225,14153.2747,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""SoundSensor"", ""AudioRecorder"", ""Siren"", ""ArmRobot"", ""Television"", ""PresenceSensor"", ""AirPurifier"", ""PressureSensor"", ""Pump""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+29,1,1,Open the valve.,벨브를 열어줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Valve).valve_open()""}",,,0,"
+(#Valve).valve_open()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""OpenValve"",""cron"":"""",""period"":0,""code"":""(#Valve).valve_open()""}",OpenValve,,0,(#Valve).valve_open(),74243,17569,22,17591,1.3794,2.3669,12752.6461,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Valve"", ""ArmRobot"", ""Door"", ""Button"", ""Pump"", ""Oven"", ""Safe"", ""RobotVacuumCleaner"", ""LevelControl"", ""DoorLock""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+30,1,1,Set the TV channel to 30.,TV 30번 채널 틀어줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Television).television_setchannel(30)""}",,,0,"
+(#Television).television_setchannel(30)",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetTVChannelTo30"",""cron"":"""",""period"":0,""code"":""(#Television).television_setchannel(30)""}",SetTVChannelTo30,,0,(#Television).television_setchannel(30),79409,18577,29,18606,1.4848,2.4621,12530.9806,0.0,,False,,,service_retrieval_fallback,10,used,hybrid,10,"[""Television"", ""ArmRobot"", ""ColorControl"", ""LevelControl"", ""Dishwasher"", ""TapDialSwitch"", ""Oven"", ""Charger"", ""MenuProvider"", ""AirConditioner""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
