@@ -28,6 +28,7 @@ python gpt_mg/version0_15_update20260413/scripts/run_paper_full_study.py \
   --resume \
   --full-run \
   --output-root "$OUT" \
+  --progress minimal \
   --quiet-final-summary
 
 echo "실행이 완료되었습니다."

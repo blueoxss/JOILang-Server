@@ -1325,3 +1325,19 @@ raw command가 dataset row와 정확히 매칭되지 않으면 DET 평가를 건
 - `demo.py`
 - `gpt_mg/run.py`
 - `query_raw.sh`
+
+
+Advisor options (GA prompt search):
+- `--llm-mutation-advisor`: Enable an LLM mutation advisor that analyzes population diagnostics and proposes prompt-block mutations for next generation candidates.
+- `--advisor-model-key`: Advisor model key (typically `gpt41_mini`). Advisor is a critic/proposer, not a JOILang generator.
+- `--advisor-top-k`: Number of best genomes included in advisor context.
+- `--advisor-bottom-k`: Number of worst genomes included in advisor context.
+- `--advisor-max-examples`: Maximum failed-row examples shown to advisor.
+- `--advisor-temperature`: Advisor temperature (default `0.0` for deterministic JSON proposals).
+
+The advisor does not replace GA selection. It only proposes mutation candidates; GA still evaluates all children and performs normal selection.
+
+Progress modes:
+- `--progress quiet`: final summary only
+- `--progress minimal`: compact stage/generation progress
+- `--progress verbose`: extended diagnostics
