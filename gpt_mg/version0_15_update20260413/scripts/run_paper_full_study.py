@@ -364,6 +364,9 @@ def _write_final_manifest_alias(root: Path) -> None:
 
 
 def main() -> int:
+    def p(line: str = "") -> None:
+        print(line, flush=True)
+
     args = build_parser().parse_args()
     if not args.full_run and not args.smoke and not args.dry_run:
         args.smoke = True
@@ -382,13 +385,13 @@ def main() -> int:
     entries = _model_entries(models)
     model_label = ",".join(models)
     if args.progress != "quiet":
-        print("[RUN]")
-        print(f"command={' '.join(sys.argv)}")
-        print(f"model={model_label}")
-        print(f"suite={args.suite}")
-        print(f"categories={','.join(categories) if categories else 'all'}")
-        print(f"limit_per_category={args.limit_per_category if args.limit_per_category is not None else 'N/A'}")
-        print(f"output_root={root}")
+        p("[RUN]")
+        p(f"command={' '.join(sys.argv)}")
+        p(f"model={model_label}")
+        p(f"suite={args.suite}")
+        p(f"categories={','.join(categories) if categories else 'all'}")
+        p(f"limit_per_category={args.limit_per_category if args.limit_per_category is not None else 'N/A'}")
+        p(f"output_root={root}")
 
     availability = _availability(args, root, entries)
     _write_stage(root, "preflight", status="pass", model_key=model_label, output_paths=availability)
@@ -411,23 +414,23 @@ def main() -> int:
         if args.resume and not args.force and _stage_completed(root, stage):
             continue
         if args.progress == "minimal":
-            print(f"[STAGE] {stage}: RUNNING")
+            p(f"[STAGE] {stage}: RUNNING")
         start_time = datetime.now().isoformat(timespec="seconds")
         if args.dry_run and stage == "cloud_to_blocks_equivalence" and command:
             code = _run(command, quiet=args.quiet_final_summary)
             _write_stage(root, stage, status="pass" if code == 0 else "fail", model_key=model_label, command=command, start_time=start_time)
             if args.progress == "minimal":
-                print(f"[STAGE] {stage}: {'PASS' if code == 0 else 'FAIL'}")
+                p(f"[STAGE] {stage}: {'PASS' if code == 0 else 'FAIL'}")
             continue
         if args.dry_run or not runnable:
             _write_stage(root, stage, status="pending" if not runnable else "skipped", model_key=model_label, command=command, start_time=start_time)
             if args.progress == "minimal":
-                print(f"[STAGE] {stage}: {'PENDING' if not runnable else 'SKIPPED'}")
+                p(f"[STAGE] {stage}: {'PENDING' if not runnable else 'SKIPPED'}")
             continue
         code = _run(command, quiet=args.quiet_final_summary)
         _write_stage(root, stage, status="pass" if code == 0 else "fail", model_key=model_label, command=command, start_time=start_time)
         if args.progress == "minimal":
-            print(f"[STAGE] {stage}: {'PASS' if code == 0 else 'FAIL'}")
+            p(f"[STAGE] {stage}: {'PASS' if code == 0 else 'FAIL'}")
         if code != 0 and args.strict_availability:
             return code
 
@@ -439,21 +442,21 @@ def main() -> int:
     dump_json(root / "study_plan.json", {"root": str(root), "commands": planned, "dry_run": args.dry_run, "smoke": args.smoke, "full_run": args.full_run})
     manifest = root / "paper" / "final_artifacts_manifest.json"
     if args.quiet_final_summary:
-        print("Paper study completed.")
-        print()
-        print("Artifacts:")
-        print(f"- manifest: {manifest}")
-        print(f"- cloud/block equivalence: {root / 'cloud_to_blocks_equivalence'}")
-        print(f"- figure1: {root / 'paper' / 'figures' / 'figure1_prompt_search_dynamics_across_model_scales.png'}")
-        print(f"- figure2: {root / 'paper' / 'figures' / 'figure2_deployment_aware_pareto_frontier_final.png'}")
-        print(f"- table3: {root / 'paper' / 'tables' / 'table3_main_results.csv'}")
-        print(f"- table4: {root / 'paper' / 'tables' / 'table4_ablation_qwen14.csv'}")
-        print(f"- model availability: {availability['csv']}")
-        print(f"- promotion decisions: {root / 'paper' / 'promotion' / 'promotion_decisions.csv'}")
-        print(f"- structured feedback: {root / 'structured_feedback.jsonl'}")
-        print()
-        print("Notes:")
-        print("- Full five-model execution is scheduled but not run in dry-run mode.")
+        p("Paper study completed.")
+        p()
+        p("Artifacts:")
+        p(f"- manifest: {manifest}")
+        p(f"- cloud/block equivalence: {root / 'cloud_to_blocks_equivalence'}")
+        p(f"- figure1: {root / 'paper' / 'figures' / 'figure1_prompt_search_dynamics_across_model_scales.png'}")
+        p(f"- figure2: {root / 'paper' / 'figures' / 'figure2_deployment_aware_pareto_frontier_final.png'}")
+        p(f"- table3: {root / 'paper' / 'tables' / 'table3_main_results.csv'}")
+        p(f"- table4: {root / 'paper' / 'tables' / 'table4_ablation_qwen14.csv'}")
+        p(f"- model availability: {availability['csv']}")
+        p(f"- promotion decisions: {root / 'paper' / 'promotion' / 'promotion_decisions.csv'}")
+        p(f"- structured feedback: {root / 'structured_feedback.jsonl'}")
+        p()
+        p("Notes:")
+        p("- Full five-model execution is scheduled but not run in dry-run mode.")
     return code
 
 

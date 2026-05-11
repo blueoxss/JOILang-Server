@@ -3,8 +3,9 @@
 # 에러 발생 시 스크립트 실행을 즉시 중단합니다 (권장 옵션)
 set -e
 
-# 작업 디렉토리로 이동
-cd /home/mgjeong/Desktop/llm/JOILang-Server
+# 스크립트 위치 기준으로 작업 디렉토리 이동 (환경 독립)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
 
 # 변수 설정
 #MODEL="phi35_mini"
@@ -19,7 +20,7 @@ echo "결과 저장 경로: $OUT"
 echo "파이썬 스크립트 실행을 시작합니다..."
 
 # 파이썬 스크립트 실행
-python gpt_mg/version0_15_update20260413/scripts/run_paper_full_study.py \
+PYTHONUNBUFFERED=1 python -u gpt_mg/version0_15_update20260413/scripts/run_paper_full_study.py \
   --suite paper_local5 \
   --models "$MODEL" \
   --categories 1,2,3,4,5,6,7,8 \
