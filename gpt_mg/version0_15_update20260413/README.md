@@ -365,19 +365,21 @@ Token/latency는 GA fitness의 직접 항이 아니라, deployment comparison ar
 ```bash
 python gpt_mg/version0_15_update20260413/scripts/run_ga_search.py \
   --profile version0_15_update20260413 \
-  --model-key qwen25_coder_7b \
-  --limit 2 \
-  --population 2 \
-  --gens 1 \
-  --sample-size 1 \
-  --validation-size 1 \
-  --cheap-eval-limit 1 \
-  --candidate-k 1 \
-  --feedback-guided-mutation \
-  --llm-mutation-advisor \
-  --progress minimal \
-  --llm-mode mock
+  --smoke \
+  --llm-mode mock \
+  --progress minimal
 ```
+
+Staged GA execution:
+
+- default with no stage flag: safe `dry-run`
+- `--dry-run`: validate CLI, dataset selection, genome loading, core/optional block split, and artifact paths without model calls
+- `--smoke`: one-row smoke with capped population/generations and `candidate_k=1`
+- `--small-category-smoke`: categories `1,2` with `limit_per_category<=2`
+- `--small-ga-advisor-smoke`: advisor-enabled tiny smoke; uses mock advisor if no endpoint/mode is configured
+- `--full-run`: required for uncapped long runs
+- `--resume`: allow writing into an existing run directory for continuation
+- `--force`: explicitly allow writing into a non-empty output directory
 
 대표 출력 artifact:
 

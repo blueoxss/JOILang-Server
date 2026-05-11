@@ -1,0 +1,58 @@
+{
+  "id": "gen-084996e0-2eac-d8d6-0cf7-c37768272e10",
+  "seed": 203684046,
+  "blocks": [
+    "01",
+    "02",
+    "05",
+    "06"
+  ],
+  "params": {
+    "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "temperature": 0.0,
+    "few_shot_count": 3,
+    "max_tokens": 1024,
+    "candidate_strategies": [
+      "explicit_preconditions",
+      "compact_json",
+      "direct",
+      "canonical_names_first"
+    ]
+  },
+  "block_params": {
+    "02": {
+      "few_shot_count": 3,
+      "micro_rules": [
+        "For INTEGER and DOUBLE arguments, avoid quoted numeric literals."
+      ]
+    },
+    "05": {
+      "repair_mode": "conservative",
+      "few_shot_count": 3
+    }
+  },
+  "_ga_metadata": {
+    "parent_ids": [
+      "gen-32d31520-914c-40ee-f092-879070b33cce"
+    ],
+    "mutation_types": [
+      "strategies"
+    ],
+    "crossover_used": false,
+    "feedback_types_used": [],
+    "base_genome_id": "gen-32d31520-914c-40ee-f092-879070b33cce",
+    "diffs": [
+      {
+        "block_id": "params",
+        "field": "candidate_strategies",
+        "old_value": "[\"minimal\", \"direct\", \"canonical_names_first\", \"compact_json\"]",
+        "new_value": "[\"explicit_preconditions\", \"compact_json\", \"direct\", \"canonical_names_first\"]",
+        "mutation_type": "strategies",
+        "feedback_driven": false,
+        "llm_advised": false,
+        "advisor_proposal_id": "",
+        "failure_type_source": ""
+      }
+    ]
+  }
+}

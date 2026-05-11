@@ -30,6 +30,7 @@
 - `results/paper_study_<timestamp>/structured_feedback.jsonl` - deterministic validation feedback records used for future mutation/repair guidance.
 - `results/ga_search_<timestamp>/advisor_mutation_proposals.jsonl` - optional LLM advisor prompt-block mutation proposals.
 - `results/ga_search_<timestamp>/ga_population_diagnostics.csv` - generation/category DET diagnostics used by feedback-guided mutation and advisor prompts.
+- `results/ga_search_<timestamp>/stage_status/` - staged GA execution status files for dry-run, smoke, category-smoke, advisor-smoke, or full-run.
 - `results/paper_study_<timestamp>/paper/figures/` - final paper Figure 1 and Figure 2 image/PDF outputs.
 - `results/paper_study_<timestamp>/paper/tables/` - final paper Table 3 and Table 4 CSV/JSON/TeX outputs.
 - `results/paper_study_<timestamp>/paper/promotion/` - regression-aware promotion decision artifacts.

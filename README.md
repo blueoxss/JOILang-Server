@@ -73,6 +73,7 @@ GA core 경계:
 - `version0_13`의 prompt repair 지식은 `utils/prompt_surgery_rules.py`에서 DET failure reason -> block family -> mutation type -> micro-rule mapping으로 재사용됩니다.
 - `--llm-mutation-advisor`는 population diagnostics를 보고 prompt-block mutation만 제안합니다.
 - Advisor는 JOILang code를 생성하지 않고, retrieval pre-mapping/top-k/service context를 변경하지 않습니다.
+- GA는 `--dry-run`, `--smoke`, `--small-category-smoke`, `--small-ga-advisor-smoke` 순서로 작게 검증하고, uncapped long run은 `--full-run`을 명시해야 합니다.
 
 최종 산출물 위치:
 

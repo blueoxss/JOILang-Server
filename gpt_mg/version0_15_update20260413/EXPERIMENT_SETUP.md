@@ -71,6 +71,18 @@ Optional LLM mutation advisor:
 - Advisor는 JOILang code를 생성하지 않고, retrieval pre-mapping/top-k/service context를 변경하지 않습니다.
 - Advisor proposal은 다음 세대 child genome으로 들어가며 일반 deterministic validation과 promotion gate를 통과해야 합니다.
 
+### Small-To-Large GA Execution
+
+`run_ga_search.py`는 full long run을 기본으로 시작하지 않습니다.
+
+- Stage flag가 없고 `--full-run`도 없으면 safe dry-run으로 동작합니다.
+- `--dry-run`: model call 없이 CLI, dataset/category selection, genome, block split, output path를 검증합니다.
+- `--smoke`: one-row smoke. population/gens/candidate_k가 안전 범위로 cap됩니다.
+- `--small-category-smoke`: category `1,2`, `limit_per_category<=2`로 category diagnostics와 failure histogram을 검증합니다.
+- `--small-ga-advisor-smoke`: advisor path를 켜고 endpoint가 없으면 mock advisor JSON으로 schema/proposal safety를 검증합니다.
+- `--full-run`: uncapped long run 허용. days-scale 실행은 이 flag가 필요합니다.
+- `--resume` / `--force`: 기존 output directory에 이어 쓰거나 강제 쓰기 할 때만 사용합니다.
+
 Structured deterministic feedback은 다음 파일에 저장됩니다.
 
 - `results/paper_study_<timestamp>/structured_feedback.jsonl`

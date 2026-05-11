@@ -86,6 +86,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--start-row", type=int, default=1)
     parser.add_argument("--end-row", type=int, default=None)
     parser.add_argument("--category", action="append", default=[], help="Filter by dataset category. Can be repeated or comma-separated.")
+    parser.add_argument("--limit-per-category", type=int, default=None)
     parser.add_argument("--population", type=int, default=20)
     parser.add_argument("--gens", type=int, default=30)
     parser.add_argument("--crossover-rate", type=float, default=0.6)
@@ -94,6 +95,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--sample-size", type=int, default=20)
     parser.add_argument("--cheap-eval-limit", type=int, default=5)
     parser.add_argument("--candidate-k", type=int, default=2)
+    parser.add_argument("--repair-attempts", type=int, default=0, help="Compatibility guard; GA core currently evaluates direct candidates only.")
     parser.add_argument("--validation-size", type=int, default=8)
     parser.add_argument("--alpha", type=float, default=0.5)
     parser.add_argument("--plateau-generations", type=int, default=3)
@@ -106,6 +108,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--progress", choices=["quiet", "minimal", "verbose"], default="minimal")
     parser.add_argument("--print-prompts", action="store_true", help="Reserved debugging flag. GA never prints prompts unless this is set.")
     parser.add_argument("--dry-run", action="store_true", help="Validate GA setup and write initial artifacts without LLM calls.")
+    parser.add_argument("--smoke", action="store_true", help="Run the safe one-row GA smoke preset.")
+    parser.add_argument("--small-category-smoke", action="store_true", help="Run categories 1 and 2 with at most two rows per category.")
+    parser.add_argument("--small-ga-advisor-smoke", action="store_true", help="Run a tiny advisor-enabled smoke; uses mock advisor when no endpoint is configured.")
+    parser.add_argument("--full-run", action="store_true", help="Allow long-running GA settings. Required for full-scale runs.")
+    parser.add_argument("--resume", action="store_true", help="Resume into an existing output directory and keep stage status files.")
+    parser.add_argument("--force", action="store_true", help="Allow writing into a non-empty output directory.")
     parser.add_argument("--top-k", type=int, default=3)
     parser.add_argument("--llm-mutation-advisor", action="store_true", help="Use an optional LLM advisor to propose prompt-block mutations.")
     parser.add_argument("--advisor-model-key", default="gpt41_mini")
@@ -129,6 +137,112 @@ def _resolve_output_root(raw: str | None) -> Path:
     if raw:
         return Path(raw).expanduser().resolve()
     return (RESULTS_DIR / f"ga_search_{_timestamp()}").resolve()
+
+
+def _has_stage_flag(args: argparse.Namespace) -> bool:
+    return bool(args.dry_run or args.smoke or args.small_category_smoke or args.small_ga_advisor_smoke)
+
+
+def _normalize_stage_args(args: argparse.Namespace) -> argparse.Namespace:
+    if not args.full_run and not _has_stage_flag(args):
+        args.dry_run = True
+        args.stage_name = "dry-run"
+        args.stage_defaulted = True
+    else:
+        args.stage_defaulted = False
+
+    if args.dry_run:
+        args.stage_name = getattr(args, "stage_name", "dry-run")
+    elif args.small_ga_advisor_smoke:
+        args.stage_name = "ga-advisor-smoke"
+        args.llm_mutation_advisor = True
+        if not args.llm_mode and not args.llm_endpoint:
+            args.llm_mode = "mock"
+        args.model_key = args.model_key or "qwen25_coder_7b"
+        args.limit = min(args.limit or 2, 2)
+        args.population = min(args.population, 4)
+        args.gens = min(args.gens, 2)
+        args.sample_size = min(args.sample_size, 2)
+        args.validation_size = min(args.validation_size, 2)
+        args.cheap_eval_limit = min(args.cheap_eval_limit, 1)
+        args.candidate_k = 1
+        args.mutation_rate = 1.0
+        args.repair_attempts = 0
+    elif args.small_category_smoke:
+        args.stage_name = "category-smoke"
+        args.model_key = args.model_key or "qwen25_coder_7b"
+        args.category = args.category or ["1", "2"]
+        args.limit_per_category = min(args.limit_per_category or 2, 2)
+        args.population = min(args.population, 4)
+        args.gens = min(args.gens, 2)
+        args.sample_size = min(args.sample_size, 4)
+        args.validation_size = min(args.validation_size, 4)
+        args.cheap_eval_limit = min(args.cheap_eval_limit, 2)
+        args.candidate_k = 1
+        args.mutation_rate = 1.0
+        args.repair_attempts = 0
+    elif args.smoke:
+        args.stage_name = "one-row-smoke"
+        args.model_key = args.model_key or "qwen25_coder_7b"
+        args.limit = min(args.limit or 1, 1)
+        args.population = min(args.population, 4)
+        args.gens = min(args.gens, 2)
+        args.sample_size = min(args.sample_size, 1)
+        args.validation_size = min(args.validation_size, 1)
+        args.cheap_eval_limit = min(args.cheap_eval_limit, 1)
+        args.candidate_k = 1
+        args.mutation_rate = 1.0
+        args.repair_attempts = 0
+    else:
+        args.stage_name = "full-run" if args.full_run else "dry-run"
+
+    if not args.full_run:
+        args.population = min(args.population, 4)
+        args.gens = min(args.gens, 2)
+        args.candidate_k = min(args.candidate_k, 1)
+        args.repair_attempts = 0
+    return args
+
+
+def _guard_output_root(output_root: Path, args: argparse.Namespace) -> None:
+    if args.resume or args.force:
+        return
+    if output_root.exists() and any(output_root.iterdir()):
+        raise SystemExit(
+            f"Output directory already exists and is not empty: {output_root}. "
+            "Use --resume or --force, or choose a new --output-root."
+        )
+
+
+def _write_stage_status(output_root: Path, stage: str, status: str, details: dict[str, Any] | None = None) -> None:
+    payload = {
+        "stage": stage,
+        "status": status,
+        "timestamp": datetime.now().isoformat(timespec="seconds"),
+        **(details or {}),
+    }
+    dump_json(output_root / "stage_status" / f"{stage}.json", payload)
+
+
+def _print_stage(args: argparse.Namespace, stage: str, status: str) -> None:
+    if args.progress != "quiet":
+        print(f"[STAGE] {stage} {status}", flush=True)
+
+
+def _final_artifacts(summary: dict[str, Any]) -> list[tuple[str, str]]:
+    output_root = Path(str(summary.get("output_root", "")))
+    return [
+        ("ga_generation_progress.csv", str(summary.get("generation_progress_csv") or output_root / "ga_generation_progress.csv")),
+        ("ga_topk_genomes.csv", str(summary.get("topk_genomes_csv") or output_root / "ga_topk_genomes.csv")),
+        ("ga_block_diffs.jsonl", str(summary.get("block_diffs_jsonl") or output_root / "ga_block_diffs.jsonl")),
+        ("ga_population_diagnostics.csv", str(summary.get("population_diagnostics_csv") or output_root / "ga_population_diagnostics.csv")),
+        ("structured_feedback.jsonl", str(summary.get("structured_feedback_jsonl") or output_root / "structured_feedback.jsonl")),
+        ("advisor_mutation_proposals.jsonl", str(summary.get("advisor_mutation_proposals_jsonl") or output_root / "advisor_mutation_proposals.jsonl")),
+        ("population_transitions.csv", str(summary.get("population_transitions_csv") or output_root / "population_transitions.csv")),
+        ("promotion_decisions.csv", str(summary.get("promotion_decisions_csv") or output_root / "promotion_decisions.csv")),
+        ("best_genome.json", str(output_root / "best_genome.json")),
+        ("ga_summary.json", str(output_root / "ga_summary.json")),
+    ]
 
 
 def _model_name_for_key(model_key: str) -> str:
@@ -839,7 +953,11 @@ def _call_mutation_advisor(
     category_diagnostics: list[dict[str, Any]],
     feedback_summary: list[dict[str, Any]],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    prompt_path = output_root / f"advisor_prompt_generation_{generation:03d}.txt"
+    response_path = output_root / f"advisor_response_generation_{generation:03d}.json"
     if not args.llm_mutation_advisor:
+        prompt_path.write_text("advisor_status=skipped llm_mutation_advisor_disabled\n", encoding="utf-8")
+        dump_json(response_path, {"advisor_status": "skipped", "reason": "llm_mutation_advisor_disabled"})
         return [], []
     prompt_text = _build_advisor_prompt(
         generation=generation,
@@ -849,9 +967,7 @@ def _call_mutation_advisor(
         feedback_summary=feedback_summary,
         args=args,
     )
-    prompt_path = output_root / f"advisor_prompt_generation_{generation:03d}.txt"
     prompt_path.write_text(prompt_text, encoding="utf-8")
-    response_path = output_root / f"advisor_response_generation_{generation:03d}.json"
     effective_mode = (args.llm_mode or "openai").strip().lower()
     if effective_mode == "mock":
         advisor_payload = _mock_advisor_response(generation, model_key, feedback_summary)
@@ -951,16 +1067,26 @@ def _progress_enabled(args: argparse.Namespace, level: str = "minimal") -> bool:
     return True
 
 
+def _diagnostic_label(category: str) -> str:
+    token = str(category or "").strip()
+    if token in {"1", "2"}:
+        return "simple"
+    if token in {"3", "4", "5"}:
+        return "temporal"
+    if token in {"6", "7", "8"}:
+        return "replay-heavy"
+    return f"cat{token or 'unknown'}"
+
+
 def _print_run_start(args: argparse.Namespace, output_root: Path, model_key: str, categories: list[str]) -> None:
     if not _progress_enabled(args):
         return
     print("[RUN]", flush=True)
-    print(f"model={model_key or 'genome.params.model'}", flush=True)
-    print(f"suite=run_ga_search", flush=True)
-    print(f"categories={','.join(categories) if categories else 'all-selected'}", flush=True)
-    print(f"limit_per_category=N/A", flush=True)
-    print(f"output_root={output_root}", flush=True)
     print(f"command={' '.join(sys.argv)}", flush=True)
+    print(f"model={model_key or 'genome.params.model'}", flush=True)
+    print(f"categories={','.join(categories) if categories else 'all-selected'}", flush=True)
+    print(f"limit_per_category={args.limit_per_category if args.limit_per_category is not None else 'N/A'}", flush=True)
+    print(f"output_root={output_root}", flush=True)
 
 
 def _print_generation(
@@ -974,21 +1100,18 @@ def _print_generation(
     feedback_summary: list[dict[str, Any]],
     category_diagnostics: list[dict[str, Any]],
     advisor_summary: dict[str, Any] | None,
+    advisor_proposals: list[dict[str, Any]],
     previous_best: dict[str, Any] | None,
 ) -> None:
     if not _progress_enabled(args):
         return
     best = top_records[0] if top_records else {}
-    previous_det = float((previous_best or {}).get("validation_avg_det_score") or 0.0)
-    delta_det = float(best.get("det", 0.0) or 0.0) - previous_det
     print(
         f"[GA][GEN {generation:02d}/{args.gens:02d}]\n"
-        f"population={args.population} evaluated={evaluated_count} elites={transition.get('survived_elites', 0)} "
-        f"crossover={transition.get('new_by_crossover', 0)} mutation={transition.get('new_by_mutation', 0)} "
-        f"advisor={transition.get('new_by_advisor', 0)} rejected={transition.get('promotion_rejected', 0)}\n"
+        f"population={args.population} evaluated={evaluated_count} "
         f"best={best.get('genome_id', '')} det={float(best.get('det', 0.0) or 0.0):.1f} "
         f"pass={best.get('det_pass_count', 0)}/{best.get('row_count', 0)} "
-        f"tokens={float(best.get('tokens', 0.0) or 0.0):.0f} delta={delta_det:+.1f}DET",
+        f"tokens={float(best.get('tokens', 0.0) or 0.0):.0f}",
         flush=True,
     )
     print("[GA][TOP-3]", flush=True)
@@ -1002,26 +1125,26 @@ def _print_generation(
             flush=True,
         )
     if category_diagnostics:
-        print(f"[GA][DIAGNOSTIC gen={generation:02d}]", flush=True)
+        print("[GA][DIAGNOSTIC]", flush=True)
         for item in category_diagnostics[:5]:
             failures = item.get("failure_histogram", "{}")
+            label = _diagnostic_label(str(item.get("category", "")))
             print(
-                f"cat{item.get('category')}: det={float(item.get('avg_det_score', 0.0) or 0.0):.1f} "
+                f"{label}: det={float(item.get('avg_det_score', 0.0) or 0.0):.1f} "
                 f"pass={item.get('det_pass_count', 0)}/{item.get('row_evaluations', 0)} "
                 f"failures={failures}",
                 flush=True,
             )
     if best_diffs:
-        print(f"[GA][BLOCK-DIFF best={best.get('genome_id', '')}]", flush=True)
-        print(f"base={best_diffs[0].get('base_genome_id', '')}", flush=True)
+        print("[GA][BLOCK-DIFF]", flush=True)
         print("changed:", flush=True)
         for diff in best_diffs[:6]:
             print(
-                f"  block_{diff.get('block_id')} {diff.get('field')}: "
-                f"{diff.get('old_value')} -> {diff.get('new_value')}",
+                f"  block={diff.get('block_id')} mutation={diff.get('mutation_type')} "
+                f"old={diff.get('old_value')} new={diff.get('new_value')}",
                 flush=True,
             )
-    if feedback_summary:
+    if feedback_summary and args.progress == "verbose":
         print("[GA][FEEDBACK]", flush=True)
         applied = []
         for item in feedback_summary[:5]:
@@ -1033,13 +1156,20 @@ def _print_generation(
             )
         print(f"applied_mutations=[{', '.join(dict.fromkeys(applied))}]", flush=True)
     if advisor_summary:
-        print(f"[GA][ADVISOR gen={generation:02d}]", flush=True)
-        print(
-            f"accepted={advisor_summary.get('accepted_proposals', 0)} "
-            f"rejected={advisor_summary.get('rejected_proposals', 0)} "
-            f"applied_to_next_generation={transition.get('new_by_advisor', 0)}",
-            flush=True,
-        )
+        print("[GA][ADVISOR]", flush=True)
+        if advisor_proposals:
+            for idx, proposal in enumerate(advisor_proposals[: max(1, args.advisor_top_k)], start=1):
+                print(
+                    f"proposal#{idx} block={proposal.get('target_block_id', '')} "
+                    f"mutation={proposal.get('mutation_type', '')} priority={proposal.get('priority', '')}",
+                    flush=True,
+                )
+        else:
+            print(
+                f"advisor_status=skipped accepted={advisor_summary.get('accepted_proposals', 0)} "
+                f"rejected={advisor_summary.get('rejected_proposals', 0)}",
+                flush=True,
+            )
     print(
         "[GA][POPULATION-UPDATE]\n"
         f"survived_elites={transition.get('survived_elites', 0)} "
@@ -1179,6 +1309,7 @@ def _metric_progress(metrics: dict[str, Any], *, threshold: float = DET_PASS_THR
 def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
     ensure_workspace()
     output_root = _resolve_output_root(args.output_root)
+    _guard_output_root(output_root, args)
     output_root.mkdir(parents=True, exist_ok=True)
     rng = random.Random(args.seed)
     base_genome = validate_genome_blocks(load_genome(args.genome_json))
@@ -1191,6 +1322,7 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
         start_row=args.start_row,
         end_row=args.end_row,
         limit=args.limit,
+        limit_per_category=args.limit_per_category,
         categories=args.category,
     )
     if not selected_rows:
@@ -1207,6 +1339,11 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
         "service_schema": str(Path(args.service_schema).expanduser().resolve()),
         "selected_row_count": len(selected_rows),
         "categories": categories,
+        "stage": getattr(args, "stage_name", ""),
+        "full_run": bool(args.full_run),
+        "resume": bool(args.resume),
+        "force": bool(args.force),
+        "limit_per_category": args.limit_per_category,
         "core_blocks": get_core_blocks(),
         "optional_blocks": get_optional_blocks(),
         "retrieval_policy": "fixed runtime service-context construction; not mutated by GA",
@@ -1214,6 +1351,7 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
         "command": " ".join(sys.argv),
     }
     dump_json(output_root / "ga_run_manifest.json", run_manifest)
+    _write_stage_status(output_root, str(getattr(args, "stage_name", "ga")), "STARTED", {"selected_row_count": len(selected_rows)})
     _print_run_start(args, output_root, model_key, categories)
 
     validation_rows = sample_rows(selected_rows, sample_size=args.validation_size, seed=args.seed + 9000)
@@ -1275,6 +1413,11 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
         atomic_write_csv(output_root / "population_transitions.csv", ["generation", "next_population"], [])
         atomic_write_csv(output_root / "promotion_decisions.csv", PROMOTION_COLUMNS, [])
         dump_json(output_root / "promotion_decisions.json", {"rows": []})
+        dump_json(output_root / "best_genome.json", {"status": "dry_run"})
+        dump_json(output_root / "advisor_response_generation_000.json", {"advisor_status": "skipped", "reason": "dry_run"})
+        (output_root / "advisor_prompt_generation_000.txt").write_text("advisor_status=skipped dry_run\n", encoding="utf-8")
+        _write_stage_status(output_root, str(getattr(args, "stage_name", "dry-run")), "PASS", {"output_root": str(output_root)})
+        _print_stage(args, str(getattr(args, "stage_name", "dry-run")), "PASS")
         return dry_summary
 
     for generation in range(1, args.gens + 1):
@@ -1642,6 +1785,7 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
             feedback_summary=generation_feedback_summary,
             category_diagnostics=generation_category_diagnostics,
             advisor_summary=advisor_summary_rows[-1] if advisor_summary_rows and advisor_summary_rows[-1].get("generation") == generation else None,
+            advisor_proposals=advisor_safe_proposals,
             previous_best=previous_generation_best,
         )
         previous_generation_best = generation_best
@@ -1695,6 +1839,8 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
         "best_validation_avg_det_score": final_best.get("validation_avg_det_score") if final_best else None,
         "fitness_formula": f"AvgDET - {args.alpha} * VarDET",
         "retrieval_policy": "fixed runtime service-context construction; not mutated by GA",
+        "stage": str(getattr(args, "stage_name", "ga")),
+        "advisor_status": "enabled" if args.llm_mutation_advisor else "skipped",
     }
     dump_json(output_root / "ga_summary.json", summary)
     if summary["best_genome"] is not None:
@@ -1711,24 +1857,22 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
                 "full_prompt_printed": False,
             },
         )
+    else:
+        dump_json(output_root / "best_genome.json", {"status": "no_best_genome"})
+        dump_json(output_root / "best_prompt_metadata.json", {"status": "no_best_genome", "full_prompt_printed": False})
+    _write_stage_status(output_root, str(getattr(args, "stage_name", "ga")), "PASS", {"output_root": str(output_root)})
+    _print_stage(args, str(getattr(args, "stage_name", "ga")), "PASS")
     return summary
 
 
 def main() -> int:
     parser = build_parser()
-    args = parser.parse_args()
+    args = _normalize_stage_args(parser.parse_args())
     summary = run_ga_search(args)
-    if args.progress == "quiet":
-        print("GA search completed")
-        print(f"- summary: {summary.get('output_root', '')}/ga_summary.json")
-        print(f"- generation progress: {summary.get('generation_progress_csv', '')}")
-        print(f"- structured feedback: {summary.get('structured_feedback_jsonl', '')}")
-        return 0
-    print("GA search completed")
-    print(f"- best_fitness: {summary.get('best_fitness')}")
-    print(f"- best_validation_avg_det_score: {summary.get('best_validation_avg_det_score')}")
-    best_genome = summary.get("best_genome") or {}
-    print(f"- best_genome_id: {best_genome.get('id', '')}")
+    print("[FINAL]")
+    print("artifacts:")
+    for name, path in _final_artifacts(summary):
+        print(f"- {name}: {path}")
     return 0
 
 

@@ -1001,19 +1001,21 @@ Advisor options:
 ```bash
 python gpt_mg/version0_15_update20260413/scripts/run_ga_search.py \
   --profile version0_15_update20260413 \
-  --model-key qwen25_coder_7b \
-  --limit 2 \
-  --population 2 \
-  --gens 1 \
-  --sample-size 1 \
-  --validation-size 1 \
-  --cheap-eval-limit 1 \
-  --candidate-k 1 \
-  --feedback-guided-mutation \
-  --llm-mutation-advisor \
-  --progress minimal \
-  --llm-mode mock
+  --smoke \
+  --llm-mode mock \
+  --progress minimal
 ```
+
+Staged execution:
+
+- No stage flag + no `--full-run`: safe dry-run only
+- `--dry-run`: no model calls, validates setup and writes empty artifacts
+- `--smoke`: one-row smoke, capped `population<=4`, `gens<=2`, `candidate_k=1`
+- `--small-category-smoke`: categories `1,2`, `limit_per_category<=2`
+- `--small-ga-advisor-smoke`: advisor-enabled smoke, mock advisor fallback if no endpoint is configured
+- `--full-run`: required for uncapped long runs
+- `--resume`: reuse an existing output directory as a resumable run
+- `--force`: allow writing into a non-empty output directory
 
 진짜 local smoke:
 
