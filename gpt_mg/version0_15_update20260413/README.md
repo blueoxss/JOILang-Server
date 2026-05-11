@@ -312,6 +312,95 @@ GA가 바꾸면 안 되는 것:
 - retrieval top-k policy
 - service context construction path
 
+## GA/Search Improvements
+
+이 워크스페이스에서 최근 대화로 반영된 GA와 search space의 핵심 개선은 아래와 같습니다.
+
+### 1. Prompt를 텍스트 조각이 아니라 genotype으로 취급
+
+이전에는 prompt를 길게 붙여넣는 방식에 가까웠지만, 이제는 `blocks=[...]`로 렌더링되는 block-structured artifact genotype으로 다룹니다.
+
+- `01`, `02`는 core blocks라서 항상 포함됩니다.
+- `03`, `05`, `06`은 optional guidance blocks라서 GA가 켜고 끄거나 바꿀 수 있습니다.
+- `blocks=[...]`는 임의 fragment가 아니라 active block ID 집합입니다.
+
+### 2. Search space를 넓히되, 바꾸면 안 되는 경계는 고정
+
+GA가 실제로 탐색하는 축은 다음과 같습니다.
+
+- optional block activation/deactivation/replacement
+- same-family block artifact replacement
+- few-shot count
+- max token / candidate strategy
+- micro-rules
+- repair clauses
+- deterministic feedback에서 유도된 targeted rule
+- LLM mutation advisor가 제안한 prompt-block micro-rule
+
+대신 아래는 고정입니다.
+
+- retrieval pre-mapping
+- retrieval top-k
+- service context construction
+
+즉, search space는 커졌지만 retrieval runtime path는 mutation 대상이 아닙니다.
+
+### 3. version0_13의 prompt surgery 지식을 v15 GA에 재사용
+
+이전 히스토리에서 반복해서 다뤘던 DET failure 유형을 `utils/prompt_surgery_rules.py`에 옮겨서 재사용합니다.
+
+대표적으로:
+
+- `invalid_json` -> JSON-only output 강화
+- `unknown_service` -> canonical service name 강화
+- `enum_grounding` -> enum/type grounding 강화
+- `temporal_error` -> elapsed-time / temporal rule 강화
+- `owner_device_mismatch` -> owner/device binding 강화
+- `dataflow` -> sensor-to-action flow 강화
+- `extraneous` -> no-unrelated-action / minimality 강화
+
+이제 deterministic validation 결과가 단순 로그가 아니라, 다음 세대 mutation 방향을 고르는 구조화된 feedback source가 됩니다.
+
+### 4. LLM mutation advisor를 별도 critic으로 분리
+
+Advisor는 JOILang 코드를 쓰는 모델이 아니라, prompt-block mutation만 제안하는 critic입니다.
+
+- generation 끝에 population diagnostics를 요약합니다.
+- top/bottom genomes, category별 failure histogram, 대표 failure rows를 보고 제안합니다.
+- proposal은 다음 세대 child genome으로 들어가고, 일반 GA 평가를 거쳐야 합니다.
+- advisor는 core block 제거, retrieval 변경, code 생성은 할 수 없습니다.
+
+### 5. 실행이 stage-safe해짐
+
+GA와 paper pipeline은 이제 무작정 full run을 시작하지 않습니다.
+
+- `--dry-run`: 모델 호출 없이 설정만 검증
+- `--smoke`: one-row smoke
+- `--small-category-smoke`: categories 1,2
+- `--small-ga-advisor-smoke`: advisor mock/schema smoke
+- `--full-run`: 긴 실험을 명시적으로 허용
+
+### 6. 결과물과 추적성이 좋아짐
+
+각 run은 다음을 남깁니다.
+
+- `ga_generation_progress.csv/jsonl`
+- `ga_topk_genomes.csv`
+- `ga_block_diffs.jsonl`
+- `ga_population_diagnostics.csv/jsonl`
+- `structured_feedback.jsonl`
+- `advisor_prompt_generation_<gen>.txt`
+- `advisor_response_generation_<gen>.json`
+- `advisor_mutation_proposals.jsonl`
+- `advisor_mutation_summary.csv`
+- `population_transitions.csv`
+- `promotion_decisions.csv`
+- `best_genome.json`
+- `best_prompt_metadata.json`
+- `ga_summary.json`
+
+이렇게 해서 “무엇이 바뀌었고, 왜 바뀌었고, 다음 세대에 어떻게 반영됐는지”를 artifact 기준으로 추적할 수 있게 만들었습니다.
+
 ### Deterministic Feedback To Prompt Surgery
 
 `utils/prompt_surgery_rules.py`는 `version0_13`에서 수동으로 축적했던 DET 기반 prompt repair 지식을 v15 GA가 재사용할 수 있는 작은 registry로 정리합니다.

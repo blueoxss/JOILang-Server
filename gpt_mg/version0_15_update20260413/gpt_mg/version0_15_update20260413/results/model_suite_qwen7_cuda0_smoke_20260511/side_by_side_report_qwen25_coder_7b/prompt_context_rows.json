@@ -1,0 +1,492 @@
+[
+  {
+    "row_no": "1",
+    "service_schema_path": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/service_list_ver2.0.1.json",
+    "service_schema_label": "service_list_ver2.0.1.json",
+    "snippet_source": "service_retrieval_fallback",
+    "mode_label": "retrieval premapping",
+    "retrieval_status": "used",
+    "retrieval_mode": "hybrid",
+    "requested_topk": 10,
+    "effective_topk": 10,
+    "device_count": 10,
+    "all_injected_category_count": 10,
+    "all_injected_categories": [
+      "Dishwasher",
+      "LaundryDryer",
+      "RiceCooker",
+      "Dehumidifier",
+      "AirConditioner",
+      "Oven",
+      "DimmerSwitch",
+      "Switch",
+      "AirPurifier",
+      "ArmRobot"
+    ],
+    "displayed_categories": [
+      "Dishwasher",
+      "LaundryDryer",
+      "RiceCooker",
+      "Dehumidifier",
+      "AirConditioner",
+      "Oven",
+      "DimmerSwitch",
+      "Switch",
+      "AirPurifier",
+      "ArmRobot"
+    ],
+    "retrieval_categories": [
+      "Dishwasher",
+      "LaundryDryer",
+      "RiceCooker",
+      "Dehumidifier",
+      "AirConditioner",
+      "Oven",
+      "DimmerSwitch",
+      "Switch",
+      "AirPurifier",
+      "ArmRobot"
+    ],
+    "connected_categories": [],
+    "relevant_categories": [
+      "Dishwasher"
+    ],
+    "note": "Retrieval premapping was used for this row. Requested top-10 and injected 10 category group(s) into the prompt.",
+    "category_cards": [
+      {
+        "category": "Dishwasher",
+        "role": "retrieved",
+        "rank": 1,
+        "service_count": 2,
+        "value_count": 1,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "Dishwasher_DishwasherMode",
+            "raw_service": "DishwasherMode",
+            "canonical_name": "Dishwasher_DishwasherMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of the dishwasher mode"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Dishwasher_SetDishwasherMode",
+            "raw_service": "SetDishwasherMode",
+            "canonical_name": "Dishwasher_SetDishwasherMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the dishwasher mode"
+          }
+        ]
+      },
+      {
+        "category": "LaundryDryer",
+        "role": "retrieved",
+        "rank": 2,
+        "service_count": 4,
+        "value_count": 2,
+        "function_count": 2,
+        "values": [
+          {
+            "service": "LaundryDryer_LaundryDryerMode",
+            "raw_service": "LaundryDryerMode",
+            "canonical_name": "LaundryDryer_LaundryDryerMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of the laundry dryer mode"
+          },
+          {
+            "service": "LaundryDryer_SpinSpeed",
+            "raw_service": "SpinSpeed",
+            "canonical_name": "LaundryDryer_SpinSpeed",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "INTEGER",
+            "descriptor": "Allows for the control of the laundry dryer mode"
+          }
+        ],
+        "functions": [
+          {
+            "service": "LaundryDryer_SetLaundryDryerMode",
+            "raw_service": "SetLaundryDryerMode",
+            "canonical_name": "LaundryDryer_SetLaundryDryerMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the laundry dryer mode"
+          },
+          {
+            "service": "LaundryDryer_SetSpinSpeed",
+            "raw_service": "SetSpinSpeed",
+            "canonical_name": "LaundryDryer_SetSpinSpeed",
+            "type": "function",
+            "argument_type": "INTEGER",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the laundry dryer mode"
+          }
+        ]
+      },
+      {
+        "category": "RiceCooker",
+        "role": "retrieved",
+        "rank": 3,
+        "service_count": 4,
+        "value_count": 1,
+        "function_count": 3,
+        "values": [
+          {
+            "service": "RiceCooker_RiceCookerMode",
+            "raw_service": "RiceCookerMode",
+            "canonical_name": "RiceCooker_RiceCookerMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of the Rice Cooker"
+          }
+        ],
+        "functions": [
+          {
+            "service": "RiceCooker_AddMoreTime",
+            "raw_service": "AddMoreTime",
+            "canonical_name": "RiceCooker_AddMoreTime",
+            "type": "function",
+            "argument_type": "DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the Rice Cooker"
+          },
+          {
+            "service": "RiceCooker_SetCookingParameters",
+            "raw_service": "SetCookingParameters",
+            "canonical_name": "RiceCooker_SetCookingParameters",
+            "type": "function",
+            "argument_type": "ENUM | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the Rice Cooker"
+          },
+          {
+            "service": "RiceCooker_SetRiceCookerMode",
+            "raw_service": "SetRiceCookerMode",
+            "canonical_name": "RiceCooker_SetRiceCookerMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the Rice Cooker"
+          }
+        ]
+      },
+      {
+        "category": "Dehumidifier",
+        "role": "retrieved",
+        "rank": 4,
+        "service_count": 2,
+        "value_count": 1,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "Dehumidifier_DehumidifierMode",
+            "raw_service": "DehumidifierMode",
+            "canonical_name": "Dehumidifier_DehumidifierMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of the dehumidifier mode"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Dehumidifier_SetDehumidifierMode",
+            "raw_service": "SetDehumidifierMode",
+            "canonical_name": "Dehumidifier_SetDehumidifierMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the dehumidifier mode"
+          }
+        ]
+      },
+      {
+        "category": "AirConditioner",
+        "role": "retrieved",
+        "rank": 5,
+        "service_count": 4,
+        "value_count": 2,
+        "function_count": 2,
+        "values": [
+          {
+            "service": "AirConditioner_AirConditionerMode",
+            "raw_service": "AirConditionerMode",
+            "canonical_name": "AirConditioner_AirConditionerMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Controls air conditioner mode and temperature settings"
+          },
+          {
+            "service": "AirConditioner_TargetTemperature",
+            "raw_service": "TargetTemperature",
+            "canonical_name": "AirConditioner_TargetTemperature",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "DOUBLE",
+            "descriptor": "Controls air conditioner mode and temperature settings"
+          }
+        ],
+        "functions": [
+          {
+            "service": "AirConditioner_SetAirConditionerMode",
+            "raw_service": "SetAirConditionerMode",
+            "canonical_name": "AirConditioner_SetAirConditionerMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Controls air conditioner mode and temperature settings"
+          },
+          {
+            "service": "AirConditioner_SetTargetTemperature",
+            "raw_service": "SetTargetTemperature",
+            "canonical_name": "AirConditioner_SetTargetTemperature",
+            "type": "function",
+            "argument_type": "DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "Controls air conditioner mode and temperature settings"
+          }
+        ]
+      },
+      {
+        "category": "Oven",
+        "role": "retrieved",
+        "rank": 6,
+        "service_count": 4,
+        "value_count": 1,
+        "function_count": 3,
+        "values": [
+          {
+            "service": "Oven_OvenMode",
+            "raw_service": "OvenMode",
+            "canonical_name": "Oven_OvenMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of the oven mode"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Oven_AddMoreTime",
+            "raw_service": "AddMoreTime",
+            "canonical_name": "Oven_AddMoreTime",
+            "type": "function",
+            "argument_type": "DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the oven mode"
+          },
+          {
+            "service": "Oven_SetCookingParameters",
+            "raw_service": "SetCookingParameters",
+            "canonical_name": "Oven_SetCookingParameters",
+            "type": "function",
+            "argument_type": "ENUM | DOUBLE",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the oven mode"
+          },
+          {
+            "service": "Oven_SetOvenMode",
+            "raw_service": "SetOvenMode",
+            "canonical_name": "Oven_SetOvenMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the oven mode"
+          }
+        ]
+      },
+      {
+        "category": "DimmerSwitch",
+        "role": "retrieved",
+        "rank": 7,
+        "service_count": 4,
+        "value_count": 4,
+        "function_count": 0,
+        "values": [
+          {
+            "service": "DimmerSwitch_Button1",
+            "raw_service": "Button1",
+            "canonical_name": "DimmerSwitch_Button1",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "A dimmer switch device with multiple buttons (typically 4 buttons)"
+          },
+          {
+            "service": "DimmerSwitch_Button2",
+            "raw_service": "Button2",
+            "canonical_name": "DimmerSwitch_Button2",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "A dimmer switch device with multiple buttons (typically 4 buttons)"
+          },
+          {
+            "service": "DimmerSwitch_Button3",
+            "raw_service": "Button3",
+            "canonical_name": "DimmerSwitch_Button3",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "A dimmer switch device with multiple buttons (typically 4 buttons)"
+          },
+          {
+            "service": "DimmerSwitch_Button4",
+            "raw_service": "Button4",
+            "canonical_name": "DimmerSwitch_Button4",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "A dimmer switch device with multiple buttons (typically 4 buttons)"
+          }
+        ],
+        "functions": []
+      },
+      {
+        "category": "Switch",
+        "role": "retrieved",
+        "rank": 8,
+        "service_count": 4,
+        "value_count": 1,
+        "function_count": 3,
+        "values": [
+          {
+            "service": "Switch_Switch",
+            "raw_service": "Switch",
+            "canonical_name": "Switch_Switch",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "Allows for the control of a Switch device"
+          }
+        ],
+        "functions": [
+          {
+            "service": "Switch_Off",
+            "raw_service": "Off",
+            "canonical_name": "Switch_Off",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of a Switch device"
+          },
+          {
+            "service": "Switch_On",
+            "raw_service": "On",
+            "canonical_name": "Switch_On",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of a Switch device"
+          },
+          {
+            "service": "Switch_Toggle",
+            "raw_service": "Toggle",
+            "canonical_name": "Switch_Toggle",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "BOOL",
+            "descriptor": "Allows for the control of a Switch device"
+          }
+        ]
+      },
+      {
+        "category": "AirPurifier",
+        "role": "retrieved",
+        "rank": 9,
+        "service_count": 2,
+        "value_count": 1,
+        "function_count": 1,
+        "values": [
+          {
+            "service": "AirPurifier_AirPurifierMode",
+            "raw_service": "AirPurifierMode",
+            "canonical_name": "AirPurifier_AirPurifierMode",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Controls air purifier mode"
+          }
+        ],
+        "functions": [
+          {
+            "service": "AirPurifier_SetAirPurifierMode",
+            "raw_service": "SetAirPurifierMode",
+            "canonical_name": "AirPurifier_SetAirPurifierMode",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Controls air purifier mode"
+          }
+        ]
+      },
+      {
+        "category": "ArmRobot",
+        "role": "retrieved",
+        "rank": 10,
+        "service_count": 5,
+        "value_count": 2,
+        "function_count": 3,
+        "values": [
+          {
+            "service": "ArmRobot_ArmRobotType",
+            "raw_service": "ArmRobotType",
+            "canonical_name": "ArmRobot_ArmRobotType",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "ENUM",
+            "descriptor": "Allows for the control of the arm robot"
+          },
+          {
+            "service": "ArmRobot_CurrentPosition",
+            "raw_service": "CurrentPosition",
+            "canonical_name": "ArmRobot_CurrentPosition",
+            "type": "value",
+            "argument_type": "-",
+            "return_type": "STRING",
+            "descriptor": "Allows for the control of the arm robot"
+          }
+        ],
+        "functions": [
+          {
+            "service": "ArmRobot_Hello",
+            "raw_service": "Hello",
+            "canonical_name": "ArmRobot_Hello",
+            "type": "function",
+            "argument_type": "-",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the arm robot"
+          },
+          {
+            "service": "ArmRobot_SendCommand",
+            "raw_service": "SendCommand",
+            "canonical_name": "ArmRobot_SendCommand",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the arm robot"
+          },
+          {
+            "service": "ArmRobot_SetPosition",
+            "raw_service": "SetPosition",
+            "canonical_name": "ArmRobot_SetPosition",
+            "type": "function",
+            "argument_type": "ENUM",
+            "return_type": "VOID",
+            "descriptor": "Allows for the control of the arm robot"
+          }
+        ]
+      }
+    ]
+  }
+]
