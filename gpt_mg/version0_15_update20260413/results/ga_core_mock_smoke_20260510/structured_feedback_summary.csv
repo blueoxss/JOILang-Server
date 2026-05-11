@@ -1,0 +1,8 @@
+failure_type,affected_block_family,suggested_mutation_type,prompt_block_id,failure_count,original_failure_reasons,generation,model_key
+enum_type_mismatch,Enum_Grounding,strengthen_enum_type_rule,02,4,arg_type|enum_grounding,1,qwen25_coder_7b
+schema_violation,Service_Mapping,add_schema_grounding_rule,02,4,gt_service_coverage|service_match,1,qwen25_coder_7b
+schema_violation,Output_Schema,strengthen_minimality_rule,03,2,extraneous,1,qwen25_coder_7b
+semantic_error,DET_Helper,add_targeted_repair_hint,06,2,gt_mismatch,1,qwen25_coder_7b
+owner_device_mismatch,Owner_Device_Rule,strengthen_owner_device_rule,02,2,gt_receiver_coverage,1,qwen25_coder_7b
+precondition,DET_Helper,add_targeted_repair_hint,06,2,precondition,1,qwen25_coder_7b
+semantic_error,Skeleton,strengthen_skeleton_rule,06,2,semantic,1,qwen25_coder_7b

@@ -30,6 +30,59 @@
 | `admin_logs/slack/` | Slack DM JSONL 로그 저장 위치 |
 | `results/` | query/DET 실행 결과 저장 위치 |
 
+## Final Paper Experiment Pipeline
+
+`gpt_mg/version0_15_update20260413`에는 논문 “Genetic Prompt Search for JOILang Code Generation under Deterministic Validation and Operational Feedback”용 재현 실험 파이프라인이 들어 있습니다.
+
+핵심 entrypoint:
+
+```bash
+python gpt_mg/version0_15_update20260413/scripts/run_paper_full_study.py \
+  --dry-run \
+  --smoke \
+  --include-cloud-ref \
+  --models qwen25_coder_7b \
+  --categories 1 \
+  --limit-per-category 1 \
+  --quiet-final-summary
+```
+
+Full run에서는 `--dry-run --smoke`를 빼고 `--full-run --paper-fair-mode --resume`을 사용합니다.
+
+실험 변형:
+
+- `B0`: local hand-crafted baseline. 없으면 `N/A`.
+- `B1`: GPT-4.1-mini cloud reference.
+- `B2`: direct cloud-to-local transfer.
+- `B3`: fixed block prompt without GA.
+- `B4`: random search over the block space.
+- `B5`: GA + benchmark only.
+- `B6`: full GPS / PromptOps.
+
+중요한 경계:
+
+- retrieval pre-mapping은 fixed runtime context construction입니다.
+- GA는 retrieval mechanism을 mutation하지 않습니다.
+- Replay cases는 leaderboard metric이 아니라 feedback/acceptance gate입니다.
+- Candidate prompt는 생성/평가될 수 있지만, replay/regression gate를 실패하면 promotion되지 않습니다.
+
+GA core 경계:
+
+- Core blocks는 항상 포함되고, optional guidance blocks만 activation/deactivation/replacement 됩니다.
+- `blocks=[...]`는 active prompt-block IDs이며 cloud prompt를 임의 fragment로 자른다는 뜻이 아닙니다.
+- `version0_13`의 prompt repair 지식은 `utils/prompt_surgery_rules.py`에서 DET failure reason -> block family -> mutation type -> micro-rule mapping으로 재사용됩니다.
+- `--llm-mutation-advisor`는 population diagnostics를 보고 prompt-block mutation만 제안합니다.
+- Advisor는 JOILang code를 생성하지 않고, retrieval pre-mapping/top-k/service context를 변경하지 않습니다.
+
+최종 산출물 위치:
+
+- `gpt_mg/version0_15_update20260413/results/paper_study_<timestamp>/availability_summary.csv`
+- `gpt_mg/version0_15_update20260413/results/paper_study_<timestamp>/paper/figures/figure1_prompt_search_dynamics_across_model_scales.png`
+- `gpt_mg/version0_15_update20260413/results/paper_study_<timestamp>/paper/figures/figure2_deployment_aware_pareto_frontier_final.png`
+- `gpt_mg/version0_15_update20260413/results/paper_study_<timestamp>/paper/tables/table3_main_results.csv`
+- `gpt_mg/version0_15_update20260413/results/paper_study_<timestamp>/paper/tables/table4_ablation_qwen14.csv`
+- `gpt_mg/version0_15_update20260413/results/paper_study_<timestamp>/paper/final_artifacts_manifest.json`
+
 ## 2. 설치
 
 가장 무난한 시작은 루트에서 가상환경을 만든 뒤 의존성을 설치하는 방식입니다.

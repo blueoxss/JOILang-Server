@@ -1,0 +1,2 @@
+Model,Variant,DETPass (%),Mean SDET,Avg Input Tokens,Latency (s)
+B0 local baseline,N/A,N/A,N/A,N/A,N/A

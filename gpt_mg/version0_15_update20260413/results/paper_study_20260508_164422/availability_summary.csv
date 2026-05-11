@@ -1,0 +1,2 @@
+model_key,model_name,status,reason,cache_path,gated_access_required,oom_observed,runtime_notes,tested_command,timestamp
+qwen25_coder_7b,Qwen2.5-Coder-7B-Instruct,skipped,dry-run only,,False,false,"{""status"": ""skipped"", ""message"": ""dry-run only"", ""cache_path"": """", ""model_label"": ""Qwen2.5-Coder-7B-Instruct""}",preflight via run_paper_full_study.py,2026-05-08T16:44:22

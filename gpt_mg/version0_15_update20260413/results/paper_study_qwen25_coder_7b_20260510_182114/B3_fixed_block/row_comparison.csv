@@ -1,0 +1,440 @@
+row_no,category,row_category,command_eng,command_kor,gt,gt_name,gt_cron,gt_period,gt_code,warmup_excluded,qwen25_coder_7b__det_score,qwen25_coder_7b__det_pass,qwen25_coder_7b__det_profile,qwen25_coder_7b__det_gt_exact,qwen25_coder_7b__det_gt_similarity,qwen25_coder_7b__det_gt_service_coverage,qwen25_coder_7b__det_gt_service_precision,qwen25_coder_7b__det_gt_receiver_coverage,qwen25_coder_7b__det_dataflow_score,qwen25_coder_7b__det_numeric_grounding,qwen25_coder_7b__det_enum_grounding,qwen25_coder_7b__failure_reasons,qwen25_coder_7b__output,qwen25_coder_7b__output_name,qwen25_coder_7b__output_cron,qwen25_coder_7b__output_period,qwen25_coder_7b__output_code,qwen25_coder_7b__prompt_chars,qwen25_coder_7b__prompt_tokens,qwen25_coder_7b__completion_tokens,qwen25_coder_7b__total_tokens,qwen25_coder_7b__llm_latency_sec,qwen25_coder_7b__total_pipeline_sec,qwen25_coder_7b__tokens_per_sec,qwen25_coder_7b__peak_vram_gb,qwen25_coder_7b__generation_error_type,qwen25_coder_7b__oom_flag,qwen25_coder_7b__worker_python,qwen25_coder_7b__resolved_model_path,qwen25_coder_7b__service_list_snippet_source,qwen25_coder_7b__service_list_device_count,qwen25_coder_7b__service_list_retrieval_status,qwen25_coder_7b__service_list_retrieval_mode,qwen25_coder_7b__service_list_retrieval_topk,qwen25_coder_7b__service_list_retrieval_categories,qwen25_coder_7b__prompt_render_mode,qwen25_coder_7b__prompt_assets_dir,qwen25_coder_7b__warmup_excluded,qwen25_coder_7b__row_category
+1,1,1,Switch the dishwasher to dry mode.,식기세척기를 건조 모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Dishwasher).dishwasher_setdishwashermode(\""dry\"")""}",,,0,"(#Dishwasher).dishwasher_setdishwashermode(""dry"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetDishwasherToDryMode"",""cron"":"""",""period"":0,""code"":""(#Dishwasher).dishwasher_setdishwashermode(\""dry\"")""}",SetDishwasherToDryMode,,0,"(#Dishwasher).dishwasher_setdishwashermode(""dry"")",78486,19082,53,19135,4.8357,8.0273,3957.0279,17.755,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""Dishwasher"", ""LaundryDryer"", ""RiceCooker"", ""Dehumidifier"", ""AirConditioner"", ""Oven"", ""DimmerSwitch"", ""Switch"", ""AirPurifier"", ""ArmRobot""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+2,1,1,Add 5 minutes to the oven.,오븐의 작동 시간을 5분 늘려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Oven).oven_addmoretime(300)""}",,,0,(#Oven).oven_addmoretime(300),False,69.9,False,strict,False,0.967857,1.0,1.0,1.0,1.0,0.0,1.0,"[""gt_mismatch"", ""numeric_grounding""]","{""name"":""Add5MinutesToOven"",""cron"":"""",""period"":0,""code"":""(#Oven).oven_addmoretime(5)""}",Add5MinutesToOven,,0,(#Oven).oven_addmoretime(5),76006,18569,47,18616,4.5787,7.7373,4065.7829,17.6577,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""Oven"", ""RiceCooker"", ""ArmRobot"", ""MenuProvider"", ""Button"", ""Dishwasher"", ""Door"", ""Television"", ""SmokeDetector"", ""LaundryDryer""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+3,1,1,Start the rice cooker on cooking mode for 30 minutes.,밥솥을 조리 모드로 30분 작동시켜.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#RiceCooker).ricecooker_setcookingparameters(\""cooking\"", 1800)""}",,,0,"(#RiceCooker).ricecooker_setcookingparameters(""cooking"", 1800)",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""StartRiceCooker"",""cron"":"""",""period"":0,""code"":""(#RiceCooker).ricecooker_setcookingparameters(\""cooking\"", 1800)""}",StartRiceCooker,,0,"(#RiceCooker).ricecooker_setcookingparameters(""cooking"", 1800)",77893,18879,58,18937,4.9551,8.159,3821.719,17.7179,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""RiceCooker"", ""Oven"", ""ArmRobot"", ""Dishwasher"", ""RobotVacuumCleaner"", ""MenuProvider"", ""Charger"", ""CarbonDioxideSensor"", ""AirConditioner"", ""FaceRecognizer""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+4,1,1,Set the siren to emergency mode.,사이렌을 응급모드로 울려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Siren).siren_setsirenmode(\""emergency\"")""}",,,0,"(#Siren).siren_setsirenmode(""emergency"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetSirenToEmergencyMode"",""cron"":"""",""period"":0,""code"":""(#Siren).siren_setsirenmode(\""emergency\"")""}",SetSirenToEmergencyMode,,0,"(#Siren).siren_setsirenmode(""emergency"")",79203,19044,49,19093,4.6941,7.8436,4067.4464,17.7459,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""Siren"", ""ArmRobot"", ""SoundSensor"", ""Oven"", ""Speaker"", ""AudioRecorder"", ""RiceCooker"", ""Pump"", ""Button"", ""Charger""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+5,1,1,Set the speaker volume to 30.,스피커의 볼륨을 30으로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#Speaker).speaker_setvolume(30)""}",,,0,(#Speaker).speaker_setvolume(30),False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetSpeakerVolume"",""cron"":"""",""period"":0,""code"":""(#Speaker).speaker_setvolume(30)""}",SetSpeakerVolume,,0,(#Speaker).speaker_setvolume(30),76383,18397,43,18440,4.3995,7.6127,4191.3854,17.6269,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""SoundSensor"", ""Siren"", ""AudioRecorder"", ""ArmRobot"", ""Television"", ""PressureSensor"", ""Pump"", ""ColorControl"", ""LevelControl""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,1
+31,2,2,Set the living room light to yellow.,거실 조명을 노란색으로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#LivingRoom #Light).colorcontrol_setcolor(\""255,255,0\"")""}",,,0,"(#LivingRoom #Light).colorcontrol_setcolor(""255,255,0"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetLivingRoomLightToYellow"",""cron"":"""",""period"":0,""code"":""(#LivingRoom #Light).light_movetorgb(255, 255, 0)""}",SetLivingRoomLightToYellow,,0,"(#LivingRoom #Light).light_movetorgb(255, 255, 0)",67573,15690,60,15750,4.3174,6.7023,3648.0289,17.1228,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,2
+32,2,2,Capture an image of the meeting room with the camera.,카메라로 회의실 사진을 촬영해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#MeetingRoom #Camera).camera_captureimage()""}",,,0,(#MeetingRoom #Camera).camera_captureimage(),False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""CaptureMeetingRoomPhoto"",""cron"":"""",""period"":0,""code"":""(#MeetingRoom #Camera).camera_captureimage()""}",CaptureMeetingRoomPhoto,,0,(#MeetingRoom #Camera).camera_captureimage(),54228,13001,44,13045,3.3068,5.6807,3944.9014,16.6207,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,2
+33,2,2,Set the brightness of the living room light to 80%.,거실 조명의 밝기를 80%로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#LivingRoom #Light).light_movetobrightness(80, 0)""}",,,0,"(#LivingRoom #Light).light_movetobrightness(80, 0)",False,93.2031,True,strict,False,0.990625,1.0,1.0,1.0,1.0,0.75,1.0,"[""arg_type"", ""gt_mismatch"", ""numeric_grounding""]","{""name"":""SetLivingRoomLightBrightness"",""cron"":"""",""period"":0,""code"":""(#LivingRoom #Light).light_movetobrightness(80)""}",SetLivingRoomLightBrightness,,0,(#LivingRoom #Light).light_movetobrightness(80),63969,14950,50,15000,3.885,6.0266,3861.0039,16.9825,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,2
+34,2,2,Set all dehumidifiers in the lab to AI drying mode.,연구실 제습기를 모두 AI건조모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""all(#Lab #Dehumidifier).dehumidifier_setdehumidifiermode(\""AIDrying\"")""}",,,0,"all(#Lab #Dehumidifier).dehumidifier_setdehumidifiermode(""AIDrying"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetAllLabDehumidifiersToAI"",""cron"":"""",""period"":0,""code"":""all(#Lab #Dehumidifier).dehumidifier_setdehumidifiermode(\""AIDrying\"")""}",SetAllLabDehumidifiersToAI,,0,"all(#Lab #Dehumidifier).dehumidifier_setdehumidifiermode(""AIDrying"")",52585,12964,64,13028,3.8474,6.2213,3386.1829,16.6143,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,connected_devices_only,3,skipped_connected_devices_present,hybrid,10,[],blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,2
+35,2,2,Set the hue of the living room light to 240 and the saturation to 80.,"거실 조명의 색조는 240, 채도는 80으로 맞춰줘.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""(#LivingRoom #Light).light_movetohueandsaturation(240, 80)""}",,,0,"(#LivingRoom #Light).light_movetohueandsaturation(240, 80)",False,58.5016,False,strict,False,0.66699,0.0,0.0,0.0,1.0,0.833333,1.0,"[""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding""]","{""name"":""SetLivingRoomLightColor"",""cron"":"""",""period"":0,""code"":""(#LivingRoom #Light).light_movetorgb(240, 80, 0)""}",SetLivingRoomLightColor,,0,"(#LivingRoom #Light).light_movetorgb(240, 80, 0)",63995,14959,58,15017,4.0774,6.436,3682.9843,16.9842,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,connected_devices_only,2,skipped_connected_devices_present,hybrid,10,[],blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,2
+61,3,3,"If the audio recorder is recording, stop recording and save as test.mp3; otherwise, start recording.",녹음기가 녹음중이면 녹음을 중지하고 test.mp3로 저장해줘. 녹음중이 아니면 녹음을 시작해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nif ((#AudioRecorder).recorderstatus == \""recording\"") {\n\n    (#AudioRecorder).audiorecorder_recordstop(\""test.mp3\"")\n\n} else {\n\n    (#AudioRecorder).audiorecorder_recordstart()\n\n}""}",,,0,"
+if ((#AudioRecorder).recorderstatus == ""recording"") {
+
+    (#AudioRecorder).audiorecorder_recordstop(""test.mp3"")
+
+} else {
+
+    (#AudioRecorder).audiorecorder_recordstart()
+
+}",False,97.6651,True,strict,False,0.983019,1.0,0.666667,1.0,1.0,1.0,1.0,"[""gt_mismatch""]","{""name"":""ToggleRecording"",""cron"":"""",""period"":0,""code"":""if ((#AudioRecorder).audiorecorder_recordstatus == \""recording\"") {\n    (#AudioRecorder).audiorecorder_recordstop(\""test.mp3\"")\n} else {\n    (#AudioRecorder).audiorecorder_recordstart()\n}""}",ToggleRecording,,0,"if ((#AudioRecorder).audiorecorder_recordstatus == ""recording"") {
+    (#AudioRecorder).audiorecorder_recordstop(""test.mp3"")
+} else {
+    (#AudioRecorder).audiorecorder_recordstart()
+}",81489,19346,87,19433,5.9673,9.1859,3256.5817,17.8061,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""AudioRecorder"", ""SoundSensor"", ""Camera"", ""ArmRobot"", ""Speaker"", ""Siren"", ""AirQualitySensor"", ""Plug"", ""PressureSensor"", ""Charger""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,3
+62,3,3,Stop charging if the voltage is 220V or higher.,"충전 전압이 220볼트 이상이면, 충전을 멈춰줘.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nif ((#Charger).charger_voltage >= 220000) {\n\n    (#Charger).switch_off()\n\n}""}",,,0,"
+if ((#Charger).charger_voltage >= 220000) {
+
+    (#Charger).switch_off()
+
+}",False,94.8514,True,strict,False,0.930282,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""StopChargingIfVoltageIs220VOrHigher"",""cron"":"""",""period"":0,""code"":""voltage = (#Charger).charger_voltage\nif (voltage >= 220000) {\n    (#Charger).switch_off()\n}""}",StopChargingIfVoltageIs220VOrHigher,,0,"voltage = (#Charger).charger_voltage
+if (voltage >= 220000) {
+    (#Charger).switch_off()
+}",76141,18374,77,18451,5.403,8.6413,3414.9547,17.6241,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""Charger"", ""Plug"", ""ArmRobot"", ""CarbonDioxideSensor"", ""PresenceVitalSensor"", ""ColorControl"", ""Pump"", ""LevelControl"", ""AudioRecorder"", ""PressureSensor""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,3
+63,3,3,"If the cloud service is activated, upload test.png file to the cloud.","클라우드 서비스가 활성화되어있으면, test.png 파일을 클라우드에 업로드해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nif ((#CloudServiceProvider).cloudserviceprovider_isavailable == true) {\n\n    (#CloudServiceProvider).cloudserviceprovider_uploadfile(\""test.png\"")\n\n}""}",,,0,"
+if ((#CloudServiceProvider).cloudserviceprovider_isavailable == true) {
+
+    (#CloudServiceProvider).cloudserviceprovider_uploadfile(""test.png"")
+
+}",False,69.9,False,strict,False,0.723515,0.5,1.0,0.5,1.0,1.0,1.0,"[""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]","{""name"":""UploadTestPNGToCloud"",""cron"":"""",""period"":0,""code"":""(#CloudServiceProvider).cloudserviceprovider_uploadfile(\""test.png\"")""}",UploadTestPNGToCloud,,0,"(#CloudServiceProvider).cloudserviceprovider_uploadfile(""test.png"")",84921,20032,49,20081,4.968,8.2071,4042.0692,17.9321,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""RainSensor"", ""CloudServiceProvider"", ""MenuProvider"", ""LevelControl"", ""EmailProvider"", ""WeatherProvider"", ""Charger"", ""ColorControl"", ""Button"", ""AirQualitySensor""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,3
+64,3,3,"If the oven is in grill mode, add 4 more minutes.","오븐이 그릴 모드이면, 시간을 4분 더 추가해줘","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nif ((#Oven).oven_ovenmode == \""grill\"") {\n\n    (#Oven).oven_addmoretime(240)\n\n}""}",,,0,"
+if ((#Oven).oven_ovenmode == ""grill"") {
+
+    (#Oven).oven_addmoretime(240)
+
+}",False,61.5828,False,strict,False,0.589885,0.5,0.5,0.5,0.2,0.0,1.0,"[""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic""]","{""name"":""Add4MinutesToOvenGrillMode"",""cron"":"""",""period"":0,""code"":""(#Oven).oven_setcookingparameters(\""grill\"", (#Oven).oven_ovenmode + 4)""}",Add4MinutesToOvenGrillMode,,0,"(#Oven).oven_setcookingparameters(""grill"", (#Oven).oven_ovenmode + 4)",79948,19319,64,19383,5.2395,8.4057,3699.3988,17.7972,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""Oven"", ""RiceCooker"", ""MenuProvider"", ""ArmRobot"", ""Dishwasher"", ""Siren"", ""Clock"", ""SmokeDetector"", ""AirConditioner"", ""Button""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,3
+65,3,3,"If the rice cooker is on keep-warm mode, switch it to cooking mode.","밥솥이 보온 모드이면, 조리 모드로 변경해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nif ((#RiceCooker).ricecooker_ricecookermode == \""keepWarm\"") {\n\n    (#RiceCooker).ricecooker_setricecookermode(\""cooking\"")\n\n}""}",,,0,"
+if ((#RiceCooker).ricecooker_ricecookermode == ""keepWarm"") {
+
+    (#RiceCooker).ricecooker_setricecookermode(""cooking"")
+
+}",False,43.9339,False,strict,False,0.541071,0.0,0.0,0.0,0.0,1.0,0.0,"[""dataflow"", ""enum_grounding"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]","{""name"":""SwitchRiceCookerFromKeepWarmToCooking"",""cron"":"""",""period"":0,""code"":""(#RiceCooker).ricecooker_setcookingparameters(\""cooking\"", 0)""}",SwitchRiceCookerFromKeepWarmToCooking,,0,"(#RiceCooker).ricecooker_setcookingparameters(""cooking"", 0)",74828,18236,61,18297,4.8955,8.0852,3737.514,17.5972,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""RiceCooker"", ""Oven"", ""ArmRobot"", ""AirConditioner"", ""Dishwasher"", ""RobotVacuumCleaner"", ""Switch"", ""TemperatureSensor"", ""Pump"", ""CarbonDioxideSensor""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,3
+91,4,4,"When the contact sensor is detected, turn on the light.",접촉 센서가 감지되면 조명을 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#ContactSensor).contactsensor_contact == true)\n\n(#Light).switch_on()""}",,,0,"
+wait until ((#ContactSensor).contactsensor_contact == true)
+
+(#Light).switch_on()",False,58.05,False,strict,False,0.65,0.5,1.0,0.5,0.0,1.0,1.0,"[""arg_type"", ""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""semantic"", ""service_match"", ""unknown_service:light_on""]","{""name"":""TurnOnLightWhenContactSensorDetected"",""cron"":"""",""period"":0,""code"":""(#ContactSensor).contactsensor_contact == true ? (#Light).light_on() : ()""}",TurnOnLightWhenContactSensorDetected,,0,(#ContactSensor).contactsensor_contact == true ? (#Light).light_on() : (),76106,18287,57,18344,4.8195,8.163,3806.204,17.6077,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""ContactSensor"", ""LightSensor"", ""PresenceVitalSensor"", ""Light"", ""MotionSensor"", ""CarbonDioxideSensor"", ""TemperatureSensor"", ""Button"", ""ColorControl""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+92,4,4,"When the presence sensor detects someone, turn on the TV.",재실 센서가 감지되면 TV를 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#PresenceSensor).presencesensor_presence == true)\n\n(#Television).switch_on()""}",,,0,"
+wait until ((#PresenceSensor).presencesensor_presence == true)
+
+(#Television).switch_on()",False,57.6947,False,strict,False,0.636078,0.5,1.0,0.5,0.0,1.0,1.0,"[""arg_type"", ""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""semantic"", ""service_match"", ""unknown_service:television_on""]","{""name"":""TurnOnTVWhenPresenceDetected"",""cron"":"""",""period"":0,""code"":""(#PresenceSensor).presencesensor_presence == true ? (#Television).television_on() : null""}",TurnOnTVWhenPresenceDetected,,0,(#PresenceSensor).presencesensor_presence == true ? (#Television).television_on() : null,71216,17324,59,17383,4.669,8.0466,3723.067,17.4253,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Television"", ""PresenceVitalSensor"", ""TemperatureSensor"", ""CarbonDioxideSensor"", ""Switch"", ""ContactSensor"", ""MotionSensor"", ""ArmRobot"", ""PressureSensor""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+93,4,4,"When the sound sensor value exceeds 50, stop speaker playback.",소리 센서의 수치가 50보다 커지면 스피커 재생을 멈춰줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#SoundSensor).soundsensor_sound > 50)\n\n(#Speaker).speaker_stop()""}",,,0,"
+wait until ((#SoundSensor).soundsensor_sound > 50)
+
+(#Speaker).speaker_stop()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""StopSpeakerPlaybackWhenSoundSensorExceeds50"",""cron"":"""",""period"":0,""code"":""wait until ((#SoundSensor).soundsensor_sound > 50)\n(#Speaker).speaker_stop()""}",StopSpeakerPlaybackWhenSoundSensorExceeds50,,0,"wait until ((#SoundSensor).soundsensor_sound > 50)
+(#Speaker).speaker_stop()",76064,18299,63,18362,4.9881,8.401,3681.1612,17.6128,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""Speaker"", ""SoundSensor"", ""AudioRecorder"", ""Siren"", ""PresenceSensor"", ""PressureSensor"", ""ContactSensor"", ""PresenceVitalSensor"", ""ArmRobot"", ""LeakSensor""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+94,4,4,"When it rains, turn on the dehumidifier.",비가 오면 제습기를 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#RainSensor).rainsensor_rain == true)\n\n(#Dehumidifier).switch_on()""}",,,0,"
+wait until ((#RainSensor).rainsensor_rain == true)
+
+(#Dehumidifier).switch_on()",False,69.9,False,strict,False,0.754032,0.5,0.5,0.5,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]","{""name"":""TurnOnDehumidifierOnRain"",""cron"":"""",""period"":0,""code"":""wait until ((#RainSensor).rainsensor_rain == true)\n(#Dehumidifier).dehumidifier_setdehumidifiermode(\""dehumidifying\"")""}",TurnOnDehumidifierOnRain,,0,"wait until ((#RainSensor).rainsensor_rain == true)
+(#Dehumidifier).dehumidifier_setdehumidifiermode(""dehumidifying"")",75535,18328,77,18405,5.3845,8.7913,3418.1447,17.6145,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""RainSensor"", ""Dehumidifier"", ""Humidifier"", ""WeatherProvider"", ""ArmRobot"", ""Dishwasher"", ""AirConditioner"", ""Pump"", ""LaundryDryer""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+95,4,4,"When the brightness falls below 100 lux, turn on the light.",밝기가 100 럭스 미만이 되면 조명을 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#LightSensor).lightsensor_brightness < 100)\n\n(#Light).switch_on()""}",,,0,"
+wait until ((#LightSensor).lightsensor_brightness < 100)
+
+(#Light).switch_on()",False,60.4048,False,strict,False,0.516667,0.5,1.0,0.5,0.0,0.75,1.0,"[""arg_type"", ""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""service_match"", ""unknown_service:light_on""]","{""name"":""TurnOnLightWhenBrightnessFallsBelow100Lux"",""cron"":"""",""period"":0,""code"":""prev := (#LightSensor).lightsensor_brightness\ncurr = (#LightSensor).lightsensor_brightness\nif (prev >= 100 and curr < 100) {\n    (#Light).light_on()\n}\nprev = curr""}",TurnOnLightWhenBrightnessFallsBelow100Lux,,0,"prev := (#LightSensor).lightsensor_brightness
+curr = (#LightSensor).lightsensor_brightness
+if (prev >= 100 and curr < 100) {
+    (#Light).light_on()
+}
+prev = curr",79609,19024,95,19119,6.0512,9.4105,3159.5386,17.7446,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""LightSensor"", ""Light"", ""ColorControl"", ""DimmerSwitch"", ""ArmRobot"", ""Switch"", ""Plug"", ""Charger"", ""SmokeDetector"", ""Television""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,4
+121,5,5,Switch the TV to channel 7 and switch to channel 11 after 1 hour.,TV 채널을 7번으로 바꾸고 1시간 뒤에 11번으로 바꿔줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Television).television_setchannel(7)\n\ndelay(1 HOUR)\n\n(#Television).television_setchannel(11)""}",,,0,"
+(#Television).television_setchannel(7)
+
+delay(1 HOUR)
+
+(#Television).television_setchannel(11)",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SwitchTVChannels"",""cron"":"""",""period"":0,""code"":""(#Television).television_setchannel(7)\ndelay(1 HOUR)\n(#Television).television_setchannel(11)""}",SwitchTVChannels,,0,"(#Television).television_setchannel(7)
+delay(1 HOUR)
+(#Television).television_setchannel(11)",87675,20756,63,20819,5.6121,9.1777,3709.663,18.0663,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""Television"", ""Switch"", ""TapDialSwitch"", ""LevelControl"", ""Clock"", ""ArmRobot"", ""DimmerSwitch"", ""Oven"", ""Speaker"", ""Dishwasher""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+122,5,5,Set the air conditioner to cool mode and switch to auto mode after 30 minutes.,에어컨을 냉방 모드로 설정하고 30분 뒤에 자동 모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n\ndelay(30 MIN)\n\n(#AirConditioner).airconditioner_setairconditionermode(\""auto\"")""}",,,0,"
+(#AirConditioner).airconditioner_setairconditionermode(""cool"")
+
+delay(30 MIN)
+
+(#AirConditioner).airconditioner_setairconditionermode(""auto"")",False,69.9,False,strict,False,0.983696,1.0,1.0,1.0,1.0,0.0,0.5,"[""enum_grounding"", ""gt_mismatch"", ""numeric_grounding"", ""semantic""]","{""name"":""SetAirConditionerCoolAndAuto"",""cron"":"""",""period"":0,""code"":""(#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\ndelay(1800 SEC)\n(#AirConditioner).airconditioner_setairconditionermode(\""auto\"")""}",SetAirConditionerCoolAndAuto,,0,"(#AirConditioner).airconditioner_setairconditionermode(""cool"")
+delay(1800 SEC)
+(#AirConditioner).airconditioner_setairconditionermode(""auto"")",78652,19058,81,19139,5.6867,9.0811,3365.5723,17.7485,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""AirConditioner"", ""AirPurifier"", ""ArmRobot"", ""AirQualitySensor"", ""Dishwasher"", ""Oven"", ""LaundryDryer"", ""Dehumidifier"", ""TemperatureSensor"", ""RobotVacuumCleaner""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+123,5,5,Set the air purifier to auto mode and switch to sleep mode after 2 hours.,공기청정기를 자동 모드로 설정하고 2시간 뒤에 수면 모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#AirPurifier).airpurifier_setairpurifiermode(\""auto\"")\n\ndelay(2 HOUR)\n\n(#AirPurifier).airpurifier_setairpurifiermode(\""sleep\"")""}",,,0,"
+(#AirPurifier).airpurifier_setairpurifiermode(""auto"")
+
+delay(2 HOUR)
+
+(#AirPurifier).airpurifier_setairpurifiermode(""sleep"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetAirPurifierToAutoAndSleepModeAfter2Hours"",""cron"":"""",""period"":0,""code"":""(#AirPurifier).airpurifier_setairpurifiermode(\""auto\"")\ndelay(2 HOUR)\n(#AirPurifier).airpurifier_setairpurifiermode(\""sleep\"")""}",SetAirPurifierToAutoAndSleepModeAfter2Hours,,0,"(#AirPurifier).airpurifier_setairpurifiermode(""auto"")
+delay(2 HOUR)
+(#AirPurifier).airpurifier_setairpurifiermode(""sleep"")",77229,18837,86,18923,5.7982,9.1283,3263.599,17.7087,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""AirPurifier"", ""AirConditioner"", ""Dishwasher"", ""AirQualitySensor"", ""RobotVacuumCleaner"", ""LaundryDryer"", ""ArmRobot"", ""Dehumidifier"", ""Pump"", ""Humidifier""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+124,5,5,Set the air conditioner temperature to 24 degrees and change it to 26 degrees after 1 hour.,에어컨 온도를 24도로 설정하고 1시간 뒤에 26도로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#AirConditioner).airconditioner_settargettemperature(24)\n\ndelay(1 HOUR)\n\n(#AirConditioner).airconditioner_settargettemperature(26)""}",,,0,"
+(#AirConditioner).airconditioner_settargettemperature(24)
+
+delay(1 HOUR)
+
+(#AirConditioner).airconditioner_settargettemperature(26)",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetAirConditionerTemperature"",""cron"":"""",""period"":0,""code"":""(#AirConditioner).airconditioner_settargettemperature(24)\ndelay(1 HOUR)\n(#AirConditioner).airconditioner_settargettemperature(26)""}",SetAirConditionerTemperature,,0,"(#AirConditioner).airconditioner_settargettemperature(24)
+delay(1 HOUR)
+(#AirConditioner).airconditioner_settargettemperature(26)",81551,19566,72,19638,5.5222,8.8983,3556.1914,17.8467,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""ArmRobot"", ""Dishwasher"", ""LaundryDryer"", ""Oven"", ""WeatherProvider"", ""Dehumidifier""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+125,5,5,Set the oven mode to Bake and change it to warming mode after 10 minutes.,오븐 모드를 베이크로 설정하고 10분 뒤에 데우기 모드로 바꿔줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Oven).oven_setovenmode(\""Bake\"")\n\ndelay(10 MIN)\n\n(#Oven).oven_setovenmode(\""warming\"")""}",,,0,"
+(#Oven).oven_setovenmode(""Bake"")
+
+delay(10 MIN)
+
+(#Oven).oven_setovenmode(""warming"")",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""SetOvenModeAndChangeAfter10Minutes"",""cron"":"""",""period"":0,""code"":""(#Oven).oven_setovenmode(\""Bake\"")\ndelay(10 MIN)\n(#Oven).oven_setovenmode(\""warming\"")""}",SetOvenModeAndChangeAfter10Minutes,,0,"(#Oven).oven_setovenmode(""Bake"")
+delay(10 MIN)
+(#Oven).oven_setovenmode(""warming"")",76435,18678,74,18752,5.4049,8.8016,3469.4444,17.6799,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""Oven"", ""RiceCooker"", ""AirConditioner"", ""ArmRobot"", ""Dishwasher"", ""LaundryDryer"", ""Pump"", ""MenuProvider"", ""Button"", ""SmokeDetector""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,5
+151,6,6,"If the temperature is 28 degrees or higher and the humidity is 70% or higher, set the air conditioner to cool mode and 24 degrees.","온도가 28도 이상이고 습도가 70% 이상이면, 에어컨을 냉방 모드로 설정하고 온도를 24도로 맞춰줘.","{""name"": """", ""cron"": """", ""period"": 0, ""script"": ""\nif ((#TemperatureSensor).temperaturesensor_temperature >= 28 and (#HumiditySensor).humiditysensor_humidity >= 70) {\n\n    (#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n\n    (#AirConditioner).airconditioner_settargettemperature(24)\n \n}""}",,,0,"
+if ((#TemperatureSensor).temperaturesensor_temperature >= 28 and (#HumiditySensor).humiditysensor_humidity >= 70) {
+
+    (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+
+    (#AirConditioner).airconditioner_settargettemperature(24)
+ 
+}",False,63.7682,False,strict,False,0.733646,0.5,1.0,0.5,0.0,0.666667,1.0,"[""dataflow"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic""]","{""name"":""SetAirConditionerCoolModeAndTemp"",""cron"":"""",""period"":0,""code"":""(#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n(#AirConditioner).airconditioner_settargettemperature(24)""}",SetAirConditionerCoolModeAndTemp,,0,"(#AirConditioner).airconditioner_setairconditionermode(""cool"")
+(#AirConditioner).airconditioner_settargettemperature(24)",79110,19056,71,19127,5.3602,8.7542,3568.337,17.7482,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""WeatherProvider"", ""Dehumidifier"", ""Dishwasher"", ""ArmRobot"", ""LaundryDryer""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,6
+152,6,6,"If the carbon dioxide concentration is 1200ppm or higher and person is being detected, set the air purifier to high mode and announce a warning using the speaker.","이산화탄소 농도가 1200ppm 이상이고 사람이 감지되고 있으면, 공기청정기를 강풍으로 바꾸고 스피커로 경고해줘.","{""name"": """", ""cron"": """", ""period"": 0, ""script"": ""\nif ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n    (#Speaker).speaker_speak(\""이산화탄소 농도가 높습니다.\"")\n\n}""}",,,0,"
+if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Speaker).speaker_speak(""이산화탄소 농도가 높습니다."")
+
+}",False,92.9373,True,strict,False,0.77079,1.0,1.0,1.0,1.0,0.666667,1.0,"[""extraneous"", ""gt_mismatch"", ""numeric_grounding""]","{""name"":""SetAirPurifierHighAndWarn"",""cron"":"""",""period"":0,""code"":""co2_level = (#CarbonDioxideSensor).carbondioxidesensor_carbondioxide\nperson_detected = (#PresenceSensor).presencesensor_presence\nif (co2_level >= 1200 and person_detected == true) {\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n    (#Speaker).speaker_speak(\""공기청정기가 강풍으로 변경되었습니다\"")\n}""}",SetAirPurifierHighAndWarn,,0,"co2_level = (#CarbonDioxideSensor).carbondioxidesensor_carbondioxide
+person_detected = (#PresenceSensor).presencesensor_presence
+if (co2_level >= 1200 and person_detected == true) {
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+    (#Speaker).speaker_speak(""공기청정기가 강풍으로 변경되었습니다"")
+}",80279,19150,131,19281,7.1364,10.5097,2701.7824,17.7665,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Speaker"", ""AirQualitySensor"", ""CarbonDioxideSensor"", ""AirPurifier"", ""AirConditioner"", ""RobotVacuumCleaner"", ""Charger"", ""PresenceVitalSensor"", ""SmokeDetector""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,6
+153,6,6,"If it is raining and the humidity is 80% or higher, set the dehumidifier to drying mode and output ""It's raining and himidity is high"" through the speaker.","비가 오고 있고 습도가 80% 이상이면, 제습기를 건조 모드로 작동시키고 ""비가 오고 습도가 높습니다""라고 스피커로 출력해줘.","{""name"": """", ""cron"": """", ""period"": 0, ""script"": ""\nif ((#RainSensor).rainsensor_rain == true and (#HumiditySensor).humiditysensor_humidity >= 80) {\n\n    (#Dehumidifier).dehumidifier_setdehumidifiermode(\""drying\"")\n\n    (#Speaker).speaker_speak(\""비가 오고 습도가 높습니다.\"")\n\n}""}",,,0,"
+if ((#RainSensor).rainsensor_rain == true and (#HumiditySensor).humiditysensor_humidity >= 80) {
+
+    (#Dehumidifier).dehumidifier_setdehumidifiermode(""drying"")
+
+    (#Speaker).speaker_speak(""비가 오고 습도가 높습니다."")
+
+}",False,61.6131,False,strict,False,0.697628,0.5,1.0,0.5,1.0,0.0,0.0,"[""enum_grounding"", ""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""numeric_grounding"", ""semantic""]","{""name"":""CheckAndReportRainStatus"",""cron"":"""",""period"":0,""code"":""if ((#RainSensor).rainsensor_rain == true) {\n    (#Speaker).speaker_speak(\""비가 오고 습도가 높습니다\"")\n}""}",CheckAndReportRainStatus,,0,"if ((#RainSensor).rainsensor_rain == true) {
+    (#Speaker).speaker_speak(""비가 오고 습도가 높습니다"")
+}",78989,19047,75,19122,5.4913,8.9111,3482.2355,17.7465,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""HumiditySensor"", ""Speaker"", ""RainSensor"", ""Dehumidifier"", ""Humidifier"", ""WeatherProvider"", ""AirQualitySensor"", ""Dishwasher"", ""Pump"", ""AirPurifier""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,6
+154,6,6,"If the noise level is 70 or higher and no one is home, take a photo with the camera and sound the police siren.","소음 수치가 70 이상이고 집에 아무도 없으면, 카메라로 사진을 찍고 경찰 사이렌을 울려줘.","{""name"": """", ""cron"": """", ""period"": 0, ""script"": ""\nif ((#SoundSensor).soundsensor_sound >= 70 and (#PresenceSensor).presencesensor_presence == false) {\n\n    (#Camera).camera_captureimage()\n\n    (#Siren).siren_setsirenmode(\""police\"")\n\n}""}",,,0,"
+if ((#SoundSensor).soundsensor_sound >= 70 and (#PresenceSensor).presencesensor_presence == false) {
+
+    (#Camera).camera_captureimage()
+
+    (#Siren).siren_setsirenmode(""police"")
+
+}",False,94.5143,True,strict,False,0.983636,1.0,1.0,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""semantic""]","{""name"":""TakePhotoAndSoundPoliceSiren"",""cron"":"""",""period"":0,""code"":""wait until ((#SoundSensor).soundsensor_sound >= 70 and (#PresenceSensor).presencesensor_presence == false)\n(#Camera).camera_captureimage()\n(#Siren).siren_setsirenmode(\""police\"")""}",TakePhotoAndSoundPoliceSiren,,0,"wait until ((#SoundSensor).soundsensor_sound >= 70 and (#PresenceSensor).presencesensor_presence == false)
+(#Camera).camera_captureimage()
+(#Siren).siren_setsirenmode(""police"")",76680,18407,86,18493,5.6868,9.0321,3251.9167,17.6318,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Siren"", ""Camera"", ""SoundSensor"", ""PresenceVitalSensor"", ""AudioRecorder"", ""AirQualitySensor"", ""ColorControl"", ""PressureSensor"", ""CarbonDioxideSensor""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,6
+155,6,6,"If the illuminance is 100 lux or lower and a person is being detected, set the speaker volume to 30 and play relax.mp3 music.","조도가 100 럭스 이하이고 사람이 감지되고 있으면, 스피커 볼륨을 30으로 설정하고 relax.mp3 음악을 재생해줘.","{""name"": """", ""cron"": """", ""period"": 0, ""script"": ""\nif ((#LightSensor).lightsensor_brightness <= 100 and (#PresenceSensor).presencesensor_presence == true) {\n\n    (#Speaker).speaker_setvolume(30)\n\n    (#Speaker).speaker_play(\""relax.mp3\"")\n\n}""}",,,0,"
+if ((#LightSensor).lightsensor_brightness <= 100 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#Speaker).speaker_setvolume(30)
+
+    (#Speaker).speaker_play(""relax.mp3"")
+
+}",False,69.9,False,strict,False,0.820755,0.75,0.75,0.75,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage""]","{""name"":""AdjustSpeakerVolumeBasedOnConditions"",""cron"":"""",""period"":0,""code"":""current_light_level = (#LightSensor).lightsensor_brightness\ncurrent_person_detected = (#PresenceSensor).presencesensor_presence\nif (current_light_level <= 100 and current_person_detected == true) {\n    (#Speaker).speaker_setvolume(30)\n    (#Speaker).speaker_speak(\""relax.mp3\"")\n}""}",AdjustSpeakerVolumeBasedOnConditions,,0,"current_light_level = (#LightSensor).lightsensor_brightness
+current_person_detected = (#PresenceSensor).presencesensor_presence
+if (current_light_level <= 100 and current_person_detected == true) {
+    (#Speaker).speaker_setvolume(30)
+    (#Speaker).speaker_speak(""relax.mp3"")
+}",85291,20071,109,20180,6.7259,10.0791,3000.342,17.9436,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""LightSensor"", ""PresenceSensor"", ""Speaker"", ""PresenceVitalSensor"", ""AudioRecorder"", ""SoundSensor"", ""Plug"", ""Siren"", ""Light"", ""ArmRobot""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,6
+181,7,7,"Every 10 minutes, if the temperature is 30 degrees or higher, set the air conditioner to cool mode.",10분마다 확인해서 온도가 30도 이상이면 에어컨을 쿨모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 600000, 
+""script"": ""\nif ((#TemperatureSensor).temperaturesensor_temperature >= 30) {\n\n    (#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n\n}""}",,,600000,"
+if ((#TemperatureSensor).temperaturesensor_temperature >= 30) {
+
+    (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+
+}",False,94.6426,True,strict,False,0.728528,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch""]","{""name"":""CheckAndSetAirConditioner"",""cron"":"""",""period"":0,""code"":""prev_temp := (#TemperatureSensor).temperaturesensor_temperature\ncurr_temp = (#TemperatureSensor).temperaturesensor_temperature\nif (curr_temp >= 30) {\n    (#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n}""}",CheckAndSetAirConditioner,,0,"prev_temp := (#TemperatureSensor).temperaturesensor_temperature
+curr_temp = (#TemperatureSensor).temperaturesensor_temperature
+if (curr_temp >= 30) {
+    (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+}",81557,19564,94,19658,6.1509,9.538,3195.9551,17.8464,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""ArmRobot"", ""Oven"", ""LaundryDryer"", ""Dishwasher"", ""WeatherProvider"", ""Dehumidifier""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+182,7,7,"Every 30 minutes, if the temperature is 20 degrees or higher and below 30 degrees, set the air conditioner to auto mode; if it is 30 degrees or higher, set it to cool mode.","30분마다 체크해서 온도가 20도 이상, 30도 미만이면 에어컨을 자동모드로 설정하고, 30도 이상이면 쿨모드로 설정해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 1800000, 
+""script"": ""\ntemp = (#TemperatureSensor).temperaturesensor_temperature\n\nif (temp >= 20 and temp < 30) {\n\n    (#AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n\n} else if (temp >= 30) {\n\n    (#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n\n}""}",,,1800000,"
+temp = (#TemperatureSensor).temperaturesensor_temperature
+
+if (temp >= 20 and temp < 30) {
+
+    (#AirConditioner).airconditioner_setairconditionermode(""auto"")
+
+} else if (temp >= 30) {
+
+    (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+
+}",False,93.3759,True,strict,False,0.900176,1.0,1.0,1.0,1.0,0.875,0.5,"[""enum_grounding"", ""gt_mismatch"", ""numeric_grounding""]","{""name"":""AdjustAirConditionerBasedOnTemperature"",""cron"":"""",""period"":1800000,""code"":""prev_temp := (#TemperatureSensor).temperaturesensor_temperature\ncurr_temp = (#TemperatureSensor).temperaturesensor_temperature\nif (prev_temp < 20 and curr_temp >= 20 and curr_temp < 30) {\n    (#AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n} else if (curr_temp >= 30) {\n    (#AirConditioner).airconditioner_setairconditionermode(\""cool\"")\n}\nprev_temp = curr_temp""}",AdjustAirConditionerBasedOnTemperature,,1800000,"prev_temp := (#TemperatureSensor).temperaturesensor_temperature
+curr_temp = (#TemperatureSensor).temperaturesensor_temperature
+if (prev_temp < 20 and curr_temp >= 20 and curr_temp < 30) {
+    (#AirConditioner).airconditioner_setairconditionermode(""auto"")
+} else if (curr_temp >= 30) {
+    (#AirConditioner).airconditioner_setairconditionermode(""cool"")
+}
+prev_temp = curr_temp",81665,19616,154,19770,7.968,11.3341,2481.1747,17.8542,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""TemperatureSensor"", ""AirConditioner"", ""AirPurifier"", ""AirQualitySensor"", ""ArmRobot"", ""LaundryDryer"", ""Oven"", ""Dishwasher"", ""Dehumidifier"", ""WeatherProvider""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+183,7,7,Lock the doorlock every day at midnight.,매일 자정에 도어락을 잠궈줘.,"{""name"": """", 
+""cron"": ""0 0 * * *"", 
+""period"": 0, 
+""script"": ""\n(#DoorLock).doorlock_lock()""}",,0 0 * * *,0,"
+(#DoorLock).doorlock_lock()",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""LockDoorlockMidnight"",""cron"":""0 0 * * *"",""period"":0,""code"":""(#DoorLock).doorlock_lock()""}",LockDoorlockMidnight,0 0 * * *,0,(#DoorLock).doorlock_lock(),80338,19253,50,19303,4.8851,8.2279,3951.4032,17.7889,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""Door"", ""DoorLock"", ""Safe"", ""ArmRobot"", ""Clock"", ""Plug"", ""LaundryDryer"", ""Dishwasher"", ""WindowCovering"", ""Charger""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+184,7,7,"On weekends at 3 PM, check for leakage; if detected, set the siren to emergency mode.",주말 오후 3시에 누수를 체크해서 감지되면 긴급 사이렌을 울려줘.,"{""name"": """", 
+""cron"": ""0 15 * * 6,7"", 
+""period"": 0, 
+""script"": ""\nif ((#LeakSensor).leaksensor_leakage == true) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n}""}",,"0 15 * * 6,7",0,"
+if ((#LeakSensor).leaksensor_leakage == true) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+}",False,69.9,False,strict,False,0.638158,0.5,0.5,0.5,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""semantic""]","{""name"":""CheckLeakAndActivateSiren"",""cron"":""0 15 * * 6-7"",""period"":0,""code"":""wait until ((#RainSensor).rainsensor_rain == true)\n(#Siren).siren_setsirenmode(\""emergency\"")""}",CheckLeakAndActivateSiren,0 15 * * 6-7,0,"wait until ((#RainSensor).rainsensor_rain == true)
+(#Siren).siren_setsirenmode(""emergency"")",74203,18053,77,18130,5.363,8.775,3380.5706,17.5629,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""PresenceSensor"", ""Siren"", ""LeakSensor"", ""Pump"", ""ArmRobot"", ""Charger"", ""PresenceVitalSensor"", ""Oven"", ""Safe"", ""RainSensor""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+185,7,7,Set the rice cooker to reheating mode every morning at 7 AM.,매일 아침 7시에 밥솥을 재가열 모드로 설정해줘.,"{""name"": """", 
+""cron"": ""0 7 * * *"", 
+""period"": 0, 
+""script"": ""\n(#RiceCooker).ricecooker_setricecookermode(\""reheating\"")""}",,0 7 * * *,0,"
+(#RiceCooker).ricecooker_setricecookermode(""reheating"")",False,52.1606,False,strict,False,0.517826,0.0,0.0,0.0,1.0,1.0,0.0,"[""enum_grounding"", ""gt_mismatch"", ""gt_receiver_coverage"", ""gt_service_coverage"", ""semantic""]","{""name"":""SetRiceCookerToReheatingMode"",""cron"":"""",""period"":0,""code"":""(#RiceCooker).ricecooker_setcookingparameters(\""reheating\"", 0)""}",SetRiceCookerToReheatingMode,,0,"(#RiceCooker).ricecooker_setcookingparameters(""reheating"", 0)",78372,18993,61,19054,5.1072,8.4803,3730.8114,17.7375,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""RiceCooker"", ""Oven"", ""ArmRobot"", ""Dishwasher"", ""AirConditioner"", ""RobotVacuumCleaner"", ""Television"", ""Charger"", ""Pump"", ""LaundryDryer""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,7
+231,8,8,"Every hour, repeat opening and closing the door.",1시간마다 문을 열었다 닫았다 반복해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 3600000, 
+""script"": ""\nopen := false\n\nif (open == false) {\n\n    (#Door).door_open()\n\n    open = true\n\n} else {\n\n    (#Door).door_close()\n\n    open = false\n\n}""}",,,3600000,"
+open := false
+
+if (open == false) {
+
+    (#Door).door_open()
+
+    open = true
+
+} else {
+
+    (#Door).door_close()
+
+    open = false
+
+}",False,93.4895,True,strict,False,0.657895,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""RepeatOpeningAndClosingDoor"",""cron"":"""",""period"":3600000,""code"":""while (true) {\n    (#Door).door_open()\n    delay(1 HOUR)\n    (#Door).door_close()\n    delay(1 HOUR)\n}""}",RepeatOpeningAndClosingDoor,,3600000,"while (true) {
+    (#Door).door_open()
+    delay(1 HOUR)
+    (#Door).door_close()
+    delay(1 HOUR)
+}",80707,19368,78,19446,5.6468,9.0357,3443.7203,17.8071,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""Door"", ""DoorLock"", ""Clock"", ""ArmRobot"", ""Safe"", ""Oven"", ""Button"", ""Valve"", ""TapDialSwitch"", ""Charger""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,8
+232,8,8,"Every 5 minutes from 1 PM to 3 PM, repeat opening and closing the valve.",오후 1시부터 3시까지 5분마다 벨브를 열었다 닫았다 반복해줘.,"{""name"": """", 
+""cron"": ""*/5 13-14 * * *"", 
+""period"": 0, 
+""script"": ""\nopen := false\n\nif (open == false) {\n\n    (#Valve).valve_open()\n\n    open = true\n\n} else {\n\n    (#Valve).valve_close()\n\n    open = false\n\n}""}",,*/5 13-14 * * *,0,"
+open := false
+
+if (open == false) {
+
+    (#Valve).valve_open()
+
+    open = true
+
+} else {
+
+    (#Valve).valve_close()
+
+    open = false
+
+}",False,92.1279,True,strict,False,0.615323,1.0,1.0,1.0,1.0,1.0,1.0,"[""gt_mismatch"", ""semantic""]","{""name"":""RepeatOpeningAndClosingValve"",""cron"":""0 13 * * *"",""period"":300000,""code"":""active := 0\nif (active == 0) {\n    (#Valve).valve_open()\n    delay(1 HOUR)\n    (#Valve).valve_close()\n    active = 1\n}""}",RepeatOpeningAndClosingValve,0 13 * * *,300000,"active := 0
+if (active == 0) {
+    (#Valve).valve_open()
+    delay(1 HOUR)
+    (#Valve).valve_close()
+    active = 1
+}",84350,20136,97,20233,6.3974,9.7408,3162.6911,17.9543,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""Valve"", ""ArmRobot"", ""TapDialSwitch"", ""Pump"", ""LevelControl"", ""Door"", ""Button"", ""PresenceVitalSensor"", ""Clock"", ""Oven""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,8
+233,8,8,"Every 30 minutes, toggle the living room air purifier between sleep mode and auto mode.",30분마다 거실 공기청정기를 수면모드와 자동모드 사이에서 전환해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 1800000,
+""script"": ""\nmode := 0\n\nif (mode == 0) {\n\n    (#LivingRoom #AirPurifier).airpurifier_setairpurifiermode(\""sleep\"")\n\n    mode = 1\n\n} else {\n\n    (#LivingRoom #AirPurifier).airpurifier_setairpurifiermode(\""auto\"")\n\n    mode = 0\n\n}""}",,,1800000,"
+mode := 0
+
+if (mode == 0) {
+
+    (#LivingRoom #AirPurifier).airpurifier_setairpurifiermode(""sleep"")
+
+    mode = 1
+
+} else {
+
+    (#LivingRoom #AirPurifier).airpurifier_setairpurifiermode(""auto"")
+
+    mode = 0
+
+}",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""ToggleLivingRoomAirPurifier"",""cron"":"""",""period"":1800000,""code"":""mode := 0\n\nif (mode == 0) {\n\n    (#LivingRoom #AirPurifier).airpurifier_setairpurifiermode(\""sleep\"")\n\n    mode = 1\n\n} else {\n\n    (#LivingRoom #AirPurifier).airpurifier_setairpurifiermode(\""auto\"")\n\n    mode = 0\n\n}""}",ToggleLivingRoomAirPurifier,,1800000,"mode := 0
+
+if (mode == 0) {
+
+    (#LivingRoom #AirPurifier).airpurifier_setairpurifiermode(""sleep"")
+
+    mode = 1
+
+} else {
+
+    (#LivingRoom #AirPurifier).airpurifier_setairpurifiermode(""auto"")
+
+    mode = 0
+
+}",79236,19233,166,19399,8.2226,11.5659,2359.2294,17.7827,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""AirPurifier"", ""AirConditioner"", ""Dishwasher"", ""AirQualitySensor"", ""RobotVacuumCleaner"", ""LaundryDryer"", ""ArmRobot"", ""Dehumidifier"", ""Humidifier"", ""Oven""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,8
+234,8,8,Repeat opening and closing the window every 10 minutes.,10분마다 창문을 열었다 닫았다 반복해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 600000,
+""script"": ""\nopen := false\n\nif (open == false) {\n\n    (#Window).windowcovering_uporopen()\n\n    open = true\n\n} else {\n\n    (#Window).windowcovering_downorclose()\n\n    open = false\n\n}""}",,,600000,"
+open := false
+
+if (open == false) {
+
+    (#Window).windowcovering_uporopen()
+
+    open = true
+
+} else {
+
+    (#Window).windowcovering_downorclose()
+
+    open = false
+
+}",False,91.5955,True,strict,False,0.702429,1.0,0.666667,1.0,1.0,1.0,1.0,"[""extraneous"", ""gt_mismatch"", ""semantic""]","{""name"":""RepeatOpeningAndClosingWindowEvery10Minutes"",""cron"":"""",""period"":600000,""code"":""if ((#Clock).clock_hour == 15) { break }\n(#Window).windowcovering_uporopen()\ndelay(10 MIN)\n(#Window).windowcovering_downorclose()""}",RepeatOpeningAndClosingWindowEvery10Minutes,,600000,"if ((#Clock).clock_hour == 15) { break }
+(#Window).windowcovering_uporopen()
+delay(10 MIN)
+(#Window).windowcovering_downorclose()",82199,19510,86,19596,5.9088,9.4529,3316.4094,17.8365,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""WindowCovering"", ""ArmRobot"", ""Door"", ""DoorLock"", ""Button"", ""Safe"", ""AirConditioner"", ""Clock"", ""Valve"", ""WeatherProvider""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,8
+235,8,8,"Every 30 minutes, toggle the air purifier between sleep mode and high speed mode.",30분마다 공기청정기를 수면모드와 강풍모드 사이에서 전환해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 1800000,
+""script"": ""\nmode := 0\n\nif (mode == 0) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""sleep\"")\n\n    mode = 1\n\n} else {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n    mode = 0\n\n}""}",,,1800000,"
+mode := 0
+
+if (mode == 0) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""sleep"")
+
+    mode = 1
+
+} else {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    mode = 0
+
+}",False,100.0,True,strict,True,1.0,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""name"":""ToggleAirPurifierBetweenSleepAndHighSpeed"",""cron"":"""",""period"":1800000,""code"":""mode := 0\n\nif (mode == 0) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""sleep\"")\n\n    mode = 1\n\n} else {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n    mode = 0\n\n}""}",ToggleAirPurifierBetweenSleepAndHighSpeed,,1800000,"mode := 0
+
+if (mode == 0) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""sleep"")
+
+    mode = 1
+
+} else {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    mode = 0
+
+}",77441,18845,157,19002,7.8578,11.2493,2418.2341,17.7099,,False,/home/mgjeong/miniconda3/envs/l/bin/python,/home/mgjeong/.cache/huggingface/hub/models--Qwen--Qwen2.5-Coder-7B-Instruct/snapshots/c03e6d358207e414f1eca0bb1891e29f1db0e242,service_retrieval_fallback,10,used,hybrid,10,"[""AirPurifier"", ""AirConditioner"", ""AirQualitySensor"", ""LaundryDryer"", ""Dishwasher"", ""RobotVacuumCleaner"", ""ArmRobot"", ""Dehumidifier"", ""Humidifier"", ""Plug""]",blocks,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,False,8

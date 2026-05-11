@@ -1,0 +1,46 @@
+{
+  "raw_content": "{\"generation\": 2, \"model_key\": \"qwen25_coder_7b\", \"diagnosis\": [{\"category_group\": \"validation\", \"main_failure\": \"enum_type_mismatch\", \"hypothesis\": \"Enum_Grounding needs a targeted micro-rule from deterministic validation.\"}], \"mutation_proposals\": [{\"target_block_id\": \"02\", \"target_block_family\": \"Enum_Grounding\", \"mutation_type\": \"strengthen_enum_type_rule\", \"priority\": 1, \"reason\": \"Mock advisor proposal generated for schema validation smoke.\", \"edit_instruction\": \"Add the proposed micro-rule to the target prompt block.\", \"proposed_micro_rule\": \"For ENUM arguments, copy an allowed enum value exactly; for numeric arguments, use unquoted numeric literals.\"}], \"do_not_change\": [\"core blocks\", \"retrieval pre-mapping\"], \"advisor_backend\": \"mock_schema\"}",
+  "parsed": {
+    "generation": 2,
+    "model_key": "qwen25_coder_7b",
+    "diagnosis": [
+      {
+        "category_group": "validation",
+        "main_failure": "enum_type_mismatch",
+        "hypothesis": "Enum_Grounding needs a targeted micro-rule from deterministic validation."
+      }
+    ],
+    "mutation_proposals": [
+      {
+        "target_block_id": "02",
+        "target_block_family": "Enum_Grounding",
+        "mutation_type": "strengthen_enum_type_rule",
+        "priority": 1,
+        "reason": "Mock advisor proposal generated for schema validation smoke.",
+        "edit_instruction": "Add the proposed micro-rule to the target prompt block.",
+        "proposed_micro_rule": "For ENUM arguments, copy an allowed enum value exactly; for numeric arguments, use unquoted numeric literals."
+      }
+    ],
+    "do_not_change": [
+      "core blocks",
+      "retrieval pre-mapping"
+    ],
+    "advisor_backend": "mock_schema"
+  },
+  "accepted_proposals": [
+    {
+      "target_block_id": "02",
+      "target_block_family": "Enum_Grounding",
+      "mutation_type": "strengthen_enum_type_rule",
+      "priority": 1,
+      "reason": "Mock advisor proposal generated for schema validation smoke.",
+      "edit_instruction": "Add the proposed micro-rule to the target prompt block.",
+      "proposed_micro_rule": "For ENUM arguments, copy an allowed enum value exactly; for numeric arguments, use unquoted numeric literals.",
+      "proposal_id": "advisor_g002_01",
+      "advisor_generation": 2,
+      "accepted": true,
+      "rejection_reason": ""
+    }
+  ],
+  "rejected_proposals": []
+}

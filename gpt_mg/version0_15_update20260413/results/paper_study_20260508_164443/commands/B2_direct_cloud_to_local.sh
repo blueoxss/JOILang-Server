@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -euo pipefail
+/home/mgjeong/miniconda3/bin/python /home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/scripts/run_benchmark.py --suite paper_local5 --candidate-k 1 --repair-attempts 0 --det-profile strict --prompt-render-mode legacy_v13_monolith --prompt-assets-dir /home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13 --enable-retrieval-premapping --retrieval-topk 10 --retrieval-mode hybrid --retrieval-device cpu --timeout-sec 1800 --output-dir /home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_20260508_164443/B2_direct_cloud_to_local --print-mode paths --skip-unavailable --model-key qwen25_coder_7b --category 1 --limit-per-category 1

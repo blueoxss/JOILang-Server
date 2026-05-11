@@ -947,6 +947,119 @@ bash gpt_mg/version0_15_update20260413/scripts/run_local_prompt_ga_study.sh \
 - `final_all_avg_det`는 선택 category 전체 row에 best genome을 다시 적용한 값입니다.
 - `ga_failure_feedback_summary.csv`에서 failure reason이 줄거나 바뀌는 흐름은 DET 피드백이 mutation rule로 반영되는지를 보여줍니다.
 
+### 13-3. GA core: block-structured prompt artifact search
+
+`run_ga_search.py`는 prompt block을 genotype으로 다루는 가장 작은 GA core runner입니다.
+
+Core blocks:
+
+- `01`
+- `02`
+
+Optional guidance blocks:
+
+- `03`
+- `05`
+- `06`
+
+중요:
+
+- Core blocks는 항상 포함됩니다.
+- Optional guidance blocks만 activation/deactivation/replacement 됩니다.
+- `block_replacement`는 가능하면 같은 block ID family 안에서 `blocks/generated/`의 대체 artifact로 `source_file`을 교체합니다.
+- `blocks=[...]`는 candidate prompt를 렌더링한 active block IDs입니다.
+- 이 표기는 cloud prompt의 임의 fragment를 사용한다는 뜻이 아닙니다.
+- Retrieval pre-mapping과 top-k service context는 runtime fixed path이며 GA mutation target이 아닙니다.
+- `utils/prompt_surgery_rules.py`는 `version0_13` prompt repair 지식을 DET failure reason -> block family -> mutation type -> micro-rule로 정리합니다.
+
+Feedback-to-mutation examples:
+
+- `invalid_json` -> `Output_Schema` -> JSON-only rule 강화
+- `unknown_service` -> `Service_Mapping` -> canonical service name rule 추가
+- `enum_grounding` -> `Enum_Grounding` -> enum/type rule 강화
+- `temporal_error` -> `Temporal_Rule` -> elapsed-time rule 강화
+- `dataflow` -> `Dataflow` -> sensor-to-action flow rule 추가
+- `extraneous` -> `Minimality` -> no-unrelated-action rule 강화
+
+LLM mutation advisor:
+
+- `--llm-mutation-advisor`는 generation 끝에서 top/bottom genomes, category diagnostics, failure histogram을 요약해 prompt-block mutation proposal만 받습니다.
+- Advisor는 JOILang code generator가 아닙니다.
+- Advisor proposal은 best prompt를 직접 덮어쓰지 않고 다음 세대 child genome으로 들어가 경쟁합니다.
+- Unsafe proposal은 reject됩니다: retrieval 변경, core block 제거, unknown block target, JOILang code 생성.
+
+Advisor options:
+
+- `--advisor-model-key`: advisor backend model key. Default `gpt41_mini`
+- `--advisor-top-k`: advisor prompt에 넣을 상위 genome 수. Default `3`
+- `--advisor-bottom-k`: advisor prompt에 넣을 하위 genome 수. Default `3`
+- `--advisor-max-examples`: representative failure row 수. Default `5`
+- `--advisor-temperature`: advisor sampling temperature. Default `0.0`
+
+빠른 smoke:
+
+```bash
+python gpt_mg/version0_15_update20260413/scripts/run_ga_search.py \
+  --profile version0_15_update20260413 \
+  --model-key qwen25_coder_7b \
+  --limit 2 \
+  --population 2 \
+  --gens 1 \
+  --sample-size 1 \
+  --validation-size 1 \
+  --cheap-eval-limit 1 \
+  --candidate-k 1 \
+  --feedback-guided-mutation \
+  --llm-mutation-advisor \
+  --progress minimal \
+  --llm-mode mock
+```
+
+진짜 local smoke:
+
+```bash
+python gpt_mg/version0_15_update20260413/scripts/run_ga_search.py \
+  --profile version0_15_update20260413 \
+  --model-key qwen25_coder_7b \
+  --limit 1 \
+  --population 1 \
+  --gens 1 \
+  --sample-size 1 \
+  --validation-size 1 \
+  --cheap-eval-limit 1 \
+  --candidate-k 1 \
+  --feedback-guided-mutation \
+  --progress quiet
+```
+
+GA progress output:
+
+- `--progress quiet`: 최종 요약만 출력
+- `--progress minimal`: generation summary, top-k genomes, feedback summary, population transition
+- `--progress verbose`: row-level failure summary까지 확장 가능
+
+Full prompt는 `--print-prompts`를 명시하지 않으면 출력하지 않습니다.
+
+주요 artifact:
+
+- `ga_generation_progress.csv`
+- `ga_generation_progress.jsonl`
+- `ga_topk_genomes.csv`
+- `ga_block_diffs.jsonl`
+- `ga_population_diagnostics.csv`
+- `ga_population_diagnostics.jsonl`
+- `advisor_prompt_generation_<gen>.txt`
+- `advisor_response_generation_<gen>.json`
+- `advisor_mutation_proposals.jsonl`
+- `advisor_mutation_summary.csv`
+- `structured_feedback.jsonl`
+- `structured_feedback_summary.csv`
+- `population_transitions.csv`
+- `promotion_decisions.csv`
+- `best_genome.json`
+- `best_prompt_metadata.json`
+- `ga_summary.json`
+
 ---
 
 ## 14. 권장 워크플로우

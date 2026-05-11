@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -euo pipefail
+/home/mgjeong/miniconda3/bin/python /home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/scripts/run_local_prompt_ga_study.py --output-root /home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_20260508_164443/B6_full_gps_ga --prompt-assets-dir /home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13 --population 4 --gens 3 --sample-size 4 --validation-size 4 --candidate-k 1 --det-profile strict --service-context-mode retrieval_fallback --retrieval-topk 10 --retrieval-mode hybrid --retrieval-device cpu --timeout-sec 1800 --skip-unavailable --model-key qwen25_coder_7b --category 1 --limit-per-category 1

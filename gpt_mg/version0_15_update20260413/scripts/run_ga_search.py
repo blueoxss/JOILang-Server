@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Assumption: this GA search runs entirely inside gpt_mg/version0_14 and records all checkpoints/results there.
+# Assumption: this GA search mutates prompt-block artifacts only; retrieval context is fixed at runtime.
 from __future__ import annotations
 
 import argparse
@@ -7,6 +7,8 @@ import json
 import random
 import statistics
 import sys
+from collections import Counter
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -16,8 +18,21 @@ if str(VERSION_ROOT) not in sys.path:
     sys.path.insert(0, str(VERSION_ROOT))
 
 from scripts.run_feedback_loop import evaluate_genome_on_rows, run_feedback_loop
+from scripts.run_model_suite_benchmark import PAPER_LOCAL5_SUITE
+from utils.ga_block_model import (
+    get_core_blocks,
+    get_optional_blocks,
+    active_block_summary,
+    feedback_records_from_rows,
+    normalize_active_blocks,
+    suggest_mutation_from_feedback,
+    summarize_deterministic_feedback,
+    validate_genome_blocks,
+)
+from utils.local_llm_client import call as call_llm
 from utils.pipeline_common import (
-    CHECKPOINTS_DIR,
+    BLOCKS_DIR,
+    BLOCK_FILE_MAP,
     DATASET_DEFAULT,
     RESULTS_DIR,
     SERVICE_SCHEMA_DEFAULT,
@@ -31,6 +46,7 @@ from utils.pipeline_common import (
     seeded_uuid,
     select_rows,
 )
+from utils.prompt_surgery_rules import det_feedback_rules, prompt_surgery_registry
 
 
 MUTATION_RULES = [
@@ -41,12 +57,27 @@ MUTATION_RULES = [
     "Keep the code minimal and remove unrelated actions.",
 ]
 
-OPTIONAL_BLOCKS = ["03", "06"]
+CANONICAL_OPTIONAL_BLOCKS = get_optional_blocks()
 DET_PASS_THRESHOLD = 70.0
+DEFAULT_STRATEGIES = ["direct", "minimal", "canonical_names_first", "explicit_preconditions", "compact_json"]
+PROMOTION_COLUMNS = [
+    "generation",
+    "candidate_id",
+    "model_key",
+    "DETPass",
+    "SDET",
+    "avg_prompt_tokens",
+    "replay_gate_pass",
+    "regression_gate_pass",
+    "promoted",
+    "rejection_reason",
+    "accepted_prompt_path",
+    "previous_accepted_prompt",
+]
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Run genetic search over version0_14 prompt-block genomes.")
+    parser = argparse.ArgumentParser(description="Run genetic search over version0_15 prompt-block artifact genomes.")
     parser.add_argument("--profile", required=True)
     parser.add_argument("--genome-json", default=str(VERSION_ROOT / "genomes" / "example_genome.json"))
     parser.add_argument("--dataset", default=str(DATASET_DEFAULT))
@@ -68,6 +99,20 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--plateau-generations", type=int, default=3)
     parser.add_argument("--feedback-attempts", type=int, default=3)
     parser.add_argument("--feedback-threshold", type=float, default=0.25)
+    parser.add_argument("--det-profile", choices=["legacy", "strict"], default="strict")
+    parser.add_argument("--model-key", default="", help="Optional paper local model key, e.g. qwen25_coder_7b.")
+    parser.add_argument("--output-root", default="", help="GA run output directory. Default: results/ga_search_<timestamp>.")
+    parser.add_argument("--feedback-guided-mutation", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--progress", choices=["quiet", "minimal", "verbose"], default="minimal")
+    parser.add_argument("--print-prompts", action="store_true", help="Reserved debugging flag. GA never prints prompts unless this is set.")
+    parser.add_argument("--dry-run", action="store_true", help="Validate GA setup and write initial artifacts without LLM calls.")
+    parser.add_argument("--top-k", type=int, default=3)
+    parser.add_argument("--llm-mutation-advisor", action="store_true", help="Use an optional LLM advisor to propose prompt-block mutations.")
+    parser.add_argument("--advisor-model-key", default="gpt41_mini")
+    parser.add_argument("--advisor-top-k", type=int, default=3)
+    parser.add_argument("--advisor-bottom-k", type=int, default=3)
+    parser.add_argument("--advisor-max-examples", type=int, default=5)
+    parser.add_argument("--advisor-temperature", type=float, default=0.0)
     parser.add_argument("--llm-mode", default=None)
     parser.add_argument("--llm-endpoint", default=None)
     parser.add_argument("--timeout-sec", type=int, default=1800)
@@ -76,20 +121,73 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _timestamp() -> str:
+    return datetime.now().strftime("%Y%m%d_%H%M%S")
+
+
+def _resolve_output_root(raw: str | None) -> Path:
+    if raw:
+        return Path(raw).expanduser().resolve()
+    return (RESULTS_DIR / f"ga_search_{_timestamp()}").resolve()
+
+
+def _model_name_for_key(model_key: str) -> str:
+    if not model_key:
+        return ""
+    for entry in PAPER_LOCAL5_SUITE:
+        if entry["key"] == model_key:
+            return str(entry["model"])
+    raise SystemExit(f"Unknown --model-key {model_key!r}. Available: {[entry['key'] for entry in PAPER_LOCAL5_SUITE]}")
+
+
+def _model_label_for_key(model_key: str) -> str:
+    for entry in PAPER_LOCAL5_SUITE:
+        if entry["key"] == model_key:
+            return str(entry.get("label") or entry["key"])
+    if model_key == "gpt41_mini":
+        return "GPT-4.1-mini"
+    return model_key
+
+
+def _advisor_model_name(model_key: str) -> str:
+    if model_key == "gpt41_mini":
+        return "gpt-4.1-mini"
+    for entry in PAPER_LOCAL5_SUITE:
+        if entry["key"] == model_key:
+            return str(entry["model"])
+    return model_key
+
+
 def _copy_genome(genome: dict[str, Any]) -> dict[str, Any]:
     return json.loads(json.dumps(genome))
 
 
 def _normalize_blocks(blocks: list[str]) -> list[str]:
-    ordered = []
-    for block_id in ["01", "02", "03", "06"]:
-        if block_id in blocks and block_id not in ordered:
-            ordered.append(block_id)
-    if "01" not in ordered:
-        ordered.insert(0, "01")
-    if "02" not in ordered:
-        ordered.insert(1 if ordered and ordered[0] == "01" else 0, "02")
-    return ordered
+    return normalize_active_blocks(blocks)
+
+
+def _annotate_genome(
+    genome: dict[str, Any],
+    *,
+    parent_ids: list[str] | None = None,
+    mutation_types: list[str] | None = None,
+    crossover_used: bool = False,
+    feedback_types_used: list[str] | None = None,
+    base_genome_id: str = "",
+    advisor_metadata: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    genome.setdefault("_ga_metadata", {})
+    metadata = {
+        "parent_ids": parent_ids or [],
+        "mutation_types": mutation_types or [],
+        "crossover_used": crossover_used,
+        "feedback_types_used": feedback_types_used or [],
+        "base_genome_id": base_genome_id,
+    }
+    if advisor_metadata:
+        metadata.update(advisor_metadata)
+    genome["_ga_metadata"].update(metadata)
+    return validate_genome_blocks(genome)
 
 
 def _random_genome(base_genome: dict[str, Any], rng: random.Random) -> dict[str, Any]:
@@ -98,83 +196,884 @@ def _random_genome(base_genome: dict[str, Any], rng: random.Random) -> dict[str,
     genome["seed"] = rng.randint(1, 10**9)
     genome.setdefault("params", {})
     genome.setdefault("block_params", {})
-    blocks = ["01", "02"]
-    for block in OPTIONAL_BLOCKS:
+    blocks = get_core_blocks()
+    for block in CANONICAL_OPTIONAL_BLOCKS:
         if rng.random() < 0.75:
             blocks.append(block)
     genome["blocks"] = _normalize_blocks(blocks)
     genome["params"]["temperature"] = rng.choice([0.0, 0.0, 0.05, 0.1])
     genome["params"]["max_tokens"] = rng.choice([512, 768, 1024])
-    genome["params"]["candidate_strategies"] = rng.sample(
-        ["direct", "minimal", "canonical_names_first", "explicit_preconditions", "compact_json"],
-        k=rng.randint(2, 5),
-    )
+    genome["params"]["candidate_strategies"] = rng.sample(DEFAULT_STRATEGIES, k=rng.randint(2, 5))
     block02 = genome.setdefault("block_params", {}).setdefault("02", {})
     block02["few_shot_count"] = rng.choice([1, 2, 3])
     block02["micro_rules"] = rng.sample(MUTATION_RULES, k=rng.randint(0, min(3, len(MUTATION_RULES))))
-    return genome
+    return _annotate_genome(genome, mutation_types=["initial_random"])
 
 
-def _mutate_genome(genome: dict[str, Any], rng: random.Random) -> dict[str, Any]:
+def _mutation_rule_from_feedback(feedback_hint: dict[str, str] | None) -> tuple[str, str, str]:
+    if not feedback_hint:
+        return "micro_rules", "", ""
+    return (
+        str(feedback_hint.get("suggested_mutation_type", "feedback_guided_rule")),
+        str(feedback_hint.get("prompt_block_id", "02") or "02"),
+        str(feedback_hint.get("rule", "") or ""),
+    )
+
+
+def _block_variant_sources(block_id: str) -> list[str]:
+    default = BLOCK_FILE_MAP.get(block_id, "")
+    sources = [default] if default else []
+    prefixes = [f"{block_id}_"]
+    if default:
+        prefixes.append(Path(default).stem)
+    generated_dir = BLOCKS_DIR / "generated"
+    if generated_dir.exists():
+        for path in sorted(generated_dir.glob("**/*")):
+            if not path.is_file() or path.suffix.lower() not in {".txt", ".md"}:
+                continue
+            rel = str(path.relative_to(BLOCKS_DIR))
+            name = path.name
+            if any(name.startswith(prefix) for prefix in prefixes) and rel not in sources:
+                sources.append(rel)
+    return sources
+
+
+def _mutate_genome(
+    genome: dict[str, Any],
+    rng: random.Random,
+    *,
+    feedback_hint: dict[str, str] | None = None,
+    advisor_proposal: dict[str, Any] | None = None,
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     child = _copy_genome(genome)
     child["id"] = f"gen-{seeded_uuid(rng)}"
     child["seed"] = rng.randint(1, 10**9)
     child.setdefault("params", {})
     child.setdefault("block_params", {})
-    block02 = child["block_params"].setdefault("02", {})
-    mutation_choice = rng.choice(["toggle_block", "few_shot", "max_tokens", "temperature", "micro_rules", "strategies"])
-    if mutation_choice == "toggle_block":
-        target = rng.choice(OPTIONAL_BLOCKS)
+    diffs: list[dict[str, Any]] = []
+    parent_id = str(genome.get("id", ""))
+    old_child = _copy_genome(child)
+    feedback_types_used: list[str] = []
+    if feedback_hint:
+        mutation_choice, target_block, feedback_rule = _mutation_rule_from_feedback(feedback_hint)
+        feedback_types_used = [str(feedback_hint.get("failure_type", ""))]
+    else:
+        mutation_choice = rng.choice(
+            [
+                "block_activation",
+                "block_deactivation",
+                "block_replacement",
+                "repair_block_insertion",
+                "repair_block_removal",
+                "few_shot",
+                "max_tokens",
+                "temperature",
+                "micro_rules",
+                "strategies",
+            ]
+        )
+        target_block = rng.choice(CANONICAL_OPTIONAL_BLOCKS)
+        feedback_rule = ""
+
+    if mutation_choice in {"block_activation", "activate_or_strengthen_temporal_rule"}:
+        blocks = list(child.get("blocks", []))
+        if target_block not in blocks and target_block in CANONICAL_OPTIONAL_BLOCKS:
+            blocks.append(target_block)
+        child["blocks"] = _normalize_blocks(blocks)
+    elif mutation_choice == "block_deactivation":
+        target = rng.choice(list(CANONICAL_OPTIONAL_BLOCKS))
         blocks = list(child.get("blocks", ["01", "02", "03", "06"]))
         if target in blocks:
             blocks.remove(target)
-        else:
-            blocks.append(target)
         child["blocks"] = _normalize_blocks(blocks)
+    elif mutation_choice == "block_replacement":
+        active_optional = active_block_summary(child)["optional"]
+        block_id = rng.choice(active_optional) if active_optional else rng.choice(CANONICAL_OPTIONAL_BLOCKS)
+        variants = _block_variant_sources(block_id)
+        current_source = str(child.get("block_params", {}).get(block_id, {}).get("source_file") or BLOCK_FILE_MAP.get(block_id, ""))
+        alternatives = [source for source in variants if source != current_source]
+        if alternatives:
+            child["block_params"].setdefault(block_id, {})["source_file"] = rng.choice(alternatives)
+            blocks = list(child.get("blocks", []))
+            if block_id not in blocks:
+                blocks.append(block_id)
+            child["blocks"] = _normalize_blocks(blocks)
+        else:
+            blocks = list(child.get("blocks", []))
+            if block_id in blocks:
+                blocks.remove(block_id)
+            else:
+                blocks.append(block_id)
+            child["blocks"] = _normalize_blocks(blocks)
+    elif mutation_choice in {"repair_clause", "repair_block_insertion", "add_repair_block"}:
+        blocks = list(child.get("blocks", []))
+        if "05" not in blocks:
+            blocks.append("05")
+        child["blocks"] = _normalize_blocks(blocks)
+    elif mutation_choice in {"repair_block_removal", "remove_repair_block"}:
+        blocks = list(child.get("blocks", []))
+        if "05" in blocks:
+            blocks.remove("05")
+        child["blocks"] = _normalize_blocks(blocks)
+    elif mutation_choice in {
+        "strengthen_json_only_rule",
+        "add_schema_grounding_rule",
+        "add_canonical_service_name_rule",
+        "strengthen_enum_type_rule",
+        "strengthen_temporal_rule",
+        "strengthen_owner_device_rule",
+        "add_sensor_to_action_flow_rule",
+        "strengthen_skeleton_rule",
+        "strengthen_minimality_rule",
+        "strengthen_no_unrelated_action_rule",
+        "add_micro_rule",
+        "strengthen_rule",
+        "add_targeted_repair_hint",
+    }:
+        block_id = target_block if target_block in {"02", "03", "06"} else "02"
+        rules = list(child["block_params"].setdefault(block_id, {}).get("micro_rules") or [])
+        if feedback_rule and feedback_rule not in rules:
+            rules.append(feedback_rule)
+        child["block_params"][block_id]["micro_rules"] = rules[-6:]
+        if block_id in CANONICAL_OPTIONAL_BLOCKS:
+            blocks = list(child.get("blocks", []))
+            if block_id not in blocks:
+                blocks.append(block_id)
+            child["blocks"] = _normalize_blocks(blocks)
     elif mutation_choice == "few_shot":
-        block02["few_shot_count"] = rng.choice([1, 2, 3])
+        child["block_params"].setdefault("02", {})["few_shot_count"] = rng.choice([1, 2, 3])
     elif mutation_choice == "max_tokens":
         child["params"]["max_tokens"] = rng.choice([512, 768, 1024])
     elif mutation_choice == "temperature":
         child["params"]["temperature"] = rng.choice([0.0, 0.0, 0.05, 0.1])
     elif mutation_choice == "micro_rules":
-        block02["micro_rules"] = rng.sample(MUTATION_RULES, k=rng.randint(0, min(3, len(MUTATION_RULES))))
+        block_id = rng.choice(["02", "03", "06"])
+        rules = list(child["block_params"].setdefault(block_id, {}).get("micro_rules") or [])
+        rule = rng.choice(MUTATION_RULES)
+        if rule not in rules:
+            rules.append(rule)
+        child["block_params"][block_id]["micro_rules"] = rules[-6:]
     elif mutation_choice == "strategies":
-        child["params"]["candidate_strategies"] = rng.sample(
-            ["direct", "minimal", "canonical_names_first", "explicit_preconditions", "compact_json"],
-            k=rng.randint(2, 5),
+        child["params"]["candidate_strategies"] = rng.sample(DEFAULT_STRATEGIES, k=rng.randint(2, 5))
+    advisor_metadata = None
+    if advisor_proposal:
+        advisor_metadata = {
+            "advisor_used": True,
+            "advisor_generation": advisor_proposal.get("advisor_generation", ""),
+            "advisor_proposal_id": advisor_proposal.get("proposal_id", ""),
+            "advisor_target_block": advisor_proposal.get("target_block_id", ""),
+            "advisor_mutation_type": advisor_proposal.get("mutation_type", ""),
+            "advisor_reason": advisor_proposal.get("reason", ""),
+            "llm_advised": True,
+        }
+    child = _annotate_genome(
+        child,
+        parent_ids=[parent_id],
+        mutation_types=[mutation_choice],
+        crossover_used=bool((genome.get("_ga_metadata") or {}).get("crossover_used")),
+        feedback_types_used=feedback_types_used,
+        base_genome_id=parent_id,
+        advisor_metadata=advisor_metadata,
+    )
+    diffs.extend(
+        _diff_genomes(
+            old_child,
+            child,
+            mutation_type=mutation_choice,
+            feedback_hint=feedback_hint,
+            advisor_proposal=advisor_proposal,
         )
-    return child
+    )
+    child.setdefault("_ga_metadata", {})["diffs"] = diffs
+    return child, diffs
 
 
-def _crossover(parent_a: dict[str, Any], parent_b: dict[str, Any], rng: random.Random) -> dict[str, Any]:
+def _crossover(parent_a: dict[str, Any], parent_b: dict[str, Any], rng: random.Random) -> tuple[dict[str, Any], dict[str, Any]]:
     child = _copy_genome(parent_a if rng.random() < 0.5 else parent_b)
     child["id"] = f"gen-{seeded_uuid(rng)}"
     child["seed"] = rng.randint(1, 10**9)
     child.setdefault("params", {})
     child.setdefault("block_params", {})
 
-    blocks = []
-    for block_id in ["01", "02", "03", "06"]:
+    blocks = get_core_blocks()
+    optional_from_a: list[str] = []
+    optional_from_b: list[str] = []
+    for block_id in CANONICAL_OPTIONAL_BLOCKS:
         owner = parent_a if rng.random() < 0.5 else parent_b
         if block_id in owner.get("blocks", []):
             blocks.append(block_id)
+            if owner is parent_a:
+                optional_from_a.append(block_id)
+            else:
+                optional_from_b.append(block_id)
     child["blocks"] = _normalize_blocks(blocks)
+    inherited_params: dict[str, str] = {}
     for key in {*(parent_a.get("params", {}).keys()), *(parent_b.get("params", {}).keys())}:
         owner = parent_a if rng.random() < 0.5 else parent_b
         if key in owner.get("params", {}):
             child["params"][key] = owner["params"][key]
+            inherited_params[key] = str(owner.get("id", ""))
+
+    # Mix candidate strategies instead of blindly taking one parent.
+    strategies = []
+    for parent in (parent_a, parent_b):
+        for item in parent.get("params", {}).get("candidate_strategies", []) or []:
+            if item not in strategies:
+                strategies.append(item)
+    if strategies:
+        child["params"]["candidate_strategies"] = strategies[: rng.randint(2, min(5, len(strategies)))]
+
     for block_id in {*(parent_a.get("block_params", {}).keys()), *(parent_b.get("block_params", {}).keys())}:
         owner = parent_a if rng.random() < 0.5 else parent_b
         if block_id in owner.get("block_params", {}):
             child["block_params"][block_id] = _copy_genome(owner["block_params"][block_id])
-    return child
+
+    # Merge and deduplicate micro-rules for active blocks.
+    for block_id in child.get("blocks", []):
+        merged_rules: list[str] = []
+        for parent in (parent_a, parent_b):
+            for rule in parent.get("block_params", {}).get(block_id, {}).get("micro_rules", []) or []:
+                if rule not in merged_rules:
+                    merged_rules.append(rule)
+        if merged_rules:
+            child["block_params"].setdefault(block_id, {})["micro_rules"] = merged_rules[-6:]
+
+    metadata = {
+        "parent_a": parent_a.get("id", ""),
+        "parent_b": parent_b.get("id", ""),
+        "inherited_core_blocks": get_core_blocks(),
+        "optional_from_a": optional_from_a,
+        "optional_from_b": optional_from_b,
+        "inherited_optional_blocks": active_block_summary(child)["optional"],
+        "inherited_params": inherited_params,
+        "crossover_type": "block_artifact_uniform",
+    }
+    child = _annotate_genome(
+        child,
+        parent_ids=[str(parent_a.get("id", "")), str(parent_b.get("id", ""))],
+        mutation_types=[],
+        crossover_used=True,
+        base_genome_id=str(parent_a.get("id", "")),
+    )
+    child["_ga_metadata"]["crossover"] = metadata
+    return child, metadata
 
 
 def _tournament_select(population: list[dict[str, Any]], rng: random.Random, size: int = 3) -> dict[str, Any]:
     contenders = rng.sample(population, k=min(size, len(population)))
     contenders.sort(key=lambda item: (-float(item["fitness"]), float(item["variance"]), item["genome"]["id"]))
     return contenders[0]["genome"]
+
+
+def _jsonish(value: Any) -> str:
+    if isinstance(value, (dict, list, tuple)):
+        return json.dumps(value, ensure_ascii=False, sort_keys=True)
+    return str(value)
+
+
+def _diff_genomes(
+    before: dict[str, Any],
+    after: dict[str, Any],
+    *,
+    mutation_type: str,
+    feedback_hint: dict[str, str] | None,
+    advisor_proposal: dict[str, Any] | None = None,
+) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    feedback_driven = bool(feedback_hint)
+    failure_source = str((feedback_hint or {}).get("failure_type", ""))
+    llm_advised = bool(advisor_proposal)
+    advisor_proposal_id = str((advisor_proposal or {}).get("proposal_id", ""))
+
+    before_optional = active_block_summary(before)["optional"]
+    after_optional = active_block_summary(after)["optional"]
+    if before_optional != after_optional:
+        rows.append(
+            {
+                "block_id": "optional",
+                "field": "active_optional_blocks",
+                "old_value": ",".join(before_optional),
+                "new_value": ",".join(after_optional),
+                "mutation_type": mutation_type,
+                "feedback_driven": feedback_driven,
+                "llm_advised": llm_advised,
+                "advisor_proposal_id": advisor_proposal_id,
+                "failure_type_source": failure_source,
+            }
+        )
+
+    for key in sorted({*before.get("params", {}).keys(), *after.get("params", {}).keys()}):
+        old_value = before.get("params", {}).get(key, "")
+        new_value = after.get("params", {}).get(key, "")
+        if old_value != new_value:
+            rows.append(
+                {
+                    "block_id": "params",
+                    "field": key,
+                    "old_value": _jsonish(old_value),
+                    "new_value": _jsonish(new_value),
+                    "mutation_type": mutation_type,
+                    "feedback_driven": feedback_driven,
+                    "llm_advised": llm_advised,
+                    "advisor_proposal_id": advisor_proposal_id,
+                    "failure_type_source": failure_source,
+                }
+            )
+
+    before_params = before.get("block_params", {}) or {}
+    after_params = after.get("block_params", {}) or {}
+    for block_id in sorted({*before_params.keys(), *after_params.keys()}):
+        old_block = before_params.get(block_id, {}) or {}
+        new_block = after_params.get(block_id, {}) or {}
+        for field in sorted({*old_block.keys(), *new_block.keys()}):
+            old_value = old_block.get(field, "")
+            new_value = new_block.get(field, "")
+            if old_value != new_value:
+                rows.append(
+                    {
+                        "block_id": block_id,
+                        "field": field,
+                        "old_value": _jsonish(old_value),
+                        "new_value": _jsonish(new_value),
+                        "mutation_type": mutation_type,
+                        "feedback_driven": feedback_driven,
+                        "llm_advised": llm_advised,
+                        "advisor_proposal_id": advisor_proposal_id,
+                        "failure_type_source": failure_source,
+                    }
+                )
+    return rows
+
+
+def _write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as handle:
+        for row in rows:
+            handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
+def _extract_json_object(text: str) -> dict[str, Any]:
+    raw = str(text or "").strip()
+    if not raw:
+        raise ValueError("empty advisor response")
+    try:
+        parsed = json.loads(raw)
+        if isinstance(parsed, dict):
+            return parsed
+    except json.JSONDecodeError:
+        pass
+    decoder = json.JSONDecoder()
+    for idx, char in enumerate(raw):
+        if char != "{":
+            continue
+        try:
+            parsed, _end = decoder.raw_decode(raw[idx:])
+        except json.JSONDecodeError:
+            continue
+        if isinstance(parsed, dict):
+            return parsed
+    raise ValueError("advisor response did not contain a JSON object")
+
+
+def _block_registry() -> list[dict[str, Any]]:
+    registry = []
+    for block_id in get_core_blocks():
+        registry.append({"block_id": block_id, "role": "core", "mutable": "micro_rules_only"})
+    for block_id in get_optional_blocks():
+        registry.append({"block_id": block_id, "role": "optional", "mutable": "activation_and_micro_rules"})
+    return registry
+
+
+def _compact_failures(rows: list[dict[str, Any]]) -> dict[str, int]:
+    counter: Counter[str] = Counter()
+    for row in rows:
+        for reason in row.get("failure_reasons") or []:
+            counter[str(reason).split(":", 1)[0]] += 1
+    return dict(counter.most_common())
+
+
+def _category_diagnostics(
+    *,
+    generation: int,
+    model_key: str,
+    evaluated_population: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    buckets: dict[str, list[dict[str, Any]]] = {}
+    for item in evaluated_population:
+        genome_id = str(item["genome"].get("id", ""))
+        for row in item.get("validation_metrics", {}).get("rows", []) or []:
+            category = str(row.get("category", "") or "uncategorized")
+            buckets.setdefault(category, []).append({**row, "genome_id": genome_id})
+    diagnostics: list[dict[str, Any]] = []
+    for category, rows in sorted(buckets.items(), key=lambda kv: kv[0]):
+        scores = [float(row.get("det_score") or 0.0) for row in rows]
+        pass_count = sum(1 for row in rows if bool(row.get("det_gt_exact")) or float(row.get("det_score") or 0.0) >= DET_PASS_THRESHOLD)
+        diagnostics.append(
+            {
+                "generation": generation,
+                "model_key": model_key,
+                "category": category,
+                "row_evaluations": len(rows),
+                "avg_det_score": round(statistics.fmean(scores), 4) if scores else 0.0,
+                "det_pass_count": pass_count,
+                "det_pass_rate": round((pass_count / len(rows)) * 100.0, 4) if rows else 0.0,
+                "failure_histogram": json.dumps(_compact_failures(rows), ensure_ascii=False, sort_keys=True),
+            }
+        )
+    return diagnostics
+
+
+def _population_summary_for_advisor(
+    evaluated_population: list[dict[str, Any]],
+    *,
+    top_k: int,
+    bottom_k: int,
+) -> dict[str, Any]:
+    def compact(item: dict[str, Any], rank: int) -> dict[str, Any]:
+        validation = _metric_summary(item["validation_metrics"])
+        active = active_block_summary(item["genome"])
+        meta = item["genome"].get("_ga_metadata", {}) or {}
+        return {
+            "rank": rank,
+            "genome_id": item["genome"].get("id", ""),
+            "fitness": item.get("fitness", 0.0),
+            "avg_det_score": validation["avg_det_score"],
+            "det_pass_rate": validation["det_pass_rate"],
+            "avg_prompt_tokens": validation["avg_prompt_tokens"],
+            "core_blocks": active["core"],
+            "optional_blocks": active["optional"],
+            "mutation_types": meta.get("mutation_types", []),
+            "feedback_types_used": meta.get("feedback_types_used", []),
+            "advisor_proposal_id": meta.get("advisor_proposal_id", ""),
+        }
+
+    top = [compact(item, idx) for idx, item in enumerate(evaluated_population[: max(1, top_k)], start=1)]
+    bottom_slice = list(reversed(evaluated_population[-max(1, bottom_k) :])) if evaluated_population else []
+    bottom = [compact(item, idx) for idx, item in enumerate(bottom_slice, start=1)]
+    return {"top_genomes": top, "bottom_genomes": bottom}
+
+
+def _representative_failure_rows(evaluated_population: list[dict[str, Any]], max_examples: int) -> list[dict[str, Any]]:
+    examples: list[dict[str, Any]] = []
+    for item in evaluated_population:
+        genome_id = str(item["genome"].get("id", ""))
+        for row in item.get("validation_metrics", {}).get("rows", []) or []:
+            reasons = row.get("failure_reasons") or []
+            if not reasons:
+                continue
+            examples.append(
+                {
+                    "row_id": row.get("row_no", ""),
+                    "category": row.get("category", ""),
+                    "genome_id": genome_id,
+                    "command_eng": row.get("command_eng", ""),
+                    "failure_reasons": reasons,
+                    "det_score": row.get("det_score", 0.0),
+                }
+            )
+            if len(examples) >= max_examples:
+                return examples
+    return examples
+
+
+def _build_advisor_prompt(
+    *,
+    generation: int,
+    model_key: str,
+    evaluated_population: list[dict[str, Any]],
+    category_diagnostics: list[dict[str, Any]],
+    feedback_summary: list[dict[str, Any]],
+    args: argparse.Namespace,
+) -> str:
+    best = evaluated_population[0]["genome"] if evaluated_population else {}
+    payload = {
+        "task": "Propose prompt-block mutations only. Do not generate JOILang code.",
+        "generation": generation,
+        "model_key": model_key,
+        "constraints": [
+            "Core blocks cannot be removed.",
+            "Retrieval pre-mapping is fixed runtime context and cannot be mutated.",
+            "Do not suggest changing retrieval top-k, retrieval mode, or service-context construction.",
+            "Propose only prompt-block-level changes, micro-rules, or block parameters.",
+            "Output valid JSON only.",
+        ],
+        "current_best": {
+            "genome_id": best.get("id", ""),
+            "blocks": active_block_summary(best) if best else {},
+            "params": best.get("params", {}) if best else {},
+            "block_params_keys": sorted((best.get("block_params", {}) or {}).keys()) if best else [],
+        },
+        "population": _population_summary_for_advisor(
+            evaluated_population,
+            top_k=args.advisor_top_k,
+            bottom_k=args.advisor_bottom_k,
+        ),
+        "category_diagnostics": category_diagnostics,
+        "feedback_summary": feedback_summary[:10],
+        "representative_failures": _representative_failure_rows(evaluated_population, args.advisor_max_examples),
+        "available_prompt_blocks": _block_registry(),
+        "version0_13_prompt_surgery_rules": prompt_surgery_registry(),
+        "det_feedback_mapping": det_feedback_rules(),
+        "required_json_schema": {
+            "generation": generation,
+            "model_key": model_key,
+            "diagnosis": [{"category_group": "string", "main_failure": "string", "hypothesis": "string"}],
+            "mutation_proposals": [
+                {
+                    "target_block_id": "02",
+                    "target_block_family": "Service_Mapping",
+                    "mutation_type": "add_micro_rule",
+                    "priority": 1,
+                    "reason": "short reason",
+                    "edit_instruction": "prompt-block edit only",
+                    "proposed_micro_rule": "concise rule text",
+                }
+            ],
+            "do_not_change": ["core blocks", "retrieval pre-mapping"],
+        },
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2)
+
+
+def _mock_advisor_response(generation: int, model_key: str, feedback_summary: list[dict[str, Any]]) -> dict[str, Any]:
+    top = feedback_summary[0] if feedback_summary else {
+        "affected_block_family": "Service_Mapping",
+        "prompt_block_id": "02",
+        "suggested_mutation_type": "add_canonical_service_name_rule",
+        "failure_type": "unknown_service",
+    }
+    family = str(top.get("affected_block_family", "Service_Mapping") or "Service_Mapping")
+    block_id = str(top.get("prompt_block_id", "02") or "02")
+    mutation_type = str(top.get("suggested_mutation_type", "add_micro_rule") or "add_micro_rule")
+    micro_rule = str(
+        top.get("rule")
+        or "Use deterministic validation feedback to strengthen the implicated prompt block."
+    )
+    return {
+        "generation": generation,
+        "model_key": model_key,
+        "diagnosis": [
+            {
+                "category_group": "validation",
+                "main_failure": str(top.get("failure_type", "unknown_service")),
+                "hypothesis": f"{family} needs a targeted micro-rule from deterministic validation.",
+            }
+        ],
+        "mutation_proposals": [
+            {
+                "target_block_id": block_id,
+                "target_block_family": family,
+                "mutation_type": mutation_type,
+                "priority": int(top.get("priority", 1) or 1),
+                "reason": "Mock advisor proposal generated for schema validation smoke.",
+                "edit_instruction": "Add the proposed micro-rule to the target prompt block.",
+                "proposed_micro_rule": micro_rule,
+            }
+        ],
+        "do_not_change": ["core blocks", "retrieval pre-mapping"],
+        "advisor_backend": "mock_schema",
+    }
+
+
+def _proposal_mentions_retrieval(proposal: dict[str, Any]) -> bool:
+    mutation_fields = {
+        "target_block_id": proposal.get("target_block_id", ""),
+        "target_block_family": proposal.get("target_block_family", ""),
+        "mutation_type": proposal.get("mutation_type", ""),
+        "edit_instruction": proposal.get("edit_instruction", ""),
+        "proposed_micro_rule": proposal.get("proposed_micro_rule", ""),
+    }
+    text = json.dumps(mutation_fields, ensure_ascii=False).lower()
+    forbidden = ("retrieval", "top-k", "topk", "service-context", "service context", "premapping", "pre-mapping")
+    return any(item in text for item in forbidden)
+
+
+def _safe_advisor_proposals(payload: dict[str, Any], *, generation: int) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    safe: list[dict[str, Any]] = []
+    rejected: list[dict[str, Any]] = []
+    valid_blocks = set(get_core_blocks()) | set(get_optional_blocks())
+    for idx, raw in enumerate(payload.get("mutation_proposals") or [], start=1):
+        proposal = dict(raw or {})
+        proposal_id = f"advisor_g{generation:03d}_{idx:02d}"
+        proposal["proposal_id"] = proposal_id
+        proposal["advisor_generation"] = generation
+        block_id = str(proposal.get("target_block_id", "") or "")
+        mutation_type = str(proposal.get("mutation_type", "") or "")
+        micro_rule = str(proposal.get("proposed_micro_rule", "") or "")
+        reason = str(proposal.get("reason", "") or "")
+        reject_reason = ""
+        if block_id not in valid_blocks:
+            reject_reason = "unknown target block"
+        elif _proposal_mentions_retrieval(proposal):
+            reject_reason = "proposal attempted to mutate retrieval context"
+        elif block_id in get_core_blocks() and mutation_type in {"block_deactivation", "block_replacement", "remove_core_block"}:
+            reject_reason = "proposal attempted to remove or replace a core block"
+        elif "(#" in micro_rule or ")." in micro_rule:
+            reject_reason = "proposal appears to generate JOILang code instead of a prompt mutation"
+        elif not micro_rule and mutation_type in {"add_micro_rule", "strengthen_rule"}:
+            reject_reason = "missing proposed_micro_rule"
+        if reject_reason:
+            rejected.append({**proposal, "accepted": False, "rejection_reason": reject_reason})
+            continue
+        safe.append({**proposal, "accepted": True, "rejection_reason": ""})
+    return safe, rejected
+
+
+def _advisor_hint_from_proposal(proposal: dict[str, Any]) -> dict[str, str]:
+    return {
+        "failure_type": "advisor_proposal",
+        "affected_block_family": str(proposal.get("target_block_family", "")),
+        "prompt_block_id": str(proposal.get("target_block_id", "02") or "02"),
+        "suggested_mutation_type": str(proposal.get("mutation_type", "add_micro_rule") or "add_micro_rule"),
+        "rule": str(proposal.get("proposed_micro_rule", "") or proposal.get("edit_instruction", "")),
+    }
+
+
+def _call_mutation_advisor(
+    *,
+    args: argparse.Namespace,
+    output_root: Path,
+    generation: int,
+    model_key: str,
+    evaluated_population: list[dict[str, Any]],
+    category_diagnostics: list[dict[str, Any]],
+    feedback_summary: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    if not args.llm_mutation_advisor:
+        return [], []
+    prompt_text = _build_advisor_prompt(
+        generation=generation,
+        model_key=model_key,
+        evaluated_population=evaluated_population,
+        category_diagnostics=category_diagnostics,
+        feedback_summary=feedback_summary,
+        args=args,
+    )
+    prompt_path = output_root / f"advisor_prompt_generation_{generation:03d}.txt"
+    prompt_path.write_text(prompt_text, encoding="utf-8")
+    response_path = output_root / f"advisor_response_generation_{generation:03d}.json"
+    effective_mode = (args.llm_mode or "openai").strip().lower()
+    if effective_mode == "mock":
+        advisor_payload = _mock_advisor_response(generation, model_key, feedback_summary)
+        raw_content = json.dumps(advisor_payload, ensure_ascii=False)
+    else:
+        try:
+            response = call_llm(
+                "You are a prompt-block mutation advisor. Return valid JSON only.",
+                prompt_text,
+                mode=effective_mode,
+                endpoint=args.llm_endpoint,
+                model=_advisor_model_name(args.advisor_model_key),
+                temperature=args.advisor_temperature,
+                max_tokens=1024,
+                timeout_sec=args.timeout_sec,
+                retries=args.retries,
+                log_path=output_root / "logs" / f"advisor_generation_{generation:03d}.json",
+            )
+            raw_content = str(response.get("content", ""))
+            advisor_payload = _extract_json_object(raw_content)
+        except Exception as exc:
+            dump_json(
+                response_path,
+                {
+                    "raw_content": "",
+                    "parsed": {},
+                    "accepted_proposals": [],
+                    "rejected_proposals": [
+                        {
+                            "proposal_id": f"advisor_g{generation:03d}_error",
+                            "accepted": False,
+                            "rejection_reason": f"advisor call failed: {exc}",
+                        }
+                    ],
+                },
+            )
+            return [], [
+                {
+                    "proposal_id": f"advisor_g{generation:03d}_error",
+                    "accepted": False,
+                    "rejection_reason": f"advisor call failed: {exc}",
+                }
+            ]
+    safe, rejected = _safe_advisor_proposals(advisor_payload, generation=generation)
+    dump_json(
+        response_path,
+        {
+            "raw_content": raw_content,
+            "parsed": advisor_payload,
+            "accepted_proposals": safe,
+            "rejected_proposals": rejected,
+        },
+    )
+    return safe, rejected
+
+
+def _avg_prompt_tokens(metrics: dict[str, Any]) -> float:
+    generation_rows = list((metrics.get("generation_summary") or {}).get("rows") or [])
+    if not generation_rows:
+        return 0.0
+    values = []
+    for row in generation_rows:
+        raw = row.get("generation_prompt_tokens_total") or row.get("prompt_tokens") or 0
+        try:
+            values.append(float(raw))
+        except Exception:
+            pass
+    return round(statistics.fmean(values), 4) if values else 0.0
+
+
+def _schema_fail_rate(metrics: dict[str, Any]) -> float:
+    rows = list(metrics.get("rows", []))
+    if not rows:
+        return 0.0
+    schema_failures = 0
+    for row in rows:
+        reasons = [str(reason).split(":", 1)[0] for reason in (row.get("failure_reasons") or [])]
+        if any(reason in {"invalid_json", "schema_missing_keys", "unknown_service", "service_match", "arg_type", "enum_grounding"} for reason in reasons):
+            schema_failures += 1
+    return round((schema_failures / len(rows)) * 100.0, 4)
+
+
+def _metric_summary(metrics: dict[str, Any], *, threshold: float = DET_PASS_THRESHOLD) -> dict[str, Any]:
+    progress = _metric_progress(metrics, threshold=threshold)
+    progress["avg_prompt_tokens"] = _avg_prompt_tokens(metrics)
+    progress["schema_fail_rate"] = _schema_fail_rate(metrics)
+    progress["strict_sdet"] = progress["avg_det_score"]
+    progress["replay_fit"] = ""
+    return progress
+
+
+def _progress_enabled(args: argparse.Namespace, level: str = "minimal") -> bool:
+    if args.progress == "quiet":
+        return False
+    if level == "verbose":
+        return args.progress == "verbose"
+    return True
+
+
+def _print_run_start(args: argparse.Namespace, output_root: Path, model_key: str, categories: list[str]) -> None:
+    if not _progress_enabled(args):
+        return
+    print("[RUN]", flush=True)
+    print(f"model={model_key or 'genome.params.model'}", flush=True)
+    print(f"suite=run_ga_search", flush=True)
+    print(f"categories={','.join(categories) if categories else 'all-selected'}", flush=True)
+    print(f"limit_per_category=N/A", flush=True)
+    print(f"output_root={output_root}", flush=True)
+    print(f"command={' '.join(sys.argv)}", flush=True)
+
+
+def _print_generation(
+    args: argparse.Namespace,
+    *,
+    generation: int,
+    evaluated_count: int,
+    transition: dict[str, Any],
+    top_records: list[dict[str, Any]],
+    best_diffs: list[dict[str, Any]],
+    feedback_summary: list[dict[str, Any]],
+    category_diagnostics: list[dict[str, Any]],
+    advisor_summary: dict[str, Any] | None,
+    previous_best: dict[str, Any] | None,
+) -> None:
+    if not _progress_enabled(args):
+        return
+    best = top_records[0] if top_records else {}
+    previous_det = float((previous_best or {}).get("validation_avg_det_score") or 0.0)
+    delta_det = float(best.get("det", 0.0) or 0.0) - previous_det
+    print(
+        f"[GA][GEN {generation:02d}/{args.gens:02d}]\n"
+        f"population={args.population} evaluated={evaluated_count} elites={transition.get('survived_elites', 0)} "
+        f"crossover={transition.get('new_by_crossover', 0)} mutation={transition.get('new_by_mutation', 0)} "
+        f"advisor={transition.get('new_by_advisor', 0)} rejected={transition.get('promotion_rejected', 0)}\n"
+        f"best={best.get('genome_id', '')} det={float(best.get('det', 0.0) or 0.0):.1f} "
+        f"pass={best.get('det_pass_count', 0)}/{best.get('row_count', 0)} "
+        f"tokens={float(best.get('tokens', 0.0) or 0.0):.0f} delta={delta_det:+.1f}DET",
+        flush=True,
+    )
+    print("[GA][TOP-3]", flush=True)
+    for row in top_records[: max(1, args.top_k)]:
+        print(
+            f"#{row.get('rank')} {row.get('genome_id')} det={float(row.get('det', 0.0) or 0.0):.1f} "
+            f"pass={row.get('det_pass_count', 0)}/{row.get('row_count', 0)} "
+            f"tokens={float(row.get('tokens', 0.0) or 0.0):.0f} "
+            f"core=[{row.get('core_blocks', '')}] optional=[{row.get('optional_blocks', '')}] "
+            f"parent={row.get('parent_ids', '')}",
+            flush=True,
+        )
+    if category_diagnostics:
+        print(f"[GA][DIAGNOSTIC gen={generation:02d}]", flush=True)
+        for item in category_diagnostics[:5]:
+            failures = item.get("failure_histogram", "{}")
+            print(
+                f"cat{item.get('category')}: det={float(item.get('avg_det_score', 0.0) or 0.0):.1f} "
+                f"pass={item.get('det_pass_count', 0)}/{item.get('row_evaluations', 0)} "
+                f"failures={failures}",
+                flush=True,
+            )
+    if best_diffs:
+        print(f"[GA][BLOCK-DIFF best={best.get('genome_id', '')}]", flush=True)
+        print(f"base={best_diffs[0].get('base_genome_id', '')}", flush=True)
+        print("changed:", flush=True)
+        for diff in best_diffs[:6]:
+            print(
+                f"  block_{diff.get('block_id')} {diff.get('field')}: "
+                f"{diff.get('old_value')} -> {diff.get('new_value')}",
+                flush=True,
+            )
+    if feedback_summary:
+        print("[GA][FEEDBACK]", flush=True)
+        applied = []
+        for item in feedback_summary[:5]:
+            applied.append(str(item.get("suggested_mutation_type", "")))
+            print(
+                f"{item.get('failure_type')}={item.get('failure_count')} -> "
+                f"target=[{item.get('affected_block_family')}]",
+                flush=True,
+            )
+        print(f"applied_mutations=[{', '.join(dict.fromkeys(applied))}]", flush=True)
+    if advisor_summary:
+        print(f"[GA][ADVISOR gen={generation:02d}]", flush=True)
+        print(
+            f"accepted={advisor_summary.get('accepted_proposals', 0)} "
+            f"rejected={advisor_summary.get('rejected_proposals', 0)} "
+            f"applied_to_next_generation={transition.get('new_by_advisor', 0)}",
+            flush=True,
+        )
+    print(
+        "[GA][POPULATION-UPDATE]\n"
+        f"survived_elites={transition.get('survived_elites', 0)} "
+        f"new_by_crossover={transition.get('new_by_crossover', 0)} "
+        f"new_by_mutation={transition.get('new_by_mutation', 0)} "
+        f"new_by_advisor={transition.get('new_by_advisor', 0)} "
+        f"new_random={transition.get('new_random', 0)} "
+        f"duplicates_removed={transition.get('duplicates_removed', 0)} "
+        f"next_population={transition.get('next_population', 0)}",
+        flush=True,
+    )
+
+
+def _genome_signature(genome: dict[str, Any]) -> str:
+    payload = {
+        "blocks": normalize_active_blocks(genome.get("blocks") or []),
+        "params": genome.get("params", {}),
+        "block_params": genome.get("block_params", {}),
+    }
+    return json.dumps(payload, ensure_ascii=False, sort_keys=True)
+
+
+def _dedupe_population(population: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int]:
+    seen: set[str] = set()
+    kept: list[dict[str, Any]] = []
+    removed = 0
+    for genome in population:
+        signature = _genome_signature(genome)
+        if signature in seen:
+            removed += 1
+            continue
+        seen.add(signature)
+        kept.append(genome)
+    return kept, removed
 
 
 def _evaluate_one(
@@ -192,6 +1091,8 @@ def _evaluate_one(
     retries: int,
     alpha: float,
     seed: int,
+    det_profile: str,
+    output_root: Path,
 ) -> dict[str, Any]:
     cheap_rows = train_rows[: min(len(train_rows), cheap_eval_limit)]
     quick_metrics = evaluate_genome_on_rows(
@@ -206,6 +1107,8 @@ def _evaluate_one(
         retries=retries,
         seed=seed,
         run_label="ga_quick",
+        det_profile=det_profile,
+        output_dir=output_root / "candidates",
     )
     metrics = quick_metrics
     if len(train_rows) > len(cheap_rows) and float(quick_metrics["avg_det_score"]) > 0.0:
@@ -221,6 +1124,8 @@ def _evaluate_one(
             retries=retries,
             seed=seed,
             run_label="ga_full",
+            det_profile=det_profile,
+            output_dir=output_root / "candidates",
         )
     validation_metrics = evaluate_genome_on_rows(
         profile=profile,
@@ -234,6 +1139,8 @@ def _evaluate_one(
         retries=retries,
         seed=seed + 500000,
         run_label="ga_validation",
+        det_profile=det_profile,
+        output_dir=output_root / "candidates",
     )
     fitness = float(metrics["avg_det_score"]) - alpha * float(metrics["variance"])
     evaluation = {
@@ -245,7 +1152,7 @@ def _evaluate_one(
         "train_metrics": metrics,
         "validation_metrics": validation_metrics,
     }
-    dump_json(RESULTS_DIR / f"genome_{genome['id']}.json", evaluation)
+    dump_json(output_root / "evaluations" / f"genome_{genome['id']}.json", evaluation)
     return evaluation
 
 
@@ -271,8 +1178,12 @@ def _metric_progress(metrics: dict[str, Any], *, threshold: float = DET_PASS_THR
 
 def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
     ensure_workspace()
+    output_root = _resolve_output_root(args.output_root)
+    output_root.mkdir(parents=True, exist_ok=True)
     rng = random.Random(args.seed)
-    base_genome = load_genome(args.genome_json)
+    base_genome = validate_genome_blocks(load_genome(args.genome_json))
+    if args.model_key:
+        base_genome.setdefault("params", {})["model"] = _model_name_for_key(args.model_key)
     service_schema = load_service_schema(args.service_schema)
     rows = load_dataset_rows(args.dataset)
     selected_rows = select_rows(
@@ -284,6 +1195,26 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
     )
     if not selected_rows:
         raise SystemExit("No rows selected. Check --start-row/--end-row/--limit/--category.")
+    categories = sorted({str(row.get("category", "")) for _row_no, row in selected_rows if str(row.get("category", ""))})
+    model_key = args.model_key or str(base_genome.get("params", {}).get("model", ""))
+    model_label = _model_label_for_key(args.model_key) if args.model_key else model_key
+
+    run_manifest = {
+        "profile": args.profile,
+        "model_key": model_key,
+        "model_label": model_label,
+        "dataset": str(Path(args.dataset).expanduser().resolve()),
+        "service_schema": str(Path(args.service_schema).expanduser().resolve()),
+        "selected_row_count": len(selected_rows),
+        "categories": categories,
+        "core_blocks": get_core_blocks(),
+        "optional_blocks": get_optional_blocks(),
+        "retrieval_policy": "fixed runtime service-context construction; not mutated by GA",
+        "fitness": f"AvgDET - {args.alpha} * VarDET",
+        "command": " ".join(sys.argv),
+    }
+    dump_json(output_root / "ga_run_manifest.json", run_manifest)
+    _print_run_start(args, output_root, model_key, categories)
 
     validation_rows = sample_rows(selected_rows, sample_size=args.validation_size, seed=args.seed + 9000)
     validation_row_nos = {row_no for row_no, _ in validation_rows}
@@ -291,8 +1222,60 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
     population = [_random_genome(base_genome, rng) for _ in range(args.population)]
     best_history: list[dict[str, Any]] = []
     generation_progress: list[dict[str, Any]] = []
+    topk_rows: list[dict[str, Any]] = []
+    block_diff_rows: list[dict[str, Any]] = []
+    population_diagnostic_rows: list[dict[str, Any]] = []
+    structured_feedback_records: list[dict[str, Any]] = []
+    structured_feedback_summary_rows: list[dict[str, Any]] = []
+    population_transition_rows: list[dict[str, Any]] = []
+    promotion_rows: list[dict[str, Any]] = []
+    advisor_proposal_rows: list[dict[str, Any]] = []
+    advisor_summary_rows: list[dict[str, Any]] = []
     global_best: dict[str, Any] | None = None
+    accepted_best: dict[str, Any] | None = None
+    previous_generation_best: dict[str, Any] | None = None
     no_improvement_generations = 0
+
+    if args.dry_run:
+        dry_summary = {
+            **run_manifest,
+            "status": "dry_run",
+            "output_root": str(output_root),
+            "generation_progress_csv": str(output_root / "ga_generation_progress.csv"),
+            "structured_feedback_jsonl": str(output_root / "structured_feedback.jsonl"),
+            "initial_population": [
+                {
+                    "genome_id": genome.get("id", ""),
+                    "core_blocks": active_block_summary(genome)["core"],
+                    "optional_blocks": active_block_summary(genome)["optional"],
+                    "params": genome.get("params", {}),
+                }
+                for genome in population
+            ],
+            "artifacts": {
+                "ga_generation_progress_csv": str(output_root / "ga_generation_progress.csv"),
+                "ga_population_diagnostics_csv": str(output_root / "ga_population_diagnostics.csv"),
+                "structured_feedback_jsonl": str(output_root / "structured_feedback.jsonl"),
+                "advisor_mutation_proposals_jsonl": str(output_root / "advisor_mutation_proposals.jsonl"),
+                "promotion_decisions_csv": str(output_root / "promotion_decisions.csv"),
+            },
+        }
+        dump_json(output_root / "ga_summary.json", dry_summary)
+        dump_json(output_root / "best_prompt_metadata.json", {"status": "dry_run", "core_blocks": get_core_blocks(), "optional_blocks": get_optional_blocks()})
+        atomic_write_csv(output_root / "ga_generation_progress.csv", ["generation", "model_key", "genome_id"], [])
+        _write_jsonl(output_root / "ga_generation_progress.jsonl", [])
+        atomic_write_csv(output_root / "ga_topk_genomes.csv", ["generation", "rank", "genome_id"], [])
+        _write_jsonl(output_root / "ga_block_diffs.jsonl", [])
+        atomic_write_csv(output_root / "ga_population_diagnostics.csv", ["generation", "model_key", "category"], [])
+        _write_jsonl(output_root / "ga_population_diagnostics.jsonl", [])
+        _write_jsonl(output_root / "advisor_mutation_proposals.jsonl", [])
+        atomic_write_csv(output_root / "advisor_mutation_summary.csv", ["generation", "proposal_id", "accepted"], [])
+        _write_jsonl(output_root / "structured_feedback.jsonl", [])
+        atomic_write_csv(output_root / "structured_feedback_summary.csv", ["failure_type", "failure_count"], [])
+        atomic_write_csv(output_root / "population_transitions.csv", ["generation", "next_population"], [])
+        atomic_write_csv(output_root / "promotion_decisions.csv", PROMOTION_COLUMNS, [])
+        dump_json(output_root / "promotion_decisions.json", {"rows": []})
+        return dry_summary
 
     for generation in range(1, args.gens + 1):
         train_rows = sample_rows(
@@ -320,6 +1303,8 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
                 retries=args.retries,
                 alpha=args.alpha,
                 seed=args.seed + generation + int(genome.get("seed", 0)) % 10000,
+                det_profile=args.det_profile,
+                output_root=output_root,
             )
             evaluated_population.append(evaluation)
 
@@ -327,26 +1312,105 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
             key=lambda item: (-float(item["fitness"]), -float(item["validation_avg_det_score"]), item["genome"]["id"])
         )
         generation_best = evaluated_population[0]
-        train_progress = _metric_progress(generation_best["train_metrics"])
-        validation_progress = _metric_progress(generation_best["validation_metrics"])
+        train_progress = _metric_summary(generation_best["train_metrics"])
+        validation_progress = _metric_summary(generation_best["validation_metrics"])
+        best_meta = generation_best["genome"].get("_ga_metadata", {}) or {}
+        active = active_block_summary(generation_best["genome"])
+        parent_ids = ",".join(str(item) for item in best_meta.get("parent_ids", []) or [])
+        mutation_types = ",".join(str(item) for item in best_meta.get("mutation_types", []) or [])
+        feedback_types_used = ",".join(str(item) for item in best_meta.get("feedback_types_used", []) or [])
         progress_record = {
             "profile": args.profile,
             "generation": generation,
+            "model_key": model_key,
             "genome_id": generation_best["genome"]["id"],
+            "parent_ids": parent_ids,
             "model": str(generation_best["genome"].get("params", {}).get("model", "")),
             "fitness": generation_best["fitness"],
+            "avg_det_score": validation_progress["avg_det_score"],
+            "det_pass_rate": validation_progress["det_pass_rate"],
+            "det_variance": validation_progress["variance"],
+            "avg_prompt_tokens": validation_progress["avg_prompt_tokens"],
+            "strict_sdet": validation_progress["strict_sdet"] if args.det_profile == "strict" else "",
+            "replay_fit": validation_progress["replay_fit"],
+            "schema_fail_rate": validation_progress["schema_fail_rate"],
             "train_avg_det_score": train_progress["avg_det_score"],
-            "train_variance": train_progress["variance"],
             "train_det_pass_rate": train_progress["det_pass_rate"],
-            "train_gt_exact_rate": train_progress["gt_exact_rate"],
             "validation_avg_det_score": validation_progress["avg_det_score"],
-            "validation_variance": validation_progress["variance"],
             "validation_det_pass_rate": validation_progress["det_pass_rate"],
             "validation_gt_exact_rate": validation_progress["gt_exact_rate"],
-            "replay_acc_rate_proxy": validation_progress["gt_exact_rate"],
             "candidate_strategies": "|".join(str(item) for item in generation_best["genome"].get("params", {}).get("candidate_strategies", []) or []),
-            "blocks": "|".join(str(item) for item in generation_best["genome"].get("blocks", []) or []),
+            "active_core_blocks": ",".join(active["core"]),
+            "active_optional_blocks": ",".join(active["optional"]),
+            "mutation_types": mutation_types,
+            "crossover_used": bool(best_meta.get("crossover_used", False)),
+            "advisor_used": bool(best_meta.get("advisor_used", False)),
+            "feedback_types_used": feedback_types_used,
+            "promoted_candidate": False,
         }
+
+        generation_feedback_records: list[dict[str, Any]] = []
+        for item in evaluated_population:
+            generation_feedback_records.extend(
+                feedback_records_from_rows(
+                    list(item["validation_metrics"].get("rows", [])),
+                    model_key=model_key,
+                    genome_id=str(item["genome"].get("id", "")),
+                    generation=generation,
+                    det_profile=args.det_profile,
+                )
+            )
+        structured_feedback_records.extend(generation_feedback_records)
+        generation_feedback_summary = summarize_deterministic_feedback(generation_feedback_records)
+        structured_feedback_summary_rows.extend(
+            {**row, "generation": generation, "model_key": model_key} for row in generation_feedback_summary
+        )
+        generation_category_diagnostics = _category_diagnostics(
+            generation=generation,
+            model_key=model_key,
+            evaluated_population=evaluated_population,
+        )
+        population_diagnostic_rows.extend(generation_category_diagnostics)
+
+        replay_gate_pass = True
+        regression_gate_pass = True
+        rejection_reason = ""
+        promoted = False
+        if accepted_best is None:
+            promoted = True
+        else:
+            accepted_validation = _metric_summary(accepted_best["validation_metrics"])
+            if validation_progress["avg_det_score"] < accepted_validation["avg_det_score"]:
+                regression_gate_pass = False
+                rejection_reason = "candidate regressed avg DET versus previous accepted prompt"
+            elif validation_progress["det_pass_rate"] < accepted_validation["det_pass_rate"]:
+                regression_gate_pass = False
+                rejection_reason = "candidate regressed DETPass versus previous accepted prompt"
+            else:
+                promoted = True
+        accepted_prompt_path = ""
+        previous_accepted_prompt = str((accepted_best or {}).get("genome", {}).get("id", ""))
+        if promoted:
+            accepted_best = generation_best
+            progress_record["promoted_candidate"] = True
+            accepted_prompt_path = str(output_root / "accepted_genomes" / f"generation_{generation:03d}_{generation_best['genome']['id']}.json")
+            dump_json(accepted_prompt_path, generation_best["genome"])
+        promotion_rows.append(
+            {
+                "generation": generation,
+                "candidate_id": generation_best["genome"]["id"],
+                "model_key": model_key,
+                "DETPass": validation_progress["det_pass_rate"],
+                "SDET": validation_progress["avg_det_score"],
+                "avg_prompt_tokens": validation_progress["avg_prompt_tokens"],
+                "replay_gate_pass": replay_gate_pass,
+                "regression_gate_pass": regression_gate_pass,
+                "promoted": promoted,
+                "rejection_reason": rejection_reason,
+                "accepted_prompt_path": accepted_prompt_path,
+                "previous_accepted_prompt": previous_accepted_prompt,
+            }
+        )
         generation_progress.append(progress_record)
         best_history.append(
             {
@@ -359,11 +1423,46 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
                 "train_gt_exact_rate": train_progress["gt_exact_rate"],
                 "validation_det_pass_rate": validation_progress["det_pass_rate"],
                 "validation_gt_exact_rate": validation_progress["gt_exact_rate"],
-                "replay_acc_rate_proxy": validation_progress["gt_exact_rate"],
                 "genome": generation_best["genome"],
             }
         )
-        dump_json(CHECKPOINTS_DIR / f"ga_generation_{generation:03d}.json", {"generation": generation, "population": evaluated_population})
+        dump_json(output_root / "checkpoints" / f"ga_generation_{generation:03d}.json", {"generation": generation, "population": evaluated_population})
+
+        generation_top_rows: list[dict[str, Any]] = []
+        for rank, item in enumerate(evaluated_population[: max(1, args.top_k)], start=1):
+            validation = _metric_summary(item["validation_metrics"])
+            item_active = active_block_summary(item["genome"])
+            item_meta = item["genome"].get("_ga_metadata", {}) or {}
+            top_row = {
+                "generation": generation,
+                "rank": rank,
+                "model_key": model_key,
+                "genome_id": item["genome"]["id"],
+                "det": validation["avg_det_score"],
+                "det_pass_rate": validation["det_pass_rate"],
+                "det_pass_count": validation["det_pass_count"],
+                "row_count": validation["row_count"],
+                "tokens": validation["avg_prompt_tokens"],
+                "core_blocks": ",".join(item_active["core"]),
+                "optional_blocks": ",".join(item_active["optional"]),
+                "parent_ids": ",".join(str(parent) for parent in item_meta.get("parent_ids", []) or []),
+                "major_mutations": ",".join(str(mut) for mut in item_meta.get("mutation_types", []) or []),
+                "advisor_proposal_id": item_meta.get("advisor_proposal_id", ""),
+                "fitness": item["fitness"],
+            }
+            generation_top_rows.append(top_row)
+            topk_rows.append(top_row)
+
+        best_diffs = [
+            {
+                "generation": generation,
+                "genome_id": generation_best["genome"]["id"],
+                "base_genome_id": str((generation_best["genome"].get("_ga_metadata", {}) or {}).get("base_genome_id", "")),
+                **diff,
+            }
+            for diff in (generation_best["genome"].get("_ga_metadata", {}) or {}).get("diffs", [])
+        ]
+        block_diff_rows.extend(best_diffs)
 
         if global_best is None or float(generation_best["validation_avg_det_score"]) > float(global_best["validation_avg_det_score"]):
             global_best = generation_best
@@ -403,6 +1502,8 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
                     retries=args.retries,
                     alpha=args.alpha,
                     seed=args.seed + generation + 12345,
+                    det_profile=args.det_profile,
+                    output_root=output_root,
                 )
                 evaluated_population.append(injected_eval)
                 evaluated_population.sort(
@@ -413,44 +1514,203 @@ def run_ga_search(args: argparse.Namespace) -> dict[str, Any]:
                     global_best = generation_best
                 no_improvement_generations = 0
 
-        elites = [item["genome"] for item in evaluated_population[: max(1, args.elites)]]
+        advisor_safe_proposals, advisor_rejected_proposals = _call_mutation_advisor(
+            args=args,
+            output_root=output_root,
+            generation=generation,
+            model_key=model_key,
+            evaluated_population=evaluated_population,
+            category_diagnostics=generation_category_diagnostics,
+            feedback_summary=generation_feedback_summary,
+        )
+        for proposal in advisor_safe_proposals + advisor_rejected_proposals:
+            advisor_proposal_rows.append(
+                {
+                    "generation": generation,
+                    "proposal_id": proposal.get("proposal_id", ""),
+                    "model_key": model_key,
+                    "target_block_id": proposal.get("target_block_id", ""),
+                    "target_block_family": proposal.get("target_block_family", ""),
+                    "mutation_type": proposal.get("mutation_type", ""),
+                    "priority": proposal.get("priority", ""),
+                    "accepted": proposal.get("accepted", False),
+                    "rejection_reason": proposal.get("rejection_reason", ""),
+                    "reason": proposal.get("reason", ""),
+                    "proposed_micro_rule": proposal.get("proposed_micro_rule", ""),
+                }
+            )
+        if args.llm_mutation_advisor:
+            advisor_summary_rows.append(
+                {
+                    "generation": generation,
+                    "model_key": model_key,
+                    "accepted_proposals": len(advisor_safe_proposals),
+                    "rejected_proposals": len(advisor_rejected_proposals),
+                    "proposal_ids": ",".join(str(item.get("proposal_id", "")) for item in advisor_safe_proposals),
+                }
+            )
+
+        advisor_slots = min(len(advisor_safe_proposals), max(0, args.population - 1))
+        elite_count = max(1, min(args.elites, args.population - advisor_slots))
+        elites = [item["genome"] for item in evaluated_population[:elite_count]]
         next_population: list[dict[str, Any]] = [_copy_genome(genome) for genome in elites]
+        new_by_crossover = 0
+        new_by_mutation = 0
+        new_by_advisor = 0
+        new_random = 0
+        feedback_hint = suggest_mutation_from_feedback(generation_feedback_summary) if args.feedback_guided_mutation else None
+        for proposal in advisor_safe_proposals:
+            if len(next_population) >= args.population:
+                break
+            parent = _copy_genome(generation_best["genome"])
+            child, child_diffs = _mutate_genome(
+                parent,
+                rng,
+                feedback_hint=_advisor_hint_from_proposal(proposal),
+                advisor_proposal=proposal,
+            )
+            next_population.append(child)
+            new_by_advisor += 1
+            new_by_mutation += 1
+            block_diff_rows.extend(
+                {
+                    "generation": generation + 1,
+                    "genome_id": child["id"],
+                    "base_genome_id": str((child.get("_ga_metadata", {}) or {}).get("base_genome_id", "")),
+                    **diff,
+                }
+                for diff in child_diffs
+            )
         while len(next_population) < args.population:
             parent_a = _tournament_select(evaluated_population, rng)
+            child_diffs: list[dict[str, Any]] = []
             if rng.random() < args.crossover_rate and len(evaluated_population) > 1:
                 parent_b = _tournament_select(evaluated_population, rng)
-                child = _crossover(parent_a, parent_b, rng)
+                child, crossover_meta = _crossover(parent_a, parent_b, rng)
+                new_by_crossover += 1
             else:
                 child = _copy_genome(parent_a)
                 child["id"] = f"gen-{seeded_uuid(rng)}"
                 child["seed"] = rng.randint(1, 10**9)
+                child = _annotate_genome(
+                    child,
+                    parent_ids=[str(parent_a.get("id", ""))],
+                    mutation_types=[],
+                    crossover_used=False,
+                    base_genome_id=str(parent_a.get("id", "")),
+                )
             if rng.random() < args.mutation_rate:
-                child = _mutate_genome(child, rng)
+                chosen_hint = feedback_hint if args.feedback_guided_mutation and feedback_hint and rng.random() < 0.75 else None
+                child, child_diffs = _mutate_genome(child, rng, feedback_hint=chosen_hint)
+                new_by_mutation += 1
+                block_diff_rows.extend(
+                    {
+                        "generation": generation + 1,
+                        "genome_id": child["id"],
+                        "base_genome_id": str((child.get("_ga_metadata", {}) or {}).get("base_genome_id", "")),
+                        **diff,
+                    }
+                    for diff in child_diffs
+                )
             next_population.append(child)
+        next_population, duplicates_removed = _dedupe_population(next_population)
+        while len(next_population) < args.population:
+            next_population.append(_random_genome(base_genome, rng))
+            new_random += 1
         population = next_population[: args.population]
 
-        dump_json(RESULTS_DIR / "best_genomes.json", best_history)
+        transition = {
+            "generation": generation,
+            "survived_elites": len(elites),
+            "new_by_crossover": new_by_crossover,
+            "new_by_mutation": new_by_mutation,
+            "new_by_advisor": new_by_advisor,
+            "new_random": new_random,
+            "duplicates_removed": duplicates_removed,
+            "next_population": len(population),
+            "promotion_rejected": 0 if promoted else 1,
+        }
+        population_transition_rows.append(transition)
+
+        _print_generation(
+            args,
+            generation=generation,
+            evaluated_count=len(evaluated_population),
+            transition=transition,
+            top_records=generation_top_rows,
+            best_diffs=best_diffs,
+            feedback_summary=generation_feedback_summary,
+            category_diagnostics=generation_category_diagnostics,
+            advisor_summary=advisor_summary_rows[-1] if advisor_summary_rows and advisor_summary_rows[-1].get("generation") == generation else None,
+            previous_best=previous_generation_best,
+        )
+        previous_generation_best = generation_best
+
+        dump_json(output_root / "best_genomes.json", best_history)
         atomic_write_csv(
-            RESULTS_DIR / "ga_generation_progress.csv",
+            output_root / "ga_generation_progress.csv",
             list(progress_record.keys()),
             generation_progress,
         )
-        with (RESULTS_DIR / "ga_generation_progress.jsonl").open("w", encoding="utf-8") as handle:
-            for item in generation_progress:
-                handle.write(json.dumps(item, ensure_ascii=False) + "\n")
+        _write_jsonl(output_root / "ga_generation_progress.jsonl", generation_progress)
+        atomic_write_csv(output_root / "ga_topk_genomes.csv", list(topk_rows[0].keys()), topk_rows)
+        _write_jsonl(output_root / "ga_block_diffs.jsonl", block_diff_rows)
+        if population_diagnostic_rows:
+            atomic_write_csv(output_root / "ga_population_diagnostics.csv", list(population_diagnostic_rows[0].keys()), population_diagnostic_rows)
+        else:
+            atomic_write_csv(output_root / "ga_population_diagnostics.csv", ["generation", "model_key", "category"], [])
+        _write_jsonl(output_root / "ga_population_diagnostics.jsonl", population_diagnostic_rows)
+        _write_jsonl(output_root / "advisor_mutation_proposals.jsonl", advisor_proposal_rows)
+        if advisor_proposal_rows:
+            atomic_write_csv(output_root / "advisor_mutation_summary.csv", list(advisor_proposal_rows[0].keys()), advisor_proposal_rows)
+        else:
+            atomic_write_csv(output_root / "advisor_mutation_summary.csv", ["generation", "proposal_id", "accepted"], [])
+        _write_jsonl(output_root / "structured_feedback.jsonl", structured_feedback_records)
+        if structured_feedback_summary_rows:
+            atomic_write_csv(output_root / "structured_feedback_summary.csv", list(structured_feedback_summary_rows[0].keys()), structured_feedback_summary_rows)
+        else:
+            atomic_write_csv(output_root / "structured_feedback_summary.csv", ["generation", "model_key", "failure_type", "failure_count"], [])
+        atomic_write_csv(output_root / "population_transitions.csv", list(population_transition_rows[0].keys()), population_transition_rows)
+        atomic_write_csv(output_root / "promotion_decisions.csv", PROMOTION_COLUMNS, promotion_rows)
+        dump_json(output_root / "promotion_decisions.json", {"rows": promotion_rows})
 
     final_best = global_best if global_best is not None else {}
     summary = {
         "best_history": best_history,
-        "generation_progress_csv": str(RESULTS_DIR / "ga_generation_progress.csv"),
-        "generation_progress_jsonl": str(RESULTS_DIR / "ga_generation_progress.jsonl"),
+        "output_root": str(output_root),
+        "generation_progress_csv": str(output_root / "ga_generation_progress.csv"),
+        "generation_progress_jsonl": str(output_root / "ga_generation_progress.jsonl"),
+        "topk_genomes_csv": str(output_root / "ga_topk_genomes.csv"),
+        "block_diffs_jsonl": str(output_root / "ga_block_diffs.jsonl"),
+        "population_diagnostics_csv": str(output_root / "ga_population_diagnostics.csv"),
+        "population_diagnostics_jsonl": str(output_root / "ga_population_diagnostics.jsonl"),
+        "advisor_mutation_proposals_jsonl": str(output_root / "advisor_mutation_proposals.jsonl"),
+        "advisor_mutation_summary_csv": str(output_root / "advisor_mutation_summary.csv"),
+        "structured_feedback_jsonl": str(output_root / "structured_feedback.jsonl"),
+        "structured_feedback_summary_csv": str(output_root / "structured_feedback_summary.csv"),
+        "population_transitions_csv": str(output_root / "population_transitions.csv"),
+        "promotion_decisions_csv": str(output_root / "promotion_decisions.csv"),
         "best_genome": final_best.get("genome") if final_best else None,
         "best_fitness": final_best.get("fitness") if final_best else None,
         "best_validation_avg_det_score": final_best.get("validation_avg_det_score") if final_best else None,
+        "fitness_formula": f"AvgDET - {args.alpha} * VarDET",
+        "retrieval_policy": "fixed runtime service-context construction; not mutated by GA",
     }
-    dump_json(RESULTS_DIR / "ga_summary.json", summary)
+    dump_json(output_root / "ga_summary.json", summary)
     if summary["best_genome"] is not None:
-        dump_json(RESULTS_DIR / "best_genome.json", summary["best_genome"])
+        dump_json(output_root / "best_genome.json", summary["best_genome"])
+        best_summary = active_block_summary(summary["best_genome"])
+        dump_json(
+            output_root / "best_prompt_metadata.json",
+            {
+                "genome_id": summary["best_genome"].get("id", ""),
+                "core_blocks": best_summary["core"],
+                "optional_blocks": best_summary["optional"],
+                "params": summary["best_genome"].get("params", {}),
+                "block_params": summary["best_genome"].get("block_params", {}),
+                "full_prompt_printed": False,
+            },
+        )
     return summary
 
 
@@ -458,6 +1718,12 @@ def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
     summary = run_ga_search(args)
+    if args.progress == "quiet":
+        print("GA search completed")
+        print(f"- summary: {summary.get('output_root', '')}/ga_summary.json")
+        print(f"- generation progress: {summary.get('generation_progress_csv', '')}")
+        print(f"- structured feedback: {summary.get('structured_feedback_jsonl', '')}")
+        return 0
     print("GA search completed")
     print(f"- best_fitness: {summary.get('best_fitness')}")
     print(f"- best_validation_avg_det_score: {summary.get('best_validation_avg_det_score')}")

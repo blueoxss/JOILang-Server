@@ -15,6 +15,87 @@
   - `peak VRAM`
   - `OOM/failure rate`
 
+## 1-A. Final Paper Study Stages
+
+최종 논문용 실행은 `scripts/run_paper_full_study.py`가 stage 단위로 orchestration합니다.
+
+1. unit-level validation
+2. dry-run validation
+3. one-row smoke test
+4. small category subset test
+5. small GA generation smoke test
+6. two-model Qwen 7B/14B reproducible subset
+7. full five-model long run
+8. artifact export
+
+각 stage는 `results/paper_study_<timestamp>/stage_status/*.json`에 상태를 남깁니다. `--resume`을 사용하면 완료된 stage를 건너뛰고, 기본적으로 timestamped result directory를 새로 만들기 때문에 이전 실험을 덮어쓰지 않습니다.
+
+### Paper Variants
+
+- `B0`: manually designed local baseline. 없으면 `N/A`이며 숫자를 만들지 않습니다.
+- `B1`: GPT-4.1-mini cloud reference.
+- `B2`: direct cloud-to-local transfer.
+- `B3`: fixed block without GA.
+- `B4`: random search over the same block space.
+- `B5`: GA + benchmark supervision only.
+- `B6`: full GPS / PromptOps with deterministic validation, replay feedback, and regression-aware acceptance.
+
+### Fixed Retrieval Scope
+
+Retrieval pre-mapping은 실험 조건의 fixed runtime context입니다. GA는 retrieval mechanism을 mutation하지 않습니다. 비교 공정성을 위해 B2/B3/B4/B5/B6 모두 같은 retrieval policy를 사용해야 합니다.
+
+### GA Fitness and Feedback
+
+현재 GA selection signal은 `fitness = AvgDET - alpha * VarDET`입니다. token/latency는 GA fitness에 직접 들어가지 않으며, 최종 deployment comparison에서 별도로 보고합니다.
+
+Prompt artifact genotype은 core block과 optional guidance block으로 나뉩니다.
+
+- Core blocks: `01`, `02`
+- Optional guidance blocks: `03`, `05`, `06`
+
+Core blocks는 항상 포함됩니다. Optional guidance blocks는 GA가 activation/deactivation/replacement 대상으로 삼을 수 있습니다. `blocks=[...]`는 active prompt-block IDs를 뜻하며, cloud prompt를 임의 fragment로 잘라 쓴다는 의미가 아닙니다.
+
+`utils/prompt_surgery_rules.py`는 `version0_13`의 수동 DET prompt repair 지식을 v15 GA용 deterministic feedback mapping으로 정리합니다.
+
+- `invalid_json`: Output_Schema / JSON-only 강화
+- `unknown_service`: Service_Mapping / canonical service name 강화
+- `arg_type`, `enum_grounding`: Enum_Grounding / enum-type grounding 강화
+- `numeric_grounding`, `temporal_error`: Temporal_Rule / elapsed-time, unit grounding 강화
+- `gt_receiver_coverage`: Owner_Device_Rule / receiver binding 강화
+- `dataflow`: Dataflow / sensor-to-action flow 강화
+- `extraneous`: Minimality / no-unrelated-action 강화
+
+Optional LLM mutation advisor:
+
+- `--llm-mutation-advisor`를 켜면 population-level diagnostics를 보고 prompt-block mutation proposal만 생성합니다.
+- Advisor는 JOILang code를 생성하지 않고, retrieval pre-mapping/top-k/service context를 변경하지 않습니다.
+- Advisor proposal은 다음 세대 child genome으로 들어가며 일반 deterministic validation과 promotion gate를 통과해야 합니다.
+
+Structured deterministic feedback은 다음 파일에 저장됩니다.
+
+- `results/paper_study_<timestamp>/structured_feedback.jsonl`
+- `results/paper_study_<timestamp>/structured_feedback_summary.csv`
+
+GA 단독 실행에서는 아래 파일에 저장됩니다.
+
+- `results/ga_search_<timestamp>/structured_feedback.jsonl`
+- `results/ga_search_<timestamp>/structured_feedback_summary.csv`
+- `results/ga_search_<timestamp>/ga_block_diffs.jsonl`
+- `results/ga_search_<timestamp>/ga_population_diagnostics.csv`
+- `results/ga_search_<timestamp>/advisor_mutation_proposals.jsonl`
+- `results/ga_search_<timestamp>/advisor_mutation_summary.csv`
+- `results/ga_search_<timestamp>/population_transitions.csv`
+
+Replay cases는 `ReplayAcc` main leaderboard column이 아니라 `ReplayFit` 또는 `replay_gate_pass` 형태의 feedback/acceptance 조건입니다.
+
+### Acceptance Gate Semantics
+
+- Candidate prompt는 생성됩니다.
+- Candidate prompt는 benchmark/replay/regression으로 평가됩니다.
+- Gate를 실패하면 promotion만 거절됩니다.
+- 이전 accepted prompt는 계속 active 상태로 유지됩니다.
+- rejection reason은 promotion artifact에 저장됩니다.
+
 ## 2. cold vs warm 정의
 
 - `cold_load_sec`

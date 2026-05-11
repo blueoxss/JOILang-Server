@@ -1,0 +1,9 @@
+{
+  "stage": "model_availability",
+  "timestamp": "2026-05-08T16:44:43",
+  "status": "completed",
+  "artifacts": {
+    "csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_20260508_164443/availability_summary.csv",
+    "json": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_20260508_164443/availability_summary.json"
+  }
+}

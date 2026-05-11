@@ -168,6 +168,236 @@ python gpt_mg/version0_15_update20260413/scripts/run_benchmark.py \
   --strict-availability
 ```
 
+## Final Paper Study Pipeline
+
+최종 논문 “Genetic Prompt Search for JOILang Code Generation under Deterministic Validation and Operational Feedback”의 산출물은 아래 entrypoint를 기준으로 생성합니다.
+
+```bash
+python gpt_mg/version0_15_update20260413/scripts/run_paper_full_study.py \
+  --suite paper_local5 \
+  --include-cloud-ref \
+  --models phi35_mini,qwen25_coder_7b,llama31_8b,gemma2_9b_it,qwen25_coder_14b \
+  --categories 1,2,3,4,5,6,7,8 \
+  --paper-fair-mode \
+  --resume \
+  --quiet-final-summary \
+  --full-run
+```
+
+가벼운 검증만 할 때:
+
+```bash
+python gpt_mg/version0_15_update20260413/scripts/run_paper_full_study.py \
+  --dry-run \
+  --smoke \
+  --include-cloud-ref \
+  --models qwen25_coder_7b \
+  --categories 1 \
+  --limit-per-category 1 \
+  --quiet-final-summary
+```
+
+### B0-B6 Definitions
+
+- `B0`: local hand-crafted baseline. 구현/실행 결과가 없으면 숫자를 만들지 않고 `N/A`로 표시합니다.
+- `B1`: GPT-4.1-mini cloud reference. local deployment point가 아니라 cloud upper reference입니다.
+- `B2`: direct cloud-to-local transfer. B1 prompt를 local model에 그대로 적용하며 model-specific GA adaptation은 없습니다.
+- `B3`: fixed block. block prompt를 쓰지만 GA search를 끕니다.
+- `B4`: random search. 같은 block search space를 쓰되 guided GA 대신 unguided random search를 비교 축으로 둡니다.
+- `B5`: GA + benchmark only. replay feedback을 search/acceptance에 쓰지 않는 GA 조건입니다.
+- `B6`: full GPS / PromptOps. block-structured GA search, benchmark supervision, replay cases, deterministic validation, regression-aware acceptance를 함께 사용합니다.
+
+### Cloud-to-Block Equivalence
+
+cloud reference prompt를 block으로 쪼개는 것 자체가 성능을 떨어뜨리지 않는지 먼저 확인합니다.
+
+```bash
+python gpt_mg/version0_15_update20260413/scripts/run_cloud_blocks_equivalence.py \
+  --category 1 \
+  --limit-per-category 1 \
+  --det-profile strict \
+  --quiet-final-summary
+```
+
+출력:
+
+- `results/cloud_to_blocks_equivalence_<timestamp>/summary.json`
+- `results/cloud_to_blocks_equivalence_<timestamp>/monolith_vs_blocks.csv`
+- `results/cloud_to_blocks_equivalence_<timestamp>/command.txt`
+- `results/cloud_to_blocks_equivalence_<timestamp>/README.md`
+
+`README.md`에는 “This verifies that prompt block decomposition itself does not degrade the cloud reference behavior.” 문장이 포함됩니다.
+
+### Retrieval and GA Boundary
+
+Retrieval pre-mapping은 고정 runtime context construction입니다.
+
+- `service_list_snippet` / service context injection은 runtime capability-scope injection path입니다.
+- GA가 mutation 대상으로 삼을 수 있는 것은 prompt block 활성화, micro-rule wording, few-shot count, candidate strategy, compression/max-token setting, repair clause입니다.
+- GA는 retrieval top-k 생성 방식, retrieval model, service shortlist construction 자체를 mutation하지 않습니다.
+
+### Deterministic Feedback and Acceptance
+
+DET failure는 structured feedback으로 저장되어 이후 prompt mutation 또는 repair clause injection의 근거가 됩니다.
+
+출력:
+
+- `results/paper_study_<timestamp>/structured_feedback.jsonl`
+- `results/paper_study_<timestamp>/structured_feedback_summary.csv`
+
+대표 mapping:
+
+- schema violation -> `output_schema` / `output_format`
+- invalid JSON -> `output_format`
+- temporal or numeric error -> `temporal_rule` / unit grounding
+- owner/device mismatch -> `owner_device_rule`
+- enum/type mismatch -> `schema_enum_grounding`
+- service coverage/mapping miss -> `service_mapping`
+
+Replay cases는 main leaderboard metric이 아니라 operational feedback 및 acceptance gate입니다. 즉 candidate prompt는 생성되고 평가되지만, replay/regression gate를 통과하지 못하면 promoted prompt가 되지 않습니다. 이전 accepted prompt는 그대로 유지되고 rejection reason이 저장됩니다.
+
+Promotion output:
+
+- `results/paper_study_<timestamp>/paper/promotion/promotion_decisions.csv`
+- `results/paper_study_<timestamp>/paper/promotion/promotion_decisions.json`
+- `results/paper_study_<timestamp>/PROMOTION.md`
+
+### Required Paper Artifacts
+
+Full or dry-run study는 다음 위치를 고정으로 만듭니다. 실제 측정이 없으면 값을 지어내지 않고 `pending` 또는 `N/A`로 표시합니다.
+
+- Figure 1: `results/paper_study_<timestamp>/paper/figures/figure1_prompt_search_dynamics_across_model_scales.png`
+- Figure 1 data: `results/paper_study_<timestamp>/paper/figure_data/figure1_generation_dynamics.csv`
+- Figure 2: `results/paper_study_<timestamp>/paper/figures/figure2_deployment_aware_pareto_frontier_final.png`
+- Figure 2 data: `results/paper_study_<timestamp>/paper/figure_data/figure2_pareto_points.csv`
+- Table 3: `results/paper_study_<timestamp>/paper/tables/table3_main_results.csv`
+- Table 4: `results/paper_study_<timestamp>/paper/tables/table4_ablation_qwen14.csv`
+- Final manifest: `results/paper_study_<timestamp>/paper/final_artifacts_manifest.json`
+
+Model availability is always recorded:
+
+- `results/paper_study_<timestamp>/availability_summary.csv`
+- `results/paper_study_<timestamp>/availability_summary.json`
+
+## GA Prompt-Block Search Core
+
+`run_ga_search.py`는 prompt를 arbitrary text fragment가 아니라 block-structured artifact genotype으로 다룹니다.
+
+Core blocks:
+
+- `01`: system/base JOILang constraints
+- `02`: service grounding, output schema foundation, basic JSON rules
+
+Optional guidance blocks:
+
+- `03`: postprocessor / JSON-only / minimality guidance
+- `05`: repair clause guidance
+- `06`: deterministic validation helper, temporal/dataflow/skeleton guidance
+
+`blocks=[...]`는 candidate prompt를 렌더링하는 active prompt-block IDs를 뜻합니다. 원본 cloud prompt 조각을 임의로 잘라 붙인다는 의미가 아닙니다. Core blocks는 항상 포함되고, optional guidance blocks만 GA가 켜고 끄거나 block parameter/micro-rule을 바꿉니다.
+
+GA가 바꿀 수 있는 것:
+
+- optional block activation/deactivation/replacement
+- same block family 안에서 `blocks/generated/`의 대체 block artifact로 source_file replacement
+- few-shot count
+- max tokens / candidate strategies / compression-style prompt parameters
+- micro-rules and repair clauses
+- deterministic validation feedback에서 유도된 targeted rule
+- optional LLM mutation advisor가 제안한 prompt-block micro-rule
+
+GA가 바꾸면 안 되는 것:
+
+- retrieval pre-mapping mechanism
+- retrieval top-k policy
+- service context construction path
+
+### Deterministic Feedback To Prompt Surgery
+
+`utils/prompt_surgery_rules.py`는 `version0_13`에서 수동으로 축적했던 DET 기반 prompt repair 지식을 v15 GA가 재사용할 수 있는 작은 registry로 정리합니다.
+
+대표 mapping:
+
+- `invalid_json` -> `Output_Schema` / `strengthen_json_only_rule`
+- `unknown_service` -> `Service_Mapping` / `add_canonical_service_name_rule`
+- `arg_type`, `enum_grounding` -> `Enum_Grounding` / `strengthen_enum_type_rule`
+- `numeric_grounding`, `temporal_error` -> `Temporal_Rule` / `strengthen_temporal_rule`
+- `gt_receiver_coverage` -> `Owner_Device_Rule` / `strengthen_owner_device_rule`
+- `dataflow` -> `Dataflow` / `add_sensor_to_action_flow_rule`
+- `extraneous` -> `Minimality` / `strengthen_no_unrelated_action_rule`
+
+이 mapping은 row 하나에 대한 hard-code가 아니라 failure reason family를 prompt block family와 mutation type으로 연결하는 공통 feedback source입니다.
+
+### LLM Mutation Advisor
+
+`--llm-mutation-advisor`를 켜면 generation 끝에서 population-level diagnostics를 요약해 별도 LLM advisor에게 prompt-block mutation 제안만 요청합니다.
+
+Advisor의 역할:
+
+- top/bottom genome, category diagnostics, failure histogram을 보고 mutation proposal 생성
+- target block, mutation type, proposed micro-rule 제안
+- advisor 제안 child는 다음 세대 population에 들어가고 일반 GA 평가를 통과해야 함
+
+Advisor가 하면 안 되는 것:
+
+- JOILang code 생성
+- core block 제거
+- retrieval pre-mapping, retrieval top-k, service context construction 변경
+- best prompt를 직접 overwrite
+
+Advisor artifact:
+
+- `advisor_prompt_generation_<gen>.txt`
+- `advisor_response_generation_<gen>.json`
+- `advisor_mutation_proposals.jsonl`
+- `advisor_mutation_summary.csv`
+
+현재 fitness는 명시적으로 아래 식을 사용합니다.
+
+```text
+fitness = AvgDET - alpha * VarDET
+```
+
+Token/latency는 GA fitness의 직접 항이 아니라, deployment comparison artifact에서 별도로 평가합니다.
+
+빠른 GA smoke:
+
+```bash
+python gpt_mg/version0_15_update20260413/scripts/run_ga_search.py \
+  --profile version0_15_update20260413 \
+  --model-key qwen25_coder_7b \
+  --limit 2 \
+  --population 2 \
+  --gens 1 \
+  --sample-size 1 \
+  --validation-size 1 \
+  --cheap-eval-limit 1 \
+  --candidate-k 1 \
+  --feedback-guided-mutation \
+  --llm-mutation-advisor \
+  --progress minimal \
+  --llm-mode mock
+```
+
+대표 출력 artifact:
+
+- `ga_generation_progress.csv`
+- `ga_generation_progress.jsonl`
+- `ga_topk_genomes.csv`
+- `ga_block_diffs.jsonl`
+- `ga_population_diagnostics.csv`
+- `ga_population_diagnostics.jsonl`
+- `advisor_mutation_proposals.jsonl`
+- `advisor_mutation_summary.csv`
+- `structured_feedback.jsonl`
+- `structured_feedback_summary.csv`
+- `population_transitions.csv`
+- `promotion_decisions.csv`
+- `promotion_decisions.json`
+- `best_genome.json`
+- `best_prompt_metadata.json`
+- `ga_summary.json`
+
 ## 빠른 benchmark + GA
 
 `admin_logs`와 상관없이 benchmark/GA만 확인하려면:

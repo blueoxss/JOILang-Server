@@ -15,6 +15,42 @@
 - `qwen25_coder_7b`
 - `qwen25_coder_14b`
 
+## Paper Suite Availability Artifact
+
+최종 paper study는 모델이 실행 가능하지 않아도 결과를 지어내지 않고 unavailable 상태를 기록한 뒤 계속 진행합니다. `--strict-availability`가 켜진 경우에만 unavailable model에서 중단합니다.
+
+출력:
+
+- `results/paper_study_<timestamp>/availability_summary.csv`
+- `results/paper_study_<timestamp>/availability_summary.json`
+
+필드:
+
+- `model_key`
+- `model_name`
+- `status`: `runnable`, `blocked`, `failed`, `skipped`
+- `reason`
+- `cache_path`
+- `gated_access_required`
+- `oom_observed`
+- `runtime_notes`
+- `tested_command`
+- `timestamp`
+
+논문 대상 local suite:
+
+- `phi35_mini`
+- `qwen25_coder_7b`
+- `llama31_8b`
+- `gemma2_9b_it`
+- `qwen25_coder_14b`
+
+cloud reference:
+
+- `gpt41_mini`
+
+Cloud reference는 local deployment frontier point가 아니라 upper cloud reference로만 해석합니다.
+
 준비는 되었지만 현재 prompt 길이에서 바로 실험이 막히는 모델:
 
 - `phi35_mini`

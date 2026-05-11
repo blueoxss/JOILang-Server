@@ -324,10 +324,14 @@ def evaluate_genome_on_rows(
     retries: int,
     seed: int,
     run_label: str,
+    det_profile: str = "legacy",
+    output_dir: str | Path | None = None,
 ) -> dict[str, Any]:
     temperature, max_tokens, model = _llm_settings(genome, argparse.Namespace(temperature=None, max_tokens=None))
     run_id = make_run_id(f"{run_label}_{genome.get('id', 'genome')}", seed)
-    output_csv = RESULTS_DIR / f"candidates_{slugify(run_id)}.csv"
+    output_root = Path(output_dir).expanduser().resolve() if output_dir else RESULTS_DIR
+    output_root.mkdir(parents=True, exist_ok=True)
+    output_csv = output_root / f"candidates_{slugify(run_id)}.csv"
     generation_summary = generate_candidates_for_rows(
         profile=profile,
         genome=genome,
@@ -357,6 +361,7 @@ def evaluate_genome_on_rows(
             service_schema,
             connected_devices=row.get("connected_devices", ""),
             ground_truth=row.get("gt", ""),
+            profile=det_profile,
         )
         best = scored[0] if scored else {
             "det_score": 0.0,

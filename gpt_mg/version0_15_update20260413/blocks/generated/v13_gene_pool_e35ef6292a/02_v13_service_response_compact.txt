@@ -1,0 +1,144 @@
+# id: 02
+# role: generator
+# params: temperature, few_shot_count, max_tokens, micro_rules
+# description: version0_13-derived gene variant: v13_service_response_compact
+# placeholders: {command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}
+
+Generate one JOILang JSON object for the current command.
+
+Current task inputs:
+- command_eng: {command_eng}
+- connected_devices: {connected_devices}
+- optional_cron: {optional_cron}
+- optional_period: {optional_period}
+- candidate_strategy: {candidate_strategy}
+
+Authoritative service_list_snippet:
+{service_list_snippet}
+
+
+Version bridge:
+- This gene is derived from version0_13 prompt assets, but it runs in the version0_15 block renderer.
+- Treat [service_list_value] and [service_list_function] from version0_13 as the typed `services` entries inside {service_list_snippet}.
+- Use only the device categories, selector tags, values, functions, argument types, and enum values present in {service_list_snippet}.
+- In final JOILang code, keep receiver tags unchanged and lowercase only the service/value member token after the receiver dot.
+- Function call arguments are always comma-separated in final JOILang code. If `argument_type` contains `|`, treat it only as a schema type-list delimiter.
+- Prefer the most specific schema-valid service: if the command supplies all required slots for a parameterized function in `argument_bounds`, use that function instead of a generic value service. If required slots are missing, do not invent them; use the generic value service only when it is the best schema-supported fallback.
+- For `Oven_SetCookingParameters` and `RiceCooker_SetCookingParameters`, cooking-time arguments are seconds. Convert minutes to seconds, e.g. 30 minutes -> 1800. Do not use milliseconds and do not leave raw minutes.
+
+
+Version0_13 service separation rules:
+
+## Step-by-Step Guide for Separating `value` and `function` in Natural Language Commands (Prompt Guide)
+## Purpose
+## Current Service Naming Policy
+## Descriptor and Unit Grounding Policy
+## Receiver Tag Preservation Policy
+## Step 1: Distinguish Conditional vs. Action Phrases
+### Conditions: Characteristics of `value` Phrases
+#### [Correct Examples]
+#### [Incorrect Examples]
+### Actions: Characteristics of `function` Phrases
+#### [Correct Examples]
+#### [Incorrect Examples]
+## Step 2: Prepare extracted `value`/`function` for JOI Lang processing
+### Split compound natural language commands into:
+#### [Example]
+## Step 3: Extract `value` and `function` + Preserve Temporal **Execution Order**
+### General Patterns of Execution Flow
+#### ✅ Pattern 1: Condition → Action (Most common)
+1. Clearly separate **conditions (`value` services)** and **actions (`function` services)**.
+2. Respect and preserve the **logical order** and **pairing** of condition → action in the original sentence.
+3. Output must be **valid JOI Lang syntax**, with strictly defined structure and service names.
+- The injected `[service_list]`, `[service_list_value]`, and `[service_list_function]` snippets are authoritative.
+- When a service entry has a `canonical_name`, use that device-prefixed service name and lowercase the final JOILang member after the dot.
+- Do not use older capability-style service names when the injected current service list provides a device-prefixed canonical service.
+- Do not spell service names from memory. Copy the exact current canonical service name and only lowercase it for the final JOILang member.
+- Never insert, remove, or reorder words inside a service member name. For example, `setrobotvacuumcleanermodemode` must not become `setrobotvacuumcleanermodermode`.
+- The service entry fields `descriptor`, `return_descriptor`, `argument_descriptor`, `argument_type`, `argument_bounds`, and `argument_format` are authoritative.
+- Before writing any comparison value or argument literal, read these descriptor fields and convert the user value to the service unit.
+- If a cooking-time argument is described in seconds, convert minutes to seconds: `30 minutes` -> `1800`.
+- If an argument format says comma, use comma-separated arguments, never `|`.
+- External/outdoor/weather air-quality phrases such as "outdoor dust", "outside fine dust", "외부 미세먼지", or "바깥 미세먼지" must use `WeatherProvider` values, not `AirQualitySensor`. Use `WeatherProvider_Pm10Weather` for dust/fine-dust/미세먼지/PM10, and use `WeatherProvider_Pm25Weather` only when PM2.5/ultrafine/초미세먼지 is explicit.
+- Local/indoor/room air-quality phrases must use `AirQualitySensor` values.
+- General temperature phrases must use `TemperatureSensor_Temperature`, not `TemperatureMeasurement_Temperature`.
+- General humidity phrases must use `HumiditySensor_Humidity`, not `AirQualitySensor_Humidity`, unless the command explicitly says air-quality sensor humidity.
+- Illuminance / lux / 조도 phrases must use `LightSensor_Brightness`, not `Light_CurrentBrightness`, `Light_CurrentSaturation`, or another color/light actuator value.
+- General carbon dioxide / CO2 / 이산화탄소 concentration phrases must use `AirQualitySensor_CarbonDioxide` when it is available. Use `CarbonDioxideSensor_CarbonDioxide` only when the command explicitly names a carbon dioxide sensor device or connected_devices only provide that sensor.
+- PresenceSensor values are BOOL. Use `presencesensor_presence == true` for someone/person detected and `presencesensor_presence == false` for no one/no person. Do not compare it to `"present"` or `"not_present"`.
+- Cloud service availability / activation phrases such as "cloud service is activated", "cloud service is available", "클라우드 서비스가 활성화" must use `CloudServiceProvider_IsAvailable == true` as a boolean condition. Emit it as `(#CloudServiceProvider).cloudserviceprovider_isavailable == true`; do not call it with an argument such as `isavailable(true)`. Do not use `CloudServiceProvider_ChatSession` for availability checks; `ChatSession` only represents an AI chat session.
+- Services/categories in the same connected-device group are shared capabilities of one physical device. If the user says "turn on/켜줘/start/activate" for a semantic target such as `#AirPurifier` and the same group exposes `Switch_On`, emit `(#AirPurifier).switch_on()` or `(#Study #AirPurifier).switch_on()`. Do not add `#Switch` to the receiver unless the user explicitly names a switch. Do not use enum mode setters such as `SetAirPurifierMode("auto")` just because the enum descriptor says the fan is on auto; mode setters are only for explicit mode requests.
+- For state preconditions such as "the AC/air conditioner is off" / "에어컨이 꺼져 있으면", test the shared switch state: `(#AirConditioner).switch_switch == false`. Do not infer off-state from `AirConditionerMode == "auto"` or another mode value.
+- Do not copy a condition location into a later action unless the command explicitly scopes that action. Example: "if presence is detected in the living room, turn on all lights" means the condition receiver is `(#LivingRoom #PresenceSensor)` but the action target is global `all(#Light)`, not `all(#LivingRoom #Light)`.
+- For c
+
+[Compact excerpt from version0_13 prompt assets]
+
+Version0_13 response construction rules:
+
+# System Prompt – Response Steps
+## **Step 1: Device and Service Extraction**
+### Device & Service Matching Principles:
+### Strict Extraction Rules
+#### [Example:]
+### Internal Debug Output (for development use only)
+### **[connected_device] input Logic**
+## **Step 2** (Internal Process Only)
+### Loop / (Nest)Condition Extraction ([ ] Format)
+## **Pre-check Before Entering Step 3**:
+### [Example] – Step 3 should be skipped:
+### When Step 3 **must** be performed:
+#### [Example] if the command contains a **condition**, like:
+- **Exact service name match** required:
+- **Exact connected tag preservation required:**
+- If the user mentions a room, group, sector, top/bottom, odd/even, or other qualifier that appears in `[connected_devices]`, include the exact connected tag in the receiver.
+- Every receiver tag after `#` must start with an uppercase English letter. Use `#Bedroom`, `#Sector1`, `#Entrance`, and `#TemperatureSensor`, never `#bedroom`, `#sector1`, `#entrance`, or `#temperaturesensor`.
+- Use `all(...)` whenever the user says all/every/모든/모두.
+- Do not replace connected tags with synonyms. Use `#Top` if the connected tag is `Top`, not `#Upper`.
+- Read `descriptor`, `return_descriptor`, `argument_descriptor`, `argument_bounds`, and `argument_format` before writing values.
+- If the service descriptor says millivolts, convert volts to millivolts: `220V` -> `220000`.
+- If the function argument is seconds, convert minutes to seconds.
+- For plain "turn on/off", "start", or "stop charging" commands, use `switch_on()` or `switch_off()` when supported. Do not use mode setters or value comparisons as substitutes for power control.
+- If the command says "any/all/every sensor in <location>", keep the location and use `all(#Location #SensorCategory)` for the condition receiver.
+- Never omit a device or its associated service when mentioned.
+- Cross-check all extracted tags with the connected_devices map.
+- Reconstruct tags as #DeviceType #Tag1 #Tag2 ... where applicable.
+- Fact all tags list: [ ]
+- Fact all service (value or function) list: [ ]
+- **Never use `while` in code**
+- **Always decompose complex or compound conditions, durations, or states into the smallest meaningful atomic chunks.**
+- For each chunk, **analyze** which categories ([Loop - Cron], [Loop - Period], [Condition], [Nested Condition]) it belongs to.
+- **Populate all four category sections below. Always check all four lists ([Loop - Cron], [Loop - Period], [Condition], [Nested Condition]) in every response, even if some are empty (print 'None').**
+- **[Condition]**: Any logical condition, state check, threshold, event, or 'if/when/unless' clause.
+- **[Nested Condition]**: Any nested/hierarchical or sequenced logical structure.
+- The chunking and mapping logic must be able to handle:
+- Single and multiple triggers, conditions, and loops in any mix.
+- Any natural language phrasing for time, repetition, or state.
+- Never omit any section: always check all five blocks, including [Chunk], [Loop - Cron], [Loop - Period], [Condition], [Nested Condition].
+- The sentence contains **no actual device-level condition** (e.g., no state/value check like “if the curtain is closed”).
+- Do **not attempt to classify into conditional logic types [1] to [5]**, as these require at least one logical condition.
+- [Condition]: none
+- If the input sentence contains one or more **condition(s)**, first list them clearly under the `[Condition]` section from Step 2.
+- Then, based on the rules in **[Condition Combination Rules]**, classify the logic into **exactly one** of the following 5 types:
+- Detected [Condition]:
+- Proceed to Step 3 and classify as [1] Static condition
+- <device/service candidates>
+- Return ONLY one final JOILang JSON object with keys `name`, `cron`, `period`, and `code`.
+- The final output must be directly parseable by Python `json.loads()`.
+- Before finalizing the JSON, run this internal self-check:
+- Every service name and argument separator exactly matches the current service signature.
+- No service_value access is chained into another function call with dot notation.
+- Every service_value read is actually used later; do not leave dead reads or dead variables.
+- For report/speak/tell/announce commands about a current sensor reading, the final code must contain both:
+1. a value read into a variable, and
+Example:
+6. **Example Output (Full Structure)**
+
+[Compact excerpt from version0_13 prompt assets]
+
+Output contract:
+- Return exactly one raw JSON object and nothing else.
+- Required keys are exactly: name, cron, period, code.
+- For unscheduled commands, use cron "" and period 0.
+- `code` must be valid JOILang and JSON-escaped.
+- If schema-safe code cannot be produced, return an empty code string instead of inventing services.

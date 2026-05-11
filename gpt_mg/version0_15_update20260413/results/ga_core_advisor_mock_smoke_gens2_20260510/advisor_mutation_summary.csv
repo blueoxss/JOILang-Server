@@ -1,0 +1,3 @@
+generation,proposal_id,model_key,target_block_id,target_block_family,mutation_type,priority,accepted,rejection_reason,reason,proposed_micro_rule
+1,advisor_g001_01,qwen25_coder_7b,02,Enum_Grounding,strengthen_enum_type_rule,1,True,,Mock advisor proposal generated for schema validation smoke.,"For ENUM arguments, copy an allowed enum value exactly; for numeric arguments, use unquoted numeric literals."
+2,advisor_g002_01,qwen25_coder_7b,02,Enum_Grounding,strengthen_enum_type_rule,1,True,,Mock advisor proposal generated for schema validation smoke.,"For ENUM arguments, copy an allowed enum value exactly; for numeric arguments, use unquoted numeric literals."
