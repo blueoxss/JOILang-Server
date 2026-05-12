@@ -36,6 +36,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--quiet-final-summary", action="store_true")
+    parser.add_argument("--progress", choices=["quiet", "minimal", "verbose"], default="minimal")
     parser.add_argument("--strict-availability", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--smoke", action="store_true")
@@ -87,13 +88,33 @@ def _stage_completed(root: Path, name: str) -> bool:
     if not path.exists():
         return False
     try:
-        return json.loads(path.read_text(encoding="utf-8")).get("status") == "completed"
+        return json.loads(path.read_text(encoding="utf-8")).get("status") == "pass"
     except Exception:
         return False
 
 
-def _write_stage(root: Path, name: str, payload: dict[str, Any]) -> None:
-    payload = {"stage": name, "timestamp": datetime.now().isoformat(timespec="seconds"), **payload}
+def _write_stage(
+    root: Path,
+    name: str,
+    *,
+    status: str,
+    model_key: str,
+    command: list[str] | None = None,
+    output_paths: dict[str, str] | None = None,
+    error_summary: str = "",
+    start_time: str | None = None,
+    end_time: str | None = None,
+) -> None:
+    payload = {
+        "stage_name": name,
+        "status": status,
+        "start_time": start_time or datetime.now().isoformat(timespec="seconds"),
+        "end_time": end_time or datetime.now().isoformat(timespec="seconds"),
+        "model_key": model_key,
+        "command": " ".join(command or []),
+        "output_paths": output_paths or {},
+        "error_summary": error_summary,
+    }
     dump_json(_stage_path(root, name), payload)
 
 
@@ -343,6 +364,9 @@ def _write_final_manifest_alias(root: Path) -> None:
 
 
 def main() -> int:
+    def p(line: str = "") -> None:
+        print(line, flush=True)
+
     args = build_parser().parse_args()
     if not args.full_run and not args.smoke and not args.dry_run:
         args.smoke = True
@@ -359,9 +383,18 @@ def main() -> int:
         if not _parse_multi(args.models):
             models = ["qwen25_coder_7b"]
     entries = _model_entries(models)
+    model_label = ",".join(models)
+    if args.progress != "quiet":
+        p("[RUN]")
+        p(f"command={' '.join(sys.argv)}")
+        p(f"model={model_label}")
+        p(f"suite={args.suite}")
+        p(f"categories={','.join(categories) if categories else 'all'}")
+        p(f"limit_per_category={args.limit_per_category if args.limit_per_category is not None else 'N/A'}")
+        p(f"output_root={root}")
 
     availability = _availability(args, root, entries)
-    _write_stage(root, "model_availability", {"status": "completed", "artifacts": availability})
+    _write_stage(root, "preflight", status="pass", model_key=model_label, output_paths=availability)
 
     planned: dict[str, str] = {}
     stages: list[tuple[str, list[str], bool]] = []
@@ -380,41 +413,50 @@ def main() -> int:
             planned[stage] = str(_write_command(root, stage, command))
         if args.resume and not args.force and _stage_completed(root, stage):
             continue
+        if args.progress == "minimal":
+            p(f"[STAGE] {stage}: RUNNING")
+        start_time = datetime.now().isoformat(timespec="seconds")
         if args.dry_run and stage == "cloud_to_blocks_equivalence" and command:
             code = _run(command, quiet=args.quiet_final_summary)
-            _write_stage(root, stage, {"status": "completed" if code == 0 else "failed", "exit_code": code, "command": command, "dry_run": True})
+            _write_stage(root, stage, status="pass" if code == 0 else "fail", model_key=model_label, command=command, start_time=start_time)
+            if args.progress == "minimal":
+                p(f"[STAGE] {stage}: {'PASS' if code == 0 else 'FAIL'}")
             continue
         if args.dry_run or not runnable:
-            _write_stage(root, stage, {"status": "pending" if not runnable else "dry_run", "command": command, "reason": "scheduled only" if not runnable else "dry-run"})
+            _write_stage(root, stage, status="pending" if not runnable else "skipped", model_key=model_label, command=command, start_time=start_time)
+            if args.progress == "minimal":
+                p(f"[STAGE] {stage}: {'PENDING' if not runnable else 'SKIPPED'}")
             continue
         code = _run(command, quiet=args.quiet_final_summary)
-        _write_stage(root, stage, {"status": "completed" if code == 0 else "failed", "exit_code": code, "command": command})
+        _write_stage(root, stage, status="pass" if code == 0 else "fail", model_key=model_label, command=command, start_time=start_time)
+        if args.progress == "minimal":
+            p(f"[STAGE] {stage}: {'PASS' if code == 0 else 'FAIL'}")
         if code != 0 and args.strict_availability:
             return code
 
     export_command = _export_command(args, root=root, availability=availability)
     planned["export_paper_final_artifacts"] = str(_write_command(root, "export_paper_final_artifacts", export_command))
     code = _run(export_command, quiet=args.quiet_final_summary)
-    _write_stage(root, "artifact_export", {"status": "completed" if code == 0 else "failed", "exit_code": code, "command": export_command})
+    _write_stage(root, "artifact_export", status="pass" if code == 0 else "fail", model_key=model_label, command=export_command)
 
     dump_json(root / "study_plan.json", {"root": str(root), "commands": planned, "dry_run": args.dry_run, "smoke": args.smoke, "full_run": args.full_run})
     manifest = root / "paper" / "final_artifacts_manifest.json"
     if args.quiet_final_summary:
-        print("Paper study completed.")
-        print()
-        print("Artifacts:")
-        print(f"- manifest: {manifest}")
-        print(f"- cloud/block equivalence: {root / 'cloud_to_blocks_equivalence'}")
-        print(f"- figure1: {root / 'paper' / 'figures' / 'figure1_prompt_search_dynamics_across_model_scales.png'}")
-        print(f"- figure2: {root / 'paper' / 'figures' / 'figure2_deployment_aware_pareto_frontier_final.png'}")
-        print(f"- table3: {root / 'paper' / 'tables' / 'table3_main_results.csv'}")
-        print(f"- table4: {root / 'paper' / 'tables' / 'table4_ablation_qwen14.csv'}")
-        print(f"- model availability: {availability['csv']}")
-        print(f"- promotion decisions: {root / 'paper' / 'promotion' / 'promotion_decisions.csv'}")
-        print(f"- structured feedback: {root / 'structured_feedback.jsonl'}")
-        print()
-        print("Notes:")
-        print("- Full five-model execution is scheduled but not run in dry-run mode.")
+        p("Paper study completed.")
+        p()
+        p("Artifacts:")
+        p(f"- manifest: {manifest}")
+        p(f"- cloud/block equivalence: {root / 'cloud_to_blocks_equivalence'}")
+        p(f"- figure1: {root / 'paper' / 'figures' / 'figure1_prompt_search_dynamics_across_model_scales.png'}")
+        p(f"- figure2: {root / 'paper' / 'figures' / 'figure2_deployment_aware_pareto_frontier_final.png'}")
+        p(f"- table3: {root / 'paper' / 'tables' / 'table3_main_results.csv'}")
+        p(f"- table4: {root / 'paper' / 'tables' / 'table4_ablation_qwen14.csv'}")
+        p(f"- model availability: {availability['csv']}")
+        p(f"- promotion decisions: {root / 'paper' / 'promotion' / 'promotion_decisions.csv'}")
+        p(f"- structured feedback: {root / 'structured_feedback.jsonl'}")
+        p()
+        p("Notes:")
+        p("- Full five-model execution is scheduled but not run in dry-run mode.")
     return code
 
 
