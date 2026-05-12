@@ -1,0 +1,303 @@
+[
+  {
+    "generation": 1,
+    "genome_id": "gene-1f51d0da-e4a9-2c3b-67a1-5e9cfaaf321e",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 6.7166,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B6_full_gps_ga/runs/gemma2_9b_it/cat4/candidates/g001_quick_gene-1f51d0da-e4a9-2c3b-67a1-5e9cfaaf321e_159927.csv",
+      "failure_summary": {
+        "invalid_json": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            1
+          ]
+        ],
+        "count": 1
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 6.7148,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 27.4703,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B6_full_gps_ga/runs/gemma2_9b_it/cat4/candidates/g001_valid_gene-1f51d0da-e4a9-2c3b-67a1-5e9cfaaf321e_659927.csv",
+      "failure_summary": {
+        "invalid_json": 4
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            4
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 27.4628,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "gene-1f51d0da-e4a9-2c3b-67a1-5e9cfaaf321e",
+      "seed": 138046513,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "google/gemma-2-9b-it",
+        "temperature": 0.05,
+        "max_tokens": 768,
+        "candidate_strategies": [
+          "explicit_preconditions",
+          "canonical_names_first",
+          "compact_json",
+          "direct"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_full.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_schema_first_compact.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code.",
+            "Never invent service names outside the provided service_list_snippet."
+          ]
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_full.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 2,
+    "genome_id": "clone-46771aad-112a-53c9-9515-4d73b4f6d0b5",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 6.7742,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B6_full_gps_ga/runs/gemma2_9b_it/cat4/candidates/g002_quick_clone-46771aad-112a-53c9-9515-4d73b4f6d0b5_158914.csv",
+      "failure_summary": {
+        "invalid_json": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            1
+          ]
+        ],
+        "count": 1
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 6.7724,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 27.427,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B6_full_gps_ga/runs/gemma2_9b_it/cat4/candidates/g002_valid_clone-46771aad-112a-53c9-9515-4d73b4f6d0b5_658914.csv",
+      "failure_summary": {
+        "invalid_json": 4
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            4
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 27.4197,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "clone-46771aad-112a-53c9-9515-4d73b4f6d0b5",
+      "seed": 652325499,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "google/gemma-2-9b-it",
+        "temperature": 0.05,
+        "max_tokens": 1024,
+        "candidate_strategies": [
+          "direct",
+          "canonical_names_first",
+          "explicit_preconditions",
+          "compact_json"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+          "few_shot_count": 1
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/03_v13_response_contract.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_compact.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 3,
+    "genome_id": "clone-46771aad-112a-53c9-9515-4d73b4f6d0b5",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 7.0504,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B6_full_gps_ga/runs/gemma2_9b_it/cat4/candidates/g003_quick_clone-46771aad-112a-53c9-9515-4d73b4f6d0b5_158915.csv",
+      "failure_summary": {
+        "invalid_json": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            1
+          ]
+        ],
+        "count": 1
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 7.0488,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 27.5201,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B6_full_gps_ga/runs/gemma2_9b_it/cat4/candidates/g003_valid_clone-46771aad-112a-53c9-9515-4d73b4f6d0b5_658915.csv",
+      "failure_summary": {
+        "invalid_json": 4
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            4
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 27.5125,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "clone-46771aad-112a-53c9-9515-4d73b4f6d0b5",
+      "seed": 652325499,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "google/gemma-2-9b-it",
+        "temperature": 0.05,
+        "max_tokens": 1024,
+        "candidate_strategies": [
+          "direct",
+          "canonical_names_first",
+          "explicit_preconditions",
+          "compact_json"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+          "few_shot_count": 1
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/03_v13_response_contract.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_compact.txt"
+        }
+      }
+    }
+  }
+]

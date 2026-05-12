@@ -1,0 +1,37 @@
+{
+  "id": "gene-7d0a4289-5681-bdd4-b374-8e964a11d522",
+  "seed": 173123764,
+  "blocks": [
+    "01",
+    "02",
+    "03",
+    "06"
+  ],
+  "params": {
+    "model": "google/gemma-2-9b-it",
+    "temperature": 0.05,
+    "max_tokens": 768,
+    "candidate_strategies": [
+      "direct",
+      "minimal"
+    ]
+  },
+  "block_params": {
+    "01": {
+      "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_compact.txt"
+    },
+    "02": {
+      "source_file": "02_generator_prompt.txt",
+      "few_shot_count": 1,
+      "micro_rules": [
+        "Return exactly one JSON object only with keys name, cron, period, code."
+      ]
+    },
+    "03": {
+      "source_file": "03_postprocessor.txt"
+    },
+    "06": {
+      "source_file": "06_det_helper.txt"
+    }
+  }
+}

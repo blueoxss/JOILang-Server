@@ -9,9 +9,9 @@ cd "$SCRIPT_DIR"
 
 # 변수 설정
 #MODEL="phi35_mini"
-MODEL="qwen25_coder_7b"
+#MODEL="qwen25_coder_7b"
 #MODEL="llama31_8b"
-#MODEL="gemma2_9b_it"
+MODEL="gemma2_9b_it"
 #MODEL="qwen25_coder_14b"
 OUT="gpt_mg/version0_15_update20260413/results/paper_study_${MODEL}_$(date +%Y%m%d_%H%M%S)"
 

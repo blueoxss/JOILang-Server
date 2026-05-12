@@ -1,0 +1,2 @@
+failure_type,affected_block_family,suggested_mutation_type,count
+schema_violation,output_format,repair_clause_injection,80

@@ -1,0 +1,38 @@
+{
+  "id": "gene-62bc6d4d-6d15-7dbc-d9c4-1f228f2091f3",
+  "seed": 865271367,
+  "blocks": [
+    "01",
+    "02",
+    "03",
+    "06"
+  ],
+  "params": {
+    "model": "google/gemma-2-9b-it",
+    "temperature": 0.0,
+    "max_tokens": 768,
+    "candidate_strategies": [
+      "compact_json",
+      "explicit_preconditions"
+    ]
+  },
+  "block_params": {
+    "01": {
+      "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_schema_strict.txt"
+    },
+    "02": {
+      "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_schema_first_compact.txt",
+      "few_shot_count": 2,
+      "micro_rules": [
+        "Use value entries in conditions and function entries in actions.",
+        "Return exactly one JSON object only with keys name, cron, period, code."
+      ]
+    },
+    "03": {
+      "source_file": "generated/v13_gene_pool_e35ef6292a/03_json_case_guard.txt"
+    },
+    "06": {
+      "source_file": "generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_compact.txt"
+    }
+  }
+}

@@ -1,0 +1,312 @@
+[
+  {
+    "generation": 1,
+    "genome_id": "gene-2bdb4d24-6d3b-855d-2f76-0bb5dbc270f8",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 6.8259,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B6_full_gps_ga/runs/gemma2_9b_it/cat7/candidates/g001_quick_gene-2bdb4d24-6d3b-855d-2f76-0bb5dbc270f8_158217.csv",
+      "failure_summary": {
+        "invalid_json": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            1
+          ]
+        ],
+        "count": 1
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 6.8243,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 27.4004,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B6_full_gps_ga/runs/gemma2_9b_it/cat7/candidates/g001_valid_gene-2bdb4d24-6d3b-855d-2f76-0bb5dbc270f8_658217.csv",
+      "failure_summary": {
+        "invalid_json": 4
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            4
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 27.3931,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "gene-2bdb4d24-6d3b-855d-2f76-0bb5dbc270f8",
+      "seed": 270021803,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "google/gemma-2-9b-it",
+        "temperature": 0.0,
+        "max_tokens": 512,
+        "candidate_strategies": [
+          "compact_json",
+          "canonical_names_first"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_full.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_full.txt",
+          "few_shot_count": 3,
+          "micro_rules": [
+            "Use value entries in conditions and function entries in actions.",
+            "Return exactly one JSON object only with keys name, cron, period, code.",
+            "Emit lowercase service/value member tokens after the receiver dot."
+          ]
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/03_json_case_guard.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_compact.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 2,
+    "genome_id": "clone-845512fd-9173-2326-1f63-7b65f8ec0466",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 6.7357,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B6_full_gps_ga/runs/gemma2_9b_it/cat7/candidates/g002_quick_clone-845512fd-9173-2326-1f63-7b65f8ec0466_157451.csv",
+      "failure_summary": {
+        "invalid_json": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            1
+          ]
+        ],
+        "count": 1
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 6.7339,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 27.5846,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B6_full_gps_ga/runs/gemma2_9b_it/cat7/candidates/g002_valid_clone-845512fd-9173-2326-1f63-7b65f8ec0466_657451.csv",
+      "failure_summary": {
+        "invalid_json": 4
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            4
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 27.5766,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "clone-845512fd-9173-2326-1f63-7b65f8ec0466",
+      "seed": 245771036,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "google/gemma-2-9b-it",
+        "temperature": 0.0,
+        "max_tokens": 768,
+        "candidate_strategies": [
+          "explicit_preconditions",
+          "compact_json",
+          "canonical_names_first",
+          "direct"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Emit lowercase service/value member tokens after the receiver dot.",
+            "Use value entries in conditions and function entries in actions.",
+            "Never invent service names outside the provided service_list_snippet."
+          ]
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/03_v13_response_contract.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_compact.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 3,
+    "genome_id": "clone-845512fd-9173-2326-1f63-7b65f8ec0466",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 6.7065,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B6_full_gps_ga/runs/gemma2_9b_it/cat7/candidates/g003_quick_clone-845512fd-9173-2326-1f63-7b65f8ec0466_157452.csv",
+      "failure_summary": {
+        "invalid_json": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            1
+          ]
+        ],
+        "count": 1
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 6.7047,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 27.522,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B6_full_gps_ga/runs/gemma2_9b_it/cat7/candidates/g003_valid_clone-845512fd-9173-2326-1f63-7b65f8ec0466_657452.csv",
+      "failure_summary": {
+        "invalid_json": 4
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            4
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 27.5148,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "clone-845512fd-9173-2326-1f63-7b65f8ec0466",
+      "seed": 245771036,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "google/gemma-2-9b-it",
+        "temperature": 0.0,
+        "max_tokens": 768,
+        "candidate_strategies": [
+          "explicit_preconditions",
+          "compact_json",
+          "canonical_names_first",
+          "direct"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Emit lowercase service/value member tokens after the receiver dot.",
+            "Use value entries in conditions and function entries in actions.",
+            "Never invent service names outside the provided service_list_snippet."
+          ]
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/03_v13_response_contract.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_compact.txt"
+        }
+      }
+    }
+  }
+]
