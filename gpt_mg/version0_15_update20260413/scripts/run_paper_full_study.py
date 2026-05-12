@@ -50,7 +50,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--repair-attempts", type=int, default=0)
     parser.add_argument("--det-profile", choices=["legacy", "strict"], default="strict")
     parser.add_argument("--ga-population", type=int, default=4)
-    parser.add_argument("--ga-gens", type=int, default=3)
+    parser.add_argument("--ga-gens", type=int, default=10)
     parser.add_argument("--ga-sample-size", type=int, default=4)
     parser.add_argument("--ga-validation-size", type=int, default=4)
     parser.add_argument("--timeout-sec", type=int, default=1800)

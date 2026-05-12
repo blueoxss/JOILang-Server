@@ -9,9 +9,9 @@ cd "$SCRIPT_DIR"
 
 # 변수 설정
 #MODEL="phi35_mini"
-#MODEL="qwen25_coder_7b"
-#MODEL="llama31_8b"
-MODEL="gemma2_9b_it"
+#ODEL="qwen25_coder_7b"
+MODEL="llama31_8b"
+#ODEL="gemma2_9b_it"
 #MODEL="qwen25_coder_14b"
 OUT="gpt_mg/version0_15_update20260413/results/paper_study_${MODEL}_$(date +%Y%m%d_%H%M%S)"
 
@@ -20,6 +20,8 @@ echo "결과 저장 경로: $OUT"
 echo "파이썬 스크립트 실행을 시작합니다..."
 
 # 파이썬 스크립트 실행
+#   parser.add_argument("--ga-population", type=int, default=4)
+#   parser.add_argument("--ga-gens", type=int, default=10)
 PYTHONUNBUFFERED=1 python -u gpt_mg/version0_15_update20260413/scripts/run_paper_full_study.py \
   --suite paper_local5 \
   --models "$MODEL" \
@@ -29,6 +31,8 @@ PYTHONUNBUFFERED=1 python -u gpt_mg/version0_15_update20260413/scripts/run_paper
   --resume \
   --full-run \
   --output-root "$OUT" \
+  --ga-population 10 \
+  --ga-gens 5 \
   --progress minimal \
   --quiet-final-summary
 

@@ -1,0 +1,500 @@
+[
+  {
+    "generation": 1,
+    "genome_id": "gene-098638c2-c76b-ae2f-7836-f12c65e1112d",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 7.0265,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260512_201402/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g001_quick_gene-098638c2-c76b-ae2f-7836-f12c65e1112d_151304.csv",
+      "failure_summary": {
+        "invalid_json": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            1
+          ]
+        ],
+        "count": 1
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 7.0247,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 27.6978,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260512_201402/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g001_valid_gene-098638c2-c76b-ae2f-7836-f12c65e1112d_651304.csv",
+      "failure_summary": {
+        "invalid_json": 4
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            4
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 27.6905,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "gene-098638c2-c76b-ae2f-7836-f12c65e1112d",
+      "seed": 547920890,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.0,
+        "max_tokens": 1024,
+        "candidate_strategies": [
+          "explicit_preconditions",
+          "canonical_names_first"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "01_preamble.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_schema_first_compact.txt",
+          "few_shot_count": 3
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_full.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 2,
+    "genome_id": "clone-18528b07-d678-2de8-fcff-2254ebb50fbf",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 7.1146,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260512_201402/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g002_quick_clone-18528b07-d678-2de8-fcff-2254ebb50fbf_159518.csv",
+      "failure_summary": {
+        "invalid_json": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            1
+          ]
+        ],
+        "count": 1
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 7.1129,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 28.631,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260512_201402/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g002_valid_clone-18528b07-d678-2de8-fcff-2254ebb50fbf_659518.csv",
+      "failure_summary": {
+        "invalid_json": 4
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            4
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 28.6238,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "clone-18528b07-d678-2de8-fcff-2254ebb50fbf",
+      "seed": 788649103,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.05,
+        "max_tokens": 1024,
+        "candidate_strategies": [
+          "canonical_names_first",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+          "few_shot_count": 3,
+          "micro_rules": [
+            "Never invent service names outside the provided service_list_snippet.",
+            "Use value entries in conditions and function entries in actions."
+          ]
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/03_v13_response_contract.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_compact.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 3,
+    "genome_id": "clone-138052a4-e2eb-b6df-ac33-70ee2fe59c7f",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 6.9462,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260512_201402/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g003_quick_clone-138052a4-e2eb-b6df-ac33-70ee2fe59c7f_158313.csv",
+      "failure_summary": {
+        "invalid_json": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            1
+          ]
+        ],
+        "count": 1
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 6.9454,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 27.9244,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260512_201402/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g003_valid_clone-138052a4-e2eb-b6df-ac33-70ee2fe59c7f_658313.csv",
+      "failure_summary": {
+        "invalid_json": 4
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            4
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 27.9211,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "clone-138052a4-e2eb-b6df-ac33-70ee2fe59c7f",
+      "seed": 362297897,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.05,
+        "max_tokens": 768,
+        "candidate_strategies": [
+          "direct",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "02_generator_prompt.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code."
+          ]
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "06_det_helper.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 4,
+    "genome_id": "clone-138052a4-e2eb-b6df-ac33-70ee2fe59c7f",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 6.921,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260512_201402/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g004_quick_clone-138052a4-e2eb-b6df-ac33-70ee2fe59c7f_158314.csv",
+      "failure_summary": {
+        "invalid_json": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            1
+          ]
+        ],
+        "count": 1
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 6.9202,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 27.7742,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260512_201402/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g004_valid_clone-138052a4-e2eb-b6df-ac33-70ee2fe59c7f_658314.csv",
+      "failure_summary": {
+        "invalid_json": 4
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            4
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 27.7671,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "clone-138052a4-e2eb-b6df-ac33-70ee2fe59c7f",
+      "seed": 362297897,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.05,
+        "max_tokens": 768,
+        "candidate_strategies": [
+          "direct",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "02_generator_prompt.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code."
+          ]
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "06_det_helper.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 5,
+    "genome_id": "clone-138052a4-e2eb-b6df-ac33-70ee2fe59c7f",
+    "fitness": 0.0,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 6.8013,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260512_201402/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g005_quick_clone-138052a4-e2eb-b6df-ac33-70ee2fe59c7f_158315.csv",
+      "failure_summary": {
+        "invalid_json": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            1
+          ]
+        ],
+        "count": 1
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 6.7996,
+      "peak_vram_gb": 0.0
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 0.0,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 27.6828,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260512_201402/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g005_valid_clone-138052a4-e2eb-b6df-ac33-70ee2fe59c7f_658315.csv",
+      "failure_summary": {
+        "invalid_json": 4
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "invalid_json",
+            4
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "llm_latency_sec": 0.0,
+      "pipeline_sec": 27.6754,
+      "peak_vram_gb": 0.0
+    },
+    "genome": {
+      "id": "clone-138052a4-e2eb-b6df-ac33-70ee2fe59c7f",
+      "seed": 362297897,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.05,
+        "max_tokens": 768,
+        "candidate_strategies": [
+          "direct",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_compact.txt"
+        },
+        "02": {
+          "source_file": "02_generator_prompt.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code."
+          ]
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "06_det_helper.txt"
+        }
+      }
+    }
+  }
+]

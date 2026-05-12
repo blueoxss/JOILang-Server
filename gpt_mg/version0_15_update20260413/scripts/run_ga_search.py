@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import random
 import statistics
 import sys
@@ -74,6 +75,126 @@ PROMOTION_COLUMNS = [
     "accepted_prompt_path",
     "previous_accepted_prompt",
 ]
+TOKEN_FEEDBACK_COLUMNS = [
+    "failure_type",
+    "generation",
+    "model_key",
+    "genome_id",
+    "source_prompt_tokens",
+    "baseline_token_budget",
+    "derived_target_budget",
+    "compression_strength",
+    "peak_vram_gb",
+    "attempted_allocation_gb",
+    "row_id",
+    "tokenizer_status",
+    "token_count_status",
+    "source_prompt_chars",
+    "timestamp",
+]
+TOKEN_MUTATION_COLUMNS = [
+    "generation",
+    "model_key",
+    "genome_id",
+    "parent_id",
+    "mutation_type",
+    "compression_strategy",
+    "compression_strength",
+    "source_failure_type",
+    "source_prompt_tokens",
+    "baseline_token_budget",
+    "derived_target_budget",
+    "preserved_core_blocks",
+    "removed_optional_blocks",
+    "summarized_blocks",
+    "few_shot_before",
+    "few_shot_after",
+    "estimated_prompt_tokens",
+    "actual_prompt_tokens",
+    "token_count_status",
+    "compression_family",
+    "compressed_child_of",
+    "preserved_parent",
+    "parent_preserved_in_generation",
+    "skip_reason",
+    "timestamp",
+]
+COMPRESSION_CHILD_COLUMNS = [
+    "generation",
+    "model_key",
+    "child_genome_id",
+    "parent_id",
+    "compression_strategy",
+    "compression_strength",
+    "source_failure_type",
+    "source_prompt_tokens",
+    "baseline_token_budget",
+    "derived_target_budget",
+    "estimated_prompt_tokens",
+    "actual_prompt_tokens",
+    "preserved_core_blocks",
+    "removed_optional_blocks",
+    "summarized_blocks",
+    "few_shot_before",
+    "few_shot_after",
+    "token_count_status",
+    "compression_family",
+    "compressed_child_of",
+    "parent_preserved_in_generation",
+    "timestamp",
+]
+PARETO_COLUMNS = [
+    "generation",
+    "genome_id",
+    "model_key",
+    "det",
+    "det_pass_rate",
+    "sdet",
+    "avg_prompt_tokens",
+    "warm_latency_p50",
+    "peak_vram_gb",
+    "oom_count",
+    "failure_rate",
+    "is_pareto_frontier",
+    "newly_discovered_frontier",
+    "dominated_by",
+    "pareto_rank",
+    "knee_candidate",
+    "pareto_status",
+]
+PARETO_SUMMARY_COLUMNS = [
+    "generation",
+    "model_key",
+    "new_frontier",
+    "frontier_size",
+    "best_det",
+    "best_det_genome_id",
+    "best_tokens",
+    "best_tokens_genome_id",
+    "knee_candidate",
+    "pareto_status",
+    "oom_resolved",
+    "overbudget_children",
+]
+TOKEN_FAILURE_SEVERITY = {
+    "cuda_oom": 100,
+    "context_length_exceeded": 95,
+    "max_context_exceeded": 95,
+    "cold_load_oom": 90,
+    "warm_generation_oom": 90,
+    "prompt_token_over_budget": 80,
+    "gpu_memory_over_budget": 70,
+    "tokenizer_failure": 60,
+}
+COMPRESSION_STRATEGIES = [
+    "drop_optional_blocks_for_budget",
+    "summarize_optional_block",
+    "reduce_few_shot_count",
+    "compress_micro_rules",
+    "simplify_candidate_strategies",
+    "lower_max_tokens",
+    "compress_block_family",
+]
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -126,6 +247,18 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--timeout-sec", type=int, default=1800)
     parser.add_argument("--retries", type=int, default=1)
     parser.add_argument("--seed", type=int, default=14)
+    parser.add_argument("--token-budget", type=int, default=None, help="Global frozen prompt-token budget fallback for this GA run.")
+    parser.add_argument("--model-token-budget-json", default="", help="Optional JSON mapping model_key to frozen prompt-token budget.")
+    parser.add_argument("--auto-token-budget-from-oom", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--compression-strength", choices=["light", "medium", "aggressive"], default="medium")
+    parser.add_argument("--compression-children-per-parent", type=int, default=3)
+    parser.add_argument("--max-compression-children-per-gen", type=int, default=12)
+    parser.add_argument("--max-compression-children-per-model", type=int, default=12)
+    parser.add_argument("--preserve-topk-uncompressed", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--preserve-topk-count", type=int, default=3)
+    parser.add_argument("--min-core-blocks", default="01,02")
+    parser.add_argument("--pareto-selection", action="store_true", help="Reserved; default GA selection remains fitness-based.")
+    parser.add_argument("--inject-mock-token-feedback", action="store_true", help=argparse.SUPPRESS)
     return parser
 
 
