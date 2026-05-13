@@ -1,0 +1,23 @@
+{
+  "model_key": "llama31_8b",
+  "model_label": "Llama-3.1-8B-Instruct",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "category": "3",
+  "row_count": 5,
+  "validation_row_count": 4,
+  "generation_count": 5,
+  "first_generation_validation_det": 0.0,
+  "best_generation": 1,
+  "best_genome_id": "gene-00424a81-4295-3dc7-190f-62a60a6366ae",
+  "best_validation_det": 0.0,
+  "best_validation_pass_rate": 0.0,
+  "improvement_vs_generation1": 0.0,
+  "final_all_avg_det": 0.0,
+  "final_all_pass_rate": 0.0,
+  "final_all_gt_exact_rate": 0.0,
+  "final_all_prompt_tokens": 0,
+  "final_all_llm_latency_sec": 0.0,
+  "final_all_peak_vram_gb": 0.0,
+  "run_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260512_201402/B6_full_gps_ga/runs/llama31_8b/cat3",
+  "best_genome_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260512_201402/B6_full_gps_ga/runs/llama31_8b/cat3/best_genome.json"
+}
