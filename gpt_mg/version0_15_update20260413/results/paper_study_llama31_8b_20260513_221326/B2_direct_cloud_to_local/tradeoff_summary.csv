@@ -1,2 +1,0 @@
-model_key,model_label,avg_det_score,warm_latency_p50,avg_prompt_tokens,peak_vram_gb_max,cold_load_sec,oom_count,generation_error_rate,failure_rate,det_per_latency,det_per_prompt_token,det_per_vram,pareto_det_vs_warm_latency,pareto_det_vs_prompt_tokens,pareto_det_vs_peak_vram
-llama31_8b,Llama-3.1-8B-Instruct,19.3864,14.3962,26880.0750,21.7057,27.9450,0,0.0000,0.8500,1.3466,0.000721,0.8931,True,True,True

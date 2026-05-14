@@ -6,11 +6,12 @@ import copy
 import concurrent.futures
 import json
 import os
+from pathlib import Path
+
 import statistics
 import sys
 from collections import Counter
 from datetime import datetime
-from pathlib import Path
 from statistics import fmean
 from textwrap import indent
 from typing import Any
@@ -2221,6 +2222,98 @@ def _run_selected_models(
             ordered[index] = summary
     return [item for item in ordered if item is not None], effective_workers
 
+def _looks_like_local_hf_model_dir(path: str | Path) -> bool:
+    path = Path(path).expanduser()
+
+    if not path.exists() or not path.is_dir():
+        return False
+
+    if not (path / "config.json").exists():
+        return False
+
+    has_tokenizer = any(
+        (path / name).exists()
+        for name in (
+            "tokenizer.json",
+            "tokenizer_config.json",
+            "special_tokens_map.json",
+            "vocab.json",
+            "merges.txt",
+            "tokenizer.model",
+        )
+    )
+
+    has_weights = (
+        any(path.glob("*.safetensors"))
+        or any(path.glob("pytorch_model*.bin"))
+        or (path / "model.safetensors.index.json").exists()
+        or (path / "pytorch_model.bin.index.json").exists()
+    )
+
+    return bool(has_tokenizer and has_weights)
+
+
+def _local_model_dir_for_model_key(model_key: str) -> Path | None:
+    """
+    Strict availability runs before local_llm_client._build_worker_payload(),
+    so it cannot see JOI_V15_LOCAL_MODEL_BASE_DIR unless we handle it here.
+
+    This maps benchmark model keys to folders created by download_models.sh.
+    """
+    model_key = str(model_key or "").strip()
+
+    explicit_model_name = (
+        os.environ.get("JOI_V15_LOCAL_MODEL_NAME", "").strip()
+        or os.environ.get("JOI_V14_LOCAL_MODEL_NAME", "").strip()
+    )
+    if explicit_model_name:
+        return Path(explicit_model_name).expanduser()
+
+    base_dir = (
+        os.environ.get("JOI_V15_LOCAL_MODEL_BASE_DIR", "").strip()
+        or os.environ.get("JOI_V14_LOCAL_MODEL_BASE_DIR", "").strip()
+    )
+    if not base_dir:
+        return None
+
+    mapping = {
+        "phi35_mini": "phi35_mini",
+        "gemma2_9b_it": "gemma2_9b_it",
+        "qwen25_coder_7b": "qwen25_coder_7b",
+        "llama31_8b": "llama31_8b",
+        "qwen25_coder_14b": "qwen25_coder_14b",
+    }
+
+    folder_name = mapping.get(model_key)
+    if not folder_name:
+        return None
+
+    return Path(base_dir).expanduser() / folder_name
+
+
+def _override_preflight_with_local_model_dirs(preflight: list[dict]) -> list[dict]:
+    """
+    If strict availability marks a model unavailable but its local HF model
+    directory exists under JOI_V15_LOCAL_MODEL_BASE_DIR, mark it ready.
+
+    This is needed for offline/local-dir runs where the benchmark model key
+    remains qwen25_coder_7b, gemma2_9b_it, etc., while actual weights live in
+    /root/llm/JOILang-Server/local_models/<folder>.
+    """
+    for item in preflight:
+        model_key = str(item.get("model_key", "")).strip()
+
+        if item.get("status") == "ready":
+            continue
+
+        local_dir = _local_model_dir_for_model_key(model_key)
+
+        if local_dir is not None and _looks_like_local_hf_model_dir(local_dir):
+            item["status"] = "ready"
+            item["availability_override"] = "local_model_dir"
+            item["local_model_dir"] = str(local_dir.resolve())
+
+    return preflight
 
 def main() -> int:
     args = build_parser().parse_args()
@@ -2240,6 +2333,7 @@ def main() -> int:
             print_worker_info=args.print_worker_info,
             debug_runtime=args.debug_runtime,
         )
+    preflight = _override_preflight_with_local_model_dirs(preflight)
     unavailable = [item for item in preflight if item.get("status") not in {"ready"}]
     if args.preflight_only:
         return 0

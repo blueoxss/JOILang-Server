@@ -427,6 +427,43 @@ def _infer_default_attn_implementation(model: str, local_model_name: str) -> str
 
     return ""
 
+def _local_model_dir_from_base(model: str, configured_model_name: str) -> str:
+    """
+    If JOI_V15_LOCAL_MODEL_BASE_DIR is set, map known benchmark model ids
+    to local folders downloaded by download_models.sh.
+
+    This keeps --model-key as the benchmark registry key while loading weights
+    from local_models/<model_folder>.
+    """
+    base_dir = _env("JOI_V15_LOCAL_MODEL_BASE_DIR", "JOI_V14_LOCAL_MODEL_BASE_DIR", "").strip()
+    if not base_dir:
+        return configured_model_name
+
+    # Explicit JOI_V15_LOCAL_MODEL_NAME should still win.
+    explicit_model_name = _env("JOI_V15_LOCAL_MODEL_NAME", "JOI_V14_LOCAL_MODEL_NAME", "").strip()
+    if explicit_model_name:
+        return explicit_model_name
+
+    normalized = str(model or "").strip().lower()
+
+    mapping = {
+        "microsoft/phi-3.5-mini-instruct": "phi35_mini",
+        "google/gemma-2-9b-it": "gemma2_9b_it",
+        "qwen/qwen2.5-coder-7b-instruct": "qwen25_coder_7b",
+        "meta-llama/meta-llama-3.1-8b-instruct": "llama31_8b",
+        "qwen/qwen2.5-coder-14b-instruct": "qwen25_coder_14b",
+    }
+
+    folder_name = mapping.get(normalized)
+    if not folder_name:
+        return configured_model_name
+
+    candidate = Path(base_dir).expanduser() / folder_name
+    if candidate.exists():
+        return str(candidate.resolve())
+
+    return configured_model_name
+
 def _build_worker_payload(
     system: str,
     user: str,
@@ -436,7 +473,8 @@ def _build_worker_payload(
     extra_payload: dict[str, Any] | None,
 ) -> dict[str, Any]:
     configured_model_name = _env("JOI_V15_LOCAL_MODEL_NAME", "JOI_V14_LOCAL_MODEL_NAME", model)
-    default_attn_implementation = _infer_default_attn_implementation(model, configured_model_name)
+    configured_model_name = _local_model_dir_from_base(model, configured_model_name)
+    default_attn_implementation = _infer_default_attn_implementation(model, configured_model_name)  
 
     payload = {
         "model": model,

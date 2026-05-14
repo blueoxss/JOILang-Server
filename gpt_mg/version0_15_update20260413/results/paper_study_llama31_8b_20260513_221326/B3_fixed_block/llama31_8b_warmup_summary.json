@@ -1,9 +1,0 @@
-{
-  "row_count": 1,
-  "row_nos": [
-    1
-  ],
-  "candidate_count": 1,
-  "cold_load_sec": 17.5557,
-  "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B3_fixed_block/llama31_8b_warmup_candidates.csv"
-}
