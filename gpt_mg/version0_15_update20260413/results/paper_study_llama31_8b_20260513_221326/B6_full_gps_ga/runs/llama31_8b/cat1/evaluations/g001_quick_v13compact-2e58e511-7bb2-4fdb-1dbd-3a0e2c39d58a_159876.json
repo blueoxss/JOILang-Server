@@ -1,0 +1,244 @@
+{
+  "run_label": "g001_quick",
+  "genome": {
+    "id": "v13compact-2e58e511-7bb2-4fdb-1dbd-3a0e2c39d58a",
+    "seed": 335029462,
+    "blocks": [
+      "01",
+      "02",
+      "03",
+      "06"
+    ],
+    "params": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "temperature": 0.05,
+      "max_tokens": 1024,
+      "candidate_strategies": [
+        "canonical_names_first",
+        "minimal"
+      ]
+    },
+    "block_params": {
+      "01": {
+        "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_compact.txt"
+      },
+      "02": {
+        "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+        "few_shot_count": 3,
+        "micro_rules": [
+          "Never invent service names outside the provided service_list_snippet.",
+          "Use value entries in conditions and function entries in actions."
+        ]
+      },
+      "03": {
+        "source_file": "generated/v13_gene_pool_e35ef6292a/03_v13_response_contract.txt"
+      },
+      "06": {
+        "source_file": "generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_compact.txt"
+      }
+    }
+  },
+  "metrics": {
+    "row_count": 1,
+    "avg_det_score": 18.0349,
+    "variance": 0.0,
+    "det_pass_count": 0,
+    "det_pass_rate": 0.0,
+    "gt_exact_count": 0,
+    "gt_exact_rate": 0.0,
+    "elapsed_sec": 21.6359,
+    "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g001_quick_v13compact-2e58e511-7bb2-4fdb-1dbd-3a0e2c39d58a_159876.csv",
+    "failure_summary": {
+      "arg_type": 1,
+      "enum_grounding": 1,
+      "extraneous": 1,
+      "gt_mismatch": 1,
+      "gt_receiver_coverage": 1,
+      "gt_service_coverage": 1,
+      "numeric_grounding": 1,
+      "precondition": 1,
+      "semantic": 1,
+      "service_match": 1,
+      "unknown_service:setcookingparameters": 1
+    },
+    "failure_patterns": {
+      "top_failure_types": [
+        [
+          "arg_type",
+          1
+        ],
+        [
+          "enum_grounding",
+          1
+        ],
+        [
+          "extraneous",
+          1
+        ],
+        [
+          "gt_mismatch",
+          1
+        ],
+        [
+          "gt_receiver_coverage",
+          1
+        ],
+        [
+          "gt_service_coverage",
+          1
+        ],
+        [
+          "numeric_grounding",
+          1
+        ],
+        [
+          "precondition",
+          1
+        ],
+        [
+          "semantic",
+          1
+        ],
+        [
+          "service_match",
+          1
+        ],
+        [
+          "unknown_service:setcookingparameters",
+          1
+        ]
+      ],
+      "count": 11
+    },
+    "prompt_tokens": 47767,
+    "completion_tokens": 62,
+    "total_tokens": 47829,
+    "llm_latency_sec": 17.0474,
+    "pipeline_sec": 21.6329,
+    "peak_vram_gb": 26.1073
+  },
+  "rows": [
+    {
+      "row_no": 3,
+      "category": "1",
+      "command_eng": "Start the rice cooker on cooking mode for 30 minutes.",
+      "det_score": 18.0349,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.606977,
+      "failure_reasons": [
+        "arg_type",
+        "enum_grounding",
+        "extraneous",
+        "gt_mismatch",
+        "gt_receiver_coverage",
+        "gt_service_coverage",
+        "numeric_grounding",
+        "precondition",
+        "semantic",
+        "service_match",
+        "unknown_service:setcookingparameters"
+      ],
+      "output": "{\"name\":\"Start the rice cooker on cooking mode for 30 minutes.\",\"cron\":\"\",\"period\":0,\"code\":\"#RiceCooker.SetRiceCookerMode(\\\"cooking\\\").setcookingparameters(30 * 60)\"}",
+      "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#RiceCooker).ricecooker_setcookingparameters(\\\"cooking\\\", 1800)\"}",
+      "service_list_snippet_source": "service_retrieval_fallback",
+      "service_list_retrieval_status": "used",
+      "service_list_retrieval_categories": "[\"RiceCooker\", \"Oven\", \"ArmRobot\", \"Dishwasher\", \"RobotVacuumCleaner\", \"MenuProvider\", \"Charger\", \"CarbonDioxideSensor\", \"AirConditioner\", \"FaceRecognizer\"]"
+    }
+  ],
+  "generation_summary": {
+    "run_id": "g001_quick_v13compact-2e58e511-7bb2-4fdb-1dbd-3a0e2c39d58a_159876",
+    "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g001_quick_v13compact-2e58e511-7bb2-4fdb-1dbd-3a0e2c39d58a_159876.csv",
+    "jsonl_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/candidates_g001_quick_v13compact-2e58e511-7bb2-4fdb-1dbd-3a0e2c39d58a_159876.jsonl",
+    "row_count": 1,
+    "rows": [
+      {
+        "index": "3",
+        "category": "1",
+        "command_kor": "밥솥을 조리 모드로 30분 작동시켜.",
+        "command_eng": "Start the rice cooker on cooking mode for 30 minutes.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#RiceCooker).SetCookingParameters(\\\"cooking\\\", 1800)\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"(#RiceCooker).ricecooker_setcookingparameters(\\\"cooking\\\", 1800)\"}",
+        "row_no": 3,
+        "profile": "version0_15_update20260413",
+        "genome_id": "v13compact-2e58e511-7bb2-4fdb-1dbd-3a0e2c39d58a",
+        "genome_seed": 335029462,
+        "run_id": "g001_quick_v13compact-2e58e511-7bb2-4fdb-1dbd-3a0e2c39d58a_159876",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"Start the rice cooker on cooking mode for 30 minutes.\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"#RiceCooker.SetRiceCookerMode(\\\\\\\"cooking\\\\\\\").setcookingparameters(30 * 60)\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"canonical_names_first\", \"prompt_chars\": 210278, \"prompt_tokens\": 47767, \"completion_tokens\": 62, \"total_tokens\": 47829, \"latency_sec\": 17.0474, \"peak_vram_gb\": 26.1073, \"load_sec\": 0.0, \"generate_sec\": 16.8562, \"prompt_prep_sec\": 0.1452, \"decode_sec\": 0.0002, \"worker_pid\": 3509550, \"error_type\": \"\", \"oom_flag\": false, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/01_v13_caution_compact.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_caution_compact\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_service_response_compact\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/03_v13_response_contract.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_response_contract\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"06\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_compact.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_grammar_tempo_compact\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/g001_quick_v13compact-2e58e511-7bb2-4fdb-1dbd-3a0e2c39d58a_159876/row_003_cand_1.json\"]",
+        "generation_status": "ok",
+        "generation_total_pipeline_sec": 21.6329,
+        "llm_mode": "worker",
+        "llm_model": "meta-llama/Llama-3.1-8B-Instruct",
+        "prompt_render_mode": "blocks",
+        "prompt_assets_dir": "",
+        "service_list_snippet_source": "service_retrieval_fallback",
+        "service_list_device_count": 10,
+        "service_list_retrieval_status": "used",
+        "service_list_retrieval_mode": "hybrid",
+        "service_list_retrieval_topk": 10,
+        "service_list_retrieval_device": "cpu",
+        "service_list_retrieval_categories": "[\"RiceCooker\", \"Oven\", \"ArmRobot\", \"Dishwasher\", \"RobotVacuumCleaner\", \"MenuProvider\", \"Charger\", \"CarbonDioxideSensor\", \"AirConditioner\", \"FaceRecognizer\"]",
+        "service_list_retrieval_scores": "[2.688916, 1.296932, 1.504577, 0.821529, 0.81013, 0.533087, 0.53061, 0.530472, 0.757368, 0.890591]",
+        "service_list_retrieval_fallback_reason": "",
+        "generation_call_count": 1,
+        "generation_error_count": 0,
+        "generation_error_type": "",
+        "generation_error_types": "[]",
+        "generation_oom_flag": false,
+        "generation_prompt_chars_total": 210278,
+        "generation_prompt_tokens_total": 47767,
+        "generation_completion_tokens_total": 62,
+        "generation_total_tokens_total": 47829,
+        "generation_llm_latency_sec": 17.0474,
+        "generation_peak_vram_gb": 26.1073
+      }
+    ],
+    "fieldnames": [
+      "index",
+      "category",
+      "command_kor",
+      "command_eng",
+      "gt_raw",
+      "connected_devices",
+      "gt",
+      "row_no",
+      "profile",
+      "genome_id",
+      "genome_seed",
+      "run_id",
+      "candidate_count",
+      "candidates",
+      "candidate_metadata",
+      "prompt_log_paths",
+      "generation_status",
+      "generation_total_pipeline_sec",
+      "llm_mode",
+      "llm_model",
+      "prompt_render_mode",
+      "prompt_assets_dir",
+      "service_list_snippet_source",
+      "service_list_device_count",
+      "service_list_retrieval_status",
+      "service_list_retrieval_mode",
+      "service_list_retrieval_topk",
+      "service_list_retrieval_device",
+      "service_list_retrieval_categories",
+      "service_list_retrieval_scores",
+      "service_list_retrieval_fallback_reason",
+      "generation_call_count",
+      "generation_error_count",
+      "generation_error_type",
+      "generation_error_types",
+      "generation_oom_flag",
+      "generation_prompt_chars_total",
+      "generation_prompt_tokens_total",
+      "generation_completion_tokens_total",
+      "generation_total_tokens_total",
+      "generation_llm_latency_sec",
+      "generation_peak_vram_gb"
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "model_key": "llama31_8b",
+  "model_label": "Llama-3.1-8B-Instruct",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "category": "5",
+  "row_count": 5,
+  "validation_row_count": 4,
+  "generation_count": 10,
+  "first_generation_validation_det": 67.3036,
+  "best_generation": 9,
+  "best_genome_id": "mut-37c1aeab-4934-2179-344d-f240a24c1b08",
+  "best_validation_det": 96.663,
+  "best_validation_pass_rate": 100.0,
+  "improvement_vs_generation1": 29.3594,
+  "final_all_avg_det": 97.3304,
+  "final_all_pass_rate": 100.0,
+  "final_all_gt_exact_rate": 60.0,
+  "final_all_prompt_tokens": 167665,
+  "final_all_llm_latency_sec": 54.3686,
+  "final_all_peak_vram_gb": 23.7497,
+  "run_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat5",
+  "best_genome_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat5/best_genome.json"
+}

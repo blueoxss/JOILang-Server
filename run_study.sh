@@ -32,7 +32,7 @@ PYTHONUNBUFFERED=1 python -u gpt_mg/version0_15_update20260413/scripts/run_paper
   --full-run \
   --output-root "$OUT" \
   --ga-population 10 \
-  --ga-gens 5 \
+  --ga-gens 10 \
   --progress minimal \
   --quiet-final-summary
 

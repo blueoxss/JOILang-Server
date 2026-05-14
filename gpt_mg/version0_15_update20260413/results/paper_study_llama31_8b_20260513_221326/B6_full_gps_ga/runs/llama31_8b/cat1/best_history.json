@@ -1,0 +1,1305 @@
+[
+  {
+    "generation": 1,
+    "genome_id": "gene-d99150b1-96d1-a1ae-1d75-a14ee7320c9f",
+    "fitness": 69.9,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 69.9,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 10.1519,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g001_quick_gene-d99150b1-96d1-a1ae-1d75-a14ee7320c9f_155527.csv",
+      "failure_summary": {
+        "arg_type": 1,
+        "enum_grounding": 1,
+        "gt_mismatch": 1,
+        "numeric_grounding": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "enum_grounding",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 19506,
+      "completion_tokens": 47,
+      "total_tokens": 19553,
+      "llm_latency_sec": 5.6552,
+      "pipeline_sec": 10.1489,
+      "peak_vram_gb": 19.5187
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 100.0,
+      "variance": 0.0,
+      "det_pass_count": 4,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 4,
+      "gt_exact_rate": 100.0,
+      "elapsed_sec": 40.6724,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g001_valid_gene-d99150b1-96d1-a1ae-1d75-a14ee7320c9f_655527.csv",
+      "failure_summary": {},
+      "failure_patterns": {
+        "top_failure_types": [],
+        "count": 0
+      },
+      "prompt_tokens": 77612,
+      "completion_tokens": 177,
+      "total_tokens": 77789,
+      "llm_latency_sec": 22.0179,
+      "pipeline_sec": 40.6612,
+      "peak_vram_gb": 19.5609
+    },
+    "genome": {
+      "id": "gene-d99150b1-96d1-a1ae-1d75-a14ee7320c9f",
+      "seed": 838165113,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.0,
+        "max_tokens": 512,
+        "candidate_strategies": [
+          "direct",
+          "compact_json",
+          "explicit_preconditions",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "01_preamble.txt"
+        },
+        "02": {
+          "source_file": "02_generator_prompt.txt",
+          "few_shot_count": 2,
+          "micro_rules": [
+            "Emit lowercase service/value member tokens after the receiver dot.",
+            "Never invent service names outside the provided service_list_snippet."
+          ]
+        },
+        "03": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/03_json_case_guard.txt"
+        },
+        "06": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_compact.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 2,
+    "genome_id": "cross-2485f743-21db-e83c-5606-ba9cf4c5ddd6",
+    "fitness": 69.9,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 69.9,
+      "variance": 0.0,
+      "det_pass_count": 0,
+      "det_pass_rate": 0.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 9.6252,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g002_quick_cross-2485f743-21db-e83c-5606-ba9cf4c5ddd6_151967.csv",
+      "failure_summary": {
+        "arg_type": 1,
+        "enum_grounding": 1,
+        "gt_mismatch": 1,
+        "numeric_grounding": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "enum_grounding",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 16614,
+      "completion_tokens": 47,
+      "total_tokens": 16661,
+      "llm_latency_sec": 4.8328,
+      "pipeline_sec": 9.6222,
+      "peak_vram_gb": 18.8413
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 100.0,
+      "variance": 0.0,
+      "det_pass_count": 4,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 4,
+      "gt_exact_rate": 100.0,
+      "elapsed_sec": 37.7276,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g002_valid_cross-2485f743-21db-e83c-5606-ba9cf4c5ddd6_651967.csv",
+      "failure_summary": {},
+      "failure_patterns": {
+        "top_failure_types": [],
+        "count": 0
+      },
+      "prompt_tokens": 66044,
+      "completion_tokens": 173,
+      "total_tokens": 66217,
+      "llm_latency_sec": 18.6592,
+      "pipeline_sec": 37.7163,
+      "peak_vram_gb": 18.89
+    },
+    "genome": {
+      "id": "cross-2485f743-21db-e83c-5606-ba9cf4c5ddd6",
+      "seed": 411141552,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.05,
+        "max_tokens": 768,
+        "candidate_strategies": [
+          "direct",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "01_preamble.txt"
+        },
+        "02": {
+          "source_file": "02_generator_prompt.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code."
+          ]
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "06_det_helper.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 3,
+    "genome_id": "mut-b2c3876c-88d6-cd8b-69e2-32a5fffb9170",
+    "fitness": 91.9434,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 91.9434,
+      "variance": 0.0,
+      "det_pass_count": 1,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 14.4541,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g003_quick_mut-b2c3876c-88d6-cd8b-69e2-32a5fffb9170_159038.csv",
+      "failure_summary": {
+        "arg_type": 1,
+        "gt_mismatch": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 30192,
+      "completion_tokens": 63,
+      "total_tokens": 30255,
+      "llm_latency_sec": 9.7028,
+      "pipeline_sec": 14.4509,
+      "peak_vram_gb": 22.0104
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 86.8834,
+      "variance": 469.173505,
+      "det_pass_count": 3,
+      "det_pass_rate": 75.0,
+      "gt_exact_count": 1,
+      "gt_exact_rate": 25.0,
+      "elapsed_sec": 55.9137,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g003_valid_mut-b2c3876c-88d6-cd8b-69e2-32a5fffb9170_659038.csv",
+      "failure_summary": {
+        "gt_mismatch": 3,
+        "arg_type": 1,
+        "gt_receiver_coverage": 1,
+        "gt_service_coverage": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            3
+          ],
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "gt_receiver_coverage",
+            1
+          ],
+          [
+            "gt_service_coverage",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 8
+      },
+      "prompt_tokens": 119582,
+      "completion_tokens": 212,
+      "total_tokens": 119794,
+      "llm_latency_sec": 36.9247,
+      "pipeline_sec": 55.902,
+      "peak_vram_gb": 22.1501
+    },
+    "genome": {
+      "id": "mut-b2c3876c-88d6-cd8b-69e2-32a5fffb9170",
+      "seed": 356858622,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.05,
+        "max_tokens": 768,
+        "candidate_strategies": [
+          "direct",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "01_preamble.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code."
+          ]
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "06_det_helper.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 4,
+    "genome_id": "cross-2af85447-22fe-0324-46b8-f7f8e31565a8",
+    "fitness": 91.9434,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 91.9434,
+      "variance": 0.0,
+      "det_pass_count": 1,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 14.5213,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g004_quick_cross-2af85447-22fe-0324-46b8-f7f8e31565a8_154885.csv",
+      "failure_summary": {
+        "arg_type": 1,
+        "gt_mismatch": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 30192,
+      "completion_tokens": 63,
+      "total_tokens": 30255,
+      "llm_latency_sec": 9.7302,
+      "pipeline_sec": 14.5182,
+      "peak_vram_gb": 22.0104
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 86.8834,
+      "variance": 469.173505,
+      "det_pass_count": 3,
+      "det_pass_rate": 75.0,
+      "gt_exact_count": 1,
+      "gt_exact_rate": 25.0,
+      "elapsed_sec": 55.8465,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g004_valid_cross-2af85447-22fe-0324-46b8-f7f8e31565a8_654885.csv",
+      "failure_summary": {
+        "gt_mismatch": 3,
+        "arg_type": 1,
+        "gt_receiver_coverage": 1,
+        "gt_service_coverage": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            3
+          ],
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "gt_receiver_coverage",
+            1
+          ],
+          [
+            "gt_service_coverage",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 8
+      },
+      "prompt_tokens": 119582,
+      "completion_tokens": 212,
+      "total_tokens": 119794,
+      "llm_latency_sec": 36.9035,
+      "pipeline_sec": 55.8347,
+      "peak_vram_gb": 22.1501
+    },
+    "genome": {
+      "id": "cross-2af85447-22fe-0324-46b8-f7f8e31565a8",
+      "seed": 549794468,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.05,
+        "max_tokens": 768,
+        "candidate_strategies": [
+          "direct",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "01_preamble.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code."
+          ]
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "06_det_helper.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 5,
+    "genome_id": "clone-e13928ec-b803-f546-be11-f390f1a60ba6",
+    "fitness": 91.9434,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 91.9434,
+      "variance": 0.0,
+      "det_pass_count": 1,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 14.5414,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g005_quick_clone-e13928ec-b803-f546-be11-f390f1a60ba6_152125.csv",
+      "failure_summary": {
+        "arg_type": 1,
+        "gt_mismatch": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 30192,
+      "completion_tokens": 63,
+      "total_tokens": 30255,
+      "llm_latency_sec": 9.7687,
+      "pipeline_sec": 14.5382,
+      "peak_vram_gb": 22.0104
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 86.8834,
+      "variance": 469.173505,
+      "det_pass_count": 3,
+      "det_pass_rate": 75.0,
+      "gt_exact_count": 1,
+      "gt_exact_rate": 25.0,
+      "elapsed_sec": 55.9688,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g005_valid_clone-e13928ec-b803-f546-be11-f390f1a60ba6_652125.csv",
+      "failure_summary": {
+        "gt_mismatch": 3,
+        "arg_type": 1,
+        "gt_receiver_coverage": 1,
+        "gt_service_coverage": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            3
+          ],
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "gt_receiver_coverage",
+            1
+          ],
+          [
+            "gt_service_coverage",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 8
+      },
+      "prompt_tokens": 119582,
+      "completion_tokens": 212,
+      "total_tokens": 119794,
+      "llm_latency_sec": 36.9187,
+      "pipeline_sec": 55.9569,
+      "peak_vram_gb": 22.1501
+    },
+    "genome": {
+      "id": "clone-e13928ec-b803-f546-be11-f390f1a60ba6",
+      "seed": 730111707,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.05,
+        "max_tokens": 1280,
+        "candidate_strategies": [
+          "direct",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "01_preamble.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code."
+          ]
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "06_det_helper.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 6,
+    "genome_id": "clone-84e6c3c0-2c76-afb0-f8d5-616b9b6be197",
+    "fitness": 91.9434,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 91.9434,
+      "variance": 0.0,
+      "det_pass_count": 1,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 14.3553,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g006_quick_clone-84e6c3c0-2c76-afb0-f8d5-616b9b6be197_156723.csv",
+      "failure_summary": {
+        "arg_type": 1,
+        "gt_mismatch": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 30192,
+      "completion_tokens": 63,
+      "total_tokens": 30255,
+      "llm_latency_sec": 9.769,
+      "pipeline_sec": 14.3521,
+      "peak_vram_gb": 22.0104
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 86.8834,
+      "variance": 469.173505,
+      "det_pass_count": 3,
+      "det_pass_rate": 75.0,
+      "gt_exact_count": 1,
+      "gt_exact_rate": 25.0,
+      "elapsed_sec": 55.3147,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g006_valid_clone-84e6c3c0-2c76-afb0-f8d5-616b9b6be197_656723.csv",
+      "failure_summary": {
+        "gt_mismatch": 3,
+        "arg_type": 1,
+        "gt_receiver_coverage": 1,
+        "gt_service_coverage": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            3
+          ],
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "gt_receiver_coverage",
+            1
+          ],
+          [
+            "gt_service_coverage",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 8
+      },
+      "prompt_tokens": 119582,
+      "completion_tokens": 212,
+      "total_tokens": 119794,
+      "llm_latency_sec": 36.9796,
+      "pipeline_sec": 55.3027,
+      "peak_vram_gb": 22.1501
+    },
+    "genome": {
+      "id": "clone-84e6c3c0-2c76-afb0-f8d5-616b9b6be197",
+      "seed": 57686304,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.05,
+        "max_tokens": 1280,
+        "candidate_strategies": [
+          "direct",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "01_preamble.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code."
+          ]
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "06_det_helper.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 7,
+    "genome_id": "mut-4b992f59-c5ec-04a9-e5b3-6f159539cf43",
+    "fitness": 91.9434,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 91.9434,
+      "variance": 0.0,
+      "det_pass_count": 1,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 14.3738,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g007_quick_mut-4b992f59-c5ec-04a9-e5b3-6f159539cf43_157132.csv",
+      "failure_summary": {
+        "arg_type": 1,
+        "gt_mismatch": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 30208,
+      "completion_tokens": 63,
+      "total_tokens": 30271,
+      "llm_latency_sec": 9.7255,
+      "pipeline_sec": 14.3706,
+      "peak_vram_gb": 22.0101
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 97.418,
+      "variance": 7.67041,
+      "det_pass_count": 4,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 2,
+      "gt_exact_rate": 50.0,
+      "elapsed_sec": 53.6276,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g007_valid_mut-4b992f59-c5ec-04a9-e5b3-6f159539cf43_657132.csv",
+      "failure_summary": {
+        "gt_mismatch": 2,
+        "arg_type": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            2
+          ],
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 5
+      },
+      "prompt_tokens": 119646,
+      "completion_tokens": 178,
+      "total_tokens": 119824,
+      "llm_latency_sec": 35.5547,
+      "pipeline_sec": 53.6161,
+      "peak_vram_gb": 22.1531
+    },
+    "genome": {
+      "id": "mut-4b992f59-c5ec-04a9-e5b3-6f159539cf43",
+      "seed": 847386712,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.05,
+        "max_tokens": 1280,
+        "candidate_strategies": [
+          "direct",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "01_preamble.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code.",
+            "Preserve GT-style temporal structure, receiver tags, service ordering, and literals."
+          ]
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "06_det_helper.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 8,
+    "genome_id": "mut-4b992f59-c5ec-04a9-e5b3-6f159539cf43",
+    "fitness": 91.9434,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 91.9434,
+      "variance": 0.0,
+      "det_pass_count": 1,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 14.2924,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g008_quick_mut-4b992f59-c5ec-04a9-e5b3-6f159539cf43_157133.csv",
+      "failure_summary": {
+        "arg_type": 1,
+        "gt_mismatch": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 30208,
+      "completion_tokens": 63,
+      "total_tokens": 30271,
+      "llm_latency_sec": 9.7219,
+      "pipeline_sec": 14.2893,
+      "peak_vram_gb": 22.0101
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 97.418,
+      "variance": 7.67041,
+      "det_pass_count": 4,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 2,
+      "gt_exact_rate": 50.0,
+      "elapsed_sec": 53.6774,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g008_valid_mut-4b992f59-c5ec-04a9-e5b3-6f159539cf43_657133.csv",
+      "failure_summary": {
+        "gt_mismatch": 2,
+        "arg_type": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            2
+          ],
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 5
+      },
+      "prompt_tokens": 119646,
+      "completion_tokens": 178,
+      "total_tokens": 119824,
+      "llm_latency_sec": 35.5488,
+      "pipeline_sec": 53.666,
+      "peak_vram_gb": 22.1531
+    },
+    "genome": {
+      "id": "mut-4b992f59-c5ec-04a9-e5b3-6f159539cf43",
+      "seed": 847386712,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.05,
+        "max_tokens": 1280,
+        "candidate_strategies": [
+          "direct",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "01_preamble.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code.",
+            "Preserve GT-style temporal structure, receiver tags, service ordering, and literals."
+          ]
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "06_det_helper.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 9,
+    "genome_id": "clone-2ce119c1-3302-157d-d1d3-61443580a91c",
+    "fitness": 91.9434,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 91.9434,
+      "variance": 0.0,
+      "det_pass_count": 1,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 14.4567,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g009_quick_clone-2ce119c1-3302-157d-d1d3-61443580a91c_151153.csv",
+      "failure_summary": {
+        "arg_type": 1,
+        "gt_mismatch": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 30208,
+      "completion_tokens": 63,
+      "total_tokens": 30271,
+      "llm_latency_sec": 9.7579,
+      "pipeline_sec": 14.4535,
+      "peak_vram_gb": 22.0101
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 97.418,
+      "variance": 7.67041,
+      "det_pass_count": 4,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 2,
+      "gt_exact_rate": 50.0,
+      "elapsed_sec": 54.8439,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g009_valid_clone-2ce119c1-3302-157d-d1d3-61443580a91c_651153.csv",
+      "failure_summary": {
+        "gt_mismatch": 2,
+        "arg_type": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            2
+          ],
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 5
+      },
+      "prompt_tokens": 119646,
+      "completion_tokens": 178,
+      "total_tokens": 119824,
+      "llm_latency_sec": 35.5327,
+      "pipeline_sec": 54.8323,
+      "peak_vram_gb": 22.1531
+    },
+    "genome": {
+      "id": "clone-2ce119c1-3302-157d-d1d3-61443580a91c",
+      "seed": 844620731,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.05,
+        "max_tokens": 512,
+        "candidate_strategies": [
+          "direct",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "01_preamble.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code.",
+            "Preserve GT-style temporal structure, receiver tags, service ordering, and literals."
+          ]
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "06_det_helper.txt"
+        }
+      }
+    }
+  },
+  {
+    "generation": 10,
+    "genome_id": "clone-15576edb-f82e-c7cd-386f-ef24e5560f92",
+    "fitness": 91.9434,
+    "train_metrics": {
+      "row_count": 1,
+      "avg_det_score": 91.9434,
+      "variance": 0.0,
+      "det_pass_count": 1,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 0,
+      "gt_exact_rate": 0.0,
+      "elapsed_sec": 14.6002,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g010_quick_clone-15576edb-f82e-c7cd-386f-ef24e5560f92_151297.csv",
+      "failure_summary": {
+        "arg_type": 1,
+        "gt_mismatch": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "gt_mismatch",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 4
+      },
+      "prompt_tokens": 30208,
+      "completion_tokens": 63,
+      "total_tokens": 30271,
+      "llm_latency_sec": 9.7057,
+      "pipeline_sec": 14.597,
+      "peak_vram_gb": 22.0101
+    },
+    "validation_metrics": {
+      "row_count": 4,
+      "avg_det_score": 97.418,
+      "variance": 7.67041,
+      "det_pass_count": 4,
+      "det_pass_rate": 100.0,
+      "gt_exact_count": 2,
+      "gt_exact_rate": 50.0,
+      "elapsed_sec": 54.435,
+      "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat1/candidates/g010_valid_clone-15576edb-f82e-c7cd-386f-ef24e5560f92_651297.csv",
+      "failure_summary": {
+        "gt_mismatch": 2,
+        "arg_type": 1,
+        "numeric_grounding": 1,
+        "semantic": 1
+      },
+      "failure_patterns": {
+        "top_failure_types": [
+          [
+            "gt_mismatch",
+            2
+          ],
+          [
+            "arg_type",
+            1
+          ],
+          [
+            "numeric_grounding",
+            1
+          ],
+          [
+            "semantic",
+            1
+          ]
+        ],
+        "count": 5
+      },
+      "prompt_tokens": 119646,
+      "completion_tokens": 178,
+      "total_tokens": 119824,
+      "llm_latency_sec": 35.4711,
+      "pipeline_sec": 54.4235,
+      "peak_vram_gb": 22.1531
+    },
+    "genome": {
+      "id": "clone-15576edb-f82e-c7cd-386f-ef24e5560f92",
+      "seed": 687790874,
+      "blocks": [
+        "01",
+        "02",
+        "03",
+        "06"
+      ],
+      "params": {
+        "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "temperature": 0.05,
+        "max_tokens": 512,
+        "candidate_strategies": [
+          "direct",
+          "minimal"
+        ]
+      },
+      "block_params": {
+        "01": {
+          "source_file": "01_preamble.txt"
+        },
+        "02": {
+          "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_compact.txt",
+          "few_shot_count": 1,
+          "micro_rules": [
+            "Return exactly one JSON object only with keys name, cron, period, code.",
+            "Preserve GT-style temporal structure, receiver tags, service ordering, and literals."
+          ]
+        },
+        "03": {
+          "source_file": "03_postprocessor.txt"
+        },
+        "06": {
+          "source_file": "06_det_helper.txt"
+        }
+      }
+    }
+  }
+]

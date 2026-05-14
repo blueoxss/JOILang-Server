@@ -1,0 +1,13 @@
+{
+  "stage_name": "preflight",
+  "status": "pass",
+  "start_time": "2026-05-13T22:13:31",
+  "end_time": "2026-05-13T22:13:31",
+  "model_key": "llama31_8b",
+  "command": "",
+  "output_paths": {
+    "csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/availability_summary.csv",
+    "json": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/availability_summary.json"
+  },
+  "error_summary": ""
+}

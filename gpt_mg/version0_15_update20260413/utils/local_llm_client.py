@@ -8,13 +8,160 @@ import os
 import select
 import subprocess
 import sys
+import threading
 import time
 import urllib.error
 import urllib.request
+from collections import deque
 from pathlib import Path
 from typing import Any
 
 from utils.pipeline_common import REPO_ROOT, dump_json
+
+# ---------------------------------------------------------------------
+# JOI local LLM worker debug utilities
+# Enable with:
+#   JOI_V15_DEBUG_WORKER=1
+# Optional:
+#   JOI_V15_DEBUG_LOG=/tmp/joi_local_llm_worker_debug.log
+# ---------------------------------------------------------------------
+def _joi_debug_enabled() -> bool:
+    return str(os.environ.get("JOI_V15_DEBUG_WORKER", "")).lower() in {"1", "true", "yes", "on"}
+
+
+def _joi_debug_log_path() -> str:
+    return os.environ.get("JOI_V15_DEBUG_LOG", "/tmp/joi_local_llm_worker_debug.log")
+
+
+def _joi_debug_log(message: str) -> None:
+    if not _joi_debug_enabled():
+        return
+
+    try:
+        from datetime import datetime
+        with open(_joi_debug_log_path(), "a", encoding="utf-8") as f:
+            f.write(f"\n[{datetime.now().isoformat(timespec='seconds')}] {message}\n")
+    except Exception:
+        # Debug logger must never break benchmark execution.
+        pass
+
+
+def _joi_debug_exc(context: str, exc: BaseException | None = None) -> None:
+    if not _joi_debug_enabled():
+        return
+
+    try:
+        import traceback
+        if exc is None:
+            _joi_debug_log(f"{context}\n{traceback.format_exc()}")
+        else:
+            _joi_debug_log(
+                f"{context}\n"
+                f"exception_type={type(exc).__name__}\n"
+                f"exception_message={exc}\n"
+                f"{traceback.format_exc()}"
+            )
+    except Exception:
+        pass
+
+
+def _joi_read_available_pipe(pipe, max_bytes: int = 200_000) -> str:
+    """
+    Non-blocking best-effort read from a subprocess pipe.
+    Safe for debugging worker stderr when the worker crashed or gave no response.
+    """
+    if pipe is None:
+        return ""
+
+    try:
+        import os as _os
+        import select
+
+        fd = pipe.fileno()
+        chunks = []
+        total = 0
+
+        while total < max_bytes:
+            ready, _, _ = select.select([fd], [], [], 0)
+            if not ready:
+                break
+
+            data = _os.read(fd, min(8192, max_bytes - total))
+            if not data:
+                break
+
+            chunks.append(data)
+            total += len(data)
+
+        return b"".join(chunks).decode("utf-8", errors="replace")
+    except Exception as e:
+        return f"<failed to read pipe: {type(e).__name__}: {e}>"
+    
+
+# Persistent worker stderr is drained in a background thread.
+# This prevents the worker from blocking when transformers/tqdm writes a lot of logs
+# and preserves the recent stderr tail for crash diagnostics.
+_PERSISTENT_WORKER_STDERR_BUFFER: deque[str] = deque(maxlen=1000)
+_PERSISTENT_WORKER_STDERR_THREAD: threading.Thread | None = None
+
+
+def _joi_worker_env() -> dict[str, str]:
+    env = dict(os.environ)
+    env.setdefault("PYTHONUNBUFFERED", "1")
+    env.setdefault("PYTHONFAULTHANDLER", "1")
+    env.setdefault("TRANSFORMERS_VERBOSITY", "error")
+    env.setdefault("HF_HUB_DISABLE_PROGRESS_BARS", "1")
+    env.setdefault("TOKENIZERS_PARALLELISM", "false")
+    return env
+
+
+def _joi_drain_pipe_to_debug(pipe, label: str) -> None:
+    """Continuously drain a subprocess pipe so the worker cannot block on stderr."""
+    if pipe is None:
+        return
+    try:
+        for line in iter(pipe.readline, ""):
+            if not line:
+                break
+            text = line.rstrip("\n")
+            _PERSISTENT_WORKER_STDERR_BUFFER.append(text)
+            if _joi_debug_enabled():
+                _joi_debug_log(f"{label}: {text}")
+    except Exception as exc:
+        _PERSISTENT_WORKER_STDERR_BUFFER.append(f"<stderr drain failed: {type(exc).__name__}: {exc}>")
+        _joi_debug_log(f"{label}: stderr drain failed: {type(exc).__name__}: {exc}")
+
+
+def _joi_persistent_stderr_tail(max_lines: int = 120) -> str:
+    if not _PERSISTENT_WORKER_STDERR_BUFFER:
+        return ""
+    return "\n".join(list(_PERSISTENT_WORKER_STDERR_BUFFER)[-max_lines:])
+
+
+def _joi_debug_payload_summary(payload: dict[str, Any]) -> str:
+    if not isinstance(payload, dict):
+        return f"payload_type={type(payload).__name__}"
+    messages = payload.get("messages") or []
+    message_lengths = []
+    if isinstance(messages, list):
+        for message in messages:
+            if isinstance(message, dict):
+                message_lengths.append({
+                    "role": message.get("role"),
+                    "chars": len(str(message.get("content", ""))),
+                })
+    summary = {
+        "keys": sorted(payload.keys()),
+        "model": payload.get("model"),
+        "local_model_name": payload.get("local_model_name"),
+        "local_device": payload.get("local_device"),
+        "local_dtype": payload.get("local_dtype"),
+        "local_files_only": payload.get("local_files_only"),
+        "local_load_in_4bit": payload.get("local_load_in_4bit"),
+        "local_max_new_tokens": payload.get("local_max_new_tokens"),
+        "message_lengths": message_lengths,
+    }
+    return json.dumps(summary, ensure_ascii=False, default=str)
 
 
 def _env(name_v15: str, name_v14: str, default: str = "") -> str:
@@ -113,6 +260,8 @@ def _probe_python_runtime(python_path: str) -> dict[str, Any]:
         )
     except Exception as exc:
         return {"ok": False, "python_path": str(candidate), "error": str(exc)}
+    
+    
     if completed.returncode != 0:
         return {
             "ok": False,
@@ -241,6 +390,42 @@ def _payload_use_persistent_worker(extra_payload: dict[str, Any] | None) -> bool
             return str(value).strip().lower() in {"1", "true", "yes", "on"}
     return _use_persistent_worker()
 
+def _is_phi_family_model(model_name: str) -> bool:
+    normalized = str(model_name or "").strip().lower()
+
+    return any(
+        marker in normalized
+        for marker in (
+            "microsoft/phi",
+            "microsoft--phi",
+            "phi-3",
+            "phi3",
+            "phi-3.5",
+            "phi35",
+            "phi-4",
+            "phi4",
+        )
+    )
+
+
+def _infer_default_attn_implementation(model: str, local_model_name: str) -> str:
+    """
+    Phi-family models can emit warnings or fail on sliding-window attention paths
+    when flash-attn/window_size support is unavailable.
+
+    If the user did not explicitly set JOI_V15_LOCAL_ATTN_IMPLEMENTATION,
+    default Phi-family models to attn_implementation='eager'.
+
+    Explicit environment/config values still take precedence.
+    """
+    configured = _env("JOI_V15_LOCAL_ATTN_IMPLEMENTATION", "JOI_V14_LOCAL_ATTN_IMPLEMENTATION", "").strip()
+    if configured:
+        return configured
+
+    if _is_phi_family_model(model) or _is_phi_family_model(local_model_name):
+        return "eager"
+
+    return ""
 
 def _build_worker_payload(
     system: str,
@@ -251,6 +436,8 @@ def _build_worker_payload(
     extra_payload: dict[str, Any] | None,
 ) -> dict[str, Any]:
     configured_model_name = _env("JOI_V15_LOCAL_MODEL_NAME", "JOI_V14_LOCAL_MODEL_NAME", model)
+    default_attn_implementation = _infer_default_attn_implementation(model, configured_model_name)
+
     payload = {
         "model": model,
         "local_model_name": configured_model_name,
@@ -265,14 +452,31 @@ def _build_worker_payload(
         "local_trust_remote_code": _env("JOI_V15_LOCAL_TRUST_REMOTE_CODE", "JOI_V14_LOCAL_TRUST_REMOTE_CODE", "false").lower() in {"1", "true", "yes", "on"},
         "local_load_in_4bit": _env("JOI_V15_LOCAL_LOAD_IN_4BIT", "JOI_V14_LOCAL_LOAD_IN_4BIT", "false").lower() in {"1", "true", "yes", "on"},
         "local_hf_modules_cache": DEFAULT_HF_MODULES_CACHE,
-        "local_attn_implementation": _env("JOI_V15_LOCAL_ATTN_IMPLEMENTATION", "JOI_V14_LOCAL_ATTN_IMPLEMENTATION", ""),
-    }
+        "local_attn_implementation": default_attn_implementation,
+    }    
     if extra_payload:
         payload.update(extra_payload)
+
+    # If extra_payload cleared local_attn_implementation, re-apply Phi default.
+    if not str(payload.get("local_attn_implementation", "") or "").strip():
+        inferred_attn = _infer_default_attn_implementation(
+            str(payload.get("model", model)),
+            str(payload.get("local_model_name", configured_model_name)),
+        )
+        if inferred_attn:
+            payload["local_attn_implementation"] = inferred_attn
+
     payload["local_model_name"] = _resolve_local_model_name(str(payload.get("local_model_name", "")))
+    if not str(payload.get("local_attn_implementation", "") or "").strip():
+        inferred_attn = _infer_default_attn_implementation(
+            str(payload.get("model", model)),
+            str(payload.get("local_model_name", "")),
+        )
+        if inferred_attn:
+            payload["local_attn_implementation"] = inferred_attn
+
     payload["local_hf_modules_cache"] = str(Path(str(payload.get("local_hf_modules_cache", DEFAULT_HF_MODULES_CACHE))).expanduser())
     return payload
-
 
 def _persistent_worker_key(worker_python: str, worker_path: str, payload: dict[str, Any]) -> tuple[str, ...]:
     return (
@@ -284,7 +488,9 @@ def _persistent_worker_key(worker_python: str, worker_path: str, payload: dict[s
         str(payload.get("local_files_only", "")),
         str(payload.get("local_trust_remote_code", "")),
         str(payload.get("local_load_in_4bit", "")),
+        str(payload.get("local_attn_implementation", "")),
     )
+
 
 
 def _close_persistent_worker() -> None:
@@ -294,20 +500,34 @@ def _close_persistent_worker() -> None:
     _PERSISTENT_WORKER_KEY = None
     if process is None:
         return
+
+    _joi_debug_log(
+        "CLOSE persistent worker\n"
+        f"pid={getattr(process, 'pid', None)}\n"
+        f"returncode_before={process.poll()}"
+    )
+
     try:
         if process.stdin and process.poll() is None:
             process.stdin.write(json.dumps({"_command": "shutdown"}) + "\n")
             process.stdin.flush()
-    except Exception:
-        pass
+    except Exception as exc:
+        _joi_debug_log(f"failed to send persistent worker shutdown command: {type(exc).__name__}: {exc}")
+
     try:
         process.wait(timeout=5)
     except Exception:
         try:
+            _joi_debug_log("persistent worker did not exit after shutdown; killing")
             process.kill()
-        except Exception:
-            pass
+        except Exception as exc:
+            _joi_debug_log(f"failed to kill persistent worker: {type(exc).__name__}: {exc}")
 
+    _joi_debug_log(
+        "CLOSED persistent worker\n"
+        f"returncode_after={process.poll()}\n"
+        f"stderr_tail:\n{_joi_persistent_stderr_tail()}"
+    )
 
 atexit.register(_close_persistent_worker)
 
@@ -316,23 +536,76 @@ def close_persistent_worker() -> None:
     _close_persistent_worker()
 
 
+
 def _ensure_persistent_worker(worker_python: str, worker_path: str, payload: dict[str, Any]) -> subprocess.Popen[str]:
-    global _PERSISTENT_WORKER_PROCESS, _PERSISTENT_WORKER_KEY
+    global _PERSISTENT_WORKER_PROCESS, _PERSISTENT_WORKER_KEY, _PERSISTENT_WORKER_STDERR_THREAD
+
     key = _persistent_worker_key(worker_python, worker_path, payload)
     process = _PERSISTENT_WORKER_PROCESS
+
     if process is not None and process.poll() is None and _PERSISTENT_WORKER_KEY == key:
         return process
+
     _close_persistent_worker()
-    process = subprocess.Popen(
-        [worker_python, worker_path],
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.DEVNULL,
-        text=True,
-        bufsize=1,
+    _PERSISTENT_WORKER_STDERR_BUFFER.clear()
+
+    env = _joi_worker_env()
+
+    _joi_debug_log(
+        "START persistent worker\n"
+        f"worker_python={worker_python}\n"
+        f"worker_path={worker_path}\n"
+        f"cwd={os.getcwd()}\n"
+        f"JOI_V15_LOCAL_DEVICE={env.get('JOI_V15_LOCAL_DEVICE')}\n"
+        f"TRANSFORMERS_VERBOSITY={env.get('TRANSFORMERS_VERBOSITY')}\n"
+        f"HF_HUB_DISABLE_PROGRESS_BARS={env.get('HF_HUB_DISABLE_PROGRESS_BARS')}\n"
+        f"TOKENIZERS_PARALLELISM={env.get('TOKENIZERS_PARALLELISM')}\n"
+        f"PYTHONUNBUFFERED={env.get('PYTHONUNBUFFERED')}\n"
+        f"PYTHONFAULTHANDLER={env.get('PYTHONFAULTHANDLER')}\n"
+        f"payload_summary={_joi_debug_payload_summary(payload)}"
     )
-    if process.stdin is None or process.stdout is None:
-        raise LocalLLMError("persistent worker did not expose stdin/stdout pipes")
+
+    try:
+        process = subprocess.Popen(
+            [worker_python, worker_path],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            bufsize=1,
+            env=env,
+        )
+    except Exception as exc:
+        _joi_debug_exc("FAILED TO START persistent worker", exc)
+        raise LocalLLMError(
+            f"failed to start persistent worker: {type(exc).__name__}: {exc}",
+            error_type="worker_crash",
+        ) from exc
+
+    if process.stderr is not None:
+        _PERSISTENT_WORKER_STDERR_THREAD = threading.Thread(
+            target=_joi_drain_pipe_to_debug,
+            args=(process.stderr, f"persistent worker pid={process.pid} stderr"),
+            daemon=True,
+        )
+        _PERSISTENT_WORKER_STDERR_THREAD.start()
+
+    if process.stdin is None or process.stdout is None or process.stderr is None:
+        _joi_debug_log(
+            "persistent worker missing one or more pipes\n"
+            f"stdin={process.stdin is not None}\n"
+            f"stdout={process.stdout is not None}\n"
+            f"stderr={process.stderr is not None}\n"
+            f"returncode={process.poll()}"
+        )
+        raise LocalLLMError("persistent worker did not expose stdin/stdout/stderr pipes", error_type="worker_crash")
+
+    _joi_debug_log(
+        "persistent worker started\n"
+        f"pid={process.pid}\n"
+        f"returncode={process.poll()}"
+    )
+
     _PERSISTENT_WORKER_PROCESS = process
     _PERSISTENT_WORKER_KEY = key
     return process
@@ -341,28 +614,89 @@ def _ensure_persistent_worker(worker_python: str, worker_path: str, payload: dic
 def _read_persistent_worker_response(process: subprocess.Popen[str], timeout_sec: int) -> dict[str, Any]:
     if process.stdout is None:
         raise LocalLLMError("persistent worker stdout is unavailable", error_type="worker_crash")
+
+    _joi_debug_log(
+        "WAIT persistent worker response\n"
+        f"pid={getattr(process, 'pid', None)}\n"
+        f"timeout_sec={timeout_sec}\n"
+        f"returncode_before={process.poll()}"
+    )
+
     ready, _, _ = select.select([process.stdout], [], [], timeout_sec)
     if not ready:
-        raise LocalLLMError(f"persistent worker timed out after {timeout_sec} seconds", error_type="cpu_fallback_timeout")
+        rc = process.poll()
+        stderr_tail = _joi_persistent_stderr_tail()
+        _joi_debug_log(
+            "PERSISTENT WORKER TIMEOUT\n"
+            f"returncode={rc}\n"
+            f"timeout_sec={timeout_sec}\n"
+            f"stderr_tail:\n{stderr_tail}"
+        )
+        raise LocalLLMError(
+            f"persistent worker timed out after {timeout_sec} seconds; "
+            f"returncode={rc}; stderr_tail={stderr_tail[-4000:]}",
+            error_type="cpu_fallback_timeout",
+            details={"returncode": rc, "stderr_tail": stderr_tail[-4000:]},
+        )
+
     line = process.stdout.readline()
+
     if not line:
-        raise LocalLLMError("persistent worker closed stdout unexpectedly", error_type="worker_crash")
+        rc = process.poll()
+        stderr_tail = _joi_persistent_stderr_tail()
+
+        _joi_debug_log(
+            "PERSISTENT WORKER EMPTY RESPONSE\n"
+            f"returncode={rc}\n"
+            f"timeout_sec={timeout_sec}\n"
+            f"stderr_tail:\n{stderr_tail}"
+        )
+
+        raise LocalLLMError(
+            f"persistent worker returned empty response; "
+            f"returncode={rc}; stderr_tail={stderr_tail[-4000:]}",
+            error_type="worker_crash",
+            details={"returncode": rc, "stderr_tail": stderr_tail[-4000:]},
+        )
+
+    _joi_debug_log(f"PERSISTENT WORKER RAW RESPONSE HEAD={line[:1000]!r}")
+
     try:
         payload = json.loads(line)
-    except json.JSONDecodeError as exc:
+    except Exception as exc:
+        stderr_tail = _joi_persistent_stderr_tail()
+
+        _joi_debug_log(
+            "PERSISTENT WORKER BAD JSON RESPONSE\n"
+            f"raw_line={line!r}\n"
+            f"stderr_tail:\n{stderr_tail}"
+        )
+
         raise LocalLLMError(
-            f"persistent worker returned non-JSON output: {line[:500]}",
+            f"persistent worker returned non-JSON response: {line[:1000]!r}; "
+            f"stderr_tail={stderr_tail[-4000:]}",
             error_type="invalid_json",
+            details={"raw_line": line[:4000], "stderr_tail": stderr_tail[-4000:]},
         ) from exc
+
     if not payload.get("ok", False):
         error_text = str(payload.get("error", "persistent worker failed"))
+        stderr_tail = _joi_persistent_stderr_tail()
+        details = dict(payload)
+        if stderr_tail and "stderr_tail" not in details:
+            details["stderr_tail"] = stderr_tail[-4000:]
+        _joi_debug_log(
+            "PERSISTENT WORKER RETURNED ERROR PAYLOAD\n"
+            f"error_text={error_text}\n"
+            f"payload={json.dumps(payload, ensure_ascii=False, default=str)[:4000]}\n"
+            f"stderr_tail:\n{stderr_tail}"
+        )
         raise LocalLLMError(
             error_text,
             error_type=str(payload.get("error_type") or classify_error_text(error_text)),
-            details=payload,
+            details=details,
         )
     return payload
-
 
 def _request_json(
     url: str,
@@ -435,6 +769,7 @@ def _call_openai_compatible(
     }
 
 
+
 def _call_worker(
     system: str,
     user: str,
@@ -454,26 +789,65 @@ def _call_worker(
     )
     worker_python = DEFAULT_WORKER_PYTHON
     worker_path = _env("JOI_V15_WORKER_PATH", "JOI_V14_WORKER_PATH", DEFAULT_WORKER)
-    completed = subprocess.run(
-        [worker_python, worker_path],
-        input=json.dumps(payload, ensure_ascii=False),
-        text=True,
-        capture_output=True,
-        timeout=timeout_sec,
-        check=False,
+    env = _joi_worker_env()
+
+    _joi_debug_log(
+        "START one-shot local worker\n"
+        f"worker_python={worker_python}\n"
+        f"worker_path={worker_path}\n"
+        f"cwd={os.getcwd()}\n"
+        f"timeout_sec={timeout_sec}\n"
+        f"payload_summary={_joi_debug_payload_summary(payload)}"
     )
+
+    try:
+        completed = subprocess.run(
+            [worker_python, worker_path],
+            input=json.dumps(payload, ensure_ascii=False),
+            text=True,
+            capture_output=True,
+            timeout=timeout_sec,
+            check=False,
+            env=env,
+        )
+    except Exception as exc:
+        _joi_debug_exc("one-shot local worker subprocess.run failed", exc)
+        raise LocalLLMError(
+            f"local worker subprocess.run failed: {type(exc).__name__}: {exc}",
+            error_type=classify_error_text(str(exc)),
+        ) from exc
+
+    _joi_debug_log(
+        "one-shot local worker finished\n"
+        f"returncode={completed.returncode}\n"
+        f"stdout_head={(completed.stdout or '')[:2000]}\n"
+        f"stdout_tail={(completed.stdout or '')[-2000:]}\n"
+        f"stderr_head={(completed.stderr or '')[:2000]}\n"
+        f"stderr_tail={(completed.stderr or '')[-4000:]}"
+    )
+
     if completed.returncode != 0:
         detail = (completed.stderr or completed.stdout or "").strip()
         raise LocalLLMError(
             f"local worker failed with exit code {completed.returncode}: {detail}",
             error_type=classify_error_text(detail),
+            details={
+                "returncode": completed.returncode,
+                "stdout_tail": (completed.stdout or "")[-4000:],
+                "stderr_tail": (completed.stderr or "")[-4000:],
+            },
         )
     try:
         worker_result = json.loads((completed.stdout or "").strip())
     except json.JSONDecodeError as exc:
         raise LocalLLMError(
-            f"local worker returned non-JSON output: {(completed.stdout or '')[:500]}",
+            f"local worker returned non-JSON output: {(completed.stdout or '')[:1000]}; "
+            f"stderr_tail={(completed.stderr or '')[-4000:]}",
             error_type="invalid_json",
+            details={
+                "stdout_tail": (completed.stdout or "")[-4000:],
+                "stderr_tail": (completed.stderr or "")[-4000:],
+            },
         ) from exc
     if not worker_result.get("ok", True):
         error_text = str(worker_result.get("error", "local worker failed"))
@@ -505,7 +879,6 @@ def _call_worker(
             response[key] = worker_result.get(key)
     return response
 
-
 def _call_worker_persistent(
     system: str,
     user: str,
@@ -530,11 +903,24 @@ def _call_worker_persistent(
     if process.stdin is None:
         raise LocalLLMError("persistent worker stdin is unavailable", error_type="worker_crash")
     try:
-        process.stdin.write(json.dumps(payload, ensure_ascii=False) + "\n")
+        request_line = json.dumps(payload, ensure_ascii=False)
+        _joi_debug_log(
+            "SEND persistent worker request\n"
+            f"pid={getattr(process, 'pid', None)}\n"
+            f"request_chars={len(request_line)}\n"
+            f"payload_summary={_joi_debug_payload_summary(payload)}"
+        )
+        process.stdin.write(request_line + "\n")
         process.stdin.flush()
     except BrokenPipeError as exc:
+        stderr_tail = _joi_persistent_stderr_tail()
+        _joi_debug_exc("persistent worker stdin pipe broke", exc)
         _close_persistent_worker()
-        raise LocalLLMError("persistent worker stdin pipe broke", error_type="worker_crash") from exc
+        raise LocalLLMError(
+            f"persistent worker stdin pipe broke; stderr_tail={stderr_tail[-4000:]}",
+            error_type="worker_crash",
+            details={"stderr_tail": stderr_tail[-4000:]},
+        ) from exc
     worker_result = _read_persistent_worker_response(process, timeout_sec)
     response = {
         "content": worker_result.get("content", ""),
@@ -690,6 +1076,10 @@ def call(
             return response
         except (LocalLLMError, urllib.error.URLError, urllib.error.HTTPError, subprocess.SubprocessError) as exc:
             last_error = exc
+            _joi_debug_exc(
+                f"local_llm_client.call attempt failed attempt={attempt + 1}/{retries + 1} mode={effective_mode}",
+                exc,
+            )
             if attempt >= retries:
                 break
             time.sleep(backoff_sec * (attempt + 1))

@@ -1,5 +1,0 @@
-model_key,model_label,failure_reason,count
-gpt41_mini,GPT-4.1-mini,gt_mismatch,7
-gpt41_mini,GPT-4.1-mini,semantic,4
-gpt41_mini,GPT-4.1-mini,extraneous,1
-gpt41_mini,GPT-4.1-mini,precondition,1

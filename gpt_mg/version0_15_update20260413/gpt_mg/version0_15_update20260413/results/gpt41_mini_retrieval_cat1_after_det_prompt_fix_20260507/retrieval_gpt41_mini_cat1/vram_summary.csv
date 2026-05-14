@@ -1,2 +1,0 @@
-model_key,model_label,peak_vram_gb_max,oom_count,cold_load_sec
-gpt41_mini,GPT-4.1-mini,0.0000,0,0.0000

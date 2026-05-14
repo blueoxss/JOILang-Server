@@ -1,0 +1,2 @@
+model_key,model_label,avg_det_score,warm_latency_p50,avg_prompt_tokens,peak_vram_gb_max,cold_load_sec,oom_count,generation_error_rate,failure_rate,det_per_latency,det_per_prompt_token,det_per_vram,pareto_det_vs_warm_latency,pareto_det_vs_prompt_tokens,pareto_det_vs_peak_vram
+qwen25_coder_14b,Qwen2.5-Coder-14B-Instruct,100.0000,26.3627,19082.0000,33.2259,0.0000,0,0.0000,0.0000,3.7932,0.005241,3.0097,True,True,True

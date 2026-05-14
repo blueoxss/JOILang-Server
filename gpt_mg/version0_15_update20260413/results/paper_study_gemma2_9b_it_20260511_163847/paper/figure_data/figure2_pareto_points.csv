@@ -1,3 +1,0 @@
-model_key,model_label,variant,variant_label,DETPass,SDET,avg_prompt_tokens,warm_latency_p50,deployment_point,source_dir
-gemma2_9b_it,Gemma-2-9B-it,B2,Direct cloud-to-local transfer,0.0,0.0,0.0,0.0,True,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B2_direct_cloud_to_local
-gemma2_9b_it,Gemma-2-9B-it,B3,Fixed block,0.0,0.0,0.0,0.0,True,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_gemma2_9b_it_20260511_163847/B3_fixed_block

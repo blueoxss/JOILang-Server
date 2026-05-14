@@ -79,6 +79,61 @@ def _ensure_dynamic_cache_compat() -> None:
 
         DynamicCache.get_usable_length = _get_usable_length
 
+    if not hasattr(DynamicCache, "from_legacy_cache"):
+        @classmethod
+        def _from_legacy_cache(cls, past_key_values=None, *args, **kwargs):
+            """
+            Compatibility shim for model code that expects
+            DynamicCache.from_legacy_cache(...).
+
+            Some model implementations, including Phi-family code paths, still
+            call DynamicCache.from_legacy_cache() during generation. Newer
+            transformers versions may not expose that helper. When legacy
+            past_key_values are provided as a tuple/list of per-layer
+            (key_states, value_states), rebuild a DynamicCache manually.
+            """
+            if past_key_values is None:
+                return cls()
+
+            if isinstance(past_key_values, cls):
+                return past_key_values
+
+            cache = cls()
+
+            try:
+                for layer_idx, layer_past in enumerate(past_key_values):
+                    if layer_past is None:
+                        continue
+                    key_states, value_states = layer_past[:2]
+                    try:
+                        cache.update(key_states, value_states, layer_idx)
+                    except TypeError:
+                        cache.update(key_states, value_states, layer_idx, cache_kwargs=None)
+            except Exception:
+                # If the legacy cache layout is unexpected, return an empty
+                # cache rather than crashing at the compatibility shim.
+                return cls()
+
+            return cache
+
+        DynamicCache.from_legacy_cache = _from_legacy_cache
+    
+    if not hasattr(DynamicCache, "to_legacy_cache"):
+        def _to_legacy_cache(self):
+            """
+            Compatibility shim for code that expects cache.to_legacy_cache().
+            """
+            try:
+                key_cache = getattr(self, "key_cache", [])
+                value_cache = getattr(self, "value_cache", [])
+                return tuple(
+                    (key_cache[i], value_cache[i])
+                    for i in range(min(len(key_cache), len(value_cache)))
+                )
+            except Exception:
+                return tuple()
+
+        DynamicCache.to_legacy_cache = _to_legacy_cache
 
 def _resolve_dtype(dtype_name: str):
     normalized = (dtype_name or "bf16").strip().lower()
@@ -283,46 +338,192 @@ def _load_runtime(payload: dict[str, Any]):
     return tokenizer, model, load_metrics
 
 
+
+def _merge_system_messages_into_user(messages: Any) -> list[dict[str, str]]:
+    """
+    Some chat templates, notably Gemma instruction models, do not support
+    the explicit {"role": "system"} message.
+
+    For those models, preserve the system instruction by folding it into the
+    next user message. This keeps the prompt semantics while producing a
+    user/assistant-only chat sequence accepted by Gemma's chat template.
+    """
+    if not isinstance(messages, list):
+        return []
+
+    normalized: list[dict[str, str]] = []
+    pending_system_parts: list[str] = []
+
+    for message in messages:
+        if not isinstance(message, dict):
+            continue
+
+        role = str(message.get("role", "")).strip()
+        content = str(message.get("content", ""))
+
+        if role == "system":
+            if content.strip():
+                pending_system_parts.append(content.strip())
+            continue
+
+        if role == "user" and pending_system_parts:
+            system_text = "\n\n".join(pending_system_parts)
+            content = (
+                "System instructions:\n"
+                f"{system_text}\n\n"
+                "User request:\n"
+                f"{content}"
+            )
+            pending_system_parts = []
+
+        if role:
+            normalized.append({"role": role, "content": content})
+
+    # If the request somehow contained only system messages, keep them as a user prompt.
+    if pending_system_parts:
+        system_text = "\n\n".join(pending_system_parts)
+        normalized.insert(
+            0,
+            {
+                "role": "user",
+                "content": f"System instructions:\n{system_text}",
+            },
+        )
+
+    return normalized
+
 def _generate(tokenizer, model, payload: dict[str, Any], *, load_metrics: dict[str, Any] | None = None) -> dict[str, Any]:
     request_started = time.perf_counter()
     messages = payload.get("messages", [])
     local_max_new_tokens = int(payload.get("local_max_new_tokens", 256))
+
     _reset_cuda_peak_stats()
+
     prompt_started = time.perf_counter()
-    prompt_tokens = tokenizer.apply_chat_template(
-        messages,
-        add_generation_prompt=True,
-        tokenize=True,
+
+    # transformers 5.x 호환:
+    # apply_chat_template(..., tokenize=True, return_tensors="pt")가
+    # Tensor가 아니라 BatchEncoding류 객체를 반환할 수 있으므로
+    # 먼저 text prompt를 만들고 tokenizer(...)로 명시적으로 input dict를 만든다.
+    # Gemma instruction models do not support an explicit "system" role in their
+
+    # Hugging Face chat template. Passing [{"role": "system", ...}, ...] into
+    # tokenizer.apply_chat_template() raises:
+    #
+    #   jinja2.exceptions.TemplateError: System role not supported
+    #
+    # To keep the system instruction without breaking Gemma's user/assistant-only
+    """
+    max_position_embeddings = 8192
+    sliding_window = 4096
+    rope_theta = None
+    model_type = gemma2
+    architectures = ['Gemma2ForCausalLM']
+    """
+    # template, fold system content into the first user message and retry.
+    try:
+        prompt_text = tokenizer.apply_chat_template(
+            messages,
+            add_generation_prompt=True,
+            tokenize=False,
+        )
+    except Exception as exc:
+        # Gemma instruction chat templates do not accept an explicit system role.
+        # Fallback: merge system content into the first user message and retry.
+        if "system role not supported" not in str(exc).lower():
+            raise
+
+        messages = _merge_system_messages_into_user(messages)
+
+        prompt_text = tokenizer.apply_chat_template(
+            messages,
+            add_generation_prompt=True,
+            tokenize=False,
+        )    
+
+    # Mingi NOTE:
+    # model.generate()의 positional input은 input_ids Tensor여야 한다.
+    # tokenizer 결과 BatchEncoding을 통째로 넘기면 transformers 내부에서
+    # inputs.shape를 찾다가 KeyError('shape') / AttributeError가 날 수 있다.
+    # 따라서 input_ids, attention_mask가 keyword argument로 전달되도록 **inputs로 풀어 넘긴다.
+
+    # transformers의 model.generate() 첫 번째 positional argument는
+    # input_ids Tensor로 해석된다.
+    #
+    # tokenizer(...) 또는 apply_chat_template(..., return_tensors="pt") 결과가
+    # BatchEncoding/dict 형태일 경우, 이를 그대로 model.generate(inputs, ...)
+    # 처럼 넘기면 generate 내부에서 inputs.shape를 참조하다가
+    # BatchEncoding에는 shape 속성이 없어 KeyError('shape') / AttributeError가 발생할 수 있다.
+    #
+    # 따라서 tokenizer 결과는 input_ids, attention_mask 등이 각각 keyword argument로
+    # 전달되도록 반드시 **inputs 형태로 풀어서 넘긴다.
+    #
+    # Wrong:
+    #   generated = model.generate(inputs, ...)
+    #
+    # Correct:
+    #   generated = model.generate(**inputs, ...)
+
+    inputs = tokenizer(
+        prompt_text,
         return_tensors="pt",
+        padding=False,
+        truncation=False,
     )
+
     device = next(model.parameters()).device
-    prompt_tokens = prompt_tokens.to(device)
+    inputs = {
+        key: value.to(device)
+        for key, value in inputs.items()
+        if hasattr(value, "to")
+    }
+
+    input_ids = inputs["input_ids"]
+    input_token_count = int(input_ids.shape[-1])
+
     _maybe_sync_cuda()
     prompt_prep_sec = round(time.perf_counter() - prompt_started, 4)
+
     generation_started = time.perf_counter()
+
+    pad_token_id = tokenizer.pad_token_id
+    if pad_token_id is None:
+        pad_token_id = tokenizer.eos_token_id
+
     with torch.no_grad():
         generated = model.generate(
-            prompt_tokens,
+            **inputs,
             max_new_tokens=local_max_new_tokens,
             do_sample=False,
-            pad_token_id=tokenizer.pad_token_id or tokenizer.eos_token_id,
+            pad_token_id=pad_token_id,
             eos_token_id=tokenizer.eos_token_id,
         )
+
     _maybe_sync_cuda()
     generate_sec = round(time.perf_counter() - generation_started, 4)
+
     decode_started = time.perf_counter()
-    completion_tokens = max(0, generated.shape[-1] - prompt_tokens.shape[-1])
-    content = tokenizer.decode(generated[0][prompt_tokens.shape[-1] :], skip_special_tokens=True).strip()
+
+    completion_tokens = max(0, int(generated.shape[-1]) - input_token_count)
+
+    content = tokenizer.decode(
+        generated[0][input_token_count:],
+        skip_special_tokens=True,
+    ).strip()
+
     _maybe_sync_cuda()
     decode_sec = round(time.perf_counter() - decode_started, 4)
+
     content = _extract_first_json_block(content)
     vram_stats = _cuda_peak_stats()
+
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
+
     response = {
         "ok": True,
         "content": content,
-        "prompt_tokens": int(prompt_tokens.shape[-1]),
+        "prompt_tokens": input_token_count,
         "completion_tokens": int(completion_tokens),
         "prompt_prep_sec": prompt_prep_sec,
         "generate_sec": generate_sec,
@@ -330,11 +531,13 @@ def _generate(tokenizer, model, payload: dict[str, Any], *, load_metrics: dict[s
         "total_worker_sec": round(time.perf_counter() - request_started, 4),
         "worker_pid": int(os.getpid()),
     }
+
     response.update(vram_stats)
+
     if load_metrics:
         response.update(load_metrics)
-    return response
 
+    return response
 
 def main() -> None:
     tokenizer = None

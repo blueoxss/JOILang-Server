@@ -1,0 +1,339 @@
+아래 jupyter에서 열리게 내용 수정해줘.
+
+{
+"cells": [
+{
+"cell_type": "markdown",
+"metadata": {},
+"source": [
+"# JOILang PromptOps: Local Model Benchmark & Render Trace\n",
+"\n",
+"이 노트북은 JOILang-Server 저장소의 run_benchmark.py를 활용하여 실제 로컬 모델 환경에서 blocks 기반 프롬프트 렌더링이 어떻게 동작하는지 한 단계씩 점검하기 위한 디버깅 및 트레이싱 도구입니다.\n",
+"\n",
+"주요 목적:\n",
+"1. 로컬 환경 변수 설정 및 단일 행(Row 1) 테스트 파이프라인 정상 구동 확인\n",
+"2. blocks 렌더링과 legacy_v13_monolith 렌더링 비교\n",
+"3. Retrieval Pre-mapping 옵션에 따른 동작 확인\n",
+"4. 생성된 결과 아티팩트(row_comparison.csv 등)를 로드하여 검증 결과 (DET 점수, 지연 시간, 토큰 수 등) 확인\n",
+"\n",
+"> 참고: 이 노트북은 전체 모델 비교 실험을 돌리기 위한 것이 아니라, 본격적인 대규모 실험 전 환경과 프롬프트 렌더링 파이프라인을 점검하는 용도입니다."
+]
+},
+{
+"cell_type": "markdown",
+"metadata": {},
+"source": [
+"## Section 1. 환경 변수 및 경로 설정\n",
+"제공된 가이드에 따라 Conda 가상환경 파이썬과 타겟 GPU 디바이스를 설정합니다."
+]
+},
+{
+"cell_type": "code",
+"execution_count": null,
+"metadata": {},
+"outputs": [],
+"source": [
+"import os\n",
+"import sys\n",
+"from pathlib import Path\n",
+"import pandas as pd\n",
+"import glob\n",
+"\n",
+"# 작업 디렉토리 기준 경로 설정\n",
+"NOTEBOOK_DIR = Path(os.getcwd()).resolve()\n",
+"VERSION_ROOT = NOTEBOOK_DIR.parent\n",
+"REPO_ROOT = VERSION_ROOT.parent.parent\n",
+"\n",
+"# 환경 변수 설정 (로컬 환경에 맞게 수정 가능)\n",
+"os.environ["JOI_V15_WORKER_PYTHON"] = "/home/mgjeong/miniconda3/envs/l/bin/python"\n",
+"os.environ["JOI_V15_LOCAL_DEVICE"] = "cuda:0"\n",
+"\n",
+"# 실행할 파이썬 스크립트 경로\n",
+"RUN_BENCHMARK_SCRIPT = VERSION_ROOT / "scripts" / "run_benchmark.py"\n",
+"\n",
+"print(f"[Paths]")\n",
+"print(f"REPO_ROOT: {REPO_ROOT}")\n",
+"print(f"VERSION_ROOT: {VERSION_ROOT}")\n",
+"print(f"RUN_BENCHMARK_SCRIPT: {RUN_BENCHMARK_SCRIPT}")\n",
+"\n",
+"print(f"\n[Environment Variables]")\n",
+"print(f"WORKER_PYTHON: {os.environ.get('JOI_V15_WORKER_PYTHON')}")\n",
+"print(f"LOCAL_DEVICE: {os.environ.get('JOI_V15_LOCAL_DEVICE')}")"
+]
+},
+{
+"cell_type": "markdown",
+"metadata": {},
+"source": [
+"## Section 2. 유틸리티 함수: 최근 실행 결과 불러오기\n",
+"벤치마크 스크립트 실행 후 results/model_suite_<timestamp> 폴더에 생성되는 CSV를 자동으로 읽어오기 위한 헬퍼 함수입니다."
+]
+},
+{
+"cell_type": "code",
+"execution_count": null,
+"metadata": {},
+"outputs": [],
+"source": [
+"def get_latest_result_dir(version_root):\n",
+"    results_dir = Path(version_root) / "results"\n",
+"    subdirs = [d for d in results_dir.iterdir() if d.is_dir() and d.name.startswith("model_suite_")]\n",
+"    if not subdirs:\n",
+"        return None\n",
+"    latest_dir = max(subdirs, key=os.path.getmtime)\n",
+"    return latest_dir\n",
+"\n",
+"def inspect_latest_row_comparison(version_root):\n",
+"    latest_dir = get_latest_result_dir(version_root)\n",
+"    if not latest_dir:\n",
+"        print("No results directory found.")\n",
+"        return None\n",
+"    \n",
+"    csv_path = latest_dir / "row_comparison.csv"\n",
+"    if not csv_path.exists():\n",
+"        print(f"row_comparison.csv not found in {latest_dir}")\n",
+"        return None\n",
+"        \n",
+"    print(f"Loading results from: {csv_path}")\n",
+"    df = pd.read_csv(csv_path)\n",
+"    \n",
+"    # 핵심 확인 지표 필터링\n",
+"    target_cols = [col for col in ['row_no', 'model_key', 'det_score', 'is_pass', 'failure_reasons', 'prompt_tokens', 'latency', 'generated_code'] if col in df.columns]\n",
+"    return df[target_cols]\n"
+]
+},
+{
+"cell_type": "markdown",
+"metadata": {},
+"source": [
+"## Section 3. [Recommended] 초기 Blocks Render 및 로컬 모델 테스트\n",
+"가장 목적에 부합하는 권장 진입점입니다. qwen25_coder_7b로 Row 1에 대해 blocks 렌더링 및 Retrieval Pre-mapping 옵션을 켜서 실행합니다.\n",
+"\n",
+"체크리스트:\n",
+"1. Generated JOICode가 비어 있지 않은가?\n",
+"2. JSON valid인가?\n",
+"3. DET 점수는 얼마인가?\n",
+"4. failure reason이 무엇인가?\n",
+"5. prompt tokens가 얼마인가?\n",
+"6. LLM latency가 찍히는가?"
+]
+},
+{
+"cell_type": "code",
+"execution_count": null,
+"metadata": {},
+"outputs": [],
+"source": [
+"%%bash -s "$RUN_BENCHMARK_SCRIPT" "$VERSION_ROOT"\n",
+"SCRIPT_PATH=$1\n",
+"VERSION_DIR=$2\n",
+"\n",
+"echo "Running basic block render test on qwen25_coder_7b (Row 1)..."\n",
+"\n",
+"python "$SCRIPT_PATH" \\n",
+"  --suite paper_local5 \\n",
+"  --model-key qwen25_coder_7b \\n",
+"  --row-no 1 \\n",
+"  --candidate-k 1 \\n",
+"  --repair-attempts 0 \\n",
+"  --det-profile strict \\n",
+"  --prompt-render-mode blocks \\n",
+"  --enable-retrieval-premapping \\n",
+"  --retrieval-topk 10 \\n",
+"  --retrieval-device cpu \\n",
+"  --print-mode compare \\n",
+"  --strict-availability"
+]
+},
+{
+"cell_type": "code",
+"execution_count": null,
+"metadata": {},
+"outputs": [],
+"source": [
+"# 위 셀 실행 후 생성된 결과를 데이터프레임으로 확인\n",
+"df_result_1 = inspect_latest_row_comparison(VERSION_ROOT)\n",
+"if df_result_1 is not None:\n",
+"    display(df_result_1)"
+]
+},
+{
+"cell_type": "markdown",
+"metadata": {},
+"source": [
+"## Section 4. Full Schema Fallback (Retrieval 끄기) 테스트\n",
+"Retrieval pre-mapping 없이 전체 스키마를 포함시켜 렌더링합니다. (프롬프트가 길어지므로 토큰 수와 Latency 증가를 관찰할 수 있습니다.)"
+]
+},
+{
+"cell_type": "code",
+"execution_count": null,
+"metadata": {},
+"outputs": [],
+"source": [
+"%%bash -s "$RUN_BENCHMARK_SCRIPT"\n",
+"SCRIPT_PATH=$1\n",
+"\n",
+"echo "Running Full Schema Fallback test..."\n",
+"\n",
+"python "$SCRIPT_PATH" \\n",
+"  --suite paper_local5 \\n",
+"  --model-key qwen25_coder_7b \\n",
+"  --row-no 1 \\n",
+"  --candidate-k 1 \\n",
+"  --repair-attempts 0 \\n",
+"  --det-profile strict \\n",
+"  --prompt-render-mode blocks \\n",
+"  --disable-retrieval-premapping \\n",
+"  --print-mode compare \\n",
+"  --strict-availability"
+]
+},
+{
+"cell_type": "code",
+"execution_count": null,
+"metadata": {},
+"outputs": [],
+"source": [
+"df_result_full_schema = inspect_latest_row_comparison(VERSION_ROOT)\n",
+"if df_result_full_schema is not None:\n",
+"    display(df_result_full_schema)"
+]
+},
+{
+"cell_type": "markdown",
+"metadata": {},
+"source": [
+"## Section 5. Legacy Monolith (v13) vs Blocks (v15) 렌더링 모드 비교\n",
+"B2 성격의 cloud-style prompt transfer인 legacy_v13_monolith 모드를 실행합니다. (이후 Section 3의 blocks 결과와 비교해볼 수 있습니다.)\n",
+"참고: 이 테스트를 위해서는 version0_13 디렉토리에 프롬프트 에셋이 존재해야 합니다."
+]
+},
+{
+"cell_type": "code",
+"execution_count": null,
+"metadata": {},
+"outputs": [],
+"source": [
+"%%bash -s "$RUN_BENCHMARK_SCRIPT" "$REPO_ROOT"\n",
+"SCRIPT_PATH=$1\n",
+"REPO_BASE=$2\n",
+"\n",
+"echo "Running Legacy Monolith test..."\n",
+"\n",
+"python "$SCRIPT_PATH" \\n",
+"  --suite paper_local5 \\n",
+"  --model-key qwen25_coder_7b \\n",
+"  --row-no 1 \\n",
+"  --candidate-k 1 \\n",
+"  --repair-attempts 0 \\n",
+"  --det-profile strict \\n",
+"  --prompt-render-mode legacy_v13_monolith \\n",
+"  --prompt-assets-dir "$REPO_BASE/gpt_mg/version0_13" \\n",
+"  --enable-retrieval-premapping \\n",
+"  --retrieval-topk 10 \\n",
+"  --retrieval-device cpu \\n",
+"  --print-mode compare \\n",
+"  --strict-availability"
+]
+},
+{
+"cell_type": "code",
+"execution_count": null,
+"metadata": {},
+"outputs": [],
+"source": [
+"df_result_legacy = inspect_latest_row_comparison(VERSION_ROOT)\n",
+"if df_result_legacy is not None:\n",
+"    display(df_result_legacy)"
+]
+},
+{
+"cell_type": "markdown",
+"metadata": {},
+"source": [
+"## Section 6. 스케일업: 카테고리 및 여러 행 실행 예시 (가이드라인)\n",
+"Row 1이 성공적으로 실행된다면, 본격적인 진화를 위해 여러 행을 평가할 수 있습니다.\n",
+"아래 명령은 --category 1과 --category 2에 대해 카테고리당 3개씩, 총 6개의 데이터를 평가합니다.\n",
+"\n",
+"(실행 시간이 길어질 수 있으므로 주석 처리되어 있습니다. 필요시 주석 해제 후 실행하세요.)"
+]
+},
+{
+"cell_type": "code",
+"execution_count": null,
+"metadata": {},
+"outputs": [],
+"source": [
+""""\n",
+"%%bash -s "$RUN_BENCHMARK_SCRIPT"\n",
+"SCRIPT_PATH=$1\n",
+"\n",
+"python "$SCRIPT_PATH" \\n",
+"  --suite paper_local5 \\n",
+"  --model-key qwen25_coder_7b \\n",
+"  --category 1 --category 2 \\n",
+"  --limit-per-category 3 \\n",
+"  --candidate-k 1 \\n",
+"  --repair-attempts 0 \\n",
+"  --det-profile strict \\n",
+"  --prompt-render-mode blocks \\n",
+"  --enable-retrieval-premapping \\n",
+"  --retrieval-topk 10 \\n",
+"  --retrieval-device cpu \\n",
+"  --print-mode summary \\n",
+"  --strict-availability\n",
+""""\n",
+"print("Uncomment the cell above to run a multi-row test.")"
+]
+},
+{
+"cell_type": "markdown",
+"metadata": {},
+"source": [
+"## Section 7. 결과 아티팩트 디렉토리 점검\n",
+"가장 최근 실행된 결과 디렉토리 내에 HTML/PDF 리포트 및 각종 요약 CSV가 정상적으로 생성되었는지 확인합니다."
+]
+},
+{
+"cell_type": "code",
+"execution_count": null,
+"metadata": {},
+"outputs": [],
+"source": [
+"latest_dir = get_latest_result_dir(VERSION_ROOT)\n",
+"if latest_dir:\n",
+"    print(f"Latest Result Directory: {latest_dir.name}\n")\n",
+"    print("--- Contained Files & Reports ---")\n",
+"    for item in latest_dir.rglob("*"):\n",
+"        if item.is_file():\n",
+"            # 너무 긴 경로는 상대 경로로 잘라서 표기\n",
+"            rel_path = item.relative_to(latest_dir)\n",
+"            print(f"- {rel_path}")\n",
+"else:\n",
+"    print("No result directory to inspect.")"
+]
+}
+],
+"metadata": {
+"kernelspec": {
+"display_name": "Python 3",
+"language": "python",
+"name": "python3"
+},
+"language_info": {
+"codemirror_mode": {
+"name": "ipython",
+"version": 3
+},
+"file_extension": ".py",
+"mimetype": "text/x-python",
+"name": "python",
+"nbconvert_exporter": "python",
+"pygments_lexer": "ipython3",
+"version": "3.8.10"
+}
+},
+"nbformat": 4,
+"nbformat_minor": 4
+}

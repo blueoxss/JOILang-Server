@@ -1,0 +1,451 @@
+{
+  "run_label": "g008_valid",
+  "genome": {
+    "id": "mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59",
+    "seed": 62710109,
+    "blocks": [
+      "01",
+      "02",
+      "03",
+      "06"
+    ],
+    "params": {
+      "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "temperature": 0.0,
+      "max_tokens": 1024,
+      "candidate_strategies": [
+        "explicit_preconditions",
+        "direct",
+        "canonical_names_first"
+      ]
+    },
+    "block_params": {
+      "01": {
+        "source_file": "generated/v13_gene_pool_e35ef6292a/01_v13_caution_full.txt"
+      },
+      "02": {
+        "source_file": "generated/v13_gene_pool_e35ef6292a/02_v13_service_response_full.txt",
+        "few_shot_count": 1,
+        "micro_rules": [
+          "Emit lowercase service/value member tokens after the receiver dot."
+        ]
+      },
+      "03": {
+        "source_file": "generated/v13_gene_pool_e35ef6292a/03_json_case_guard.txt"
+      },
+      "06": {
+        "source_file": "generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_full.txt",
+        "micro_rules": [
+          "Remove unrelated helper actions and duplicate service calls."
+        ]
+      }
+    }
+  },
+  "metrics": {
+    "row_count": 4,
+    "avg_det_score": 48.4819,
+    "variance": 335.001167,
+    "det_pass_count": 0,
+    "det_pass_rate": 0.0,
+    "gt_exact_count": 0,
+    "gt_exact_rate": 0.0,
+    "elapsed_sec": 112.8111,
+    "generation_output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat4/candidates/g008_valid_mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59_653530.csv",
+    "failure_summary": {
+      "gt_mismatch": 4,
+      "gt_receiver_coverage": 4,
+      "gt_service_coverage": 4,
+      "dataflow": 3,
+      "extraneous": 2,
+      "semantic": 2,
+      "arg_type": 2,
+      "service_match": 2,
+      "precondition": 1,
+      "unknown_service:alarm_off": 1,
+      "unknown_service:alarm_siren": 1,
+      "unknown_service:weatherprovider_rain": 1,
+      "unknown_service:light_on": 1
+    },
+    "failure_patterns": {
+      "top_failure_types": [
+        [
+          "gt_mismatch",
+          4
+        ],
+        [
+          "gt_receiver_coverage",
+          4
+        ],
+        [
+          "gt_service_coverage",
+          4
+        ],
+        [
+          "dataflow",
+          3
+        ],
+        [
+          "extraneous",
+          2
+        ],
+        [
+          "semantic",
+          2
+        ],
+        [
+          "arg_type",
+          2
+        ],
+        [
+          "service_match",
+          2
+        ],
+        [
+          "precondition",
+          1
+        ],
+        [
+          "unknown_service:alarm_off",
+          1
+        ],
+        [
+          "unknown_service:alarm_siren",
+          1
+        ],
+        [
+          "unknown_service:weatherprovider_rain",
+          1
+        ],
+        [
+          "unknown_service:light_on",
+          1
+        ]
+      ],
+      "count": 28
+    },
+    "prompt_tokens": 240296,
+    "completion_tokens": 259,
+    "total_tokens": 240555,
+    "llm_latency_sec": 93.641,
+    "pipeline_sec": 112.7955,
+    "peak_vram_gb": 29.8915
+  },
+  "rows": [
+    {
+      "row_no": 92,
+      "category": "4",
+      "command_eng": "When the presence sensor detects someone, turn on the TV.",
+      "det_score": 65.578,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.365604,
+      "failure_reasons": [
+        "extraneous",
+        "gt_mismatch",
+        "gt_receiver_coverage",
+        "gt_service_coverage",
+        "semantic"
+      ],
+      "output": "{\"name\":\"Scenario1\",\"cron\":\"0 7 * * *\",\"period\":0,\"code\":\"if ((#WindowCovering).windowcovering_currentposition == 0) {\\n  (#Irrigator).switch_on()\\n  (#WindowCovering).windowcovering_uporopen()\\n  wait until ((#Irrigator).switch_switch == \\\"on\\\")\\n  (#WindowCovering).windowcovering_downorclose()\\n}\"}",
+      "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#PresenceSensor).presencesensor_presence == true)\\n\\n(#Television).switch_on()\"}",
+      "service_list_snippet_source": "service_retrieval_fallback",
+      "service_list_retrieval_status": "used",
+      "service_list_retrieval_categories": "[\"PresenceSensor\", \"Television\", \"PresenceVitalSensor\", \"TemperatureSensor\", \"CarbonDioxideSensor\", \"Switch\", \"ContactSensor\", \"MotionSensor\", \"ArmRobot\", \"PressureSensor\"]"
+    },
+    {
+      "row_no": 93,
+      "category": "4",
+      "command_eng": "When the sound sensor value exceeds 50, stop speaker playback.",
+      "det_score": 50.2208,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.284161,
+      "failure_reasons": [
+        "dataflow",
+        "gt_mismatch",
+        "gt_receiver_coverage",
+        "gt_service_coverage"
+      ],
+      "output": "{\"name\":\"Scenario1\",\"cron\":\"\",\"period\":0,\"code\":\"(#Speaker).speaker_speak(\\\"When the sound sensor value exceeds 50, stop speaker playback.\\\")\"}",
+      "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#SoundSensor).soundsensor_sound > 50)\\n\\n(#Speaker).speaker_stop()\"}",
+      "service_list_snippet_source": "service_retrieval_fallback",
+      "service_list_retrieval_status": "used",
+      "service_list_retrieval_categories": "[\"Speaker\", \"SoundSensor\", \"AudioRecorder\", \"Siren\", \"PresenceSensor\", \"PressureSensor\", \"ContactSensor\", \"PresenceVitalSensor\", \"ArmRobot\", \"LeakSensor\"]"
+    },
+    {
+      "row_no": 94,
+      "category": "4",
+      "command_eng": "When it rains, turn on the dehumidifier.",
+      "det_score": 18.2398,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.314634,
+      "failure_reasons": [
+        "arg_type",
+        "dataflow",
+        "extraneous",
+        "gt_mismatch",
+        "gt_receiver_coverage",
+        "gt_service_coverage",
+        "precondition",
+        "semantic",
+        "service_match",
+        "unknown_service:alarm_off",
+        "unknown_service:alarm_siren",
+        "unknown_service:weatherprovider_rain"
+      ],
+      "output": "{\"name\":\"Scenario1\",\"cron\":\"\",\"period\":0,\"code\":\"(#WeatherProvider).weatherprovider_rain == true ? (#Alarm).alarm_siren() : (#Alarm).alarm_off()\"}",
+      "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#RainSensor).rainsensor_rain == true)\\n\\n(#Dehumidifier).switch_on()\"}",
+      "service_list_snippet_source": "service_retrieval_fallback",
+      "service_list_retrieval_status": "used",
+      "service_list_retrieval_categories": "[\"HumiditySensor\", \"RainSensor\", \"Dehumidifier\", \"Humidifier\", \"WeatherProvider\", \"ArmRobot\", \"Dishwasher\", \"AirConditioner\", \"Pump\", \"LaundryDryer\"]"
+    },
+    {
+      "row_no": 95,
+      "category": "4",
+      "command_eng": "When the brightness falls below 100 lux, turn on the light.",
+      "det_score": 59.8889,
+      "det_gt_exact": false,
+      "det_gt_similarity": 0.663489,
+      "failure_reasons": [
+        "arg_type",
+        "dataflow",
+        "gt_mismatch",
+        "gt_receiver_coverage",
+        "gt_service_coverage",
+        "service_match",
+        "unknown_service:light_on"
+      ],
+      "output": "{\"name\":\"Scenario1\",\"cron\":\"\",\"period\":0,\"code\":\"if ((#LightSensor).lightsensor_brightness < 100) { (#Light).light_on() }\"}",
+      "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#LightSensor).lightsensor_brightness < 100)\\n\\n(#Light).switch_on()\"}",
+      "service_list_snippet_source": "service_retrieval_fallback",
+      "service_list_retrieval_status": "used",
+      "service_list_retrieval_categories": "[\"LightSensor\", \"Light\", \"ColorControl\", \"DimmerSwitch\", \"ArmRobot\", \"Switch\", \"Plug\", \"Charger\", \"SmokeDetector\", \"Television\"]"
+    }
+  ],
+  "generation_summary": {
+    "run_id": "g008_valid_mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59_653530",
+    "output_csv": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/paper_study_llama31_8b_20260513_221326/B6_full_gps_ga/runs/llama31_8b/cat4/candidates/g008_valid_mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59_653530.csv",
+    "jsonl_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/results/candidates_g008_valid_mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59_653530.jsonl",
+    "row_count": 4,
+    "rows": [
+      {
+        "index": "2",
+        "category": "4",
+        "command_kor": "재실 센서가 감지되면 TV를 켜줘.",
+        "command_eng": "When the presence sensor detects someone, turn on the TV.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#PresenceSensor).Presence == true)\\n\\n(#Television).On()\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#PresenceSensor).presencesensor_presence == true)\\n\\n(#Television).switch_on()\"}",
+        "row_no": 92,
+        "profile": "version0_15_update20260413",
+        "genome_id": "mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59",
+        "genome_seed": 62710109,
+        "run_id": "g008_valid_mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59_653530",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"Scenario1\\\",\\\"cron\\\":\\\"0 7 * * *\\\",\\\"period\\\":0,\\\"code\\\":\\\"if ((#WindowCovering).windowcovering_currentposition == 0) {\\\\n  (#Irrigator).switch_on()\\\\n  (#WindowCovering).windowcovering_uporopen()\\\\n  wait until ((#Irrigator).switch_switch == \\\\\\\"on\\\\\\\")\\\\n  (#WindowCovering).windowcovering_downorclose()\\\\n}\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_chars\": 232405, \"prompt_tokens\": 55468, \"completion_tokens\": 106, \"total_tokens\": 55574, \"latency_sec\": 23.3152, \"peak_vram_gb\": 27.9036, \"load_sec\": 0.0, \"generate_sec\": 23.1342, \"prompt_prep_sec\": 0.1364, \"decode_sec\": 0.0003, \"worker_pid\": 3509550, \"error_type\": \"\", \"oom_flag\": false, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/01_v13_caution_full.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_caution_full\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/02_v13_service_response_full.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_service_response_full\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/03_json_case_guard.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: json_case_guard\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"06\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_full.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_grammar_tempo_full\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/g008_valid_mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59_653530/row_092_cand_1.json\"]",
+        "generation_status": "ok",
+        "generation_total_pipeline_sec": 28.096,
+        "llm_mode": "worker",
+        "llm_model": "meta-llama/Llama-3.1-8B-Instruct",
+        "prompt_render_mode": "blocks",
+        "prompt_assets_dir": "",
+        "service_list_snippet_source": "service_retrieval_fallback",
+        "service_list_device_count": 10,
+        "service_list_retrieval_status": "used",
+        "service_list_retrieval_mode": "hybrid",
+        "service_list_retrieval_topk": 10,
+        "service_list_retrieval_device": "cpu",
+        "service_list_retrieval_categories": "[\"PresenceSensor\", \"Television\", \"PresenceVitalSensor\", \"TemperatureSensor\", \"CarbonDioxideSensor\", \"Switch\", \"ContactSensor\", \"MotionSensor\", \"ArmRobot\", \"PressureSensor\"]",
+        "service_list_retrieval_scores": "[2.80251, 0.71228, 1.80151, 0.778406, 0.757932, 1.132761, 0.764976, 0.763217, 1.491326, 0.749369]",
+        "service_list_retrieval_fallback_reason": "",
+        "generation_call_count": 1,
+        "generation_error_count": 0,
+        "generation_error_type": "",
+        "generation_error_types": "[]",
+        "generation_oom_flag": false,
+        "generation_prompt_chars_total": 232405,
+        "generation_prompt_tokens_total": 55468,
+        "generation_completion_tokens_total": 106,
+        "generation_total_tokens_total": 55574,
+        "generation_llm_latency_sec": 23.3152,
+        "generation_peak_vram_gb": 27.9036
+      },
+      {
+        "index": "3",
+        "category": "4",
+        "command_kor": "소리 센서의 수치가 50보다 커지면 스피커 재생을 멈춰줘.",
+        "command_eng": "When the sound sensor value exceeds 50, stop speaker playback.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#SoundSensor).Sound > 50)\\n\\n(#Speaker).Stop()\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#SoundSensor).soundsensor_sound > 50)\\n\\n(#Speaker).speaker_stop()\"}",
+        "row_no": 93,
+        "profile": "version0_15_update20260413",
+        "genome_id": "mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59",
+        "genome_seed": 62710109,
+        "run_id": "g008_valid_mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59_653530",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"Scenario1\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#Speaker).speaker_speak(\\\\\\\"When the sound sensor value exceeds 50, stop speaker playback.\\\\\\\")\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_chars\": 256573, \"prompt_tokens\": 60271, \"completion_tokens\": 50, \"total_tokens\": 60321, \"latency_sec\": 22.6459, \"peak_vram_gb\": 29.0222, \"load_sec\": 0.0, \"generate_sec\": 22.4358, \"prompt_prep_sec\": 0.1633, \"decode_sec\": 0.0003, \"worker_pid\": 3509550, \"error_type\": \"\", \"oom_flag\": false, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/01_v13_caution_full.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_caution_full\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/02_v13_service_response_full.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_service_response_full\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/03_json_case_guard.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: json_case_guard\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"06\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_full.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_grammar_tempo_full\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/g008_valid_mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59_653530/row_093_cand_1.json\"]",
+        "generation_status": "ok",
+        "generation_total_pipeline_sec": 27.4296,
+        "llm_mode": "worker",
+        "llm_model": "meta-llama/Llama-3.1-8B-Instruct",
+        "prompt_render_mode": "blocks",
+        "prompt_assets_dir": "",
+        "service_list_snippet_source": "service_retrieval_fallback",
+        "service_list_device_count": 10,
+        "service_list_retrieval_status": "used",
+        "service_list_retrieval_mode": "hybrid",
+        "service_list_retrieval_topk": 10,
+        "service_list_retrieval_device": "cpu",
+        "service_list_retrieval_categories": "[\"Speaker\", \"SoundSensor\", \"AudioRecorder\", \"Siren\", \"PresenceSensor\", \"PressureSensor\", \"ContactSensor\", \"PresenceVitalSensor\", \"ArmRobot\", \"LeakSensor\"]",
+        "service_list_retrieval_scores": "[2.854364, 1.607103, 0.973676, 0.645678, 0.80732, 0.789206, 0.76193, 1.016588, 1.486968, 0.746418]",
+        "service_list_retrieval_fallback_reason": "",
+        "generation_call_count": 1,
+        "generation_error_count": 0,
+        "generation_error_type": "",
+        "generation_error_types": "[]",
+        "generation_oom_flag": false,
+        "generation_prompt_chars_total": 256573,
+        "generation_prompt_tokens_total": 60271,
+        "generation_completion_tokens_total": 50,
+        "generation_total_tokens_total": 60321,
+        "generation_llm_latency_sec": 22.6459,
+        "generation_peak_vram_gb": 29.0222
+      },
+      {
+        "index": "4",
+        "category": "4",
+        "command_kor": "비가 오면 제습기를 켜줘.",
+        "command_eng": "When it rains, turn on the dehumidifier.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#RainSensor).Rain == true)\\n\\n(#Dehumidifier).On()\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#RainSensor).rainsensor_rain == true)\\n\\n(#Dehumidifier).switch_on()\"}",
+        "row_no": 94,
+        "profile": "version0_15_update20260413",
+        "genome_id": "mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59",
+        "genome_seed": 62710109,
+        "run_id": "g008_valid_mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59_653530",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"Scenario1\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"(#WeatherProvider).weatherprovider_rain == true ? (#Alarm).alarm_siren() : (#Alarm).alarm_off()\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_chars\": 254088, \"prompt_tokens\": 60569, \"completion_tokens\": 53, \"total_tokens\": 60622, \"latency_sec\": 22.9956, \"peak_vram_gb\": 29.0931, \"load_sec\": 0.0, \"generate_sec\": 22.7916, \"prompt_prep_sec\": 0.1589, \"decode_sec\": 0.0003, \"worker_pid\": 3509550, \"error_type\": \"\", \"oom_flag\": false, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/01_v13_caution_full.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_caution_full\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/02_v13_service_response_full.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_service_response_full\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/03_json_case_guard.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: json_case_guard\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"06\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_full.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_grammar_tempo_full\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/g008_valid_mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59_653530/row_094_cand_1.json\"]",
+        "generation_status": "ok",
+        "generation_total_pipeline_sec": 27.7631,
+        "llm_mode": "worker",
+        "llm_model": "meta-llama/Llama-3.1-8B-Instruct",
+        "prompt_render_mode": "blocks",
+        "prompt_assets_dir": "",
+        "service_list_snippet_source": "service_retrieval_fallback",
+        "service_list_device_count": 10,
+        "service_list_retrieval_status": "used",
+        "service_list_retrieval_mode": "hybrid",
+        "service_list_retrieval_topk": 10,
+        "service_list_retrieval_device": "cpu",
+        "service_list_retrieval_categories": "[\"HumiditySensor\", \"RainSensor\", \"Dehumidifier\", \"Humidifier\", \"WeatherProvider\", \"ArmRobot\", \"Dishwasher\", \"AirConditioner\", \"Pump\", \"LaundryDryer\"]",
+        "service_list_retrieval_scores": "[2.504671, 2.503671, 1.464899, 0.669429, 0.616438, 1.502671, 0.597476, 0.58367, 0.582613, 0.580754]",
+        "service_list_retrieval_fallback_reason": "",
+        "generation_call_count": 1,
+        "generation_error_count": 0,
+        "generation_error_type": "",
+        "generation_error_types": "[]",
+        "generation_oom_flag": false,
+        "generation_prompt_chars_total": 254088,
+        "generation_prompt_tokens_total": 60569,
+        "generation_completion_tokens_total": 53,
+        "generation_total_tokens_total": 60622,
+        "generation_llm_latency_sec": 22.9956,
+        "generation_peak_vram_gb": 29.0931
+      },
+      {
+        "index": "5",
+        "category": "4",
+        "command_kor": "밝기가 100 럭스 미만이 되면 조명을 켜줘.",
+        "command_eng": "When the brightness falls below 100 lux, turn on the light.",
+        "gt_raw": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#LightSensor).Brightness < 100)\\n\\n(#Light).On()\"}",
+        "connected_devices": "",
+        "gt": "{\"name\": \"\", \n\"cron\": \"\", \n\"period\": 0, \n\"script\": \"\\nwait until ((#LightSensor).lightsensor_brightness < 100)\\n\\n(#Light).switch_on()\"}",
+        "row_no": 95,
+        "profile": "version0_15_update20260413",
+        "genome_id": "mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59",
+        "genome_seed": 62710109,
+        "run_id": "g008_valid_mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59_653530",
+        "candidate_count": 1,
+        "candidates": "[\"{\\\"name\\\":\\\"Scenario1\\\",\\\"cron\\\":\\\"\\\",\\\"period\\\":0,\\\"code\\\":\\\"if ((#LightSensor).lightsensor_brightness < 100) { (#Light).light_on() }\\\"}\"]",
+        "candidate_metadata": "[{\"candidate_index\": 0, \"strategy\": \"explicit_preconditions\", \"prompt_chars\": 274338, \"prompt_tokens\": 63988, \"completion_tokens\": 50, \"total_tokens\": 64038, \"latency_sec\": 24.6843, \"peak_vram_gb\": 29.8915, \"load_sec\": 0.0, \"generate_sec\": 24.4653, \"prompt_prep_sec\": 0.1718, \"decode_sec\": 0.0003, \"worker_pid\": 3509550, \"error_type\": \"\", \"oom_flag\": false, \"block_manifest\": [{\"id\": \"01\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/01_v13_caution_full.txt\", \"metadata\": {\"id\": \"01\", \"role\": \"preprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_caution_full\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"02\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/02_v13_service_response_full.txt\", \"metadata\": {\"id\": \"02\", \"role\": \"generator\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_service_response_full\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"03\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/03_json_case_guard.txt\", \"metadata\": {\"id\": \"03\", \"role\": \"postprocessor\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: json_case_guard\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}, {\"id\": \"06\", \"path\": \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/blocks/generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_full.txt\", \"metadata\": {\"id\": \"06\", \"role\": \"helper\", \"params\": \"temperature, few_shot_count, max_tokens, micro_rules\", \"description\": \"version0_13-derived gene variant: v13_grammar_tempo_full\", \"placeholders\": \"{command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}\"}}]}]",
+        "prompt_log_paths": "[\"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/logs/g008_valid_mut-f417b00e-5721-6c18-d9e7-8fa63d93ee59_653530/row_095_cand_1.json\"]",
+        "generation_status": "ok",
+        "generation_total_pipeline_sec": 29.5068,
+        "llm_mode": "worker",
+        "llm_model": "meta-llama/Llama-3.1-8B-Instruct",
+        "prompt_render_mode": "blocks",
+        "prompt_assets_dir": "",
+        "service_list_snippet_source": "service_retrieval_fallback",
+        "service_list_device_count": 10,
+        "service_list_retrieval_status": "used",
+        "service_list_retrieval_mode": "hybrid",
+        "service_list_retrieval_topk": 10,
+        "service_list_retrieval_device": "cpu",
+        "service_list_retrieval_categories": "[\"LightSensor\", \"Light\", \"ColorControl\", \"DimmerSwitch\", \"ArmRobot\", \"Switch\", \"Plug\", \"Charger\", \"SmokeDetector\", \"Television\"]",
+        "service_list_retrieval_scores": "[2.620231, 1.269191, 0.605099, 0.571469, 1.442121, 1.07263, 0.541945, 0.539973, 0.536351, 0.520109]",
+        "service_list_retrieval_fallback_reason": "",
+        "generation_call_count": 1,
+        "generation_error_count": 0,
+        "generation_error_type": "",
+        "generation_error_types": "[]",
+        "generation_oom_flag": false,
+        "generation_prompt_chars_total": 274338,
+        "generation_prompt_tokens_total": 63988,
+        "generation_completion_tokens_total": 50,
+        "generation_total_tokens_total": 64038,
+        "generation_llm_latency_sec": 24.6843,
+        "generation_peak_vram_gb": 29.8915
+      }
+    ],
+    "fieldnames": [
+      "index",
+      "category",
+      "command_kor",
+      "command_eng",
+      "gt_raw",
+      "connected_devices",
+      "gt",
+      "row_no",
+      "profile",
+      "genome_id",
+      "genome_seed",
+      "run_id",
+      "candidate_count",
+      "candidates",
+      "candidate_metadata",
+      "prompt_log_paths",
+      "generation_status",
+      "generation_total_pipeline_sec",
+      "llm_mode",
+      "llm_model",
+      "prompt_render_mode",
+      "prompt_assets_dir",
+      "service_list_snippet_source",
+      "service_list_device_count",
+      "service_list_retrieval_status",
+      "service_list_retrieval_mode",
+      "service_list_retrieval_topk",
+      "service_list_retrieval_device",
+      "service_list_retrieval_categories",
+      "service_list_retrieval_scores",
+      "service_list_retrieval_fallback_reason",
+      "generation_call_count",
+      "generation_error_count",
+      "generation_error_type",
+      "generation_error_types",
+      "generation_oom_flag",
+      "generation_prompt_chars_total",
+      "generation_prompt_tokens_total",
+      "generation_completion_tokens_total",
+      "generation_total_tokens_total",
+      "generation_llm_latency_sec",
+      "generation_peak_vram_gb"
+    ]
+  }
+}

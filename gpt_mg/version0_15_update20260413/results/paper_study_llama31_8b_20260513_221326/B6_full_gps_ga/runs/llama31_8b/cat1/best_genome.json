@@ -1,0 +1,40 @@
+{
+  "id": "gene-d99150b1-96d1-a1ae-1d75-a14ee7320c9f",
+  "seed": 838165113,
+  "blocks": [
+    "01",
+    "02",
+    "03",
+    "06"
+  ],
+  "params": {
+    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "temperature": 0.0,
+    "max_tokens": 512,
+    "candidate_strategies": [
+      "direct",
+      "compact_json",
+      "explicit_preconditions",
+      "minimal"
+    ]
+  },
+  "block_params": {
+    "01": {
+      "source_file": "01_preamble.txt"
+    },
+    "02": {
+      "source_file": "02_generator_prompt.txt",
+      "few_shot_count": 2,
+      "micro_rules": [
+        "Emit lowercase service/value member tokens after the receiver dot.",
+        "Never invent service names outside the provided service_list_snippet."
+      ]
+    },
+    "03": {
+      "source_file": "generated/v13_gene_pool_e35ef6292a/03_json_case_guard.txt"
+    },
+    "06": {
+      "source_file": "generated/v13_gene_pool_e35ef6292a/06_v13_grammar_tempo_compact.txt"
+    }
+  }
+}

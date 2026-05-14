@@ -1,0 +1,13 @@
+model_key,model_label,failure_reason,count
+llama31_8b,Llama-3.1-8B-Instruct,gt_mismatch,27
+llama31_8b,Llama-3.1-8B-Instruct,semantic,12
+llama31_8b,Llama-3.1-8B-Instruct,enum_grounding,9
+llama31_8b,Llama-3.1-8B-Instruct,gt_receiver_coverage,9
+llama31_8b,Llama-3.1-8B-Instruct,extraneous,8
+llama31_8b,Llama-3.1-8B-Instruct,gt_service_coverage,8
+llama31_8b,Llama-3.1-8B-Instruct,numeric_grounding,8
+llama31_8b,Llama-3.1-8B-Instruct,arg_type,5
+llama31_8b,Llama-3.1-8B-Instruct,dataflow,3
+llama31_8b,Llama-3.1-8B-Instruct,precondition,1
+llama31_8b,Llama-3.1-8B-Instruct,service_match,1
+llama31_8b,Llama-3.1-8B-Instruct,unknown_service:ricecooker_ricecookermode_setcookingmode,1

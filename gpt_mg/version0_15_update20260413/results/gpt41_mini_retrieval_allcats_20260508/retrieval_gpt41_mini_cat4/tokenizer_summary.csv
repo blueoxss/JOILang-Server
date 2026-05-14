@@ -1,2 +1,0 @@
-model_key,model_label,avg_prompt_chars,avg_prompt_tokens,avg_completion_tokens,avg_total_tokens,avg_tokens_per_sec
-gpt41_mini,GPT-4.1-mini,96292.4333,25184.3000,68.3333,25252.6333,11913.5996
