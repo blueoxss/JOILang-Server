@@ -45,11 +45,11 @@
       "content": "{\n  \"name\": \"StartRiceCooker\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#RiceCooker).ricecooker_setcookingparameters(\\\"cooking\\\", 1800)\"\n}",
       "prompt_tokens": 76739,
       "completion_tokens": 58,
-      "prompt_prep_sec": 0.1731,
-      "generate_sec": 13.9331,
+      "prompt_prep_sec": 0.1721,
+      "generate_sec": 13.8999,
       "decode_sec": 0.0001,
-      "total_worker_sec": 14.113,
-      "worker_pid": 8061,
+      "total_worker_sec": 14.079,
+      "worker_pid": 69797,
       "peak_vram_bytes": 30608974848,
       "peak_vram_gb": 28.5068,
       "peak_vram_by_device": {
@@ -58,12 +58,12 @@
     },
     "peak_vram_bytes": 30608974848,
     "peak_vram_gb": 28.5068,
-    "prompt_prep_sec": 0.1731,
-    "generate_sec": 13.9331,
+    "prompt_prep_sec": 0.1721,
+    "generate_sec": 13.8999,
     "decode_sec": 0.0001,
-    "total_worker_sec": 14.113,
-    "worker_pid": 8061,
-    "latency_sec": 14.1184,
+    "total_worker_sec": 14.079,
+    "worker_pid": 69797,
+    "latency_sec": 14.0845,
     "attempt": 1
   }
 }
