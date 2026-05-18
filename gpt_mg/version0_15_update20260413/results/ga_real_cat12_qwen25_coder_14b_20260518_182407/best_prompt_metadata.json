@@ -1,0 +1,12 @@
+{
+  "status": "dry_run",
+  "core_blocks": [
+    "01",
+    "02"
+  ],
+  "optional_blocks": [
+    "03",
+    "05",
+    "06"
+  ]
+}
