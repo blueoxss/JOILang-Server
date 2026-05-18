@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.05,
     "max_tokens": 768,
     "seed": 652394,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"Capture Image\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"if ((#MeetingRoom_Camera).camera_cameraState == \\\"on\\\") { (#MeetingRoom_Camera).camera_captureImage() }\"\n}",
-    "prompt_tokens": 23175,
-    "completion_tokens": 54,
-    "total_tokens": 23229,
+    "content": "",
+    "prompt_tokens": 26375,
+    "completion_tokens": 4,
+    "total_tokens": 26379,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"Capture Image\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"if ((#MeetingRoom_Camera).camera_cameraState == \\\"on\\\") { (#MeetingRoom_Camera).camera_captureImage() }\"\n}",
-      "prompt_tokens": 23175,
-      "completion_tokens": 54,
-      "prompt_prep_sec": 0.0645,
-      "generate_sec": 6.945,
+      "content": "",
+      "prompt_tokens": 26375,
+      "completion_tokens": 4,
+      "prompt_prep_sec": 0.0913,
+      "generate_sec": 15.3331,
       "decode_sec": 0.0002,
-      "total_worker_sec": 7.0361,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 21877306368,
-      "peak_vram_gb": 20.3748,
+      "total_worker_sec": 15.4675,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 32075083776,
+      "peak_vram_gb": 29.8722,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 21877306368
+        "1": 32075083776
       }
     },
-    "peak_vram_bytes": 21877306368,
-    "peak_vram_gb": 20.3748,
-    "prompt_prep_sec": 0.0645,
-    "generate_sec": 6.945,
+    "peak_vram_bytes": 32075083776,
+    "peak_vram_gb": 29.8722,
+    "prompt_prep_sec": 0.0913,
+    "generate_sec": 15.3331,
     "decode_sec": 0.0002,
-    "total_worker_sec": 7.0361,
-    "worker_pid": 3509550,
-    "latency_sec": 7.0418,
+    "total_worker_sec": 15.4675,
+    "worker_pid": 3555110,
+    "latency_sec": 15.4755,
     "attempt": 1
   }
 }

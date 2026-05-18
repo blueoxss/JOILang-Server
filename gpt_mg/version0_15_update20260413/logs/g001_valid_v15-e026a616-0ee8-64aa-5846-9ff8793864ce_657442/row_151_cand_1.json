@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.0,
     "max_tokens": 768,
     "seed": 657593,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"SetAirConditionerToCoolModeAndTemperature\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"if ((#TemperatureSensor).temperaturesensor_temperature >= 28 and (#HumiditySensor).humiditysensor_humidity >= 70) { (#AirConditioner).airconditioner_setairconditionermode(\\\"cool\\\") (#AirConditioner).airconditioner_settargettemperature(24) }\"\n}",
-    "prompt_tokens": 18621,
-    "completion_tokens": 96,
-    "total_tokens": 18717,
+    "content": "",
+    "prompt_tokens": 20772,
+    "completion_tokens": 1,
+    "total_tokens": 20773,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"SetAirConditionerToCoolModeAndTemperature\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"if ((#TemperatureSensor).temperaturesensor_temperature >= 28 and (#HumiditySensor).humiditysensor_humidity >= 70) { (#AirConditioner).airconditioner_setairconditionermode(\\\"cool\\\") (#AirConditioner).airconditioner_settargettemperature(24) }\"\n}",
-      "prompt_tokens": 18621,
-      "completion_tokens": 96,
-      "prompt_prep_sec": 0.0543,
-      "generate_sec": 7.0636,
-      "decode_sec": 0.0002,
-      "total_worker_sec": 7.1441,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 20739497984,
-      "peak_vram_gb": 19.3152,
+      "content": "",
+      "prompt_tokens": 20772,
+      "completion_tokens": 1,
+      "prompt_prep_sec": 0.0793,
+      "generate_sec": 10.7281,
+      "decode_sec": 0.0001,
+      "total_worker_sec": 10.8463,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 28609423872,
+      "peak_vram_gb": 26.6446,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 20739497984
+        "1": 28609423872
       }
     },
-    "peak_vram_bytes": 20739497984,
-    "peak_vram_gb": 19.3152,
-    "prompt_prep_sec": 0.0543,
-    "generate_sec": 7.0636,
-    "decode_sec": 0.0002,
-    "total_worker_sec": 7.1441,
-    "worker_pid": 3509550,
-    "latency_sec": 7.1477,
+    "peak_vram_bytes": 28609423872,
+    "peak_vram_gb": 26.6446,
+    "prompt_prep_sec": 0.0793,
+    "generate_sec": 10.7281,
+    "decode_sec": 0.0001,
+    "total_worker_sec": 10.8463,
+    "worker_pid": 3555110,
+    "latency_sec": 10.8505,
     "attempt": 1
   }
 }

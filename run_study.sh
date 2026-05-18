@@ -10,9 +10,11 @@ cd "$SCRIPT_DIR"
 # 변수 설정
 #MODEL="phi35_mini"
 #ODEL="qwen25_coder_7b"
-#MODEL="llama31_8b"
-#ODEL="gemma2_9b_it"
-MODEL="qwen25_coder_14b"
+
+#MODEL="llama31_8b" # 260513
+MODEL="gemma2_9b_it" # 260514
+#MODEL="qwen25_coder_14b"
+
 OUT="gpt_mg/version0_15_update20260413/results/paper_study_${MODEL}_$(date +%Y%m%d_%H%M%S)"
 
 echo "실행 모델: $MODEL"

@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.0,
     "max_tokens": 1024,
     "seed": 655898,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"SetSpeakerVolume\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#Speaker).speaker_setvolume(30)\"\n}",
-    "prompt_tokens": 16150,
-    "completion_tokens": 38,
-    "total_tokens": 16188,
+    "content": ", \"\n\nThe,\n\n\"\n\nThe,\n\n\"\n\nThe,\n\n\"\n\nThe.\n\nThe,\n\n\"\n\nThe.\n\nThe, \"\n\nThe.\n\nThe.\n\nThe.\n\n\"\n\nThe.\n\n\"\n\nThe.\n\n\"\n\nThe.\n\nThe.\n\n\"\n\nThe.\n\nThe.\n\nThe.\n\n\"\n\nThe.\n\n\"\n\nThe.\n\nThe.\n\n\"\n\nThe.\n\nThe, \"\n\nThe,\n\n\"\n\nThe.\n\n\"\n\nThe, \"\n\nThe,\n\nThe,\n\n\"\n\nThe.\n\n\"\n\nThe, \"\n\nThe,\n\n\"\n\nThe,\n\n\"\n\nThe.\n\nThe.\n\nThe,\n\n\"\n\nThe.\n\n\"\n\nThe.\n\n\"\n\nThe.\n\n\"\n\nThe, and \"\n\nThe.\n\n\"\n\nThe, and.\n\n\"\n\nThe, \"\n\nThe, and, \"\n\nThe, \"\n\nThe,\n\n\"\n\nThe,\n\n\"\n\nThe, and, \"\n\nThe, \"\n\nThe,\n\n\"\n\nThe, \"\n\nThe, \"\n\nThe, \"\n\nThe, \"\n\nThe, \"\n\nThe, \"\n\nThe, \"\n\nThe,\n\n\"\n\nThe, \"\n\nThe, \"",
+    "prompt_tokens": 18190,
+    "completion_tokens": 256,
+    "total_tokens": 18446,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"SetSpeakerVolume\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#Speaker).speaker_setvolume(30)\"\n}",
-      "prompt_tokens": 16150,
-      "completion_tokens": 38,
-      "prompt_prep_sec": 0.0485,
-      "generate_sec": 4.2977,
-      "decode_sec": 0.0002,
-      "total_worker_sec": 4.3702,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 20115931136,
-      "peak_vram_gb": 18.7344,
+      "content": ", \"\n\nThe,\n\n\"\n\nThe,\n\n\"\n\nThe,\n\n\"\n\nThe.\n\nThe,\n\n\"\n\nThe.\n\nThe, \"\n\nThe.\n\nThe.\n\nThe.\n\n\"\n\nThe.\n\n\"\n\nThe.\n\n\"\n\nThe.\n\nThe.\n\n\"\n\nThe.\n\nThe.\n\nThe.\n\n\"\n\nThe.\n\n\"\n\nThe.\n\nThe.\n\n\"\n\nThe.\n\nThe, \"\n\nThe,\n\n\"\n\nThe.\n\n\"\n\nThe, \"\n\nThe,\n\nThe,\n\n\"\n\nThe.\n\n\"\n\nThe, \"\n\nThe,\n\n\"\n\nThe,\n\n\"\n\nThe.\n\nThe.\n\nThe,\n\n\"\n\nThe.\n\n\"\n\nThe.\n\n\"\n\nThe.\n\n\"\n\nThe, and \"\n\nThe.\n\n\"\n\nThe, and.\n\n\"\n\nThe, \"\n\nThe, and, \"\n\nThe, \"\n\nThe,\n\n\"\n\nThe,\n\n\"\n\nThe, and, \"\n\nThe, \"\n\nThe,\n\n\"\n\nThe, \"\n\nThe, \"\n\nThe, \"\n\nThe, \"\n\nThe, \"\n\nThe, \"\n\nThe, \"\n\nThe,\n\n\"\n\nThe, \"\n\nThe, \"",
+      "prompt_tokens": 18190,
+      "completion_tokens": 256,
+      "prompt_prep_sec": 0.0439,
+      "generate_sec": 23.5303,
+      "decode_sec": 0.0003,
+      "total_worker_sec": 23.6131,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 27193482752,
+      "peak_vram_gb": 25.3259,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 20115931136
+        "1": 27193482752
       }
     },
-    "peak_vram_bytes": 20115931136,
-    "peak_vram_gb": 18.7344,
-    "prompt_prep_sec": 0.0485,
-    "generate_sec": 4.2977,
-    "decode_sec": 0.0002,
-    "total_worker_sec": 4.3702,
-    "worker_pid": 3509550,
-    "latency_sec": 4.3742,
+    "peak_vram_bytes": 27193482752,
+    "peak_vram_gb": 25.3259,
+    "prompt_prep_sec": 0.0439,
+    "generate_sec": 23.5303,
+    "decode_sec": 0.0003,
+    "total_worker_sec": 23.6131,
+    "worker_pid": 3555110,
+    "latency_sec": 23.6167,
     "attempt": 1
   }
 }

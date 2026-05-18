@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.0,
     "max_tokens": 1024,
     "seed": 653050,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"Set Light Color\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"if ((#LivingRoom #Light).light_colormode == \\\"hsv\\\") { (#LivingRoom #Light).light_movetohueandsaturation(240, 80) }\"\n}",
-    "prompt_tokens": 17012,
-    "completion_tokens": 69,
-    "total_tokens": 17081,
+    "content": "\"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"",
+    "prompt_tokens": 18661,
+    "completion_tokens": 256,
+    "total_tokens": 18917,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"Set Light Color\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"if ((#LivingRoom #Light).light_colormode == \\\"hsv\\\") { (#LivingRoom #Light).light_movetohueandsaturation(240, 80) }\"\n}",
-      "prompt_tokens": 17012,
-      "completion_tokens": 69,
-      "prompt_prep_sec": 0.0375,
-      "generate_sec": 5.6438,
-      "decode_sec": 0.0002,
-      "total_worker_sec": 5.7053,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 20335518720,
-      "peak_vram_gb": 18.9389,
+      "content": "\"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"\n    \"",
+      "prompt_tokens": 18661,
+      "completion_tokens": 256,
+      "prompt_prep_sec": 0.0749,
+      "generate_sec": 24.2874,
+      "decode_sec": 0.0003,
+      "total_worker_sec": 24.4023,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 27421947392,
+      "peak_vram_gb": 25.5387,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 20335518720
+        "1": 27421947392
       }
     },
-    "peak_vram_bytes": 20335518720,
-    "peak_vram_gb": 18.9389,
-    "prompt_prep_sec": 0.0375,
-    "generate_sec": 5.6438,
-    "decode_sec": 0.0002,
-    "total_worker_sec": 5.7053,
-    "worker_pid": 3509550,
-    "latency_sec": 5.7092,
+    "peak_vram_bytes": 27421947392,
+    "peak_vram_gb": 25.5387,
+    "prompt_prep_sec": 0.0749,
+    "generate_sec": 24.2874,
+    "decode_sec": 0.0003,
+    "total_worker_sec": 24.4023,
+    "worker_pid": 3555110,
+    "latency_sec": 24.4074,
     "attempt": 1
   }
 }

@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.0,
     "max_tokens": 768,
     "seed": 154451,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"StopRecordingAndSave\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"if ((#AudioRecorder).audiorecorder_recordstatus == \\\"recording\\\") { (#AudioRecorder).audiorecorder_recordstop(); } else { (#AudioRecorder).audiorecorder_recordstart(); }\"\n}",
-    "prompt_tokens": 22437,
-    "completion_tokens": 75,
-    "total_tokens": 22512,
+    "content": "",
+    "prompt_tokens": 25043,
+    "completion_tokens": 1,
+    "total_tokens": 25044,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"StopRecordingAndSave\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"if ((#AudioRecorder).audiorecorder_recordstatus == \\\"recording\\\") { (#AudioRecorder).audiorecorder_recordstop(); } else { (#AudioRecorder).audiorecorder_recordstart(); }\"\n}",
-      "prompt_tokens": 22437,
-      "completion_tokens": 75,
-      "prompt_prep_sec": 0.0618,
-      "generate_sec": 7.4723,
+      "content": "",
+      "prompt_tokens": 25043,
+      "completion_tokens": 1,
+      "prompt_prep_sec": 0.0873,
+      "generate_sec": 14.8052,
       "decode_sec": 0.0002,
-      "total_worker_sec": 7.5589,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 21693091840,
-      "peak_vram_gb": 20.2033,
+      "total_worker_sec": 14.9346,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 31221830144,
+      "peak_vram_gb": 29.0776,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 21693091840
+        "1": 31221830144
       }
     },
-    "peak_vram_bytes": 21693091840,
-    "peak_vram_gb": 20.2033,
-    "prompt_prep_sec": 0.0618,
-    "generate_sec": 7.4723,
+    "peak_vram_bytes": 31221830144,
+    "peak_vram_gb": 29.0776,
+    "prompt_prep_sec": 0.0873,
+    "generate_sec": 14.8052,
     "decode_sec": 0.0002,
-    "total_worker_sec": 7.5589,
-    "worker_pid": 3509550,
-    "latency_sec": 7.5639,
+    "total_worker_sec": 14.9346,
+    "worker_pid": 3555110,
+    "latency_sec": 14.9407,
     "attempt": 1
   }
 }

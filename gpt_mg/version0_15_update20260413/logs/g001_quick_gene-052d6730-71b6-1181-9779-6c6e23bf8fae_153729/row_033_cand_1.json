@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.05,
     "max_tokens": 1024,
     "seed": 153762,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"Set the brightness of the living room light to 80%\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"light = (#Light).light_currentbrightness\\nif (light < 80.0) {\\n  (#Light).light_move_to_brightness(80.0, 0.0)\\n}\"\n}",
-    "prompt_tokens": 23443,
-    "completion_tokens": 77,
-    "total_tokens": 23520,
+    "content": "\"\n    \n    \"\n    \n    _\n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \"\n    \n    \"\n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"",
+    "prompt_tokens": 26475,
+    "completion_tokens": 256,
+    "total_tokens": 26731,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"Set the brightness of the living room light to 80%\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"light = (#Light).light_currentbrightness\\nif (light < 80.0) {\\n  (#Light).light_move_to_brightness(80.0, 0.0)\\n}\"\n}",
-      "prompt_tokens": 23443,
-      "completion_tokens": 77,
-      "prompt_prep_sec": 0.0931,
-      "generate_sec": 7.9504,
-      "decode_sec": 0.0002,
-      "total_worker_sec": 8.0684,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 21949049856,
-      "peak_vram_gb": 20.4416,
+      "content": "\"\n    \n    \"\n    \n    _\n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \"\n    \n    \"\n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"\n    \n    \"",
+      "prompt_tokens": 26475,
+      "completion_tokens": 256,
+      "prompt_prep_sec": 0.0942,
+      "generate_sec": 33.0444,
+      "decode_sec": 0.0004,
+      "total_worker_sec": 33.164,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 32136976896,
+      "peak_vram_gb": 29.9299,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 21949049856
+        "1": 32136976896
       }
     },
-    "peak_vram_bytes": 21949049856,
-    "peak_vram_gb": 20.4416,
-    "prompt_prep_sec": 0.0931,
-    "generate_sec": 7.9504,
-    "decode_sec": 0.0002,
-    "total_worker_sec": 8.0684,
-    "worker_pid": 3509550,
-    "latency_sec": 8.0754,
+    "peak_vram_bytes": 32136976896,
+    "peak_vram_gb": 29.9299,
+    "prompt_prep_sec": 0.0942,
+    "generate_sec": 33.0444,
+    "decode_sec": 0.0004,
+    "total_worker_sec": 33.164,
+    "worker_pid": 3555110,
+    "latency_sec": 33.172,
     "attempt": 1
   }
 }

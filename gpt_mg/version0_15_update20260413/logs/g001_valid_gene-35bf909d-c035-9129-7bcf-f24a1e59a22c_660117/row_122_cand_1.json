@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.0,
     "max_tokens": 768,
     "seed": 660239,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"Set the air conditioner to cool mode and switch to auto mode after 30 minutes\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"delay(30 MIN); (#AirConditioner).airconditioner_setairconditionermode(\\\"cool\\\"); delay(30 MIN); (#AirConditioner).airconditioner_setairconditionermode(\\\"auto\\\")\"\n}",
-    "prompt_tokens": 13268,
-    "completion_tokens": 86,
-    "total_tokens": 13354,
+    "content": "`\n\n` and `\n\n` and the.\n\n`\n\n`\n\n` and the.\n\n`\n\n` and the.\n\n`\n\n` and the.\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\nThe `\n\n`\n\n`\n\n`\n\n`\n\nThe.\n\n`\n\n`\n\nThe.\n\n`\n\n`\n\nThe `\n\n`\n\nThe `\n\n`\n\n`\n\nThe `\n\n`\n\n`\n\nThe `\n\n`\n\n`\n\nThe `\n\n`\n\nThe `\n\n#555.\n\n`\n\n`\n\nand the.\n\n`\n\nThe.\n\n`\n\nThe `\n\n55.\n\n`\n\nThe `\n\n`\n\nThe `\n\nand.\n\n`\n\n55.\n\n`\n\nThe `\n\n`\n\nThe `\n\nThe.\n\n`\n\n555.\n\n`\n\nThe `\n\nThe `\n\n`\n\n`\n\nThe `\n\nThe `\n\n`\n\n555.\n\n`\n\nThe `\n\nThe `\n\nThe.\n\n`\n\nThe `\n\nThe `\n\nThe.\n\n`\n\nThe `\n\nThe.\n\n`\n\nThe `\n\nThe.\n\n`\n\nThe `\n\nThe `\n\nThe\n\n`\n\nThe `",
+    "prompt_tokens": 14913,
+    "completion_tokens": 256,
+    "total_tokens": 15169,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"Set the air conditioner to cool mode and switch to auto mode after 30 minutes\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"delay(30 MIN); (#AirConditioner).airconditioner_setairconditionermode(\\\"cool\\\"); delay(30 MIN); (#AirConditioner).airconditioner_setairconditionermode(\\\"auto\\\")\"\n}",
-      "prompt_tokens": 13268,
-      "completion_tokens": 86,
-      "prompt_prep_sec": 0.0358,
-      "generate_sec": 5.1685,
-      "decode_sec": 0.0002,
-      "total_worker_sec": 5.2262,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 19393876992,
-      "peak_vram_gb": 18.062,
+      "content": "`\n\n` and `\n\n` and the.\n\n`\n\n`\n\n` and the.\n\n`\n\n` and the.\n\n`\n\n` and the.\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\nThe `\n\n`\n\n`\n\n`\n\n`\n\nThe.\n\n`\n\n`\n\nThe.\n\n`\n\n`\n\nThe `\n\n`\n\nThe `\n\n`\n\n`\n\nThe `\n\n`\n\n`\n\nThe `\n\n`\n\n`\n\nThe `\n\n`\n\nThe `\n\n#555.\n\n`\n\n`\n\nand the.\n\n`\n\nThe.\n\n`\n\nThe `\n\n55.\n\n`\n\nThe `\n\n`\n\nThe `\n\nand.\n\n`\n\n55.\n\n`\n\nThe `\n\n`\n\nThe `\n\nThe.\n\n`\n\n555.\n\n`\n\nThe `\n\nThe `\n\n`\n\n`\n\nThe `\n\nThe `\n\n`\n\n555.\n\n`\n\nThe `\n\nThe `\n\nThe.\n\n`\n\nThe `\n\nThe `\n\nThe.\n\n`\n\nThe `\n\nThe.\n\n`\n\nThe `\n\nThe.\n\n`\n\nThe `\n\nThe `\n\nThe\n\n`\n\nThe `",
+      "prompt_tokens": 14913,
+      "completion_tokens": 256,
+      "prompt_prep_sec": 0.0694,
+      "generate_sec": 20.8621,
+      "decode_sec": 0.0003,
+      "total_worker_sec": 20.9745,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 25575578112,
+      "peak_vram_gb": 23.8191,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 19393876992
+        "1": 25575578112
       }
     },
-    "peak_vram_bytes": 19393876992,
-    "peak_vram_gb": 18.062,
-    "prompt_prep_sec": 0.0358,
-    "generate_sec": 5.1685,
-    "decode_sec": 0.0002,
-    "total_worker_sec": 5.2262,
-    "worker_pid": 3509550,
-    "latency_sec": 5.229,
+    "peak_vram_bytes": 25575578112,
+    "peak_vram_gb": 23.8191,
+    "prompt_prep_sec": 0.0694,
+    "generate_sec": 20.8621,
+    "decode_sec": 0.0003,
+    "total_worker_sec": 20.9745,
+    "worker_pid": 3555110,
+    "latency_sec": 20.9789,
     "attempt": 1
   }
 }

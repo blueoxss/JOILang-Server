@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.0,
     "max_tokens": 768,
     "seed": 654452,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"StopChargingIfVoltageIsHigh\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"if ((#Charger).charger_voltage >= 220000) { (#Charger).switch_off() }\"\n}",
-    "prompt_tokens": 21455,
-    "completion_tokens": 56,
-    "total_tokens": 21511,
+    "content": "",
+    "prompt_tokens": 23803,
+    "completion_tokens": 1,
+    "total_tokens": 23804,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"StopChargingIfVoltageIsHigh\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"if ((#Charger).charger_voltage >= 220000) { (#Charger).switch_off() }\"\n}",
-      "prompt_tokens": 21455,
-      "completion_tokens": 56,
-      "prompt_prep_sec": 0.0526,
-      "generate_sec": 6.4383,
+      "content": "",
+      "prompt_tokens": 23803,
+      "completion_tokens": 1,
+      "prompt_prep_sec": 0.0813,
+      "generate_sec": 13.9684,
       "decode_sec": 0.0002,
-      "total_worker_sec": 6.5175,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 21444992000,
-      "peak_vram_gb": 19.9722,
+      "total_worker_sec": 14.0917,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 30443469312,
+      "peak_vram_gb": 28.3527,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 21444992000
+        "1": 30443469312
       }
     },
-    "peak_vram_bytes": 21444992000,
-    "peak_vram_gb": 19.9722,
-    "prompt_prep_sec": 0.0526,
-    "generate_sec": 6.4383,
+    "peak_vram_bytes": 30443469312,
+    "peak_vram_gb": 28.3527,
+    "prompt_prep_sec": 0.0813,
+    "generate_sec": 13.9684,
     "decode_sec": 0.0002,
-    "total_worker_sec": 6.5175,
-    "worker_pid": 3509550,
-    "latency_sec": 6.5223,
+    "total_worker_sec": 14.0917,
+    "worker_pid": 3555110,
+    "latency_sec": 14.0988,
     "attempt": 1
   }
 }

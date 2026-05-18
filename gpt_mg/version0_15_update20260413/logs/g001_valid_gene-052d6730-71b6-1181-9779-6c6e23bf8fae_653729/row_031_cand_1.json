@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.05,
     "max_tokens": 1024,
     "seed": 653760,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"Set the living room light to yellow\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"light = (#LivingRoom_Light).light_currentcolor\\nif (light == \\\"rgb\\\") {\\n  (#LivingRoom_Light).light_setcolor(\\\"255,0,0\\\")\\n}\"\n}",
-    "prompt_tokens": 25623,
-    "completion_tokens": 74,
-    "total_tokens": 25697,
+    "content": "\"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :",
+    "prompt_tokens": 29148,
+    "completion_tokens": 256,
+    "total_tokens": 29404,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"Set the living room light to yellow\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"light = (#LivingRoom_Light).light_currentcolor\\nif (light == \\\"rgb\\\") {\\n  (#LivingRoom_Light).light_setcolor(\\\"255,0,0\\\")\\n}\"\n}",
-      "prompt_tokens": 25623,
-      "completion_tokens": 74,
-      "prompt_prep_sec": 0.1062,
-      "generate_sec": 8.5524,
-      "decode_sec": 0.0002,
-      "total_worker_sec": 8.6832,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 22485046272,
-      "peak_vram_gb": 20.9408,
+      "content": "\"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :\n            \"\n            :",
+      "prompt_tokens": 29148,
+      "completion_tokens": 256,
+      "prompt_prep_sec": 0.1044,
+      "generate_sec": 38.2574,
+      "decode_sec": 0.0006,
+      "total_worker_sec": 38.3884,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 33905548288,
+      "peak_vram_gb": 31.577,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 22485046272
+        "1": 33905548288
       }
     },
-    "peak_vram_bytes": 22485046272,
-    "peak_vram_gb": 20.9408,
-    "prompt_prep_sec": 0.1062,
-    "generate_sec": 8.5524,
-    "decode_sec": 0.0002,
-    "total_worker_sec": 8.6832,
-    "worker_pid": 3509550,
-    "latency_sec": 8.6914,
+    "peak_vram_bytes": 33905548288,
+    "peak_vram_gb": 31.577,
+    "prompt_prep_sec": 0.1044,
+    "generate_sec": 38.2574,
+    "decode_sec": 0.0006,
+    "total_worker_sec": 38.3884,
+    "worker_pid": 3555110,
+    "latency_sec": 38.3959,
     "attempt": 1
   }
 }

@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.05,
     "max_tokens": 1024,
     "seed": 653761,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"CaptureImage\",\n  \"cron\": \"\",\n  \"period\": 100,\n  \"code\": \"\n    camera := false\n    if (camera == false) {\n      wait until ((#MeetingRoom_Camera).camera_cameraState == \\\"on\\\")\n      camera = true\n      (#MeetingRoom_Camera).camera_captureImage()\n    } else {\n      (#MeetingRoom_Camera).camera_captureImage()\n    }\n  \"\n}",
-    "prompt_tokens": 17693,
-    "completion_tokens": 91,
-    "total_tokens": 17784,
+    "content": "\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"",
+    "prompt_tokens": 19915,
+    "completion_tokens": 256,
+    "total_tokens": 20171,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"CaptureImage\",\n  \"cron\": \"\",\n  \"period\": 100,\n  \"code\": \"\n    camera := false\n    if (camera == false) {\n      wait until ((#MeetingRoom_Camera).camera_cameraState == \\\"on\\\")\n      camera = true\n      (#MeetingRoom_Camera).camera_captureImage()\n    } else {\n      (#MeetingRoom_Camera).camera_captureImage()\n    }\n  \"\n}",
-      "prompt_tokens": 17693,
-      "completion_tokens": 91,
-      "prompt_prep_sec": 0.076,
-      "generate_sec": 6.643,
-      "decode_sec": 0.0002,
-      "total_worker_sec": 6.7451,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 20500893696,
-      "peak_vram_gb": 19.0929,
+      "content": "\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"\n\"",
+      "prompt_tokens": 19915,
+      "completion_tokens": 256,
+      "prompt_prep_sec": 0.081,
+      "generate_sec": 24.9635,
+      "decode_sec": 0.0003,
+      "total_worker_sec": 25.0854,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 28104996352,
+      "peak_vram_gb": 26.1748,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 20500893696
+        "1": 28104996352
       }
     },
-    "peak_vram_bytes": 20500893696,
-    "peak_vram_gb": 19.0929,
-    "prompt_prep_sec": 0.076,
-    "generate_sec": 6.643,
-    "decode_sec": 0.0002,
-    "total_worker_sec": 6.7451,
-    "worker_pid": 3509550,
-    "latency_sec": 6.7509,
+    "peak_vram_bytes": 28104996352,
+    "peak_vram_gb": 26.1748,
+    "prompt_prep_sec": 0.081,
+    "generate_sec": 24.9635,
+    "decode_sec": 0.0003,
+    "total_worker_sec": 25.0854,
+    "worker_pid": 3555110,
+    "latency_sec": 25.0922,
     "attempt": 1
   }
 }

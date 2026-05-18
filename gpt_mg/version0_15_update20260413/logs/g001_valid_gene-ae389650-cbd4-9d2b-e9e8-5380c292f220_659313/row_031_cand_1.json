@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.05,
     "max_tokens": 512,
     "seed": 659344,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"Set the living room light to yellow\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#LivingRoom #Light).light_setcolor(255,0,0)\"\n}",
-    "prompt_tokens": 20896,
-    "completion_tokens": 49,
-    "total_tokens": 20945,
+    "content": "",
+    "prompt_tokens": 23927,
+    "completion_tokens": 1,
+    "total_tokens": 23928,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"Set the living room light to yellow\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#LivingRoom #Light).light_setcolor(255,0,0)\"\n}",
-      "prompt_tokens": 20896,
-      "completion_tokens": 49,
-      "prompt_prep_sec": 0.0886,
-      "generate_sec": 6.0562,
+      "content": "",
+      "prompt_tokens": 23927,
+      "completion_tokens": 1,
+      "prompt_prep_sec": 0.0858,
+      "generate_sec": 13.0728,
       "decode_sec": 0.0002,
-      "total_worker_sec": 6.1719,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 21309186560,
-      "peak_vram_gb": 19.8457,
+      "total_worker_sec": 13.1989,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 30522283520,
+      "peak_vram_gb": 28.4261,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 21309186560
+        "1": 30522283520
       }
     },
-    "peak_vram_bytes": 21309186560,
-    "peak_vram_gb": 19.8457,
-    "prompt_prep_sec": 0.0886,
-    "generate_sec": 6.0562,
+    "peak_vram_bytes": 30522283520,
+    "peak_vram_gb": 28.4261,
+    "prompt_prep_sec": 0.0858,
+    "generate_sec": 13.0728,
     "decode_sec": 0.0002,
-    "total_worker_sec": 6.1719,
-    "worker_pid": 3509550,
-    "latency_sec": 6.177,
+    "total_worker_sec": 13.1989,
+    "worker_pid": 3555110,
+    "latency_sec": 13.2038,
     "attempt": 1
   }
 }

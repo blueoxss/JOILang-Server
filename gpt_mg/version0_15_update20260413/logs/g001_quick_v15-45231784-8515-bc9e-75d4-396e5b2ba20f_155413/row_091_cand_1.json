@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.0,
     "max_tokens": 768,
     "seed": 155504,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"TurnOnContactSensor\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#ContactSensor).contactsensor_contact == true ? (#ContactSensor).contactsensor_contact = false : (#ContactSensor).contactsensor_contact = true\"\n}",
-    "prompt_tokens": 16351,
-    "completion_tokens": 60,
-    "total_tokens": 16411,
+    "content": "\"\n\nThe.\n\nThe.\n\nThe, \"\n\nThe.\n\nThe.\n\nThe, \"\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\"\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe",
+    "prompt_tokens": 18358,
+    "completion_tokens": 256,
+    "total_tokens": 18614,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"TurnOnContactSensor\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#ContactSensor).contactsensor_contact == true ? (#ContactSensor).contactsensor_contact = false : (#ContactSensor).contactsensor_contact = true\"\n}",
-      "prompt_tokens": 16351,
-      "completion_tokens": 60,
-      "prompt_prep_sec": 0.0765,
-      "generate_sec": 5.1484,
-      "decode_sec": 0.0002,
-      "total_worker_sec": 5.25,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 20172393472,
-      "peak_vram_gb": 18.787,
+      "content": "\"\n\nThe.\n\nThe.\n\nThe, \"\n\nThe.\n\nThe.\n\nThe, \"\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\"\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe,\n\nThe",
+      "prompt_tokens": 18358,
+      "completion_tokens": 256,
+      "prompt_prep_sec": 0.0738,
+      "generate_sec": 24.2277,
+      "decode_sec": 0.0003,
+      "total_worker_sec": 24.3174,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 27270117888,
+      "peak_vram_gb": 25.3973,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 20172393472
+        "1": 27270117888
       }
     },
-    "peak_vram_bytes": 20172393472,
-    "peak_vram_gb": 18.787,
-    "prompt_prep_sec": 0.0765,
-    "generate_sec": 5.1484,
-    "decode_sec": 0.0002,
-    "total_worker_sec": 5.25,
-    "worker_pid": 3509550,
-    "latency_sec": 5.2548,
+    "peak_vram_bytes": 27270117888,
+    "peak_vram_gb": 25.3973,
+    "prompt_prep_sec": 0.0738,
+    "generate_sec": 24.2277,
+    "decode_sec": 0.0003,
+    "total_worker_sec": 24.3174,
+    "worker_pid": 3555110,
+    "latency_sec": 24.3215,
     "attempt": 1
   }
 }

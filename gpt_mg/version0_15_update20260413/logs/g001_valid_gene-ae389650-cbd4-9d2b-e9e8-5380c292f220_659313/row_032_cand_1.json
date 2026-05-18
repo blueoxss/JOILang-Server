@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.05,
     "max_tokens": 512,
     "seed": 659345,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"Capture an image of the meeting room with the camera\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#MeetingRoom #Camera).camera_captureimage()\"\n}",
-    "prompt_tokens": 12966,
-    "completion_tokens": 46,
-    "total_tokens": 13012,
+    "content": "- ``\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n**`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`",
+    "prompt_tokens": 14694,
+    "completion_tokens": 256,
+    "total_tokens": 14950,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"Capture an image of the meeting room with the camera\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#MeetingRoom #Camera).camera_captureimage()\"\n}",
-      "prompt_tokens": 12966,
-      "completion_tokens": 46,
-      "prompt_prep_sec": 0.04,
-      "generate_sec": 3.8002,
-      "decode_sec": 0.0002,
-      "total_worker_sec": 3.862,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 19317944320,
-      "peak_vram_gb": 17.9912,
+      "content": "- ``\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n**`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`",
+      "prompt_tokens": 14694,
+      "completion_tokens": 256,
+      "prompt_prep_sec": 0.0652,
+      "generate_sec": 21.008,
+      "decode_sec": 0.0003,
+      "total_worker_sec": 21.1123,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 25470417920,
+      "peak_vram_gb": 23.7212,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 19317944320
+        "1": 25470417920
       }
     },
-    "peak_vram_bytes": 19317944320,
-    "peak_vram_gb": 17.9912,
-    "prompt_prep_sec": 0.04,
-    "generate_sec": 3.8002,
-    "decode_sec": 0.0002,
-    "total_worker_sec": 3.862,
-    "worker_pid": 3509550,
-    "latency_sec": 3.865,
+    "peak_vram_bytes": 25470417920,
+    "peak_vram_gb": 23.7212,
+    "prompt_prep_sec": 0.0652,
+    "generate_sec": 21.008,
+    "decode_sec": 0.0003,
+    "total_worker_sec": 21.1123,
+    "worker_pid": 3555110,
+    "latency_sec": 21.1167,
     "attempt": 1
   }
 }

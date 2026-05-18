@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.05,
     "max_tokens": 1024,
     "seed": 662533,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"SetAirPurifierHighMode\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#AirPurifier).airpurifier_setairpurifiermode(\\\"high\\\") and (#Speaker).speaker_speak(\\\"경고: 이산화탄소 농도가 1200ppm 이상이고 사람이 감지되고 있으니 공기청정기를 강풍으로 바꾸고 스피커로 경고해줘.\\\")\"\n}",
-    "prompt_tokens": 20376,
-    "completion_tokens": 106,
-    "total_tokens": 20482,
+    "content": "",
+    "prompt_tokens": 22629,
+    "completion_tokens": 1,
+    "total_tokens": 22630,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"SetAirPurifierHighMode\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#AirPurifier).airpurifier_setairpurifiermode(\\\"high\\\") and (#Speaker).speaker_speak(\\\"경고: 이산화탄소 농도가 1200ppm 이상이고 사람이 감지되고 있으니 공기청정기를 강풍으로 바꾸고 스피커로 경고해줘.\\\")\"\n}",
-      "prompt_tokens": 20376,
-      "completion_tokens": 106,
-      "prompt_prep_sec": 0.0472,
-      "generate_sec": 7.9945,
+      "content": "",
+      "prompt_tokens": 22629,
+      "completion_tokens": 1,
+      "prompt_prep_sec": 0.0812,
+      "generate_sec": 12.0835,
       "decode_sec": 0.0002,
-      "total_worker_sec": 8.0678,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 21179945984,
-      "peak_vram_gb": 19.7254,
+      "total_worker_sec": 12.2098,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 29719529472,
+      "peak_vram_gb": 27.6785,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 21179945984
+        "1": 29719529472
       }
     },
-    "peak_vram_bytes": 21179945984,
-    "peak_vram_gb": 19.7254,
-    "prompt_prep_sec": 0.0472,
-    "generate_sec": 7.9945,
+    "peak_vram_bytes": 29719529472,
+    "peak_vram_gb": 27.6785,
+    "prompt_prep_sec": 0.0812,
+    "generate_sec": 12.0835,
     "decode_sec": 0.0002,
-    "total_worker_sec": 8.0678,
-    "worker_pid": 3509550,
-    "latency_sec": 8.0722,
+    "total_worker_sec": 12.2098,
+    "worker_pid": 3555110,
+    "latency_sec": 12.2155,
     "attempt": 1
   }
 }

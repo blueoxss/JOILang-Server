@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.05,
     "max_tokens": 512,
     "seed": 659347,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"Set all dehumidifiers in the lab to AI drying mode\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"all(#Lab #Dehumidifier).dehumidifier_setdehumidifiermode('AIDrying')\"\n}",
-    "prompt_tokens": 12716,
-    "completion_tokens": 63,
-    "total_tokens": 12779,
+    "content": "-\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\nThe.\n\n`\n\n`\n\nThe.\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n##\n\n`\n\n`\n\n`\n\nThe.\n\n`\n\n##\n\n`\n\n`\n\nThe.\n\n`\n\n`\n\n##",
+    "prompt_tokens": 13857,
+    "completion_tokens": 256,
+    "total_tokens": 14113,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"Set all dehumidifiers in the lab to AI drying mode\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"all(#Lab #Dehumidifier).dehumidifier_setdehumidifiermode('AIDrying')\"\n}",
-      "prompt_tokens": 12716,
-      "completion_tokens": 63,
-      "prompt_prep_sec": 0.0607,
-      "generate_sec": 4.3021,
-      "decode_sec": 0.0002,
-      "total_worker_sec": 4.3835,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 19257687040,
-      "peak_vram_gb": 17.9351,
+      "content": "-\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\nThe.\n\n`\n\n`\n\nThe.\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n`\n\n##\n\n`\n\n`\n\n`\n\nThe.\n\n`\n\n##\n\n`\n\n`\n\nThe.\n\n`\n\n`\n\n##",
+      "prompt_tokens": 13857,
+      "completion_tokens": 256,
+      "prompt_prep_sec": 0.064,
+      "generate_sec": 20.431,
+      "decode_sec": 0.0003,
+      "total_worker_sec": 20.5391,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 25056444416,
+      "peak_vram_gb": 23.3356,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 19257687040
+        "1": 25056444416
       }
     },
-    "peak_vram_bytes": 19257687040,
-    "peak_vram_gb": 17.9351,
-    "prompt_prep_sec": 0.0607,
-    "generate_sec": 4.3021,
-    "decode_sec": 0.0002,
-    "total_worker_sec": 4.3835,
-    "worker_pid": 3509550,
-    "latency_sec": 4.3869,
+    "peak_vram_bytes": 25056444416,
+    "peak_vram_gb": 23.3356,
+    "prompt_prep_sec": 0.064,
+    "generate_sec": 20.431,
+    "decode_sec": 0.0003,
+    "total_worker_sec": 20.5391,
+    "worker_pid": 3555110,
+    "latency_sec": 20.5426,
     "attempt": 1
   }
 }

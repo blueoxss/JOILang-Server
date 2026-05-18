@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.05,
     "max_tokens": 1024,
     "seed": 659931,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"SetLabDehumidifiersToAIDryingMode\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#Lab #Dehumidifier).dehumidifier_setdehumidifiermode(\\\"AIDrying\\\")\"\n}",
-    "prompt_tokens": 10890,
-    "completion_tokens": 61,
-    "total_tokens": 10951,
+    "content": "`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`",
+    "prompt_tokens": 11694,
+    "completion_tokens": 256,
+    "total_tokens": 11950,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"SetLabDehumidifiersToAIDryingMode\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#Lab #Dehumidifier).dehumidifier_setdehumidifiermode(\\\"AIDrying\\\")\"\n}",
-      "prompt_tokens": 10890,
-      "completion_tokens": 61,
-      "prompt_prep_sec": 0.0556,
-      "generate_sec": 3.8115,
-      "decode_sec": 0.0002,
-      "total_worker_sec": 3.89,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 18800703488,
-      "peak_vram_gb": 17.5095,
+      "content": "`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`\n\n`#`",
+      "prompt_tokens": 11694,
+      "completion_tokens": 256,
+      "prompt_prep_sec": 0.054,
+      "generate_sec": 19.09,
+      "decode_sec": 0.0003,
+      "total_worker_sec": 19.1827,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 24009872384,
+      "peak_vram_gb": 22.3609,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 18800703488
+        "1": 24009872384
       }
     },
-    "peak_vram_bytes": 18800703488,
-    "peak_vram_gb": 17.5095,
-    "prompt_prep_sec": 0.0556,
-    "generate_sec": 3.8115,
-    "decode_sec": 0.0002,
-    "total_worker_sec": 3.89,
-    "worker_pid": 3509550,
-    "latency_sec": 3.893,
+    "peak_vram_bytes": 24009872384,
+    "peak_vram_gb": 22.3609,
+    "prompt_prep_sec": 0.054,
+    "generate_sec": 19.09,
+    "decode_sec": 0.0003,
+    "total_worker_sec": 19.1827,
+    "worker_pid": 3555110,
+    "latency_sec": 19.1864,
     "attempt": 1
   }
 }

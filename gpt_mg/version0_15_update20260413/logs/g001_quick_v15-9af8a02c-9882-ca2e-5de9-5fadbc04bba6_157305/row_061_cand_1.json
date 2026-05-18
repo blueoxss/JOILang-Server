@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.0,
     "max_tokens": 1024,
     "seed": 157366,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"StopRecordingOrStartRecording\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"if ((#AudioRecorder).audiorecorder_recordstatus == \\\"recording\\\") { (#AudioRecorder).audiorecorder_recordstop(); speaker_speak(\\\"녹음을 중지하고 test.mp3로 저장해줘.\\\") } else { (#AudioRecorder).audiorecorder_recordstart(); speaker_speak(\\\"녹음을 시작해줘.\\\") }\"\n}",
-    "prompt_tokens": 18967,
-    "completion_tokens": 109,
-    "total_tokens": 19076,
+    "content": "\"",
+    "prompt_tokens": 21341,
+    "completion_tokens": 3,
+    "total_tokens": 21344,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"StopRecordingOrStartRecording\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"if ((#AudioRecorder).audiorecorder_recordstatus == \\\"recording\\\") { (#AudioRecorder).audiorecorder_recordstop(); speaker_speak(\\\"녹음을 중지하고 test.mp3로 저장해줘.\\\") } else { (#AudioRecorder).audiorecorder_recordstart(); speaker_speak(\\\"녹음을 시작해줘.\\\") }\"\n}",
-      "prompt_tokens": 18967,
-      "completion_tokens": 109,
-      "prompt_prep_sec": 0.0482,
-      "generate_sec": 7.6684,
-      "decode_sec": 0.0002,
-      "total_worker_sec": 7.7397,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 20818383872,
-      "peak_vram_gb": 19.3886,
+      "content": "\"",
+      "prompt_tokens": 21341,
+      "completion_tokens": 3,
+      "prompt_prep_sec": 0.088,
+      "generate_sec": 11.0053,
+      "decode_sec": 0.0001,
+      "total_worker_sec": 11.1341,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 28950650368,
+      "peak_vram_gb": 26.9624,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 20818383872
+        "1": 28950650368
       }
     },
-    "peak_vram_bytes": 20818383872,
-    "peak_vram_gb": 19.3886,
-    "prompt_prep_sec": 0.0482,
-    "generate_sec": 7.6684,
-    "decode_sec": 0.0002,
-    "total_worker_sec": 7.7397,
-    "worker_pid": 3509550,
-    "latency_sec": 7.7435,
+    "peak_vram_bytes": 28950650368,
+    "peak_vram_gb": 26.9624,
+    "prompt_prep_sec": 0.088,
+    "generate_sec": 11.0053,
+    "decode_sec": 0.0001,
+    "total_worker_sec": 11.1341,
+    "worker_pid": 3555110,
+    "latency_sec": 11.1396,
     "attempt": 1
   }
 }

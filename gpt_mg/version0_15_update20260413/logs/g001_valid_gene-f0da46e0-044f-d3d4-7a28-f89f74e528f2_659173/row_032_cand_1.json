@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.0,
     "max_tokens": 768,
     "seed": 659205,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"Capture an image of the meeting room with the camera\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#MeetingRoom_Camera).camera_captureimage()\"\n}",
-    "prompt_tokens": 24772,
-    "completion_tokens": 45,
-    "total_tokens": 24817,
+    "content": "",
+    "prompt_tokens": 28000,
+    "completion_tokens": 1,
+    "total_tokens": 28001,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"Capture an image of the meeting room with the camera\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#MeetingRoom_Camera).camera_captureimage()\"\n}",
-      "prompt_tokens": 24772,
-      "completion_tokens": 45,
-      "prompt_prep_sec": 0.0964,
-      "generate_sec": 7.1004,
+      "content": "",
+      "prompt_tokens": 28000,
+      "completion_tokens": 1,
+      "prompt_prep_sec": 0.0942,
+      "generate_sec": 19.0706,
       "decode_sec": 0.0002,
-      "total_worker_sec": 7.2225,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 22281081856,
-      "peak_vram_gb": 20.7509,
+      "total_worker_sec": 19.188,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 32256823296,
+      "peak_vram_gb": 30.0415,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 22281081856
+        "1": 32256823296
       }
     },
-    "peak_vram_bytes": 22281081856,
-    "peak_vram_gb": 20.7509,
-    "prompt_prep_sec": 0.0964,
-    "generate_sec": 7.1004,
+    "peak_vram_bytes": 32256823296,
+    "peak_vram_gb": 30.0415,
+    "prompt_prep_sec": 0.0942,
+    "generate_sec": 19.0706,
     "decode_sec": 0.0002,
-    "total_worker_sec": 7.2225,
-    "worker_pid": 3509550,
-    "latency_sec": 7.2298,
+    "total_worker_sec": 19.188,
+    "worker_pid": 3555110,
+    "latency_sec": 19.1964,
     "attempt": 1
   }
 }

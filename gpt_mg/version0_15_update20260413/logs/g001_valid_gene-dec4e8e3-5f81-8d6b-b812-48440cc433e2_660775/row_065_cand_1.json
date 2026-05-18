@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.0,
     "max_tokens": 512,
     "seed": 660840,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"ChangeRiceCookerMode\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#RiceCooker).ricecooker_ricecookermode == \\\"cooking\\\" ? ( (#RiceCooker).ricecooker_setricecookermode(\\\"cooking\\\") ) : ( (#RiceCooker).ricecooker_setricecookermode(\\\"keepWarm\\\") )\"\n}",
-    "prompt_tokens": 23489,
-    "completion_tokens": 94,
-    "total_tokens": 23583,
+    "content": "",
+    "prompt_tokens": 25933,
+    "completion_tokens": 1,
+    "total_tokens": 25934,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"ChangeRiceCookerMode\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#RiceCooker).ricecooker_ricecookermode == \\\"cooking\\\" ? ( (#RiceCooker).ricecooker_setricecookermode(\\\"cooking\\\") ) : ( (#RiceCooker).ricecooker_setricecookermode(\\\"keepWarm\\\") )\"\n}",
-      "prompt_tokens": 23489,
-      "completion_tokens": 94,
-      "prompt_prep_sec": 0.0929,
-      "generate_sec": 8.5599,
+      "content": "",
+      "prompt_tokens": 25933,
+      "completion_tokens": 1,
+      "prompt_prep_sec": 0.0852,
+      "generate_sec": 15.3929,
       "decode_sec": 0.0002,
-      "total_worker_sec": 8.6795,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 21955338240,
-      "peak_vram_gb": 20.4475,
+      "total_worker_sec": 15.5191,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 31794392064,
+      "peak_vram_gb": 29.6108,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 21955338240
+        "1": 31794392064
       }
     },
-    "peak_vram_bytes": 21955338240,
-    "peak_vram_gb": 20.4475,
-    "prompt_prep_sec": 0.0929,
-    "generate_sec": 8.5599,
+    "peak_vram_bytes": 31794392064,
+    "peak_vram_gb": 29.6108,
+    "prompt_prep_sec": 0.0852,
+    "generate_sec": 15.3929,
     "decode_sec": 0.0002,
-    "total_worker_sec": 8.6795,
-    "worker_pid": 3509550,
-    "latency_sec": 8.6859,
+    "total_worker_sec": 15.5191,
+    "worker_pid": 3555110,
+    "latency_sec": 15.527,
     "attempt": 1
   }
 }

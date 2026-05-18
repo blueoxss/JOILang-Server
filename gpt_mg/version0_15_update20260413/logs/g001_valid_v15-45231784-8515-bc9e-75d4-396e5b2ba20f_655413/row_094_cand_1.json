@@ -1,7 +1,7 @@
 {
   "request": {
     "mode": "worker",
-    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "model": "google/gemma-2-9b-it",
     "temperature": 0.0,
     "max_tokens": 768,
     "seed": 655507,
@@ -11,7 +11,7 @@
     "worker_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_15_update20260413/utils/persistent_qwen_worker.py",
     "worker_python": "/home/mgjeong/miniconda3/envs/l/bin/python",
     "persistent_worker": true,
-    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659",
+    "resolved_local_model_name": "/home/mgjeong/.cache/huggingface/hub/models--google--gemma-2-9b-it/snapshots/11c9b309abf73637e4b6f9a3fa1e92e615547819",
     "local_device": "cuda:1",
     "local_dtype": "bf16",
     "local_files_only": true,
@@ -37,35 +37,35 @@
     }
   },
   "response": {
-    "content": "{\n  \"name\": \"TurnOnDehumidifierWhenItRains\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#WeatherProvider).weatherprovider_rain == true ? (#Dehumidifier).dehumidifier_setdehumidifiermode(\\\"dehumidifying\\\") : null\"\n}",
-    "prompt_tokens": 16416,
-    "completion_tokens": 72,
-    "total_tokens": 16488,
+    "content": "),\n\nThe.\n\nThe.\n\nThe.\n\nThe.\n\nThe.\n\nThe, and.\n\nThe.\n\nThe.\n\nThe, and, \"The\", and \"\n\nThe.\n\nThe, and, \"The\", and \"\n\nThe.\n\nThe, and, \"The\", and \"\n\nThe, and, \"\n\nThe.\n\nThe, and \"\n\nThe.\n\nThe, and, \"\n\nThe, and, \"\n\nThe, \"\n\nThe, and, \"The\", and \"\n\nThe, \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and, \"The\", and \"\n\nThe, and, \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and, \"The\", and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"",
+    "prompt_tokens": 18321,
+    "completion_tokens": 256,
+    "total_tokens": 18577,
     "raw": {
       "ok": true,
-      "content": "{\n  \"name\": \"TurnOnDehumidifierWhenItRains\",\n  \"cron\": \"\",\n  \"period\": 0,\n  \"code\": \"(#WeatherProvider).weatherprovider_rain == true ? (#Dehumidifier).dehumidifier_setdehumidifiermode(\\\"dehumidifying\\\") : null\"\n}",
-      "prompt_tokens": 16416,
-      "completion_tokens": 72,
-      "prompt_prep_sec": 0.0477,
-      "generate_sec": 5.5488,
-      "decode_sec": 0.0002,
-      "total_worker_sec": 5.6205,
-      "worker_pid": 3509550,
-      "peak_vram_bytes": 20179612672,
-      "peak_vram_gb": 18.7937,
+      "content": "),\n\nThe.\n\nThe.\n\nThe.\n\nThe.\n\nThe.\n\nThe, and.\n\nThe.\n\nThe.\n\nThe, and, \"The\", and \"\n\nThe.\n\nThe, and, \"The\", and \"\n\nThe.\n\nThe, and, \"The\", and \"\n\nThe, and, \"\n\nThe.\n\nThe, and \"\n\nThe.\n\nThe, and, \"\n\nThe, and, \"\n\nThe, \"\n\nThe, and, \"The\", and \"\n\nThe, \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and, \"The\", and \"\n\nThe, and, \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and, \"The\", and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"\n\nThe, and \"",
+      "prompt_tokens": 18321,
+      "completion_tokens": 256,
+      "prompt_prep_sec": 0.0764,
+      "generate_sec": 23.8825,
+      "decode_sec": 0.0003,
+      "total_worker_sec": 24.001,
+      "worker_pid": 3555110,
+      "peak_vram_bytes": 27254315520,
+      "peak_vram_gb": 25.3826,
       "peak_vram_by_device": {
         "0": 0,
-        "1": 20179612672
+        "1": 27254315520
       }
     },
-    "peak_vram_bytes": 20179612672,
-    "peak_vram_gb": 18.7937,
-    "prompt_prep_sec": 0.0477,
-    "generate_sec": 5.5488,
-    "decode_sec": 0.0002,
-    "total_worker_sec": 5.6205,
-    "worker_pid": 3509550,
-    "latency_sec": 5.6239,
+    "peak_vram_bytes": 27254315520,
+    "peak_vram_gb": 25.3826,
+    "prompt_prep_sec": 0.0764,
+    "generate_sec": 23.8825,
+    "decode_sec": 0.0003,
+    "total_worker_sec": 24.001,
+    "worker_pid": 3555110,
+    "latency_sec": 24.0059,
     "attempt": 1
   }
 }
