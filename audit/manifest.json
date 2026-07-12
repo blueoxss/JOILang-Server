@@ -1,6 +1,6 @@
 {
   "generated_by": "tools/build_settings_manifest.py",
-  "source_commit": "d82db4c7",
+  "source_commit": "fb409c42",
   "datasets": {
     "benchmark": {
       "path": "datasets/JOICommands-280.csv",
@@ -49,8 +49,8 @@
       "population": 2,
       "generations": 1,
       "sources": [
-        "utils/ga_search/cli.py:98",
-        "utils/ga_search/cli.py:99"
+        "utils/ga_search/cli.py:99",
+        "utils/ga_search/cli.py:100"
       ]
     },
     "canonical_engine_behavior": {
@@ -76,11 +76,22 @@
   },
   "fitness": {
     "canonical": {
-      "formula": "avg_det + 10.0 * pass_rate + 5.0 * exact_rate - 0.0001 * prompt_tokens - 0.01 * latency",
-      "hardcoded": true,
-      "source": "utils/ga_search/rerank.py:61",
-      "terms_vs_paper": "ReplayFit 항 부재, 논문에 없는 gt_exact_rate 항 존재, 토큰/지연 비정규화",
-      "token_cost_caveat": "worker 백엔드가 usage 토큰을 0으로 보고(프로브 실측) — 토큰 항이 실효 없음"
+      "formula": "alpha*DETPass + beta*S_DET + gamma*ReplayFit_search - lambda_t*Tok_hat - lambda_l*Lat_hat",
+      "hardcoded": false,
+      "source": "utils/ga_search/fitness.py (구현) + configs/ga_search_fitness.json (가중치)",
+      "weights": [
+        0.5,
+        0.15,
+        0.2,
+        0.1,
+        0.05
+      ],
+      "normalization": {
+        "sdet_scale": 100.0,
+        "tokens_ref": 4096,
+        "latency_ref_sec": 5.0
+      },
+      "replay_fit_note": "WI-05 배선 전까지 gamma 항은 replay_fit_missing=true 로 0 기여"
     },
     "paper_assumption": {
       "formula": "α·DETPass + β·S_DET + γ·ReplayFit_search − λt·Tok̂ − λl·Lat̂",
@@ -171,15 +182,15 @@
     {
       "id": "AS-05",
       "paper": "적합도 가중치 0.50:0.15:0.20:0.10:0.05, config 외부화",
-      "measured": "하드코딩 수식: avg_det + 10.0 * pass_rate + 5.0 * exact_rate - 0.0001 * prompt_tokens - 0.01 * latency",
-      "status": "MISMATCH",
+      "measured": "WI-07 완료: [0.5, 0.15, 0.2, 0.1, 0.05] @ configs/ga_search_fitness.json, 5항 정규화 구현(fitness.py). gamma(ReplayFit)는 WI-05 배선 전까지 missing 처리",
+      "status": "MATCH",
       "mapped_wi": "WI-07"
     },
     {
       "id": "AS-06",
       "paper": "세대당 층화 표본 9범주×5=45",
-      "measured": "층화 표본기 부재(rng.sample 단순 무작위). 실데이터는 8범주 — 9범주 서술은 FIX_PAPER 대상",
-      "status": "ABSENT",
+      "measured": "층화 표본기 구현됨(WI-07, --stratify-per-category). 단 실데이터는 8범주(×5=40) — 9범주(45) 서술은 FIX_PAPER 대상",
+      "status": "PARTIAL",
       "mapped_wi": "WI-07 (+FIX_PAPER: 9범주→8범주)"
     },
     {

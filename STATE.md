@@ -18,7 +18,7 @@
 | WI | 내용 | 우선 | 상태 | 마지막 커밋 | 다음 행동 |
 |---|---|---|---|---|---|
 | WI-01 | 설정 실측화: manifest.json + 논문 가정 diff 표 | P0 | DONE | 266788a0 | (완료) 재생성: tools/build_settings_manifest.py |
-| WI-07 | 적합도 5항 정리 + 가중치 config 외부화 + 층화 표본기 | P0 | DOING | - | fitness config 스키마 설계 → 테스트 먼저. worker 토큰 0 보고 결함 포함 처리 |
+| WI-07 | 적합도 5항 정리 + 가중치 config 외부화 + 층화 표본기 | P0 | DONE | (wi-07 브랜치 머지) | (완료) γ항 실배선은 WI-05에서, --fitness-mode 배선은 WI-04c에서 |
 | WI-05 | 리플레이 search/holdout 분리 + ReplayFit 계산 신규 구현 | P0 | TODO | - | 리플레이 원천(usr_rag/admin_logs) 실측 후 replay_split.json 설계 |
 | WI-06 | 채택 게이트 3조건 하드 게이트 (레거시 regression_gate 이식+확장) | P0 | TODO | - | WI-05의 holdout 완성 후 착수 |
 | WI-16 | (신규) 정본 GA 엔진 논문 정합: elite 2·tournament 3·p_m 0.35·블록 교차·6연산 (레거시 ga_selection/ga_mutation 이식) | P0 | TODO | - | WI-07 config 체계 위에서 이식 |

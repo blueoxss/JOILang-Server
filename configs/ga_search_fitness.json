@@ -1,0 +1,20 @@
+{
+  "schema": "ga_search.fitness.v1",
+  "_doc": "논문 5항 적합도: alpha*DETPass + beta*S_DET + gamma*ReplayFit_search - lambda_t*Tok_hat - lambda_l*Lat_hat. 모든 항은 [0,1] 정규화. S_DET은 det_score(0~100)/100. Tok_hat=avg_total_tokens/tokens_ref, Lat_hat=avg_latency_sec/latency_ref_sec (각각 1.0으로 클립).",
+  "weights": {
+    "alpha_detpass": 0.5,
+    "beta_sdet": 0.15,
+    "gamma_replayfit": 0.2,
+    "lambda_tokens": 0.1,
+    "lambda_latency": 0.05
+  },
+  "normalization": {
+    "sdet_scale": 100.0,
+    "tokens_ref": 4096,
+    "latency_ref_sec": 5.0
+  },
+  "replay_fit_policy": {
+    "_doc": "ReplayFit 미제공(WI-05 배선 전 또는 리플레이 미사용 실행) 시 gamma 항은 0으로 두고 replay_fit_missing=true를 기록한다. 값을 날조하지 않는다.",
+    "missing_value_contribution": 0.0
+  }
+}

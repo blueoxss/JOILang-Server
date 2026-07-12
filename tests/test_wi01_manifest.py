@@ -60,10 +60,18 @@ def test_ga_budget_extracted_from_source(manifest):
 
 def test_fitness_weights_recorded(manifest):
     fitness = manifest["fitness"]["canonical"]
+    config_path = REPO / "configs" / "ga_search_fitness.json"
     rerank_src = (REPO / "utils" / "ga_search" / "rerank.py").read_text(encoding="utf-8")
-    assert "avg_det + 10.0 * pass_rate" in rerank_src, "rerank.py 수식이 변경되면 manifest 재생성 필요"
-    assert fitness["hardcoded"] is True
-    assert fitness["source"].startswith("utils/ga_search/rerank.py:")
+    if config_path.exists() and "10.0 * pass_rate" not in rerank_src:
+        # WI-07 이후: config 외부화 상태를 manifest가 반영해야 함
+        assert fitness["hardcoded"] is False
+        cfg = json.loads(config_path.read_text(encoding="utf-8"))["weights"]
+        assert fitness["weights"] == [
+            cfg["alpha_detpass"], cfg["beta_sdet"], cfg["gamma_replayfit"],
+            cfg["lambda_tokens"], cfg["lambda_latency"],
+        ]
+    else:
+        assert fitness["hardcoded"] is True
     paper = manifest["fitness"]["paper_assumption"]
     assert paper["weights"] == [0.50, 0.15, 0.20, 0.10, 0.05]
 

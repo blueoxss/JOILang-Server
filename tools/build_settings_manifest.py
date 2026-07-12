@@ -108,17 +108,32 @@ def extract_ga_budget() -> dict:
 
 
 def extract_fitness() -> dict:
-    text = _read("utils/ga_search/rerank.py")
-    match = re.search(r'"fitness":\s*(.+),', text)
-    line_no = text[: match.start()].count("\n") + 1 if match else -1
-    return {
-        "canonical": {
+    """WI-07 이후: 적합도는 fitness.py + configs/ga_search_fitness.json 로 외부화됨."""
+    config_path = REPO / "configs" / "ga_search_fitness.json"
+    legacy_hardcoded = bool(re.search(r"10\.0\s*\*\s*pass_rate", _read("utils/ga_search/rerank.py")))
+    if config_path.exists() and not legacy_hardcoded:
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+        w = config["weights"]
+        canonical = {
+            "formula": "alpha*DETPass + beta*S_DET + gamma*ReplayFit_search - lambda_t*Tok_hat - lambda_l*Lat_hat",
+            "hardcoded": False,
+            "source": "utils/ga_search/fitness.py (구현) + configs/ga_search_fitness.json (가중치)",
+            "weights": [w["alpha_detpass"], w["beta_sdet"], w["gamma_replayfit"], w["lambda_tokens"], w["lambda_latency"]],
+            "normalization": config.get("normalization", {}),
+            "replay_fit_note": "WI-05 배선 전까지 gamma 항은 replay_fit_missing=true 로 0 기여",
+        }
+    else:
+        text = _read("utils/ga_search/rerank.py")
+        match = re.search(r'"fitness":\s*(.+),', text)
+        line_no = text[: match.start()].count("\n") + 1 if match else -1
+        canonical = {
             "formula": match.group(1).strip() if match else "EXTRACT_FAILED",
             "hardcoded": True,
             "source": f"utils/ga_search/rerank.py:{line_no}",
             "terms_vs_paper": "ReplayFit 항 부재, 논문에 없는 gt_exact_rate 항 존재, 토큰/지연 비정규화",
-            "token_cost_caveat": "worker 백엔드가 usage 토큰을 0으로 보고(프로브 실측) — 토큰 항이 실효 없음",
-        },
+        }
+    return {
+        "canonical": canonical,
         "paper_assumption": {
             "formula": "α·DETPass + β·S_DET + γ·ReplayFit_search − λt·Tok̂ − λl·Lat̂",
             "weights": [0.50, 0.15, 0.20, 0.10, 0.05],
@@ -209,15 +224,24 @@ def build_assumptions_diff(m: dict) -> list[dict]:
         {
             "id": "AS-05",
             "paper": "적합도 가중치 0.50:0.15:0.20:0.10:0.05, config 외부화",
-            "measured": f"하드코딩 수식: {m['fitness']['canonical']['formula']}",
-            "status": "MISMATCH",
+            "measured": (
+                f"WI-07 완료: {m['fitness']['canonical']['weights']} @ configs/ga_search_fitness.json, 5항 정규화 구현(fitness.py). "
+                "gamma(ReplayFit)는 WI-05 배선 전까지 missing 처리"
+                if m["fitness"]["canonical"]["hardcoded"] is False
+                else f"하드코딩 수식: {m['fitness']['canonical']['formula']}"
+            ),
+            "status": "MATCH" if m["fitness"]["canonical"]["hardcoded"] is False else "MISMATCH",
             "mapped_wi": "WI-07",
         },
         {
             "id": "AS-06",
             "paper": "세대당 층화 표본 9범주×5=45",
-            "measured": f"층화 표본기 부재(rng.sample 단순 무작위). 실데이터는 {bench['n_categories']}범주 — 9범주 서술은 FIX_PAPER 대상",
-            "status": "ABSENT",
+            "measured": (
+                f"층화 표본기 구현됨(WI-07, --stratify-per-category). 단 실데이터는 {bench['n_categories']}범주(×5=40) — 9범주(45) 서술은 FIX_PAPER 대상"
+                if "stratified_sample_rows" in _read("utils/ga_search/dataset_runner.py")
+                else f"층화 표본기 부재. 실데이터는 {bench['n_categories']}범주"
+            ),
+            "status": "PARTIAL" if "stratified_sample_rows" in _read("utils/ga_search/dataset_runner.py") else "ABSENT",
             "mapped_wi": "WI-07 (+FIX_PAPER: 9범주→8범주)",
         },
         {

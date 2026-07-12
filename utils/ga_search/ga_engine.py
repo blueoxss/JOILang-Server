@@ -10,11 +10,13 @@ from typing import Any
 try:
     from .candidate_generation import generate_candidates_for_rows, write_candidate_csv
     from .evaluation import evaluate_candidate_records, write_evaluation_outputs
+    from .fitness import load_fitness_config
     from .prompt_patch_apply import rendered_prompt_with_genome
     from .rerank import aggregate_genome_scores
 except ImportError:
     from candidate_generation import generate_candidates_for_rows, write_candidate_csv  # type: ignore
     from evaluation import evaluate_candidate_records, write_evaluation_outputs  # type: ignore
+    from fitness import load_fitness_config  # type: ignore
     from prompt_patch_apply import rendered_prompt_with_genome  # type: ignore
     from rerank import aggregate_genome_scores  # type: ignore
 
@@ -269,6 +271,7 @@ def run_search(
     seed: int = 0,
     feedback_guided_mutation: bool = False,
     compression_mutation: bool = False,
+    fitness_config: str | Path | None = None,
 ) -> dict[str, Any]:
     requested_engine_mode = str(engine_mode or "auto").lower()
     if requested_engine_mode == "mock" or (requested_engine_mode == "auto" and llm_mode == "mock"):
@@ -292,6 +295,7 @@ def run_search(
     genomes_dir.mkdir(parents=True, exist_ok=True)
     candidates_dir.mkdir(parents=True, exist_ok=True)
     rng = random.Random(seed)
+    fitness_config_loaded = load_fitness_config(fitness_config)
     current_population = _initial_population(population, initial_genomes=initial_genomes)
     _write_json(genomes_dir / "initial_population.json", current_population)
 
@@ -338,7 +342,7 @@ def run_search(
         write_candidate_csv(candidates_dir / f"generation_{generation:03d}.csv", generation_records)
         eval_rows = evaluate_candidate_records(generation_records, det_threshold=det_threshold)
         all_eval_rows.extend(eval_rows)
-        genome_scores = aggregate_genome_scores(eval_rows)
+        genome_scores = aggregate_genome_scores(eval_rows, config=fitness_config_loaded)
         generation_best = genome_scores[0] if genome_scores else {"genome_id": "", "avg_det_score": 0.0, "det_pass_rate": 0.0, "fitness": 0.0}
         if float(generation_best.get("fitness") or 0.0) > best_score:
             best_score = float(generation_best.get("fitness") or 0.0)
@@ -403,6 +407,11 @@ def run_search(
         "best_DETPass": eval_summary.get("det_pass_rate", 0.0),
         "best_avg_DET": eval_summary.get("avg_det_score", 0.0),
         "best_avg_prompt_tokens": sum(float(row.get("generation_prompt_tokens_total") or 0) for row in all_eval_rows) / len(all_eval_rows) if all_eval_rows else 0.0,
+        "fitness_config": {
+            "path": fitness_config_loaded.get("_config_path"),
+            "weights": fitness_config_loaded.get("weights"),
+            "normalization": fitness_config_loaded.get("normalization"),
+        },
         "generation_error_rate": generation_error_rate,
         "stop_reason": "completed_requested_generations",
         "best_history": best_history,

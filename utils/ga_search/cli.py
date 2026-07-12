@@ -73,6 +73,7 @@ def add_dataset_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--category", action="append", default=[])
     parser.add_argument("--limit-per-category", type=int, default=None)
     parser.add_argument("--sample-size", type=int, default=None)
+    parser.add_argument("--stratify-per-category", type=int, default=None)
     parser.add_argument("--validation-size", type=int, default=None)
     parser.add_argument("--cheap-eval-limit", type=int, default=None)
     parser.add_argument("--seed", type=int, default=0)
@@ -101,6 +102,7 @@ def add_search_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--max-generations", type=int, default=None)
     parser.add_argument("--selection-mode", default="det_score")
     parser.add_argument("--fitness-mode", default="strict_det")
+    parser.add_argument("--fitness-config", default="", help="적합도 가중치 config 경로 (기본: configs/ga_search_fitness.json)")
     parser.add_argument("--mutation-mode", default="mock")
     parser.add_argument("--feedback-guided-mutation", action="store_true")
     parser.add_argument("--enable-compression-mutation", action="store_true")
@@ -295,6 +297,9 @@ def selected_rows_for_args(args: argparse.Namespace) -> list[tuple[int, dict[str
     sample_size = args.sample_size
     if sample_size is None:
         sample_size = args.cheap_eval_limit or args.validation_size
+    stratify = getattr(args, "stratify_per_category", None)
+    if stratify is not None:
+        sample_size = None
     return select_dataset_rows(
         rows,
         row_no=args.row_no,
@@ -303,6 +308,7 @@ def selected_rows_for_args(args: argparse.Namespace) -> list[tuple[int, dict[str
         categories=args.category,
         limit_per_category=args.limit_per_category,
         sample_size=sample_size,
+        stratify_per_category=stratify,
         seed=args.seed,
     )
 
@@ -403,6 +409,7 @@ def run_search(args: argparse.Namespace) -> int:
         seed=args.seed,
         feedback_guided_mutation=args.feedback_guided_mutation,
         compression_mutation=args.enable_compression_mutation,
+        fitness_config=args.fitness_config or None,
     )
     if patch_application_result:
         summary["patch_application"] = patch_application_result["report"]
