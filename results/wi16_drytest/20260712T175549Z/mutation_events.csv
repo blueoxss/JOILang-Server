@@ -1,0 +1,5 @@
+﻿generation,parent_id,parent_ids,child_id,mutation_type,crossover_type,details
+1,,"[""genome_003"",""genome_002""]",x_genome_003_genome_002_g001_c000,,block_uniform,"{""blocks"":[""01"",""02"",""03"",""06""]}"
+1,,"[""genome_003"",""genome_003""]",x_genome_003_genome_003_g001_c001,,block_uniform,"{""blocks"":[""01"",""02"",""03"",""06""]}"
+2,,"[""x_genome_003_genome_003_g001_c001"",""x_genome_003_genome_003_g001_c001""]",x_x_genome_003_genome_003_g001_c001_x_genome_003_genome_003_g001_c001_g002_c000,,block_uniform,"{""blocks"":[""01"",""02"",""03"",""06""]}"
+2,,"[""genome_003"",""genome_003""]",x_genome_003_genome_003_g002_c001,,block_uniform,"{""blocks"":[""01"",""02"",""03"",""06""]}"

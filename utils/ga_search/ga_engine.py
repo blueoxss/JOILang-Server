@@ -11,6 +11,7 @@ try:
     from .candidate_generation import generate_candidates_for_rows, write_candidate_csv
     from .evaluation import evaluate_candidate_records, write_evaluation_outputs
     from .fitness import load_fitness_config
+    from .ga_operators import load_budget_config, next_generation
     from .gate import evaluate_adoption_gate, load_gate_config, subset_detpass_from_eval_rows
     from .prompt_patch_apply import rendered_prompt_with_genome
     from .replay import load_replay_split, replay_cases_to_rows, replay_pass_rate
@@ -19,6 +20,7 @@ except ImportError:
     from candidate_generation import generate_candidates_for_rows, write_candidate_csv  # type: ignore
     from evaluation import evaluate_candidate_records, write_evaluation_outputs  # type: ignore
     from fitness import load_fitness_config  # type: ignore
+    from ga_operators import load_budget_config, next_generation  # type: ignore
     from gate import evaluate_adoption_gate, load_gate_config, subset_detpass_from_eval_rows  # type: ignore
     from prompt_patch_apply import rendered_prompt_with_genome  # type: ignore
     from replay import load_replay_split, replay_cases_to_rows, replay_pass_rate  # type: ignore
@@ -96,50 +98,7 @@ def _initial_population(population: int, initial_genomes: list[dict[str, Any]] |
     return [fallback_genome(f"genome_{idx:03d}") for idx in range(max(1, population))]
 
 
-MUTATION_RULES = [
-    "Prefer canonical service names exactly as given by the service schema.",
-    "Before final JSON, verify every receiver tag mentioned by the user is still present.",
-    "Derive cron and period before writing code; do not invent repeated loops for one-shot commands.",
-    "Use unquoted numeric literals for numeric service arguments.",
-    "Return one JSON object only with name, cron, period, and code.",
-]
-
-
-def _mutate_genome(parent: dict[str, Any], rng: random.Random, generation: int, index: int) -> tuple[dict[str, Any], dict[str, Any]]:
-    child = _copy_json(parent)
-    child["id"] = f"{parent.get('id', 'genome')}_g{generation:03d}_m{index:03d}"
-    child.setdefault("params", {})
-    child.setdefault("block_params", {})
-    mutation_type = rng.choice(["micro_rule", "toggle_optional", "candidate_strategy", "max_tokens"])
-    details: dict[str, Any] = {}
-    if mutation_type == "micro_rule":
-        block_id = rng.choice(["02", "03", "06"])
-        rules = child.setdefault("block_params", {}).setdefault(block_id, {}).setdefault("micro_rules", [])
-        rule = rng.choice(MUTATION_RULES)
-        if rule not in rules:
-            rules.append(rule)
-        details = {"block_id": block_id, "rule": rule}
-    elif mutation_type == "toggle_optional":
-        block_id = rng.choice(["03", "05", "06"])
-        blocks = [str(block).zfill(2) for block in child.get("blocks", [])]
-        if block_id in blocks and block_id not in {"01", "02"}:
-            blocks.remove(block_id)
-        elif block_id not in blocks:
-            blocks.append(block_id)
-        child["blocks"] = [block for block in ["01", "02", "03", "05", "06"] if block in set(blocks) or block in {"01", "02"}]
-        details = {"block_id": block_id, "active_blocks": child["blocks"]}
-    elif mutation_type == "candidate_strategy":
-        strategies = child.setdefault("params", {}).setdefault("candidate_strategies", ["direct"])
-        for strategy in ["direct", "compact_json", "canonical_names_first", "temporal_first"]:
-            if strategy not in strategies:
-                strategies.append(strategy)
-                details = {"added_strategy": strategy}
-                break
-    else:
-        current = int(child.setdefault("params", {}).get("max_tokens", 512) or 512)
-        child["params"]["max_tokens"] = min(2048, current + 128)
-        details = {"max_tokens": child["params"]["max_tokens"]}
-    return child, {"generation": generation, "parent_id": parent.get("id", ""), "child_id": child["id"], "mutation_type": mutation_type, "details": details}
+# 변이·교차 연산은 ga_operators.py 로 이동했다 (WI-16, 논문 6연산 + 블록 교차).
 
 
 def _candidate_strategy(genome: dict[str, Any]) -> str:
@@ -279,6 +238,10 @@ def run_search(
     replay_split: str | Path | None = None,
     gate_config: str | Path | None = None,
     gate_baseline: str | Path | None = None,
+    elite: int | None = None,
+    tournament: int | None = None,
+    p_mutation: float | None = None,
+    budget_config: str | Path | None = None,
 ) -> dict[str, Any]:
     requested_engine_mode = str(engine_mode or "auto").lower()
     if requested_engine_mode == "mock" or (requested_engine_mode == "auto" and llm_mode == "mock"):
@@ -303,6 +266,11 @@ def run_search(
     candidates_dir.mkdir(parents=True, exist_ok=True)
     rng = random.Random(seed)
     fitness_config_loaded = load_fitness_config(fitness_config)
+    budget = load_budget_config(budget_config)
+    # 명시 인자 > budget config (population/gens 는 기존 시그니처 유지 — 호출부가 결정)
+    elite_n = elite if elite is not None else int(budget["elite"])
+    tournament_n = tournament if tournament is not None else int(budget["tournament"])
+    p_m = p_mutation if p_mutation is not None else float(budget["p_mutation"])
     replay_split_loaded = load_replay_split(replay_split) if replay_split else None
     replay_history: list[dict[str, Any]] = []
     current_population = _initial_population(population, initial_genomes=initial_genomes)
@@ -317,8 +285,9 @@ def run_search(
     best_score = -1.0
     best_eval_rows: list[dict[str, Any]] = []
     known_limitations = [
-        "real engine skeleton evaluates genomes with strict DET and records selection/mutation artifacts",
-        "advanced crossover, pareto archive, and compression mutation policies are hooks, not full legacy parity",
+        "real engine evaluates genomes with strict DET and records selection/crossover/mutation artifacts",
+        "O(블록 순서)·V(블록 버전)·E(예제 수) 유전자는 연산·기록만 되고 렌더러 반영은 WI-09 범위",
+        "pareto archive and compression mutation policies are hooks, not full legacy parity",
     ]
     if feedback_guided_mutation:
         known_limitations.append("feedback_guided_mutation flag recorded; advisor-generated genomes must be passed through prompt patches/advisor artifacts")
@@ -416,15 +385,17 @@ def run_search(
             }
         )
         if generation < max(1, gens) - 1:
-            ranked_ids = [str(item["genome_id"]) for item in genome_scores] or [str(genome.get("id")) for genome in current_population]
-            ranked_genomes = [next((genome for genome in current_population if str(genome.get("id")) == genome_id), current_population[0]) for genome_id in ranked_ids]
-            next_population = [_copy_json(ranked_genomes[0])]
-            while len(next_population) < max(1, population):
-                parent = rng.choice(ranked_genomes[: max(1, min(3, len(ranked_genomes)))])
-                child, event = _mutate_genome(parent, rng, generation + 1, len(next_population))
-                mutation_events.append(event)
-                next_population.append(child)
-            current_population = next_population
+            fitness_by_id = {str(item["genome_id"]): float(item.get("fitness") or 0.0) for item in genome_scores}
+            current_population, succession_events = next_generation(
+                current_population,
+                fitness_by_id,
+                rng,
+                generation=generation + 1,
+                elite=elite_n,
+                tournament=tournament_n,
+                p_mutation=p_m,
+            )
+            mutation_events.extend(succession_events)
 
     eval_summary = write_evaluation_outputs(root, all_eval_rows)
     holdout_replay: dict[str, Any] | None = None
@@ -497,7 +468,11 @@ def run_search(
             },
         },
     )
-    _write_rows_csv(root / "mutation_events.csv", mutation_events, ["generation", "parent_id", "child_id", "mutation_type", "details"])
+    _write_rows_csv(
+        root / "mutation_events.csv",
+        mutation_events,
+        ["generation", "parent_id", "parent_ids", "child_id", "mutation_type", "crossover_type", "details"],
+    )
     _write_jsonl(root / "mutation_events.jsonl", mutation_events)
     _write_jsonl(root / "ga_block_diffs.jsonl", [])
     generation_error_rate = eval_summary.get("generation_error_rate", 0.0)
@@ -520,6 +495,14 @@ def run_search(
             "path": fitness_config_loaded.get("_config_path"),
             "weights": fitness_config_loaded.get("weights"),
             "normalization": fitness_config_loaded.get("normalization"),
+        },
+        "ga_budget": {
+            "population": population,
+            "gens": gens,
+            "elite": elite_n,
+            "tournament": tournament_n,
+            "p_mutation": p_m,
+            "budget_config_path": budget.get("_config_path"),
         },
         "replay": {
             "split_path": replay_split_loaded.path,

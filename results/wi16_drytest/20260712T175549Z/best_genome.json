@@ -1,0 +1,15 @@
+{
+  "id": "x_x_genome_003_genome_003_g001_c001_x_genome_003_genome_003_g001_c001_g002_c000",
+  "blocks": [
+    "01",
+    "02",
+    "03",
+    "06"
+  ],
+  "params": {
+    "candidate_strategies": [
+      "mock_gt_copy"
+    ]
+  },
+  "block_params": {}
+}
