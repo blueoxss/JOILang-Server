@@ -16,7 +16,7 @@ try:
     from .checks import run_check
     from .dataset_runner import command_text, load_dataset_rows, select_dataset_rows
     from .evaluation import evaluate_candidate_records, write_evaluation_outputs
-    from .ga_engine import run_search as run_ga_search
+    from .ga_engine import render_package_for_genome, run_search as run_ga_search
     from .model_resolver import ModelPackageSpec, resolve_model_package
     from .monolith_search import build_monolith_search_input
     from .prompt_patch_apply import apply_prompt_patches
@@ -30,7 +30,7 @@ except ImportError:
     from checks import run_check  # type: ignore
     from dataset_runner import command_text, load_dataset_rows, select_dataset_rows  # type: ignore
     from evaluation import evaluate_candidate_records, write_evaluation_outputs  # type: ignore
-    from ga_engine import run_search as run_ga_search  # type: ignore
+    from ga_engine import render_package_for_genome, run_search as run_ga_search  # type: ignore
     from model_resolver import ModelPackageSpec, resolve_model_package  # type: ignore
     from monolith_search import build_monolith_search_input  # type: ignore
     from prompt_patch_apply import apply_prompt_patches  # type: ignore
@@ -325,6 +325,11 @@ def run_eval(args: argparse.Namespace) -> int:
     if not rows:
         raise SystemExit("no dataset rows selected")
     rendered = render_for_args(args, user_input=command_text(rows[0][1]) or args.user_input)
+    eval_genome_id = "eval_base"
+    if args.genome_json:
+        genome = json.loads(Path(args.genome_json).read_text(encoding="utf-8"))
+        rendered = render_package_for_genome(rendered, genome)
+        eval_genome_id = str(genome.get("id") or "eval_genome")
     search_mode = effective_search_mode(args, rendered)
     run_dir = Path(args.out_dir) if args.out_dir else default_run_dir(
         args.out_root,
@@ -339,7 +344,7 @@ def run_eval(args: argparse.Namespace) -> int:
         model_key=args.model_key,
         candidate_k=args.candidate_k,
         generation=0,
-        genome_id="eval_base",
+        genome_id=eval_genome_id,
         candidate_strategy="mock_gt_copy" if args.llm_mode == "mock" else f"{args.llm_mode}_direct",
         service_schema=args.service_schema,
         service_context_mode=args.service_context_mode,

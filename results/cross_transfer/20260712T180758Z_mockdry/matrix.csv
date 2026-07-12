@@ -1,0 +1,13 @@
+﻿prompt_id,target,is_diagonal,provenance,det_pass_rate,avg_det_score,avg_total_tokens,avg_latency_sec,generation_error_rate,rows,error
+P_Q7,Q7,True,PLACEHOLDER_base_prompt,1.0,100.0,0.0,2.925e-05,0.0,8,
+P_Q7,L8,False,PLACEHOLDER_base_prompt,1.0,100.0,0.0,3.1125e-05,0.0,8,
+P_Q7,Q14,False,PLACEHOLDER_base_prompt,1.0,100.0,0.0,3.1875e-05,0.0,8,
+P_L8,Q7,False,PLACEHOLDER_base_prompt,1.0,100.0,0.0,3.325e-05,0.0,8,
+P_L8,L8,True,PLACEHOLDER_base_prompt,1.0,100.0,0.0,3.2124999999999995e-05,0.0,8,
+P_L8,Q14,False,PLACEHOLDER_base_prompt,1.0,100.0,0.0,3.0375e-05,0.0,8,
+P_Q14,Q7,False,PLACEHOLDER_base_prompt,1.0,100.0,0.0,3.0625e-05,0.0,8,
+P_Q14,L8,False,PLACEHOLDER_base_prompt,1.0,100.0,0.0,2.9375e-05,0.0,8,
+P_Q14,Q14,True,PLACEHOLDER_base_prompt,1.0,100.0,0.0,3.1125000000000004e-05,0.0,8,
+DT,Q7,False,cloud_authored_base_prompt,1.0,100.0,0.0,2.9749999999999998e-05,0.0,8,
+DT,L8,False,cloud_authored_base_prompt,1.0,100.0,0.0,3.0875e-05,0.0,8,
+DT,Q14,False,cloud_authored_base_prompt,1.0,100.0,0.0,2.9874999999999998e-05,0.0,8,

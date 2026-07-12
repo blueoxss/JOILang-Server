@@ -85,6 +85,11 @@ def _render_for_genome(rendered_package: dict[str, Any], genome: dict[str, Any])
     return patched
 
 
+# 교차 전이 러너 등 외부에서 재사용하는 공개 이름 (WI-02)
+def render_package_for_genome(rendered_package: dict[str, Any], genome: dict[str, Any]) -> dict[str, Any]:
+    return _render_for_genome(rendered_package, genome)
+
+
 def _initial_population(population: int, initial_genomes: list[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
     if initial_genomes:
         out = []
