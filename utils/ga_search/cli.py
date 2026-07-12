@@ -424,6 +424,7 @@ def run_search(args: argparse.Namespace) -> int:
         tournament=args.tournament,
         p_mutation=args.p_mutation,
         budget_config=args.budget_config or None,
+        fitness_mode=args.fitness_mode,
     )
     if patch_application_result:
         summary["patch_application"] = patch_application_result["report"]

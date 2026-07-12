@@ -1,0 +1,44 @@
+{
+  "dataset": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/JOICommands-280.csv",
+  "row_no": 1,
+  "command": "Switch the dishwasher to dry mode.",
+  "gt_code": null,
+  "det_threshold": 70.0,
+  "candidates": [
+    {
+      "candidate": "cand_1_unknown_service",
+      "det_score(S_DET)": 61.25,
+      "det_pass": false,
+      "failure_reasons": [
+        "gt_mismatch",
+        "gt_service_coverage",
+        "unknown_service"
+      ],
+      "generated_code": "(#Dishwasher).unknownHallucinatedService(\"dry\")"
+    },
+    {
+      "candidate": "cand_2_schedule_numeric_drift",
+      "det_score(S_DET)": 85.0,
+      "det_pass": true,
+      "failure_reasons": [
+        "cron_mismatch",
+        "period_mismatch"
+      ],
+      "generated_code": "(#Dishwasher).dishwasher_setdishwashermode(\"dry\")"
+    },
+    {
+      "candidate": "cand_3_invalid_json",
+      "det_score(S_DET)": 0.0,
+      "det_pass": false,
+      "failure_reasons": [
+        "invalid_json",
+        "missing_generated_code",
+        "gt_mismatch",
+        "gt_service_coverage",
+        "gt_receiver_coverage",
+        "enum_grounding"
+      ],
+      "generated_code": ""
+    }
+  ]
+}

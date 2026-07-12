@@ -43,10 +43,11 @@ def aggregate_genome_scores(
     *,
     config: dict[str, Any] | None = None,
     replay_fit_by_genome: dict[str, float] | None = None,
+    mode: str = "graded",
 ) -> list[dict[str, Any]]:
     """논문 5항 적합도 기반 genome 집계 (구현: fitness.py, 설정: configs/ga_search_fitness.json)."""
     try:
         from .fitness import aggregate_genome_scores as _aggregate
     except ImportError:
         from fitness import aggregate_genome_scores as _aggregate  # type: ignore
-    return _aggregate(eval_rows, config=config, replay_fit_by_genome=replay_fit_by_genome)
+    return _aggregate(eval_rows, config=config, replay_fit_by_genome=replay_fit_by_genome, mode=mode)

@@ -58,6 +58,19 @@ def _clip01(value: float) -> float:
     return min(1.0, max(0.0, value))
 
 
+FITNESS_MODES = {"graded", "binary"}
+
+
+def normalize_fitness_mode(mode: str | None) -> str:
+    """CLI 별칭 정규화: strict_det/graded → graded, binary/detpass_only → binary."""
+    token = str(mode or "graded").strip().lower()
+    if token in {"", "graded", "strict_det", "default"}:
+        return "graded"
+    if token in {"binary", "detpass_only", "detpass"}:
+        return "binary"
+    raise ValueError(f"unknown fitness mode: {mode!r} (graded|binary)")
+
+
 def compute_fitness(
     *,
     det_pass_rate: float,
@@ -66,10 +79,14 @@ def compute_fitness(
     avg_total_tokens: float,
     avg_latency_sec: float,
     config: dict[str, Any],
+    mode: str = "graded",
 ) -> dict[str, Any]:
+    mode = normalize_fitness_mode(mode)
     weights = config["weights"]
     norm = config["normalization"]
     sdet = _clip01(_float(avg_det_score) / _float(norm.get("sdet_scale"), 100.0))
+    if mode == "binary":
+        sdet = 0.0  # 이진 모드: 등급 신호(β·S_DET) 제거, DETPass 신호만 사용 (C-22 비교용)
     tok_hat = _clip01(_float(avg_total_tokens) / max(1.0, _float(norm.get("tokens_ref"), 4096)))
     lat_hat = _clip01(_float(avg_latency_sec) / max(1e-9, _float(norm.get("latency_ref_sec"), 5.0)))
     replay_fit_missing = replay_fit is None
@@ -83,6 +100,7 @@ def compute_fitness(
     fitness = alpha_term + beta_term + gamma_term - tokens_penalty - latency_penalty
     return {
         "fitness": fitness,
+        "mode": mode,
         "replay_fit_missing": replay_fit_missing,
         "terms": {
             "alpha_term": alpha_term,
@@ -101,6 +119,7 @@ def aggregate_genome_scores(
     *,
     config: dict[str, Any] | None = None,
     replay_fit_by_genome: dict[str, float] | None = None,
+    mode: str = "graded",
 ) -> list[dict[str, Any]]:
     """genome 단위 지표 집계 + 논문 5항 적합도.
 
@@ -130,6 +149,7 @@ def aggregate_genome_scores(
             avg_total_tokens=total_tokens,
             avg_latency_sec=latency,
             config=config,
+            mode=mode,
         )
         records.append(
             {
@@ -144,6 +164,7 @@ def aggregate_genome_scores(
                 "replay_fit": replay_map.get(genome_id),
                 "replay_fit_missing": result["replay_fit_missing"],
                 "fitness": result["fitness"],
+                "fitness_mode": result["mode"],
                 "fitness_terms": result["terms"],
             }
         )
