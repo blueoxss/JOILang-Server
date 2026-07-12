@@ -1,0 +1,67 @@
+metric_id,description,status,value,unit,source,updated_by
+main.cloudref.detpass,주 결과 CloudRef(B1) DETPass,ANCHOR,94.5,pp,§3 수치 앵커,seed
+main.cloudref.sdet,주 결과 CloudRef Mean SDET,ANCHOR,0.89,ratio,§3 수치 앵커,seed
+main.cloudref.replayacc,주 결과 CloudRef ReplayAcc,ANCHOR,92.0,pp,§3 수치 앵커,seed
+main.cloudref.tokens,주 결과 CloudRef Avg Input Tokens,ANCHOR,3500,tokens,§3 수치 앵커,seed
+main.cloudref.latency,주 결과 CloudRef Latency,ANCHOR,2.85,s,§3 수치 앵커,seed
+main.q7.dt.detpass,Qwen2.5-Coder-7B 직접 전이 DETPass,ANCHOR,87.8,pp,§3 수치 앵커,seed
+main.q7.dt.sdet,Qwen2.5-Coder-7B 직접 전이 SDET,ANCHOR,0.73,ratio,§3 수치 앵커,seed
+main.q7.dt.replayacc,Qwen2.5-Coder-7B 직접 전이 ReplayAcc,ANCHOR,80.8,pp,§3 수치 앵커,seed
+main.q7.gps.detpass,Qwen2.5-Coder-7B GPS DETPass,ANCHOR,92.6,pp,§3 수치 앵커,seed
+main.q7.gps.sdet,Qwen2.5-Coder-7B GPS SDET,ANCHOR,0.87,ratio,§3 수치 앵커,seed
+main.q7.gps.replayacc,Qwen2.5-Coder-7B GPS ReplayAcc,ANCHOR,91.2,pp,§3 수치 앵커,seed
+main.q7.gps.tokens,Qwen2.5-Coder-7B GPS Avg Input Tokens,ANCHOR,1120,tokens,§3 수치 앵커,seed
+main.q7.gps.latency,Qwen2.5-Coder-7B GPS Latency,ANCHOR,1.25,s,§3 수치 앵커,seed
+main.l8.dt.detpass,Llama-3.1-8B 직접 전이 DETPass,ANCHOR,81.7,pp,§3 수치 앵커,seed
+main.l8.dt.sdet,Llama-3.1-8B 직접 전이 SDET,ANCHOR,0.68,ratio,§3 수치 앵커,seed
+main.l8.dt.replayacc,Llama-3.1-8B 직접 전이 ReplayAcc,ANCHOR,72.4,pp,§3 수치 앵커,seed
+main.l8.gps.detpass,Llama-3.1-8B GPS DETPass,ANCHOR,88.7,pp,§3 수치 앵커,seed
+main.l8.gps.sdet,Llama-3.1-8B GPS SDET,ANCHOR,0.82,ratio,§3 수치 앵커,seed
+main.l8.gps.replayacc,Llama-3.1-8B GPS ReplayAcc,ANCHOR,89.4,pp,§3 수치 앵커,seed
+main.l8.gps.tokens,Llama-3.1-8B GPS Avg Input Tokens,ANCHOR,1250,tokens,§3 수치 앵커,seed
+main.l8.gps.latency,Llama-3.1-8B GPS Latency,ANCHOR,1.40,s,§3 수치 앵커,seed
+main.q14.dt.detpass,Qwen2.5-Coder-14B 직접 전이 DETPass,ANCHOR,90.1,pp,§3 수치 앵커,seed
+main.q14.dt.sdet,Qwen2.5-Coder-14B 직접 전이 SDET,ANCHOR,0.77,ratio,§3 수치 앵커,seed
+main.q14.dt.replayacc,Qwen2.5-Coder-14B 직접 전이 ReplayAcc,ANCHOR,84.3,pp,§3 수치 앵커,seed
+main.q14.gps.detpass,Qwen2.5-Coder-14B GPS DETPass,ANCHOR,94.0,pp,§3 수치 앵커,seed
+main.q14.gps.sdet,Qwen2.5-Coder-14B GPS SDET,ANCHOR,0.89,ratio,§3 수치 앵커,seed
+main.q14.gps.replayacc,Qwen2.5-Coder-14B GPS ReplayAcc,ANCHOR,92.2,pp,§3 수치 앵커,seed
+main.q14.gps.tokens,Qwen2.5-Coder-14B GPS Avg Input Tokens,ANCHOR,1290,tokens,§3 수치 앵커,seed
+main.q14.gps.latency,Qwen2.5-Coder-14B GPS Latency,ANCHOR,1.63,s,§3 수치 앵커,seed
+cross_transfer.P_Q7.Q7.detpass,교차 전이 P_Q7→Q7 (대각; 앵커 재현 기대),PROJECTED,92.6,pp,예상(대각=GPS 앵커),seed
+cross_transfer.P_Q7.L8.detpass,교차 전이 P_Q7→L8,PROJECTED,TBD,pp,미실행,seed
+cross_transfer.P_Q7.Q14.detpass,교차 전이 P_Q7→Q14,PROJECTED,TBD,pp,미실행,seed
+cross_transfer.P_L8.Q7.detpass,교차 전이 P_L8→Q7,PROJECTED,TBD,pp,미실행,seed
+cross_transfer.P_L8.L8.detpass,교차 전이 P_L8→L8 (대각),PROJECTED,88.7,pp,예상(대각=GPS 앵커),seed
+cross_transfer.P_L8.Q14.detpass,교차 전이 P_L8→Q14,PROJECTED,TBD,pp,미실행,seed
+cross_transfer.P_Q14.Q7.detpass,교차 전이 P_Q14→Q7,PROJECTED,TBD,pp,미실행,seed
+cross_transfer.P_Q14.L8.detpass,교차 전이 P_Q14→L8,PROJECTED,TBD,pp,미실행,seed
+cross_transfer.P_Q14.Q14.detpass,교차 전이 P_Q14→Q14 (대각),PROJECTED,94.0,pp,예상(대각=GPS 앵커),seed
+ablation.A0.detpass,절제 A0(탐색 없음) DETPass,PROJECTED,TBD,pp,미실행,seed
+ablation.A0.replayfit_holdout,절제 A0 holdout ReplayFit,PROJECTED,TBD,pp,미실행,seed
+ablation.A0.tokens,절제 A0 tokens,PROJECTED,TBD,tokens,미실행,seed
+ablation.A0.critical_regressions,절제 A0 핵심 부분집합 회귀 수,PROJECTED,TBD,count,미실행,seed
+ablation.A1.detpass,절제 A1(일반 GA) DETPass,PROJECTED,TBD,pp,미실행,seed
+ablation.A1.replayfit_holdout,절제 A1 holdout ReplayFit,PROJECTED,TBD,pp,미실행,seed
+ablation.A1.tokens,절제 A1 tokens,PROJECTED,TBD,tokens,미실행,seed
+ablation.A1.critical_regressions,절제 A1 핵심 부분집합 회귀 수,PROJECTED,TBD,count,미실행,seed
+ablation.A2.detpass,절제 A2(+진단 변이) DETPass,PROJECTED,TBD,pp,미실행,seed
+ablation.A2.replayfit_holdout,절제 A2 holdout ReplayFit,PROJECTED,TBD,pp,미실행,seed
+ablation.A2.tokens,절제 A2 tokens,PROJECTED,TBD,tokens,미실행,seed
+ablation.A2.critical_regressions,절제 A2 핵심 부분집합 회귀 수,PROJECTED,TBD,count,미실행,seed
+ablation.A3.detpass,절제 A3(+리플레이) DETPass,PROJECTED,TBD,pp,미실행,seed
+ablation.A3.replayfit_holdout,절제 A3 holdout ReplayFit,PROJECTED,TBD,pp,미실행,seed
+ablation.A3.tokens,절제 A3 tokens,PROJECTED,TBD,tokens,미실행,seed
+ablation.A3.critical_regressions,절제 A3 핵심 부분집합 회귀 수,PROJECTED,TBD,count,미실행,seed
+ablation.A4.detpass,절제 A4(전체) DETPass,PROJECTED,TBD,pp,미실행,seed
+ablation.A4.replayfit_holdout,절제 A4 holdout ReplayFit,PROJECTED,TBD,pp,미실행,seed
+ablation.A4.tokens,절제 A4 tokens,PROJECTED,TBD,tokens,미실행,seed
+ablation.A4.critical_regressions,절제 A4 핵심 부분집합 회귀 수,PROJECTED,TBD,count,미실행,seed
+search_signal.graded.budget_best_detpass,이진vs등급 — 등급 모드 예산 내 최고 DETPass,PROJECTED,TBD,pp,실행 중(results/search_signal),seed
+search_signal.graded.reach_generation,이진vs등급 — 등급 모드 도달 세대,PROJECTED,TBD,gen,실행 중,seed
+search_signal.binary.budget_best_detpass,이진vs등급 — 이진 모드 예산 내 최고 DETPass,PROJECTED,TBD,pp,실행 중,seed
+search_signal.binary.reach_generation,이진vs등급 — 이진 모드 도달 세대,PROJECTED,TBD,gen,실행 중,seed
+cloud_reverse.P_Q7.gpt41mini.detpass,역방향 교차 P_Q7→GPT-4.1-mini (WI-12),PROJECTED,TBD,pp,미실행,seed
+cloud_reverse.P_L8.gpt41mini.detpass,역방향 교차 P_L8→GPT-4.1-mini (WI-12),PROJECTED,TBD,pp,미실행,seed
+cloud_reverse.P_Q14.gpt41mini.detpass,역방향 교차 P_Q14→GPT-4.1-mini (WI-12),PROJECTED,TBD,pp,미실행,seed
+seed_variance.gps.detpass_std,seed 3회 분산 GPS DETPass 표준편차 (WI-14),PROJECTED,TBD,pp,미실행,seed
