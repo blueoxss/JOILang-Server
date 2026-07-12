@@ -1,0 +1,4 @@
+﻿generation,parent_id,parent_ids,child_id,mutation_type,crossover_type,details
+1,,"[""genome_002"",""genome_002""]",x_genome_002_genome_002_g001_c000,,block_uniform,"{""blocks"":[""01"",""02"",""03"",""06""]}"
+1,x_genome_002_genome_002_g001_c000,,x_genome_002_genome_002_g001_c000_g001_m000,adjust_few_shot,,"{""few_shot_count"":1,""renderer_note"":""예제 유전자 — 렌더 반영은 WI-09""}"
+2,,"[""x_genome_002_genome_002_g001_c000_g001_m000"",""x_genome_002_genome_002_g001_c000_g001_m000""]",x_x_genome_002_genome_002_g001_c000_g001_m000_x_genome_002_genome_002_g001_c000_g001_m000_g002_c000,,block_uniform,"{""blocks"":[""01"",""02"",""03"",""06""]}"

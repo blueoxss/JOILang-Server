@@ -1,0 +1,79 @@
+{
+  "llm_mode": "worker",
+  "candidate": {
+    "name": "LowerSpeakerVolume",
+    "cron": "",
+    "period": -1,
+    "code": "volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}"
+  },
+  "generation_error_type": "",
+  "backend_response": {
+    "content": "{\n  \"name\": \"LowerSpeakerVolume\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"volume = (#Speaker).speaker_volume\\nif (volume > 0) {\\n  volume -= 1\\n  (#Speaker).speaker_volume = volume\\n}\"\n}",
+    "usage": {
+      "prompt_tokens": 106245,
+      "completion_tokens": 66,
+      "total_tokens": 106311
+    },
+    "latency_sec": 64.866813,
+    "peak_vram_gb": 34.0069,
+    "raw": {
+      "ok": true,
+      "content": "{\n  \"name\": \"LowerSpeakerVolume\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"volume = (#Speaker).speaker_volume\\nif (volume > 0) {\\n  volume -= 1\\n  (#Speaker).speaker_volume = volume\\n}\"\n}",
+      "prompt_tokens": 106245,
+      "completion_tokens": 66,
+      "prompt_prep_sec": 0.2672,
+      "generate_sec": 55.3521,
+      "decode_sec": 0.0004,
+      "total_worker_sec": 61.293,
+      "worker_pid": 441728,
+      "load_sec": 5.1253,
+      "load_peak_vram_bytes": 15232282112,
+      "load_peak_vram_gb": 14.1862,
+      "peak_vram_bytes": 36514583552,
+      "peak_vram_gb": 34.0069,
+      "peak_vram_by_device": {
+        "0": 36514583552,
+        "1": 0
+      }
+    },
+    "backend": "worker",
+    "request": {
+      "worker_path": "/data/mgjeong/joilang_run_snapshot/gpt_mg/version0_13/qwen_local_worker.py",
+      "worker_python": "/home/mgjeong/miniconda3/envs/sg/bin/python",
+      "payload": {
+        "model": "qwen25_coder_7b",
+        "local_model_name": "Qwen/Qwen2.5-Coder-7B-Instruct",
+        "local_device": "cuda",
+        "local_dtype": "bf16",
+        "local_max_new_tokens": 512,
+        "local_files_only": true,
+        "local_trust_remote_code": false,
+        "local_load_in_4bit": false
+      }
+    }
+  },
+  "repair": {
+    "ok": true,
+    "error_type": "",
+    "candidate": {
+      "name": "LowerSpeakerVolume",
+      "cron": "",
+      "period": -1,
+      "code": "volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}"
+    },
+    "before": "{\n  \"name\": \"LowerSpeakerVolume\",\n  \"cron\": \"\",\n  \"period\": -1,\n  \"code\": \"volume = (#Speaker).speaker_volume\\nif (volume > 0) {\\n  volume -= 1\\n  (#Speaker).speaker_volume = volume\\n}\"\n}",
+    "after": "{\"name\": \"LowerSpeakerVolume\", \"cron\": \"\", \"period\": -1, \"code\": \"volume = (#Speaker).speaker_volume\\nif (volume > 0) {\\n  volume -= 1\\n  (#Speaker).speaker_volume = volume\\n}\"}",
+    "repair_applied": false,
+    "repair_actions": [],
+    "missing_required_keys": []
+  },
+  "service_context": {
+    "service_schema_path": "datasets/service_list_ver2.0.1.json",
+    "service_context_mode": "schema_fallback",
+    "service_context_source": "provided_schema",
+    "service_list_retrieval_scores": {
+      "status": "retrieval_disabled",
+      "reason": "canonical ga_search has not enabled service retrieval yet"
+    }
+  }
+}

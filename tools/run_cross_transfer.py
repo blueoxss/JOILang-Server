@@ -145,6 +145,7 @@ def main() -> None:
     parser.add_argument("--timestamp", default="")
     parser.add_argument("--out-root", default=str(REPO / "results" / "cross_transfer"))
     parser.add_argument("--code-root", default="")
+    parser.add_argument("--ledger-grade", action="store_true", help="논문 예산 본실험 표기 — ledger ingest 자격")
     args = parser.parse_args()
 
     config = json.loads(Path(args.config).read_text(encoding="utf-8"))
@@ -187,7 +188,10 @@ def main() -> None:
 
     verdicts = build_verdicts(cells, prompts, targets)
     (root / "verdicts.json").write_text(json.dumps(verdicts, ensure_ascii=False, indent=2), encoding="utf-8")
-    (root / "meta.json").write_text(json.dumps({"args": vars(args), "config": config, "timestamp": ts}, ensure_ascii=False, indent=2), encoding="utf-8")
+    (root / "meta.json").write_text(
+        json.dumps({"args": vars(args), "config": config, "timestamp": ts, "ledger_grade": bool(args.ledger_grade)}, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
     print(f"written: {root / 'matrix.csv'}")
     print(json.dumps(verdicts["argmax_by_target"], ensure_ascii=False, indent=1))
 

@@ -68,10 +68,17 @@ def sync_tex(rows: list[dict], tex_path: Path, *, dry_run: bool) -> dict:
 
 
 def _real_run(meta_path: Path) -> bool:
+    """ingest 자격: (a) mock 아님 (b) 실행자가 ledger_grade=true 로 표기한 본실험만.
+
+    소규모 스모크/검증 실행이 논문 셀을 오염시키는 것을 막는다
+    (실측 사례: 퇴화 스모크 런이 0.0 을 MEASURED 로 밀어넣을 뻔함).
+    """
     if not meta_path.exists():
         return False
     meta = json.loads(meta_path.read_text(encoding="utf-8"))
-    return str((meta.get("args") or {}).get("llm_mode", "")).lower() not in {"", "mock"}
+    if str((meta.get("args") or {}).get("llm_mode", "")).lower() in {"", "mock"}:
+        return False
+    return bool(meta.get("ledger_grade"))
 
 
 def ingest(rows: list[dict], results_root: Path) -> list[str]:

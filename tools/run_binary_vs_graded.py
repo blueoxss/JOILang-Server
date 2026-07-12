@@ -66,6 +66,7 @@ def main() -> None:
     parser.add_argument("--timestamp", default="")
     parser.add_argument("--out-root", default=str(REPO / "results" / "search_signal"))
     parser.add_argument("--code-root", default="", help="실행 코드 스냅샷 위치(worktree). 결과는 out-root에 기록")
+    parser.add_argument("--ledger-grade", action="store_true", help="논문 예산 본실험임을 표기 — 이 표기가 있어야 ledger ingest 대상이 됨")
     args = parser.parse_args()
 
     ts = args.timestamp or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -117,7 +118,8 @@ def main() -> None:
         writer.writeheader()
         writer.writerows(summary_rows)
     (root / "meta.json").write_text(
-        json.dumps({"args": vars(args), "timestamp": ts}, ensure_ascii=False, indent=2), encoding="utf-8"
+        json.dumps({"args": vars(args), "timestamp": ts, "ledger_grade": bool(args.ledger_grade)}, ensure_ascii=False, indent=2),
+        encoding="utf-8",
     )
     print(f"written: {out_csv}")
     for row in summary_rows:

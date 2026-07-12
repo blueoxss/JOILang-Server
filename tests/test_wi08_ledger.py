@@ -53,10 +53,12 @@ def test_sync_dagger_and_projected_count(tmp_path):
     assert report2["written"] is False and not tex2.exists()
 
 
-def _mk_search_signal(root: Path, llm_mode: str):
+def _mk_search_signal(root: Path, llm_mode: str, ledger_grade: bool = True):
     run = root / "search_signal" / "20990101T000000Z"
     run.mkdir(parents=True)
-    (run / "meta.json").write_text(json.dumps({"args": {"llm_mode": llm_mode}}), encoding="utf-8")
+    (run / "meta.json").write_text(
+        json.dumps({"args": {"llm_mode": llm_mode}, "ledger_grade": ledger_grade}), encoding="utf-8"
+    )
     with (run / "binary_vs_graded_summary.csv").open("w", newline="", encoding="utf-8-sig") as handle:
         writer = csv.DictWriter(handle, fieldnames=["mode", "budget_best_det_pass_rate", "reach_generation", "overall_DETPass_all_rows", "generation_error_rate"])
         writer.writeheader()
@@ -86,6 +88,15 @@ def test_ingest_real_run_flips_to_measured(tmp_path):
 
 def test_ingest_refuses_mock_runs(tmp_path):
     _mk_search_signal(tmp_path, "mock")
+    rows = _base_rows()
+    updated = sl.ingest(rows, tmp_path)
+    assert updated == []
+    assert all(row["status"] == "PROJECTED" for row in rows)
+
+
+def test_ingest_refuses_non_ledger_grade_real_runs(tmp_path):
+    """실측(worker)이라도 ledger_grade 표기가 없는 스모크 실행은 반영 금지."""
+    _mk_search_signal(tmp_path, "worker", ledger_grade=False)
     rows = _base_rows()
     updated = sl.ingest(rows, tmp_path)
     assert updated == []

@@ -1,0 +1,3 @@
+{"generation": 1, "parent_ids": ["genome_002", "genome_002"], "child_id": "x_genome_002_genome_002_g001_c000", "crossover_type": "block_uniform", "details": {"blocks": ["01", "02", "03", "06"]}}
+{"generation": 1, "parent_id": "x_genome_002_genome_002_g001_c000", "child_id": "x_genome_002_genome_002_g001_c000_g001_m000", "mutation_type": "adjust_few_shot", "details": {"few_shot_count": 1, "renderer_note": "예제 유전자 — 렌더 반영은 WI-09"}}
+{"generation": 2, "parent_ids": ["x_genome_002_genome_002_g001_c000_g001_m000", "x_genome_002_genome_002_g001_c000_g001_m000"], "child_id": "x_x_genome_002_genome_002_g001_c000_g001_m000_x_genome_002_genome_002_g001_c000_g001_m000_g002_c000", "crossover_type": "block_uniform", "details": {"blocks": ["01", "02", "03", "06"]}}
