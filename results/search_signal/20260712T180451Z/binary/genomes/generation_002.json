@@ -1,0 +1,50 @@
+[
+  {
+    "id": "genome_000",
+    "blocks": [
+      "01",
+      "02",
+      "03",
+      "06"
+    ],
+    "params": {
+      "candidate_strategies": [
+        "mock_gt_copy"
+      ]
+    },
+    "block_params": {},
+    "seed": 0
+  },
+  {
+    "id": "genome_001",
+    "blocks": [
+      "01",
+      "02",
+      "03",
+      "06"
+    ],
+    "params": {
+      "candidate_strategies": [
+        "mock_gt_copy"
+      ]
+    },
+    "block_params": {},
+    "seed": 0
+  },
+  {
+    "id": "x_x_genome_002_genome_002_g001_c000_g001_m000_x_genome_002_genome_002_g001_c000_g001_m000_g002_c000",
+    "blocks": [
+      "01",
+      "02",
+      "03",
+      "06"
+    ],
+    "params": {
+      "candidate_strategies": [
+        "mock_gt_copy"
+      ],
+      "few_shot_count": 1
+    },
+    "block_params": {}
+  }
+]

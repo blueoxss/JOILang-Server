@@ -1,0 +1,703 @@
+﻿row_no,category,genome_id,candidate_index,det_score,det_pass,gt_exact,gt_similarity,schedule_match,cron_match,period_match,code_match,service_valid,receiver_valid,gt_service_coverage,gt_service_precision,gt_receiver_coverage,dataflow_score,numeric_grounding,enum_grounding,failure_reasons,diff_summary,gt_code,generated_code,gt_json,generated_json,generation,candidate_strategy,generation_error_type,generation_error_count,generation_prompt_tokens_total,generation_completion_tokens_total,generation_total_tokens_total,latency_sec,peak_vram_gb,raw_response_path,prompt_log_paths,service_schema_path,service_context_mode,service_context_source,service_list_retrieval_scores,repair_applied,repair_actions,backend
+28,1,genome_000,0,51.7373,False,False,0.474576,False,True,False,False,False,True,0.0,0.0,1.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service""]","{""gt_services"":[""speaker_volumedown""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+(#Speaker).speaker_volumedown()","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#Speaker).speaker_volumedown()""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,61.1269,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_28_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+43,2,genome_000,0,28.6417,False,False,0.204724,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Farm#Siren""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""fire""],""generated_string_args"":[]}","(#Farm #Siren).siren_setsirenmode(""fire"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Farm #Siren).siren_setsirenmode(\""fire\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,63.001975,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_43_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+85,3,genome_000,0,18.4067,False,False,0.196891,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#Farm#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""800""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+if ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,64.332719,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_85_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+119,4,genome_000,0,22.3077,False,False,0.326923,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#ServerRoom#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""5000""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+wait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)
+
+all(#Siren).siren_setsirenmode(""emergency"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nwait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)\n\nall(#Siren).siren_setsirenmode(\""emergency\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,64.255602,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_119_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+134,5,genome_000,0,47.7454,False,False,0.674847,False,True,False,False,False,True,0.0,0.0,1.0,1.0,0.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""numeric_grounding""]","{""gt_services"":[""speaker_setvolume""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""20"",""10"",""40""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","(#Speaker).speaker_setvolume(20)
+
+delay(10 MIN)
+
+(#Speaker).speaker_setvolume(40)","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Speaker).speaker_setvolume(20)\n\ndelay(10 MIN)\n\n(#Speaker).speaker_setvolume(40)""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.758346,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_134_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+152,6,genome_000,0,20.7338,False,False,0.191126,False,True,False,False,False,False,0.0,0.0,0.25,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_carbondioxide"",""presencesensor_presence"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#AirPurifier"",""#PresenceSensor"",""#Speaker"",""(#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""1200""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""high"",""이산화탄소농도가높습니다.""],""generated_string_args"":[]}","
+if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Speaker).speaker_speak(""이산화탄소 농도가 높습니다."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n    (#Speaker).speaker_speak(\""이산화탄소 농도가 높습니다.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.462598,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_152_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+197,7,genome_000,0,25.6306,False,False,0.243243,False,False,False,False,False,False,0.0,0.0,0.333333,1.0,1.0,0.0,"[""cron_mismatch"",""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""doorlock_doorlockstate"",""safe_safestate"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#DoorLock"",""#Speaker"",""(#Safe""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""unlocked"",""unlocked"",""금고와도어락의잠금상태를확인해주세요.""],""generated_string_args"":[]}","
+if ((#Safe).safe_safestate == ""unlocked"" or (#DoorLock).doorlock_doorlockstate == ""unlocked"") {
+
+    (#Speaker).speaker_speak(""금고와 도어락의 잠금 상태를 확인해 주세요."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":""0 23 * * *"",""period"":0,""script"":""\nif ((#Safe).safe_safestate == \""unlocked\"" or (#DoorLock).doorlock_doorlockstate == \""unlocked\"") {\n\n    (#Speaker).speaker_speak(\""금고와 도어락의 잠금 상태를 확인해 주세요.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.151697,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_197_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+263,8,genome_000,0,34.9131,False,False,0.247104,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage""]","{""gt_services"":[""door_close"",""rainsensor_rain"",""windowcovering_downorclose""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Door"",""#RainSensor"",""#Window""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+prev := (#RainSensor).rainsensor_rain
+
+curr = (#RainSensor).rainsensor_rain
+
+if (prev == false and curr == true) {
+
+    all(#Window).windowcovering_downorclose()
+
+    all(#Door).door_close()
+
+}
+
+prev = curr","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":100,""script"":""\nprev := (#RainSensor).rainsensor_rain\n\ncurr = (#RainSensor).rainsensor_rain\n\nif (prev == false and curr == true) {\n\n    all(#Window).windowcovering_downorclose()\n\n    all(#Door).door_close()\n\n}\n\nprev = curr""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.013859,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_263_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+28,1,genome_001,0,51.7373,False,False,0.474576,False,True,False,False,False,True,0.0,0.0,1.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service""]","{""gt_services"":[""speaker_volumedown""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+(#Speaker).speaker_volumedown()","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#Speaker).speaker_volumedown()""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.137279,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_28_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+43,2,genome_001,0,28.6417,False,False,0.204724,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Farm#Siren""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""fire""],""generated_string_args"":[]}","(#Farm #Siren).siren_setsirenmode(""fire"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Farm #Siren).siren_setsirenmode(\""fire\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.342401,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_43_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+85,3,genome_001,0,18.4067,False,False,0.196891,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#Farm#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""800""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+if ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.418128,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_85_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+119,4,genome_001,0,22.3077,False,False,0.326923,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#ServerRoom#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""5000""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+wait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)
+
+all(#Siren).siren_setsirenmode(""emergency"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nwait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)\n\nall(#Siren).siren_setsirenmode(\""emergency\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.19527,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_119_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+134,5,genome_001,0,47.7454,False,False,0.674847,False,True,False,False,False,True,0.0,0.0,1.0,1.0,0.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""numeric_grounding""]","{""gt_services"":[""speaker_setvolume""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""20"",""10"",""40""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","(#Speaker).speaker_setvolume(20)
+
+delay(10 MIN)
+
+(#Speaker).speaker_setvolume(40)","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Speaker).speaker_setvolume(20)\n\ndelay(10 MIN)\n\n(#Speaker).speaker_setvolume(40)""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.452215,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_134_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+152,6,genome_001,0,20.7338,False,False,0.191126,False,True,False,False,False,False,0.0,0.0,0.25,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_carbondioxide"",""presencesensor_presence"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#AirPurifier"",""#PresenceSensor"",""#Speaker"",""(#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""1200""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""high"",""이산화탄소농도가높습니다.""],""generated_string_args"":[]}","
+if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Speaker).speaker_speak(""이산화탄소 농도가 높습니다."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n    (#Speaker).speaker_speak(\""이산화탄소 농도가 높습니다.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.243315,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_152_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+197,7,genome_001,0,25.6306,False,False,0.243243,False,False,False,False,False,False,0.0,0.0,0.333333,1.0,1.0,0.0,"[""cron_mismatch"",""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""doorlock_doorlockstate"",""safe_safestate"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#DoorLock"",""#Speaker"",""(#Safe""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""unlocked"",""unlocked"",""금고와도어락의잠금상태를확인해주세요.""],""generated_string_args"":[]}","
+if ((#Safe).safe_safestate == ""unlocked"" or (#DoorLock).doorlock_doorlockstate == ""unlocked"") {
+
+    (#Speaker).speaker_speak(""금고와 도어락의 잠금 상태를 확인해 주세요."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":""0 23 * * *"",""period"":0,""script"":""\nif ((#Safe).safe_safestate == \""unlocked\"" or (#DoorLock).doorlock_doorlockstate == \""unlocked\"") {\n\n    (#Speaker).speaker_speak(\""금고와 도어락의 잠금 상태를 확인해 주세요.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.289992,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_197_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+263,8,genome_001,0,34.9131,False,False,0.247104,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage""]","{""gt_services"":[""door_close"",""rainsensor_rain"",""windowcovering_downorclose""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Door"",""#RainSensor"",""#Window""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+prev := (#RainSensor).rainsensor_rain
+
+curr = (#RainSensor).rainsensor_rain
+
+if (prev == false and curr == true) {
+
+    all(#Window).windowcovering_downorclose()
+
+    all(#Door).door_close()
+
+}
+
+prev = curr","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":100,""script"":""\nprev := (#RainSensor).rainsensor_rain\n\ncurr = (#RainSensor).rainsensor_rain\n\nif (prev == false and curr == true) {\n\n    all(#Window).windowcovering_downorclose()\n\n    all(#Door).door_close()\n\n}\n\nprev = curr""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.184669,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_263_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+28,1,genome_002,0,51.7373,False,False,0.474576,False,True,False,False,False,True,0.0,0.0,1.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service""]","{""gt_services"":[""speaker_volumedown""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+(#Speaker).speaker_volumedown()","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#Speaker).speaker_volumedown()""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.151026,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_28_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+43,2,genome_002,0,28.6417,False,False,0.204724,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Farm#Siren""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""fire""],""generated_string_args"":[]}","(#Farm #Siren).siren_setsirenmode(""fire"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Farm #Siren).siren_setsirenmode(\""fire\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.17863,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_43_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+85,3,genome_002,0,18.4067,False,False,0.196891,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#Farm#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""800""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+if ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.525505,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_85_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+119,4,genome_002,0,22.3077,False,False,0.326923,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#ServerRoom#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""5000""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+wait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)
+
+all(#Siren).siren_setsirenmode(""emergency"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nwait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)\n\nall(#Siren).siren_setsirenmode(\""emergency\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.374891,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_119_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+134,5,genome_002,0,47.7454,False,False,0.674847,False,True,False,False,False,True,0.0,0.0,1.0,1.0,0.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""numeric_grounding""]","{""gt_services"":[""speaker_setvolume""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""20"",""10"",""40""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","(#Speaker).speaker_setvolume(20)
+
+delay(10 MIN)
+
+(#Speaker).speaker_setvolume(40)","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Speaker).speaker_setvolume(20)\n\ndelay(10 MIN)\n\n(#Speaker).speaker_setvolume(40)""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.362949,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_134_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+152,6,genome_002,0,20.7338,False,False,0.191126,False,True,False,False,False,False,0.0,0.0,0.25,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_carbondioxide"",""presencesensor_presence"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#AirPurifier"",""#PresenceSensor"",""#Speaker"",""(#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""1200""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""high"",""이산화탄소농도가높습니다.""],""generated_string_args"":[]}","
+if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Speaker).speaker_speak(""이산화탄소 농도가 높습니다."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n    (#Speaker).speaker_speak(\""이산화탄소 농도가 높습니다.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.310502,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_152_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+197,7,genome_002,0,25.6306,False,False,0.243243,False,False,False,False,False,False,0.0,0.0,0.333333,1.0,1.0,0.0,"[""cron_mismatch"",""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""doorlock_doorlockstate"",""safe_safestate"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#DoorLock"",""#Speaker"",""(#Safe""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""unlocked"",""unlocked"",""금고와도어락의잠금상태를확인해주세요.""],""generated_string_args"":[]}","
+if ((#Safe).safe_safestate == ""unlocked"" or (#DoorLock).doorlock_doorlockstate == ""unlocked"") {
+
+    (#Speaker).speaker_speak(""금고와 도어락의 잠금 상태를 확인해 주세요."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":""0 23 * * *"",""period"":0,""script"":""\nif ((#Safe).safe_safestate == \""unlocked\"" or (#DoorLock).doorlock_doorlockstate == \""unlocked\"") {\n\n    (#Speaker).speaker_speak(\""금고와 도어락의 잠금 상태를 확인해 주세요.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.58676,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_197_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+263,8,genome_002,0,34.9131,False,False,0.247104,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage""]","{""gt_services"":[""door_close"",""rainsensor_rain"",""windowcovering_downorclose""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Door"",""#RainSensor"",""#Window""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+prev := (#RainSensor).rainsensor_rain
+
+curr = (#RainSensor).rainsensor_rain
+
+if (prev == false and curr == true) {
+
+    all(#Window).windowcovering_downorclose()
+
+    all(#Door).door_close()
+
+}
+
+prev = curr","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":100,""script"":""\nprev := (#RainSensor).rainsensor_rain\n\ncurr = (#RainSensor).rainsensor_rain\n\nif (prev == false and curr == true) {\n\n    all(#Window).windowcovering_downorclose()\n\n    all(#Door).door_close()\n\n}\n\nprev = curr""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",0,mock_gt_copy,,0,106245,66,106311,65.297578,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_263_cand_0_gen_000.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_000.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+28,1,genome_000,0,51.7373,False,False,0.474576,False,True,False,False,False,True,0.0,0.0,1.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service""]","{""gt_services"":[""speaker_volumedown""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+(#Speaker).speaker_volumedown()","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#Speaker).speaker_volumedown()""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,65.148665,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_28_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+43,2,genome_000,0,28.6417,False,False,0.204724,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Farm#Siren""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""fire""],""generated_string_args"":[]}","(#Farm #Siren).siren_setsirenmode(""fire"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Farm #Siren).siren_setsirenmode(\""fire\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,65.200851,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_43_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+85,3,genome_000,0,18.4067,False,False,0.196891,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#Farm#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""800""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+if ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,65.124987,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_85_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+119,4,genome_000,0,22.3077,False,False,0.326923,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#ServerRoom#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""5000""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+wait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)
+
+all(#Siren).siren_setsirenmode(""emergency"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nwait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)\n\nall(#Siren).siren_setsirenmode(\""emergency\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,65.279702,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_119_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+134,5,genome_000,0,47.7454,False,False,0.674847,False,True,False,False,False,True,0.0,0.0,1.0,1.0,0.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""numeric_grounding""]","{""gt_services"":[""speaker_setvolume""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""20"",""10"",""40""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","(#Speaker).speaker_setvolume(20)
+
+delay(10 MIN)
+
+(#Speaker).speaker_setvolume(40)","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Speaker).speaker_setvolume(20)\n\ndelay(10 MIN)\n\n(#Speaker).speaker_setvolume(40)""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,64.961606,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_134_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+152,6,genome_000,0,20.7338,False,False,0.191126,False,True,False,False,False,False,0.0,0.0,0.25,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_carbondioxide"",""presencesensor_presence"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#AirPurifier"",""#PresenceSensor"",""#Speaker"",""(#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""1200""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""high"",""이산화탄소농도가높습니다.""],""generated_string_args"":[]}","
+if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Speaker).speaker_speak(""이산화탄소 농도가 높습니다."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n    (#Speaker).speaker_speak(\""이산화탄소 농도가 높습니다.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,64.941544,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_152_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+197,7,genome_000,0,25.6306,False,False,0.243243,False,False,False,False,False,False,0.0,0.0,0.333333,1.0,1.0,0.0,"[""cron_mismatch"",""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""doorlock_doorlockstate"",""safe_safestate"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#DoorLock"",""#Speaker"",""(#Safe""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""unlocked"",""unlocked"",""금고와도어락의잠금상태를확인해주세요.""],""generated_string_args"":[]}","
+if ((#Safe).safe_safestate == ""unlocked"" or (#DoorLock).doorlock_doorlockstate == ""unlocked"") {
+
+    (#Speaker).speaker_speak(""금고와 도어락의 잠금 상태를 확인해 주세요."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":""0 23 * * *"",""period"":0,""script"":""\nif ((#Safe).safe_safestate == \""unlocked\"" or (#DoorLock).doorlock_doorlockstate == \""unlocked\"") {\n\n    (#Speaker).speaker_speak(\""금고와 도어락의 잠금 상태를 확인해 주세요.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,65.128166,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_197_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+263,8,genome_000,0,34.9131,False,False,0.247104,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage""]","{""gt_services"":[""door_close"",""rainsensor_rain"",""windowcovering_downorclose""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Door"",""#RainSensor"",""#Window""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+prev := (#RainSensor).rainsensor_rain
+
+curr = (#RainSensor).rainsensor_rain
+
+if (prev == false and curr == true) {
+
+    all(#Window).windowcovering_downorclose()
+
+    all(#Door).door_close()
+
+}
+
+prev = curr","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":100,""script"":""\nprev := (#RainSensor).rainsensor_rain\n\ncurr = (#RainSensor).rainsensor_rain\n\nif (prev == false and curr == true) {\n\n    all(#Window).windowcovering_downorclose()\n\n    all(#Door).door_close()\n\n}\n\nprev = curr""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,64.952343,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_263_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+28,1,genome_001,0,51.7373,False,False,0.474576,False,True,False,False,False,True,0.0,0.0,1.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service""]","{""gt_services"":[""speaker_volumedown""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+(#Speaker).speaker_volumedown()","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#Speaker).speaker_volumedown()""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,65.226699,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_28_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+43,2,genome_001,0,28.6417,False,False,0.204724,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Farm#Siren""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""fire""],""generated_string_args"":[]}","(#Farm #Siren).siren_setsirenmode(""fire"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Farm #Siren).siren_setsirenmode(\""fire\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,64.88446,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_43_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+85,3,genome_001,0,18.4067,False,False,0.196891,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#Farm#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""800""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+if ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,64.908563,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_85_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+119,4,genome_001,0,22.3077,False,False,0.326923,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#ServerRoom#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""5000""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+wait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)
+
+all(#Siren).siren_setsirenmode(""emergency"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nwait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)\n\nall(#Siren).siren_setsirenmode(\""emergency\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,64.959095,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_119_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+134,5,genome_001,0,47.7454,False,False,0.674847,False,True,False,False,False,True,0.0,0.0,1.0,1.0,0.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""numeric_grounding""]","{""gt_services"":[""speaker_setvolume""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""20"",""10"",""40""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","(#Speaker).speaker_setvolume(20)
+
+delay(10 MIN)
+
+(#Speaker).speaker_setvolume(40)","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Speaker).speaker_setvolume(20)\n\ndelay(10 MIN)\n\n(#Speaker).speaker_setvolume(40)""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,65.091096,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_134_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+152,6,genome_001,0,20.7338,False,False,0.191126,False,True,False,False,False,False,0.0,0.0,0.25,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_carbondioxide"",""presencesensor_presence"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#AirPurifier"",""#PresenceSensor"",""#Speaker"",""(#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""1200""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""high"",""이산화탄소농도가높습니다.""],""generated_string_args"":[]}","
+if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Speaker).speaker_speak(""이산화탄소 농도가 높습니다."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n    (#Speaker).speaker_speak(\""이산화탄소 농도가 높습니다.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,65.068019,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_152_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+197,7,genome_001,0,25.6306,False,False,0.243243,False,False,False,False,False,False,0.0,0.0,0.333333,1.0,1.0,0.0,"[""cron_mismatch"",""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""doorlock_doorlockstate"",""safe_safestate"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#DoorLock"",""#Speaker"",""(#Safe""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""unlocked"",""unlocked"",""금고와도어락의잠금상태를확인해주세요.""],""generated_string_args"":[]}","
+if ((#Safe).safe_safestate == ""unlocked"" or (#DoorLock).doorlock_doorlockstate == ""unlocked"") {
+
+    (#Speaker).speaker_speak(""금고와 도어락의 잠금 상태를 확인해 주세요."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":""0 23 * * *"",""period"":0,""script"":""\nif ((#Safe).safe_safestate == \""unlocked\"" or (#DoorLock).doorlock_doorlockstate == \""unlocked\"") {\n\n    (#Speaker).speaker_speak(\""금고와 도어락의 잠금 상태를 확인해 주세요.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,65.510124,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_197_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+263,8,genome_001,0,34.9131,False,False,0.247104,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage""]","{""gt_services"":[""door_close"",""rainsensor_rain"",""windowcovering_downorclose""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Door"",""#RainSensor"",""#Window""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+prev := (#RainSensor).rainsensor_rain
+
+curr = (#RainSensor).rainsensor_rain
+
+if (prev == false and curr == true) {
+
+    all(#Window).windowcovering_downorclose()
+
+    all(#Door).door_close()
+
+}
+
+prev = curr","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":100,""script"":""\nprev := (#RainSensor).rainsensor_rain\n\ncurr = (#RainSensor).rainsensor_rain\n\nif (prev == false and curr == true) {\n\n    all(#Window).windowcovering_downorclose()\n\n    all(#Door).door_close()\n\n}\n\nprev = curr""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,65.61366,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_263_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+28,1,x_genome_002_genome_002_g001_c000_g001_m000,0,51.7373,False,False,0.474576,False,True,False,False,False,True,0.0,0.0,1.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service""]","{""gt_services"":[""speaker_volumedown""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+(#Speaker).speaker_volumedown()","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#Speaker).speaker_volumedown()""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,65.052713,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_28_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+43,2,x_genome_002_genome_002_g001_c000_g001_m000,0,28.6417,False,False,0.204724,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Farm#Siren""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""fire""],""generated_string_args"":[]}","(#Farm #Siren).siren_setsirenmode(""fire"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Farm #Siren).siren_setsirenmode(\""fire\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,64.829103,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_43_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+85,3,x_genome_002_genome_002_g001_c000_g001_m000,0,18.4067,False,False,0.196891,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#Farm#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""800""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+if ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,65.033428,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_85_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+119,4,x_genome_002_genome_002_g001_c000_g001_m000,0,22.3077,False,False,0.326923,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#ServerRoom#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""5000""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+wait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)
+
+all(#Siren).siren_setsirenmode(""emergency"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nwait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)\n\nall(#Siren).siren_setsirenmode(\""emergency\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,64.839099,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_119_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+134,5,x_genome_002_genome_002_g001_c000_g001_m000,0,47.7454,False,False,0.674847,False,True,False,False,False,True,0.0,0.0,1.0,1.0,0.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""numeric_grounding""]","{""gt_services"":[""speaker_setvolume""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""20"",""10"",""40""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","(#Speaker).speaker_setvolume(20)
+
+delay(10 MIN)
+
+(#Speaker).speaker_setvolume(40)","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Speaker).speaker_setvolume(20)\n\ndelay(10 MIN)\n\n(#Speaker).speaker_setvolume(40)""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,64.972214,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_134_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+152,6,x_genome_002_genome_002_g001_c000_g001_m000,0,20.7338,False,False,0.191126,False,True,False,False,False,False,0.0,0.0,0.25,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_carbondioxide"",""presencesensor_presence"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#AirPurifier"",""#PresenceSensor"",""#Speaker"",""(#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""1200""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""high"",""이산화탄소농도가높습니다.""],""generated_string_args"":[]}","
+if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Speaker).speaker_speak(""이산화탄소 농도가 높습니다."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n    (#Speaker).speaker_speak(\""이산화탄소 농도가 높습니다.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,64.74561,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_152_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+197,7,x_genome_002_genome_002_g001_c000_g001_m000,0,25.6306,False,False,0.243243,False,False,False,False,False,False,0.0,0.0,0.333333,1.0,1.0,0.0,"[""cron_mismatch"",""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""doorlock_doorlockstate"",""safe_safestate"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#DoorLock"",""#Speaker"",""(#Safe""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""unlocked"",""unlocked"",""금고와도어락의잠금상태를확인해주세요.""],""generated_string_args"":[]}","
+if ((#Safe).safe_safestate == ""unlocked"" or (#DoorLock).doorlock_doorlockstate == ""unlocked"") {
+
+    (#Speaker).speaker_speak(""금고와 도어락의 잠금 상태를 확인해 주세요."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":""0 23 * * *"",""period"":0,""script"":""\nif ((#Safe).safe_safestate == \""unlocked\"" or (#DoorLock).doorlock_doorlockstate == \""unlocked\"") {\n\n    (#Speaker).speaker_speak(\""금고와 도어락의 잠금 상태를 확인해 주세요.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,64.741663,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_197_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+263,8,x_genome_002_genome_002_g001_c000_g001_m000,0,34.9131,False,False,0.247104,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage""]","{""gt_services"":[""door_close"",""rainsensor_rain"",""windowcovering_downorclose""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Door"",""#RainSensor"",""#Window""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+prev := (#RainSensor).rainsensor_rain
+
+curr = (#RainSensor).rainsensor_rain
+
+if (prev == false and curr == true) {
+
+    all(#Window).windowcovering_downorclose()
+
+    all(#Door).door_close()
+
+}
+
+prev = curr","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":100,""script"":""\nprev := (#RainSensor).rainsensor_rain\n\ncurr = (#RainSensor).rainsensor_rain\n\nif (prev == false and curr == true) {\n\n    all(#Window).windowcovering_downorclose()\n\n    all(#Door).door_close()\n\n}\n\nprev = curr""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",1,mock_gt_copy,,0,106245,66,106311,64.725696,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_263_cand_0_gen_001.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_001.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_001.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+28,1,genome_000,0,51.7373,False,False,0.474576,False,True,False,False,False,True,0.0,0.0,1.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service""]","{""gt_services"":[""speaker_volumedown""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+(#Speaker).speaker_volumedown()","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#Speaker).speaker_volumedown()""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.954892,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_28_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+43,2,genome_000,0,28.6417,False,False,0.204724,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Farm#Siren""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""fire""],""generated_string_args"":[]}","(#Farm #Siren).siren_setsirenmode(""fire"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Farm #Siren).siren_setsirenmode(\""fire\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.807161,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_43_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+85,3,genome_000,0,18.4067,False,False,0.196891,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#Farm#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""800""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+if ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,63.875851,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_85_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+119,4,genome_000,0,22.3077,False,False,0.326923,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#ServerRoom#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""5000""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+wait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)
+
+all(#Siren).siren_setsirenmode(""emergency"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nwait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)\n\nall(#Siren).siren_setsirenmode(\""emergency\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.972714,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_119_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+134,5,genome_000,0,47.7454,False,False,0.674847,False,True,False,False,False,True,0.0,0.0,1.0,1.0,0.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""numeric_grounding""]","{""gt_services"":[""speaker_setvolume""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""20"",""10"",""40""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","(#Speaker).speaker_setvolume(20)
+
+delay(10 MIN)
+
+(#Speaker).speaker_setvolume(40)","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Speaker).speaker_setvolume(20)\n\ndelay(10 MIN)\n\n(#Speaker).speaker_setvolume(40)""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,65.000381,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_134_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+152,6,genome_000,0,20.7338,False,False,0.191126,False,True,False,False,False,False,0.0,0.0,0.25,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_carbondioxide"",""presencesensor_presence"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#AirPurifier"",""#PresenceSensor"",""#Speaker"",""(#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""1200""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""high"",""이산화탄소농도가높습니다.""],""generated_string_args"":[]}","
+if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Speaker).speaker_speak(""이산화탄소 농도가 높습니다."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n    (#Speaker).speaker_speak(\""이산화탄소 농도가 높습니다.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,65.100693,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_152_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+197,7,genome_000,0,25.6306,False,False,0.243243,False,False,False,False,False,False,0.0,0.0,0.333333,1.0,1.0,0.0,"[""cron_mismatch"",""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""doorlock_doorlockstate"",""safe_safestate"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#DoorLock"",""#Speaker"",""(#Safe""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""unlocked"",""unlocked"",""금고와도어락의잠금상태를확인해주세요.""],""generated_string_args"":[]}","
+if ((#Safe).safe_safestate == ""unlocked"" or (#DoorLock).doorlock_doorlockstate == ""unlocked"") {
+
+    (#Speaker).speaker_speak(""금고와 도어락의 잠금 상태를 확인해 주세요."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":""0 23 * * *"",""period"":0,""script"":""\nif ((#Safe).safe_safestate == \""unlocked\"" or (#DoorLock).doorlock_doorlockstate == \""unlocked\"") {\n\n    (#Speaker).speaker_speak(\""금고와 도어락의 잠금 상태를 확인해 주세요.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.733068,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_197_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+263,8,genome_000,0,34.9131,False,False,0.247104,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage""]","{""gt_services"":[""door_close"",""rainsensor_rain"",""windowcovering_downorclose""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Door"",""#RainSensor"",""#Window""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+prev := (#RainSensor).rainsensor_rain
+
+curr = (#RainSensor).rainsensor_rain
+
+if (prev == false and curr == true) {
+
+    all(#Window).windowcovering_downorclose()
+
+    all(#Door).door_close()
+
+}
+
+prev = curr","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":100,""script"":""\nprev := (#RainSensor).rainsensor_rain\n\ncurr = (#RainSensor).rainsensor_rain\n\nif (prev == false and curr == true) {\n\n    all(#Window).windowcovering_downorclose()\n\n    all(#Door).door_close()\n\n}\n\nprev = curr""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.676058,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_263_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+28,1,genome_001,0,51.7373,False,False,0.474576,False,True,False,False,False,True,0.0,0.0,1.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service""]","{""gt_services"":[""speaker_volumedown""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+(#Speaker).speaker_volumedown()","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#Speaker).speaker_volumedown()""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.869423,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_28_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+43,2,genome_001,0,28.6417,False,False,0.204724,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Farm#Siren""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""fire""],""generated_string_args"":[]}","(#Farm #Siren).siren_setsirenmode(""fire"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Farm #Siren).siren_setsirenmode(\""fire\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.91904,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_43_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+85,3,genome_001,0,18.4067,False,False,0.196891,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#Farm#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""800""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+if ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.661482,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_85_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+119,4,genome_001,0,22.3077,False,False,0.326923,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#ServerRoom#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""5000""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+wait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)
+
+all(#Siren).siren_setsirenmode(""emergency"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nwait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)\n\nall(#Siren).siren_setsirenmode(\""emergency\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.730084,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_119_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+134,5,genome_001,0,47.7454,False,False,0.674847,False,True,False,False,False,True,0.0,0.0,1.0,1.0,0.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""numeric_grounding""]","{""gt_services"":[""speaker_setvolume""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""20"",""10"",""40""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","(#Speaker).speaker_setvolume(20)
+
+delay(10 MIN)
+
+(#Speaker).speaker_setvolume(40)","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Speaker).speaker_setvolume(20)\n\ndelay(10 MIN)\n\n(#Speaker).speaker_setvolume(40)""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.686876,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_134_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+152,6,genome_001,0,20.7338,False,False,0.191126,False,True,False,False,False,False,0.0,0.0,0.25,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_carbondioxide"",""presencesensor_presence"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#AirPurifier"",""#PresenceSensor"",""#Speaker"",""(#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""1200""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""high"",""이산화탄소농도가높습니다.""],""generated_string_args"":[]}","
+if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Speaker).speaker_speak(""이산화탄소 농도가 높습니다."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n    (#Speaker).speaker_speak(\""이산화탄소 농도가 높습니다.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,65.26675,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_152_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+197,7,genome_001,0,25.6306,False,False,0.243243,False,False,False,False,False,False,0.0,0.0,0.333333,1.0,1.0,0.0,"[""cron_mismatch"",""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""doorlock_doorlockstate"",""safe_safestate"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#DoorLock"",""#Speaker"",""(#Safe""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""unlocked"",""unlocked"",""금고와도어락의잠금상태를확인해주세요.""],""generated_string_args"":[]}","
+if ((#Safe).safe_safestate == ""unlocked"" or (#DoorLock).doorlock_doorlockstate == ""unlocked"") {
+
+    (#Speaker).speaker_speak(""금고와 도어락의 잠금 상태를 확인해 주세요."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":""0 23 * * *"",""period"":0,""script"":""\nif ((#Safe).safe_safestate == \""unlocked\"" or (#DoorLock).doorlock_doorlockstate == \""unlocked\"") {\n\n    (#Speaker).speaker_speak(\""금고와 도어락의 잠금 상태를 확인해 주세요.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,65.620943,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_197_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+263,8,genome_001,0,34.9131,False,False,0.247104,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage""]","{""gt_services"":[""door_close"",""rainsensor_rain"",""windowcovering_downorclose""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Door"",""#RainSensor"",""#Window""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+prev := (#RainSensor).rainsensor_rain
+
+curr = (#RainSensor).rainsensor_rain
+
+if (prev == false and curr == true) {
+
+    all(#Window).windowcovering_downorclose()
+
+    all(#Door).door_close()
+
+}
+
+prev = curr","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":100,""script"":""\nprev := (#RainSensor).rainsensor_rain\n\ncurr = (#RainSensor).rainsensor_rain\n\nif (prev == false and curr == true) {\n\n    all(#Window).windowcovering_downorclose()\n\n    all(#Door).door_close()\n\n}\n\nprev = curr""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.982975,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_263_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+28,1,x_x_genome_002_genome_002_g001_c000_g001_m000_x_genome_002_genome_002_g001_c000_g001_m000_g002_c000,0,51.7373,False,False,0.474576,False,True,False,False,False,True,0.0,0.0,1.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service""]","{""gt_services"":[""speaker_volumedown""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+(#Speaker).speaker_volumedown()","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#Speaker).speaker_volumedown()""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,65.014597,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_28_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_28_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+43,2,x_x_genome_002_genome_002_g001_c000_g001_m000_x_genome_002_genome_002_g001_c000_g001_m000_g002_c000,0,28.6417,False,False,0.204724,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Farm#Siren""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""fire""],""generated_string_args"":[]}","(#Farm #Siren).siren_setsirenmode(""fire"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Farm #Siren).siren_setsirenmode(\""fire\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.70099,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_43_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_43_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+85,3,x_x_genome_002_genome_002_g001_c000_g001_m000_x_genome_002_genome_002_g001_c000_g001_m000_g002_c000,0,18.4067,False,False,0.196891,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#Farm#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""800""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+if ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#Farm #AirQualitySensor).airqualitysensor_carbondioxide >= 800) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.572478,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_85_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_85_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+119,4,x_x_genome_002_genome_002_g001_c000_g001_m000_x_genome_002_genome_002_g001_c000_g001_m000_g002_c000,0,22.3077,False,False,0.326923,False,True,False,False,False,False,0.0,0.0,0.0,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airqualitysensor_carbondioxide"",""siren_setsirenmode""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Siren"",""(#ServerRoom#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""5000""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""emergency""],""generated_string_args"":[]}","
+wait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)
+
+all(#Siren).siren_setsirenmode(""emergency"")","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nwait until ((#ServerRoom #AirQualitySensor).airqualitysensor_carbondioxide >= 5000)\n\nall(#Siren).siren_setsirenmode(\""emergency\"")""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.871539,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_119_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_119_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+134,5,x_x_genome_002_genome_002_g001_c000_g001_m000_x_genome_002_genome_002_g001_c000_g001_m000_g002_c000,0,47.7454,False,False,0.674847,False,True,False,False,False,True,0.0,0.0,1.0,1.0,0.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""numeric_grounding""]","{""gt_services"":[""speaker_setvolume""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""20"",""10"",""40""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","(#Speaker).speaker_setvolume(20)
+
+delay(10 MIN)
+
+(#Speaker).speaker_setvolume(40)","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""(#Speaker).speaker_setvolume(20)\n\ndelay(10 MIN)\n\n(#Speaker).speaker_setvolume(40)""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.7689,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_134_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_134_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+152,6,x_x_genome_002_genome_002_g001_c000_g001_m000_x_genome_002_genome_002_g001_c000_g001_m000_g002_c000,0,20.7338,False,False,0.191126,False,True,False,False,False,False,0.0,0.0,0.25,1.0,0.0,0.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""numeric_grounding"",""enum_grounding""]","{""gt_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_carbondioxide"",""presencesensor_presence"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#AirPurifier"",""#PresenceSensor"",""#Speaker"",""(#AirQualitySensor""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[""1200""],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""high"",""이산화탄소농도가높습니다.""],""generated_string_args"":[]}","
+if ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+    (#Speaker).speaker_speak(""이산화탄소 농도가 높습니다."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#AirQualitySensor).airqualitysensor_carbondioxide >= 1200 and (#PresenceSensor).presencesensor_presence == true) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n    (#Speaker).speaker_speak(\""이산화탄소 농도가 높습니다.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.820242,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_152_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_152_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+197,7,x_x_genome_002_genome_002_g001_c000_g001_m000_x_genome_002_genome_002_g001_c000_g001_m000_g002_c000,0,25.6306,False,False,0.243243,False,False,False,False,False,False,0.0,0.0,0.333333,1.0,1.0,0.0,"[""cron_mismatch"",""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage"",""enum_grounding""]","{""gt_services"":[""doorlock_doorlockstate"",""safe_safestate"",""speaker_speak""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#DoorLock"",""#Speaker"",""(#Safe""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[""unlocked"",""unlocked"",""금고와도어락의잠금상태를확인해주세요.""],""generated_string_args"":[]}","
+if ((#Safe).safe_safestate == ""unlocked"" or (#DoorLock).doorlock_doorlockstate == ""unlocked"") {
+
+    (#Speaker).speaker_speak(""금고와 도어락의 잠금 상태를 확인해 주세요."")
+
+}","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":""0 23 * * *"",""period"":0,""script"":""\nif ((#Safe).safe_safestate == \""unlocked\"" or (#DoorLock).doorlock_doorlockstate == \""unlocked\"") {\n\n    (#Speaker).speaker_speak(\""금고와 도어락의 잠금 상태를 확인해 주세요.\"")\n\n}""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.825329,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_197_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_197_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker
+263,8,x_x_genome_002_genome_002_g001_c000_g001_m000_x_genome_002_genome_002_g001_c000_g001_m000_g002_c000,0,34.9131,False,False,0.247104,False,True,False,False,False,False,0.0,0.0,0.0,1.0,1.0,1.0,"[""period_mismatch"",""gt_mismatch"",""gt_service_coverage"",""unknown_service"",""gt_receiver_coverage""]","{""gt_services"":[""door_close"",""rainsensor_rain"",""windowcovering_downorclose""],""generated_services"":[""speaker_volume""],""gt_receivers"":[""#Door"",""#RainSensor"",""#Window""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[""0"",""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+prev := (#RainSensor).rainsensor_rain
+
+curr = (#RainSensor).rainsensor_rain
+
+if (prev == false and curr == true) {
+
+    all(#Window).windowcovering_downorclose()
+
+    all(#Door).door_close()
+
+}
+
+prev = curr","volume = (#Speaker).speaker_volume
+if (volume > 0) {
+  volume -= 1
+  (#Speaker).speaker_volume = volume
+}","{""name"":"""",""cron"":"""",""period"":100,""script"":""\nprev := (#RainSensor).rainsensor_rain\n\ncurr = (#RainSensor).rainsensor_rain\n\nif (prev == false and curr == true) {\n\n    all(#Window).windowcovering_downorclose()\n\n    all(#Door).door_close()\n\n}\n\nprev = curr""}","{""name"":""LowerSpeakerVolume"",""cron"":"""",""period"":-1,""code"":""volume = (#Speaker).speaker_volume\nif (volume > 0) {\n  volume -= 1\n  (#Speaker).speaker_volume = volume\n}""}",2,mock_gt_copy,,0,106245,66,106311,64.850663,34.0069,/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/raw_responses/row_263_cand_0_gen_002.json,"[""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_002.md"", ""/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal/20260712T180451Z/graded/prompts/row_263_cand_0_gen_002.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],worker

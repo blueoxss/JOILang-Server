@@ -1,0 +1,20 @@
+{
+  "args": {
+    "model": "gpt_mg.version0_13",
+    "dataset": "datasets/JOICommands-280.csv",
+    "service_schema": "datasets/service_list_ver2.0.1.json",
+    "llm_mode": "worker",
+    "model_key": "qwen25_coder_7b",
+    "stratify_per_category": 1,
+    "population": 3,
+    "gens": 3,
+    "seed": 0,
+    "det_threshold": 70.0,
+    "timeout_sec": 1800,
+    "replay_split": "",
+    "timestamp": "",
+    "out_root": "/home/mgjeong/Desktop/llm/JOILang-Server/results/search_signal",
+    "code_root": "/data/mgjeong/joilang_run_snapshot"
+  },
+  "timestamp": "20260712T180451Z"
+}

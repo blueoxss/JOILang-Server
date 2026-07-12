@@ -169,6 +169,7 @@ def main() -> None:
     parser.add_argument("--timestamp", default="")
     parser.add_argument("--out-root", default=str(REPO / "results" / "ablation"))
     parser.add_argument("--code-root", default="")
+    parser.add_argument("--ledger-grade", action="store_true", help="논문 예산 본실험 표기 — ledger ingest 자격")
     args = parser.parse_args()
 
     gate_config = load_gate_config()
@@ -272,7 +273,10 @@ def main() -> None:
         )
         writer.writeheader()
         writer.writerows(rows_out)
-    (root / "meta.json").write_text(json.dumps({"args": vars(args), "timestamp": ts}, ensure_ascii=False, indent=2), encoding="utf-8")
+    (root / "meta.json").write_text(
+        json.dumps({"args": vars(args), "timestamp": ts, "ledger_grade": bool(args.ledger_grade)}, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
     print(f"written: {out_csv}")
     for row in rows_out:
         print(row["variant"], row["det_pass_rate"], "regress:", row["critical_regressions"])

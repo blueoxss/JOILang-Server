@@ -1,0 +1,32 @@
+[
+  {
+    "generation": 0,
+    "candidate_rows": 24,
+    "avg_det_score": 31.264537499999992,
+    "train_det_pass_rate": 0.0,
+    "best_genome_id": "genome_000",
+    "best_avg_det_score": 31.264537499999996,
+    "best_det_pass_rate": 0.0,
+    "best_fitness": -0.15000000000000002
+  },
+  {
+    "generation": 1,
+    "candidate_rows": 24,
+    "avg_det_score": 31.264537499999992,
+    "train_det_pass_rate": 0.0,
+    "best_genome_id": "genome_000",
+    "best_avg_det_score": 31.264537499999996,
+    "best_det_pass_rate": 0.0,
+    "best_fitness": -0.15000000000000002
+  },
+  {
+    "generation": 2,
+    "candidate_rows": 24,
+    "avg_det_score": 31.264537499999992,
+    "train_det_pass_rate": 0.0,
+    "best_genome_id": "genome_000",
+    "best_avg_det_score": 31.264537499999996,
+    "best_det_pass_rate": 0.0,
+    "best_fitness": -0.15000000000000002
+  }
+]

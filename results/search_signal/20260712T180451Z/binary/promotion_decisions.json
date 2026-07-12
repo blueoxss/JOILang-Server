@@ -1,0 +1,28 @@
+{
+  "decisions": [
+    {
+      "generation": 0,
+      "promoted_genome_id": "genome_000",
+      "reason": "highest_strict_det_fitness",
+      "avg_det_score": 31.264537499999996
+    },
+    {
+      "generation": 1,
+      "promoted_genome_id": "genome_000",
+      "reason": "highest_strict_det_fitness",
+      "avg_det_score": 31.264537499999996
+    },
+    {
+      "generation": 2,
+      "promoted_genome_id": "genome_000",
+      "reason": "highest_strict_det_fitness",
+      "avg_det_score": 31.264537499999996
+    }
+  ],
+  "final_best_genome_id": "genome_000",
+  "adoption_gate": {
+    "adopted": true,
+    "reject_reasons": [],
+    "epsilon_pp": 1.0
+  }
+}

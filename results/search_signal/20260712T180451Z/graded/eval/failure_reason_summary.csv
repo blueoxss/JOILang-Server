@@ -1,0 +1,9 @@
+﻿failure_reason,count
+period_mismatch,72
+gt_mismatch,72
+gt_service_coverage,72
+unknown_service,72
+gt_receiver_coverage,54
+enum_grounding,45
+numeric_grounding,36
+cron_mismatch,9

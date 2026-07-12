@@ -50,6 +50,33 @@ def _write_raw_response(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def package_for_row(rendered_package: dict[str, Any], row: dict[str, Any]) -> dict[str, Any]:
+    """행별 user 명령을 주입한 패키지 사본.
+
+    렌더는 CLI에서 첫 행 명령으로 1회만 수행되므로, 행마다 user 메시지를 교체하지
+    않으면 모든 행이 첫 행의 명령으로 생성된다(2026-07 실측 결함: 다중 행 실생성에서
+    8개 상이한 명령이 전부 동일 출력). 마지막 user 메시지를 해당 행 명령으로 바꾼다.
+    """
+    command = command_text(row)
+    if not command:
+        return rendered_package
+    package = json.loads(json.dumps(rendered_package, ensure_ascii=False))
+    messages = package.get("messages")
+    replaced = False
+    if isinstance(messages, list):
+        for message in reversed(messages):
+            if isinstance(message, dict) and message.get("role") == "user":
+                message["content"] = command
+                replaced = True
+                break
+        if not replaced:
+            messages.append({"role": "user", "content": command})
+            replaced = True
+    if not replaced or str(package.get("user_prompt") or "").strip():
+        package["user_prompt"] = command
+    return package
+
+
 def _write_prompt_logs(prompt_dir: Path, row_no: int, candidate_index: int, generation: int, rendered_package: dict[str, Any]) -> list[str]:
     prompt_dir.mkdir(parents=True, exist_ok=True)
     stem = f"row_{row_no}_cand_{candidate_index}_gen_{generation:03d}"
@@ -134,8 +161,9 @@ def generate_candidates_for_rows(
     service_context = build_service_context(service_schema=service_schema, service_context_mode=service_context_mode)
     extra_payload = llm_extra or {}
     for row_no, row in rows:
+        row_package = package_for_row(rendered_package, row)
         for candidate_index in range(max(1, candidate_k)):
-            prompt_log_paths = _write_prompt_logs(prompt_dir, row_no, candidate_index, generation, rendered_package)
+            prompt_log_paths = _write_prompt_logs(prompt_dir, row_no, candidate_index, generation, row_package)
             started = time.perf_counter()
             generation_error_type = ""
             generation_error_count = 0
@@ -166,7 +194,7 @@ def generate_candidates_for_rows(
                     try:
                         backend_response = call_llm_backend(
                             llm_mode=mode,
-                            rendered_package=rendered_package,
+                            rendered_package=row_package,
                             model_key=model_key,
                             endpoint=llm_endpoint,
                             timeout_sec=timeout_sec,
