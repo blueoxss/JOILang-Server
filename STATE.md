@@ -19,7 +19,7 @@
 |---|---|---|---|---|---|
 | WI-01 | 설정 실측화: manifest.json + 논문 가정 diff 표 | P0 | DONE | 266788a0 | (완료) 재생성: tools/build_settings_manifest.py |
 | WI-07 | 적합도 5항 정리 + 가중치 config 외부화 + 층화 표본기 | P0 | DONE | (wi-07 브랜치 머지) | (완료) γ항 실배선은 WI-05에서, --fitness-mode 배선은 WI-04c에서 |
-| WI-05 | 리플레이 search/holdout 분리 + ReplayFit 계산 신규 구현 | P0 | TODO | - | 리플레이 원천(usr_rag/admin_logs) 실측 후 replay_split.json 설계 |
+| WI-05 | 리플레이 search/holdout 분리 + ReplayFit 계산 신규 구현 | P0 | DONE | (wi-05 브랜치 머지) | (완료) 실측 30건→15/15. holdout 게이트 소비는 WI-06에서 |
 | WI-06 | 채택 게이트 3조건 하드 게이트 (레거시 regression_gate 이식+확장) | P0 | TODO | - | WI-05의 holdout 완성 후 착수 |
 | WI-16 | (신규) 정본 GA 엔진 논문 정합: elite 2·tournament 3·p_m 0.35·블록 교차·6연산 (레거시 ga_selection/ga_mutation 이식) | P0 | TODO | - | WI-07 config 체계 위에서 이식 |
 | WI-04 | S_DET 정합: 수식 문서 + 3후보 실측 추출 도구 + 이진vs등급 비교 모드 | P0 | TODO | - | (a) 문서는 즉시 가능, (c)는 WI-07 이후 |

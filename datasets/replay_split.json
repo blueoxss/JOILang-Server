@@ -1,0 +1,199 @@
+{
+  "schema": "ga_search.replay_split.v1",
+  "seed": 0,
+  "source": {
+    "dir": "/home/mgjeong/Desktop/llm/JOILang-Server/datasets/usr_rag",
+    "files": 26,
+    "total_rows": 33,
+    "unique_cases": 30,
+    "skipped": [],
+    "excluded_sources": [
+      "admin_logs/slack/*.jsonl — gt(확정 코드) 부재로 제외"
+    ],
+    "paper_note": "논문은 리플레이 60건(30/30)을 서술하나 실측 고유 사례는 이 수치임 — audit/assumptions_diff.md AS-02 참조"
+  },
+  "search": [
+    {
+      "command_kor": "먼저 모든 스위치를 끄고, 그 다음 임의의 스피커가 \"모든 불을 소등합니다.\"라고 알린다.",
+      "gt": "{\"name\": \"집안모든스위치끄고스피커알림\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Switch).off()\\n(#Speaker).speak(\\\"모든 불을 소등합니다.\\\")\"}",
+      "source_file": "sentence_best_code_log_9672545b-46b5-4433-8287-016f48463824.csv",
+      "replay_id": "replay_002"
+    },
+    {
+      "command_kor": "먼저 임의의 내방 에어컨 온도를 15도로 설정한다.",
+      "gt": "{\"name\": \"내방온도15도재설정\", \"cron\": \"\", \"period\": -1, \"code\": \"(#AirConditioner #myRoom).airConditionerMode_setTemperature(15)\"}",
+      "source_file": "sentence_best_code_log_05e499b6-2eab-4385-9056-56aca0551ee1.csv",
+      "replay_id": "replay_005"
+    },
+    {
+      "command_kor": "모든 방의 모든 조명을 끈다.",
+      "gt": "{\"name\": \"방안전등꺼기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light #방).switch_off()\"}",
+      "source_file": "sentence_best_code_log_ac506e7b-a91f-48ca-93e5-78bdd4c3a7c3.csv",
+      "replay_id": "replay_007"
+    },
+    {
+      "command_kor": "모든 사무실 조명을 켠다.",
+      "gt": "{\"name\": \"사무실조명켜기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light #Office).on()\"}",
+      "source_file": "sentence_best_code_log_06015698-5aeb-4509-a17b-597df8a6fe25.csv",
+      "replay_id": "replay_009"
+    },
+    {
+      "command_kor": "모든 스위치를 꺼라.",
+      "gt": "{\"name\": \"모든IoT스위치끄기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Switch).off()\"}",
+      "source_file": "sentence_best_code_log_61ab699f-f22c-461b-a5ae-41d2889b26e4.csv",
+      "replay_id": "replay_010"
+    },
+    {
+      "command_kor": "모든 스위치를 꺼라.",
+      "gt": "{\"name\": \"사무실스위치끄기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Switch).off()\"}",
+      "source_file": "sentence_best_code_log_06015698-5aeb-4509-a17b-597df8a6fe25.csv",
+      "replay_id": "replay_012"
+    },
+    {
+      "command_kor": "모든 스위치를 끈다.",
+      "gt": "{\"name\": \"스위치모두끄기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Switch).off()\"}",
+      "source_file": "sentence_best_code_log_9067b8e2-7790-4155-9cf8-da4945a65b28.csv",
+      "replay_id": "replay_013"
+    },
+    {
+      "command_kor": "모든 스위치를 켜라.",
+      "gt": "{\"name\": \"사용자모든스위치켜기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Switch).on()\"}",
+      "source_file": "sentence_best_code_log_8aea9c08-9ff6-4f87-8dd4-79719035da1b.csv",
+      "replay_id": "replay_014"
+    },
+    {
+      "command_kor": "모든 조명을 꺼라.",
+      "gt": "{\"name\": \"모든조명꺼기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light).switch_off()\"}",
+      "source_file": "sentence_best_code_log_9bc1103b-e497-4a21-8893-bcc61433fcbb.csv",
+      "replay_id": "replay_016"
+    },
+    {
+      "command_kor": "모든 조명을 끈다.",
+      "gt": "{\"name\": \"모든조명끄기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light).off()\"}",
+      "source_file": "sentence_best_code_log_77a174c0-cbf4-4090-b27c-b410d9e7b252.csv",
+      "replay_id": "replay_017"
+    },
+    {
+      "command_kor": "모든 조명을 켠다.",
+      "gt": "{\"name\": \"집안모든불켜기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light).on()\"}",
+      "source_file": "sentence_best_code_log_593de233-2e5d-47aa-9fd3-228ec396b164.csv",
+      "replay_id": "replay_023"
+    },
+    {
+      "command_kor": "모든 조명을 켠다.",
+      "gt": "{\"name\": \"집안모든조명켜기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light).on()\"}",
+      "source_file": "sentence_best_code_log_022252f6-afad-4c42-81cd-0a32f380f4b2.csv",
+      "replay_id": "replay_024"
+    },
+    {
+      "command_kor": "모든 조명의 색상을 흰색으로 변경한다.",
+      "gt": "{\"name\": \"모든조명하얀색변경\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light).colorControl_setColor(\\\"255|255|255\\\")\"}",
+      "source_file": "sentence_best_code_log_443e7bf0-864f-44c0-b6ae-15753edd4d88.csv",
+      "replay_id": "replay_025"
+    },
+    {
+      "command_kor": "임의의 에어컨 온도를 18도로 설정한다.",
+      "gt": "{\"name\": \"에어컨온도18도설정\", \"cron\": \"\", \"period\": -1, \"code\": \"(#AirConditioner).airConditionerMode_setTemperature(18)\"}",
+      "source_file": "sentence_best_code_log_9bc1103b-e497-4a21-8893-bcc61433fcbb.csv",
+      "replay_id": "replay_028"
+    },
+    {
+      "command_kor": "임의의 조명을 켠다.",
+      "gt": "{\"name\": \"임의조명켜기\", \"cron\": \"\", \"period\": -1, \"code\": \"(#Light).on()\"}",
+      "source_file": "sentence_best_code_log_f99c321c-94dd-4538-98af-860a6e4e487d.csv",
+      "replay_id": "replay_029"
+    }
+  ],
+  "holdout": [
+    {
+      "command_kor": "먼저 \"사무실 태그를 찾을 수 없습니다. 모든 조명을 켭니다.\"라고 안내한 후, 모든 조명을 켠다.",
+      "gt": "{\"name\": \"사무실조명켜기\", \"cron\": \"\", \"period\": -1, \"code\": \"(#Speaker).mediaPlayback_speak(\\\"Office tag not found. Turning on all lights.\\\")\\nall(#Light).switch_on()\"}",
+      "source_file": "sentence_best_code_log_c547e7cb-7ac5-4dc1-afed-4d88caa4ee4c.csv",
+      "replay_id": "replay_001"
+    },
+    {
+      "command_kor": "먼저 바깥 온도를 확인하고, 14.9도로 에어컨 온도를 설정한다.",
+      "gt": "{\"name\": \"사용자방온도샌프란시스코기준설정\", \"cron\": \"\", \"period\": -1, \"code\": \"temp = (#WeatherProvider).weatherProvider_temperatureWeather\\nadjustedTemp = 14.9\\n(#AirConditioner).airConditionerMode_setTemperature(adjustedTemp)\"}",
+      "source_file": "sentence_best_code_log_c5c67b15-ca63-4811-9556-1400a72caeb6.csv",
+      "replay_id": "replay_003"
+    },
+    {
+      "command_kor": "먼저 바깥 온도를 확인하고, 14.9도로 에어컨 온도를 설정한다.",
+      "gt": "{\"name\": \"사용자방온도샌프란시스코동기화\", \"cron\": \"\", \"period\": -1, \"code\": \"temp = (#WeatherProvider).weatherProvider_temperatureWeather\\nadjustedTemp = 14.9\\n(#AirConditioner).airConditionerMode_setTemperature(adjustedTemp)\"}",
+      "source_file": "sentence_best_code_log_c5c67b15-ca63-4811-9556-1400a72caeb6.csv",
+      "replay_id": "replay_004"
+    },
+    {
+      "command_kor": "먼저 임의의 에어컨을 켜고, 그 다음 냉방 모드로 설정하며, 이후 온도를 16도로 맞춘다.",
+      "gt": "{\"name\": \"에어컨최강세기설정\", \"cron\": \"\", \"period\": -1, \"code\": \"(#AirConditioner).switch_on()\\n(#AirConditioner).airConditionerMode_setAirConditionerMode(\\\"cool\\\")\\n(#AirConditioner).airConditionerMode_setTemperature(16.0)\"}",
+      "source_file": "sentence_best_code_log_9bc1103b-e497-4a21-8893-bcc61433fcbb.csv",
+      "replay_id": "replay_006"
+    },
+    {
+      "command_kor": "모든 사무실 조명을 끈다.",
+      "gt": "{\"name\": \"사무실조명끄기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light #Office).switch_off()\"}",
+      "source_file": "sentence_best_code_log_c547e7cb-7ac5-4dc1-afed-4d88caa4ee4c.csv",
+      "replay_id": "replay_008"
+    },
+    {
+      "command_kor": "모든 스위치를 꺼라.",
+      "gt": "{\"name\": \"모든스위치끄기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Switch).off()\"}",
+      "source_file": "sentence_best_code_log_427d36c3-3471-4fc6-83b6-c9a4cb953dd0.csv",
+      "replay_id": "replay_011"
+    },
+    {
+      "command_kor": "모든 조명을 꺼라.",
+      "gt": "{\"name\": \"모든전등끄기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light).off()\"}",
+      "source_file": "sentence_best_code_log_de4537a3-0368-4799-af7e-98ac8f4fefa6.csv",
+      "replay_id": "replay_015"
+    },
+    {
+      "command_kor": "모든 조명을 끈다.",
+      "gt": "{\"name\": \"사무실조명끄기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light).off()\"}",
+      "source_file": "sentence_best_code_log_1344d1c5-833e-43ea-a562-21b734c08e19.csv",
+      "replay_id": "replay_018"
+    },
+    {
+      "command_kor": "모든 조명을 끈다.",
+      "gt": "{\"name\": \"집안모든전구끄기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light).off()\"}",
+      "source_file": "sentence_best_code_log_88c69b04-c4c7-4926-8e54-3eeefad5bf34.csv",
+      "replay_id": "replay_019"
+    },
+    {
+      "command_kor": "모든 조명을 켜고, 그 다음 모든 스위치를 켠다.",
+      "gt": "{\"name\": \"사무실전등스위치켜기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light).on()\\nall(#Switch).on()\"}",
+      "source_file": "sentence_best_code_log_a5b8e57a-8750-48ed-a707-224961f32b62.csv",
+      "replay_id": "replay_020"
+    },
+    {
+      "command_kor": "모든 조명을 켜라.",
+      "gt": "{\"name\": \"모든전등켜기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light).on()\"}",
+      "source_file": "sentence_best_code_log_4980ba4e-3cfb-4e31-85ab-1c8ccc2c24c5.csv",
+      "replay_id": "replay_021"
+    },
+    {
+      "command_kor": "모든 조명을 켠다.",
+      "gt": "{\"name\": \"모든전등켜기\", \"cron\": \"\", \"period\": -1, \"code\": \"all(#Light).on()\"}",
+      "source_file": "sentence_best_code_log_cfaddbe7-30d9-4d4c-8c2d-9582a4b8544b.csv",
+      "replay_id": "replay_022"
+    },
+    {
+      "command_kor": "임의의 방 에어컨 온도를 15도로 설정한다.",
+      "gt": "{\"name\": \"내방온도15도설정\", \"cron\": \"\", \"period\": -1, \"code\": \"(#AirConditioner #Room).airConditionerMode_setTemperature(15)\"}",
+      "source_file": "sentence_best_code_log_05e499b6-2eab-4385-9056-56aca0551ee1.csv",
+      "replay_id": "replay_026"
+    },
+    {
+      "command_kor": "임의의 스위치를 켠다.",
+      "gt": "{\"name\": \"임의스위치켜기\", \"cron\": \"\", \"period\": -1, \"code\": \"(#Switch).on()\"}",
+      "source_file": "sentence_best_code_log_c528d302-9d83-407a-8a70-95e652f24632.csv",
+      "replay_id": "replay_027"
+    },
+    {
+      "command_kor": "전체 중 하나의 점유 센서가 감지되면 먼저 모든 스마트 플러그, 모든 스위치, 모든 조명을 켜고, 이후 점유 센서가 감지되지 않으면 15분 동안 대기하다가 모든 스위치를 끄고 반복을 종료한다.",
+      "gt": "{\"name\": \"사무실재실제어\", \"cron\": \"\", \"period\": 100, \"code\": \"triggered := false\\nabsenceTimer := 0\\npresence = any(#OccupancySensor).presence\\nif (presence == \\\"present\\\") {\\n    if (triggered == false) {\\n        all(#SmartPlug).on()\\n        all(#Switch).on()\\n        all(#Light).on()\\n        triggered = true\\n        absenceTimer = 0\\n    } else {\\n        absenceTimer = 0\\n    }\\n} else {\\n    absenceTimer = absenceTimer + 100\\n    if (absenceTimer >= 900000) {\\n        all(#Switch).off()\\n        triggered = false\\n        absenceTimer = 0\\n    }\\n}\"}",
+      "source_file": "sentence_best_code_log_d852827d-7ca6-43bf-9b24-78fc360f2d89.csv",
+      "replay_id": "replay_030"
+    }
+  ]
+}

@@ -103,6 +103,7 @@ def add_search_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--selection-mode", default="det_score")
     parser.add_argument("--fitness-mode", default="strict_det")
     parser.add_argument("--fitness-config", default="", help="적합도 가중치 config 경로 (기본: configs/ga_search_fitness.json)")
+    parser.add_argument("--replay-split", default="", help="리플레이 search/holdout 분할 파일 (datasets/replay_split.json). 지정 시 γ·ReplayFit_search 항 활성화")
     parser.add_argument("--mutation-mode", default="mock")
     parser.add_argument("--feedback-guided-mutation", action="store_true")
     parser.add_argument("--enable-compression-mutation", action="store_true")
@@ -410,6 +411,7 @@ def run_search(args: argparse.Namespace) -> int:
         feedback_guided_mutation=args.feedback_guided_mutation,
         compression_mutation=args.enable_compression_mutation,
         fitness_config=args.fitness_config or None,
+        replay_split=args.replay_split or None,
     )
     if patch_application_result:
         summary["patch_application"] = patch_application_result["report"]
