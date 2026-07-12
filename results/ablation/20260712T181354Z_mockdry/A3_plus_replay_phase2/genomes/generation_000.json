@@ -1,0 +1,30 @@
+[
+  {
+    "id": "patched_base_patched",
+    "blocks": [
+      "01",
+      "02",
+      "03",
+      "06"
+    ],
+    "params": {},
+    "block_params": {},
+    "seed": 0
+  },
+  {
+    "id": "genome_001",
+    "blocks": [
+      "01",
+      "02",
+      "03",
+      "06"
+    ],
+    "params": {
+      "candidate_strategies": [
+        "mock_gt_copy"
+      ]
+    },
+    "block_params": {},
+    "seed": 0
+  }
+]

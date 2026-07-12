@@ -1,0 +1,15 @@
+{
+  "created_at": "2026-07-12T18:13:22.352043+00:00",
+  "candidate_count": 1,
+  "search_mode": "monolith",
+  "advisor_mode": "none",
+  "candidates": [
+    {
+      "candidate_id": "candidate_000_base_prompt",
+      "path": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181321Z_mockdry/A0_no_search/candidates/candidate_000.json",
+      "source": "base_prompt",
+      "patch_refs": [],
+      "mutation_intent": "baseline"
+    }
+  ]
+}

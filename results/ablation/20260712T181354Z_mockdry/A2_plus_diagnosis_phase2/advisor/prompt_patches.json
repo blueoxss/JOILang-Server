@@ -1,0 +1,101 @@
+{
+  "advisor_meta": {
+    "created_at": "2026-07-12T18:13:56.068572+00:00",
+    "source": "ga_search_local_dry_run",
+    "schema_version": "prompt_advisor.v1",
+    "dry_run": true,
+    "advisor_mode": "local"
+  },
+  "compressed_feedback_summary": {
+    "row_count": 32,
+    "failure_count": 0,
+    "top_failure_reasons": [],
+    "top_cloud_failure_dimensions": [],
+    "available_diagnostics": false
+  },
+  "dynamic_criteria": {
+    "primary_signal": "strict DET",
+    "auxiliary_signal": "cloud semantic judge reasoning",
+    "micro_rule_policy": "minimal targeted mutations only"
+  },
+  "core_optional_decision": {
+    "hard_core": [
+      "Core_System",
+      "Service_Mapping",
+      "Output_Schema"
+    ],
+    "dynamic_core": [],
+    "optional": [],
+    "suppress_or_do_not_change": []
+  },
+  "prompt_patches": [],
+  "do_not_change": [
+    "Do not attach advisor_rich_feedback.json to final generation prompts.",
+    "Do not rewrite entire prompt blocks.",
+    "Do not treat cloud judge scores as official benchmark metrics."
+  ],
+  "iteration_audit": [
+    {
+      "cycle": 1,
+      "criteria_update": "Start from strict DET failures, concrete diagnostics, and minimal prompt mutation scope.",
+      "patch_review_summary": "Reject broad rewrites; keep only targeted micro-rules with evidence rows.",
+      "weak_patch_filter": "Mark one-row or cloud-only support as low confidence.",
+      "predicted_user_q": "Why is this patch applied to advisor/mutation rather than final generation prompt?",
+      "answer": "The advisor evidence is converted into micro-rule patches so final generation prompts stay controlled.",
+      "score": 90
+    },
+    {
+      "cycle": 2,
+      "criteria_update": "Tighten evidence threshold, token discipline, regression protection, and validation scope.",
+      "patch_review_summary": "Reject broad rewrites; keep only targeted micro-rules with evidence rows.",
+      "weak_patch_filter": "Mark one-row or cloud-only support as low confidence.",
+      "predicted_user_q": "If strict DET and cloud judge disagree, which one is trusted?",
+      "answer": "Strict DET is primary; cloud reasoning is auxiliary explanation only.",
+      "score": 92
+    },
+    {
+      "cycle": 3,
+      "criteria_update": "Tighten evidence threshold, token discipline, regression protection, and validation scope.",
+      "patch_review_summary": "Reject broad rewrites; keep only targeted micro-rules with evidence rows.",
+      "weak_patch_filter": "Mark one-row or cloud-only support as low confidence.",
+      "predicted_user_q": "Could this micro-rule damage v13's existing high performance?",
+      "answer": "Each patch carries regression risk and validation scope to protect passing behavior.",
+      "score": 94
+    },
+    {
+      "cycle": 4,
+      "criteria_update": "Tighten evidence threshold, token discipline, regression protection, and validation scope.",
+      "patch_review_summary": "Reject broad rewrites; keep only targeted micro-rules with evidence rows.",
+      "weak_patch_filter": "Mark one-row or cloud-only support as low confidence.",
+      "predicted_user_q": "Does this increase prompt tokens too much?",
+      "answer": "Token cost is labeled and high-cost patches are isolated from conservative candidates.",
+      "score": 96
+    },
+    {
+      "cycle": 5,
+      "criteria_update": "Tighten evidence threshold, token discipline, regression protection, and validation scope.",
+      "patch_review_summary": "Reject broad rewrites; keep only targeted micro-rules with evidence rows.",
+      "weak_patch_filter": "Mark one-row or cloud-only support as low confidence.",
+      "predicted_user_q": "Is this overfitting one row?",
+      "answer": "Single-row evidence is low confidence and should become optional or diversity-only.",
+      "score": 98
+    },
+    {
+      "cycle": 6,
+      "criteria_update": "Tighten evidence threshold, token discipline, regression protection, and validation scope.",
+      "patch_review_summary": "Reject broad rewrites; keep only targeted micro-rules with evidence rows.",
+      "weak_patch_filter": "Mark one-row or cloud-only support as low confidence.",
+      "predicted_user_q": "Should this be dynamic core or optional?",
+      "answer": "Repeated low-risk clusters can be dynamic core; narrower evidence stays optional.",
+      "score": 100
+    }
+  ],
+  "validation_plan": {
+    "primary": "Run strict DET on evidence rows, then full 280-row benchmark if improved.",
+    "secondary": "Run cloud semantic judges for explanation drift only."
+  },
+  "final_decision": {
+    "status": "ready_for_population_generation",
+    "reason": "Patches are scoped to genome micro-rules and optional block activation."
+  }
+}

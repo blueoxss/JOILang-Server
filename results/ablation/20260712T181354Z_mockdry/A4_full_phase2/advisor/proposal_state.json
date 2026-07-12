@@ -1,0 +1,9 @@
+{
+  "created_at": "2026-07-12T18:14:01.100375+00:00",
+  "accepted_proposal_count": 0,
+  "advisor_child_scheduled_count": 0,
+  "advisor_backed_diff_count": 0,
+  "prompt_patches_count": 0,
+  "mutation_population_candidate_count": 0,
+  "dry_run": true
+}

@@ -1,0 +1,33 @@
+{
+  "advisor_mode": "local",
+  "created_at": "2026-07-12T18:13:56.068281+00:00",
+  "source_files": {
+    "local_det_report": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis/local_det_failure_report.json",
+    "strict_results_dir": ""
+  },
+  "primary_signal": "strict_det",
+  "official_score_policy": {
+    "primary_metric": "strict_det",
+    "cloud_is_auxiliary": true,
+    "cloud_score_is_official": false
+  },
+  "mode_description": {
+    "advisor_mode": "local",
+    "primary_signal": "strict_det",
+    "cloud_is_auxiliary": true,
+    "api_required": false,
+    "description": "Use local strict DET failure report as deterministic advisor evidence.",
+    "required_inputs": [
+      "local_det_report or strict_results_dir/local_det_failure_report.json"
+    ]
+  },
+  "global_summary": {
+    "row_count": 32,
+    "failure_count": 0,
+    "top_failure_reasons": [],
+    "top_cloud_failure_dimensions": [],
+    "available_diagnostics": false
+  },
+  "failure_clusters": [],
+  "high_priority_rows": []
+}

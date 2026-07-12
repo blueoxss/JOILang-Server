@@ -1,0 +1,6 @@
+﻿variant,det_pass_rate,avg_det_score,avg_total_tokens,replay_fit_search,holdout_replay_fit,critical_regressions,regressed_subsets,notes
+A0_no_search,1.0,100.0,0.0,,,0,,baseline
+A1_plain_ga,1.0,100.0,0.0,,,0,,일반 GA (advisor·replay 없음)
+A2_plus_diagnosis,1.0,100.0,0.0,,,0,,A1 + 진단 변이(탐색→advisor 패치→재주입 탐색) (patch 재주입 2단계 실행)
+A3_plus_replay,1.0,100.0,0.0,1.0,1.0,0,,A2 + 리플레이 항 (patch 재주입 2단계 실행)
+A4_full,1.0,100.0,0.0,1.0,1.0,0,,전체 파이프라인(게이트 포함) — 동일 코드 경로 (patch 재주입 2단계 실행) | adopted=True

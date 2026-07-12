@@ -1,0 +1,126 @@
+{
+  "created_at": "2026-07-12T18:13:55.932529+00:00",
+  "artifact_schema": "ga_search.foundation.v1",
+  "run_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis",
+  "search_mode": "monolith",
+  "advisor_mode": "none",
+  "model_render_mode": "monolith",
+  "official_score_policy": {
+    "primary_metric": "strict_det",
+    "cloud_is_auxiliary": true
+  },
+  "artifacts": {
+    "rendered_base_prompt": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis/rendered_base_prompt.md",
+    "render_metadata": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis/render_metadata.json",
+    "search_input": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis/search_input.json",
+    "decomposed_blocks": "",
+    "advisor_dir": "",
+    "candidates_manifest": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis/candidates/candidates_manifest.json"
+  },
+  "advisor_summary": {},
+  "candidate_summary": {
+    "created_at": "2026-07-12T18:13:55.929610+00:00",
+    "candidate_count": 1,
+    "search_mode": "monolith",
+    "advisor_mode": "none",
+    "candidates": [
+      {
+        "candidate_id": "candidate_000_base_prompt",
+        "path": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis/candidates/candidate_000.json",
+        "source": "base_prompt",
+        "patch_refs": [],
+        "mutation_intent": "baseline"
+      }
+    ]
+  },
+  "ga_summary": {
+    "run_id": "A2_plus_diagnosis",
+    "model_id": "gpt_mg.version0_13",
+    "model_package_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13",
+    "model_key": "",
+    "search_mode": "monolith",
+    "ga_engine_mode": "real_generation_skeleton",
+    "requested_engine_mode": "real",
+    "llm_mode": "mock",
+    "official_metric": "strict_det",
+    "ground_truth_column": "gt",
+    "rows": 8,
+    "best_DETPass": 1.0,
+    "best_avg_DET": 100.0,
+    "best_avg_prompt_tokens": 0.0,
+    "fitness_config": {
+      "path": "/home/mgjeong/Desktop/llm/JOILang-Server/configs/ga_search_fitness.json",
+      "weights": {
+        "alpha_detpass": 0.5,
+        "beta_sdet": 0.15,
+        "gamma_replayfit": 0.2,
+        "lambda_tokens": 0.1,
+        "lambda_latency": 0.05
+      },
+      "normalization": {
+        "sdet_scale": 100.0,
+        "tokens_ref": 4096,
+        "latency_ref_sec": 5.0
+      },
+      "mode": "strict_det"
+    },
+    "ga_budget": {
+      "population": 2,
+      "gens": 2,
+      "elite": 2,
+      "tournament": 3,
+      "p_mutation": 0.35,
+      "budget_config_path": "/home/mgjeong/Desktop/llm/JOILang-Server/configs/ga_search_budget.json"
+    },
+    "replay": null,
+    "adoption_gate": {
+      "adopted": true,
+      "baseline_missing": true,
+      "epsilon_pp": 1.0,
+      "checks": [],
+      "reject_reasons": [],
+      "note": "baseline 부재 — 첫 채택으로 간주하고 게이트 공허 통과",
+      "candidate_metrics": {
+        "overall_detpass": 1.0,
+        "subset_detpass": {
+          "basic": 1.0,
+          "temporal": 1.0,
+          "complex": 1.0
+        },
+        "holdout_replay_fit": null
+      },
+      "baseline_source": null,
+      "best_genome_id": "genome_001"
+    },
+    "generation_error_rate": 0.0,
+    "stop_reason": "completed_requested_generations",
+    "best_history": [
+      {
+        "generation": 0,
+        "candidate_rows": 16,
+        "avg_det_score": 100.0,
+        "train_det_pass_rate": 1.0,
+        "best_genome_id": "genome_001",
+        "best_avg_det_score": 100.0,
+        "best_det_pass_rate": 1.0,
+        "best_fitness": 0.64999970625
+      },
+      {
+        "generation": 1,
+        "candidate_rows": 16,
+        "avg_det_score": 100.0,
+        "train_det_pass_rate": 1.0,
+        "best_genome_id": "genome_001",
+        "best_avg_det_score": 100.0,
+        "best_det_pass_rate": 1.0,
+        "best_fitness": 0.64999971
+      }
+    ],
+    "cloud_is_auxiliary": true,
+    "known_limitations": [
+      "real engine evaluates genomes with strict DET and records selection/crossover/mutation artifacts",
+      "O(블록 순서)·V(블록 버전)·E(예제 수) 유전자는 연산·기록만 되고 렌더러 반영은 WI-09 범위",
+      "pareto archive and compression mutation policies are hooks, not full legacy parity"
+    ]
+  }
+}

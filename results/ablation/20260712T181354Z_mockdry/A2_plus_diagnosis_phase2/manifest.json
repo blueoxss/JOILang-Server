@@ -1,0 +1,76 @@
+{
+  "created_at": "2026-07-12T18:13:56.526877+00:00",
+  "artifact_schema": "ga_search.foundation.v1",
+  "run_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis_phase2",
+  "search_mode": "monolith",
+  "advisor_mode": "none",
+  "model_render_mode": "monolith",
+  "official_score_policy": {
+    "primary_metric": "strict_det",
+    "cloud_is_auxiliary": true
+  },
+  "artifacts": {
+    "rendered_base_prompt": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis_phase2/rendered_base_prompt.md",
+    "render_metadata": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis_phase2/render_metadata.json",
+    "search_input": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis_phase2/search_input.json",
+    "decomposed_blocks": "",
+    "advisor_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis_phase2/advisor",
+    "candidates_manifest": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis_phase2/candidates/candidates_manifest.json"
+  },
+  "advisor_summary": {
+    "advisor_mode": "none",
+    "advisor_dir": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis_phase2/advisor",
+    "dry_run": true,
+    "evidence_packet": {
+      "advisor_mode": "none",
+      "created_at": "2026-07-12T18:13:56.522101+00:00",
+      "source_files": {},
+      "primary_signal": "base_prompt",
+      "official_score_policy": {
+        "primary_metric": "strict_det",
+        "cloud_is_auxiliary": true,
+        "cloud_score_is_official": false
+      },
+      "mode_description": {
+        "advisor_mode": "none",
+        "primary_signal": "base_prompt",
+        "cloud_is_auxiliary": true,
+        "api_required": false,
+        "description": "No advisor feedback is attached; only base search input artifacts are produced.",
+        "required_inputs": []
+      },
+      "global_summary": {},
+      "failure_clusters": [],
+      "high_priority_rows": []
+    },
+    "prompt_patches_path": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis_phase2/advisor/prompt_patches.json",
+    "mutation_population_path": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis_phase2/advisor/mutation_population.json",
+    "candidate_records": [],
+    "summary": {
+      "evidence_rows": 0,
+      "failure_clusters": 0,
+      "prompt_patches": 0,
+      "population_candidates": 0,
+      "accepted_proposal_count": 0,
+      "advisor_child_scheduled_count": 0,
+      "advisor_backed_diff_count": 0,
+      "primary_signal": "base_prompt",
+      "cloud_is_auxiliary": true
+    }
+  },
+  "candidate_summary": {
+    "created_at": "2026-07-12T18:13:56.523901+00:00",
+    "candidate_count": 1,
+    "search_mode": "monolith",
+    "advisor_mode": "none",
+    "candidates": [
+      {
+        "candidate_id": "candidate_000_base_prompt",
+        "path": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis_phase2/candidates/candidate_000.json",
+        "source": "base_prompt",
+        "patch_refs": [],
+        "mutation_intent": "baseline"
+      }
+    ]
+  }
+}

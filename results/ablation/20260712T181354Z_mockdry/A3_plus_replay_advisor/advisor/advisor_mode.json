@@ -1,0 +1,10 @@
+{
+  "advisor_mode": "local",
+  "primary_signal": "strict_det",
+  "cloud_is_auxiliary": true,
+  "api_required": false,
+  "description": "Use local strict DET failure report as deterministic advisor evidence.",
+  "required_inputs": [
+    "local_det_report or strict_results_dir/local_det_failure_report.json"
+  ]
+}
