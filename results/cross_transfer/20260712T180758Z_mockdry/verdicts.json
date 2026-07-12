@@ -1,0 +1,67 @@
+{
+  "argmax_by_target": {
+    "Q7": {
+      "argmax_prompt": "P_Q7",
+      "diagonal_prompt": "P_Q7",
+      "diagonal_is_argmax": true,
+      "column": {
+        "P_Q7": 1.0,
+        "P_L8": 1.0,
+        "P_Q14": 1.0
+      }
+    },
+    "L8": {
+      "argmax_prompt": "P_Q7",
+      "diagonal_prompt": "P_L8",
+      "diagonal_is_argmax": false,
+      "column": {
+        "P_Q7": 1.0,
+        "P_L8": 1.0,
+        "P_Q14": 1.0
+      }
+    },
+    "Q14": {
+      "argmax_prompt": "P_Q7",
+      "diagonal_prompt": "P_Q14",
+      "diagonal_is_argmax": false,
+      "column": {
+        "P_Q7": 1.0,
+        "P_L8": 1.0,
+        "P_Q14": 1.0
+      }
+    }
+  },
+  "anchor_checks": [
+    {
+      "cell": "P_Q7×Q7",
+      "status": "SKIPPED",
+      "diagnosis": "provenance=PLACEHOLDER_base_prompt — 논문 예산 GA 산출물이 아니므로 앵커 비교는 무의미(수치 조작 금지 원칙)"
+    },
+    {
+      "cell": "P_L8×L8",
+      "status": "SKIPPED",
+      "diagnosis": "provenance=PLACEHOLDER_base_prompt — 논문 예산 GA 산출물이 아니므로 앵커 비교는 무의미(수치 조작 금지 원칙)"
+    },
+    {
+      "cell": "P_Q14×Q14",
+      "status": "SKIPPED",
+      "diagnosis": "provenance=PLACEHOLDER_base_prompt — 논문 예산 GA 산출물이 아니므로 앵커 비교는 무의미(수치 조작 금지 원칙)"
+    },
+    {
+      "cell": "DT×Q7",
+      "status": "SKIPPED",
+      "diagnosis": "provenance=cloud_authored_base_prompt — 논문 예산 GA 산출물이 아니므로 앵커 비교는 무의미(수치 조작 금지 원칙)"
+    },
+    {
+      "cell": "DT×L8",
+      "status": "SKIPPED",
+      "diagnosis": "provenance=cloud_authored_base_prompt — 논문 예산 GA 산출물이 아니므로 앵커 비교는 무의미(수치 조작 금지 원칙)"
+    },
+    {
+      "cell": "DT×Q14",
+      "status": "SKIPPED",
+      "diagnosis": "provenance=cloud_authored_base_prompt — 논문 예산 GA 산출물이 아니므로 앵커 비교는 무의미(수치 조작 금지 원칙)"
+    }
+  ],
+  "notes": []
+}

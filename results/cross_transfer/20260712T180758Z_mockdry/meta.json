@@ -1,0 +1,59 @@
+{
+  "args": {
+    "config": "configs/cross_transfer_q7_l8_q14.json",
+    "dataset": "datasets/JOICommands-280.csv",
+    "service_schema": "datasets/service_list_ver2.0.1.json",
+    "llm_mode": "mock",
+    "stratify_per_category": 1,
+    "seed": 0,
+    "det_threshold": 70.0,
+    "candidate_k": 1,
+    "timestamp": "20260712T180758Z_mockdry",
+    "out_root": "/home/mgjeong/Desktop/llm/JOILang-Server/results/cross_transfer",
+    "code_root": ""
+  },
+  "config": {
+    "schema": "ga_search.cross_transfer.v1",
+    "_doc": "교차 전이 3×3 구성. genome_json 이 null 이면 해당 모델의 GA 승격 산출물이 아직 없다는 뜻이며(감사 C-23), provenance 를 PLACEHOLDER 로 명시한다. 논문 예산 GA 3회 실행 후 각 best_genome.json 경로로 교체하고 provenance 를 paper_grade 로 바꿀 것 — 그 전에는 앵커 검증이 SKIPPED 로 기록된다.",
+    "dt_model_package": "gpt_mg.version0_13",
+    "dt_provenance": "cloud_authored_base_prompt",
+    "prompts": [
+      {
+        "id": "P_Q7",
+        "source_target_label": "Q7",
+        "model_package": "gpt_mg.version0_13",
+        "genome_json": null,
+        "provenance": "PLACEHOLDER_base_prompt"
+      },
+      {
+        "id": "P_L8",
+        "source_target_label": "L8",
+        "model_package": "gpt_mg.version0_13",
+        "genome_json": null,
+        "provenance": "PLACEHOLDER_base_prompt"
+      },
+      {
+        "id": "P_Q14",
+        "source_target_label": "Q14",
+        "model_package": "gpt_mg.version0_13",
+        "genome_json": null,
+        "provenance": "PLACEHOLDER_base_prompt"
+      }
+    ],
+    "targets": [
+      {
+        "key": "qwen25_coder_7b",
+        "label": "Q7"
+      },
+      {
+        "key": "llama31_8b",
+        "label": "L8"
+      },
+      {
+        "key": "qwen25_coder_14b",
+        "label": "Q14"
+      }
+    ]
+  },
+  "timestamp": "20260712T180758Z_mockdry"
+}
