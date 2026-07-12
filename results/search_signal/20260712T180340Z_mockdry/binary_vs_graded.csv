@@ -1,0 +1,5 @@
+﻿mode,generation,best_det_pass_rate,best_avg_det_score,best_fitness
+graded,0,1.0,100.0,0.64999969375
+graded,1,1.0,100.0,0.6499996975
+binary,0,1.0,100.0,0.4999996925
+binary,1,1.0,100.0,0.49999968875

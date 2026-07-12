@@ -242,6 +242,7 @@ def run_search(
     tournament: int | None = None,
     p_mutation: float | None = None,
     budget_config: str | Path | None = None,
+    fitness_mode: str = "graded",
 ) -> dict[str, Any]:
     requested_engine_mode = str(engine_mode or "auto").lower()
     if requested_engine_mode == "mock" or (requested_engine_mode == "auto" and llm_mode == "mock"):
@@ -358,6 +359,7 @@ def run_search(
             eval_rows,
             config=fitness_config_loaded,
             replay_fit_by_genome=replay_fit_by_genome or None,
+            mode=fitness_mode,
         )
         generation_best = genome_scores[0] if genome_scores else {"genome_id": "", "avg_det_score": 0.0, "det_pass_rate": 0.0, "fitness": 0.0}
         if float(generation_best.get("fitness") or 0.0) > best_score:
@@ -372,6 +374,7 @@ def run_search(
             "train_det_pass_rate": sum(1 for row in eval_rows if row.get("det_pass")) / len(eval_rows) if eval_rows else 0.0,
             "best_genome_id": generation_best.get("genome_id", ""),
             "best_avg_det_score": generation_best.get("avg_det_score", 0.0),
+            "best_det_pass_rate": generation_best.get("det_pass_rate", 0.0),
             "best_fitness": generation_best.get("fitness", 0.0),
         }
         progress_rows.append(progress)
@@ -453,7 +456,7 @@ def run_search(
     _write_rows_csv(
         root / "ga_generation_progress.csv",
         progress_rows,
-        ["generation", "candidate_rows", "avg_det_score", "train_det_pass_rate", "best_genome_id", "best_avg_det_score", "best_fitness"],
+        ["generation", "candidate_rows", "avg_det_score", "train_det_pass_rate", "best_genome_id", "best_avg_det_score", "best_det_pass_rate", "best_fitness"],
     )
     _write_rows_csv(root / "promotion_decisions.csv", promotion_rows, ["generation", "promoted_genome_id", "reason", "avg_det_score"])
     _write_json(
@@ -495,6 +498,7 @@ def run_search(
             "path": fitness_config_loaded.get("_config_path"),
             "weights": fitness_config_loaded.get("weights"),
             "normalization": fitness_config_loaded.get("normalization"),
+            "mode": fitness_mode,
         },
         "ga_budget": {
             "population": population,
