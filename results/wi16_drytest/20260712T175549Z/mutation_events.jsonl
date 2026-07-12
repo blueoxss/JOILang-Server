@@ -1,0 +1,4 @@
+{"generation": 1, "parent_ids": ["genome_003", "genome_002"], "child_id": "x_genome_003_genome_002_g001_c000", "crossover_type": "block_uniform", "details": {"blocks": ["01", "02", "03", "06"]}}
+{"generation": 1, "parent_ids": ["genome_003", "genome_003"], "child_id": "x_genome_003_genome_003_g001_c001", "crossover_type": "block_uniform", "details": {"blocks": ["01", "02", "03", "06"]}}
+{"generation": 2, "parent_ids": ["x_genome_003_genome_003_g001_c001", "x_genome_003_genome_003_g001_c001"], "child_id": "x_x_genome_003_genome_003_g001_c001_x_genome_003_genome_003_g001_c001_g002_c000", "crossover_type": "block_uniform", "details": {"blocks": ["01", "02", "03", "06"]}}
+{"generation": 2, "parent_ids": ["genome_003", "genome_003"], "child_id": "x_genome_003_genome_003_g002_c001", "crossover_type": "block_uniform", "details": {"blocks": ["01", "02", "03", "06"]}}

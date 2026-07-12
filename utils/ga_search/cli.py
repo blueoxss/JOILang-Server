@@ -106,6 +106,10 @@ def add_search_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--replay-split", default="", help="리플레이 search/holdout 분할 파일 (datasets/replay_split.json). 지정 시 γ·ReplayFit_search 항 활성화")
     parser.add_argument("--gate-config", default="", help="채택 게이트 config (기본: configs/ga_search_gate.json)")
     parser.add_argument("--gate-baseline", default="", help="기존 채택본 지표 JSON (overall_detpass/subset_detpass/holdout_replay_fit). 미지정 시 첫 채택으로 간주")
+    parser.add_argument("--budget-config", default="", help="GA 예산 config (기본: configs/ga_search_budget.json — elite/tournament/p_m)")
+    parser.add_argument("--elite", type=int, default=None)
+    parser.add_argument("--tournament", type=int, default=None)
+    parser.add_argument("--p-mutation", type=float, default=None)
     parser.add_argument("--mutation-mode", default="mock")
     parser.add_argument("--feedback-guided-mutation", action="store_true")
     parser.add_argument("--enable-compression-mutation", action="store_true")
@@ -416,6 +420,10 @@ def run_search(args: argparse.Namespace) -> int:
         replay_split=args.replay_split or None,
         gate_config=args.gate_config or None,
         gate_baseline=args.gate_baseline or None,
+        elite=args.elite,
+        tournament=args.tournament,
+        p_mutation=args.p_mutation,
+        budget_config=args.budget_config or None,
     )
     if patch_application_result:
         summary["patch_application"] = patch_application_result["report"]

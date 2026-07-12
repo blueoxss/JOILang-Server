@@ -1,0 +1,9 @@
+{
+  "schema": "ga_search.budget.v1",
+  "_doc": "논문 GA 예산(C-10): pop 10 / gen 12 / elite 2 / tournament 3 / p_m 0.35. CLI 명시 인자가 이 config 를 덮어쓴다. 스모크·드라이런은 CLI에서 작은 값을 명시해 사용.",
+  "population": 10,
+  "generations": 12,
+  "elite": 2,
+  "tournament": 3,
+  "p_mutation": 0.35
+}
