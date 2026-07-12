@@ -1,0 +1,52 @@
+{
+  "llm_mode": "worker",
+  "candidate": {
+    "name": "",
+    "cron": "",
+    "period": 0,
+    "code": ""
+  },
+  "generation_error_type": "worker_crash",
+  "backend_response": {
+    "content": "",
+    "usage": {
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0
+    },
+    "latency_sec": 13.655796,
+    "peak_vram_gb": "",
+    "raw": {
+      "ok": false,
+      "error": "Using a `device_map` or `tp_plan` requires `accelerate`. You can install it with `pip install accelerate`",
+      "error_type": "worker_crash",
+      "oom_flag": false,
+      "traceback": "Traceback (most recent call last):\n  File \"/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13/qwen_local_worker.py\", line 276, in main\n    model = AutoModelForCausalLM.from_pretrained(local_model_name, **model_kwargs)\n  File \"/home/mgjeong/miniconda3/envs/sg/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py\", line 571, in from_pretrained\n    return model_class.from_pretrained(\n  File \"/home/mgjeong/miniconda3/envs/sg/lib/python3.9/site-packages/transformers/modeling_utils.py\", line 279, in _wrapper\n    return func(*args, **kwargs)\n  File \"/home/mgjeong/miniconda3/envs/sg/lib/python3.9/site-packages/transformers/modeling_utils.py\", line 4139, in from_pretrained\n    raise ValueError(\nValueError: Using a `device_map` or `tp_plan` requires `accelerate`. You can install it with `pip install accelerate`\n"
+    },
+    "backend": "worker",
+    "error": "Using a `device_map` or `tp_plan` requires `accelerate`. You can install it with `pip install accelerate`",
+    "error_type": "worker_crash"
+  },
+  "repair": {
+    "ok": false,
+    "candidate": {
+      "name": "",
+      "cron": "",
+      "period": 0,
+      "code": ""
+    },
+    "error_type": "worker_crash",
+    "repair_applied": false,
+    "repair_actions": [],
+    "error": "Using a `device_map` or `tp_plan` requires `accelerate`. You can install it with `pip install accelerate`"
+  },
+  "service_context": {
+    "service_schema_path": "datasets/service_list_ver2.0.1.json",
+    "service_context_mode": "schema_fallback",
+    "service_context_source": "provided_schema",
+    "service_list_retrieval_scores": {
+      "status": "retrieval_disabled",
+      "reason": "canonical ga_search has not enabled service retrieval yet"
+    }
+  }
+}

@@ -6,16 +6,19 @@
 - 판정 분포: IMPLEMENTED 3 / PARTIAL 9 / MISSING 4 / CONTRADICTS_PAPER 8 (상세는 audit/)
 
 ## 환경 메모
-- conda env `sg` (Python 3.9.21). pytest 설치 여부: 세션 1에서 설치 예정/완료 — 실측 확인할 것.
-- GPU/로컬 모델 가용성: 세션 1 프로브 결과를 이 파일에 기록 (아래 BLOCKED 판단 근거).
+- conda env `sg` (Python 3.9.21). pytest 8.4.2, accelerate 1.10.1 설치 완료(세션 1).
+- GPU: RTX A6000 48GB ×2. HF 캐시에 Qwen2.5-Coder-7B/14B, Llama-3.1-8B, gemma-2-9b, Phi-3.5 존재.
+  7-6 프로브 성공: worker 모드 Qwen7B 1건 생성(RC=0, results/phase1_worker_probe/20260712T172618Z).
+  → GPU 실행형 WI(02/03/04c) UNBLOCKED.
+- 결함 메모: worker 백엔드가 usage 토큰을 0으로 보고 → 적합도 토큰 항 실효 없음(WI-07에서 처리).
 - heredoc + `conda run` 조합은 stdin이 전달되지 않음 — 스크립트 파일로 실행할 것.
 
 ## 백로그
 
 | WI | 내용 | 우선 | 상태 | 마지막 커밋 | 다음 행동 |
 |---|---|---|---|---|---|
-| WI-01 | 설정 실측화: manifest.json + 논문 가정 diff 표 | P0 | DOING | - | terrain 실측표를 audit/manifest.json으로 정식화 |
-| WI-07 | 적합도 5항 정리 + 가중치 config 외부화 + 층화 표본기 | P0 | TODO | - | fitness config 스키마 설계 → 테스트 먼저 |
+| WI-01 | 설정 실측화: manifest.json + 논문 가정 diff 표 | P0 | DONE | 266788a0 | (완료) 재생성: tools/build_settings_manifest.py |
+| WI-07 | 적합도 5항 정리 + 가중치 config 외부화 + 층화 표본기 | P0 | DOING | - | fitness config 스키마 설계 → 테스트 먼저. worker 토큰 0 보고 결함 포함 처리 |
 | WI-05 | 리플레이 search/holdout 분리 + ReplayFit 계산 신규 구현 | P0 | TODO | - | 리플레이 원천(usr_rag/admin_logs) 실측 후 replay_split.json 설계 |
 | WI-06 | 채택 게이트 3조건 하드 게이트 (레거시 regression_gate 이식+확장) | P0 | TODO | - | WI-05의 holdout 완성 후 착수 |
 | WI-16 | (신규) 정본 GA 엔진 논문 정합: elite 2·tournament 3·p_m 0.35·블록 교차·6연산 (레거시 ga_selection/ga_mutation 이식) | P0 | TODO | - | WI-07 config 체계 위에서 이식 |

@@ -1,0 +1,200 @@
+{
+  "generated_by": "tools/build_settings_manifest.py",
+  "source_commit": "d82db4c7",
+  "datasets": {
+    "benchmark": {
+      "path": "datasets/JOICommands-280.csv",
+      "rows": 280,
+      "columns": [
+        "index",
+        "category",
+        "command_kor",
+        "command_eng",
+        "connected_devices",
+        "gt"
+      ],
+      "category_distribution": {
+        "1": 30,
+        "2": 30,
+        "3": 30,
+        "4": 30,
+        "5": 30,
+        "6": 30,
+        "7": 50,
+        "8": 50
+      },
+      "n_categories": 8,
+      "note": "cat1~6 각 30건(합 180) + cat7 50건 + cat8 50건. 논문의 180/60/40 분할 매니페스트는 부재."
+    },
+    "replay_sources": {
+      "usr_rag_files": 26,
+      "usr_rag_rows": 33,
+      "usr_rag_columns": [
+        "sentence",
+        "best_code"
+      ],
+      "admin_log_files": [
+        "admin_logs/slack/2026-04-13.jsonl"
+      ],
+      "admin_log_rows": 1,
+      "replayfit_computation": "ABSENT — 정본 런타임에 리플레이 재해결율 계산 경로 없음 (audit C-05/C-14)"
+    },
+    "stress": {
+      "status": "NOT_FOUND",
+      "hits": []
+    }
+  },
+  "ga_budget": {
+    "canonical_cli_defaults": {
+      "population": 2,
+      "generations": 1,
+      "sources": [
+        "utils/ga_search/cli.py:98",
+        "utils/ga_search/cli.py:99"
+      ]
+    },
+    "canonical_engine_behavior": {
+      "elite": "1 고정 (ga_engine.py:369 — 최고 유전형 1개 복제)",
+      "tournament": "없음 — 상위 min(3,len) 중 rng.choice (ga_engine.py:371)",
+      "p_mutation": "비엘리트 자식 100% 변이 (ga_engine.py:372)",
+      "crossover": "없음 — 변이 4종만 (audit C-11)"
+    },
+    "check_script_full_mode": {
+      "population": 2,
+      "source": "run_ga_search_check.sh:101"
+    },
+    "legacy_backup_defaults": {
+      "population": 20,
+      "generations": 30,
+      "elites": 2,
+      "sources": [
+        "gpt_mg/version0_15_update20260413/scripts/run_ga_search.py:251",
+        "gpt_mg/version0_15_update20260413/scripts/run_ga_search.py:252",
+        "gpt_mg/version0_15_update20260413/scripts/run_ga_search.py:255"
+      ]
+    }
+  },
+  "fitness": {
+    "canonical": {
+      "formula": "avg_det + 10.0 * pass_rate + 5.0 * exact_rate - 0.0001 * prompt_tokens - 0.01 * latency",
+      "hardcoded": true,
+      "source": "utils/ga_search/rerank.py:61",
+      "terms_vs_paper": "ReplayFit 항 부재, 논문에 없는 gt_exact_rate 항 존재, 토큰/지연 비정규화",
+      "token_cost_caveat": "worker 백엔드가 usage 토큰을 0으로 보고(프로브 실측) — 토큰 항이 실효 없음"
+    },
+    "paper_assumption": {
+      "formula": "α·DETPass + β·S_DET + γ·ReplayFit_search − λt·Tok̂ − λl·Lat̂",
+      "weights": [
+        0.5,
+        0.15,
+        0.2,
+        0.1,
+        0.05
+      ],
+      "externalized_config": true
+    }
+  },
+  "det": {
+    "threshold": 70.0,
+    "threshold_source": "utils/det_evaluator.py:124",
+    "paper_threshold_claim": 0.8,
+    "sdet_component_weights": {
+      "code_sim": 0.3,
+      "schedule": 0.15,
+      "service_coverage": 0.15,
+      "service_precision": 0.1,
+      "receiver_coverage": 0.1,
+      "numeric_grounding": 0.1,
+      "enum_grounding": 0.05,
+      "dataflow": 0.05
+    },
+    "sdet_scale": "0~100 (×100)",
+    "fatal_zero_rules": [
+      "invalid_json",
+      "missing_official_gt"
+    ],
+    "note": "논문의 '1−정규화 구조 편집거리'가 아니라 8성분 가중합 (audit C-03)"
+  },
+  "serving": {
+    "vllm_present": false,
+    "actual_backends": {
+      "worker": "HF transformers subprocess (utils/ga_search/local_worker.py; greedy decoding)",
+      "local": "OpenAI 호환 HTTP (기본 http://127.0.0.1:8000/v1/chat/completions)",
+      "openai": "OpenAI SDK (gpt-4.1-mini 기본)"
+    },
+    "max_model_len": "NOT_FOUND",
+    "max_model_len_search": "grep -rn max_model_len 전역 0건 (audit C-19)",
+    "local_max_new_tokens": {
+      "local_worker_default": 256,
+      "local_worker_source": "utils/ga_search/local_worker.py:239",
+      "registry_default": 512,
+      "registry_source": "utils/ga_search/local_model_registry.py:113"
+    },
+    "local_models_available": [
+      "qwen25_coder_7b",
+      "llama31_8b",
+      "qwen25_coder_14b",
+      "gemma2_9b_it",
+      "phi35_mini"
+    ],
+    "gpu_probe": "2×RTX A6000 48GB; worker 모드 Qwen7B 1건 생성 성공 (results/phase1_worker_probe/)"
+  },
+  "assumptions_diff": [
+    {
+      "id": "AS-01",
+      "paper": "벤치마크 N=180",
+      "measured": "정본 CSV 280행(8범주). cat1~6 합계 180으로 분할 설계 가능하나 분할 매니페스트 부재",
+      "status": "MISMATCH",
+      "mapped_wi": "WI-01/WI-05"
+    },
+    {
+      "id": "AS-02",
+      "paper": "리플레이 60건 (탐색 30 / 보류 30)",
+      "measured": "ReplayFit 계산 경로 자체 부재. 실사용 리플레이 원천: usr_rag 33행 + admin 로그 1건",
+      "status": "ABSENT",
+      "mapped_wi": "WI-05"
+    },
+    {
+      "id": "AS-03",
+      "paper": "스트레스 40건",
+      "measured": "스트레스 셋 전역 부재 (find/grep 0건)",
+      "status": "ABSENT",
+      "mapped_wi": "WI-01 후속(스트레스 셋 확보 또는 FIX_PAPER)"
+    },
+    {
+      "id": "AS-04",
+      "paper": "GA 예산 pop 10 / gen 12 / elite 2 / tournament 3 / p_m 0.35",
+      "measured": "정본 기본 pop 2 / gen 1, elite 1 고정, tournament 없음, 100% 변이. 레거시 백업 pop 20 / gen 30 / elites 2",
+      "status": "MISMATCH",
+      "mapped_wi": "WI-16"
+    },
+    {
+      "id": "AS-05",
+      "paper": "적합도 가중치 0.50:0.15:0.20:0.10:0.05, config 외부화",
+      "measured": "하드코딩 수식: avg_det + 10.0 * pass_rate + 5.0 * exact_rate - 0.0001 * prompt_tokens - 0.01 * latency",
+      "status": "MISMATCH",
+      "mapped_wi": "WI-07"
+    },
+    {
+      "id": "AS-06",
+      "paper": "세대당 층화 표본 9범주×5=45",
+      "measured": "층화 표본기 부재(rng.sample 단순 무작위). 실데이터는 8범주 — 9범주 서술은 FIX_PAPER 대상",
+      "status": "ABSENT",
+      "mapped_wi": "WI-07 (+FIX_PAPER: 9범주→8범주)"
+    },
+    {
+      "id": "AS-07",
+      "paper": "명령당 3회 반복 생성 평균, 비율 0.1% 반올림",
+      "measured": "candidate_k 기본 1(정본)·2(레거시), 3 지정 스크립트/설정 전역 부재. 반올림 프로토콜 코드 부재",
+      "status": "ABSENT",
+      "mapped_wi": "WI-02/WI-03 실행 config에서 적용"
+    },
+    {
+      "id": "AS-08",
+      "paper": "vLLM 서빙 + max_model_len 기록",
+      "measured": "vLLM 부재(requirements 포함). 실서빙: HF transformers subprocess + OpenAI호환 local HTTP. max_model_len 전역 0건, local_max_new_tokens(256/512)만 존재",
+      "status": "MISMATCH",
+      "mapped_wi": "WI-11 (+FIX_PAPER)"
+    }
+  ]
+}
