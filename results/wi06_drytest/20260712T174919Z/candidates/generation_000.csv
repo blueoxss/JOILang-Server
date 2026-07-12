@@ -1,0 +1,305 @@
+﻿row_no,category,command_eng,command_kor,gt,genome_id,generation,candidate_index,candidate_strategy,prompt_render_mode,prompt_assets_dir,prompt_log_paths,raw_response_path,candidates,generated_code,generated_json,generation_error_type,generation_error_count,generation_prompt_tokens_total,generation_completion_tokens_total,generation_total_tokens_total,latency_sec,peak_vram_gb,service_context_source,service_context_mode,service_list_retrieval_scores,connected_devices_used,service_schema_path,repair_applied,repair_actions,backend
+13,1,Announce the fine dust level through the speaker.,미세먼지 농도를 스피커로 알려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\ndust = (#AirQualitySensor).airqualitysensor_dustlevel\n\n(#Speaker).speaker_speak(\""미세먼지 농도는 \"" + dust + \""입니다\"")""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_13_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_13_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_13_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\ndust = (#AirQualitySensor).airqualitysensor_dustlevel\n\n(#Speaker).speaker_speak(\""미세먼지 농도는 \"" + dust + \""입니다\"")""}]","
+dust = (#AirQualitySensor).airqualitysensor_dustlevel
+
+(#Speaker).speaker_speak(""미세먼지 농도는 "" + dust + ""입니다"")","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\ndust = (#AirQualitySensor).airqualitysensor_dustlevel\n\n(#Speaker).speaker_speak(\""미세먼지 농도는 \"" + dust + \""입니다\"")""}",,0,0,0,0,3.3e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+28,1,Lower the speaker volume by one.,스피커 볼륨을 하나 낮춰줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Speaker).speaker_volumedown()""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_28_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_28_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_28_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\n(#Speaker).speaker_volumedown()""}]","
+(#Speaker).speaker_volumedown()","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\n(#Speaker).speaker_volumedown()""}",,0,0,0,0,2.9e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+55,2,Lower all even-tagged blinds in the bedroom.,안방에 있는 짝수 태그 블라인드를 모두 내려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nall(#Bedroom #Even #Blind).windowcovering_downorclose()""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_55_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_55_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_55_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nall(#Bedroom #Even #Blind).windowcovering_downorclose()""}]","
+all(#Bedroom #Even #Blind).windowcovering_downorclose()","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nall(#Bedroom #Even #Blind).windowcovering_downorclose()""}",,0,0,0,0,2.8e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'BR_Blind_2': {'category': ['WindowCovering'], 'tags': ['Bedroom', 'Even', 'Blind', 'WindowCovering']}, 'BR_Blind_4': {'category': ['WindowCovering'], 'tags': ['Bedroom', 'Even', 'Blind', 'WindowCovering']}, 'BR_Blind_1': {'category': ['WindowCovering'], 'tags': ['Bedroom', 'Odd', 'Blind', 'WindowCovering']}, 'LR_Blind_2': {'category': ['WindowCovering'], 'tags': ['LivingRoom', 'Even', 'Blind', 'WindowCovering']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+59,2,Lock all door locks in the storage.,창고의 모든 도어락을 잠궈줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nall(#Storage #DoorLock).doorlock_lock()""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_59_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_59_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_59_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nall(#Storage #DoorLock).doorlock_lock()""}]","
+all(#Storage #DoorLock).doorlock_lock()","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nall(#Storage #DoorLock).doorlock_lock()""}",,0,0,0,0,2.8e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'Stor_Lock_1': {'category': ['DoorLock'], 'tags': ['Storage', 'DoorLock']}, 'Stor_Lock_2': {'category': ['DoorLock'], 'tags': ['Storage', 'DoorLock']}, 'Entrance_Lock': {'category': ['DoorLock'], 'tags': ['Entrance', 'DoorLock']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+62,3,Stop charging if the voltage is 220V or higher.,"충전 전압이 220볼트 이상이면, 충전을 멈춰줘.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nif ((#Charger).charger_voltage >= 220000) {\n\n    (#Charger).switch_off()\n\n}""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_62_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_62_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_62_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#Charger).charger_voltage >= 220000) {\n\n    (#Charger).switch_off()\n\n}""}]","
+if ((#Charger).charger_voltage >= 220000) {
+
+    (#Charger).switch_off()
+
+}","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#Charger).charger_voltage >= 220000) {\n\n    (#Charger).switch_off()\n\n}""}",,0,0,0,0,2.9e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+74,3,"If the button is in the pushed state, raise the blind.","버튼이 눌려진 상태면, 블라인드를 올려줘.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nif ((#Button).button_button == \""pushed\"") {\n\n    (#Blind).windowcovering_uporopen()\n\n}""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_74_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_74_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_74_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#Button).button_button == \""pushed\"") {\n\n    (#Blind).windowcovering_uporopen()\n\n}""}]","
+if ((#Button).button_button == ""pushed"") {
+
+    (#Blind).windowcovering_uporopen()
+
+}","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#Button).button_button == \""pushed\"") {\n\n    (#Blind).windowcovering_uporopen()\n\n}""}",,0,0,0,0,2.8e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+99,4,"When the temperature reaches 35 degrees or higher, set the air conditioner to 30 degrees.",온도가 35도 이상이 되면 에어컨의 목표 온도를 30도로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)\n\n(#AirConditioner).airconditioner_settargettemperature(30)""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_99_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_99_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_99_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nwait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)\n\n(#AirConditioner).airconditioner_settargettemperature(30)""}]","
+wait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)
+
+(#AirConditioner).airconditioner_settargettemperature(30)","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nwait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)\n\n(#AirConditioner).airconditioner_settargettemperature(30)""}",,0,0,0,0,2.9e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+107,4,"When motion is detected in the bedroom, turn on the bedroom air conditioner.",침실에 움직임이 감지되면 침실 에어컨을 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Bedroom #MotionSensor).motionsensor_motion == true)\n\n(#Bedroom #AirConditioner).switch_on()""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_107_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_107_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_107_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nwait until ((#Bedroom #MotionSensor).motionsensor_motion == true)\n\n(#Bedroom #AirConditioner).switch_on()""}]","
+wait until ((#Bedroom #MotionSensor).motionsensor_motion == true)
+
+(#Bedroom #AirConditioner).switch_on()","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nwait until ((#Bedroom #MotionSensor).motionsensor_motion == true)\n\n(#Bedroom #AirConditioner).switch_on()""}",,0,0,0,0,2.9e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'Bedroom_Motion': {'category': 'MotionSensor', 'tags': ['Bedroom', 'MotionSensor']}, 'LivingRoom_Motion': {'category': 'MotionSensor', 'tags': ['LivingRoom', 'MotionSensor']}, 'Bedroom_AC': {'category': 'AirConditioner', 'tags': ['Bedroom', 'AirConditioner', 'Switch']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+133,5,Start the robot vacuum cleaner in auto mode and switch to manual mode after 30 minutes.,로봇 청소기를 자동 모드로 시작하고 30분 뒤에 수동 모드로 바꿔줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_133_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_133_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_133_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}]","
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+
+delay(30 MIN)
+
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""manual"")","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}",,0,0,0,0,3e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+136,5,Turn on all lights in the living room and turn them off after 1 hour.,거실의 모든 전등을 켜고 1시간 뒤에 꺼줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nall(#LivingRoom #Light).switch_on()\n\ndelay(1 HOUR)\n\nall(#LivingRoom #Light).switch_off()""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_136_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_136_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_136_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nall(#LivingRoom #Light).switch_on()\n\ndelay(1 HOUR)\n\nall(#LivingRoom #Light).switch_off()""}]","
+all(#LivingRoom #Light).switch_on()
+
+delay(1 HOUR)
+
+all(#LivingRoom #Light).switch_off()","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nall(#LivingRoom #Light).switch_on()\n\ndelay(1 HOUR)\n\nall(#LivingRoom #Light).switch_off()""}",,0,0,0,0,2.9e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'LivingRoom_Light_1': {'category': ['Light', 'Switch'], 'tags': ['LivingRoom', 'Light', 'Switch']}, 'LivingRoom_Light_2': {'category': ['Light', 'Switch'], 'tags': ['LivingRoom', 'Light', 'Switch']}, 'Kitchen_Light': {'category': ['Light', 'Switch'], 'tags': ['Kitchen', 'Light', 'Switch']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+176,6,"If the wine cellar temperature is 15 degrees or higher and humidity is 60% or higher, turn on the air conditioner and turn off the humidifier.","와인 셀러 온도가 15도 이상이고 습도가 60% 이상이면, 에어컨을 켜고 가습기를 꺼줘.","{""name"": """", ""cron"": """", ""period"": 0, ""script"": ""\nif ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {\n\n    (#AirConditioner).switch_on()\n\n    (#Humidifier).switch_off()\n\n}""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_176_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_176_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_176_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {\n\n    (#AirConditioner).switch_on()\n\n    (#Humidifier).switch_off()\n\n}""}]","
+if ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {
+
+    (#AirConditioner).switch_on()
+
+    (#Humidifier).switch_off()
+
+}","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {\n\n    (#AirConditioner).switch_on()\n\n    (#Humidifier).switch_off()\n\n}""}",,0,0,0,0,3e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'WineCellar_Temp': {'category': 'TemperatureSensor', 'tags': ['WineCellar', 'TemperatureSensor']}, 'WineCellar_Hum': {'category': 'HumiditySensor', 'tags': ['WineCellar', 'HumiditySensor']}, 'AC': {'category': ['AirConditioner', 'Switch'], 'tags': ['AirConditioner', 'Switch']}, 'WineCellar_Humidifier': {'category': ['Humidifier', 'Switch'], 'tags': ['Humidifier', 'Switch']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+180,6,"If the living room light is on and the illuminance is 50 lux or higher, close the living room blind and set the AC to auto mode.","거실 조명이 켜져 있고 조도가 50 럭스 이상이면, 거실 블라인드를 닫고 에어컨을 자동 모드로 설정해줘.","{""name"": """", ""cron"": """", ""period"": 0, ""script"": ""\nif ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {\n\n    (#LivingRoom #Blind).windowcovering_downorclose()\n\n    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n\n}""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_180_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_180_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_180_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {\n\n    (#LivingRoom #Blind).windowcovering_downorclose()\n\n    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n\n}""}]","
+if ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {
+
+    (#LivingRoom #Blind).windowcovering_downorclose()
+
+    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(""auto"")
+
+}","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {\n\n    (#LivingRoom #Blind).windowcovering_downorclose()\n\n    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n\n}""}",,0,0,0,0,3.1e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'LivingRoom_Light': {'category': ['Light', 'Switch'], 'tags': ['LivingRoom', 'Light', 'Switch']}, 'LivingRoom_AC': {'category': 'AirConditioner', 'tags': ['LivingRoom', 'AirConditioner']}, 'LivingRoom_Blind': {'category': 'WindowCovering', 'tags': ['LivingRoom', 'Blind', 'WindowCovering']}, 'LivingRoom_LightSensor': {'category': 'LightSensor', 'tags': ['LivingRoom', 'LightSensor']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+200,7,"Check the fine dust level every hour; if it's 200 or higher, set the air purifier to high speed; if it's 100 or lower, set it to low speed.",1시간마다 미세먼지 농도를 체크해서 200 이상이면 공기청정기를 강풍모드로 설정하고 100 이하이면 미풍모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 3600000, 
+""script"": ""\ndust = (#AirQualitySensor).airqualitysensor_finedustlevel\n\nif (dust >= 200) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n} else if (dust <= 100) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""low\"")\n\n}""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_200_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_200_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_200_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 3600000, ""code"": ""\ndust = (#AirQualitySensor).airqualitysensor_finedustlevel\n\nif (dust >= 200) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n} else if (dust <= 100) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""low\"")\n\n}""}]","
+dust = (#AirQualitySensor).airqualitysensor_finedustlevel
+
+if (dust >= 200) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+} else if (dust <= 100) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""low"")
+
+}","{""name"": """", ""cron"": """", ""period"": 3600000, ""code"": ""\ndust = (#AirQualitySensor).airqualitysensor_finedustlevel\n\nif (dust >= 200) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n} else if (dust <= 100) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""low\"")\n\n}""}",,0,0,0,0,3.1e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+211,7,"Every 7 PM, if no one is detected on the 1st floor, turn off all lights; for the 2nd floor, check at 8 PM and turn off all its lights if no one is present.",밤 7시에 1층에 사람이 없으면 불을 다 꺼주고 2층은 8시에 사람이 없으면 불을 다 꺼줘.,"{""name"": """", 
+""cron"": ""0 19 * * *"", 
+""period"": 0, 
+""script"": ""\nif ((#Floor1 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor1 #Light).switch_off()\n\n}\n\ndelay(1 HOUR)\n\nif ((#Floor2 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor2 #Light).switch_off()\n\n}""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_211_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_211_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_211_cand_0_gen_000.json,"[{""name"": """", ""cron"": ""0 19 * * *"", ""period"": 0, ""code"": ""\nif ((#Floor1 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor1 #Light).switch_off()\n\n}\n\ndelay(1 HOUR)\n\nif ((#Floor2 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor2 #Light).switch_off()\n\n}""}]","
+if ((#Floor1 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor1 #Light).switch_off()
+
+}
+
+delay(1 HOUR)
+
+if ((#Floor2 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor2 #Light).switch_off()
+
+}","{""name"": """", ""cron"": ""0 19 * * *"", ""period"": 0, ""code"": ""\nif ((#Floor1 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor1 #Light).switch_off()\n\n}\n\ndelay(1 HOUR)\n\nif ((#Floor2 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor2 #Light).switch_off()\n\n}""}",,0,0,0,0,3.1e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'F1_Presence': {'category': ['PresenceSensor'], 'tags': ['Floor1', 'PresenceSensor']}, 'F2_Presence': {'category': ['PresenceSensor'], 'tags': ['Floor2', 'PresenceSensor']}, 'F1_Light': {'category': ['Light', 'Switch'], 'tags': ['Floor1', 'Light', 'Switch']}, 'F2_Light': {'category': ['Light', 'Switch'], 'tags': ['Floor2', 'Light', 'Switch']}, 'F3_Light': {'category': ['Light', 'Switch'], 'tags': ['Floor3', 'Light', 'Switch']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+253,8,"When a smoke is detected, announce it through the speaker and send an email every 5 minutes to ""test@example.com"" with the subject ""Fire Warning"" and the content ""A fire has occurred. Please evacuate."".","연기가 감지되면 스피커로 화재를 알리고, 이후 5분마다 test@example.com으로 ""화재 경고""라는 제목과 ""화재가 발생했습니다. 대피하세요""라는 내용의 이메일을 보내줘.","{""name"": """", 
+""cron"": """", 
+""period"": 300000, 
+""script"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#SmokeDetector).smokedetector_smoke == true)\n\n    (#Speaker).speaker_speak(\""화재 발생! 즉시 대피하세요.\"" )\n\n    active = 1\n\n}\n\n(#EmailProvider).emailprovider_sendmail(\""test@example.com\"", \""화재 경고\"", \""화재가 발생했습니다. 대피하세요.\"")""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_253_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_253_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_253_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 300000, ""code"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#SmokeDetector).smokedetector_smoke == true)\n\n    (#Speaker).speaker_speak(\""화재 발생! 즉시 대피하세요.\"" )\n\n    active = 1\n\n}\n\n(#EmailProvider).emailprovider_sendmail(\""test@example.com\"", \""화재 경고\"", \""화재가 발생했습니다. 대피하세요.\"")""}]","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#SmokeDetector).smokedetector_smoke == true)
+
+    (#Speaker).speaker_speak(""화재 발생! 즉시 대피하세요."" )
+
+    active = 1
+
+}
+
+(#EmailProvider).emailprovider_sendmail(""test@example.com"", ""화재 경고"", ""화재가 발생했습니다. 대피하세요."")","{""name"": """", ""cron"": """", ""period"": 300000, ""code"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#SmokeDetector).smokedetector_smoke == true)\n\n    (#Speaker).speaker_speak(\""화재 발생! 즉시 대피하세요.\"" )\n\n    active = 1\n\n}\n\n(#EmailProvider).emailprovider_sendmail(\""test@example.com\"", \""화재 경고\"", \""화재가 발생했습니다. 대피하세요.\"")""}",,0,0,0,0,3.7e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+268,8,"When the carbon dioxide level in the parking lot exceeds 880 ppm, speak ""CO2 level danger"" through the parking lot speaker every 10 seconds.","주차장 이산화탄소 농도가 880ppm보다 높아지면, 10초마다 ""CO2 농도 위험""이라고 주차장 스피커로 출력해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 10000, 
+""script"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)\n\n    active = 1\n\n}\n\n(#ParkingLot #Speaker).speaker_speak(\""CO2 농도 위험\"")""}",genome_000,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_268_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_268_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_268_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 10000, ""code"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)\n\n    active = 1\n\n}\n\n(#ParkingLot #Speaker).speaker_speak(\""CO2 농도 위험\"")""}]","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)
+
+    active = 1
+
+}
+
+(#ParkingLot #Speaker).speaker_speak(""CO2 농도 위험"")","{""name"": """", ""cron"": """", ""period"": 10000, ""code"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)\n\n    active = 1\n\n}\n\n(#ParkingLot #Speaker).speaker_speak(\""CO2 농도 위험\"")""}",,0,0,0,0,3.4e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'P_AQ': {'category': 'AirQualitySensor', 'tags': ['ParkingLot', 'AirQualitySensor']}, 'P_Speaker': {'category': 'Speaker', 'tags': ['ParkingLot', 'Speaker']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+13,1,Announce the fine dust level through the speaker.,미세먼지 농도를 스피커로 알려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\ndust = (#AirQualitySensor).airqualitysensor_dustlevel\n\n(#Speaker).speaker_speak(\""미세먼지 농도는 \"" + dust + \""입니다\"")""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_13_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_13_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_13_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\ndust = (#AirQualitySensor).airqualitysensor_dustlevel\n\n(#Speaker).speaker_speak(\""미세먼지 농도는 \"" + dust + \""입니다\"")""}]","
+dust = (#AirQualitySensor).airqualitysensor_dustlevel
+
+(#Speaker).speaker_speak(""미세먼지 농도는 "" + dust + ""입니다"")","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\ndust = (#AirQualitySensor).airqualitysensor_dustlevel\n\n(#Speaker).speaker_speak(\""미세먼지 농도는 \"" + dust + \""입니다\"")""}",,0,0,0,0,3.2e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+28,1,Lower the speaker volume by one.,스피커 볼륨을 하나 낮춰줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Speaker).speaker_volumedown()""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_28_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_28_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_28_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\n(#Speaker).speaker_volumedown()""}]","
+(#Speaker).speaker_volumedown()","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\n(#Speaker).speaker_volumedown()""}",,0,0,0,0,2.8e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+55,2,Lower all even-tagged blinds in the bedroom.,안방에 있는 짝수 태그 블라인드를 모두 내려줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nall(#Bedroom #Even #Blind).windowcovering_downorclose()""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_55_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_55_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_55_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nall(#Bedroom #Even #Blind).windowcovering_downorclose()""}]","
+all(#Bedroom #Even #Blind).windowcovering_downorclose()","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nall(#Bedroom #Even #Blind).windowcovering_downorclose()""}",,0,0,0,0,2.8e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'BR_Blind_2': {'category': ['WindowCovering'], 'tags': ['Bedroom', 'Even', 'Blind', 'WindowCovering']}, 'BR_Blind_4': {'category': ['WindowCovering'], 'tags': ['Bedroom', 'Even', 'Blind', 'WindowCovering']}, 'BR_Blind_1': {'category': ['WindowCovering'], 'tags': ['Bedroom', 'Odd', 'Blind', 'WindowCovering']}, 'LR_Blind_2': {'category': ['WindowCovering'], 'tags': ['LivingRoom', 'Even', 'Blind', 'WindowCovering']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+59,2,Lock all door locks in the storage.,창고의 모든 도어락을 잠궈줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nall(#Storage #DoorLock).doorlock_lock()""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_59_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_59_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_59_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nall(#Storage #DoorLock).doorlock_lock()""}]","
+all(#Storage #DoorLock).doorlock_lock()","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nall(#Storage #DoorLock).doorlock_lock()""}",,0,0,0,0,2.8e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'Stor_Lock_1': {'category': ['DoorLock'], 'tags': ['Storage', 'DoorLock']}, 'Stor_Lock_2': {'category': ['DoorLock'], 'tags': ['Storage', 'DoorLock']}, 'Entrance_Lock': {'category': ['DoorLock'], 'tags': ['Entrance', 'DoorLock']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+62,3,Stop charging if the voltage is 220V or higher.,"충전 전압이 220볼트 이상이면, 충전을 멈춰줘.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nif ((#Charger).charger_voltage >= 220000) {\n\n    (#Charger).switch_off()\n\n}""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_62_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_62_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_62_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#Charger).charger_voltage >= 220000) {\n\n    (#Charger).switch_off()\n\n}""}]","
+if ((#Charger).charger_voltage >= 220000) {
+
+    (#Charger).switch_off()
+
+}","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#Charger).charger_voltage >= 220000) {\n\n    (#Charger).switch_off()\n\n}""}",,0,0,0,0,2.9e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+74,3,"If the button is in the pushed state, raise the blind.","버튼이 눌려진 상태면, 블라인드를 올려줘.","{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nif ((#Button).button_button == \""pushed\"") {\n\n    (#Blind).windowcovering_uporopen()\n\n}""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_74_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_74_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_74_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#Button).button_button == \""pushed\"") {\n\n    (#Blind).windowcovering_uporopen()\n\n}""}]","
+if ((#Button).button_button == ""pushed"") {
+
+    (#Blind).windowcovering_uporopen()
+
+}","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#Button).button_button == \""pushed\"") {\n\n    (#Blind).windowcovering_uporopen()\n\n}""}",,0,0,0,0,2.9e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+99,4,"When the temperature reaches 35 degrees or higher, set the air conditioner to 30 degrees.",온도가 35도 이상이 되면 에어컨의 목표 온도를 30도로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)\n\n(#AirConditioner).airconditioner_settargettemperature(30)""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_99_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_99_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_99_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nwait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)\n\n(#AirConditioner).airconditioner_settargettemperature(30)""}]","
+wait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)
+
+(#AirConditioner).airconditioner_settargettemperature(30)","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nwait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)\n\n(#AirConditioner).airconditioner_settargettemperature(30)""}",,0,0,0,0,2.9e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+107,4,"When motion is detected in the bedroom, turn on the bedroom air conditioner.",침실에 움직임이 감지되면 침실 에어컨을 켜줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nwait until ((#Bedroom #MotionSensor).motionsensor_motion == true)\n\n(#Bedroom #AirConditioner).switch_on()""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_107_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_107_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_107_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nwait until ((#Bedroom #MotionSensor).motionsensor_motion == true)\n\n(#Bedroom #AirConditioner).switch_on()""}]","
+wait until ((#Bedroom #MotionSensor).motionsensor_motion == true)
+
+(#Bedroom #AirConditioner).switch_on()","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nwait until ((#Bedroom #MotionSensor).motionsensor_motion == true)\n\n(#Bedroom #AirConditioner).switch_on()""}",,0,0,0,0,2.9e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'Bedroom_Motion': {'category': 'MotionSensor', 'tags': ['Bedroom', 'MotionSensor']}, 'LivingRoom_Motion': {'category': 'MotionSensor', 'tags': ['LivingRoom', 'MotionSensor']}, 'Bedroom_AC': {'category': 'AirConditioner', 'tags': ['Bedroom', 'AirConditioner', 'Switch']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+133,5,Start the robot vacuum cleaner in auto mode and switch to manual mode after 30 minutes.,로봇 청소기를 자동 모드로 시작하고 30분 뒤에 수동 모드로 바꿔줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_133_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_133_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_133_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}]","
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+
+delay(30 MIN)
+
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""manual"")","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}",,0,0,0,0,3.1e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+136,5,Turn on all lights in the living room and turn them off after 1 hour.,거실의 모든 전등을 켜고 1시간 뒤에 꺼줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\nall(#LivingRoom #Light).switch_on()\n\ndelay(1 HOUR)\n\nall(#LivingRoom #Light).switch_off()""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_136_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_136_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_136_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nall(#LivingRoom #Light).switch_on()\n\ndelay(1 HOUR)\n\nall(#LivingRoom #Light).switch_off()""}]","
+all(#LivingRoom #Light).switch_on()
+
+delay(1 HOUR)
+
+all(#LivingRoom #Light).switch_off()","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nall(#LivingRoom #Light).switch_on()\n\ndelay(1 HOUR)\n\nall(#LivingRoom #Light).switch_off()""}",,0,0,0,0,3e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'LivingRoom_Light_1': {'category': ['Light', 'Switch'], 'tags': ['LivingRoom', 'Light', 'Switch']}, 'LivingRoom_Light_2': {'category': ['Light', 'Switch'], 'tags': ['LivingRoom', 'Light', 'Switch']}, 'Kitchen_Light': {'category': ['Light', 'Switch'], 'tags': ['Kitchen', 'Light', 'Switch']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+176,6,"If the wine cellar temperature is 15 degrees or higher and humidity is 60% or higher, turn on the air conditioner and turn off the humidifier.","와인 셀러 온도가 15도 이상이고 습도가 60% 이상이면, 에어컨을 켜고 가습기를 꺼줘.","{""name"": """", ""cron"": """", ""period"": 0, ""script"": ""\nif ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {\n\n    (#AirConditioner).switch_on()\n\n    (#Humidifier).switch_off()\n\n}""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_176_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_176_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_176_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {\n\n    (#AirConditioner).switch_on()\n\n    (#Humidifier).switch_off()\n\n}""}]","
+if ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {
+
+    (#AirConditioner).switch_on()
+
+    (#Humidifier).switch_off()
+
+}","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {\n\n    (#AirConditioner).switch_on()\n\n    (#Humidifier).switch_off()\n\n}""}",,0,0,0,0,3e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'WineCellar_Temp': {'category': 'TemperatureSensor', 'tags': ['WineCellar', 'TemperatureSensor']}, 'WineCellar_Hum': {'category': 'HumiditySensor', 'tags': ['WineCellar', 'HumiditySensor']}, 'AC': {'category': ['AirConditioner', 'Switch'], 'tags': ['AirConditioner', 'Switch']}, 'WineCellar_Humidifier': {'category': ['Humidifier', 'Switch'], 'tags': ['Humidifier', 'Switch']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+180,6,"If the living room light is on and the illuminance is 50 lux or higher, close the living room blind and set the AC to auto mode.","거실 조명이 켜져 있고 조도가 50 럭스 이상이면, 거실 블라인드를 닫고 에어컨을 자동 모드로 설정해줘.","{""name"": """", ""cron"": """", ""period"": 0, ""script"": ""\nif ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {\n\n    (#LivingRoom #Blind).windowcovering_downorclose()\n\n    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n\n}""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_180_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_180_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_180_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {\n\n    (#LivingRoom #Blind).windowcovering_downorclose()\n\n    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n\n}""}]","
+if ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {
+
+    (#LivingRoom #Blind).windowcovering_downorclose()
+
+    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(""auto"")
+
+}","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {\n\n    (#LivingRoom #Blind).windowcovering_downorclose()\n\n    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n\n}""}",,0,0,0,0,3e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'LivingRoom_Light': {'category': ['Light', 'Switch'], 'tags': ['LivingRoom', 'Light', 'Switch']}, 'LivingRoom_AC': {'category': 'AirConditioner', 'tags': ['LivingRoom', 'AirConditioner']}, 'LivingRoom_Blind': {'category': 'WindowCovering', 'tags': ['LivingRoom', 'Blind', 'WindowCovering']}, 'LivingRoom_LightSensor': {'category': 'LightSensor', 'tags': ['LivingRoom', 'LightSensor']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+200,7,"Check the fine dust level every hour; if it's 200 or higher, set the air purifier to high speed; if it's 100 or lower, set it to low speed.",1시간마다 미세먼지 농도를 체크해서 200 이상이면 공기청정기를 강풍모드로 설정하고 100 이하이면 미풍모드로 설정해줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 3600000, 
+""script"": ""\ndust = (#AirQualitySensor).airqualitysensor_finedustlevel\n\nif (dust >= 200) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n} else if (dust <= 100) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""low\"")\n\n}""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_200_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_200_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_200_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 3600000, ""code"": ""\ndust = (#AirQualitySensor).airqualitysensor_finedustlevel\n\nif (dust >= 200) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n} else if (dust <= 100) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""low\"")\n\n}""}]","
+dust = (#AirQualitySensor).airqualitysensor_finedustlevel
+
+if (dust >= 200) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+} else if (dust <= 100) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""low"")
+
+}","{""name"": """", ""cron"": """", ""period"": 3600000, ""code"": ""\ndust = (#AirQualitySensor).airqualitysensor_finedustlevel\n\nif (dust >= 200) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n} else if (dust <= 100) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""low\"")\n\n}""}",,0,0,0,0,3.2e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+211,7,"Every 7 PM, if no one is detected on the 1st floor, turn off all lights; for the 2nd floor, check at 8 PM and turn off all its lights if no one is present.",밤 7시에 1층에 사람이 없으면 불을 다 꺼주고 2층은 8시에 사람이 없으면 불을 다 꺼줘.,"{""name"": """", 
+""cron"": ""0 19 * * *"", 
+""period"": 0, 
+""script"": ""\nif ((#Floor1 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor1 #Light).switch_off()\n\n}\n\ndelay(1 HOUR)\n\nif ((#Floor2 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor2 #Light).switch_off()\n\n}""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_211_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_211_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_211_cand_0_gen_000.json,"[{""name"": """", ""cron"": ""0 19 * * *"", ""period"": 0, ""code"": ""\nif ((#Floor1 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor1 #Light).switch_off()\n\n}\n\ndelay(1 HOUR)\n\nif ((#Floor2 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor2 #Light).switch_off()\n\n}""}]","
+if ((#Floor1 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor1 #Light).switch_off()
+
+}
+
+delay(1 HOUR)
+
+if ((#Floor2 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor2 #Light).switch_off()
+
+}","{""name"": """", ""cron"": ""0 19 * * *"", ""period"": 0, ""code"": ""\nif ((#Floor1 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor1 #Light).switch_off()\n\n}\n\ndelay(1 HOUR)\n\nif ((#Floor2 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor2 #Light).switch_off()\n\n}""}",,0,0,0,0,3.2e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'F1_Presence': {'category': ['PresenceSensor'], 'tags': ['Floor1', 'PresenceSensor']}, 'F2_Presence': {'category': ['PresenceSensor'], 'tags': ['Floor2', 'PresenceSensor']}, 'F1_Light': {'category': ['Light', 'Switch'], 'tags': ['Floor1', 'Light', 'Switch']}, 'F2_Light': {'category': ['Light', 'Switch'], 'tags': ['Floor2', 'Light', 'Switch']}, 'F3_Light': {'category': ['Light', 'Switch'], 'tags': ['Floor3', 'Light', 'Switch']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+253,8,"When a smoke is detected, announce it through the speaker and send an email every 5 minutes to ""test@example.com"" with the subject ""Fire Warning"" and the content ""A fire has occurred. Please evacuate."".","연기가 감지되면 스피커로 화재를 알리고, 이후 5분마다 test@example.com으로 ""화재 경고""라는 제목과 ""화재가 발생했습니다. 대피하세요""라는 내용의 이메일을 보내줘.","{""name"": """", 
+""cron"": """", 
+""period"": 300000, 
+""script"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#SmokeDetector).smokedetector_smoke == true)\n\n    (#Speaker).speaker_speak(\""화재 발생! 즉시 대피하세요.\"" )\n\n    active = 1\n\n}\n\n(#EmailProvider).emailprovider_sendmail(\""test@example.com\"", \""화재 경고\"", \""화재가 발생했습니다. 대피하세요.\"")""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_253_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_253_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_253_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 300000, ""code"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#SmokeDetector).smokedetector_smoke == true)\n\n    (#Speaker).speaker_speak(\""화재 발생! 즉시 대피하세요.\"" )\n\n    active = 1\n\n}\n\n(#EmailProvider).emailprovider_sendmail(\""test@example.com\"", \""화재 경고\"", \""화재가 발생했습니다. 대피하세요.\"")""}]","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#SmokeDetector).smokedetector_smoke == true)
+
+    (#Speaker).speaker_speak(""화재 발생! 즉시 대피하세요."" )
+
+    active = 1
+
+}
+
+(#EmailProvider).emailprovider_sendmail(""test@example.com"", ""화재 경고"", ""화재가 발생했습니다. 대피하세요."")","{""name"": """", ""cron"": """", ""period"": 300000, ""code"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#SmokeDetector).smokedetector_smoke == true)\n\n    (#Speaker).speaker_speak(\""화재 발생! 즉시 대피하세요.\"" )\n\n    active = 1\n\n}\n\n(#EmailProvider).emailprovider_sendmail(\""test@example.com\"", \""화재 경고\"", \""화재가 발생했습니다. 대피하세요.\"")""}",,0,0,0,0,3.7e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+268,8,"When the carbon dioxide level in the parking lot exceeds 880 ppm, speak ""CO2 level danger"" through the parking lot speaker every 10 seconds.","주차장 이산화탄소 농도가 880ppm보다 높아지면, 10초마다 ""CO2 농도 위험""이라고 주차장 스피커로 출력해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 10000, 
+""script"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)\n\n    active = 1\n\n}\n\n(#ParkingLot #Speaker).speaker_speak(\""CO2 농도 위험\"")""}",genome_001,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/wi06_drytest/20260712T174919Z/prompts/row_268_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_268_cand_0_gen_000.json""]",results/wi06_drytest/20260712T174919Z/raw_responses/row_268_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 10000, ""code"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)\n\n    active = 1\n\n}\n\n(#ParkingLot #Speaker).speaker_speak(\""CO2 농도 위험\"")""}]","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)
+
+    active = 1
+
+}
+
+(#ParkingLot #Speaker).speaker_speak(""CO2 농도 위험"")","{""name"": """", ""cron"": """", ""period"": 10000, ""code"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)\n\n    active = 1\n\n}\n\n(#ParkingLot #Speaker).speaker_speak(\""CO2 농도 위험\"")""}",,0,0,0,0,3.4e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'P_AQ': {'category': 'AirQualitySensor', 'tags': ['ParkingLot', 'AirQualitySensor']}, 'P_Speaker': {'category': 'Speaker', 'tags': ['ParkingLot', 'Speaker']}}",datasets/service_list_ver2.0.1.json,False,[],mock
