@@ -1,0 +1,122 @@
+{
+  "created_at": "2026-07-12T17:44:10.375333+00:00",
+  "artifact_schema": "ga_search.foundation.v1",
+  "run_dir": "results/wi05_drytest/20260712T174408Z",
+  "search_mode": "monolith",
+  "advisor_mode": "none",
+  "model_render_mode": "monolith",
+  "official_score_policy": {
+    "primary_metric": "strict_det",
+    "cloud_is_auxiliary": true
+  },
+  "artifacts": {
+    "rendered_base_prompt": "results/wi05_drytest/20260712T174408Z/rendered_base_prompt.md",
+    "render_metadata": "results/wi05_drytest/20260712T174408Z/render_metadata.json",
+    "search_input": "results/wi05_drytest/20260712T174408Z/search_input.json",
+    "decomposed_blocks": "",
+    "advisor_dir": "",
+    "candidates_manifest": "results/wi05_drytest/20260712T174408Z/candidates/candidates_manifest.json"
+  },
+  "advisor_summary": {},
+  "candidate_summary": {
+    "created_at": "2026-07-12T17:44:10.372674+00:00",
+    "candidate_count": 1,
+    "search_mode": "monolith",
+    "advisor_mode": "none",
+    "candidates": [
+      {
+        "candidate_id": "candidate_000_base_prompt",
+        "path": "results/wi05_drytest/20260712T174408Z/candidates/candidate_000.json",
+        "source": "base_prompt",
+        "patch_refs": [],
+        "mutation_intent": "baseline"
+      }
+    ]
+  },
+  "ga_summary": {
+    "run_id": "20260712T174408Z",
+    "model_id": "gpt_mg.version0_13",
+    "model_package_path": "/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13",
+    "model_key": "",
+    "search_mode": "monolith",
+    "ga_engine_mode": "real_generation_skeleton",
+    "requested_engine_mode": "real",
+    "llm_mode": "mock",
+    "official_metric": "strict_det",
+    "ground_truth_column": "gt",
+    "rows": 16,
+    "best_DETPass": 1.0,
+    "best_avg_DET": 100.0,
+    "best_avg_prompt_tokens": 0.0,
+    "fitness_config": {
+      "path": "/home/mgjeong/Desktop/llm/JOILang-Server/configs/ga_search_fitness.json",
+      "weights": {
+        "alpha_detpass": 0.5,
+        "beta_sdet": 0.15,
+        "gamma_replayfit": 0.2,
+        "lambda_tokens": 0.1,
+        "lambda_latency": 0.05
+      },
+      "normalization": {
+        "sdet_scale": 100.0,
+        "tokens_ref": 4096,
+        "latency_ref_sec": 5.0
+      }
+    },
+    "replay": {
+      "split_path": "datasets/replay_split.json",
+      "counts": {
+        "search": 15,
+        "holdout": 15
+      },
+      "search_history": [
+        {
+          "generation": 0,
+          "search_replay_fit_by_genome": {
+            "genome_000": 1.0,
+            "genome_001": 1.0
+          }
+        },
+        {
+          "generation": 1,
+          "search_replay_fit_by_genome": {
+            "genome_001": 1.0,
+            "genome_000_g001_m001": 1.0
+          }
+        }
+      ],
+      "holdout_report": {
+        "replay_fit": 1.0,
+        "cases": 15,
+        "best_genome_id": "genome_001"
+      }
+    },
+    "generation_error_rate": 0.0,
+    "stop_reason": "completed_requested_generations",
+    "best_history": [
+      {
+        "generation": 0,
+        "candidate_rows": 32,
+        "avg_det_score": 100.0,
+        "train_det_pass_rate": 1.0,
+        "best_genome_id": "genome_001",
+        "best_avg_det_score": 100.0,
+        "best_fitness": 0.8499996981250001
+      },
+      {
+        "generation": 1,
+        "candidate_rows": 32,
+        "avg_det_score": 100.0,
+        "train_det_pass_rate": 1.0,
+        "best_genome_id": "genome_001",
+        "best_avg_det_score": 100.0,
+        "best_fitness": 0.8499996981250001
+      }
+    ],
+    "cloud_is_auxiliary": true,
+    "known_limitations": [
+      "real engine skeleton evaluates genomes with strict DET and records selection/mutation artifacts",
+      "advanced crossover, pareto archive, and compression mutation policies are hooks, not full legacy parity"
+    ]
+  }
+}

@@ -12,12 +12,14 @@ try:
     from .evaluation import evaluate_candidate_records, write_evaluation_outputs
     from .fitness import load_fitness_config
     from .prompt_patch_apply import rendered_prompt_with_genome
+    from .replay import load_replay_split, replay_cases_to_rows, replay_pass_rate
     from .rerank import aggregate_genome_scores
 except ImportError:
     from candidate_generation import generate_candidates_for_rows, write_candidate_csv  # type: ignore
     from evaluation import evaluate_candidate_records, write_evaluation_outputs  # type: ignore
     from fitness import load_fitness_config  # type: ignore
     from prompt_patch_apply import rendered_prompt_with_genome  # type: ignore
+    from replay import load_replay_split, replay_cases_to_rows, replay_pass_rate  # type: ignore
     from rerank import aggregate_genome_scores  # type: ignore
 
 
@@ -272,6 +274,7 @@ def run_search(
     feedback_guided_mutation: bool = False,
     compression_mutation: bool = False,
     fitness_config: str | Path | None = None,
+    replay_split: str | Path | None = None,
 ) -> dict[str, Any]:
     requested_engine_mode = str(engine_mode or "auto").lower()
     if requested_engine_mode == "mock" or (requested_engine_mode == "auto" and llm_mode == "mock"):
@@ -296,6 +299,8 @@ def run_search(
     candidates_dir.mkdir(parents=True, exist_ok=True)
     rng = random.Random(seed)
     fitness_config_loaded = load_fitness_config(fitness_config)
+    replay_split_loaded = load_replay_split(replay_split) if replay_split else None
+    replay_history: list[dict[str, Any]] = []
     current_population = _initial_population(population, initial_genomes=initial_genomes)
     _write_json(genomes_dir / "initial_population.json", current_population)
 
@@ -342,7 +347,44 @@ def run_search(
         write_candidate_csv(candidates_dir / f"generation_{generation:03d}.csv", generation_records)
         eval_rows = evaluate_candidate_records(generation_records, det_threshold=det_threshold)
         all_eval_rows.extend(eval_rows)
-        genome_scores = aggregate_genome_scores(eval_rows, config=fitness_config_loaded)
+        replay_fit_by_genome: dict[str, float] = {}
+        if replay_split_loaded:
+            # 적합도에는 search 사례만 사용한다(C-14). holdout 은 최종 보고/게이트 전용.
+            search_cases = replay_split_loaded.search_cases()
+            for genome in current_population:
+                rendered_for_genome = _render_for_genome(rendered_package, genome)
+                replay_records = generate_candidates_for_rows(
+                    rows=replay_cases_to_rows(search_cases),
+                    rendered_package=rendered_for_genome,
+                    out_dir=root / "replay",
+                    llm_mode=llm_mode,
+                    model_key=model_key,
+                    candidate_k=1,
+                    generation=generation,
+                    genome_id=str(genome.get("id") or "genome"),
+                    candidate_strategy=_candidate_strategy(genome),
+                    service_schema=service_schema,
+                    service_context_mode=service_context_mode,
+                    timeout_sec=timeout_sec,
+                    retries=retries,
+                    llm_endpoint=llm_endpoint,
+                    llm_extra=llm_extra,
+                    repair_attempts=repair_attempts,
+                )
+                replay_eval = evaluate_candidate_records(replay_records, det_threshold=det_threshold)
+                _write_jsonl(
+                    root / "replay" / f"search_eval_gen{generation:03d}_{genome.get('id')}.jsonl",
+                    replay_eval,
+                )
+                fit = replay_pass_rate(replay_eval)
+                if fit is not None:
+                    replay_fit_by_genome[str(genome.get("id") or "genome")] = fit
+            replay_history.append({"generation": generation, "search_replay_fit_by_genome": dict(replay_fit_by_genome)})
+        genome_scores = aggregate_genome_scores(
+            eval_rows,
+            config=fitness_config_loaded,
+            replay_fit_by_genome=replay_fit_by_genome or None,
+        )
         generation_best = genome_scores[0] if genome_scores else {"genome_id": "", "avg_det_score": 0.0, "det_pass_rate": 0.0, "fitness": 0.0}
         if float(generation_best.get("fitness") or 0.0) > best_score:
             best_score = float(generation_best.get("fitness") or 0.0)
@@ -379,6 +421,36 @@ def run_search(
             current_population = next_population
 
     eval_summary = write_evaluation_outputs(root, all_eval_rows)
+    holdout_replay: dict[str, Any] | None = None
+    if replay_split_loaded:
+        # 보고 전용 holdout 평가 — 최종 best genome 1개에 대해서만 수행한다.
+        holdout_cases = replay_split_loaded.holdout_cases(consumer="report")
+        rendered_best = _render_for_genome(rendered_package, best_genome)
+        holdout_records = generate_candidates_for_rows(
+            rows=replay_cases_to_rows(holdout_cases),
+            rendered_package=rendered_best,
+            out_dir=root / "replay_holdout",
+            llm_mode=llm_mode,
+            model_key=model_key,
+            candidate_k=1,
+            generation=0,
+            genome_id=str(best_genome.get("id") or "best"),
+            candidate_strategy=_candidate_strategy(best_genome),
+            service_schema=service_schema,
+            service_context_mode=service_context_mode,
+            timeout_sec=timeout_sec,
+            retries=retries,
+            llm_endpoint=llm_endpoint,
+            llm_extra=llm_extra,
+            repair_attempts=repair_attempts,
+        )
+        holdout_eval = evaluate_candidate_records(holdout_records, det_threshold=det_threshold)
+        _write_jsonl(root / "replay_holdout" / "holdout_eval.jsonl", holdout_eval)
+        holdout_replay = {
+            "replay_fit": replay_pass_rate(holdout_eval),
+            "cases": len(holdout_cases),
+            "best_genome_id": best_genome.get("id"),
+        }
     _write_json(root / "best_genome.json", best_genome)
     _write_json(root / "best_genomes.json", best_history)
     _write_rows_csv(
@@ -412,6 +484,14 @@ def run_search(
             "weights": fitness_config_loaded.get("weights"),
             "normalization": fitness_config_loaded.get("normalization"),
         },
+        "replay": {
+            "split_path": replay_split_loaded.path,
+            "counts": replay_split_loaded.counts,
+            "search_history": replay_history,
+            "holdout_report": holdout_replay,
+        }
+        if replay_split_loaded
+        else None,
         "generation_error_rate": generation_error_rate,
         "stop_reason": "completed_requested_generations",
         "best_history": best_history,
