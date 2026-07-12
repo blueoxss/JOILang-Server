@@ -1,0 +1,105 @@
+﻿row_no,category,command_eng,command_kor,gt,genome_id,generation,candidate_index,candidate_strategy,prompt_render_mode,prompt_assets_dir,prompt_log_paths,raw_response_path,candidates,generated_code,generated_json,generation_error_type,generation_error_count,generation_prompt_tokens_total,generation_completion_tokens_total,generation_total_tokens_total,latency_sec,peak_vram_gb,service_context_source,service_context_mode,service_list_retrieval_scores,connected_devices_used,service_schema_path,repair_applied,repair_actions,backend
+21,1, Change the light color to yellow.,조명 색을 노란색으로 바꿔줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#Light).light_movetorgb(255, 255, 0)""}",eval_base,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/phase0_smoke/20260712T170819Z/prompts/row_21_cand_0_gen_000.md"", ""results/phase0_smoke/20260712T170819Z/prompts/row_21_cand_0_gen_000.json""]",results/phase0_smoke/20260712T170819Z/raw_responses/row_21_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\n(#Light).light_movetorgb(255, 255, 0)""}]","
+(#Light).light_movetorgb(255, 255, 0)","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\n(#Light).light_movetorgb(255, 255, 0)""}",,0,0,0,0,3.1e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+133,5,Start the robot vacuum cleaner in auto mode and switch to manual mode after 30 minutes.,로봇 청소기를 자동 모드로 시작하고 30분 뒤에 수동 모드로 바꿔줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 0, 
+""script"": ""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}",eval_base,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/phase0_smoke/20260712T170819Z/prompts/row_133_cand_0_gen_000.md"", ""results/phase0_smoke/20260712T170819Z/prompts/row_133_cand_0_gen_000.json""]",results/phase0_smoke/20260712T170819Z/raw_responses/row_133_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}]","
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+
+delay(30 MIN)
+
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""manual"")","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}",,0,0,0,0,3.1e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+156,6,"If the fine dust level is 150 or higher and the door is open, close the door and set the air purifier to high.","미세먼지 농도가 150 이상이고 문이 열려 있으면, 문을 닫고 공기청정기를 강풍으로 작동시켜줘.","{""name"": """", ""cron"": """", ""period"": 0, ""script"": ""\nif ((#AirQualitySensor).airqualitysensor_finedustlevel >= 150 and (#Door).door_doorstate == \""open\"") {\n\n    (#Door).door_close()\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n}""}",eval_base,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/phase0_smoke/20260712T170819Z/prompts/row_156_cand_0_gen_000.md"", ""results/phase0_smoke/20260712T170819Z/prompts/row_156_cand_0_gen_000.json""]",results/phase0_smoke/20260712T170819Z/raw_responses/row_156_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#AirQualitySensor).airqualitysensor_finedustlevel >= 150 and (#Door).door_doorstate == \""open\"") {\n\n    (#Door).door_close()\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n}""}]","
+if ((#AirQualitySensor).airqualitysensor_finedustlevel >= 150 and (#Door).door_doorstate == ""open"") {
+
+    (#Door).door_close()
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+}","{""name"": """", ""cron"": """", ""period"": 0, ""code"": ""\nif ((#AirQualitySensor).airqualitysensor_finedustlevel >= 150 and (#Door).door_doorstate == \""open\"") {\n\n    (#Door).door_close()\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n}""}",,0,0,0,0,3.1e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+184,7,"On weekends at 3 PM, check for leakage; if detected, set the siren to emergency mode.",주말 오후 3시에 누수를 체크해서 감지되면 긴급 사이렌을 울려줘.,"{""name"": """", 
+""cron"": ""0 15 * * 6,7"", 
+""period"": 0, 
+""script"": ""\nif ((#LeakSensor).leaksensor_leakage == true) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n}""}",eval_base,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/phase0_smoke/20260712T170819Z/prompts/row_184_cand_0_gen_000.md"", ""results/phase0_smoke/20260712T170819Z/prompts/row_184_cand_0_gen_000.json""]",results/phase0_smoke/20260712T170819Z/raw_responses/row_184_cand_0_gen_000.json,"[{""name"": """", ""cron"": ""0 15 * * 6,7"", ""period"": 0, ""code"": ""\nif ((#LeakSensor).leaksensor_leakage == true) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n}""}]","
+if ((#LeakSensor).leaksensor_leakage == true) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+}","{""name"": """", ""cron"": ""0 15 * * 6,7"", ""period"": 0, ""code"": ""\nif ((#LeakSensor).leaksensor_leakage == true) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n}""}",,0,0,0,0,2.9e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+198,7,"Check every 30 minutes; if the temperature is 30 degrees or higher, set the target temperature to 25 degrees; if it's below 23 degrees, set it to 26 degrees.","30분마다 체크해서 온도가 30도 이상이면 목표 온도를 25도로 설정하고, 23도 미만이면 26도로 설정해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 1800000, 
+""script"": ""\ntemp = (#TemperatureSensor).temperaturesensor_temperature\n\nif (temp >= 30) {\n\n    (#AirConditioner).airconditioner_settargettemperature(25)\n\n} else if (temp < 23) {\n\n    (#AirConditioner).airconditioner_settargettemperature(26)\n\n}""}",eval_base,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/phase0_smoke/20260712T170819Z/prompts/row_198_cand_0_gen_000.md"", ""results/phase0_smoke/20260712T170819Z/prompts/row_198_cand_0_gen_000.json""]",results/phase0_smoke/20260712T170819Z/raw_responses/row_198_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 1800000, ""code"": ""\ntemp = (#TemperatureSensor).temperaturesensor_temperature\n\nif (temp >= 30) {\n\n    (#AirConditioner).airconditioner_settargettemperature(25)\n\n} else if (temp < 23) {\n\n    (#AirConditioner).airconditioner_settargettemperature(26)\n\n}""}]","
+temp = (#TemperatureSensor).temperaturesensor_temperature
+
+if (temp >= 30) {
+
+    (#AirConditioner).airconditioner_settargettemperature(25)
+
+} else if (temp < 23) {
+
+    (#AirConditioner).airconditioner_settargettemperature(26)
+
+}","{""name"": """", ""cron"": """", ""period"": 1800000, ""code"": ""\ntemp = (#TemperatureSensor).temperaturesensor_temperature\n\nif (temp >= 30) {\n\n    (#AirConditioner).airconditioner_settargettemperature(25)\n\n} else if (temp < 23) {\n\n    (#AirConditioner).airconditioner_settargettemperature(26)\n\n}""}",,0,0,0,0,3.1e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+208,7,"Every minute, if the humidity of all sensors in Group2 is 50% or higher, set all dehumidifiers to refresh mode.","그룹 2에 속한 습도 센서들을 1분마다 체크해서 모두 50% 이상이면, 모든 제습기를 리프레쉬 모드로 설정해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 60000, 
+""script"": ""\nif (all(#Group2 #HumiditySensor).humiditysensor_humidity >= 50) {\n\n    all(#Dehumidifier).dehumidifier_setdehumidifiermode(\""refreshing\"")\n\n}""}",eval_base,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/phase0_smoke/20260712T170819Z/prompts/row_208_cand_0_gen_000.md"", ""results/phase0_smoke/20260712T170819Z/prompts/row_208_cand_0_gen_000.json""]",results/phase0_smoke/20260712T170819Z/raw_responses/row_208_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 60000, ""code"": ""\nif (all(#Group2 #HumiditySensor).humiditysensor_humidity >= 50) {\n\n    all(#Dehumidifier).dehumidifier_setdehumidifiermode(\""refreshing\"")\n\n}""}]","
+if (all(#Group2 #HumiditySensor).humiditysensor_humidity >= 50) {
+
+    all(#Dehumidifier).dehumidifier_setdehumidifiermode(""refreshing"")
+
+}","{""name"": """", ""cron"": """", ""period"": 60000, ""code"": ""\nif (all(#Group2 #HumiditySensor).humiditysensor_humidity >= 50) {\n\n    all(#Dehumidifier).dehumidifier_setdehumidifiermode(\""refreshing\"")\n\n}""}",,0,0,0,0,3e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'Grp2_Hum_1': {'category': ['HumiditySensor'], 'tags': ['Group2', 'HumiditySensor', 'North']}, 'Grp2_Hum_2': {'category': ['HumiditySensor'], 'tags': ['Group2', 'HumiditySensor', 'South']}, 'Grp1_Hum_1': {'category': ['HumiditySensor'], 'tags': ['Group1', 'HumiditySensor', 'East']}, 'Dehum_1': {'category': ['Dehumidifier', 'Switch'], 'tags': ['Main', 'Dehumidifier', 'Switch']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+216,7,"Every 10 PM, if presence is detected in the living room, turn on all lights.","밤 10시에 거실에 사람이 감지되면, 모든 불을 켜줘.","{""name"": """", 
+""cron"": ""0 22 * * *"", 
+""period"": 0, 
+""script"": ""\nif ((#LivingRoom #PresenceSensor).presencesensor_presence == true) {\n\n    all(#Light).light_movetobrightness(100, 0)\n\n}""}",eval_base,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/phase0_smoke/20260712T170819Z/prompts/row_216_cand_0_gen_000.md"", ""results/phase0_smoke/20260712T170819Z/prompts/row_216_cand_0_gen_000.json""]",results/phase0_smoke/20260712T170819Z/raw_responses/row_216_cand_0_gen_000.json,"[{""name"": """", ""cron"": ""0 22 * * *"", ""period"": 0, ""code"": ""\nif ((#LivingRoom #PresenceSensor).presencesensor_presence == true) {\n\n    all(#Light).light_movetobrightness(100, 0)\n\n}""}]","
+if ((#LivingRoom #PresenceSensor).presencesensor_presence == true) {
+
+    all(#Light).light_movetobrightness(100, 0)
+
+}","{""name"": """", ""cron"": ""0 22 * * *"", ""period"": 0, ""code"": ""\nif ((#LivingRoom #PresenceSensor).presencesensor_presence == true) {\n\n    all(#Light).light_movetobrightness(100, 0)\n\n}""}",,0,0,0,0,2.9e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'LR_Presence': {'category': ['PresenceSensor'], 'tags': ['LivingRoom', 'PresenceSensor']}, 'LR_Light': {'category': ['Light', 'Switch', 'LevelControl'], 'tags': ['LivingRoom', 'Light', 'Switch', 'LevelControl']}, 'Kitchen_Light': {'category': ['Light', 'Switch'], 'tags': ['Kitchen', 'Light', 'Switch']}}",datasets/service_list_ver2.0.1.json,False,[],mock
+245,8,"Whenever the temperature becomes 30 degrees or higher, close the blind.",온도가 30도 이상이 될 때마다 블라인드를 닫아줘.,"{""name"": """", ""cron"": """", ""period"": 100, ""script"": ""triggered := false\nif ((#TemperatureSensor).temperaturesensor_temperature >= 30) {\n    if (triggered == false) {\n        (#Blind).windowcovering_downorclose()\n        triggered = true\n    }\n} else {\n    triggered = false\n}""}",eval_base,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/phase0_smoke/20260712T170819Z/prompts/row_245_cand_0_gen_000.md"", ""results/phase0_smoke/20260712T170819Z/prompts/row_245_cand_0_gen_000.json""]",results/phase0_smoke/20260712T170819Z/raw_responses/row_245_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 100, ""code"": ""triggered := false\nif ((#TemperatureSensor).temperaturesensor_temperature >= 30) {\n    if (triggered == false) {\n        (#Blind).windowcovering_downorclose()\n        triggered = true\n    }\n} else {\n    triggered = false\n}""}]","triggered := false
+if ((#TemperatureSensor).temperaturesensor_temperature >= 30) {
+    if (triggered == false) {
+        (#Blind).windowcovering_downorclose()
+        triggered = true
+    }
+} else {
+    triggered = false
+}","{""name"": """", ""cron"": """", ""period"": 100, ""code"": ""triggered := false\nif ((#TemperatureSensor).temperaturesensor_temperature >= 30) {\n    if (triggered == false) {\n        (#Blind).windowcovering_downorclose()\n        triggered = true\n    }\n} else {\n    triggered = false\n}""}",,0,0,0,0,3.2e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+249,8,"When a leak is detected, close the valve immediately and give a warning broadcast through the speaker every minute.","누수가 감지되면 즉시 밸브를 잠그고 1분마다 스피커로 ""누수가 감지되었습니다. 대피하세요""라고 출력해줘.","{""name"": """", 
+""cron"": """", 
+""period"": 60000, 
+""script"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#LeakSensor).leaksensor_leakage == true)\n\n    (#Valve).valve_close()\n\n    active = 1\n\n}\n\n(#Speaker).speaker_speak(\""누수가 감지되었습니다. 대피하세요\"")""}",eval_base,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/phase0_smoke/20260712T170819Z/prompts/row_249_cand_0_gen_000.md"", ""results/phase0_smoke/20260712T170819Z/prompts/row_249_cand_0_gen_000.json""]",results/phase0_smoke/20260712T170819Z/raw_responses/row_249_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 60000, ""code"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#LeakSensor).leaksensor_leakage == true)\n\n    (#Valve).valve_close()\n\n    active = 1\n\n}\n\n(#Speaker).speaker_speak(\""누수가 감지되었습니다. 대피하세요\"")""}]","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#LeakSensor).leaksensor_leakage == true)
+
+    (#Valve).valve_close()
+
+    active = 1
+
+}
+
+(#Speaker).speaker_speak(""누수가 감지되었습니다. 대피하세요"")","{""name"": """", ""cron"": """", ""period"": 60000, ""code"": ""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#LeakSensor).leaksensor_leakage == true)\n\n    (#Valve).valve_close()\n\n    active = 1\n\n}\n\n(#Speaker).speaker_speak(\""누수가 감지되었습니다. 대피하세요\"")""}",,0,0,0,0,3.6e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",,datasets/service_list_ver2.0.1.json,False,[],mock
+262,8,"Whenever the button with the 'Stop' tag is pressed, turn off all devices with 'Even' tags.",중단 태그가 달린 버튼이 눌릴때마다 짝수 태그가 붙은 장치들을 모두 꺼줘.,"{""name"": """", 
+""cron"": """", 
+""period"": 100, 
+""script"": ""\nprev := (#Stop #Button).button_button\n\ncurr = (#Stop #Button).button_button\n\nif (prev != \""pushed\"" and curr == \""pushed\"") {\n\n    all(#Even).switch_off()\n\n}\n\nprev = curr""}",eval_base,0,0,mock_gt_copy,monolith,/home/mgjeong/Desktop/llm/JOILang-Server/gpt_mg/version0_13,"[""results/phase0_smoke/20260712T170819Z/prompts/row_262_cand_0_gen_000.md"", ""results/phase0_smoke/20260712T170819Z/prompts/row_262_cand_0_gen_000.json""]",results/phase0_smoke/20260712T170819Z/raw_responses/row_262_cand_0_gen_000.json,"[{""name"": """", ""cron"": """", ""period"": 100, ""code"": ""\nprev := (#Stop #Button).button_button\n\ncurr = (#Stop #Button).button_button\n\nif (prev != \""pushed\"" and curr == \""pushed\"") {\n\n    all(#Even).switch_off()\n\n}\n\nprev = curr""}]","
+prev := (#Stop #Button).button_button
+
+curr = (#Stop #Button).button_button
+
+if (prev != ""pushed"" and curr == ""pushed"") {
+
+    all(#Even).switch_off()
+
+}
+
+prev = curr","{""name"": """", ""cron"": """", ""period"": 100, ""code"": ""\nprev := (#Stop #Button).button_button\n\ncurr = (#Stop #Button).button_button\n\nif (prev != \""pushed\"" and curr == \""pushed\"") {\n\n    all(#Even).switch_off()\n\n}\n\nprev = curr""}",,0,0,0,0,3.2e-05,,provided_schema,schema_fallback,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}","{'Stop_Button': {'category': 'Button', 'tags': ['Stop', 'Button']}, 'Even_Charger': {'category': ['Charger', 'Switch'], 'tags': ['Even', 'Charger', 'Switch']}, 'Even_Light': {'category': ['Light', 'Switch'], 'tags': ['Even', 'Light', 'Switch']}, 'Odd_Charger': {'category': ['Charger', 'Switch'], 'tags': ['Odd', 'Charger', 'Switch']}}",datasets/service_list_ver2.0.1.json,False,[],mock
