@@ -104,6 +104,8 @@ def add_search_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--fitness-mode", default="strict_det")
     parser.add_argument("--fitness-config", default="", help="적합도 가중치 config 경로 (기본: configs/ga_search_fitness.json)")
     parser.add_argument("--replay-split", default="", help="리플레이 search/holdout 분할 파일 (datasets/replay_split.json). 지정 시 γ·ReplayFit_search 항 활성화")
+    parser.add_argument("--gate-config", default="", help="채택 게이트 config (기본: configs/ga_search_gate.json)")
+    parser.add_argument("--gate-baseline", default="", help="기존 채택본 지표 JSON (overall_detpass/subset_detpass/holdout_replay_fit). 미지정 시 첫 채택으로 간주")
     parser.add_argument("--mutation-mode", default="mock")
     parser.add_argument("--feedback-guided-mutation", action="store_true")
     parser.add_argument("--enable-compression-mutation", action="store_true")
@@ -412,6 +414,8 @@ def run_search(args: argparse.Namespace) -> int:
         compression_mutation=args.enable_compression_mutation,
         fitness_config=args.fitness_config or None,
         replay_split=args.replay_split or None,
+        gate_config=args.gate_config or None,
+        gate_baseline=args.gate_baseline or None,
     )
     if patch_application_result:
         summary["patch_application"] = patch_application_result["report"]

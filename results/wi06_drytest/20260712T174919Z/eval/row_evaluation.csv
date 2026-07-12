@@ -1,0 +1,409 @@
+﻿row_no,category,genome_id,candidate_index,det_score,det_pass,gt_exact,gt_similarity,schedule_match,cron_match,period_match,code_match,service_valid,receiver_valid,gt_service_coverage,gt_service_precision,gt_receiver_coverage,dataflow_score,numeric_grounding,enum_grounding,failure_reasons,diff_summary,gt_code,generated_code,gt_json,generated_json,generation,candidate_strategy,generation_error_type,generation_error_count,generation_prompt_tokens_total,generation_completion_tokens_total,generation_total_tokens_total,latency_sec,peak_vram_gb,raw_response_path,prompt_log_paths,service_schema_path,service_context_mode,service_context_source,service_list_retrieval_scores,repair_applied,repair_actions,backend
+13,1,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""airqualitysensor_dustlevel"",""speaker_speak""],""generated_services"":[""airqualitysensor_dustlevel"",""speaker_speak""],""gt_receivers"":[""#AirQualitySensor"",""#Speaker""],""generated_receivers"":[""#AirQualitySensor"",""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[""미세먼지농도는"",""입니다""],""generated_string_args"":[""미세먼지농도는"",""입니다""]}","
+dust = (#AirQualitySensor).airqualitysensor_dustlevel
+
+(#Speaker).speaker_speak(""미세먼지 농도는 "" + dust + ""입니다"")","
+dust = (#AirQualitySensor).airqualitysensor_dustlevel
+
+(#Speaker).speaker_speak(""미세먼지 농도는 "" + dust + ""입니다"")","{""name"":"""",""cron"":"""",""period"":0,""script"":""\ndust = (#AirQualitySensor).airqualitysensor_dustlevel\n\n(#Speaker).speaker_speak(\""미세먼지 농도는 \"" + dust + \""입니다\"")""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\ndust = (#AirQualitySensor).airqualitysensor_dustlevel\n\n(#Speaker).speaker_speak(\""미세먼지 농도는 \"" + dust + \""입니다\"")""}",0,mock_gt_copy,,0,0,0,0,3.3e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_13_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_13_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_13_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+28,1,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""speaker_volumedown""],""generated_services"":[""speaker_volumedown""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[],""generated_string_args"":[]}","
+(#Speaker).speaker_volumedown()","
+(#Speaker).speaker_volumedown()","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#Speaker).speaker_volumedown()""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\n(#Speaker).speaker_volumedown()""}",0,mock_gt_copy,,0,0,0,0,2.9e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_28_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_28_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_28_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+55,2,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""windowcovering_downorclose""],""generated_services"":[""windowcovering_downorclose""],""gt_receivers"":[""#Bedroom#Even#Blind""],""generated_receivers"":[""#Bedroom#Even#Blind""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[],""generated_string_args"":[]}","
+all(#Bedroom #Even #Blind).windowcovering_downorclose()","
+all(#Bedroom #Even #Blind).windowcovering_downorclose()","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nall(#Bedroom #Even #Blind).windowcovering_downorclose()""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nall(#Bedroom #Even #Blind).windowcovering_downorclose()""}",0,mock_gt_copy,,0,0,0,0,2.8e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_55_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_55_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_55_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+59,2,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""doorlock_lock""],""generated_services"":[""doorlock_lock""],""gt_receivers"":[""#Storage#DoorLock""],""generated_receivers"":[""#Storage#DoorLock""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[],""generated_string_args"":[]}","
+all(#Storage #DoorLock).doorlock_lock()","
+all(#Storage #DoorLock).doorlock_lock()","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nall(#Storage #DoorLock).doorlock_lock()""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nall(#Storage #DoorLock).doorlock_lock()""}",0,mock_gt_copy,,0,0,0,0,2.8e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_59_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_59_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_59_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+62,3,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""charger_voltage"",""switch_off""],""generated_services"":[""charger_voltage"",""switch_off""],""gt_receivers"":[""#Charger"",""(#Charger""],""generated_receivers"":[""#Charger"",""(#Charger""],""gt_numeric_literals"":[""220000""],""generated_numeric_literals"":[""220000""],""gt_string_args"":[],""generated_string_args"":[]}","
+if ((#Charger).charger_voltage >= 220000) {
+
+    (#Charger).switch_off()
+
+}","
+if ((#Charger).charger_voltage >= 220000) {
+
+    (#Charger).switch_off()
+
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#Charger).charger_voltage >= 220000) {\n\n    (#Charger).switch_off()\n\n}""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nif ((#Charger).charger_voltage >= 220000) {\n\n    (#Charger).switch_off()\n\n}""}",0,mock_gt_copy,,0,0,0,0,2.9e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_62_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_62_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_62_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+74,3,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""button_button"",""windowcovering_uporopen""],""generated_services"":[""button_button"",""windowcovering_uporopen""],""gt_receivers"":[""#Blind"",""(#Button""],""generated_receivers"":[""#Blind"",""(#Button""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[""pushed""],""generated_string_args"":[""pushed""]}","
+if ((#Button).button_button == ""pushed"") {
+
+    (#Blind).windowcovering_uporopen()
+
+}","
+if ((#Button).button_button == ""pushed"") {
+
+    (#Blind).windowcovering_uporopen()
+
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#Button).button_button == \""pushed\"") {\n\n    (#Blind).windowcovering_uporopen()\n\n}""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nif ((#Button).button_button == \""pushed\"") {\n\n    (#Blind).windowcovering_uporopen()\n\n}""}",0,mock_gt_copy,,0,0,0,0,2.8e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_74_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_74_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_74_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+99,4,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""airconditioner_settargettemperature"",""temperaturesensor_temperature""],""generated_services"":[""airconditioner_settargettemperature"",""temperaturesensor_temperature""],""gt_receivers"":[""#AirConditioner"",""(#TemperatureSensor""],""generated_receivers"":[""#AirConditioner"",""(#TemperatureSensor""],""gt_numeric_literals"":[""35"",""30""],""generated_numeric_literals"":[""35"",""30""],""gt_string_args"":[],""generated_string_args"":[]}","
+wait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)
+
+(#AirConditioner).airconditioner_settargettemperature(30)","
+wait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)
+
+(#AirConditioner).airconditioner_settargettemperature(30)","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nwait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)\n\n(#AirConditioner).airconditioner_settargettemperature(30)""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nwait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)\n\n(#AirConditioner).airconditioner_settargettemperature(30)""}",0,mock_gt_copy,,0,0,0,0,2.9e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_99_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_99_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_99_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+107,4,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""motionsensor_motion"",""switch_on""],""generated_services"":[""motionsensor_motion"",""switch_on""],""gt_receivers"":[""#Bedroom#AirConditioner"",""(#Bedroom#MotionSensor""],""generated_receivers"":[""#Bedroom#AirConditioner"",""(#Bedroom#MotionSensor""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[],""generated_string_args"":[]}","
+wait until ((#Bedroom #MotionSensor).motionsensor_motion == true)
+
+(#Bedroom #AirConditioner).switch_on()","
+wait until ((#Bedroom #MotionSensor).motionsensor_motion == true)
+
+(#Bedroom #AirConditioner).switch_on()","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nwait until ((#Bedroom #MotionSensor).motionsensor_motion == true)\n\n(#Bedroom #AirConditioner).switch_on()""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nwait until ((#Bedroom #MotionSensor).motionsensor_motion == true)\n\n(#Bedroom #AirConditioner).switch_on()""}",0,mock_gt_copy,,0,0,0,0,2.9e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_107_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_107_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_107_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+133,5,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""robotvacuumcleaner_setrobotvacuumcleanermodemode""],""generated_services"":[""robotvacuumcleaner_setrobotvacuumcleanermodemode""],""gt_receivers"":[""#RobotVacuumCleaner""],""generated_receivers"":[""#RobotVacuumCleaner""],""gt_numeric_literals"":[""30""],""generated_numeric_literals"":[""30""],""gt_string_args"":[""auto"",""manual""],""generated_string_args"":[""auto"",""manual""]}","
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+
+delay(30 MIN)
+
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""manual"")","
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+
+delay(30 MIN)
+
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""manual"")","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}",0,mock_gt_copy,,0,0,0,0,3e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_133_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_133_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_133_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+136,5,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""switch_off"",""switch_on""],""generated_services"":[""switch_off"",""switch_on""],""gt_receivers"":[""#LivingRoom#Light""],""generated_receivers"":[""#LivingRoom#Light""],""gt_numeric_literals"":[""1""],""generated_numeric_literals"":[""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+all(#LivingRoom #Light).switch_on()
+
+delay(1 HOUR)
+
+all(#LivingRoom #Light).switch_off()","
+all(#LivingRoom #Light).switch_on()
+
+delay(1 HOUR)
+
+all(#LivingRoom #Light).switch_off()","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nall(#LivingRoom #Light).switch_on()\n\ndelay(1 HOUR)\n\nall(#LivingRoom #Light).switch_off()""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nall(#LivingRoom #Light).switch_on()\n\ndelay(1 HOUR)\n\nall(#LivingRoom #Light).switch_off()""}",0,mock_gt_copy,,0,0,0,0,2.9e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_136_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_136_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_136_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+176,6,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""humiditysensor_humidity"",""switch_off"",""switch_on"",""temperaturesensor_temperature""],""generated_services"":[""humiditysensor_humidity"",""switch_off"",""switch_on"",""temperaturesensor_temperature""],""gt_receivers"":[""#AirConditioner"",""#Humidifier"",""#WineCellar#HumiditySensor"",""(#WineCellar#TemperatureSensor""],""generated_receivers"":[""#AirConditioner"",""#Humidifier"",""#WineCellar#HumiditySensor"",""(#WineCellar#TemperatureSensor""],""gt_numeric_literals"":[""15"",""60""],""generated_numeric_literals"":[""15"",""60""],""gt_string_args"":[],""generated_string_args"":[]}","
+if ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {
+
+    (#AirConditioner).switch_on()
+
+    (#Humidifier).switch_off()
+
+}","
+if ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {
+
+    (#AirConditioner).switch_on()
+
+    (#Humidifier).switch_off()
+
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {\n\n    (#AirConditioner).switch_on()\n\n    (#Humidifier).switch_off()\n\n}""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nif ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {\n\n    (#AirConditioner).switch_on()\n\n    (#Humidifier).switch_off()\n\n}""}",0,mock_gt_copy,,0,0,0,0,3e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_176_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_176_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_176_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+180,6,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""airconditioner_setairconditionermode"",""lightsensor_brightness"",""switch_switch"",""windowcovering_downorclose""],""generated_services"":[""airconditioner_setairconditionermode"",""lightsensor_brightness"",""switch_switch"",""windowcovering_downorclose""],""gt_receivers"":[""#LivingRoom#AirConditioner"",""#LivingRoom#Blind"",""#LivingRoom#LightSensor"",""(#LivingRoom#Light""],""generated_receivers"":[""#LivingRoom#AirConditioner"",""#LivingRoom#Blind"",""#LivingRoom#LightSensor"",""(#LivingRoom#Light""],""gt_numeric_literals"":[""50""],""generated_numeric_literals"":[""50""],""gt_string_args"":[""auto""],""generated_string_args"":[""auto""]}","
+if ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {
+
+    (#LivingRoom #Blind).windowcovering_downorclose()
+
+    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(""auto"")
+
+}","
+if ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {
+
+    (#LivingRoom #Blind).windowcovering_downorclose()
+
+    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(""auto"")
+
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {\n\n    (#LivingRoom #Blind).windowcovering_downorclose()\n\n    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n\n}""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nif ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {\n\n    (#LivingRoom #Blind).windowcovering_downorclose()\n\n    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n\n}""}",0,mock_gt_copy,,0,0,0,0,3.1e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_180_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_180_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_180_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+200,7,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_finedustlevel""],""generated_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_finedustlevel""],""gt_receivers"":[""#AirPurifier"",""#AirQualitySensor""],""generated_receivers"":[""#AirPurifier"",""#AirQualitySensor""],""gt_numeric_literals"":[""200"",""100""],""generated_numeric_literals"":[""200"",""100""],""gt_string_args"":[""high"",""low""],""generated_string_args"":[""high"",""low""]}","
+dust = (#AirQualitySensor).airqualitysensor_finedustlevel
+
+if (dust >= 200) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+} else if (dust <= 100) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""low"")
+
+}","
+dust = (#AirQualitySensor).airqualitysensor_finedustlevel
+
+if (dust >= 200) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+} else if (dust <= 100) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""low"")
+
+}","{""name"":"""",""cron"":"""",""period"":3600000,""script"":""\ndust = (#AirQualitySensor).airqualitysensor_finedustlevel\n\nif (dust >= 200) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n} else if (dust <= 100) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""low\"")\n\n}""}","{""name"":"""",""cron"":"""",""period"":3600000,""code"":""\ndust = (#AirQualitySensor).airqualitysensor_finedustlevel\n\nif (dust >= 200) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n} else if (dust <= 100) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""low\"")\n\n}""}",0,mock_gt_copy,,0,0,0,0,3.1e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_200_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_200_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_200_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+211,7,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""presencesensor_presence"",""switch_off""],""generated_services"":[""presencesensor_presence"",""switch_off""],""gt_receivers"":[""#Floor1#Light"",""#Floor2#Light"",""(#Floor1#PresenceSensor"",""(#Floor2#PresenceSensor""],""generated_receivers"":[""#Floor1#Light"",""#Floor2#Light"",""(#Floor1#PresenceSensor"",""(#Floor2#PresenceSensor""],""gt_numeric_literals"":[""1""],""generated_numeric_literals"":[""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+if ((#Floor1 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor1 #Light).switch_off()
+
+}
+
+delay(1 HOUR)
+
+if ((#Floor2 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor2 #Light).switch_off()
+
+}","
+if ((#Floor1 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor1 #Light).switch_off()
+
+}
+
+delay(1 HOUR)
+
+if ((#Floor2 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor2 #Light).switch_off()
+
+}","{""name"":"""",""cron"":""0 19 * * *"",""period"":0,""script"":""\nif ((#Floor1 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor1 #Light).switch_off()\n\n}\n\ndelay(1 HOUR)\n\nif ((#Floor2 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor2 #Light).switch_off()\n\n}""}","{""name"":"""",""cron"":""0 19 * * *"",""period"":0,""code"":""\nif ((#Floor1 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor1 #Light).switch_off()\n\n}\n\ndelay(1 HOUR)\n\nif ((#Floor2 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor2 #Light).switch_off()\n\n}""}",0,mock_gt_copy,,0,0,0,0,3.1e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_211_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_211_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_211_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+253,8,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""emailprovider_sendmail"",""smokedetector_smoke"",""speaker_speak""],""generated_services"":[""emailprovider_sendmail"",""smokedetector_smoke"",""speaker_speak""],""gt_receivers"":[""#EmailProvider"",""#Speaker"",""(#SmokeDetector""],""generated_receivers"":[""#EmailProvider"",""#Speaker"",""(#SmokeDetector""],""gt_numeric_literals"":[""0"",""0"",""1""],""generated_numeric_literals"":[""0"",""0"",""1""],""gt_string_args"":[""화재발생!즉시대피하세요."",""test@example.com"",""화재경고"",""화재가발생했습니다.대피하세요.""],""generated_string_args"":[""화재발생!즉시대피하세요."",""test@example.com"",""화재경고"",""화재가발생했습니다.대피하세요.""]}","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#SmokeDetector).smokedetector_smoke == true)
+
+    (#Speaker).speaker_speak(""화재 발생! 즉시 대피하세요."" )
+
+    active = 1
+
+}
+
+(#EmailProvider).emailprovider_sendmail(""test@example.com"", ""화재 경고"", ""화재가 발생했습니다. 대피하세요."")","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#SmokeDetector).smokedetector_smoke == true)
+
+    (#Speaker).speaker_speak(""화재 발생! 즉시 대피하세요."" )
+
+    active = 1
+
+}
+
+(#EmailProvider).emailprovider_sendmail(""test@example.com"", ""화재 경고"", ""화재가 발생했습니다. 대피하세요."")","{""name"":"""",""cron"":"""",""period"":300000,""script"":""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#SmokeDetector).smokedetector_smoke == true)\n\n    (#Speaker).speaker_speak(\""화재 발생! 즉시 대피하세요.\"" )\n\n    active = 1\n\n}\n\n(#EmailProvider).emailprovider_sendmail(\""test@example.com\"", \""화재 경고\"", \""화재가 발생했습니다. 대피하세요.\"")""}","{""name"":"""",""cron"":"""",""period"":300000,""code"":""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#SmokeDetector).smokedetector_smoke == true)\n\n    (#Speaker).speaker_speak(\""화재 발생! 즉시 대피하세요.\"" )\n\n    active = 1\n\n}\n\n(#EmailProvider).emailprovider_sendmail(\""test@example.com\"", \""화재 경고\"", \""화재가 발생했습니다. 대피하세요.\"")""}",0,mock_gt_copy,,0,0,0,0,3.7e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_253_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_253_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_253_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+268,8,genome_000,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""airqualitysensor_carbondioxide"",""speaker_speak""],""generated_services"":[""airqualitysensor_carbondioxide"",""speaker_speak""],""gt_receivers"":[""#ParkingLot#Speaker"",""(#ParkingLot#AirQualitySensor""],""generated_receivers"":[""#ParkingLot#Speaker"",""(#ParkingLot#AirQualitySensor""],""gt_numeric_literals"":[""0"",""0"",""880"",""1""],""generated_numeric_literals"":[""0"",""0"",""880"",""1""],""gt_string_args"":[""co2농도위험""],""generated_string_args"":[""co2농도위험""]}","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)
+
+    active = 1
+
+}
+
+(#ParkingLot #Speaker).speaker_speak(""CO2 농도 위험"")","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)
+
+    active = 1
+
+}
+
+(#ParkingLot #Speaker).speaker_speak(""CO2 농도 위험"")","{""name"":"""",""cron"":"""",""period"":10000,""script"":""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)\n\n    active = 1\n\n}\n\n(#ParkingLot #Speaker).speaker_speak(\""CO2 농도 위험\"")""}","{""name"":"""",""cron"":"""",""period"":10000,""code"":""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)\n\n    active = 1\n\n}\n\n(#ParkingLot #Speaker).speaker_speak(\""CO2 농도 위험\"")""}",0,mock_gt_copy,,0,0,0,0,3.4e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_268_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_268_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_268_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+13,1,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""airqualitysensor_dustlevel"",""speaker_speak""],""generated_services"":[""airqualitysensor_dustlevel"",""speaker_speak""],""gt_receivers"":[""#AirQualitySensor"",""#Speaker""],""generated_receivers"":[""#AirQualitySensor"",""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[""미세먼지농도는"",""입니다""],""generated_string_args"":[""미세먼지농도는"",""입니다""]}","
+dust = (#AirQualitySensor).airqualitysensor_dustlevel
+
+(#Speaker).speaker_speak(""미세먼지 농도는 "" + dust + ""입니다"")","
+dust = (#AirQualitySensor).airqualitysensor_dustlevel
+
+(#Speaker).speaker_speak(""미세먼지 농도는 "" + dust + ""입니다"")","{""name"":"""",""cron"":"""",""period"":0,""script"":""\ndust = (#AirQualitySensor).airqualitysensor_dustlevel\n\n(#Speaker).speaker_speak(\""미세먼지 농도는 \"" + dust + \""입니다\"")""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\ndust = (#AirQualitySensor).airqualitysensor_dustlevel\n\n(#Speaker).speaker_speak(\""미세먼지 농도는 \"" + dust + \""입니다\"")""}",0,mock_gt_copy,,0,0,0,0,3.2e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_13_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_13_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_13_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+28,1,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""speaker_volumedown""],""generated_services"":[""speaker_volumedown""],""gt_receivers"":[""#Speaker""],""generated_receivers"":[""#Speaker""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[],""generated_string_args"":[]}","
+(#Speaker).speaker_volumedown()","
+(#Speaker).speaker_volumedown()","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#Speaker).speaker_volumedown()""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\n(#Speaker).speaker_volumedown()""}",0,mock_gt_copy,,0,0,0,0,2.8e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_28_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_28_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_28_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+55,2,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""windowcovering_downorclose""],""generated_services"":[""windowcovering_downorclose""],""gt_receivers"":[""#Bedroom#Even#Blind""],""generated_receivers"":[""#Bedroom#Even#Blind""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[],""generated_string_args"":[]}","
+all(#Bedroom #Even #Blind).windowcovering_downorclose()","
+all(#Bedroom #Even #Blind).windowcovering_downorclose()","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nall(#Bedroom #Even #Blind).windowcovering_downorclose()""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nall(#Bedroom #Even #Blind).windowcovering_downorclose()""}",0,mock_gt_copy,,0,0,0,0,2.8e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_55_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_55_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_55_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+59,2,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""doorlock_lock""],""generated_services"":[""doorlock_lock""],""gt_receivers"":[""#Storage#DoorLock""],""generated_receivers"":[""#Storage#DoorLock""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[],""generated_string_args"":[]}","
+all(#Storage #DoorLock).doorlock_lock()","
+all(#Storage #DoorLock).doorlock_lock()","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nall(#Storage #DoorLock).doorlock_lock()""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nall(#Storage #DoorLock).doorlock_lock()""}",0,mock_gt_copy,,0,0,0,0,2.8e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_59_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_59_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_59_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+62,3,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""charger_voltage"",""switch_off""],""generated_services"":[""charger_voltage"",""switch_off""],""gt_receivers"":[""#Charger"",""(#Charger""],""generated_receivers"":[""#Charger"",""(#Charger""],""gt_numeric_literals"":[""220000""],""generated_numeric_literals"":[""220000""],""gt_string_args"":[],""generated_string_args"":[]}","
+if ((#Charger).charger_voltage >= 220000) {
+
+    (#Charger).switch_off()
+
+}","
+if ((#Charger).charger_voltage >= 220000) {
+
+    (#Charger).switch_off()
+
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#Charger).charger_voltage >= 220000) {\n\n    (#Charger).switch_off()\n\n}""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nif ((#Charger).charger_voltage >= 220000) {\n\n    (#Charger).switch_off()\n\n}""}",0,mock_gt_copy,,0,0,0,0,2.9e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_62_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_62_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_62_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+74,3,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""button_button"",""windowcovering_uporopen""],""generated_services"":[""button_button"",""windowcovering_uporopen""],""gt_receivers"":[""#Blind"",""(#Button""],""generated_receivers"":[""#Blind"",""(#Button""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[""pushed""],""generated_string_args"":[""pushed""]}","
+if ((#Button).button_button == ""pushed"") {
+
+    (#Blind).windowcovering_uporopen()
+
+}","
+if ((#Button).button_button == ""pushed"") {
+
+    (#Blind).windowcovering_uporopen()
+
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#Button).button_button == \""pushed\"") {\n\n    (#Blind).windowcovering_uporopen()\n\n}""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nif ((#Button).button_button == \""pushed\"") {\n\n    (#Blind).windowcovering_uporopen()\n\n}""}",0,mock_gt_copy,,0,0,0,0,2.9e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_74_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_74_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_74_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+99,4,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""airconditioner_settargettemperature"",""temperaturesensor_temperature""],""generated_services"":[""airconditioner_settargettemperature"",""temperaturesensor_temperature""],""gt_receivers"":[""#AirConditioner"",""(#TemperatureSensor""],""generated_receivers"":[""#AirConditioner"",""(#TemperatureSensor""],""gt_numeric_literals"":[""35"",""30""],""generated_numeric_literals"":[""35"",""30""],""gt_string_args"":[],""generated_string_args"":[]}","
+wait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)
+
+(#AirConditioner).airconditioner_settargettemperature(30)","
+wait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)
+
+(#AirConditioner).airconditioner_settargettemperature(30)","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nwait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)\n\n(#AirConditioner).airconditioner_settargettemperature(30)""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nwait until ((#TemperatureSensor).temperaturesensor_temperature >= 35)\n\n(#AirConditioner).airconditioner_settargettemperature(30)""}",0,mock_gt_copy,,0,0,0,0,2.9e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_99_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_99_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_99_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+107,4,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""motionsensor_motion"",""switch_on""],""generated_services"":[""motionsensor_motion"",""switch_on""],""gt_receivers"":[""#Bedroom#AirConditioner"",""(#Bedroom#MotionSensor""],""generated_receivers"":[""#Bedroom#AirConditioner"",""(#Bedroom#MotionSensor""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[],""generated_string_args"":[]}","
+wait until ((#Bedroom #MotionSensor).motionsensor_motion == true)
+
+(#Bedroom #AirConditioner).switch_on()","
+wait until ((#Bedroom #MotionSensor).motionsensor_motion == true)
+
+(#Bedroom #AirConditioner).switch_on()","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nwait until ((#Bedroom #MotionSensor).motionsensor_motion == true)\n\n(#Bedroom #AirConditioner).switch_on()""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nwait until ((#Bedroom #MotionSensor).motionsensor_motion == true)\n\n(#Bedroom #AirConditioner).switch_on()""}",0,mock_gt_copy,,0,0,0,0,2.9e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_107_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_107_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_107_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+133,5,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""robotvacuumcleaner_setrobotvacuumcleanermodemode""],""generated_services"":[""robotvacuumcleaner_setrobotvacuumcleanermodemode""],""gt_receivers"":[""#RobotVacuumCleaner""],""generated_receivers"":[""#RobotVacuumCleaner""],""gt_numeric_literals"":[""30""],""generated_numeric_literals"":[""30""],""gt_string_args"":[""auto"",""manual""],""generated_string_args"":[""auto"",""manual""]}","
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+
+delay(30 MIN)
+
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""manual"")","
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+
+delay(30 MIN)
+
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""manual"")","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}",0,mock_gt_copy,,0,0,0,0,3.1e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_133_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_133_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_133_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+136,5,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""switch_off"",""switch_on""],""generated_services"":[""switch_off"",""switch_on""],""gt_receivers"":[""#LivingRoom#Light""],""generated_receivers"":[""#LivingRoom#Light""],""gt_numeric_literals"":[""1""],""generated_numeric_literals"":[""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+all(#LivingRoom #Light).switch_on()
+
+delay(1 HOUR)
+
+all(#LivingRoom #Light).switch_off()","
+all(#LivingRoom #Light).switch_on()
+
+delay(1 HOUR)
+
+all(#LivingRoom #Light).switch_off()","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nall(#LivingRoom #Light).switch_on()\n\ndelay(1 HOUR)\n\nall(#LivingRoom #Light).switch_off()""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nall(#LivingRoom #Light).switch_on()\n\ndelay(1 HOUR)\n\nall(#LivingRoom #Light).switch_off()""}",0,mock_gt_copy,,0,0,0,0,3e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_136_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_136_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_136_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+176,6,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""humiditysensor_humidity"",""switch_off"",""switch_on"",""temperaturesensor_temperature""],""generated_services"":[""humiditysensor_humidity"",""switch_off"",""switch_on"",""temperaturesensor_temperature""],""gt_receivers"":[""#AirConditioner"",""#Humidifier"",""#WineCellar#HumiditySensor"",""(#WineCellar#TemperatureSensor""],""generated_receivers"":[""#AirConditioner"",""#Humidifier"",""#WineCellar#HumiditySensor"",""(#WineCellar#TemperatureSensor""],""gt_numeric_literals"":[""15"",""60""],""generated_numeric_literals"":[""15"",""60""],""gt_string_args"":[],""generated_string_args"":[]}","
+if ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {
+
+    (#AirConditioner).switch_on()
+
+    (#Humidifier).switch_off()
+
+}","
+if ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {
+
+    (#AirConditioner).switch_on()
+
+    (#Humidifier).switch_off()
+
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {\n\n    (#AirConditioner).switch_on()\n\n    (#Humidifier).switch_off()\n\n}""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nif ((#WineCellar #TemperatureSensor).temperaturesensor_temperature >= 15 and (#WineCellar #HumiditySensor).humiditysensor_humidity >= 60) {\n\n    (#AirConditioner).switch_on()\n\n    (#Humidifier).switch_off()\n\n}""}",0,mock_gt_copy,,0,0,0,0,3e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_176_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_176_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_176_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+180,6,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""airconditioner_setairconditionermode"",""lightsensor_brightness"",""switch_switch"",""windowcovering_downorclose""],""generated_services"":[""airconditioner_setairconditionermode"",""lightsensor_brightness"",""switch_switch"",""windowcovering_downorclose""],""gt_receivers"":[""#LivingRoom#AirConditioner"",""#LivingRoom#Blind"",""#LivingRoom#LightSensor"",""(#LivingRoom#Light""],""generated_receivers"":[""#LivingRoom#AirConditioner"",""#LivingRoom#Blind"",""#LivingRoom#LightSensor"",""(#LivingRoom#Light""],""gt_numeric_literals"":[""50""],""generated_numeric_literals"":[""50""],""gt_string_args"":[""auto""],""generated_string_args"":[""auto""]}","
+if ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {
+
+    (#LivingRoom #Blind).windowcovering_downorclose()
+
+    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(""auto"")
+
+}","
+if ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {
+
+    (#LivingRoom #Blind).windowcovering_downorclose()
+
+    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(""auto"")
+
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {\n\n    (#LivingRoom #Blind).windowcovering_downorclose()\n\n    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n\n}""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nif ((#LivingRoom #Light).switch_switch == true and (#LivingRoom #LightSensor).lightsensor_brightness >= 50) {\n\n    (#LivingRoom #Blind).windowcovering_downorclose()\n\n    (#LivingRoom #AirConditioner).airconditioner_setairconditionermode(\""auto\"")\n\n}""}",0,mock_gt_copy,,0,0,0,0,3e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_180_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_180_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_180_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+200,7,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_finedustlevel""],""generated_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_finedustlevel""],""gt_receivers"":[""#AirPurifier"",""#AirQualitySensor""],""generated_receivers"":[""#AirPurifier"",""#AirQualitySensor""],""gt_numeric_literals"":[""200"",""100""],""generated_numeric_literals"":[""200"",""100""],""gt_string_args"":[""high"",""low""],""generated_string_args"":[""high"",""low""]}","
+dust = (#AirQualitySensor).airqualitysensor_finedustlevel
+
+if (dust >= 200) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+} else if (dust <= 100) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""low"")
+
+}","
+dust = (#AirQualitySensor).airqualitysensor_finedustlevel
+
+if (dust >= 200) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+} else if (dust <= 100) {
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""low"")
+
+}","{""name"":"""",""cron"":"""",""period"":3600000,""script"":""\ndust = (#AirQualitySensor).airqualitysensor_finedustlevel\n\nif (dust >= 200) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n} else if (dust <= 100) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""low\"")\n\n}""}","{""name"":"""",""cron"":"""",""period"":3600000,""code"":""\ndust = (#AirQualitySensor).airqualitysensor_finedustlevel\n\nif (dust >= 200) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n} else if (dust <= 100) {\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""low\"")\n\n}""}",0,mock_gt_copy,,0,0,0,0,3.2e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_200_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_200_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_200_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+211,7,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""presencesensor_presence"",""switch_off""],""generated_services"":[""presencesensor_presence"",""switch_off""],""gt_receivers"":[""#Floor1#Light"",""#Floor2#Light"",""(#Floor1#PresenceSensor"",""(#Floor2#PresenceSensor""],""generated_receivers"":[""#Floor1#Light"",""#Floor2#Light"",""(#Floor1#PresenceSensor"",""(#Floor2#PresenceSensor""],""gt_numeric_literals"":[""1""],""generated_numeric_literals"":[""1""],""gt_string_args"":[],""generated_string_args"":[]}","
+if ((#Floor1 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor1 #Light).switch_off()
+
+}
+
+delay(1 HOUR)
+
+if ((#Floor2 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor2 #Light).switch_off()
+
+}","
+if ((#Floor1 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor1 #Light).switch_off()
+
+}
+
+delay(1 HOUR)
+
+if ((#Floor2 #PresenceSensor).presencesensor_presence == false) {
+
+    all(#Floor2 #Light).switch_off()
+
+}","{""name"":"""",""cron"":""0 19 * * *"",""period"":0,""script"":""\nif ((#Floor1 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor1 #Light).switch_off()\n\n}\n\ndelay(1 HOUR)\n\nif ((#Floor2 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor2 #Light).switch_off()\n\n}""}","{""name"":"""",""cron"":""0 19 * * *"",""period"":0,""code"":""\nif ((#Floor1 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor1 #Light).switch_off()\n\n}\n\ndelay(1 HOUR)\n\nif ((#Floor2 #PresenceSensor).presencesensor_presence == false) {\n\n    all(#Floor2 #Light).switch_off()\n\n}""}",0,mock_gt_copy,,0,0,0,0,3.2e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_211_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_211_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_211_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+253,8,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""emailprovider_sendmail"",""smokedetector_smoke"",""speaker_speak""],""generated_services"":[""emailprovider_sendmail"",""smokedetector_smoke"",""speaker_speak""],""gt_receivers"":[""#EmailProvider"",""#Speaker"",""(#SmokeDetector""],""generated_receivers"":[""#EmailProvider"",""#Speaker"",""(#SmokeDetector""],""gt_numeric_literals"":[""0"",""0"",""1""],""generated_numeric_literals"":[""0"",""0"",""1""],""gt_string_args"":[""화재발생!즉시대피하세요."",""test@example.com"",""화재경고"",""화재가발생했습니다.대피하세요.""],""generated_string_args"":[""화재발생!즉시대피하세요."",""test@example.com"",""화재경고"",""화재가발생했습니다.대피하세요.""]}","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#SmokeDetector).smokedetector_smoke == true)
+
+    (#Speaker).speaker_speak(""화재 발생! 즉시 대피하세요."" )
+
+    active = 1
+
+}
+
+(#EmailProvider).emailprovider_sendmail(""test@example.com"", ""화재 경고"", ""화재가 발생했습니다. 대피하세요."")","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#SmokeDetector).smokedetector_smoke == true)
+
+    (#Speaker).speaker_speak(""화재 발생! 즉시 대피하세요."" )
+
+    active = 1
+
+}
+
+(#EmailProvider).emailprovider_sendmail(""test@example.com"", ""화재 경고"", ""화재가 발생했습니다. 대피하세요."")","{""name"":"""",""cron"":"""",""period"":300000,""script"":""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#SmokeDetector).smokedetector_smoke == true)\n\n    (#Speaker).speaker_speak(\""화재 발생! 즉시 대피하세요.\"" )\n\n    active = 1\n\n}\n\n(#EmailProvider).emailprovider_sendmail(\""test@example.com\"", \""화재 경고\"", \""화재가 발생했습니다. 대피하세요.\"")""}","{""name"":"""",""cron"":"""",""period"":300000,""code"":""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#SmokeDetector).smokedetector_smoke == true)\n\n    (#Speaker).speaker_speak(\""화재 발생! 즉시 대피하세요.\"" )\n\n    active = 1\n\n}\n\n(#EmailProvider).emailprovider_sendmail(\""test@example.com\"", \""화재 경고\"", \""화재가 발생했습니다. 대피하세요.\"")""}",0,mock_gt_copy,,0,0,0,0,3.7e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_253_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_253_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_253_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+268,8,genome_001,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""airqualitysensor_carbondioxide"",""speaker_speak""],""generated_services"":[""airqualitysensor_carbondioxide"",""speaker_speak""],""gt_receivers"":[""#ParkingLot#Speaker"",""(#ParkingLot#AirQualitySensor""],""generated_receivers"":[""#ParkingLot#Speaker"",""(#ParkingLot#AirQualitySensor""],""gt_numeric_literals"":[""0"",""0"",""880"",""1""],""generated_numeric_literals"":[""0"",""0"",""880"",""1""],""gt_string_args"":[""co2농도위험""],""generated_string_args"":[""co2농도위험""]}","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)
+
+    active = 1
+
+}
+
+(#ParkingLot #Speaker).speaker_speak(""CO2 농도 위험"")","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)
+
+    active = 1
+
+}
+
+(#ParkingLot #Speaker).speaker_speak(""CO2 농도 위험"")","{""name"":"""",""cron"":"""",""period"":10000,""script"":""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)\n\n    active = 1\n\n}\n\n(#ParkingLot #Speaker).speaker_speak(\""CO2 농도 위험\"")""}","{""name"":"""",""cron"":"""",""period"":10000,""code"":""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#ParkingLot #AirQualitySensor).airqualitysensor_carbondioxide > 880)\n\n    active = 1\n\n}\n\n(#ParkingLot #Speaker).speaker_speak(\""CO2 농도 위험\"")""}",0,mock_gt_copy,,0,0,0,0,3.4e-05,,results/wi06_drytest/20260712T174919Z/raw_responses/row_268_cand_0_gen_000.json,"[""results/wi06_drytest/20260712T174919Z/prompts/row_268_cand_0_gen_000.md"", ""results/wi06_drytest/20260712T174919Z/prompts/row_268_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock

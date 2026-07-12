@@ -1,0 +1,10 @@
+{
+  "schema": "ga_search.gate.v1",
+  "_doc": "채택 게이트 3조건(C-15): ① 전체 DETPass ② 핵심 부분집합별 DETPass ③ holdout ReplayFit — 각각 기존 채택본 대비 epsilon_pp(%p) 이상 회귀하면 채택 거절(하드 게이트). C_crit(C-16) 구성: 논문의 '시간' 축은 temporal 그룹이 담당, '과거 실패'는 ③ holdout 리플레이 조건이 담당, '안전' 축은 데이터셋에 안전 카테고리·검사가 부재해(감사 C-01/C-16) 현재 구성 불가 — 확보 시 critical_subsets에 추가할 것.",
+  "epsilon_pp": 1.0,
+  "critical_subsets": {
+    "basic": ["1", "2"],
+    "temporal": ["3", "4", "5"],
+    "complex": ["6", "7", "8"]
+  }
+}

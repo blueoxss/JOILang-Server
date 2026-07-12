@@ -11,6 +11,7 @@ try:
     from .candidate_generation import generate_candidates_for_rows, write_candidate_csv
     from .evaluation import evaluate_candidate_records, write_evaluation_outputs
     from .fitness import load_fitness_config
+    from .gate import evaluate_adoption_gate, load_gate_config, subset_detpass_from_eval_rows
     from .prompt_patch_apply import rendered_prompt_with_genome
     from .replay import load_replay_split, replay_cases_to_rows, replay_pass_rate
     from .rerank import aggregate_genome_scores
@@ -18,6 +19,7 @@ except ImportError:
     from candidate_generation import generate_candidates_for_rows, write_candidate_csv  # type: ignore
     from evaluation import evaluate_candidate_records, write_evaluation_outputs  # type: ignore
     from fitness import load_fitness_config  # type: ignore
+    from gate import evaluate_adoption_gate, load_gate_config, subset_detpass_from_eval_rows  # type: ignore
     from prompt_patch_apply import rendered_prompt_with_genome  # type: ignore
     from replay import load_replay_split, replay_cases_to_rows, replay_pass_rate  # type: ignore
     from rerank import aggregate_genome_scores  # type: ignore
@@ -275,6 +277,8 @@ def run_search(
     compression_mutation: bool = False,
     fitness_config: str | Path | None = None,
     replay_split: str | Path | None = None,
+    gate_config: str | Path | None = None,
+    gate_baseline: str | Path | None = None,
 ) -> dict[str, Any]:
     requested_engine_mode = str(engine_mode or "auto").lower()
     if requested_engine_mode == "mock" or (requested_engine_mode == "auto" and llm_mode == "mock"):
@@ -311,6 +315,7 @@ def run_search(
     promotion_rows: list[dict[str, Any]] = []
     best_genome = current_population[0]
     best_score = -1.0
+    best_eval_rows: list[dict[str, Any]] = []
     known_limitations = [
         "real engine skeleton evaluates genomes with strict DET and records selection/mutation artifacts",
         "advanced crossover, pareto archive, and compression mutation policies are hooks, not full legacy parity",
@@ -390,6 +395,7 @@ def run_search(
             best_score = float(generation_best.get("fitness") or 0.0)
             best_id = str(generation_best.get("genome_id") or "")
             best_genome = next((genome for genome in current_population if str(genome.get("id")) == best_id), current_population[0])
+            best_eval_rows = [row for row in eval_rows if str(row.get("genome_id")) == best_id]
         progress = {
             "generation": generation,
             "candidate_rows": len(eval_rows),
@@ -451,6 +457,26 @@ def run_search(
             "cases": len(holdout_cases),
             "best_genome_id": best_genome.get("id"),
         }
+    # 채택 게이트(C-15): 하드 게이트 — 적합도가 아니라 최종 채택 여부를 결정한다.
+    gate_config_loaded = load_gate_config(gate_config)
+    baseline_metrics = None
+    if gate_baseline:
+        baseline_metrics = json.loads(Path(gate_baseline).read_text(encoding="utf-8"))
+    candidate_metrics = {
+        "overall_detpass": (
+            sum(1 for row in best_eval_rows if bool(row.get("det_pass"))) / len(best_eval_rows)
+            if best_eval_rows
+            else None
+        ),
+        "subset_detpass": subset_detpass_from_eval_rows(best_eval_rows, gate_config_loaded.get("critical_subsets", {})),
+        "holdout_replay_fit": (holdout_replay or {}).get("replay_fit"),
+    }
+    adoption_gate = evaluate_adoption_gate(candidate_metrics, baseline_metrics, config=gate_config_loaded)
+    adoption_gate["candidate_metrics"] = candidate_metrics
+    adoption_gate["baseline_source"] = str(gate_baseline) if gate_baseline else None
+    adoption_gate["best_genome_id"] = best_genome.get("id")
+    _write_json(root / "adoption_gate.json", adoption_gate)
+
     _write_json(root / "best_genome.json", best_genome)
     _write_json(root / "best_genomes.json", best_history)
     _write_rows_csv(
@@ -459,7 +485,18 @@ def run_search(
         ["generation", "candidate_rows", "avg_det_score", "train_det_pass_rate", "best_genome_id", "best_avg_det_score", "best_fitness"],
     )
     _write_rows_csv(root / "promotion_decisions.csv", promotion_rows, ["generation", "promoted_genome_id", "reason", "avg_det_score"])
-    _write_json(root / "promotion_decisions.json", {"decisions": promotion_rows, "final_best_genome_id": best_genome.get("id")})
+    _write_json(
+        root / "promotion_decisions.json",
+        {
+            "decisions": promotion_rows,
+            "final_best_genome_id": best_genome.get("id"),
+            "adoption_gate": {
+                "adopted": adoption_gate["adopted"],
+                "reject_reasons": adoption_gate["reject_reasons"],
+                "epsilon_pp": adoption_gate["epsilon_pp"],
+            },
+        },
+    )
     _write_rows_csv(root / "mutation_events.csv", mutation_events, ["generation", "parent_id", "child_id", "mutation_type", "details"])
     _write_jsonl(root / "mutation_events.jsonl", mutation_events)
     _write_jsonl(root / "ga_block_diffs.jsonl", [])
@@ -492,6 +529,7 @@ def run_search(
         }
         if replay_split_loaded
         else None,
+        "adoption_gate": adoption_gate,
         "generation_error_rate": generation_error_rate,
         "stop_reason": "completed_requested_generations",
         "best_history": best_history,
