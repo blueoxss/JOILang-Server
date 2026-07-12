@@ -1,0 +1,20 @@
+[
+  {
+    "generation": 0,
+    "candidate_rows": 32,
+    "avg_det_score": 100.0,
+    "train_det_pass_rate": 1.0,
+    "best_genome_id": "genome_000",
+    "best_avg_det_score": 100.0,
+    "best_fitness": 0.649999700625
+  },
+  {
+    "generation": 1,
+    "candidate_rows": 32,
+    "avg_det_score": 100.0,
+    "train_det_pass_rate": 1.0,
+    "best_genome_id": "genome_001_g001_m001",
+    "best_avg_det_score": 100.0,
+    "best_fitness": 0.64999966125
+  }
+]

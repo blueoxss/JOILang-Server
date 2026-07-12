@@ -38,27 +38,15 @@ def best_row(eval_rows: list[dict[str, Any]]) -> dict[str, Any] | None:
     return ranked[0] if ranked else None
 
 
-def aggregate_genome_scores(eval_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    grouped: dict[str, list[dict[str, Any]]] = {}
-    for row in eval_rows:
-        grouped.setdefault(str(row.get("genome_id") or "base"), []).append(row)
-    records = []
-    for genome_id, rows in grouped.items():
-        avg_det = sum(_float(row.get("det_score")) for row in rows) / len(rows) if rows else 0.0
-        pass_rate = sum(1 for row in rows if _truthy(row.get("det_pass"))) / len(rows) if rows else 0.0
-        exact_rate = sum(1 for row in rows if _truthy(row.get("gt_exact"))) / len(rows) if rows else 0.0
-        prompt_tokens = sum(_float(row.get("generation_prompt_tokens_total")) for row in rows) / len(rows) if rows else 0.0
-        latency = sum(_float(row.get("latency_sec")) for row in rows) / len(rows) if rows else 0.0
-        records.append(
-            {
-                "genome_id": genome_id,
-                "rows": len(rows),
-                "avg_det_score": avg_det,
-                "det_pass_rate": pass_rate,
-                "gt_exact_rate": exact_rate,
-                "avg_prompt_tokens": prompt_tokens,
-                "avg_latency_sec": latency,
-                "fitness": avg_det + 10.0 * pass_rate + 5.0 * exact_rate - 0.0001 * prompt_tokens - 0.01 * latency,
-            }
-        )
-    return sorted(records, key=lambda item: (-float(item["fitness"]), item["genome_id"]))
+def aggregate_genome_scores(
+    eval_rows: list[dict[str, Any]],
+    *,
+    config: dict[str, Any] | None = None,
+    replay_fit_by_genome: dict[str, float] | None = None,
+) -> list[dict[str, Any]]:
+    """논문 5항 적합도 기반 genome 집계 (구현: fitness.py, 설정: configs/ga_search_fitness.json)."""
+    try:
+        from .fitness import aggregate_genome_scores as _aggregate
+    except ImportError:
+        from fitness import aggregate_genome_scores as _aggregate  # type: ignore
+    return _aggregate(eval_rows, config=config, replay_fit_by_genome=replay_fit_by_genome)

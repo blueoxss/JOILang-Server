@@ -1,0 +1,35 @@
+[
+  {
+    "id": "genome_000",
+    "blocks": [
+      "01",
+      "02",
+      "03",
+      "06"
+    ],
+    "params": {
+      "candidate_strategies": [
+        "mock_gt_copy"
+      ]
+    },
+    "block_params": {},
+    "seed": 0
+  },
+  {
+    "id": "genome_001_g001_m001",
+    "blocks": [
+      "01",
+      "02",
+      "03",
+      "06"
+    ],
+    "params": {
+      "candidate_strategies": [
+        "mock_gt_copy"
+      ],
+      "max_tokens": 640
+    },
+    "block_params": {},
+    "seed": 0
+  }
+]

@@ -79,7 +79,9 @@ def _classify_text_error(text: str, fallback: str = "unknown_error") -> str:
 def _usage(prompt_tokens: Any = 0, completion_tokens: Any = 0, total_tokens: Any = 0) -> dict[str, int]:
     prompt = _int(prompt_tokens, 0)
     completion = _int(completion_tokens, 0)
-    total = _int(total_tokens, prompt + completion)
+    total = _int(total_tokens, 0)
+    if total <= 0 and (prompt or completion):
+        total = prompt + completion
     return {"prompt_tokens": prompt, "completion_tokens": completion, "total_tokens": total}
 
 

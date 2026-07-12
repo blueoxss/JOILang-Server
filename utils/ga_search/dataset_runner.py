@@ -22,6 +22,29 @@ def normalize_categories(values: list[str] | tuple[str, ...] | None) -> set[str]
     return out
 
 
+def stratified_sample_rows(
+    selected: list[tuple[int, dict[str, Any]]],
+    *,
+    per_category: int,
+    seed: int = 0,
+) -> list[tuple[int, dict[str, Any]]]:
+    """범주 층화 표본: 각 category에서 per_category건을 seed 결정적으로 추출 (논문 C-09)."""
+    if per_category < 1:
+        raise ValueError(f"per_category must be >= 1: {per_category}")
+    groups: dict[str, list[tuple[int, dict[str, Any]]]] = {}
+    for idx, row in selected:
+        key = str(row.get("category", "")).strip() or "__uncategorized__"
+        groups.setdefault(key, []).append((idx, row))
+    rng = random.Random(seed)
+    sampled: list[tuple[int, dict[str, Any]]] = []
+    for key in sorted(groups):
+        items = groups[key]
+        if len(items) > per_category:
+            items = rng.sample(items, per_category)
+        sampled.extend(items)
+    return sorted(sampled, key=lambda item: item[0])
+
+
 def select_dataset_rows(
     rows: list[dict[str, Any]],
     *,
@@ -31,6 +54,7 @@ def select_dataset_rows(
     categories: list[str] | tuple[str, ...] | None = None,
     limit_per_category: int | None = None,
     sample_size: int | None = None,
+    stratify_per_category: int | None = None,
     seed: int = 0,
 ) -> list[tuple[int, dict[str, Any]]]:
     if row_no is not None:
@@ -59,6 +83,11 @@ def select_dataset_rows(
         if "gt" not in row or not str(row.get("gt") or "").strip():
             raise ValueError(f"row {idx} is missing official gt column")
         selected.append((idx, dict(row)))
+
+    if stratify_per_category is not None:
+        if sample_size is not None:
+            raise ValueError("stratify_per_category and sample_size are mutually exclusive")
+        return stratified_sample_rows(selected, per_category=stratify_per_category, seed=seed)
 
     if sample_size is not None and sample_size > 0 and len(selected) > sample_size:
         rng = random.Random(seed)
