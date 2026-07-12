@@ -1,0 +1,151 @@
+﻿row_no,category,genome_id,candidate_index,det_score,det_pass,gt_exact,gt_similarity,schedule_match,cron_match,period_match,code_match,service_valid,receiver_valid,gt_service_coverage,gt_service_precision,gt_receiver_coverage,dataflow_score,numeric_grounding,enum_grounding,failure_reasons,diff_summary,gt_code,generated_code,gt_json,generated_json,generation,candidate_strategy,generation_error_type,generation_error_count,generation_prompt_tokens_total,generation_completion_tokens_total,generation_total_tokens_total,latency_sec,peak_vram_gb,raw_response_path,prompt_log_paths,service_schema_path,service_context_mode,service_context_source,service_list_retrieval_scores,repair_applied,repair_actions,backend
+21,1,eval_base,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""light_movetorgb""],""generated_services"":[""light_movetorgb""],""gt_receivers"":[""#Light""],""generated_receivers"":[""#Light""],""gt_numeric_literals"":[""255"",""255"",""0""],""generated_numeric_literals"":[""255"",""255"",""0""],""gt_string_args"":[],""generated_string_args"":[]}","
+(#Light).light_movetorgb(255, 255, 0)","
+(#Light).light_movetorgb(255, 255, 0)","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#Light).light_movetorgb(255, 255, 0)""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\n(#Light).light_movetorgb(255, 255, 0)""}",0,mock_gt_copy,,0,0,0,0,2.9e-05,,results/regression_smoke/20260712T181431Z/raw_responses/row_21_cand_0_gen_000.json,"[""results/regression_smoke/20260712T181431Z/prompts/row_21_cand_0_gen_000.md"", ""results/regression_smoke/20260712T181431Z/prompts/row_21_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+133,5,eval_base,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""robotvacuumcleaner_setrobotvacuumcleanermodemode""],""generated_services"":[""robotvacuumcleaner_setrobotvacuumcleanermodemode""],""gt_receivers"":[""#RobotVacuumCleaner""],""generated_receivers"":[""#RobotVacuumCleaner""],""gt_numeric_literals"":[""30""],""generated_numeric_literals"":[""30""],""gt_string_args"":[""auto"",""manual""],""generated_string_args"":[""auto"",""manual""]}","
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+
+delay(30 MIN)
+
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""manual"")","
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""auto"")
+
+delay(30 MIN)
+
+(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(""manual"")","{""name"":"""",""cron"":"""",""period"":0,""script"":""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""auto\"")\n\ndelay(30 MIN)\n\n(#RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\""manual\"")""}",0,mock_gt_copy,,0,0,0,0,3e-05,,results/regression_smoke/20260712T181431Z/raw_responses/row_133_cand_0_gen_000.json,"[""results/regression_smoke/20260712T181431Z/prompts/row_133_cand_0_gen_000.md"", ""results/regression_smoke/20260712T181431Z/prompts/row_133_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+156,6,eval_base,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_finedustlevel"",""door_close"",""door_doorstate""],""generated_services"":[""airpurifier_setairpurifiermode"",""airqualitysensor_finedustlevel"",""door_close"",""door_doorstate""],""gt_receivers"":[""#AirPurifier"",""#Door"",""(#AirQualitySensor""],""generated_receivers"":[""#AirPurifier"",""#Door"",""(#AirQualitySensor""],""gt_numeric_literals"":[""150""],""generated_numeric_literals"":[""150""],""gt_string_args"":[""open"",""high""],""generated_string_args"":[""open"",""high""]}","
+if ((#AirQualitySensor).airqualitysensor_finedustlevel >= 150 and (#Door).door_doorstate == ""open"") {
+
+    (#Door).door_close()
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+}","
+if ((#AirQualitySensor).airqualitysensor_finedustlevel >= 150 and (#Door).door_doorstate == ""open"") {
+
+    (#Door).door_close()
+
+    (#AirPurifier).airpurifier_setairpurifiermode(""high"")
+
+}","{""name"":"""",""cron"":"""",""period"":0,""script"":""\nif ((#AirQualitySensor).airqualitysensor_finedustlevel >= 150 and (#Door).door_doorstate == \""open\"") {\n\n    (#Door).door_close()\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n}""}","{""name"":"""",""cron"":"""",""period"":0,""code"":""\nif ((#AirQualitySensor).airqualitysensor_finedustlevel >= 150 and (#Door).door_doorstate == \""open\"") {\n\n    (#Door).door_close()\n\n    (#AirPurifier).airpurifier_setairpurifiermode(\""high\"")\n\n}""}",0,mock_gt_copy,,0,0,0,0,3e-05,,results/regression_smoke/20260712T181431Z/raw_responses/row_156_cand_0_gen_000.json,"[""results/regression_smoke/20260712T181431Z/prompts/row_156_cand_0_gen_000.md"", ""results/regression_smoke/20260712T181431Z/prompts/row_156_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+184,7,eval_base,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""leaksensor_leakage"",""siren_setsirenmode""],""generated_services"":[""leaksensor_leakage"",""siren_setsirenmode""],""gt_receivers"":[""#Siren"",""(#LeakSensor""],""generated_receivers"":[""#Siren"",""(#LeakSensor""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[""emergency""],""generated_string_args"":[""emergency""]}","
+if ((#LeakSensor).leaksensor_leakage == true) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+}","
+if ((#LeakSensor).leaksensor_leakage == true) {
+
+    (#Siren).siren_setsirenmode(""emergency"")
+}","{""name"":"""",""cron"":""0 15 * * 6,7"",""period"":0,""script"":""\nif ((#LeakSensor).leaksensor_leakage == true) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n}""}","{""name"":"""",""cron"":""0 15 * * 6,7"",""period"":0,""code"":""\nif ((#LeakSensor).leaksensor_leakage == true) {\n\n    (#Siren).siren_setsirenmode(\""emergency\"")\n}""}",0,mock_gt_copy,,0,0,0,0,2.9e-05,,results/regression_smoke/20260712T181431Z/raw_responses/row_184_cand_0_gen_000.json,"[""results/regression_smoke/20260712T181431Z/prompts/row_184_cand_0_gen_000.md"", ""results/regression_smoke/20260712T181431Z/prompts/row_184_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+198,7,eval_base,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""airconditioner_settargettemperature"",""temperaturesensor_temperature""],""generated_services"":[""airconditioner_settargettemperature"",""temperaturesensor_temperature""],""gt_receivers"":[""#AirConditioner"",""#TemperatureSensor""],""generated_receivers"":[""#AirConditioner"",""#TemperatureSensor""],""gt_numeric_literals"":[""30"",""25"",""23"",""26""],""generated_numeric_literals"":[""30"",""25"",""23"",""26""],""gt_string_args"":[],""generated_string_args"":[]}","
+temp = (#TemperatureSensor).temperaturesensor_temperature
+
+if (temp >= 30) {
+
+    (#AirConditioner).airconditioner_settargettemperature(25)
+
+} else if (temp < 23) {
+
+    (#AirConditioner).airconditioner_settargettemperature(26)
+
+}","
+temp = (#TemperatureSensor).temperaturesensor_temperature
+
+if (temp >= 30) {
+
+    (#AirConditioner).airconditioner_settargettemperature(25)
+
+} else if (temp < 23) {
+
+    (#AirConditioner).airconditioner_settargettemperature(26)
+
+}","{""name"":"""",""cron"":"""",""period"":1800000,""script"":""\ntemp = (#TemperatureSensor).temperaturesensor_temperature\n\nif (temp >= 30) {\n\n    (#AirConditioner).airconditioner_settargettemperature(25)\n\n} else if (temp < 23) {\n\n    (#AirConditioner).airconditioner_settargettemperature(26)\n\n}""}","{""name"":"""",""cron"":"""",""period"":1800000,""code"":""\ntemp = (#TemperatureSensor).temperaturesensor_temperature\n\nif (temp >= 30) {\n\n    (#AirConditioner).airconditioner_settargettemperature(25)\n\n} else if (temp < 23) {\n\n    (#AirConditioner).airconditioner_settargettemperature(26)\n\n}""}",0,mock_gt_copy,,0,0,0,0,3.1e-05,,results/regression_smoke/20260712T181431Z/raw_responses/row_198_cand_0_gen_000.json,"[""results/regression_smoke/20260712T181431Z/prompts/row_198_cand_0_gen_000.md"", ""results/regression_smoke/20260712T181431Z/prompts/row_198_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+208,7,eval_base,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""dehumidifier_setdehumidifiermode"",""humiditysensor_humidity""],""generated_services"":[""dehumidifier_setdehumidifiermode"",""humiditysensor_humidity""],""gt_receivers"":[""#Dehumidifier"",""all(#Group2#HumiditySensor""],""generated_receivers"":[""#Dehumidifier"",""all(#Group2#HumiditySensor""],""gt_numeric_literals"":[""50""],""generated_numeric_literals"":[""50""],""gt_string_args"":[""refreshing""],""generated_string_args"":[""refreshing""]}","
+if (all(#Group2 #HumiditySensor).humiditysensor_humidity >= 50) {
+
+    all(#Dehumidifier).dehumidifier_setdehumidifiermode(""refreshing"")
+
+}","
+if (all(#Group2 #HumiditySensor).humiditysensor_humidity >= 50) {
+
+    all(#Dehumidifier).dehumidifier_setdehumidifiermode(""refreshing"")
+
+}","{""name"":"""",""cron"":"""",""period"":60000,""script"":""\nif (all(#Group2 #HumiditySensor).humiditysensor_humidity >= 50) {\n\n    all(#Dehumidifier).dehumidifier_setdehumidifiermode(\""refreshing\"")\n\n}""}","{""name"":"""",""cron"":"""",""period"":60000,""code"":""\nif (all(#Group2 #HumiditySensor).humiditysensor_humidity >= 50) {\n\n    all(#Dehumidifier).dehumidifier_setdehumidifiermode(\""refreshing\"")\n\n}""}",0,mock_gt_copy,,0,0,0,0,2.9e-05,,results/regression_smoke/20260712T181431Z/raw_responses/row_208_cand_0_gen_000.json,"[""results/regression_smoke/20260712T181431Z/prompts/row_208_cand_0_gen_000.md"", ""results/regression_smoke/20260712T181431Z/prompts/row_208_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+216,7,eval_base,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""light_movetobrightness"",""presencesensor_presence""],""generated_services"":[""light_movetobrightness"",""presencesensor_presence""],""gt_receivers"":[""#Light"",""(#LivingRoom#PresenceSensor""],""generated_receivers"":[""#Light"",""(#LivingRoom#PresenceSensor""],""gt_numeric_literals"":[""100"",""0""],""generated_numeric_literals"":[""100"",""0""],""gt_string_args"":[],""generated_string_args"":[]}","
+if ((#LivingRoom #PresenceSensor).presencesensor_presence == true) {
+
+    all(#Light).light_movetobrightness(100, 0)
+
+}","
+if ((#LivingRoom #PresenceSensor).presencesensor_presence == true) {
+
+    all(#Light).light_movetobrightness(100, 0)
+
+}","{""name"":"""",""cron"":""0 22 * * *"",""period"":0,""script"":""\nif ((#LivingRoom #PresenceSensor).presencesensor_presence == true) {\n\n    all(#Light).light_movetobrightness(100, 0)\n\n}""}","{""name"":"""",""cron"":""0 22 * * *"",""period"":0,""code"":""\nif ((#LivingRoom #PresenceSensor).presencesensor_presence == true) {\n\n    all(#Light).light_movetobrightness(100, 0)\n\n}""}",0,mock_gt_copy,,0,0,0,0,2.8e-05,,results/regression_smoke/20260712T181431Z/raw_responses/row_216_cand_0_gen_000.json,"[""results/regression_smoke/20260712T181431Z/prompts/row_216_cand_0_gen_000.md"", ""results/regression_smoke/20260712T181431Z/prompts/row_216_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+245,8,eval_base,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""temperaturesensor_temperature"",""windowcovering_downorclose""],""generated_services"":[""temperaturesensor_temperature"",""windowcovering_downorclose""],""gt_receivers"":[""#Blind"",""(#TemperatureSensor""],""generated_receivers"":[""#Blind"",""(#TemperatureSensor""],""gt_numeric_literals"":[""30""],""generated_numeric_literals"":[""30""],""gt_string_args"":[],""generated_string_args"":[]}","triggered := false
+if ((#TemperatureSensor).temperaturesensor_temperature >= 30) {
+    if (triggered == false) {
+        (#Blind).windowcovering_downorclose()
+        triggered = true
+    }
+} else {
+    triggered = false
+}","triggered := false
+if ((#TemperatureSensor).temperaturesensor_temperature >= 30) {
+    if (triggered == false) {
+        (#Blind).windowcovering_downorclose()
+        triggered = true
+    }
+} else {
+    triggered = false
+}","{""name"":"""",""cron"":"""",""period"":100,""script"":""triggered := false\nif ((#TemperatureSensor).temperaturesensor_temperature >= 30) {\n    if (triggered == false) {\n        (#Blind).windowcovering_downorclose()\n        triggered = true\n    }\n} else {\n    triggered = false\n}""}","{""name"":"""",""cron"":"""",""period"":100,""code"":""triggered := false\nif ((#TemperatureSensor).temperaturesensor_temperature >= 30) {\n    if (triggered == false) {\n        (#Blind).windowcovering_downorclose()\n        triggered = true\n    }\n} else {\n    triggered = false\n}""}",0,mock_gt_copy,,0,0,0,0,3.2e-05,,results/regression_smoke/20260712T181431Z/raw_responses/row_245_cand_0_gen_000.json,"[""results/regression_smoke/20260712T181431Z/prompts/row_245_cand_0_gen_000.md"", ""results/regression_smoke/20260712T181431Z/prompts/row_245_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+249,8,eval_base,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""leaksensor_leakage"",""speaker_speak"",""valve_close""],""generated_services"":[""leaksensor_leakage"",""speaker_speak"",""valve_close""],""gt_receivers"":[""#Speaker"",""#Valve"",""(#LeakSensor""],""generated_receivers"":[""#Speaker"",""#Valve"",""(#LeakSensor""],""gt_numeric_literals"":[""0"",""0"",""1""],""generated_numeric_literals"":[""0"",""0"",""1""],""gt_string_args"":[""누수가감지되었습니다.대피하세요""],""generated_string_args"":[""누수가감지되었습니다.대피하세요""]}","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#LeakSensor).leaksensor_leakage == true)
+
+    (#Valve).valve_close()
+
+    active = 1
+
+}
+
+(#Speaker).speaker_speak(""누수가 감지되었습니다. 대피하세요"")","
+active := 0
+
+if (active == 0) {
+
+    wait until ((#LeakSensor).leaksensor_leakage == true)
+
+    (#Valve).valve_close()
+
+    active = 1
+
+}
+
+(#Speaker).speaker_speak(""누수가 감지되었습니다. 대피하세요"")","{""name"":"""",""cron"":"""",""period"":60000,""script"":""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#LeakSensor).leaksensor_leakage == true)\n\n    (#Valve).valve_close()\n\n    active = 1\n\n}\n\n(#Speaker).speaker_speak(\""누수가 감지되었습니다. 대피하세요\"")""}","{""name"":"""",""cron"":"""",""period"":60000,""code"":""\nactive := 0\n\nif (active == 0) {\n\n    wait until ((#LeakSensor).leaksensor_leakage == true)\n\n    (#Valve).valve_close()\n\n    active = 1\n\n}\n\n(#Speaker).speaker_speak(\""누수가 감지되었습니다. 대피하세요\"")""}",0,mock_gt_copy,,0,0,0,0,3.4e-05,,results/regression_smoke/20260712T181431Z/raw_responses/row_249_cand_0_gen_000.json,"[""results/regression_smoke/20260712T181431Z/prompts/row_249_cand_0_gen_000.md"", ""results/regression_smoke/20260712T181431Z/prompts/row_249_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock
+262,8,eval_base,0,100.0,True,True,1.0,True,True,True,True,True,True,1.0,1.0,1.0,1.0,1.0,1.0,[],"{""gt_services"":[""button_button"",""switch_off""],""generated_services"":[""button_button"",""switch_off""],""gt_receivers"":[""#Even"",""#Stop#Button""],""generated_receivers"":[""#Even"",""#Stop#Button""],""gt_numeric_literals"":[],""generated_numeric_literals"":[],""gt_string_args"":[""pushed"",""pushed""],""generated_string_args"":[""pushed"",""pushed""]}","
+prev := (#Stop #Button).button_button
+
+curr = (#Stop #Button).button_button
+
+if (prev != ""pushed"" and curr == ""pushed"") {
+
+    all(#Even).switch_off()
+
+}
+
+prev = curr","
+prev := (#Stop #Button).button_button
+
+curr = (#Stop #Button).button_button
+
+if (prev != ""pushed"" and curr == ""pushed"") {
+
+    all(#Even).switch_off()
+
+}
+
+prev = curr","{""name"":"""",""cron"":"""",""period"":100,""script"":""\nprev := (#Stop #Button).button_button\n\ncurr = (#Stop #Button).button_button\n\nif (prev != \""pushed\"" and curr == \""pushed\"") {\n\n    all(#Even).switch_off()\n\n}\n\nprev = curr""}","{""name"":"""",""cron"":"""",""period"":100,""code"":""\nprev := (#Stop #Button).button_button\n\ncurr = (#Stop #Button).button_button\n\nif (prev != \""pushed\"" and curr == \""pushed\"") {\n\n    all(#Even).switch_off()\n\n}\n\nprev = curr""}",0,mock_gt_copy,,0,0,0,0,3e-05,,results/regression_smoke/20260712T181431Z/raw_responses/row_262_cand_0_gen_000.json,"[""results/regression_smoke/20260712T181431Z/prompts/row_262_cand_0_gen_000.md"", ""results/regression_smoke/20260712T181431Z/prompts/row_262_cand_0_gen_000.json""]",datasets/service_list_ver2.0.1.json,schema_fallback,provided_schema,"{""status"": ""retrieval_disabled"", ""reason"": ""canonical ga_search has not enabled service retrieval yet""}",False,[],mock

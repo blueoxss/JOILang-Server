@@ -1,0 +1,25 @@
+{
+  "created_at": "2026-07-12T18:14:00.112364+00:00",
+  "prompt_patches_path": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A4_full_advisor/advisor/prompt_patches.json",
+  "base_genome_path": "fallback",
+  "patched_genome_path": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A4_full_phase2/patch_application/patched_genome.json",
+  "accepted_proposal_count": 0,
+  "advisor_child_scheduled_count": 0,
+  "advisor_backed_diff_count": 0,
+  "patch_count": 0,
+  "visible_patch_ids": [],
+  "patch_visibility_ok": true,
+  "applications": [],
+  "before_blocks": [
+    "01",
+    "02",
+    "03",
+    "06"
+  ],
+  "after_blocks": [
+    "01",
+    "02",
+    "03",
+    "06"
+  ]
+}

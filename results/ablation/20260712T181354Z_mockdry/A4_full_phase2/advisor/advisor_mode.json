@@ -1,0 +1,8 @@
+{
+  "advisor_mode": "none",
+  "primary_signal": "base_prompt",
+  "cloud_is_auxiliary": true,
+  "api_required": false,
+  "description": "No advisor feedback is attached; only base search input artifacts are produced.",
+  "required_inputs": []
+}

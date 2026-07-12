@@ -1,0 +1,8 @@
+{
+  "metadata": {
+    "row_count": 32,
+    "source": "/home/mgjeong/Desktop/llm/JOILang-Server/results/ablation/20260712T181354Z_mockdry/A2_plus_diagnosis/eval/row_evaluation.csv",
+    "adapter": "tools/run_ablation_ladder.py:build_failure_report"
+  },
+  "rows": []
+}

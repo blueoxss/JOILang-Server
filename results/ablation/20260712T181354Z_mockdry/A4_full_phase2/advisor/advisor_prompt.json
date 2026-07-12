@@ -1,0 +1,12 @@
+{
+  "system_prompt": "You are a feedback advisor for JOILang prompt optimization. You propose prompt mutations only and never generate JOILang code.",
+  "user_prompt": "Treat strict DET as the primary signal. Use cloud judge reasoning only as auxiliary explanation. Return prompt_patches.json-compatible JSON with minimal targeted micro-rules.",
+  "evidence_summary": {},
+  "failure_clusters": [],
+  "metadata": {
+    "created_at": "2026-07-12T18:14:01.099036+00:00",
+    "advisor_mode": "none",
+    "primary_signal": "base_prompt",
+    "cloud_is_auxiliary": true
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "adopted": true,
+  "baseline_missing": true,
+  "epsilon_pp": 1.0,
+  "checks": [],
+  "reject_reasons": [],
+  "note": "baseline 부재 — 첫 채택으로 간주하고 게이트 공허 통과",
+  "candidate_metrics": {
+    "overall_detpass": 1.0,
+    "subset_detpass": {
+      "basic": 1.0,
+      "temporal": 1.0,
+      "complex": 1.0
+    },
+    "holdout_replay_fit": null
+  },
+  "baseline_source": null,
+  "best_genome_id": "genome_001"
+}
