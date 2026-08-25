@@ -1,0 +1,12 @@
+{
+ "grammar": "full",
+ "temporal": "full",
+ "caution": "on",
+ "few_shot": 0,
+ "rules": [
+  {
+   "target_block": "schema",
+   "rule": "Convert numeric parameters to correct units and formats as required by services."
+  }
+ ]
+}

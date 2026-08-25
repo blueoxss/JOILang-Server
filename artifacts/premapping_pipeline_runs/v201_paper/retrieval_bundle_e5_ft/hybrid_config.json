@@ -1,0 +1,11 @@
+{
+ "version": 1,
+ "model_id_dense": "/home/mgjeong/Desktop/llm/JOILang-Server/artifacts/premapping_pipeline_runs/v201_paper/models/e5-small-split-v201",
+ "bm25_pickled": false,
+ "best_A": 20,
+ "best_B": 20,
+ "best_w": [
+  0.6,
+  0.4
+ ]
+}

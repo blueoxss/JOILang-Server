@@ -1,0 +1,17 @@
+{
+ "round_id": "R3",
+ "created": "2026-08-25",
+ "criteria_sha256": "5affee069fc71683",
+ "pytest": "174 passed",
+ "artifacts": {
+  "tests/fixtures/regression_expanded.json": "b81ce93c7deaf673",
+  "tests/fixtures/paper_v1_expanded_baseline.json": "0443dcb185f7f19b",
+  "tests/test_paper_v1_boundary.py": "cb180cd57bc4f9e6",
+  "tests/test_paper_v1_regression_expanded.py": "efe8896bea6d719b",
+  "utils/det_paper_v1.py": "d289c1ffeefb4756",
+  "docs/iv4_five_round/round_03/criteria.yaml": "f25c929ee042fadf",
+  "docs/iv4_five_round/round_03/initial_evaluation.json": "41b9d5a36f081621",
+  "docs/iv4_five_round/round_03/feedback.md": "81d66bbb6231ab08",
+  "docs/iv4_five_round/round_03/changes.md": "1043f3253c5f8b51"
+ }
+}

@@ -1,0 +1,12 @@
+{
+ "grammar": "compact",
+ "temporal": "full",
+ "caution": "off",
+ "few_shot": 2,
+ "rules": [
+  {
+   "target_block": "schema",
+   "rule": "Always use exact service and method names from device context in scripts."
+  }
+ ]
+}

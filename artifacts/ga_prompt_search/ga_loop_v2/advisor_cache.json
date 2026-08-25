@@ -1,0 +1,214 @@
+{
+"7fb70605298a3d80eb3c17e41e712637d573180c": {
+"rules": [
+{
+"target_block": "schema",
+"rule": "Always use full receiver and service coverage as in ground truth, including all relevant tags."
+},
+{
+"target_block": "temporal",
+"rule": "Express all time durations in seconds as integers matching ground truth conventions."
+},
+{
+"target_block": "general",
+"rule": "Use numeric and enum values exactly as shown in ground truth, avoiding informal or approximate forms."
+}
+]
+},
+"80061769c32015c792a75118ffca5109857e6877": {
+"rules": [
+{
+"target_block": "schema",
+"rule": "Always use full receiver and service coverage as in ground truth, including all relevant tags."
+},
+{
+"target_block": "temporal",
+"rule": "Express all time durations in seconds as integers matching ground truth conventions."
+},
+{
+"target_block": "general",
+"rule": "Use numeric and enum values exactly as in ground truth, avoiding informal or approximate forms."
+}
+]
+},
+"ab718479b33d1aae3c1551312af3a59da70c7785": {
+"rules": [
+{
+"target_block": "schema",
+"rule": "Always use exact service and receiver names as in schema with correct casing and full coverage."
+},
+{
+"target_block": "temporal",
+"rule": "Use wait until and delay with units MIN or SEC, never raw milliseconds or custom timers."
+},
+{
+"target_block": "general",
+"rule": "Avoid extra variables or control flow; use direct wait/delay and commands matching ground truth style."
+}
+]
+},
+"4275115fb39c1c11961d490e17a85ef38431360f": {
+"rules": [
+{
+"target_block": "schema",
+"rule": "Always use exact service and receiver names as defined in the schema without substitutions."
+},
+{
+"target_block": "temporal",
+"rule": "Express all timing using explicit delay, period, or cron functions matching GT format."
+},
+{
+"target_block": "general",
+"rule": "Match GT control flow and state logic precisely, including flags and conditions for event triggers."
+}
+]
+},
+"1f7dbdb736b0535cd903b09a43716214fd4d7ece": {
+"rules": [
+{
+"target_block": "schema",
+"rule": "Use exact service and receiver names as in schema without adding or omitting parts."
+},
+{
+"target_block": "temporal",
+"rule": "Express delays and schedules using explicit delay() and exact time ranges or cron syntax."
+},
+{
+"target_block": "output",
+"rule": "Produce complete, valid JSON-like output matching expected structure and numeric formats precisely."
+}
+]
+},
+"35b5e732971771bde763ae844f8c0fc6980d388b": {
+"rules": [
+{
+"target_block": "schema",
+"rule": "Use exact service and receiver names as in ground truth schema without renaming or adding prefixes."
+},
+{
+"target_block": "temporal",
+"rule": "Express all time, delay, and schedule using explicit JOILang temporal constructs like delay() or cron syntax."
+},
+{
+"target_block": "output",
+"rule": "Match output strings and enum values exactly as in ground truth, including language and casing."
+}
+]
+},
+"8219f434872bc24a44755b2daaf4c6d179af5b35": {
+"rules": [
+{
+"target_block": "schema",
+"rule": "Always specify full receiver scope including location and device type tags."
+},
+{
+"target_block": "temporal",
+"rule": "Use explicit temporal constructs like delay, wait, or cron for timing and scheduling."
+},
+{
+"target_block": "output",
+"rule": "Generate output strictly matching expected JSON structure without extra conditions or type mismatches."
+}
+]
+},
+"414ef668f85832cd75b48738c46ef1a35761d2e4": {
+"verdict": "real_error",
+"reason": "The generated code omits the #Lab filter, causing it to target all dehumidifiers instead of only those in the lab as specified."
+},
+"885d9b3c53be1ddfeaaad5d4ff406e61bd352450": {
+"verdict": "real_error",
+"reason": "The generated code adds unnecessary mode checks and uses a numeric delay instead of the required exact syntax, deviating from the specified command logic and style."
+},
+"206dcc937e2173dd677323db97862f1c9a5d8451": {
+"verdict": "real_error",
+"reason": "The generated code lacks the weekday check and the hourly schedule trigger, thus failing to match the command's timing requirements exactly."
+},
+"7ee1edbe61ad00764996c2486c75eca271b7e925": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device (#WindowCovering) and property (windowcovering_currentposition) with a string comparison instead of the correct device (#Window) and numeric property (armrobot_currentposition), causing functional mismatch."
+},
+"f094b230543d63b9f89caf57ae3b34e6058e3076": {
+"rules": [
+{
+"target_block": "schema",
+"rule": "Include all specified location and device type qualifiers exactly as stated."
+},
+{
+"target_block": "temporal",
+"rule": "Use explicit delay or schedule commands with correct units and avoid conditional mode checks."
+},
+{
+"target_block": "general",
+"rule": "Use exact service and receiver names from the schema without substitutions or approximations."
+}
+]
+},
+"74398528484ceb51d15b9ffa72aa4791a2251ae9": {
+"rules": [
+{
+"target_block": "schema",
+"rule": "Use exact service and receiver names as in ground truth without substitutions or synonyms."
+},
+{
+"target_block": "temporal",
+"rule": "Express time and schedule constraints using explicit delay or simple period constructs matching ground truth."
+},
+{
+"target_block": "general",
+"rule": "Avoid adding extra conditions or numeric formats not present in the ground truth commands."
+}
+]
+},
+"7d09bd93b27772f3013e5845429b6c9eb83c4e97": {
+"verdict": "real_error",
+"reason": "The generated code uses a different method and time unit (minutes instead of seconds) and does not set the cooking parameters directly as required by the command."
+},
+"cb9f4f0365ba97092c1ed0ad7541e34c457d39c5": {
+"verdict": "real_error",
+"reason": "The generated code targets all lights instead of specifically the living room light and uses a different method not matching the reference command's device and function."
+},
+"d1b72fe556fa8844d8044792bb1360e7c7fe9d41": {
+"verdict": "real_error",
+"reason": "The generated code omits the device reference and uses a numeric delay instead of the specified '1 HOUR' keyword, failing the exact-match style requirements."
+},
+"5baaa8145ab0f4c45fd5fa5e641bc953a9835fe6": {
+"verdict": "real_error",
+"reason": "The generated code lacks the necessary scheduling and weekend afternoon time condition required to run every 30 minutes on weekend afternoons."
+},
+"a5f6a0d401707757d4aab8c7d5bf34b07c4ebb52": {
+"verdict": "real_error",
+"reason": "The generated code lacks the required scheduling logic to trigger the capture every hour on weekdays, thus failing to implement the command correctly."
+},
+"f5298b215cf4abf61229605e88e5dceade93a7fd": {
+"verdict": "real_error",
+"reason": "The generated code lacks the required state toggling and 5-minute repetition logic, resulting in incorrect valve operation compared to the reference."
+},
+"88af66d51331c21aa525b551d58d97a3ffb8d23b": {
+"verdict": "real_error",
+"reason": "The generated code lacks the required 30-minute scheduling and the use of a persistent mode variable to toggle states, making it functionally incomplete compared to the reference."
+},
+"86c95f49d54c86a739aecc29f4778a3330853b6f": {
+"verdict": "real_error",
+"reason": "The generated code lacks the mode state variable and does not toggle the mode variable, which is necessary to maintain state across executions and correctly alternate modes every 30 minutes as specified."
+},
+"a80e602d1ca9692ede00f79e8753f877cd069acf": {
+"rules": [
+{
+"target_block": "schema",
+"rule": "Use exact service and receiver names from schema without adding conditions or alternative methods."
+},
+{
+"target_block": "temporal",
+"rule": "Express delays and periods using 'delay(X HOUR)' format with uppercase units and no numeric conversion."
+},
+{
+"target_block": "general",
+"rule": "Generate commands exactly as single calls or separated blocks without extra logic or numeric transformations."
+}
+]
+},
+"c03e5e816351b588a07ea5a5c5e783728b867661": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device identifier and lacks the required 30-minute scheduling and mode state tracking, making it functionally incorrect compared to the reference."
+}
+}

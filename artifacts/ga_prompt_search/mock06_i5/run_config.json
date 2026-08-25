@@ -1,0 +1,20 @@
+{
+ "RUN_TAG": "mock06_i5",
+ "LLM_MODE": "mock",
+ "POP": 3,
+ "MAX_GEN": 2,
+ "ROUNDS": 5,
+ "TARGET": 90.0,
+ "SUBSET_N": 6,
+ "SUBSET_N_FINAL": 8,
+ "HOLDOUT_N": 6,
+ "GEN_BATCH": 10,
+ "MAX_NEW_TOKENS": 512,
+ "LOCAL_MODEL_DIR": "/home/mgjeong/Desktop/llm/local_models/qwen25_coder_7b",
+ "SEED": 2025,
+ "ELITE": 2,
+ "TOURN": 3,
+ "P_MUT": 0.35,
+ "MAX_RULES": 8,
+ "REG_EPS": 1
+}

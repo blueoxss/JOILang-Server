@@ -1,0 +1,20 @@
+{
+  "profile": "strict_v1",
+  "description": "v15 utils/det_evaluator.py STRICT_WEIGHTS(34-47행)의 기록 사본. 참조·문서화 목적 — v15 strict 프로파일 자체는 자신의 내장 dict를 사용하며 이 파일을 읽지 않는다(동작 무변경). strict에는 이 밖에 gt_exact override(→1.0)와 5조건 min(score,0.699) cap이 있음(1541-1555행).",
+  "scale": "0-1 (원 구현은 0-100)",
+  "threshold": 0.70,
+  "weights": {
+    "schema_ok": 0.05,
+    "service_match": 0.10,
+    "arg_type": 0.05,
+    "precondition": 0.05,
+    "semantic": 0.10,
+    "extraneous": 0.05,
+    "gt_similarity": 0.05,
+    "gt_service_coverage": 0.20,
+    "gt_receiver_coverage": 0.15,
+    "dataflow": 0.10,
+    "numeric_grounding": 0.05,
+    "enum_grounding": 0.05
+  }
+}

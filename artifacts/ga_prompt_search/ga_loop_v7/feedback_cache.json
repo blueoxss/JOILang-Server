@@ -1,0 +1,129 @@
+{
+"49bcdfd8d19087f6b49cce2e42fd1b1a8bbd8e45": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling",
+"Use exact numeric values in base units, not approximations or percentages",
+"Reference all devices and services with full hierarchical tags as in input"
+]
+},
+"3627ac9ffb63a2051e46d332ce8efb53d6c7d7e2": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact numeric values and units as integers or scaled integers, not floats or words.",
+"Reference all device components explicitly with full hierarchical tags for correct service coverage."
+]
+},
+"c7503dda2567be33a46bfd07df5b73b644c5677d": {
+"rules": [
+"Always set period=0 unless explicitly periodic or scheduled",
+"Use exact device and service names with correct method calls and casing",
+"Express delays with uppercase units and numeric values as in 'delay(X UNIT)'"
+]
+},
+"c1e3dd90f974a2c0898b60b057884be3a0abc66a": {
+"rules": [
+"Use exact service and receiver names from the domain without alteration.",
+"Set period and cron fields precisely as per temporal command requirements.",
+"Implement scripts with correct syntax and service method calls matching domain conventions."
+]
+},
+"e1fd919f3bebfa9fc4308beec2ab99736cf19107": {
+"rules": [
+"Always include all specified location and device qualifiers exactly as stated.",
+"Use exact cron expressions for scheduled commands; avoid approximations or conditional timing.",
+"Invoke only documented services and methods with correct argument formats and units."
+]
+},
+"0558a79fd21b7e1009e6d732ce0af96857c4cb98": {
+"rules": [
+"Use exact device group tags from the command context for all receivers.",
+"Always generate cron and period fields matching natural language time specifications.",
+"Use canonical service and property names strictly as per device definitions."
+]
+},
+"9677a5ab18e902cd501dab5d6397881dd6d47c3c": {
+"verdict": "real_error",
+"reason": "The generated code omits the #Lab tag, causing it to target all dehumidifiers instead of only those in the lab, which changes the device selection logic."
+},
+"cdf654fe91fb1b20388a9a925cc44a17a5bbc29b": {
+"verdict": "real_error",
+"reason": "The generated code includes unnecessary mode checks and uses a negative period value, deviating from the exact-match requirement and altering the intended straightforward logic and timing."
+},
+"7ac96c936fb083b2b75dbf043db25b314d90bd0d": {
+"verdict": "real_error",
+"reason": "The generated cron triggers only at midnight instead of every hour from 8 AM to 11 PM, which does not match the required schedule."
+},
+"7c4b6f430d9bcd6e8b81ee0a36febf737f9d607d": {
+"verdict": "real_error",
+"reason": "The generated code uses undefined variables and a different function call without proper context, deviating from the reference logic and variable usage."
+},
+"d10b7bd12072c7fc885e2c672e9d792b015f2d3f": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device (#WindowCovering vs #Window), different property, and a string comparison instead of a numeric one, which changes the logic and is not a valid alternative."
+},
+"916b88c9ced0c747c07b87438f244425ce40b7e8": {
+"rules": [
+"Always include explicit receiver selectors with correct tags for all device commands.",
+"Use exact cron and period values matching natural language time specifications.",
+"Ground all numeric values precisely and handle value limits explicitly in code."
+]
+},
+"8e182b352bb414a6e6f9f926d41405c04fc9694b": {
+"verdict": "real_error",
+"reason": "The generated cron expression triggers only once daily at 8 AM with a 1-hour period, which does not match the reference's exact hourly triggers from 8 AM to 11 PM on weekdays."
+},
+"1f84dc9840ee33d1b40ea96742e7260916516f4a": {
+"rules": [
+"Use exact device group selectors with all() and correct tags for receivers.",
+"Always use precise cron and period values matching time expressions exactly.",
+"Include full service and receiver references with proper numeric types and bounds checks."
+]
+},
+"9f40b7e2e12d91d71553dab88725cb30b4a8f4a1": {
+"verdict": "real_error",
+"reason": "The generated code uses a different method and separates the delay from the cooking mode setting, which changes the logic and timing handling compared to the reference's single command with a 1800-second period."
+},
+"43711047f53651fada4122ea7f7eac1fe6929831": {
+"verdict": "real_error",
+"reason": "The generated code uses a different method and parameter format than the reference, and the command requires exact match on script logic including method and parameters."
+},
+"149ea00827dcc7faa383c9d530f659215994722a": {
+"verdict": "real_error",
+"reason": "The generated code uses an incorrect period value and a different condition check with a string instead of a boolean, and it calls a different method on the device, all of which deviate from the reference logic and style."
+},
+"2eee3757d29cff1437a96feb84b3cec4c69d0865": {
+"verdict": "real_error",
+"reason": "The generated code uses period=-1 instead of period=0, which is a real error as cron or period values must match exactly."
+},
+"62d0c627658c3cf7786c3d385ac1a840b41d17db": {
+"verdict": "real_error",
+"reason": "The generated code uses period=-1 and delay in milliseconds instead of period=0 and delay in minutes, which violates the exact-match requirement for cron or period values."
+},
+"d72dcc968eec019e4f2e27fa2ece4999158bad88": {
+"verdict": "real_error",
+"reason": "The generated cron expression differs from the reference and the period value is invalid, causing a scheduling mismatch rather than a valid alternative implementation."
+},
+"e7b915f80cdc9ae52311cf38783d549eaeeff7bd": {
+"verdict": "real_error",
+"reason": "The generated code uses different device property names and a different spoken message text, which constitutes a functional error rather than a valid alternative."
+},
+"dfd35dec00cfa60b1899121fb36b5b38db2063b8": {
+"verdict": "real_error",
+"reason": "The generated code uses a period value and an empty cron instead of the required cron expression and zero period, which is a real functional error."
+},
+"3dedffe2fa0fad66c13003e91c5f6343f43efb04": {
+"verdict": "valid_alternative",
+"reason": "The generated code toggles the mode based on the current device state rather than an internal variable, which is a valid alternative implementation without changing the schedule or logic."
+},
+"b65a06983ca0d7a59b90b0d81140090ef64fd838": {
+"verdict": "real_error",
+"reason": "The generated code uses device state checking instead of the required internal mode variable to toggle modes, which changes the logic and is not a valid alternative implementation."
+},
+"bed6ec20d7d8e8a7bd778fc3227f9484b89c3064": {
+"rules": [
+"Use exact service and method names as single tokens without extra parentheses or rearrangements",
+"Set period=0 for immediate commands; avoid negative or nonzero periods unless explicitly required",
+"Represent numeric values as integers in seconds or RGB strings exactly as comma-separated quoted strings"
+]
+}
+}

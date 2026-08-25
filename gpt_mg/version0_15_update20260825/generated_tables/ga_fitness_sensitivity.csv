@@ -1,0 +1,6 @@
+profile,coeffs,n_candidates,n_generation_groups,fitness_mean,fitness_min,fitness_max,winner_change_rate,mean_kendall_tau_vs_base
+base,0.7/0.2/0.05/0.05,50,10,0.325066,0.0,0.725696,0.0,1.0
+pass_heavy,0.85/0.1/0.025/0.025,50,10,0.397533,0.0,0.862848,0.0,1.0
+graded_heavy,0.45/0.45/0.05/0.05,50,10,0.323343,0.0,0.721787,0.0,0.94
+cost_heavy,0.5/0.1/0.2/0.2,50,10,-0.104911,-0.184181,0.0,0.7,0.32
+quality_only,0.78/0.22/0/0,50,10,0.468484,0.0,0.99656,0.2,0.76

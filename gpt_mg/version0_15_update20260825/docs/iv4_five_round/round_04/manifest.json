@@ -1,0 +1,29 @@
+{
+ "round_id": "R4",
+ "created": "2026-08-25",
+ "criteria_sha256": "136dfde4b17e0ac0",
+ "n_variant_configs": 29,
+ "artifacts": {
+  "scripts/run_det_weight_sensitivity.py": "f931764784882805",
+  "scripts/run_ga_fitness_sensitivity.py": "ae60ef9c21c44454",
+  "generated_tables/det_weight_sensitivity_by_model.csv": "d2a90f225c129e18",
+  "generated_tables/det_weight_sensitivity_summary.csv": "99a963c9bbb5bfb8",
+  "generated_tables/det_weight_sensitivity_summary.tex": "c938f329388cc529",
+  "generated_tables/ga_fitness_sensitivity.csv": "1a810385b8fd5f77",
+  "generated_tables/ga_fitness_sensitivity.tex": "8a1837403d5329e7",
+  "generated_tables/tau_sensitivity.csv": "2da573a5ea1c9343",
+  "generated_tables/tau_sensitivity.tex": "1d98088610b3d105",
+  "artifacts/sensitivity/ga_rescore_rows.csv": "bc8bb8cb6a1a0d2b",
+  "artifacts/sensitivity/components_cloud_v07.jsonl": "01987ea50437e177",
+  "artifacts/sensitivity/components_cloud_v12.jsonl": "17e87ea7de5645e0",
+  "artifacts/sensitivity/components_cloud_v13.jsonl": "4794943efbfa69db",
+  "artifacts/sensitivity/components_cloud_v14.jsonl": "644333609b062fff",
+  "artifacts/sensitivity/components_cloud_v15.jsonl": "492148e64d4ca870",
+  "artifacts/sensitivity/components_qwen14b.jsonl": "3ce3732a1ca1fa8f",
+  "docs/iv4_five_round/round_04/criteria.yaml": "3e215965268cfb53",
+  "docs/iv4_five_round/round_04/initial_evaluation.json": "155fed41fc0d5a99",
+  "docs/iv4_five_round/round_04/feedback.md": "5416285aedd2a078",
+  "docs/iv4_five_round/round_04/changes.md": "6f55add7a5f7bf70",
+  "docs/iv4_five_round/round_04/paused_long_run.md": "54b9e88f15642297"
+ }
+}

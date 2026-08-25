@@ -1,0 +1,13 @@
+row,category,label,parse_ok,prompt_tokens,latency_sec,logic_equivalent,script_similarity,ast_similarity,cron_equal,period_equal,ir_error,det_score,det_pass,gt_exact,failure_reasons
+0,1,gpt-4.1-mini (CloudRef),True,29604,5.3,True,1.0,1.0,True,False,,92.5,True,False,period_mismatch
+1,1,gpt-4.1-mini (CloudRef),True,29605,2.362,True,0.929,0.917,True,False,,80.3571,True,False,"period_mismatch,gt_mismatch,numeric_grounding"
+2,1,gpt-4.1-mini (CloudRef),True,29609,1.675,True,0.943,0.25,True,False,,81.0,True,False,"period_mismatch,gt_mismatch,numeric_grounding"
+3,1,gpt-4.1-mini (CloudRef),True,29605,1.565,True,1.0,1.0,True,False,,92.5,True,False,period_mismatch
+4,1,gpt-4.1-mini (CloudRef),True,29605,1.7,True,1.0,1.0,True,False,,92.5,True,False,period_mismatch
+5,1,gpt-4.1-mini (CloudRef),True,29605,1.299,True,1.0,1.0,True,False,,92.5,True,False,period_mismatch
+0,1,Qwen2.5-Coder-7B (DirectTransfer),True,30087,7.702,True,0.959,1.0,True,False,,91.2755,True,False,"period_mismatch,gt_mismatch"
+1,1,Qwen2.5-Coder-7B (DirectTransfer),True,30088,7.097,True,0.929,0.917,True,False,,80.3571,True,False,"period_mismatch,gt_mismatch,numeric_grounding"
+2,1,Qwen2.5-Coder-7B (DirectTransfer),True,30093,8.938,True,0.426,0.478,True,False,,40.8981,False,False,"period_mismatch,gt_mismatch,gt_service_coverage,unknown_service,numeric_grounding"
+3,1,Qwen2.5-Coder-7B (DirectTransfer),True,30088,7.273,True,0.905,0.917,True,False,,64.6429,False,False,"period_mismatch,gt_mismatch,gt_service_coverage,unknown_service"
+4,1,Qwen2.5-Coder-7B (DirectTransfer),True,30089,7.082,True,0.821,0.917,True,False,,62.1429,False,False,"period_mismatch,gt_mismatch,gt_service_coverage,unknown_service"
+5,1,Qwen2.5-Coder-7B (DirectTransfer),True,30088,7.135,True,1.0,1.0,True,False,,92.5,True,False,period_mismatch

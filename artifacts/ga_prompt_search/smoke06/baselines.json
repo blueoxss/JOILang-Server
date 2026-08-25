@@ -1,0 +1,8 @@
+{
+ "DirectTransfer_subsetA": 66.66666666666667,
+ "CloudRef_subsetA": 83.33333333333333,
+ "DirectTransfer_holdout": 33.333333333333336,
+ "CloudRef_holdout": 83.33333333333333,
+ "source": "/home/mgjeong/Desktop/llm/JOILang-Server/artifacts/fullprompt_runs/fullprompt_v06_ver201",
+ "mode": "real"
+}

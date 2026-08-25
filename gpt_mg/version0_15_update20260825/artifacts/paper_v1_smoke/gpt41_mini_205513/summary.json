@@ -1,0 +1,29 @@
+{
+ "n": 280,
+ "det_profile": "paper_v1",
+ "det_weights_path": "(default)",
+ "det_threshold": 0.7,
+ "DETPass": 0.928571,
+ "S_DET": 0.926549,
+ "hard_gate_rows": 0,
+ "gt_exact_rows": 155,
+ "source": "/data/mgjeong/JOILang-Server/gpt_mg/version0_15_update20260413/results/model_suite_20260616_205513/gpt41_mini_summary.json",
+ "llm_calls": 0,
+ "fitness_paper_v1": {
+  "fitness": 0.735309977384903,
+  "detpass": 0.9285714285714286,
+  "sdet": 0.926549435701868,
+  "tok_hat": 1.00000000141559,
+  "lat_hat": 0.9999981936938238,
+  "tokens_ref": 30275.1071,
+  "latency_ref_sec": 1.9772,
+  "weights": {
+   "detpass": 0.7,
+   "sdet": 0.2,
+   "tokens": 0.05,
+   "latency": 0.05
+  },
+  "model_key": "gpt41_mini",
+  "fitness_mode": "paper_v1"
+ }
+}

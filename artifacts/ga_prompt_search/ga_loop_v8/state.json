@@ -1,0 +1,3887 @@
+{
+ "round_idx": 5,
+ "population": null,
+ "rule_pool": [
+  {
+   "target_block": "temporal",
+   "rule": "Always set period=0 for immediate commands unless specified otherwise"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact numeric units and convert units to base units when applicable"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Include all relevant receivers and services explicitly in the script"
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Always use correct cron and period fields matching time expressions precisely"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and receiver names from input context without generic substitutions"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Ground numeric and enum parameters to explicit values, not descriptive words or relative delays"
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Always use exact cron expressions for recurring schedules, never empty or approximate cron fields."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use correct service and method names matching the device and action precisely."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Represent durations and intervals as integer milliseconds in the period field, not in script delays."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Always use cron expressions for scheduling, avoid negative or default period values."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact numeric values or standard numeric formats for parameters, avoid enums or color names."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact device group qualifiers from commands, e.g. location and type, in selectors."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Always set period=0 and cron='' unless explicitly scheduling recurring tasks."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service method names and parameters as per device capabilities without adding conditions or conversions."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact device and location filters as in the command, never omit or generalize receivers."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Fully qualify service calls with receiver and service names; do not simplify or omit numeric constants."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact device group selectors including location tags when specified"
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Always set cron and period fields exactly as per temporal instructions"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use canonical service and receiver names from the domain ontology"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and property names from the domain without synonyms or variants"
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Generate cron expressions precisely matching time and day constraints in natural language"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Represent numeric values as integers without decimals and use zero-based periods unless delay is specified"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and method names as single concatenated lowercase words without synonyms."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Set period and cron fields precisely matching timing instructions, never use -1 or defaults."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Represent numeric values as integers or exact strings without decimals or extra formatting."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Represent numeric values in seconds or exact units as integers, not floats or words."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Set cron and period fields precisely to reflect timing and repetition requirements."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Set period and cron fields precisely as specified, avoiding defaults or placeholders"
+  }
+ ],
+ "adopted": {
+  "grammar": "compact",
+  "temporal": "full",
+  "caution": "off",
+  "few_shot": 2,
+  "rules": [
+   {
+    "target_block": "schema",
+    "rule": "Use correct service and method names matching the device and action precisely."
+   },
+   {
+    "target_block": "schema",
+    "rule": "Use exact numeric values or standard numeric formats for parameters, avoid enums or color names."
+   },
+   {
+    "target_block": "schema",
+    "rule": "Use exact device group selectors including location tags when specified"
+   },
+   {
+    "target_block": "schema",
+    "rule": "Use canonical service and receiver names from the domain ontology"
+   },
+   {
+    "target_block": "schema",
+    "rule": "Use exact numeric units and convert units to base units when applicable"
+   },
+   {
+    "target_block": "schema",
+    "rule": "Use exact service and receiver names from input context without generic substitutions"
+   },
+   {
+    "target_block": "schema",
+    "rule": "Fully qualify service calls with receiver and service names; do not simplify or omit numeric constants."
+   },
+   {
+    "target_block": "schema",
+    "rule": "Include all relevant receivers and services explicitly in the script"
+   }
+  ]
+ },
+ "lineage": [
+  {
+   "round": "R1",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "968276e47879",
+     "parents": [
+      "968276e47879"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "55259c794afb",
+     "parents": [
+      "55259c794afb"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "cd0e0da70417",
+     "parents": [
+      "968276e47879",
+      "74c629fc19e9"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "e5409a2992e5",
+     "parents": [
+      "55259c794afb",
+      "cd0e0da70417"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "74c629fc19e9",
+     "parents": [
+      "74c629fc19e9",
+      "74c629fc19e9"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "3801dc733664",
+     "parents": [
+      "5f66d7cc296b",
+      "968276e47879"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "cd0e0da70417",
+      "74c629fc19e9"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:0->1"
+     ]
+    },
+    {
+     "child": "52b615d58ff6",
+     "parents": [
+      "cd0e0da70417",
+      "cd0e0da70417"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:0->2"
+     ]
+    },
+    {
+     "child": "168b94b716f0",
+     "parents": [
+      "cd0e0da70417",
+      "cd0e0da70417"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion",
+      "few_shot_count:0->2"
+     ]
+    },
+    {
+     "child": "e671cb40bb17",
+     "parents": [
+      "74c629fc19e9",
+      "968276e47879"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:full->compact"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R1",
+   "after_gen": 2,
+   "children": [
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "e671cb40bb17",
+     "parents": [
+      "e671cb40bb17"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "38419e024264",
+     "parents": [
+      "cd0e0da70417",
+      "e671cb40bb17"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "99dd17dad89d",
+     "parents": [
+      "168b94b716f0",
+      "e671cb40bb17"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "c9a5d3cac462",
+     "parents": [
+      "89368b6a4048",
+      "968276e47879"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "4aa9be901144",
+     "parents": [
+      "968276e47879",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "8fc0eaab75c5",
+     "parents": [
+      "e671cb40bb17",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "56ad36723ecf",
+     "parents": [
+      "e5409a2992e5",
+      "e671cb40bb17"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "280aadcbabda",
+     "parents": [
+      "e671cb40bb17",
+      "55259c794afb"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "52b615d58ff6",
+     "parents": [
+      "89368b6a4048",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on",
+      "caution_toggle:on->off",
+      "caution_toggle:off->on",
+      "few_shot_count:1->2"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R1",
+   "after_gen": 3,
+   "children": [
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "56ad36723ecf",
+     "parents": [
+      "56ad36723ecf"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "6416acf76f3c",
+     "parents": [
+      "89368b6a4048",
+      "8fc0eaab75c5"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "da8d96fdae77",
+     "parents": [
+      "89368b6a4048",
+      "8fc0eaab75c5"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "545fcf1902c8",
+     "parents": [
+      "56ad36723ecf",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "8fc0eaab75c5",
+     "parents": [
+      "89368b6a4048",
+      "8fc0eaab75c5"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:1->0"
+     ]
+    },
+    {
+     "child": "238efc3735ed",
+     "parents": [
+      "56ad36723ecf",
+      "8fc0eaab75c5"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full",
+      "grammar_version:full->compact",
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "4aa9be901144",
+     "parents": [
+      "c9a5d3cac462",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "0b4a2114759e",
+     "parents": [
+      "8fc0eaab75c5",
+      "52b615d58ff6"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "8e09208553d4",
+     "parents": [
+      "56ad36723ecf",
+      "56ad36723ecf"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full",
+      "caution_toggle:off->on"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R1",
+   "after_gen": 4,
+   "children": [
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "56ad36723ecf",
+     "parents": [
+      "56ad36723ecf"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "4aa9be901144",
+     "parents": [
+      "89368b6a4048",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "1d5b01ce7d9d",
+     "parents": [
+      "8fc0eaab75c5",
+      "56ad36723ecf"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "da8d96fdae77",
+     "parents": [
+      "da8d96fdae77",
+      "da8d96fdae77"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "cd2cf5a191f6",
+     "parents": [
+      "89368b6a4048",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on",
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "1ab1627c37a8",
+     "parents": [
+      "da8d96fdae77",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "e00be27d3f01",
+     "parents": [
+      "8fc0eaab75c5",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on",
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "40e2cfa960d5",
+     "parents": [
+      "56ad36723ecf",
+      "6416acf76f3c"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "c076f7ad4fee",
+     "parents": [
+      "56ad36723ecf",
+      "56ad36723ecf"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:0->2"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R1",
+   "after_gen": 5,
+   "children": [
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "56ad36723ecf",
+     "parents": [
+      "56ad36723ecf"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "65991f13c714",
+     "parents": [
+      "89368b6a4048",
+      "56ad36723ecf"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "fd3aec3aaeb2",
+     "parents": [
+      "c076f7ad4fee",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:1->0",
+      "rule_insertion",
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "da8d96fdae77",
+     "parents": [
+      "89368b6a4048",
+      "da8d96fdae77"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "c076f7ad4fee",
+     "parents": [
+      "56ad36723ecf",
+      "c076f7ad4fee"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "ce818327c09f",
+     "parents": [
+      "c076f7ad4fee",
+      "c076f7ad4fee"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "1ab1627c37a8",
+     "parents": [
+      "e00be27d3f01",
+      "89368b6a4048"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "1d5b01ce7d9d",
+     "parents": [
+      "c076f7ad4fee",
+      "1d5b01ce7d9d"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "2989c85636b4",
+     "parents": [
+      "1d5b01ce7d9d",
+      "da8d96fdae77"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    }
+   ]
+  },
+  {
+   "round": "R1",
+   "after_gen": 6,
+   "children": [
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "56ad36723ecf",
+     "parents": [
+      "56ad36723ecf"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "d6a4eb9812ff",
+     "parents": [
+      "56ad36723ecf",
+      "da8d96fdae77"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "52c5e28d8549",
+     "parents": [
+      "56ad36723ecf",
+      "89368b6a4048"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "da8d96fdae77",
+     "parents": [
+      "da8d96fdae77",
+      "89368b6a4048"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "87191af23b69",
+     "parents": [
+      "89368b6a4048",
+      "56ad36723ecf"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "c076f7ad4fee",
+     "parents": [
+      "56ad36723ecf",
+      "c076f7ad4fee"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "0af2668fe71f",
+     "parents": [
+      "da8d96fdae77",
+      "da8d96fdae77"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "ce383af5e8b3",
+     "parents": [
+      "56ad36723ecf",
+      "c076f7ad4fee"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "65991f13c714",
+     "parents": [
+      "56ad36723ecf",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R1",
+   "after_gen": 7,
+   "children": [
+    {
+     "child": "52c5e28d8549",
+     "parents": [
+      "52c5e28d8549"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "20e55fc819b7",
+     "parents": [
+      "52c5e28d8549",
+      "52c5e28d8549"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "56ad36723ecf",
+     "parents": [
+      "56ad36723ecf",
+      "89368b6a4048"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "49b6b381f4c2",
+     "parents": [
+      "52c5e28d8549",
+      "52c5e28d8549"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "c9a5d3cac462",
+     "parents": [
+      "89368b6a4048",
+      "da8d96fdae77"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop",
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "545fcf1902c8",
+     "parents": [
+      "56ad36723ecf",
+      "56ad36723ecf"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "4aa9be901144",
+     "parents": [
+      "89368b6a4048",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "8e11b0dbc870",
+     "parents": [
+      "ce383af5e8b3",
+      "56ad36723ecf"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "87191af23b69",
+     "parents": [
+      "52c5e28d8549",
+      "56ad36723ecf"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R1",
+   "after_gen": 8,
+   "children": [
+    {
+     "child": "52c5e28d8549",
+     "parents": [
+      "52c5e28d8549"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "238efc3735ed",
+     "parents": [
+      "52c5e28d8549",
+      "56ad36723ecf"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "20e55fc819b7",
+     "parents": [
+      "89368b6a4048",
+      "20e55fc819b7"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "92d065984642",
+     "parents": [
+      "89368b6a4048",
+      "20e55fc819b7"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "c2421e86c27d",
+     "parents": [
+      "56ad36723ecf",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "87191af23b69",
+     "parents": [
+      "56ad36723ecf",
+      "52c5e28d8549"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "da8d96fdae77",
+     "parents": [
+      "89368b6a4048",
+      "52c5e28d8549"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "40e529cc9d78",
+     "parents": [
+      "52c5e28d8549",
+      "c9a5d3cac462"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion",
+      "rule_drop",
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "af75d63f260f",
+     "parents": [
+      "52c5e28d8549",
+      "56ad36723ecf"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion",
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R1",
+   "after_gen": 9,
+   "children": [
+    {
+     "child": "c2421e86c27d",
+     "parents": [
+      "c2421e86c27d"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "52c5e28d8549",
+     "parents": [
+      "52c5e28d8549"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "af75d63f260f",
+     "parents": [
+      "af75d63f260f",
+      "52c5e28d8549"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "87191af23b69",
+     "parents": [
+      "c2421e86c27d",
+      "52c5e28d8549"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "478d689df346",
+     "parents": [
+      "c2421e86c27d",
+      "c2421e86c27d"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "2989c85636b4",
+     "parents": [
+      "52c5e28d8549",
+      "da8d96fdae77"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "661aa8ca49aa",
+     "parents": [
+      "89368b6a4048",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "831350fe7e2c",
+     "parents": [
+      "af75d63f260f",
+      "20e55fc819b7"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "22010db21cba",
+     "parents": [
+      "c2421e86c27d",
+      "87191af23b69"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "545fcf1902c8",
+     "parents": [
+      "da8d96fdae77",
+      "c2421e86c27d"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full",
+      "few_shot_count:1->0"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R1",
+   "after_gen": 10,
+   "children": [
+    {
+     "child": "c2421e86c27d",
+     "parents": [
+      "c2421e86c27d"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "52c5e28d8549",
+     "parents": [
+      "52c5e28d8549"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "2989c85636b4",
+     "parents": [
+      "c2421e86c27d",
+      "52c5e28d8549"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "da21c21e8ff8",
+     "parents": [
+      "661aa8ca49aa",
+      "c2421e86c27d"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "6e2075e7db5d",
+     "parents": [
+      "c2421e86c27d",
+      "831350fe7e2c"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "af75d63f260f",
+     "parents": [
+      "52c5e28d8549",
+      "af75d63f260f"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "572d472f90a6",
+     "parents": [
+      "52c5e28d8549",
+      "52c5e28d8549"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "7aee0385eab4",
+     "parents": [
+      "2989c85636b4",
+      "52c5e28d8549"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "831350fe7e2c",
+     "parents": [
+      "831350fe7e2c",
+      "52c5e28d8549"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "f5191ce64ede",
+     "parents": [
+      "661aa8ca49aa",
+      "c2421e86c27d"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R1",
+   "after_gen": 11,
+   "children": [
+    {
+     "child": "c2421e86c27d",
+     "parents": [
+      "c2421e86c27d"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "52c5e28d8549",
+     "parents": [
+      "52c5e28d8549"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "831350fe7e2c",
+     "parents": [
+      "831350fe7e2c",
+      "c2421e86c27d"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "b149ceb88a50",
+     "parents": [
+      "52c5e28d8549",
+      "da21c21e8ff8"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "af75d63f260f",
+     "parents": [
+      "af75d63f260f",
+      "c2421e86c27d"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "7427c7e877df",
+     "parents": [
+      "52c5e28d8549",
+      "af75d63f260f"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "f5191ce64ede",
+     "parents": [
+      "f5191ce64ede",
+      "f5191ce64ede"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "553e87d24e19",
+     "parents": [
+      "52c5e28d8549",
+      "da21c21e8ff8"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "eaddf8751781",
+     "parents": [
+      "af75d63f260f",
+      "da21c21e8ff8"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "37e8538015cb",
+     "parents": [
+      "c2421e86c27d",
+      "f5191ce64ede"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "478d689df346",
+     "parents": [
+      "478d689df346"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "c9a5d3cac462",
+     "parents": [
+      "9635e984c764",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "43c99f64f3c8",
+     "parents": [
+      "c2421e86c27d",
+      "9040a25d9eaf"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "5ba483a15ebc",
+     "parents": [
+      "89368b6a4048",
+      "478d689df346"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "c2421e86c27d",
+     "parents": [
+      "89368b6a4048",
+      "c2421e86c27d"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "2795bd9b409a",
+     "parents": [
+      "478d689df346",
+      "478d689df346"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "c54552f68d70",
+     "parents": [
+      "89368b6a4048",
+      "9040a25d9eaf"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "b780cb78dbfd",
+     "parents": [
+      "478d689df346",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "9635e984c764",
+     "parents": [
+      "c2421e86c27d",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 2,
+   "children": [
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "478d689df346",
+     "parents": [
+      "478d689df346"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "8519ae0639b2",
+     "parents": [
+      "89368b6a4048",
+      "5ba483a15ebc"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "c2421e86c27d",
+     "parents": [
+      "89368b6a4048",
+      "9635e984c764"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "9635e984c764",
+     "parents": [
+      "c2421e86c27d",
+      "9635e984c764"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "43c99f64f3c8",
+     "parents": [
+      "43c99f64f3c8",
+      "9635e984c764"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "fb26a5e9a567",
+     "parents": [
+      "43c99f64f3c8",
+      "5ba483a15ebc"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "5c75318e1481",
+     "parents": [
+      "478d689df346",
+      "43c99f64f3c8"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "121cafbae2a0",
+     "parents": [
+      "478d689df346",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "09f2db2c25de",
+     "parents": [
+      "89368b6a4048",
+      "478d689df346"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 3,
+   "children": [
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "478d689df346",
+     "parents": [
+      "478d689df346"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "2795bd9b409a",
+     "parents": [
+      "478d689df346",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "91cde9e5969c",
+     "parents": [
+      "5c75318e1481",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "608e4de3c3c4",
+     "parents": [
+      "89368b6a4048",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "78a0b9df6a46",
+     "parents": [
+      "89368b6a4048",
+      "478d689df346"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "121cafbae2a0",
+     "parents": [
+      "478d689df346",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "6f8c145be6eb",
+     "parents": [
+      "478d689df346",
+      "478d689df346"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "8f91aedf9af1",
+     "parents": [
+      "5c75318e1481",
+      "09f2db2c25de"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "09f2db2c25de",
+     "parents": [
+      "478d689df346",
+      "478d689df346"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 4,
+   "children": [
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "478d689df346",
+     "parents": [
+      "478d689df346"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "78a0b9df6a46",
+     "parents": [
+      "78a0b9df6a46",
+      "478d689df346"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "fd969b32a03d",
+     "parents": [
+      "89368b6a4048",
+      "78a0b9df6a46"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "c76c6473a96a",
+     "parents": [
+      "89368b6a4048",
+      "478d689df346"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:1->0"
+     ]
+    },
+    {
+     "child": "6fc9efcd0aa7",
+     "parents": [
+      "89368b6a4048",
+      "91cde9e5969c"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "f636a20d0ade",
+     "parents": [
+      "478d689df346",
+      "78a0b9df6a46"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "c689529bdf8d",
+     "parents": [
+      "91cde9e5969c",
+      "91cde9e5969c"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "37e8538015cb",
+     "parents": [
+      "78a0b9df6a46",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "281f21cf98cc",
+     "parents": [
+      "78a0b9df6a46",
+      "478d689df346"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 5,
+   "children": [
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "478d689df346",
+     "parents": [
+      "478d689df346"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "cdfe717d3336",
+     "parents": [
+      "c689529bdf8d",
+      "89368b6a4048"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "7f43bcd1d4be",
+     "parents": [
+      "6fc9efcd0aa7",
+      "37e8538015cb"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "65bfd3c11885",
+     "parents": [
+      "37e8538015cb",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "4aa9be901144",
+     "parents": [
+      "89368b6a4048",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "37e8538015cb",
+     "parents": [
+      "78a0b9df6a46",
+      "37e8538015cb"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "5e075ecaaccd",
+     "parents": [
+      "78a0b9df6a46",
+      "78a0b9df6a46"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "52b615d58ff6",
+     "parents": [
+      "89368b6a4048",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on",
+      "few_shot_count:1->2"
+     ]
+    },
+    {
+     "child": "5554685d3411",
+     "parents": [
+      "6fc9efcd0aa7",
+      "78a0b9df6a46"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 6,
+   "children": [
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "478d689df346",
+     "parents": [
+      "478d689df346"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "5ae4c7af6e09",
+     "parents": [
+      "7f43bcd1d4be",
+      "37e8538015cb"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "37e8538015cb",
+     "parents": [
+      "89368b6a4048",
+      "37e8538015cb"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "5e075ecaaccd",
+     "parents": [
+      "5e075ecaaccd",
+      "478d689df346"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "6aa4c169dba0",
+     "parents": [
+      "7f43bcd1d4be",
+      "478d689df346"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "602019da5ee0",
+     "parents": [
+      "89368b6a4048",
+      "478d689df346"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:1->2"
+     ]
+    },
+    {
+     "child": "4aa9be901144",
+     "parents": [
+      "89368b6a4048",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "cdfe717d3336",
+     "parents": [
+      "89368b6a4048",
+      "cdfe717d3336"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "75cf9270ebb3",
+     "parents": [
+      "478d689df346",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 7,
+   "children": [
+    {
+     "child": "602019da5ee0",
+     "parents": [
+      "602019da5ee0"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "89368b6a4048",
+     "parents": [
+      "89368b6a4048"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "478d689df346",
+     "parents": [
+      "478d689df346",
+      "89368b6a4048"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "5ae4c7af6e09",
+     "parents": [
+      "478d689df346",
+      "5ae4c7af6e09"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "b5ff9c4ef639",
+     "parents": [
+      "5ae4c7af6e09",
+      "602019da5ee0"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "660dc973080b",
+     "parents": [
+      "602019da5ee0",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "75cf9270ebb3",
+     "parents": [
+      "75cf9270ebb3",
+      "89368b6a4048"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "b780cb78dbfd",
+     "parents": [
+      "478d689df346",
+      "478d689df346"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "c7645b335fb7",
+     "parents": [
+      "5e075ecaaccd",
+      "602019da5ee0"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "09f2db2c25de",
+     "parents": [
+      "89368b6a4048",
+      "602019da5ee0"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 8,
+   "children": [
+    {
+     "child": "602019da5ee0",
+     "parents": [
+      "602019da5ee0"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "b5ff9c4ef639",
+     "parents": [
+      "b5ff9c4ef639"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "c76c6473a96a",
+     "parents": [
+      "478d689df346",
+      "89368b6a4048"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:1->0"
+     ]
+    },
+    {
+     "child": "5f40cb1a76f6",
+     "parents": [
+      "602019da5ee0",
+      "09f2db2c25de"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "2080c2da217a",
+     "parents": [
+      "75cf9270ebb3",
+      "602019da5ee0"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "478d689df346",
+     "parents": [
+      "602019da5ee0",
+      "478d689df346"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "77a1e2fd493e",
+     "parents": [
+      "602019da5ee0",
+      "5ae4c7af6e09"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "6569c242b43b",
+     "parents": [
+      "b5ff9c4ef639",
+      "602019da5ee0"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "09f2db2c25de",
+     "parents": [
+      "09f2db2c25de",
+      "478d689df346"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "e31611602086",
+     "parents": [
+      "478d689df346",
+      "602019da5ee0"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 9,
+   "children": [
+    {
+     "child": "6569c242b43b",
+     "parents": [
+      "6569c242b43b"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "602019da5ee0",
+     "parents": [
+      "602019da5ee0"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "33f7b7d6de80",
+     "parents": [
+      "b5ff9c4ef639",
+      "478d689df346"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:1->0"
+     ]
+    },
+    {
+     "child": "1469c411b8e6",
+     "parents": [
+      "602019da5ee0",
+      "602019da5ee0"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "408e5edb1f61",
+     "parents": [
+      "602019da5ee0",
+      "5f40cb1a76f6"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "09f2db2c25de",
+     "parents": [
+      "602019da5ee0",
+      "09f2db2c25de"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "13ffb3122efb",
+     "parents": [
+      "6569c242b43b",
+      "602019da5ee0"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "916f39e569da",
+     "parents": [
+      "478d689df346",
+      "6569c242b43b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:2->0",
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "0c95ecb97d53",
+     "parents": [
+      "b5ff9c4ef639",
+      "6569c242b43b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full",
+      "grammar_version:full->compact",
+      "grammar_version:compact->full",
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "b5ff9c4ef639",
+     "parents": [
+      "b5ff9c4ef639",
+      "478d689df346"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 10,
+   "children": [
+    {
+     "child": "1469c411b8e6",
+     "parents": [
+      "1469c411b8e6"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "6569c242b43b",
+     "parents": [
+      "6569c242b43b"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "fb648ed4196f",
+     "parents": [
+      "1469c411b8e6",
+      "1469c411b8e6"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:2->0"
+     ]
+    },
+    {
+     "child": "8eb680603053",
+     "parents": [
+      "6569c242b43b",
+      "1469c411b8e6"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "26ca5c15e474",
+     "parents": [
+      "602019da5ee0",
+      "602019da5ee0"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion",
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "bc8672164c66",
+     "parents": [
+      "1469c411b8e6",
+      "408e5edb1f61"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on",
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "9bd4a9c27473",
+     "parents": [
+      "09f2db2c25de",
+      "6569c242b43b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "408e5edb1f61",
+     "parents": [
+      "408e5edb1f61",
+      "408e5edb1f61"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "602019da5ee0",
+     "parents": [
+      "602019da5ee0",
+      "408e5edb1f61"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "4e9568187a7a",
+     "parents": [
+      "1469c411b8e6",
+      "6569c242b43b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 11,
+   "children": [
+    {
+     "child": "1469c411b8e6",
+     "parents": [
+      "1469c411b8e6"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "6569c242b43b",
+     "parents": [
+      "6569c242b43b"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "768140549033",
+     "parents": [
+      "408e5edb1f61",
+      "6569c242b43b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "4e9568187a7a",
+     "parents": [
+      "6569c242b43b",
+      "4e9568187a7a"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "ef1b41667d2c",
+     "parents": [
+      "1469c411b8e6",
+      "1469c411b8e6"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "738745864d5b",
+     "parents": [
+      "408e5edb1f61",
+      "1469c411b8e6"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "d80578293369",
+     "parents": [
+      "4e9568187a7a",
+      "602019da5ee0"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "26ca5c15e474",
+     "parents": [
+      "1469c411b8e6",
+      "bc8672164c66"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "a4c95bc2e36a",
+     "parents": [
+      "602019da5ee0",
+      "6569c242b43b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "13ffb3122efb",
+     "parents": [
+      "6569c242b43b",
+      "1469c411b8e6"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R3",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "738745864d5b",
+     "parents": [
+      "738745864d5b"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "20ee49aebd13",
+     "parents": [
+      "20ee49aebd13"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "447cfb0b7659",
+     "parents": [
+      "738745864d5b",
+      "738745864d5b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "67015cfece2f",
+     "parents": [
+      "20ee49aebd13",
+      "1270f3c8c6da"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "0963e0bf2e13",
+     "parents": [
+      "738745864d5b",
+      "0963e0bf2e13"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "9d90bdf1f7e9",
+     "parents": [
+      "738745864d5b",
+      "738745864d5b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "237d0b627844",
+     "parents": [
+      "738745864d5b",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "e84e5fd08c41",
+     "parents": [
+      "1270f3c8c6da",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "27239f9ee18e",
+     "parents": [
+      "738745864d5b",
+      "33db21cb37cc"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "755085c73373",
+     "parents": [
+      "0963e0bf2e13",
+      "161db905180d"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    }
+   ]
+  },
+  {
+   "round": "R4",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "738745864d5b",
+     "parents": [
+      "738745864d5b"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "ee84bb0e682c",
+     "parents": [
+      "ee84bb0e682c"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "0a5a76abef1c",
+     "parents": [
+      "1469c411b8e6",
+      "ee84bb0e682c"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "50e8149f2eb6",
+     "parents": [
+      "738745864d5b",
+      "738745864d5b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "9d90bdf1f7e9",
+     "parents": [
+      "82cb32675d10",
+      "738745864d5b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop",
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "0963e0bf2e13",
+     "parents": [
+      "1469c411b8e6",
+      "381292e6efbe"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "dc2b2ba355f0",
+     "parents": [
+      "82cb32675d10",
+      "ee84bb0e682c"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "82cb32675d10",
+     "parents": [
+      "738745864d5b",
+      "82cb32675d10"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "44d43a9df785",
+     "parents": [
+      "82cb32675d10",
+      "ee84bb0e682c"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:2->1"
+     ]
+    },
+    {
+     "child": "196e79362392",
+     "parents": [
+      "1469c411b8e6",
+      "82cb32675d10"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:2->1"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "20ee49aebd13",
+     "parents": [
+      "20ee49aebd13"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "738745864d5b",
+     "parents": [
+      "738745864d5b"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "0a5a76abef1c",
+     "parents": [
+      "738745864d5b",
+      "ee84bb0e682c"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "4e74bfaa125a",
+     "parents": [
+      "ee84bb0e682c",
+      "20ee49aebd13"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "b191a86c31f3",
+     "parents": [
+      "ee84bb0e682c",
+      "738745864d5b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:2->0"
+     ]
+    },
+    {
+     "child": "22f611363a3b",
+     "parents": [
+      "ee84bb0e682c",
+      "7e0918ce1380"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "ee84bb0e682c",
+     "parents": [
+      "ee84bb0e682c",
+      "381292e6efbe"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full",
+      "grammar_version:full->compact"
+     ]
+    },
+    {
+     "child": "ef8a9cc47b3d",
+     "parents": [
+      "ee84bb0e682c",
+      "ee84bb0e682c"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "9ee1b2139e4b",
+     "parents": [
+      "20ee49aebd13",
+      "381292e6efbe"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "cee68c8e4401",
+     "parents": [
+      "ee84bb0e682c",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:2->0"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 2,
+   "children": [
+    {
+     "child": "20ee49aebd13",
+     "parents": [
+      "20ee49aebd13"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "738745864d5b",
+     "parents": [
+      "738745864d5b"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "c7d1bb6ca8bc",
+     "parents": [
+      "ef8a9cc47b3d",
+      "738745864d5b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:2->0"
+     ]
+    },
+    {
+     "child": "c8104522957a",
+     "parents": [
+      "738745864d5b",
+      "4e74bfaa125a"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "9ee1b2139e4b",
+     "parents": [
+      "738745864d5b",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "f9c1035a1df0",
+     "parents": [
+      "738745864d5b",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "31e669551467",
+     "parents": [
+      "20ee49aebd13",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "4e74bfaa125a",
+     "parents": [
+      "4e74bfaa125a",
+      "20ee49aebd13"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "4d0ae88c6775",
+     "parents": [
+      "738745864d5b",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "cee68c8e4401",
+     "parents": [
+      "4e74bfaa125a",
+      "4e74bfaa125a"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:2->0"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 3,
+   "children": [
+    {
+     "child": "20ee49aebd13",
+     "parents": [
+      "20ee49aebd13"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "738745864d5b",
+     "parents": [
+      "738745864d5b"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "f9c1035a1df0",
+     "parents": [
+      "f9c1035a1df0",
+      "20ee49aebd13"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "326414b0e8ae",
+     "parents": [
+      "4e74bfaa125a",
+      "f9c1035a1df0"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:2->1"
+     ]
+    },
+    {
+     "child": "31e669551467",
+     "parents": [
+      "20ee49aebd13",
+      "31e669551467"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "4e74bfaa125a",
+     "parents": [
+      "738745864d5b",
+      "4e74bfaa125a"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "3504b14cb786",
+     "parents": [
+      "f9c1035a1df0",
+      "4e74bfaa125a"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "5b75ebebc2ec",
+     "parents": [
+      "738745864d5b",
+      "738745864d5b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "bf26ecbc35dd",
+     "parents": [
+      "20ee49aebd13",
+      "f9c1035a1df0"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "678f2d175aaf",
+     "parents": [
+      "cee68c8e4401",
+      "738745864d5b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 4,
+   "children": [
+    {
+     "child": "20ee49aebd13",
+     "parents": [
+      "20ee49aebd13"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "738745864d5b",
+     "parents": [
+      "738745864d5b"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "45d354a0cbb8",
+     "parents": [
+      "4e74bfaa125a",
+      "3504b14cb786"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "fb718bff1e63",
+     "parents": [
+      "f9c1035a1df0",
+      "3504b14cb786"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "467ea622189c",
+     "parents": [
+      "20ee49aebd13",
+      "31e669551467"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "b99644972435",
+     "parents": [
+      "738745864d5b",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "19cb179712b1",
+     "parents": [
+      "738745864d5b",
+      "4e74bfaa125a"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "3504b14cb786",
+     "parents": [
+      "326414b0e8ae",
+      "20ee49aebd13"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "4d0ae88c6775",
+     "parents": [
+      "20ee49aebd13",
+      "738745864d5b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "d4d905d8f918",
+     "parents": [
+      "20ee49aebd13",
+      "3504b14cb786"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 5,
+   "children": [
+    {
+     "child": "20ee49aebd13",
+     "parents": [
+      "20ee49aebd13"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "19cb179712b1",
+     "parents": [
+      "19cb179712b1"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "326414b0e8ae",
+     "parents": [
+      "20ee49aebd13",
+      "3504b14cb786"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:2->1"
+     ]
+    },
+    {
+     "child": "3504b14cb786",
+     "parents": [
+      "3504b14cb786",
+      "20ee49aebd13"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "4d0ae88c6775",
+     "parents": [
+      "20ee49aebd13",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "8addd82d97aa",
+     "parents": [
+      "19cb179712b1",
+      "738745864d5b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "a05fc9d58c5d",
+     "parents": [
+      "b99644972435",
+      "738745864d5b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full",
+      "few_shot_count:2->0"
+     ]
+    },
+    {
+     "child": "4e74bfaa125a",
+     "parents": [
+      "b99644972435",
+      "19cb179712b1"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "7576b10d2260",
+     "parents": [
+      "19cb179712b1",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "dbba4a6e498f",
+     "parents": [
+      "19cb179712b1",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full",
+      "grammar_version:full->compact",
+      "rule_insertion",
+      "temporal_toggle:full->off"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 6,
+   "children": [
+    {
+     "child": "7576b10d2260",
+     "parents": [
+      "7576b10d2260"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "20ee49aebd13",
+     "parents": [
+      "20ee49aebd13"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "f9c1035a1df0",
+     "parents": [
+      "20ee49aebd13",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "3504b14cb786",
+     "parents": [
+      "19cb179712b1",
+      "326414b0e8ae"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "326414b0e8ae",
+     "parents": [
+      "3504b14cb786",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:2->1"
+     ]
+    },
+    {
+     "child": "06ba50e4e82c",
+     "parents": [
+      "4e74bfaa125a",
+      "3504b14cb786"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "4e74bfaa125a",
+     "parents": [
+      "19cb179712b1",
+      "4e74bfaa125a"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "4a31203b7bcf",
+     "parents": [
+      "7576b10d2260",
+      "19cb179712b1"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "8addd82d97aa",
+     "parents": [
+      "19cb179712b1",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "45d354a0cbb8",
+     "parents": [
+      "3504b14cb786",
+      "19cb179712b1"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 7,
+   "children": [
+    {
+     "child": "7576b10d2260",
+     "parents": [
+      "7576b10d2260"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "20ee49aebd13",
+     "parents": [
+      "20ee49aebd13"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "4a31203b7bcf",
+     "parents": [
+      "7576b10d2260",
+      "7576b10d2260"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "dbba4a6e498f",
+     "parents": [
+      "20ee49aebd13",
+      "7576b10d2260"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "78afec413dcb",
+     "parents": [
+      "f9c1035a1df0",
+      "7576b10d2260"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "d5af48230dbe",
+     "parents": [
+      "7576b10d2260",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off",
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "802bc8700454",
+     "parents": [
+      "7576b10d2260",
+      "7576b10d2260"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on",
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "0b62763ddaba",
+     "parents": [
+      "3504b14cb786",
+      "7576b10d2260"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "b6a9491a3380",
+     "parents": [
+      "7576b10d2260",
+      "3504b14cb786"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "1419d69f989e",
+     "parents": [
+      "4e74bfaa125a",
+      "06ba50e4e82c"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 8,
+   "children": [
+    {
+     "child": "7576b10d2260",
+     "parents": [
+      "7576b10d2260"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "20ee49aebd13",
+     "parents": [
+      "20ee49aebd13"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "298788cace7d",
+     "parents": [
+      "20ee49aebd13",
+      "0b62763ddaba"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "4a31203b7bcf",
+     "parents": [
+      "20ee49aebd13",
+      "dbba4a6e498f"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "873496a5241c",
+     "parents": [
+      "7576b10d2260",
+      "7576b10d2260"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "e7876e97d6e4",
+     "parents": [
+      "7576b10d2260",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "78afec413dcb",
+     "parents": [
+      "78afec413dcb",
+      "7576b10d2260"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "4e625aaaad67",
+     "parents": [
+      "20ee49aebd13",
+      "dbba4a6e498f"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:2->1"
+     ]
+    },
+    {
+     "child": "1825756f405b",
+     "parents": [
+      "78afec413dcb",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "ed0ba56a818c",
+     "parents": [
+      "78afec413dcb",
+      "78afec413dcb"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 9,
+   "children": [
+    {
+     "child": "7576b10d2260",
+     "parents": [
+      "7576b10d2260"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "20ee49aebd13",
+     "parents": [
+      "20ee49aebd13"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "e7876e97d6e4",
+     "parents": [
+      "e7876e97d6e4",
+      "7576b10d2260"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "8b2a0d47563d",
+     "parents": [
+      "7576b10d2260",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "1825756f405b",
+     "parents": [
+      "1825756f405b",
+      "78afec413dcb"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "873496a5241c",
+     "parents": [
+      "7576b10d2260",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "0dc8dda30fc8",
+     "parents": [
+      "7576b10d2260",
+      "7576b10d2260"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "529eb72a81fe",
+     "parents": [
+      "78afec413dcb",
+      "1825756f405b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop",
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "4a31203b7bcf",
+     "parents": [
+      "20ee49aebd13",
+      "7576b10d2260"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "0b62763ddaba",
+     "parents": [
+      "78afec413dcb",
+      "7576b10d2260"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact",
+      "temporal_toggle:compact->off"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 10,
+   "children": [
+    {
+     "child": "8b2a0d47563d",
+     "parents": [
+      "8b2a0d47563d"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "7576b10d2260",
+     "parents": [
+      "7576b10d2260"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "20ee49aebd13",
+     "parents": [
+      "20ee49aebd13",
+      "20ee49aebd13"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "e7876e97d6e4",
+     "parents": [
+      "0dc8dda30fc8",
+      "e7876e97d6e4"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "4a31203b7bcf",
+     "parents": [
+      "7576b10d2260",
+      "7576b10d2260"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "6c3b2f4fd405",
+     "parents": [
+      "7576b10d2260",
+      "e7876e97d6e4"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "dbba4a6e498f",
+     "parents": [
+      "7576b10d2260",
+      "7576b10d2260"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "b7abdefbd5ca",
+     "parents": [
+      "20ee49aebd13",
+      "20ee49aebd13"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "4717c29d3282",
+     "parents": [
+      "8b2a0d47563d",
+      "0dc8dda30fc8"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "e5034fa66aaf",
+     "parents": [
+      "873496a5241c",
+      "8b2a0d47563d"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 11,
+   "children": [
+    {
+     "child": "8b2a0d47563d",
+     "parents": [
+      "8b2a0d47563d"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "7576b10d2260",
+     "parents": [
+      "7576b10d2260"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "e7876e97d6e4",
+     "parents": [
+      "e7876e97d6e4",
+      "e7876e97d6e4"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "d41102033532",
+     "parents": [
+      "8b2a0d47563d",
+      "7576b10d2260"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "13df86ef0a69",
+     "parents": [
+      "e7876e97d6e4",
+      "8b2a0d47563d"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "5e2715c62357",
+     "parents": [
+      "7576b10d2260",
+      "dbba4a6e498f"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "18a1298be3ea",
+     "parents": [
+      "7576b10d2260",
+      "e7876e97d6e4"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "8334192b5465",
+     "parents": [
+      "20ee49aebd13",
+      "6c3b2f4fd405"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "a8cafd327c41",
+     "parents": [
+      "e7876e97d6e4",
+      "7576b10d2260"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "f5d586bc0a7d",
+     "parents": [
+      "6c3b2f4fd405",
+      "8b2a0d47563d"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    }
+   ]
+  }
+ ],
+ "mode": "real",
+ "z3_errors": 0
+}

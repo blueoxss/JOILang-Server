@@ -1,0 +1,143 @@
+# id: 06
+# role: helper
+# params: temperature, few_shot_count, max_tokens, micro_rules
+# description: version0_13-derived gene variant: v13_grammar_tempo_compact
+# placeholders: {command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}
+
+Grammar and temporal helper rules derived from version0_13.
+
+# Timing Control
+## cron
+## [Example] "매일 아침 9시에 실행" → cron: "0 9 * * *"
+### Warning
+### ✅ Required Behavior
+## period
+## *break*: Stops current/future periods until next cron.
+### [Example]
+## When to Use `period` over `cron`
+## Periodic Execution within Time Range in cron scenario
+### [Example]
+## [Example]
+### Cron and period use case1: Run once now
+### Cron and period use case2: Run at 9 AM once
+###  Daily 9 AM execution
+###  Continuous 10-second monitoring
+# Variable Management
+## Global variables
+- Use cron for scenarios triggered at specific time schedules, such as:
+- Without a proper termination condition (break), the scenario may continue running indefinitely, even when the original cron condition is no longer valid.
+- Use the following condition at the start of your code block to stop execution on weekdays:
+- **Always insert a `break` statement when the repetition condition is no longer valid.**
+- **If the user command includes instructions to stop or terminate the repetition (for example, "반복을 중단해", "더 이상 반복하지 마", "중단", "until stopped", etc.), you must ensure the periodic execution loop is interrupted by using `break` inside the code block at the appropriate condition.**
+- If the user command includes "매초마다", "매 5분마다", "15초마다" 등 반복 주기 표현이 포함된 경우, You must always control repeated intervals **using period first**, not cron.
+- **Never use `while` in code**
+- all variables Must be declared only inside the "code" block, do not place them inside or next to "period".
+- Global variables must be declared **strictly at the very beginning** of the "code" block, before any logic, if, or service (value or function) calls.
+- All variables must be declared once at the very beginning of the "code" block using :=, and **must be updated later using = during execution**.
+- Variable values are preserved and updated across all executions within the same period loop.
+- **Every tag name is english**
+- Every receiver tag after `#` must start with an uppercase English letter.
+- The tags can be combined from command.
+- Each device has pre-defined Tags (**device**, **location**, **group**...).
+- (#Tag1 #Tag2 ...) selects devices with ALL specified tags (AND logic, separated by spaces).
+- Access: `(#Tags).service_value` (read-only) or `(#Tags).service_function(args)` (control)
+- When using numeric comparisons or function arguments, follow the service descriptor units exactly. For example, if a voltage value has `return_descriptor` saying millivolts, compare `220V` as `220000`.
+- Tags must be accurately **extracted from the command**, typically consisting of one device tag and a combination of user-defined tags like location, group, or multiple user-defined tags only.
+- A valid device selection typically consists of one device tag (e.g., #Light) and one or more user-defined tags such as #location, #group, etc.
+- Identify which devices contain the tag and extract their category (e.g., Light, Alarm).
+- Check available control **function list** OR the **value list** for conditional checks and control actions
+- Any bracket-based selector like `(#...)`, `all(#...)`, `(#TagA #TagB)` must include **at least one valid device type**.
+- A **device type** is one explicitly defined in `service_list`, or resolvable via `connected_devices`.
+- If a tag used in device selection (e.g., `(#Tag)`, `all(#Tag)`) is:
+1. Not listed as a valid device type in `service_list`, **AND**
+- Command: "Turn off all devices with tag Group1"
+- `#Group1` is not a device-type tag.
+- Use this pattern to support generalized group operations when tag-only identifiers are used in the user's command:
+- `(#Tag).function()`: Apply function to some of matching devices(default)
+- `all(#Tag).function()`: Apply function to ALL matching devices
+- `all(#Tag).attribute == value`: True if ALL devices match condition
+- `any(#Tag).attribute == value`: True if ANY device matches condition
+- Use explicit boolean comparisons for conditions (e.g., `attribute == true`).
+- `wait until(condition)`: Pauses the execution of all subsequent statements in the current period until the specified condition becomes true. Once the condition is satisfied, the next lines are executed sequentially. While waiting, no other commands run, even if the period interval elapses. New triggers within the same cron cycle are ignored during this wait.
+- `delay(N SEC|MIN|HOUR)`: Delays execution for the specified duration, then continues with the next statement. Use this helper for between-action waits in dataset JOICode. It must be a standalone statement and must not be used with `wait until` or passed as an argument.
+- Must assign to variable before using in methods (value/function) calls
+- Whenever you use a service_value as a function argument, assign it to a variable first and then pass the variable as the argument.
+- A service_value access must never be followed by another method call using dot chaining.
+- If a variable is created from a service_value, that variable must be consumed later.
+- All conditions must evaluate to explicit boolean values
+- Multiple devices may provide same functionality:
+- Presence: `(#PresenceSensor).presencesensor_presence` or an equivalent current presence service from the injected schema
+- Assign arithmetic results to variables before method (service/function) calls
+- "If A is true": Use `if/else` (single-time condition check).
+Command: "Turn on the lights in the odd group"
+[Step1] If the **tag** in the command is not found in the **device list** from **[service_list_value] or [service_list_function]** as a device tag:
+[Step4] Generate all control commands per device type using the tag as a shared filter.
+"name": "<Set the "name" field using a **brief and intuitive summary** of the command's intent.>",
+Generate JOI Lang code for: <user_command>
+
+[Compact excerpt from version0_13 prompt assets]
+
+### 1. Static condition (state check): ~였으면, ~인 상태면, ~라면 (If)
+#### Caution:
+#### [example]
+### 2. Dynamic transition (state change detection): ~하면, ~되면, ~하게 되면 (When)
+#### [incorrect]
+#### [example2]
+#### [example2]
+### 3-1. [Combined condition]: ~였다가 ~하면, ~였거나 ~하면, ~이거나 ~하면 (If + when, If + And then)
+#### [Example]: “토양 습도가 20% 이상인데 알람이 켜지게 되면 물을 줘” → 토양 상태와 알람 이벤트는 독립적이며, 둘 다 충족되었을 때 실행
+### 3-2. [Combined condition]: = ~하고 ~하면, (When + When)
+#### [Example] "문이 열렸다 닫히면 알림을 울려줘."
+### 4. [One-Time Trigger (Dynamic transition) + Subsequent Repeating Action]
+#### Key Principles
+#### [Example]
+### 5. [Combined condition + Repeating condition] (dynamic + periodic): ~할 때마다, ~하게 될 때마다 + 주기적으로 ~해줘 (loop는 period를 의미).
+#### [Example]
+### 6. [Periodic Monitoring / Repeating Execution]: 실시간으로 ~할 때마다, 계속 ~하면 ~해줘, ~동안 ~하면 ~해줘
+#### 🧠 Key Principle:
+- This applies when the condition is already true at the time of evaluation.
+- The system simply checks the current state and executes immediately if the condition is met.
+- It assumes that the state has already been sustained for some time.
+**Applies when the state is already true at evaluation time.**
+**Triggers only when the condition becomes true from the opposite state.**
+**If the condition implies a **transition** from a previous numeric state (e.g., below threshold → above threshold)**
+- This triggers only when a condition changes from false to true.
+- This is important for event-driven scenarios where the system must wait for a state to become true.
+- **Important**: Even though this looks like a numeric threshold, it still implies a **change in state** (from <80 to >=80), and must be treated as **Dynamic Transition**.
+- DO NOT use `if (...)` for threshold-based transitions unless the command explicitly implies the condition is already true at evaluation time.
+**Also used for one-time triggering events** in below **4. One-Time Trigger + Repeating Action** patterns.
+- Therefore, **Step 4 should treat any such one-time event detection via `wait until (...)` as a [2] Dynamic transition**, regardless of what follows.
+- Separately,When a condition involves **two consecutive state changes**, like “A happened, and then B happens”
+- → Use **two `wait until` statements** to capture both transitions when events must occur in sequence.
+- If the condition requires simultaneous truth (e.g., “if it's raining and the window is open”), use a single `if (...) and (...)` block instead.
+- Detect the **triggering event** only once using **Dynamic transition (state change detection)** `wait until (...)` or **Static condition (state check)** `if`.
+- English translated command: "whenever the door opens"
+- English translated command: "whenever the door opens", "after the door closes and opens, take a photo every 5 seconds"
+- **If the sentence explicitly mentions a specific repeating interval (such as "every 5 seconds", "5초마다"), always convert this interval to milliseconds and set it as the period value (e.g., period = 5000 for 5 seconds).**
+- → Use with "period": 100 to continuously monitor state transitions and respond in real time.
+- Use this pattern when a condition leads to continuous behavior (e.g., taking photos every N seconds) rather than a one-time reaction.
+- When a command includes both a **"state-based trigger" (~할 때마다)** and a **"fixed time loop" (e.g., every 2 seconds)**, you **must use `period` with a state flag variable** to prevent repeated triggering within the same state.
+- You must initialize a **boolean variable** using `:=` and reset it appropriately to track state transitions accurately.
+- These expressions describe conditions that must be repeatedly checked over time.
+- This ensures that the system **monitors state changes frequently and promptly**, as expected from real-time behavior.
+- `"실시간"인데 period: 10000` → too slow; not real-time.
+- → `if ((#Sensor).sensor_value == "on") { ... }`
+- Use "period": 100 (or another value > 0) to repeatedly check the condition at regular intervals.
+- When using variables to count time or duration inside "code", such as lightOnTime = lightOnTime + 100, the period value directly determines the unit of increment.
+- Therefore, if no specific interval is given, **you must set `period": 100` as the default** to ensure accurate time tracking (e.g., 1800000ms = 30 minutes) as `real time` (`실시간`).
+- Important distinction: If the command describes a one-time event followed by a delay,
+- The `delay(N SEC|MIN|HOUR)` helper suspends execution for the specified duration without needing to be used with `wait until`. It must be a standalone blocking statement.
+- If a command includes a numeric time condition (e.g., "5초 내에, within 5 seconds"), you must ensure the logic enforces that constraint explicitly in code.
+- → This is not a repeating condition. It should be handled using "period": -1 and an explicit delay call like:
+- Use `"period": > 0` to **enable repeated detection** for expressions like "every time", "whenever", or “~할 때마다”.
+[example]
+
+[Compact excerpt from version0_13 prompt assets]
+
+DET-aware generation targets:
+- Service coverage: include every value/function implied by the command.
+- Receiver coverage: preserve category tags, selector tags, locations, and all(...) groups.
+- Dataflow: when reading a sensor value, use that value in the downstream condition/action.
+- Numeric grounding: preserve numbers and convert only when service units require it.
+- Enum grounding: use exact enum strings from the selected service entry.
+- Minimality: avoid unrelated actions, duplicate calls, and helper methods outside the schema.

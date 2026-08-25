@@ -1,0 +1,54 @@
+round_id: R4
+parent_criteria_sha256: 5affee069fc71683
+objective: "DET 가중치 민감도(재채점) + GA 적합도 계수 민감도(rescore/rerank[/full]) 실험 실행 및 CSV+LaTeX 자동표 생성"
+allowed_change_scope: "canonical dir 내 scripts/sensitivity_*·configs/det_weights/variants/·generated_tables/·artifacts/·docs; 평가기·적합도 로직 변경 금지"
+forbidden_changes:
+  - "원본·root 수정; 논문 tex 수정(R5)"
+  - "동결된 fixture·baseline 변경"
+  - "robustness 분류 기준의 사후 조정"
+  - "미실행 조합을 실행된 것처럼 서술 (PAUSED_LONG_RUN은 명시 표기)"
+evidence_rules:
+  - "부재 주장은 실행 명령+출력 요지 병기"
+  - "모든 표 수치는 생성 스크립트 재실행으로 재현 가능해야 함 (수기 편집 금지)"
+pre_registered_design:
+  det_weight_profiles:
+    base: "w0 = (0.30,0.15,0.15,0.10,0.10,0.10,0.05,0.05)"
+    uniform: "각 1/8"
+    execution_heavy: "code_sim 0.10, schedule 0.20, service_coverage 0.20, service_precision 0.15, receiver_coverage 0.15, numeric 0.10, enum 0.05, dataflow 0.05"
+    structure_heavy: "code_sim 0.50, schedule 0.10, service_coverage 0.10, service_precision 0.05, receiver_coverage 0.10, numeric 0.05, enum 0.05, dataflow 0.05"
+    no_code_sim: "code_sim 0.0, 나머지 7항을 w0 비례 재정규화 (w_k/0.70)"
+  loo: "8변형 — 각 성분 w_k=0 후 나머지 재정규화"
+  pm20: "16변형 — 각 성분 ×0.8/×1.2 후 전체 재정규화"
+  tau: "τ ∈ {0.65, 0.70, 0.75}, base 가중치"
+  datasets: "실측 6종 — GPT-4.1-mini 280행 suite 5종(v07/v12/v13/v14/v15 프롬프트, /data model_suite_*) + Qwen14B 280행(artifacts/eval_pipeline_checks_20260623_111811_full row_comparison.csv)"
+  det_metrics: "변형별 DETPass·S_DET, ΔDETPass(pp, vs base), 프롬프트 버전 순위의 Spearman ρ(5개 cloud suite 순위 vs base), row-level pass flip율"
+  ga_fitness_profiles:
+    base: [0.70, 0.20, 0.05, 0.05]
+    pass_heavy: [0.85, 0.10, 0.025, 0.025]
+    graded_heavy: [0.45, 0.45, 0.05, 0.05]
+    cost_heavy: [0.50, 0.10, 0.20, 0.20]
+    quality_only: [0.78, 0.22, 0.0, 0.0]
+  ga_levels:
+    rescore: "manual 14B GA 8런 checkpoints population별 redesign_metrics(det_pass_rate·avg_det·tokens·latency)로 식(7) 재계산 — f 분포 변화"
+    rerank: "세대별 최우수 후보 변경률 + 후보 순위 Kendall τ (vs base)"
+    full_ga: "신규 GA 실행 — GPU 장기: PAUSED_LONG_RUN 규약(run matrix+resume 명령) 허용; 실행분만 보고"
+  robustness_rule_frozen: "strong: max|ΔDETPass|≤2pp ∧ Spearman ρ≥0.90 ∧ flip≤5% / moderate: ≤5pp ∧ ρ≥0.80 ∧ flip≤10% / 그 외 sensitive — 실행 전 동결, 사후 조정 금지"
+quantitative_gates:
+  - {id: G1_det_grid, desc: "DET 재채점 조합 100% 실행: (5+8+16 가중치 변형)×6데이터셋 + τ3×6 = 192개 (DETPass,S_DET) 셀 산출, 결측 0"}
+  - {id: G2_det_outputs, desc: "det_weight_sensitivity_by_model.csv + det_weight_sensitivity_summary.csv + tau_sensitivity.csv + 대응 .tex 존재, 스크립트 재실행 재현"}
+  - {id: G3_ga_rescore, desc: "GA rescore/rerank: 8런 checkpoints 전 population×5프로파일 재계산, ga_fitness_sensitivity.csv + rerank 지표(우승자 변경률·Kendall τ) 산출"}
+  - {id: G4_tables_tex, desc: "generated_tables/*.tex가 표 환경으로 컴파일 가능(독립 latexmk 스모크) + 각 표 각주에 출처·프로파일·τ 명기"}
+  - {id: G5_classification, desc: "robustness 분류가 동결 규칙대로 산출·기록(det_weight_sensitivity_summary에 등급 열)"}
+  - {id: G6_honesty, desc: "미실행 조합(full-GA 등) 0건의 허위 완료 서술; PAUSED_LONG_RUN 시 run matrix+resume 명령 문서화"}
+  - {id: G7_green_isolated, desc: "canonical 전체 pytest exit 0 유지 + canonical 밖 신규 변경 0건"}
+required_artifacts:
+  - configs/det_weights/variants/ (전 변형 JSON)
+  - scripts/run_det_weight_sensitivity.py
+  - scripts/run_ga_fitness_sensitivity.py
+  - artifacts/sensitivity/ (원시 재채점 산출)
+  - generated_tables/{det_weight_sensitivity_by_model.csv,det_weight_sensitivity_summary.csv,tau_sensitivity.csv,ga_fitness_sensitivity.csv}
+  - generated_tables/*.tex
+  - docs/iv4_five_round/round_04/{initial_evaluation.json,feedback.md,changes.md,manifest.json}
+pass_rule: "모든 정량 gate 통과 + 필수 산출물 존재; 게이트당 수정 반복 최대 3회"
+created_before_evaluation: true
+criteria_sha256: 136dfde4b17e0ac0

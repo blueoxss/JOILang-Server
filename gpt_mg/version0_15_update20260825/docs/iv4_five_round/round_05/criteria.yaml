@@ -1,0 +1,30 @@
+round_id: R5
+parent_criteria_sha256: 136dfde4b17e0ac0
+objective: "main_revised.tex 전면 개정 — 교수님 식(3)-(7) 기준 IV-4 재작성 + ReplayFit 전면 제거 + 민감도 신규 절(\\input 자동표) + 격리 컴파일·시각 검증 + 최종 보고"
+allowed_change_scope: "Paper/drafted/2026_JOK/main_revised.tex 단 1개 파일 + canonical dir 내 문서·아티팩트(백업/컴파일 outdir/보고서)"
+forbidden_changes:
+  - "main.tex·두 PDF 수정 (읽기 전용)"
+  - "결과 수치 변경·창작 (표5·6 값은 교수님 무변경 유지 원칙 #11)"
+  - "민감도 결과를 full-GA 실측처럼 서술 (rescore 기반 명시)"
+  - "generated_tables/*.tex 수기 편집"
+evidence_rules:
+  - "부재 주장은 실행 명령+출력 요지 병기"
+  - "수식·근거 문구는 교수님 PDF 추출본과 자구 대조"
+quantitative_gates:
+  - {id: G1_iv4_rewrite, desc: "IV-4에 식(3)-(7) 완비: w0 벡터, τ=0.70, D_i, DETPass, S_DET, f 식·계수, '별도 설계값' 문구, 단일 기준 코드 r_i, 가중치 근거 자구('예비 실험으로 학습한 값은 아니며...')"}
+  - {id: G2_replayfit_zero, desc: "grep -c 'ReplayFit|Replay Set|RegPen|CatBal|SchemaRob' main_revised.tex == 0"}
+  - {id: G3_mojibake_zero, desc: "U+FFFD 개수 == 0 (python 검사)"}
+  - {id: G4_sensitivity_section, desc: "민감도 신규 하위절: generated_tables 3종 \\input, 재채점(rescore) 기반 명시, 데이터 출처 명시, full-GA 주장 0건"}
+  - {id: G5_compile_visual, desc: "tectonic으로 격리 outdir(artifacts/paper_20260825) 컴파일 성공 + 전 페이지 PDF 시각 확인(수식·표·한글 렌더 정상)"}
+  - {id: G6_numbers_preserved, desc: "표5·6 수치가 main.tex 값과 동일(ReplayFit 열 제거 외); 신규 수치는 generated_tables 경유만"}
+  - {id: G7_before_after, desc: "개정 전후 대조 보고(docs/iv4_five_round/round_05/before_after.md): 절별 변경·삭제·신설 목록 + 교수님 12항목 반영 체크"}
+  - {id: G8_isolation, desc: "Paper 폴더에서 main_revised.tex 외 변경 0건 (원본 백업은 canonical artifacts에)"}
+  - {id: G9_final_report, desc: "마스터 §20 형식 최종 보고(5라운드 요약표 포함) 작성"}
+required_artifacts:
+  - "artifacts/paper_20260825/main_revised_before_R5.tex (개정 전 백업)"
+  - "artifacts/paper_20260825/main_revised.pdf (컴파일 산출)"
+  - docs/iv4_five_round/round_05/{initial_evaluation.json,feedback.md,changes.md,manifest.json,before_after.md}
+  - docs/iv4_five_round/final_report.md
+pass_rule: "모든 정량 gate 통과 + 필수 산출물 존재; 게이트당 수정 반복 최대 3회"
+created_before_evaluation: true
+criteria_sha256: 2c5ccd5155dcbb46

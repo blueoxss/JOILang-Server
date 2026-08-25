@@ -1,0 +1,223 @@
+{
+ "round_idx": 5,
+ "population": null,
+ "rule_pool": [
+  {
+   "target_block": "temporal",
+   "rule": "Always set period=0 for immediate commands without scheduling."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and method names matching device and action context."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Represent numeric parameters as integers without decimals unless specified."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Always set period to 0 unless specified otherwise."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Combine multiple property changes into a single service call when possible."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use full receiver paths including all relevant tags for accurate targeting."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact numeric or RGB values for parameters, not color names or units."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Include all relevant receivers explicitly in the script's target list."
+  }
+ ],
+ "adopted": {
+  "grammar": "compact",
+  "temporal": "full",
+  "caution": "on",
+  "few_shot": 0,
+  "rules": [
+   {
+    "target_block": "schema",
+    "rule": "Represent numeric parameters as integers without decimals unless specified."
+   },
+   {
+    "target_block": "schema",
+    "rule": "Include all relevant receivers explicitly in the script's target list."
+   }
+  ]
+ },
+ "lineage": [
+  {
+   "round": "R1",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "cd0e0da70417",
+     "parents": [
+      "cd0e0da70417"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "54966e171b3e",
+     "parents": [
+      "54966e171b3e"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "280aadcbabda",
+     "parents": [
+      "cd0e0da70417",
+      "cd0e0da70417"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "cd0e0da70417",
+     "parents": [
+      "cd0e0da70417"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "0a5c3a81ef18",
+     "parents": [
+      "0a5c3a81ef18"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "968276e47879",
+     "parents": [
+      "cd0e0da70417",
+      "cd0e0da70417"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R3",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "cd0e0da70417",
+     "parents": [
+      "cd0e0da70417"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "968276e47879",
+     "parents": [
+      "968276e47879"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "280aadcbabda",
+     "parents": [
+      "cd0e0da70417",
+      "cd0e0da70417"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R4",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "cd0e0da70417",
+     "parents": [
+      "cd0e0da70417"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "4aa9be901144",
+     "parents": [
+      "4aa9be901144"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "e671cb40bb17",
+     "parents": [
+      "cd0e0da70417",
+      "cd0e0da70417"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:on->off"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "0a5c3a81ef18",
+     "parents": [
+      "0a5c3a81ef18"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "cd0e0da70417",
+     "parents": [
+      "cd0e0da70417"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "14542a7cb132",
+     "parents": [
+      "0a5c3a81ef18",
+      "0a5c3a81ef18"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  }
+ ],
+ "mode": "real",
+ "z3_errors": 0
+}

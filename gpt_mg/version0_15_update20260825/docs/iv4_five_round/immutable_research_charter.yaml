@@ -1,0 +1,21 @@
+charter_version: 1
+frozen_at: "2026-08-25"
+objective: >
+  IV-4 평가식(paper_v1 DET)과 GA 적합도의 수식-코드-논문 정합화, DET 내부 가중치와
+  GA 적합도 계수의 분리된 민감도 실험, main_revised.tex 반영. 정확히 5회(R1~R5)의
+  기준 재수립-평가-피드백-수정-재평가 루프 수행 후 종료.
+fixed_decisions:
+  original_readonly: gpt_mg/version0_15_update20260413
+  canonical: gpt_mg/version0_15_update20260825
+  det_profile: paper_v1 (8-component, tau=0.70, 0-1 internal scale)
+  det_weights_w0: [0.30, 0.15, 0.15, 0.10, 0.10, 0.10, 0.05, 0.05]
+  fitness_paper_v1: {detpass: 0.70, sdet: 0.20, token: 0.05, latency: 0.05}
+  replayfit: EXCLUDED from current method and paper
+  tex_editable: Paper/drafted/2026_JOK/main_revised.tex (only)
+  tex_readonly: [main.tex, main_professor_revision_v15_clean.pdf, _2026_JOK__*.pdf]
+  rounds: exactly 5 (R1..R5), no early exit, no R6
+forbidden:
+  - renaming strict results as paper_v1
+  - retro-applying new formulas to old numbers
+  - post-hoc weight tuning after seeing results
+  - destructive git ops, commits, pushes

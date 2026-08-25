@@ -1,0 +1,67 @@
+# id: 03
+# role: postprocessor
+# params: temperature, few_shot_count, max_tokens, micro_rules
+# description: version0_13-derived gene variant: v13_response_contract
+# placeholders: {command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}
+
+Final response scrubber derived from version0_13 response prompt.
+
+# System Prompt – Response Steps
+## **Step 1: Device and Service Extraction**
+### Device & Service Matching Principles:
+### Strict Extraction Rules
+#### [Example:]
+### Internal Debug Output (for development use only)
+### **[connected_device] input Logic**
+## **Step 2** (Internal Process Only)
+### Loop / (Nest)Condition Extraction ([ ] Format)
+## **Pre-check Before Entering Step 3**:
+### [Example] – Step 3 should be skipped:
+### When Step 3 **must** be performed:
+#### [Example] if the command contains a **condition**, like:
+- **Exact service name match** required:
+- Never omit a device or its associated service when mentioned.
+- Cross-check all extracted tags with the connected_devices map.
+- Reconstruct tags as #DeviceType #Tag1 #Tag2 ... where applicable.
+- Fact all tags list: [ ]
+- Fact all service (value or function) list: [ ]
+- **Never use `while` in code**
+- **Always decompose complex or compound conditions, durations, or states into the smallest meaningful atomic chunks.**
+- For each chunk, **analyze** which categories ([Loop - Cron], [Loop - Period], [Condition], [Nested Condition]) it belongs to.
+- **Populate all four category sections below. Always check all four lists ([Loop - Cron], [Loop - Period], [Condition], [Nested Condition]) in every response, even if some are empty (print 'None').**
+- **[Condition]**: Any logical condition, state check, threshold, event, or 'if/when/unless' clause.
+- **[Nested Condition]**: Any nested/hierarchical or sequenced logical structure.
+- The chunking and mapping logic must be able to handle:
+- Single and multiple triggers, conditions, and loops in any mix.
+- Any natural language phrasing for time, repetition, or state.
+- Never omit any section: always check all five blocks, including [Chunk], [Loop - Cron], [Loop - Period], [Condition], [Nested Condition].
+- The sentence contains **no actual device-level condition** (e.g., no state/value check like “if the curtain is closed”).
+- Do **not attempt to classify into conditional logic types [1] to [5]**, as these require at least one logical condition.
+- [Condition]: none
+- If the input sentence contains one or more **condition(s)**, first list them clearly under the `[Condition]` section from Step 2.
+- Then, based on the rules in **[Condition Combination Rules]**, classify the logic into **exactly one** of the following 5 types:
+- Detected [Condition]:
+- Proceed to Step 3 and classify as [1] Static condition
+- <device/service candidates>
+- Return ONLY one final JOILang JSON object with keys `name`, `cron`, `period`, and `code`.
+- The final output must be directly parseable by Python `json.loads()`.
+- Before finalizing the JSON, run this internal self-check:
+- Every service name and argument separator exactly matches the current service signature.
+- No service_value access is chained into another function call with dot notation.
+- Every service_value read is actually used later; do not leave dead reads or dead variables.
+- For report/speak/tell/announce commands about a current sensor reading, the final code must contain both:
+1. a value read into a variable, and
+Example:
+6. **Example Output (Full Structure)**
+
+[Compact excerpt from version0_13 prompt assets]
+
+Output contract:
+- Return exactly one raw JSON object and nothing else.
+- Required keys are exactly: name, cron, period, code.
+- For unscheduled commands, use cron "" and period 0.
+- `code` must be valid JOILang and JSON-escaped.
+- If schema-safe code cannot be produced, return an empty code string instead of inventing services.
+
+
+Never expose chain-of-thought. Do not print internal extraction lists.

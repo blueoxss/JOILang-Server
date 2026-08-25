@@ -31,6 +31,37 @@ CORE_BLOCKS = ("01", "02")
 OPTIONAL_BLOCKS = ("03", "05", "06")
 BLOCK_ORDER = ("01", "02", "03", "05", "06")
 
+# --- WI-09: render the B/O/V/E genotype axes into the emitted prompt ----------
+try:
+    from .prompt_decomposer import decompose_prompt_to_blocks
+except ImportError:  # pragma: no cover - fallback for standalone use
+    from prompt_decomposer import decompose_prompt_to_blocks  # type: ignore
+
+# Map each decomposed monolith family to a genome block id (01/02/03/05/06).
+FAMILY_TO_GENOME_BLOCK = {
+    "preamble": "01",
+    "service_mapping": "02",
+    "service_list": "02",
+    "connected_devices": "02",
+    "grammar": "03",
+    "output_contract": "03",
+    "temporal_rules": "05",
+    "caution": "05",
+    "examples": "06",
+    "response_contract": "06",
+    "reasoning_contract": "06",
+    "misc": "06",
+}
+# Only these families may be dropped when their genome block is toggled off (B).
+# Every other family is kept even if its block id is inactive, so B never removes
+# schema, grammar, output-contract or temporal core content and breaks generation.
+OPTIONAL_FAMILIES = {"caution", "examples", "response_contract", "reasoning_contract", "misc"}
+DEFAULT_BLOCK_VERSION = "v1"
+
+
+def _genome_block_for(family: str) -> str:
+    return FAMILY_TO_GENOME_BLOCK.get(str(family or "misc"), "06")
+
 
 def read_json(path: str | Path) -> Any:
     return json.loads(Path(path).read_text(encoding="utf-8"))
@@ -158,8 +189,9 @@ def apply_patch_to_genome(genome: dict[str, Any], patch: dict[str, Any]) -> dict
     return {"patch_id": patch.get("patch_id"), "operation": operation, "target_block_id": block_id, "target_block_family": family, "changed": changed, "patch_text": text}
 
 
-def rendered_prompt_with_genome(rendered_package: dict[str, Any] | None, genome: dict[str, Any]) -> str:
-    base = str((rendered_package or {}).get("prompt_text") or "")
+def _legacy_overlay(base: str, genome: dict[str, Any]) -> str:
+    """Original behaviour: append micro_rules / replacement_text as an overlay.
+    Used as a fallback when the base prompt cannot be decomposed into blocks."""
     lines = []
     for block_id, params in (genome.get("block_params") or {}).items():
         rules = params.get("micro_rules") if isinstance(params, dict) else []
@@ -173,6 +205,86 @@ def rendered_prompt_with_genome(rendered_package: dict[str, Any] | None, genome:
     if not lines:
         return base
     return base.rstrip() + "\n\n---\n[GA Prompt Patch Overlay]\n" + "\n".join(lines) + "\n"
+
+
+def _assemble_prompt_from_genome(system_text: str, genome: dict[str, Any]) -> str | None:
+    """Assemble the system prompt from its decomposed blocks so the B/O/V/E axes
+    change the emitted text. Returns None when the text is not decomposable
+    (caller then falls back to the legacy overlay). Deterministic."""
+    blocks = decompose_prompt_to_blocks(system_text)
+    if len(blocks) < 2:
+        return None
+    active = list(genome.get("blocks") or ["01", "02"])
+    active_set = set(active)
+    block_params = genome.get("block_params") or {}
+    few_shot = (genome.get("params") or {}).get("few_shot_count")
+    order_index = {bid: i for i, bid in enumerate(active)}
+
+    def order_key(gid: str, blk: dict[str, Any]):
+        # active blocks keep the genome's order (O); inactive-but-kept blocks
+        # fall to the tail in canonical BLOCK_ORDER.
+        primary = order_index.get(gid, len(active) + (BLOCK_ORDER.index(gid) if gid in BLOCK_ORDER else 99))
+        return (primary, blk.get("order", 0))
+
+    kept: list[tuple[str, dict[str, Any]]] = []
+    examples_kept = False
+    for blk in blocks:
+        family = str(blk.get("family") or "misc")
+        gid = _genome_block_for(family)
+        if family in OPTIONAL_FAMILIES and gid in OPTIONAL_BLOCKS and gid not in active_set:
+            continue  # B: drop only genuinely-optional families
+        if family == "examples":
+            examples_kept = True
+        kept.append((gid, blk))
+    kept.sort(key=lambda item: order_key(item[0], item[1]))
+
+    pieces: list[str] = []
+    rules_emitted: set[str] = set()
+    for gid, blk in kept:
+        params = block_params.get(gid) if isinstance(block_params.get(gid), dict) else {}
+        text = str((params or {}).get("replacement_text") or blk.get("text") or "")
+        directives = []
+        version = str((params or {}).get("version") or "")
+        if version and version != DEFAULT_BLOCK_VERSION:  # V axis
+            directives.append(f"[GA:{gid}:style={version}]")
+        if str(blk.get("family")) == "examples" and few_shot is not None:  # E axis
+            directives.append(f"[GA:{gid}:few_shot<={int(few_shot)}]")
+        seg = ("\n".join(directives) + "\n" + text) if directives else text
+        pieces.append(seg.rstrip("\n"))
+        rules = (params or {}).get("micro_rules") or []  # R axis
+        if rules and gid not in rules_emitted:
+            pieces.append(f"[GA block {gid} micro_rules]\n" + "\n".join(f"- {r}" for r in rules))
+            rules_emitted.add(gid)
+
+    overlay: list[str] = []
+    if few_shot is not None and not examples_kept:
+        overlay.append(f"[GA:few_shot<={int(few_shot)}]")  # keep E effective even with no examples block
+    for gid, params in block_params.items():  # rules whose block never rendered
+        if gid in rules_emitted or not isinstance(params, dict):
+            continue
+        for rule in params.get("micro_rules") or []:
+            overlay.append(f"[GA block {gid} micro_rules] - {rule}")
+        if params.get("replacement_text") and gid not in {g for g, _ in kept}:
+            overlay.append(f"[GA block {gid} replacement_text]\n{params['replacement_text']}")
+
+    body = "\n\n".join(p for p in pieces if p.strip())
+    if overlay:
+        body = body.rstrip() + "\n\n---\n[GA Prompt Patch Overlay]\n" + "\n".join(overlay)
+    return body
+
+
+def rendered_prompt_with_genome(rendered_package: dict[str, Any] | None, genome: dict[str, Any]) -> str:
+    pkg = rendered_package or {}
+    system_text = str(pkg.get("system_prompt") or "")
+    user_text = str(pkg.get("user_prompt") or "")
+    base = str(pkg.get("prompt_text") or "")
+    source = system_text or base
+    assembled = _assemble_prompt_from_genome(source, genome) if source else None
+    if assembled is None:
+        return _legacy_overlay(base, genome)
+    if system_text and user_text:
+        return assembled.rstrip() + "\n\n" + user_text + "\n"
+    return assembled.rstrip() + "\n"
 
 
 def apply_prompt_patches(

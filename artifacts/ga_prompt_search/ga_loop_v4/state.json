@@ -1,0 +1,2032 @@
+{
+ "round_idx": 5,
+ "population": null,
+ "rule_pool": [
+  {
+   "target_block": "temporal",
+   "rule": "Always set period=0 for immediate commands without scheduling."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Include all relevant receivers and services explicitly in the script selector."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Always set period=0 for immediate commands unless scheduling is specified"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and method names as in the domain schema without approximation"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Convert numeric units precisely and use integer values when required"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service names and methods matching the device and action, never invent or split commands"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Always wrap service receivers in parentheses with a leading #, e.g. (#Service).method()"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and method names with full coverage and correct casing"
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Generate cron expressions precisely matching time and day constraints without fallback to script conditions"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and receiver names as in the prompt context."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Prefer cron expressions for scheduling over manual time checks."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Use exact numeric units and conversions as implied by commands."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Always include all necessary conditional and control flow structures."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use only valid services and properties explicitly referenced in the command."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and method names matching device capabilities."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Convert all numeric units to base units as integers (e.g., seconds, millivolts)."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Always include full conditional syntax with proper receiver and property references."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and method names as in the domain schema without inventing new ones."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Convert all numeric units to base units expected by the API (e.g., seconds, millivolts)."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Always include full conditional blocks with proper syntax, not shorthand or partial expressions."
+  }
+ ],
+ "adopted": {
+  "grammar": "compact",
+  "temporal": "compact",
+  "caution": "off",
+  "few_shot": 0,
+  "rules": [
+   {
+    "target_block": "schema",
+    "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+   },
+   {
+    "target_block": "temporal",
+    "rule": "Always include all necessary conditional and control flow structures."
+   },
+   {
+    "target_block": "temporal",
+    "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+   },
+   {
+    "target_block": "schema",
+    "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+   }
+  ]
+ },
+ "history": [
+  {
+   "round": "R1",
+   "gen": 1,
+   "best": "42c6f41b29fe",
+   "score": 63.3,
+   "fitness": 0.3758,
+   "det_score": 72.3,
+   "logic_pct": 84.2,
+   "tokens": 8302,
+   "latency": 3.72,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [
+    {
+     "target_block": "temporal",
+     "rule": "Always set period=0 for immediate commands without scheduling."
+    },
+    {
+     "target_block": "schema",
+     "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+    },
+    {
+     "target_block": "schema",
+     "rule": "Include all relevant receivers and services explicitly in the script selector."
+    }
+   ],
+   "population": [
+    [
+     "42c6f41b29fe",
+     63.3,
+     0.3758
+    ],
+    [
+     "f33a5f914745",
+     63.3,
+     0.3737
+    ],
+    [
+     "29ec9ace4979",
+     60.0,
+     0.359
+    ],
+    [
+     "3623bb2d93fd",
+     60.0,
+     0.3347
+    ],
+    [
+     "f456dfa38eb8",
+     60.0,
+     0.3335
+    ],
+    [
+     "8a7c58c9f637",
+     53.3,
+     0.3264
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R1",
+   "gen": 2,
+   "best": "9fe5c0c70821",
+   "score": 66.7,
+   "fitness": 0.4179,
+   "det_score": 74.9,
+   "logic_pct": 84.2,
+   "tokens": 4631,
+   "latency": 2.12,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [
+    {
+     "target_block": "temporal",
+     "rule": "Always set period=0 for immediate commands unless scheduling is specified"
+    },
+    {
+     "target_block": "schema",
+     "rule": "Use exact service and method names as in the domain schema without approximation"
+    },
+    {
+     "target_block": "schema",
+     "rule": "Convert numeric units precisely and use integer values when required"
+    }
+   ],
+   "population": [
+    [
+     "9fe5c0c70821",
+     66.7,
+     0.4179
+    ],
+    [
+     "6262afbed91d",
+     70.0,
+     0.4116
+    ],
+    [
+     "42c6f41b29fe",
+     63.3,
+     0.3758
+    ],
+    [
+     "f33a5f914745",
+     63.3,
+     0.3737
+    ],
+    [
+     "29ec9ace4979",
+     60.0,
+     0.359
+    ],
+    [
+     "3623bb2d93fd",
+     60.0,
+     0.3347
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R1",
+   "gen": 3,
+   "best": "257585339e80",
+   "score": 66.7,
+   "fitness": 0.4392,
+   "det_score": 76.3,
+   "logic_pct": 84.2,
+   "tokens": 1241,
+   "latency": 0.77,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [
+    {
+     "target_block": "schema",
+     "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+    },
+    {
+     "target_block": "schema",
+     "rule": "Use exact service names and methods matching the device and action, never invent or split commands"
+    },
+    {
+     "target_block": "schema",
+     "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+    }
+   ],
+   "population": [
+    [
+     "257585339e80",
+     66.7,
+     0.4392
+    ],
+    [
+     "e2ba3d169aaa",
+     73.3,
+     0.4295
+    ],
+    [
+     "dafbe15010fd",
+     66.7,
+     0.4206
+    ],
+    [
+     "9fe5c0c70821",
+     66.7,
+     0.4179
+    ],
+    [
+     "f0820e7fced2",
+     70.0,
+     0.4118
+    ],
+    [
+     "6262afbed91d",
+     70.0,
+     0.4116
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R1",
+   "gen": "adopt",
+   "score": 66.7,
+   "note": "adopted",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R2",
+   "gen": 1,
+   "best": "386d57818378",
+   "score": 70.0,
+   "fitness": 0.5529,
+   "det_score": 77.5,
+   "logic_pct": 95.0,
+   "tokens": 1297,
+   "latency": 0.68,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [
+    {
+     "target_block": "schema",
+     "rule": "Always wrap service receivers in parentheses with a leading #, e.g. (#Service).method()"
+    },
+    {
+     "target_block": "schema",
+     "rule": "Use exact service and method names with full coverage and correct casing"
+    },
+    {
+     "target_block": "temporal",
+     "rule": "Generate cron expressions precisely matching time and day constraints without fallback to script conditions"
+    }
+   ],
+   "population": [
+    [
+     "386d57818378",
+     70.0,
+     0.5529
+    ],
+    [
+     "418db4593495",
+     70.0,
+     0.5438
+    ],
+    [
+     "257585339e80",
+     66.7,
+     0.5351
+    ],
+    [
+     "cda5c1c593c9",
+     60.0,
+     0.4993
+    ],
+    [
+     "a7adaff29bd3",
+     60.0,
+     0.4988
+    ],
+    [
+     "a9967a2c6789",
+     60.0,
+     0.4743
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+     }
+    ]
+   }
+  },
+  {
+   "round": "R2",
+   "gen": 2,
+   "best": "0ad6b166efbe",
+   "score": 73.3,
+   "fitness": 0.5736,
+   "det_score": 80.3,
+   "logic_pct": 95.0,
+   "tokens": 1319,
+   "latency": 0.69,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [
+    {
+     "target_block": "schema",
+     "rule": "Use exact service and receiver names as in the prompt context."
+    },
+    {
+     "target_block": "temporal",
+     "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+    },
+    {
+     "target_block": "temporal",
+     "rule": "Prefer cron expressions for scheduling over manual time checks."
+    }
+   ],
+   "population": [
+    [
+     "0ad6b166efbe",
+     73.3,
+     0.5736
+    ],
+    [
+     "386d57818378",
+     70.0,
+     0.5529
+    ],
+    [
+     "3b3ed3bdb032",
+     70.0,
+     0.5449
+    ],
+    [
+     "418db4593495",
+     70.0,
+     0.5438
+    ],
+    [
+     "18137d81e8b8",
+     73.3,
+     0.5419
+    ],
+    [
+     "1de09c1939e9",
+     70.0,
+     0.5198
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+     },
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     }
+    ]
+   }
+  },
+  {
+   "round": "R2",
+   "gen": 3,
+   "best": "bdb67a4f1d87",
+   "score": 76.7,
+   "fitness": 0.5885,
+   "det_score": 79.5,
+   "logic_pct": 95.0,
+   "tokens": 1342,
+   "latency": 0.79,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [
+    {
+     "target_block": "temporal",
+     "rule": "Use exact numeric units and conversions as implied by commands."
+    },
+    {
+     "target_block": "temporal",
+     "rule": "Always include all necessary conditional and control flow structures."
+    },
+    {
+     "target_block": "schema",
+     "rule": "Use only valid services and properties explicitly referenced in the command."
+    }
+   ],
+   "population": [
+    [
+     "bdb67a4f1d87",
+     76.7,
+     0.5885
+    ],
+    [
+     "0ad6b166efbe",
+     73.3,
+     0.5736
+    ],
+    [
+     "386d57818378",
+     70.0,
+     0.5529
+    ],
+    [
+     "c57c294a72c2",
+     73.3,
+     0.5475
+    ],
+    [
+     "61683e2af3aa",
+     66.7,
+     0.5359
+    ],
+    [
+     "bd22d6bde196",
+     56.7,
+     0.4819
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R2",
+   "gen": "adopt",
+   "score": 76.7,
+   "note": "adopted",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R3",
+   "gen": 1,
+   "best": "bdb67a4f1d87",
+   "score": 76.7,
+   "fitness": 0.5885,
+   "det_score": 79.5,
+   "logic_pct": 95.0,
+   "tokens": 1342,
+   "latency": 0.79,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [],
+   "population": [
+    [
+     "bdb67a4f1d87",
+     76.7,
+     0.5885
+    ],
+    [
+     "edfa4e0c58d1",
+     73.3,
+     0.5711
+    ],
+    [
+     "ae8b0637fa6a",
+     70.0,
+     0.5564
+    ],
+    [
+     "8b0c4b763f2f",
+     73.3,
+     0.5475
+    ],
+    [
+     "000df8fe0888",
+     66.7,
+     0.5345
+    ],
+    [
+     "05465610199e",
+     66.7,
+     0.5009
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R3",
+   "gen": 2,
+   "best": "bdb67a4f1d87",
+   "score": 76.7,
+   "fitness": 0.5885,
+   "det_score": 79.5,
+   "logic_pct": 95.0,
+   "tokens": 1342,
+   "latency": 0.79,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [],
+   "population": [
+    [
+     "bdb67a4f1d87",
+     76.7,
+     0.5885
+    ],
+    [
+     "edfa4e0c58d1",
+     73.3,
+     0.5711
+    ],
+    [
+     "390fcc15dad5",
+     70.0,
+     0.5546
+    ],
+    [
+     "5b291fa7fd59",
+     70.0,
+     0.5539
+    ],
+    [
+     "8b0c4b763f2f",
+     73.3,
+     0.5475
+    ],
+    [
+     "d8239c371f29",
+     66.7,
+     0.5356
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R3",
+   "gen": 3,
+   "best": "bdb67a4f1d87",
+   "score": 76.7,
+   "fitness": 0.5885,
+   "det_score": 79.5,
+   "logic_pct": 95.0,
+   "tokens": 1342,
+   "latency": 0.79,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [],
+   "population": [
+    [
+     "bdb67a4f1d87",
+     76.7,
+     0.5885
+    ],
+    [
+     "edfa4e0c58d1",
+     73.3,
+     0.5711
+    ],
+    [
+     "5b291fa7fd59",
+     70.0,
+     0.5539
+    ],
+    [
+     "8b0c4b763f2f",
+     73.3,
+     0.5475
+    ],
+    [
+     "d8239c371f29",
+     66.7,
+     0.5356
+    ],
+    [
+     "52baa222a52a",
+     70.0,
+     0.5235
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R3",
+   "gen": "adopt",
+   "score": 76.7,
+   "note": "adopted (regression 0 <= 1)",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R4",
+   "gen": 1,
+   "best": "bdb67a4f1d87",
+   "score": 76.7,
+   "fitness": 0.5885,
+   "det_score": 79.5,
+   "logic_pct": 95.0,
+   "tokens": 1342,
+   "latency": 0.79,
+   "judge_adjusted": 76.66666666666667,
+   "judged_fails": 7,
+   "valid_alternative": 0,
+   "new_rules": [],
+   "population": [
+    [
+     "bdb67a4f1d87",
+     76.7,
+     0.5885
+    ],
+    [
+     "32f5759c55e7",
+     73.3,
+     0.577
+    ],
+    [
+     "0ad6b166efbe",
+     73.3,
+     0.5736
+    ],
+    [
+     "ae8b0637fa6a",
+     70.0,
+     0.5564
+    ],
+    [
+     "8b0c4b763f2f",
+     73.3,
+     0.5475
+    ],
+    [
+     "d8239c371f29",
+     66.7,
+     0.5356
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R4",
+   "gen": 2,
+   "best": "bdb67a4f1d87",
+   "score": 76.7,
+   "fitness": 0.5885,
+   "det_score": 79.5,
+   "logic_pct": 95.0,
+   "tokens": 1342,
+   "latency": 0.79,
+   "judge_adjusted": 76.66666666666667,
+   "judged_fails": 7,
+   "valid_alternative": 0,
+   "new_rules": [],
+   "population": [
+    [
+     "bdb67a4f1d87",
+     76.7,
+     0.5885
+    ],
+    [
+     "496373750f93",
+     76.7,
+     0.5863
+    ],
+    [
+     "32f5759c55e7",
+     73.3,
+     0.577
+    ],
+    [
+     "04a535f96e6b",
+     66.7,
+     0.5421
+    ],
+    [
+     "d8239c371f29",
+     66.7,
+     0.5356
+    ],
+    [
+     "05465610199e",
+     66.7,
+     0.5009
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R4",
+   "gen": 3,
+   "best": "bdb67a4f1d87",
+   "score": 76.7,
+   "fitness": 0.5885,
+   "det_score": 79.5,
+   "logic_pct": 95.0,
+   "tokens": 1342,
+   "latency": 0.79,
+   "judge_adjusted": 76.66666666666667,
+   "judged_fails": 7,
+   "valid_alternative": 0,
+   "new_rules": [],
+   "population": [
+    [
+     "bdb67a4f1d87",
+     76.7,
+     0.5885
+    ],
+    [
+     "660e6bc65114",
+     76.7,
+     0.5879
+    ],
+    [
+     "496373750f93",
+     76.7,
+     0.5863
+    ],
+    [
+     "32f5759c55e7",
+     73.3,
+     0.577
+    ],
+    [
+     "8b0c4b763f2f",
+     73.3,
+     0.5475
+    ],
+    [
+     "b98b230a5eb8",
+     66.7,
+     0.5122
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R4",
+   "gen": "adopt",
+   "score": 76.7,
+   "note": "adopted (regression 0 <= 1)",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R5",
+   "gen": 1,
+   "best": "bdb67a4f1d87",
+   "score": 73.3,
+   "fitness": 0.5651,
+   "det_score": 78.4,
+   "logic_pct": 89.7,
+   "tokens": 1323,
+   "latency": 0.78,
+   "judge_adjusted": 73.33333333333333,
+   "judged_fails": 16,
+   "valid_alternative": 0,
+   "new_rules": [
+    {
+     "target_block": "schema",
+     "rule": "Use exact service and method names matching device capabilities."
+    },
+    {
+     "target_block": "temporal",
+     "rule": "Convert all numeric units to base units as integers (e.g., seconds, millivolts)."
+    },
+    {
+     "target_block": "schema",
+     "rule": "Always include full conditional syntax with proper receiver and property references."
+    }
+   ],
+   "population": [
+    [
+     "bdb67a4f1d87",
+     73.3,
+     0.5651
+    ],
+    [
+     "ea33cb2dbd63",
+     71.7,
+     0.5581
+    ],
+    [
+     "edfa4e0c58d1",
+     71.7,
+     0.5577
+    ],
+    [
+     "35048d42de4b",
+     70.0,
+     0.5472
+    ],
+    [
+     "000df8fe0888",
+     70.0,
+     0.5467
+    ],
+    [
+     "8b0c4b763f2f",
+     70.0,
+     0.5263
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R5",
+   "gen": 2,
+   "best": "efd6f37a3292",
+   "score": 73.3,
+   "fitness": 0.5682,
+   "det_score": 80.4,
+   "logic_pct": 89.7,
+   "tokens": 1316,
+   "latency": 0.75,
+   "judge_adjusted": 75.0,
+   "judged_fails": 16,
+   "valid_alternative": 1,
+   "new_rules": [
+    {
+     "target_block": "schema",
+     "rule": "Use exact service and method names as in the domain schema without inventing new ones."
+    },
+    {
+     "target_block": "temporal",
+     "rule": "Convert all numeric units to base units expected by the API (e.g., seconds, millivolts)."
+    },
+    {
+     "target_block": "schema",
+     "rule": "Always include full conditional blocks with proper syntax, not shorthand or partial expressions."
+    }
+   ],
+   "population": [
+    [
+     "efd6f37a3292",
+     73.3,
+     0.5682
+    ],
+    [
+     "bdb67a4f1d87",
+     73.3,
+     0.5651
+    ],
+    [
+     "f40216949b27",
+     73.3,
+     0.5595
+    ],
+    [
+     "ea33cb2dbd63",
+     71.7,
+     0.5581
+    ],
+    [
+     "f76dcb12a8ef",
+     73.3,
+     0.5432
+    ],
+    [
+     "2e781e2c310b",
+     65.0,
+     0.4881
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Always include all necessary conditional and control flow structures."
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R5",
+   "gen": 3,
+   "best": "efd6f37a3292",
+   "score": 73.3,
+   "fitness": 0.5682,
+   "det_score": 80.4,
+   "logic_pct": 89.7,
+   "tokens": 1316,
+   "latency": 0.75,
+   "judge_adjusted": 75.0,
+   "judged_fails": 16,
+   "valid_alternative": 1,
+   "new_rules": [],
+   "population": [
+    [
+     "efd6f37a3292",
+     73.3,
+     0.5682
+    ],
+    [
+     "bdb67a4f1d87",
+     73.3,
+     0.5651
+    ],
+    [
+     "f40216949b27",
+     73.3,
+     0.5595
+    ],
+    [
+     "d8239c371f29",
+     71.7,
+     0.5576
+    ],
+    [
+     "fa3a6e2e3919",
+     68.3,
+     0.5173
+    ],
+    [
+     "45fac41a373a",
+     66.7,
+     0.4901
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Always include all necessary conditional and control flow structures."
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R5",
+   "gen": "adopt",
+   "score": 73.3,
+   "note": "adopted (regression 1 <= 1)",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "compact",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Always include all necessary conditional and control flow structures."
+     },
+     {
+      "target_block": "temporal",
+      "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+     },
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+     }
+    ]
+   }
+  }
+ ],
+ "lineage": [
+  {
+   "round": "R1",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "42c6f41b29fe",
+     "parents": [
+      "42c6f41b29fe"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "f33a5f914745",
+     "parents": [
+      "f33a5f914745"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "29ec9ace4979",
+     "parents": [
+      "42c6f41b29fe",
+      "42c6f41b29fe"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:0->1"
+     ]
+    },
+    {
+     "child": "6262afbed91d",
+     "parents": [
+      "f33a5f914745",
+      "42c6f41b29fe"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on",
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "3623bb2d93fd",
+     "parents": [
+      "42c6f41b29fe",
+      "f33a5f914745"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "9fe5c0c70821",
+     "parents": [
+      "42c6f41b29fe",
+      "42c6f41b29fe"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R1",
+   "after_gen": 2,
+   "children": [
+    {
+     "child": "9fe5c0c70821",
+     "parents": [
+      "9fe5c0c70821"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "6262afbed91d",
+     "parents": [
+      "6262afbed91d"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "dafbe15010fd",
+     "parents": [
+      "42c6f41b29fe",
+      "9fe5c0c70821"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact",
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "257585339e80",
+     "parents": [
+      "6262afbed91d",
+      "9fe5c0c70821"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:on->off"
+     ]
+    },
+    {
+     "child": "f0820e7fced2",
+     "parents": [
+      "6262afbed91d",
+      "9fe5c0c70821"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:0->2"
+     ]
+    },
+    {
+     "child": "e2ba3d169aaa",
+     "parents": [
+      "6262afbed91d",
+      "6262afbed91d"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "386d57818378",
+     "parents": [
+      "386d57818378"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "418db4593495",
+     "parents": [
+      "418db4593495"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "0ad6b166efbe",
+     "parents": [
+      "386d57818378",
+      "418db4593495"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "3b3ed3bdb032",
+     "parents": [
+      "418db4593495",
+      "386d57818378"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "1de09c1939e9",
+     "parents": [
+      "418db4593495",
+      "418db4593495"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "18137d81e8b8",
+     "parents": [
+      "386d57818378",
+      "418db4593495"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 2,
+   "children": [
+    {
+     "child": "0ad6b166efbe",
+     "parents": [
+      "0ad6b166efbe"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "386d57818378",
+     "parents": [
+      "386d57818378"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "bd22d6bde196",
+     "parents": [
+      "386d57818378",
+      "386d57818378"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "c57c294a72c2",
+     "parents": [
+      "0ad6b166efbe",
+      "0ad6b166efbe"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "61683e2af3aa",
+     "parents": [
+      "0ad6b166efbe",
+      "386d57818378"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:compact->off"
+     ]
+    },
+    {
+     "child": "bdb67a4f1d87",
+     "parents": [
+      "0ad6b166efbe",
+      "0ad6b166efbe"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R3",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "bdb67a4f1d87",
+     "parents": [
+      "bdb67a4f1d87"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "edfa4e0c58d1",
+     "parents": [
+      "edfa4e0c58d1"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "d8239c371f29",
+     "parents": [
+      "bdb67a4f1d87",
+      "bdb67a4f1d87"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:compact->off"
+     ]
+    },
+    {
+     "child": "8b0c4b763f2f",
+     "parents": [
+      "bdb67a4f1d87",
+      "bdb67a4f1d87"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "5b291fa7fd59",
+     "parents": [
+      "ae8b0637fa6a",
+      "edfa4e0c58d1"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "390fcc15dad5",
+     "parents": [
+      "ae8b0637fa6a",
+      "edfa4e0c58d1"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R3",
+   "after_gen": 2,
+   "children": [
+    {
+     "child": "bdb67a4f1d87",
+     "parents": [
+      "bdb67a4f1d87"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "edfa4e0c58d1",
+     "parents": [
+      "edfa4e0c58d1"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "d8239c371f29",
+     "parents": [
+      "bdb67a4f1d87",
+      "bdb67a4f1d87"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:compact->off"
+     ]
+    },
+    {
+     "child": "52baa222a52a",
+     "parents": [
+      "bdb67a4f1d87",
+      "edfa4e0c58d1"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "5b291fa7fd59",
+     "parents": [
+      "5b291fa7fd59",
+      "edfa4e0c58d1"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "8b0c4b763f2f",
+     "parents": [
+      "bdb67a4f1d87",
+      "bdb67a4f1d87"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:compact->off",
+      "temporal_toggle:off->compact",
+      "caution_toggle:off->on"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R4",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "bdb67a4f1d87",
+     "parents": [
+      "bdb67a4f1d87"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "32f5759c55e7",
+     "parents": [
+      "32f5759c55e7"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "05465610199e",
+     "parents": [
+      "32f5759c55e7",
+      "bdb67a4f1d87"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "496373750f93",
+     "parents": [
+      "bdb67a4f1d87",
+      "32f5759c55e7"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "04a535f96e6b",
+     "parents": [
+      "bdb67a4f1d87",
+      "32f5759c55e7"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:compact->off"
+     ]
+    },
+    {
+     "child": "d8239c371f29",
+     "parents": [
+      "bdb67a4f1d87",
+      "bdb67a4f1d87"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:compact->off"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R4",
+   "after_gen": 2,
+   "children": [
+    {
+     "child": "bdb67a4f1d87",
+     "parents": [
+      "bdb67a4f1d87"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "496373750f93",
+     "parents": [
+      "496373750f93"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "b98b230a5eb8",
+     "parents": [
+      "496373750f93",
+      "04a535f96e6b"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "32f5759c55e7",
+     "parents": [
+      "bdb67a4f1d87",
+      "32f5759c55e7"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "660e6bc65114",
+     "parents": [
+      "bdb67a4f1d87",
+      "496373750f93"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "8b0c4b763f2f",
+     "parents": [
+      "bdb67a4f1d87",
+      "bdb67a4f1d87"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "bdb67a4f1d87",
+     "parents": [
+      "bdb67a4f1d87"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "ea33cb2dbd63",
+     "parents": [
+      "ea33cb2dbd63"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "efd6f37a3292",
+     "parents": [
+      "edfa4e0c58d1",
+      "bdb67a4f1d87"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop"
+     ]
+    },
+    {
+     "child": "2e781e2c310b",
+     "parents": [
+      "bdb67a4f1d87",
+      "ea33cb2dbd63"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "f76dcb12a8ef",
+     "parents": [
+      "bdb67a4f1d87",
+      "ea33cb2dbd63"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    },
+    {
+     "child": "f40216949b27",
+     "parents": [
+      "ea33cb2dbd63",
+      "bdb67a4f1d87"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:0->1"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 2,
+   "children": [
+    {
+     "child": "efd6f37a3292",
+     "parents": [
+      "efd6f37a3292"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "bdb67a4f1d87",
+     "parents": [
+      "bdb67a4f1d87"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "f40216949b27",
+     "parents": [
+      "bdb67a4f1d87",
+      "f40216949b27"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "d8239c371f29",
+     "parents": [
+      "bdb67a4f1d87",
+      "bdb67a4f1d87"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:compact->off"
+     ]
+    },
+    {
+     "child": "45fac41a373a",
+     "parents": [
+      "efd6f37a3292",
+      "f40216949b27"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    },
+    {
+     "child": "fa3a6e2e3919",
+     "parents": [
+      "efd6f37a3292",
+      "efd6f37a3292"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on"
+     ]
+    }
+   ]
+  }
+ ],
+ "mode": "real"
+}

@@ -1,0 +1,24 @@
+{
+"27bb513f47a038387f6bff56c4a670cd0bc1cd9e": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact service and receiver names as a combined hashtag group in parentheses.",
+"Convert numeric parameters to expected formats, not natural language or separate calls."
+]
+},
+"1ce56315f53c9c71d5b4d2bf04fe40712a1daeff": {
+"verdict": "real_error",
+"reason": "The generated code uses a different method and period value, failing to set the cooking duration explicitly as 1800 seconds, which is required and not a valid alternative."
+},
+"c1e0e218e9a93866a874c6d118b27bc9c5eece2d": {
+"verdict": "real_error",
+"reason": "The generated code uses a different period value and a different method with different parameters, which is not a valid alternative to the exact reference command."
+},
+"e8c19fb7732c411c9ec6ea3078ec8c7ce9023a77": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact service and method names matching device capabilities.",
+"Convert time and color values to required formats precisely."
+]
+}
+}

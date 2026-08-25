@@ -1,0 +1,102 @@
+{
+ "generated": "2026-08-25",
+ "note": "R3 시점 paper_v1 동결 baseline",
+ "cases": {
+  "182:exact": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "182:perturbed": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "183:exact": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "183:perturbed": {
+   "e": 0.998203592814,
+   "det_pass": true
+  },
+  "184:exact": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "184:perturbed": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "90:exact": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "90:perturbed": {
+   "e": 0.828846153846,
+   "det_pass": true
+  },
+  "91:exact": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "91:perturbed": {
+   "e": 0.821808510638,
+   "det_pass": true
+  },
+  "92:exact": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "92:perturbed": {
+   "e": 0.703813559322,
+   "det_pass": true
+  },
+  "33:exact": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "33:perturbed": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "35:exact": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "35:perturbed": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "36:exact": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "36:perturbed": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "60:exact": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "60:perturbed": {
+   "e": 0.999016393443,
+   "det_pass": true
+  },
+  "71:exact": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "71:perturbed": {
+   "e": 0.964597701149,
+   "det_pass": true
+  },
+  "89:exact": {
+   "e": 1.0,
+   "det_pass": true
+  },
+  "89:perturbed": {
+   "e": 0.895041322314,
+   "det_pass": true
+  }
+ }
+}

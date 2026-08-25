@@ -1,0 +1,39 @@
+round_id: R2
+parent_criteria_sha256: 2276a194cbe9e4bb
+objective: "paper_v1 DET 평가기 + paper_v1 GA 적합도 + configs + CLI 플러밍 + 테스트 구현 (canonical dir 한정)"
+allowed_change_scope: "gpt_mg/version0_15_update20260825 내부 코드/설정/테스트/docs만"
+forbidden_changes:
+  - "version0_15_update20260413·root utils·root configs·tests(root) 수정"
+  - "기존 legacy/strict profile의 수치 동작 변경"
+  - "strict profile 개명·재라벨로 paper_v1 대체 (0.92643979 게이트가 차단)"
+  - "논문 tex 수정 (R5 범위)"
+evidence_rules:
+  - "부재 주장('X 없음')은 실행 명령+출력 요지 병기 시에만 인정 (R1 69.9 사건 재발 방지)"
+  - "수치 게이트는 명시된 오차 한계로 판정"
+quantitative_gates:
+  - {id: G1_configs, desc: "configs/det_weights/{paper_v1,strict_v1,legacy_v1}.json 존재, paper_v1 가중치==w0=(0.30,0.15,0.15,0.10,0.10,0.10,0.05,0.05), 합==1.0 (오차<1e-12), configs/fitness_weights/paper_v1.json==(0.70,0.20,0.05,0.05)"}
+  - {id: G2_fixture_paper, desc: "외부온도 변수유지 간결형 fixture: paper_v1 프로파일 e_i==0.9264397905759162 (abs<1e-8), det_pass==true; exact 케이스 e_i==1.0"}
+  - {id: G3_hard_gates, desc: "치명 오류(invalid JSON, GT 부재, 생성 코드 부재) → e_i==0.0 ∧ pass==false; 0-1 스케일 보장(전 fixture 0≤e≤1)"}
+  - {id: G4_regression, desc: "legacy/strict 프로파일: 회귀 fixture 집합(최소 6케이스: exact/간결2변형/invalid/부분일치/치명)에서 R1 기준선과 수치 동일 (abs<1e-9); 69.9 cap 동작 보존"}
+  - {id: G5_fitness, desc: "paper_v1 fitness: 손계산 fixture와 일치 (abs<1e-9); DirectTransfer 기준값 파일로 Tok̂·Lat̂ 정규화; 기준값 부재 모델 → fail-fast(명시적 오류, 침묵 기본값 금지)"}
+  - {id: G6_cli, desc: "--det-profile paper_v1 / --det-weights / --det-threshold / --fitness-mode paper_v1 / --fitness-weights / --direct-transfer-baseline 이 run_ga_search.py(또는 단일 진입 CLI)에서 파싱·소비됨; --help 출력 증빙"}
+  - {id: G7_tests, desc: "신규 테스트 ≥15, canonical dir 전체 pytest exit 0, 테스트가 G1-G5 게이트를 직접 검증"}
+  - {id: G8_isolation, desc: "git status: canonical dir 외 신규 변경 0건 (기존 사용자 M pipeline_common.py 제외)"}
+  - {id: G9_multiref, desc: "gt_refs 리스트 입력 시 참조별 max 채점; 단일 gt 입력과 [gt] 리스트 입력 동치 (abs<1e-12)"}
+  - {id: G10_components, desc: "출력에 8성분 벡터(0-1)·프로파일명·가중치·임계값·정규화 기준 메타데이터 보존 (R4 재채점 전제)"}
+qualitative_gates:
+  - "paper_v1은 ROOT 8항 의미론의 이식이며 v15 strict의 재라벨이 아님을 코드 주석·docs에 명시"
+  - "기존 4개 적합도 정의와의 관계(공존, 무변경)를 docs에 기록"
+required_artifacts:
+  - configs/det_weights/paper_v1.json
+  - configs/det_weights/strict_v1.json
+  - configs/det_weights/legacy_v1.json
+  - configs/fitness_weights/paper_v1.json
+  - configs/direct_transfer_baseline.json
+  - "paper_v1 평가기 모듈 (utils/ 내 신규 또는 det_evaluator 확장)"
+  - "paper_v1 적합도 모듈 (scripts/ 내)"
+  - "tests: 신규 테스트 파일(s)"
+  - docs/iv4_five_round/round_02/{initial_evaluation.json,feedback.md,changes.md,manifest.json}
+pass_rule: "모든 정량 gate 통과 + 필수 산출물 존재 + evidence_rules 준수; 게이트당 수정 반복 최대 3회, 미해결시 UNRESOLVED 이관"
+created_before_evaluation: true
+criteria_sha256: a9891ddc65f1f536

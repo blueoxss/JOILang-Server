@@ -1,0 +1,7 @@
+row,category,det_pass,det_score,logic
+5,1,True,92.5,
+6,1,True,92.5,
+7,1,False,43.8636,
+8,1,False,57.8022,
+9,1,False,40.8714,
+10,1,False,44.5,

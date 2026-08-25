@@ -1,0 +1,25 @@
+{
+ "round_id": "R2",
+ "created": "2026-08-25",
+ "criteria_sha256": "a9891ddc65f1f536",
+ "pytest": "141 passed",
+ "artifacts": {
+  "configs/det_weights/paper_v1.json": "541e8b1eb5fa0e78",
+  "configs/det_weights/strict_v1.json": "f2deee7e2b1a27e4",
+  "configs/det_weights/legacy_v1.json": "35071ebfe6c6cba2",
+  "configs/fitness_weights/paper_v1.json": "1f8560bce21b5f5e",
+  "configs/direct_transfer_baseline.json": "cfaf235a88986d55",
+  "utils/det_paper_v1.py": "e7d059a361060f33",
+  "scripts/fitness_paper_v1.py": "32ca16eeb82c937a",
+  "scripts/run_paper_v1_eval.py": "344f9db0ce1af052",
+  "scripts/build_direct_transfer_baseline.py": "63b40443b7a0dccd",
+  "tests/test_paper_v1.py": "d5ad7e2090afd1fd",
+  "utils/det_evaluator.py": "d934d847bc03cf7c",
+  "scripts/run_feedback_loop.py": "ad479d512047224f",
+  "scripts/run_ga_search.py": "3896e1661428f29a",
+  "docs/iv4_five_round/round_02/criteria.yaml": "1b011ca58e3789a3",
+  "docs/iv4_five_round/round_02/initial_evaluation.json": "e4dbe203194918ba",
+  "docs/iv4_five_round/round_02/feedback.md": "9d4977699c01236f",
+  "docs/iv4_five_round/round_02/changes.md": "682c2765ddaa40e1"
+ }
+}

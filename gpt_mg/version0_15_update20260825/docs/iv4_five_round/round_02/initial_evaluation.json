@@ -1,0 +1,28 @@
+{
+  "round_id": "R2",
+  "criteria_sha256": "a9891ddc65f1f536",
+  "evaluated_at": "2026-08-25",
+  "gates": {
+    "G1_configs": {"verdict": "PASS", "evidence": "det_weights 3종+fitness_weights+DT baseline 존재; paper_v1==w0 합=1.0<1e-12, fitness==(0.70,0.20,0.05,0.05) — test_config_* 2건이 직접 단언"},
+    "G2_fixture_paper": {"verdict": "PASS", "evidence": "외부온도 간결형 e=0.9264397905759162(<1e-8), exact e=1.0 — test_fixture_concise/exact"},
+    "G3_hard_gates": {"verdict": "PASS", "evidence": "invalid_json/missing_gt/missing_code → e=0.0·pass=False; 전 fixture 0≤e≤1 — 테스트 4건"},
+    "G4_regression": {"verdict": "PASS", "evidence": "6케이스(원본 20260413 실측 동결)와 canonical 수치 완전 동일; 69.9 cap·semantic exact override 보존 — test_legacy_strict_regression_frozen_baseline"},
+    "G5_fitness": {"verdict": "PASS", "evidence": "손계산 fixture 0.74(<1e-9); DT 정규화 자기일관성(기준런 재채점 시 tok̂=lat̂≈1.0); 부재 모델 fail-fast — 테스트 4건 + 280행 실검증"},
+    "G6_cli": {"verdict": "PASS", "evidence": "run_ga_search --help에 6플래그 노출·소비(_prepare_paper_v1 fail-fast, dispatch, fitness override, 정렬); run_paper_v1_eval.py는 τ 임의값 포함 전 플래그 소비 — 실행 로그 changes.md §실검증"},
+    "G7_tests": {"verdict": "PASS", "evidence": "신규 24(≥15), canonical 전체 pytest 141 passed exit 0"},
+    "G8_isolation": {"verdict": "PASS", "evidence": "git status: canonical 밖 신규 변경 0건. M ga_engine.py는 mtime 2026-08-11(세션 전) 기존 사용자 변경으로 판명·기록(R1 목록 누락 정정)"},
+    "G9_multiref": {"verdict": "PASS", "evidence": "gt_refs max 선택(selected_ref_index=1)·단일 gt 동치(<1e-12) — 테스트 2건 + dispatch 경유 1건"},
+    "G10_components": {"verdict": "PASS", "evidence": "8성분·가중치·τ·프로파일 보존, score_from_components 재조합 일치(<1e-9), 재가중 재채점 무재추출 — 테스트 2건"}
+  },
+  "qualitative_gates": {
+    "paper_v1_not_strict_relabel": {"verdict": "PASS", "evidence": "모듈 docstring·config description에 명시; oneliner fixture가 실증(paper_v1 0.7846 vs strict 69.9 cap)"},
+    "fitness_coexistence_documented": {"verdict": "PASS", "evidence": "changes.md에 기존 4정의 무변경·공존 기록"}
+  },
+  "evidence_rules_compliance": "부재 주장 2건(Q7/L8 DT 실측 부재, canonical 밖 변경 없음) 모두 명령·출력 병기",
+  "round_verdict": "PASS",
+  "fix_iterations_used": 0,
+  "unresolved_carryover": [
+    "feedback loop 내부 평가의 det_profile 미전달(기존 동작) — paper_v1 full-GA 설계 시 고려(R4)",
+    "Q7/L8 DT 기준값 실측 부재 — R4 full-GA에 해당 모델 포함 시 실측 선행 필요(PAUSED_LONG_RUN 후보)"
+  ]
+}

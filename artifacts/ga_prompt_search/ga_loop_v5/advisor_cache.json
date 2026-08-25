@@ -1,0 +1,81 @@
+{
+"52e2c80a2496a85063e24660bec5037d7259c7cb": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact numeric values in base units, not approximations or percentages.",
+"Reference all devices and services explicitly with full hierarchical tags."
+]
+},
+"0bafb74da2d64fc47978ea6c51e9ce8f67d3910e": {
+"rules": [
+"Always set period=0 for immediate commands unless specified otherwise.",
+"Use exact numeric values in base units without decimals or percentages.",
+"Reference all devices and services explicitly with full hierarchical tags."
+]
+},
+"7839f90d31aa4bdcf8cbc8a55c0a4636b2b14d98": {
+"rules": [
+"Always use exact service and method names from device context in scripts.",
+"Set cron and period fields precisely matching time expressions in commands.",
+"Include all relevant receivers explicitly in the script's device selector."
+]
+},
+"d0b1cc66df3fd66debe3611b0091f5871c22ac27": {
+"rules": [
+"Use exact service and property names from the domain ontology without alteration.",
+"Generate cron expressions precisely matching natural language time constraints.",
+"Represent numeric values as integers without decimals unless explicitly required."
+]
+},
+"cdf654fe91fb1b20388a9a925cc44a17a5bbc29b": {
+"verdict": "real_error",
+"reason": "The generated code introduces conditional checks and a negative period value, deviating from the exact unconditional commands and period=0 in the reference, which is not allowed."
+},
+"8e182b352bb414a6e6f9f926d41405c04fc9694b": {
+"verdict": "real_error",
+"reason": "The generated cron triggers only once daily at 8 AM instead of every hour from 8 AM to midnight, violating the exact-match requirement for cron or period values."
+},
+"d10b7bd12072c7fc885e2c672e9d792b015f2d3f": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device (#WindowCovering vs #Window), different property, and different condition values, which changes the logic and is not a valid alternative."
+},
+"50111bebe5e2a37f09ef26a54c011ea2c558c0d3": {
+"verdict": "real_error",
+"reason": "The generated code uses a different method and period value (-1 instead of 0) and adds time rather than setting cooking parameters for 1800 seconds, which is a functional difference from the reference."
+},
+"1201bfaa60ce56dcec85098a6c779f50a590edd6": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device selector and method with incorrect RGB values, which does not match the exact reference command for setting the living room light to yellow."
+},
+"ecf6cea00f8aea843c47a53d74004221bbb470f2": {
+"verdict": "real_error",
+"reason": "The generated code uses an invalid period value (-1) and incorrect delay units (milliseconds instead of the expected delay(1 HOUR) syntax), which are functional errors compared to the reference."
+},
+"df3ce7d96139547f7557f7aa36703bbc9beedac1": {
+"verdict": "real_error",
+"reason": "The generated code uses a different cron expression and period value than the reference, which is a real error as cron and period must match exactly."
+},
+"7ac96c936fb083b2b75dbf043db25b314d90bd0d": {
+"verdict": "real_error",
+"reason": "The generated cron triggers only at minute 0 of hour 0 (midnight) on weekdays, missing the required hourly captures from 8 AM to 11 PM, and uses a non-zero period which is disallowed."
+},
+"870c034836af5937989ceb72400dbc9c54704aaa": {
+"verdict": "real_error",
+"reason": "The generated code uses a fixed period and explicit datetime checks instead of the required cron expression and zero period, which is a real functional error per the specification."
+},
+"a6f6031baa8356d578f33e7f373c40abb852aca4": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device selector and logic by reading the current mode instead of toggling a stored variable, which changes the intended device scope and state management, constituting a real functional error."
+},
+"6355253d951706dd3b34f9209046e45bc52eb363": {
+"verdict": "real_error",
+"reason": "The generated code uses a different logic by checking the device state instead of toggling an internal mode variable, which changes the implementation approach and may cause functional differences."
+},
+"c4b12a3fcec1823a993adac35d52b93b7e311aa8": {
+"rules": [
+"Always set period=0 for immediate or scheduled commands without recurring intervals.",
+"Use exact service and method names matching device and action, covering all relevant receivers.",
+"Express numeric values as integers or exact literals; use standard time units (e.g., HOUR) for delays."
+]
+}
+}

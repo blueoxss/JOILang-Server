@@ -1,0 +1,9 @@
+cat,idx,command,premap,det_score,det_pass,gt_exact,failure_reasons
+1,1,Switch the dishwasher to dry mode.,used,92.5,True,False,period_mismatch
+2,1,Set the living room light to yellow.,skipped_connected_devices_present,40.5,False,False,"period_mismatch,gt_mismatch,gt_service_cover"
+3,1,"If the audio recorder is recording, stop recor",used,83.0,True,False,"period_mismatch,gt_mismatch,gt_service_cover"
+4,1,"When the contact sensor is detected, turn on t",used,92.5,True,False,period_mismatch
+5,1,Switch the TV to channel 7 and switch to chann,used,92.5,True,False,period_mismatch
+6,1,If the temperature is 28 degrees or higher and,used,82.1,True,False,"period_mismatch,gt_mismatch,numeric_groundin"
+7,1,"Every 10 minutes, if the temperature is 30 deg",used,89.8,True,False,"gt_mismatch,numeric_grounding"
+8,1,"Every hour, repeat opening and closing the doo",used,87.9,True,False,gt_mismatch

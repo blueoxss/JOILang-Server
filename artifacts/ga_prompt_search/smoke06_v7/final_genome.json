@@ -1,0 +1,16 @@
+{
+ "grammar": "compact",
+ "temporal": "full",
+ "caution": "off",
+ "few_shot": 0,
+ "rules": [
+  {
+   "target_block": "temporal",
+   "rule": "Always set period=0 for immediate commands without scheduling."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Convert numeric parameters to expected formats, not natural language words."
+  }
+ ]
+}

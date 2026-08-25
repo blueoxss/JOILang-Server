@@ -1,0 +1,19 @@
+{
+ "round_id": "R1",
+ "created": "2026-08-25",
+ "criteria_sha256": "2276a194cbe9e4bb",
+ "artifacts": {
+  "docs/iv4_copy_baseline_verification.md": "6888038db663de45",
+  "docs/paper_source_of_truth.md": "1251c19330dcaab5",
+  "docs/paper_four_way_comparison.md": "af829b9b9be552d1",
+  "docs/professor_revision_preservation.md": "c8b53294290b84a0",
+  "docs/iv4_metric_provenance_audit.md": "2c11a9b9c8e8ee0f",
+  "docs/iv4_five_round/immutable_research_charter.yaml": "3613b0f3bc4ee214",
+  "docs/iv4_five_round/round_01/criteria.yaml": "724af2b24a92ce1c",
+  "docs/iv4_five_round/round_01/initial_evaluation.json": "5a63fc34679333ac",
+  "docs/iv4_five_round/round_01/feedback.md": "9d2d7caac1558be8",
+  "docs/iv4_five_round/round_01/changes.md": "a0fa2cd191810a04"
+ },
+ "code_changes": [],
+ "original_dir_untouched": true
+}

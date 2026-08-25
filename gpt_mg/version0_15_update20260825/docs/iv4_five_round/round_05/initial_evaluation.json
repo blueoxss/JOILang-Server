@@ -1,0 +1,24 @@
+{
+  "round_id": "R5",
+  "criteria_sha256": "2c5ccd5155dcbb46",
+  "evaluated_at": "2026-08-25",
+  "gates": {
+    "G1_iv4_rewrite": {"verdict": "PASS", "evidence": "식(3)-(7) 완비(p.7 시각 확인): w0 벡터 grep 1건, 'tau = 0.70' 1건, 근거 자구('예비 실험으로 학습한 값은 아니며') 1건, eq 라벨 7건, 단일 기준 코드 r_i, '역할이 다른 별도 설계값' 문장 — 교수님 PDF 추출본과 자구 대조"},
+    "G2_replayfit_zero": {"verdict": "PASS", "evidence": "grep -cE 'ReplayFit|Replay Set|RegPen|CatBal|SchemaRob' == 0"},
+    "G3_mojibake_zero": {"verdict": "PASS", "evidence": "U+FFFD count == 0 (python 검사)"},
+    "G4_sensitivity_section": {"verdict": "PASS", "evidence": "V.4 신설 — generated_tables 3종 \\input(표7·8·9 렌더 확인), 재채점 기반·사전 고정 기준·데이터 출처 명시, full-GA 주장 0건('후속 연구 과제'로 명시)"},
+    "G5_compile_visual": {"verdict": "PASS", "evidence": "tectonic 격리 outdir(artifacts/paper_20260825) 컴파일 성공(11p, 286KB); 전 11페이지 시각 확인 — 수식·표 1-9·한글·참고문헌 렌더 정상. 결함 2건 수정: ICU linebreak iterator(\\XeTeXlinebreaklocale \"\" 우회, 최소 재현으로 원인 격리), ä 글리프 부재(Rocktaschel)"},
+    "G6_numbers_preserved": {"verdict": "PASS", "evidence": "표5·6 수치 = main.tex/교수님 PDF 값 그대로(p.8 시각 대조); 신규 수치는 generated_tables \\input 경유만; ReplayFit 열 부재"},
+    "G7_before_after": {"verdict": "PASS", "evidence": "before_after.md — 절별 변경표 + 교수님 12항목 체크 + 잔여사항 정직 기록"},
+    "G8_isolation": {"verdict": "PASS", "evidence": "Paper 폴더에서 main_revised.tex만 변경(타 3파일 mtime 불변); 백업은 canonical artifacts에(SHA 일치 확인)"},
+    "G9_final_report": {"verdict": "PASS", "evidence": "docs/iv4_five_round/final_report.md (마스터 §20 형식, 5라운드 요약표 포함)"}
+  },
+  "fix_iterations_used": 2,
+  "fix_log": "(1) tectonic ICU linebreak iterator 실패 → 최소 재현(t1/t2/t3)으로 원인 격리, \\XeTeXlinebreaklocale \"\" 우회 적용(주석으로 TeX Live 무해성 명시), 재컴파일 성공. (2) 시각 검증에서 ref[14] ä→□ 발견 → Rocktaschel로 수정, 재컴파일·재확인.",
+  "round_verdict": "PASS",
+  "unresolved_carryover": [
+    "그림 2 png 원본 부재 — placeholder 렌더 (파일 확보 시 자동 포함)",
+    "표8 축소 폰트·p.9 우측 단 공백 — 조판 미세조정 여지 (내용 무결)",
+    "full-GA 계수 민감도 PAUSED_LONG_RUN (round_04/paused_long_run.md)"
+  ]
+}

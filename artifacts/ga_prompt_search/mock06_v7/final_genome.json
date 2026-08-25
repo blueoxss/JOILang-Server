@@ -1,0 +1,12 @@
+{
+ "grammar": "compact",
+ "temporal": "compact",
+ "caution": "on",
+ "few_shot": 0,
+ "rules": [
+  {
+   "target_block": "schema",
+   "rule": "mock rule: use exact service delay durations in seconds"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "grammar": "compact",
+ "temporal": "full",
+ "caution": "off",
+ "few_shot": 2,
+ "rules": [
+  {
+   "target_block": "schema",
+   "rule": "Always use exact service and receiver names as defined in the schema without substitutions."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Express all time durations in seconds as integers matching ground truth conventions."
+  },
+  {
+   "target_block": "general",
+   "rule": "Use numeric and enum values exactly as in ground truth, avoiding informal or approximate forms."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and receiver names from schema without adding conditions or alternative methods."
+  }
+ ]
+}

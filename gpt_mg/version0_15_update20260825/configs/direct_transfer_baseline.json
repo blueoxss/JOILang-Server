@@ -1,0 +1,16 @@
+{
+  "description": "모델별 DirectTransfer 기준값 (평균 총 토큰, 평균 warm latency 초). 식(7)의 Tok̂=avg_tokens/tokens_ref, Lat̂=avg_latency/latency_ref 정규화에 사용. 실측 아티팩트에서만 채움 — 실측이 없는 모델은 의도적으로 부재시켜 fail-fast를 유도한다(침묵 기본값 금지).",
+  "models": {
+    "qwen25_coder_14b": {
+      "tokens_ref": 34259.2036,
+      "latency_ref_sec": 12.3645,
+      "provenance": "artifacts/eval_pipeline_checks_20260623_111811_full/strict_det/main_model_comparison.csv (280행 실측, v13 monolith DT 프롬프트; 20260623_142307_full에서 동일 재현)"
+    },
+    "gpt41_mini": {
+      "tokens_ref": 30275.1071,
+      "latency_ref_sec": 1.9772,
+      "provenance": "/data .../results/model_suite_20260616_205513/main_model_comparison.csv (280행 실측, v14 monolith)"
+    }
+  },
+  "missing_models_note": "qwen25_coder_7b·llama31_8b: 280행 DT 실측 suite 부재(R1 provenance 감사 §D) — 실측 확보 전 사용 시 fail-fast가 정상 동작. 신규 실측 시 scripts/build_direct_transfer_baseline.py로 추가."
+}

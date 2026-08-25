@@ -1,0 +1,162 @@
+{
+"31aafe6cd98ed8f7fe94e796bc14566315aa418e": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact numeric units and scale as implied by context, not raw input values.",
+"Include all relevant receivers and services explicitly in the script selector."
+]
+},
+"8bfa0a4f2cd2ff08560672014151b0f88feec0dd": {
+"rules": [
+"Always set period=0 for immediate commands unless scheduling is specified",
+"Use exact service and method names as in the domain schema without approximation",
+"Convert numeric units precisely and use integer values when required"
+]
+},
+"752c15e4f448b19bfbd06a5708d3361fac858f45": {
+"rules": [
+"Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")",
+"Use exact service names and methods matching the device and action, never invent or split commands",
+"Represent numeric values and enums precisely as integers or quoted strings without spaces or extra formatting"
+]
+},
+"bcff3d7974066b182d19d78c66e876dd3199b673": {
+"rules": [
+"Always wrap service receivers in parentheses with a leading #, e.g. (#Service).method()",
+"Use exact service and method names with full coverage and correct casing",
+"Generate cron expressions precisely matching time and day constraints without fallback to script conditions"
+]
+},
+"9fb84db2342bd0ff50be5a35324c0674b7c8b768": {
+"rules": [
+"Use exact service and receiver names as in the prompt context.",
+"Convert numeric units precisely to expected formats (e.g., seconds to milliseconds).",
+"Prefer cron expressions for scheduling over manual time checks."
+]
+},
+"064c67070b30eb3e041f6040410dea981d4b204a": {
+"rules": [
+"Use exact numeric units and conversions as implied by commands.",
+"Always include all necessary conditional and control flow structures.",
+"Use only valid services and properties explicitly referenced in the command."
+]
+},
+"dca9a741698ea56764e09304142099d216cc6558": {
+"verdict": "real_error",
+"reason": "The generated code adds 4 seconds instead of 240 seconds (4 minutes) and omits the necessary condition checking the oven mode, which is a functional error."
+},
+"f4bb068be1624d908a6c513a28b1f85b7a455778": {
+"verdict": "real_error",
+"reason": "The generated code sets the oven mode to 'heating' and then to 'Conventional' instead of waiting for 'heating' mode and switching to 'Microwave' after 3 seconds as required."
+},
+"464d8a1fb89112c965c3586bc5cf93f3ced6c29d": {
+"verdict": "real_error",
+"reason": "The generated code uses a different cron expression and includes additional service calls and speech content, deviating from the exact-match requirement for cron and period values and altering the intended announcement logic."
+},
+"78617cb67482963d71dd33bc5e27f14f77d1896a": {
+"verdict": "real_error",
+"reason": "The generated code uses a cron expression and lacks the capping logic to prevent volume from exceeding 100, differing from the reference's period-based scheduling and volume limit enforcement."
+},
+"2c015a33263e25b106476b135962f99f7f0a1245": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device and property with no trigger flag or period, and the period value differs from the reference, which is a real functional error."
+},
+"3d1c7e4d5cdc128307fb8a5406c6132a0c7b62f4": {
+"verdict": "real_error",
+"reason": "The generated code uses a different period value and lacks the triggered flag logic and exact brightness cap handling, causing functional differences from the reference."
+},
+"44145250f10fb3cc122307714b3cd4f02058f705": {
+"verdict": "real_error",
+"reason": "The generated code uses a different period value and changes the action logic by setting brightness instead of switching on the light, which deviates from the exact-match requirement and original behavior."
+},
+"c5ca97b5601a0ad02156ffda33d18719bc538346": {
+"verdict": "real_error",
+"reason": "The generated code uses different methods and separates mode setting and timing, whereas the reference sets mode and duration in a single command with an exact 1800-second period, which is required and not interchangeable."
+},
+"1201bfaa60ce56dcec85098a6c779f50a590edd6": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device selector and method than the reference, changing both the target and the command logic, which is not a valid alternative."
+},
+"802dfaa31de0e5de6f421e230f7106a2ca484ab0": {
+"verdict": "real_error",
+"reason": "The generated code uses a different voltage threshold format and method calls that do not match the reference logic and syntax, indicating a functional discrepancy rather than a stylistic variation."
+},
+"f1685be82efd082f54ba35379ce0fdbe755d9d43": {
+"verdict": "real_error",
+"reason": "The generated code uses cron='0 15 * * 6,0' where '0' represents Sunday but the reference uses '6,7' for Saturday and Sunday, making the cron expression incorrect and thus a real error."
+},
+"7a28006f104e2a57239618395d1f2bf780e277e2": {
+"verdict": "real_error",
+"reason": "The generated code has an empty cron expression, which differs from the reference and is a real scheduling error."
+},
+"e7eb4a0253f97601fd8d24d4da375b231c658b43": {
+"verdict": "real_error",
+"reason": "The generated code uses an incorrect cron expression and period value, which do not match the required every 5 minutes schedule, constituting a real functional error."
+},
+"a9339d2dde1b38b7da9e94bd2a194a8113cf9de1": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device selector and command that does not toggle between sleep and auto modes as required, thus failing the functional logic of the reference."
+},
+"664668725da8bf221e112d38479587303aa069ce": {
+"verdict": "real_error",
+"reason": "The generated code uses a different method and lacks the explicit mode toggling logic and specific mode settings required by the reference, making it a functional error rather than a valid alternative."
+},
+"bc98f5f633c702b20bbca5e93a9c5ecc88a56bcc": {
+"verdict": "real_error",
+"reason": "The generated code uses a different period value and different device properties and methods, which changes the logic and timing, making it a real functional error rather than a valid alternative."
+},
+"a940f2a92cedcc9b53ed6ad82564aaffc4f4e2eb": {
+"rules": [
+"Use exact service and method names matching device capabilities.",
+"Convert all numeric units to base units as integers (e.g., seconds, millivolts).",
+"Always include full conditional syntax with proper receiver and property references."
+]
+},
+"23fec703a7dbdfccddc4e910ee3bae80f9bd1720": {
+"verdict": "real_error",
+"reason": "The generated code uses a different method to get the oven mode and adds 4 seconds instead of 240 seconds (4 minutes), which is a functional error."
+},
+"4353ac596566ed685d0a94c0a8e4890754277b5a": {
+"verdict": "real_error",
+"reason": "The generated code uses an incorrect condition syntax and does not properly wait for the humidity to fall below 30%, which is a functional error compared to the reference."
+},
+"1bc138e5d6b26c037d8bb63939477a06671750ad": {
+"verdict": "real_error",
+"reason": "The generated code uses an empty cron and a different time range (afternoon hours 15-18) instead of the exact cron and period values specified in the reference, which is a real functional error."
+},
+"64948c328aba98db61e36ebf826a7f7a1dabe333": {
+"verdict": "real_error",
+"reason": "The generated code uses a different cron schedule and includes additional logic and speech content not matching the exact reference command requirements."
+},
+"b328a728081b4751dd3eb6d6358f6bf87601d0c1": {
+"verdict": "real_error",
+"reason": "The generated code uses a period value and a different scheduling approach instead of the exact cron expression, which violates the requirement that cron or period values must match exactly."
+},
+"64548922b7d74931c1a804cc1e41f574a2b5c848": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device selector and lacks the required toggle logic with a persistent mode variable, making it a functional error rather than a valid alternative."
+},
+"27efd21b807c39693ec6a96ed1420478a12bdb5f": {
+"verdict": "valid_alternative",
+"reason": "The generated code uses the device's current mode to toggle between sleep and high modes every 30 minutes, matching the reference logic and period without using an external mode variable."
+},
+"6971ff17ba15035132677592333fbe016fb17062": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device and property with no trigger flag or period, and the period value differs from the reference, which is a real functional error."
+},
+"81d90f6fa34fbbd9085d413f4a2ec046484ba14a": {
+"verdict": "real_error",
+"reason": "The generated code uses period=0 instead of period=100 and lacks the triggered flag logic, causing incorrect scheduling and repeated increments beyond max brightness without stopping."
+},
+"f78d9d4da64a4b806ec8ff260c15017c8ce3b88c": {
+"verdict": "real_error",
+"reason": "The generated code uses a different period value and changes the action logic from switching on the light once to continuously setting brightness, which is a functional deviation from the reference."
+},
+"77cf0e49f4abdbd70b62cd35a92b640b2a0661b5": {
+"rules": [
+"Use exact service and method names as in the domain schema without inventing new ones.",
+"Convert all numeric units to base units expected by the API (e.g., seconds, millivolts).",
+"Always include full conditional blocks with proper syntax, not shorthand or partial expressions."
+]
+}
+}

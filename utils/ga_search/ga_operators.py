@@ -8,9 +8,10 @@
 - 선택: elitism + tournament, 비엘리트 자식은 교차로 생성 후 확률 p_m 로 변이.
 - 예산(pop/gen/elite/tournament/p_m)은 configs/ga_search_budget.json 로 외부화.
 
-주의: O(순서)·V(버전)·E(예제 수) 유전자의 렌더러 반영은 WI-09 범위다.
+O(순서)·V(버전)·E(예제 수) 유전자의 렌더러 반영은 이제
+prompt_patch_apply.rendered_prompt_with_genome 에서 수행된다(WI-09 완료).
 여기서는 유전형 조작·기록을 논문 연산 단위로 정확히 수행하고,
-렌더 미반영 축은 mutation_events 에 그대로 남겨 추적 가능하게 한다.
+각 변이는 mutation_events 에 그대로 남겨 추적 가능하게 한다.
 """
 from __future__ import annotations
 
@@ -86,7 +87,7 @@ def _mut_reorder_blocks(child: dict[str, Any], rng: random.Random) -> dict[str, 
         i, j = rng.sample(range(len(blocks)), 2)
         blocks[i], blocks[j] = blocks[j], blocks[i]
     child["blocks"] = blocks
-    return {"order": blocks, "renderer_note": "블록 순서 유전자 — 렌더 반영은 WI-09"}
+    return {"order": blocks, "renderer_note": "블록 순서(O) — rendered_prompt_with_genome에서 반영"}
 
 
 def _mut_swap_block_version(child: dict[str, Any], rng: random.Random) -> dict[str, Any]:
@@ -96,7 +97,7 @@ def _mut_swap_block_version(child: dict[str, Any], rng: random.Random) -> dict[s
     current = params.get("version", BLOCK_VERSION_TAGS[0])
     candidates = [tag for tag in BLOCK_VERSION_TAGS if tag != current]
     params["version"] = rng.choice(candidates) if candidates else current
-    return {"block_id": target, "version": params["version"], "renderer_note": "버전 유전자 — 렌더 반영은 WI-09"}
+    return {"block_id": target, "version": params["version"], "renderer_note": "버전(V) — rendered_prompt_with_genome에서 지시자로 반영"}
 
 
 def _mut_edit_micro_rule(child: dict[str, Any], rng: random.Random) -> dict[str, Any]:
@@ -117,7 +118,7 @@ def _mut_adjust_few_shot(child: dict[str, Any], rng: random.Random) -> dict[str,
     current = int(params.get("few_shot_count", 2) or 0)
     delta = rng.choice([-1, 1])
     params["few_shot_count"] = max(0, min(8, current + delta))
-    return {"few_shot_count": params["few_shot_count"], "renderer_note": "예제 유전자 — 렌더 반영은 WI-09"}
+    return {"few_shot_count": params["few_shot_count"], "renderer_note": "예제 수(E) — rendered_prompt_with_genome에서 지시자로 반영"}
 
 
 def _mut_adjust_decoding(child: dict[str, Any], rng: random.Random) -> dict[str, Any]:
@@ -176,8 +177,10 @@ def block_uniform_crossover(
     index: int,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """블록 단위 균등 교차 — 블록 활성/파라미터를 키 단위로 부모 중 하나에서 선택."""
+    # 자식 id 는 세대·인덱스만으로 짧게 짓는다(run 내 유일). 부모 id 를 이어붙이면
+    # 세대가 지날수록 id 가 폭증하므로, 계보는 event["parent_ids"] 에만 보존한다.
     child: dict[str, Any] = {
-        "id": f"x_{parent_a.get('id', 'a')}_{parent_b.get('id', 'b')}_g{generation:03d}_c{index:03d}",
+        "id": f"x_g{generation:03d}_c{index:03d}",
         "blocks": [],
         "params": {},
         "block_params": {},

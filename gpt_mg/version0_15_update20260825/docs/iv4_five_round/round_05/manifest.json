@@ -1,0 +1,17 @@
+{
+ "round_id": "R5",
+ "created": "2026-08-25",
+ "criteria_sha256": "2c5ccd5155dcbb46",
+ "pytest": "174 passed",
+ "artifacts": {
+  "docs/iv4_five_round/round_05/before_after.md": "a85a18c984c2a985",
+  "docs/iv4_five_round/round_05/changes.md": "dffb4122e6b79b41",
+  "docs/iv4_five_round/round_05/criteria.yaml": "7390cbcc15f332c3",
+  "docs/iv4_five_round/round_05/feedback.md": "3669f6e20dcd6dc1",
+  "docs/iv4_five_round/round_05/initial_evaluation.json": "74706aa56683107b",
+  "docs/iv4_five_round/final_report.md": "63320e4c08c8c4c2",
+  "artifacts/paper_20260825/main_revised_before_R5.tex": "06a51f5571d85b83",
+  "artifacts/paper_20260825/main_revised.pdf": "3cde9b98fa7e3914",
+  "/home/mgjeong/Desktop/llm/Paper/drafted/2026_JOK/main_revised.tex": "79a1bb22d61049a7"
+ }
+}

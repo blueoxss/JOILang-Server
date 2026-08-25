@@ -1,0 +1,35 @@
+{
+  "model_name": "gen_prompt_surgery_external",
+  "device_name": "qwen2.5-Coder-7B-Instruct",
+  "model_version": "version0_15_update20260413",
+  "model_description": "Admin-feedback-promoted update generated from version0_15. Includes admin replay feedback and benchmark/GA verification artifacts.",
+  "model_create": "2026-04-13",
+  "author": {
+    "first_name": "OpenAI",
+    "last_name": "Codex"
+  },
+  "model_input": {
+    "model": "qwen2.5-Coder-7B-Instruct",
+    "backend": "local_qwen",
+    "local_model_name": "Qwen/Qwen2.5-Coder-7B-Instruct",
+    "local_python": "",
+    "local_worker": "",
+    "temperature": 0.0,
+    "local_device": "cuda:1",
+    "local_dtype": "bf16",
+    "local_max_new_tokens": 512,
+    "local_files_only": true,
+    "local_trust_remote_code": false,
+    "local_load_in_4bit": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "system_prompt"
+      },
+      {
+        "role": "user",
+        "content": "sentence"
+      }
+    ]
+  }
+}

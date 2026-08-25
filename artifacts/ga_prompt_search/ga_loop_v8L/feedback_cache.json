@@ -1,0 +1,307 @@
+{
+"a89f140a43aff3c5cfb1a212845fef925e8d87e4": {
+"rules": [
+"Always set period=0 for immediate commands unless specified otherwise",
+"Use exact numeric values in base units without conversion errors",
+"Invoke full service and receiver names matching command context"
+]
+},
+"959e66068a40fc976aa66d04940759552e9070be": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use full receiver context with all relevant tags in parentheses.",
+"Convert time units to seconds as integer arguments, not milliseconds or strings."
+]
+},
+"13328d6289970bd7930ba5d67789aef97d3c5457": {
+"rules": [
+"Always include all relevant receivers as hashtags in parentheses before the script.",
+"Set period=0 and cron='' for immediate, one-time commands unless specified otherwise.",
+"Use numeric values grounded in seconds or milliseconds as required, not textual or approximate times."
+]
+},
+"54a7819d87038f0e5e0838e9b12873b9b0ac3cf9": {
+"rules": [
+"Always set period=0 for immediate commands unless specified otherwise",
+"Use exact service and receiver names from the command for full coverage",
+"Convert numeric units precisely to match expected scale and format"
+]
+},
+"e6727f77f1c366184f3777df8f8071d64f02c23c": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact numeric units as integers matching seconds or counts, no milliseconds or floats.",
+"Fully qualify receivers and services with all relevant tags in parentheses."
+]
+},
+"64b04b45a74fcfee53a28ca89a26de41d363efa6": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact numeric values in seconds or integers as required, no unit conversions.",
+"Include all relevant receivers and services explicitly in the script call."
+]
+},
+"7b778048e7da1a79a24b95c17afad6029d8e2af5": {
+"rules": [
+"Use exact service and method names from the device's API without inventing new services.",
+"Always include all required parameters and numeric values in correct units and formats.",
+"Fully specify all receivers and services explicitly in the script syntax."
+]
+},
+"fb4038c143fe6193f10727d9c886eac4e6d86240": {
+"rules": [
+"Always set period=0 for immediate or conditional commands unless delay is explicit",
+"Use correct cron syntax matching day and hour fields precisely",
+"Invoke services and receivers exactly as named without extra variables or assignments"
+]
+},
+"60eb6e1371e019e28c78efc910e100cb988ca21f": {
+"rules": [
+"Always set period and cron fields exactly as required by the command's timing semantics.",
+"Use only documented services and methods matching the command's domain and receiver.",
+"Implement complete conditional logic and value calculations explicitly in the script."
+]
+},
+"80f0d261d362a5ba85c6ca837738fa0733d91d6f": {
+"rules": [
+"Always use cron expressions for scheduling instead of wait or loop constructs.",
+"Use exact device and service identifiers with correct receiver syntax (#Device #Service).",
+"Avoid unknown or unsupported services; use only documented service names and methods."
+]
+},
+"4190a2f699c214285030cbd29f1fb24048661348": {
+"rules": [
+"Always generate exact cron expressions matching time and day constraints precisely.",
+"Use correct service and receiver names with full coverage in the script.",
+"Avoid wait-until loops; embed all timing in cron and minimal script conditions."
+]
+},
+"18505b78c5769fd00a5f7f353789d738133e474b": {
+"verdict": "real_error",
+"reason": "The generated cron expression and period values differ from the reference, and the logic incorrectly schedules siren activation beyond midnight and uses an invalid period and looping structure."
+},
+"48c3b544254cf0773e596776dabf2093af8ddc7c": {
+"verdict": "real_error",
+"reason": "The generated cron expression '0 0-23 1-5 * *' incorrectly schedules on days 1-5 of the month instead of weekdays, and the period value differs from the reference, making it a functional error."
+},
+"8a693d71bfb26874ff1e3312332cbe746489eadf": {
+"verdict": "real_error",
+"reason": "The generated code uses a wait condition for Sunday at midnight instead of the exact cron schedule for January 1st, which is a real functional error."
+},
+"b8feff3a7a567d08ad9ec285d6b95bd440ada442": {
+"verdict": "real_error",
+"reason": "The generated cron expression '0 0 6 * * 1,3' is invalid and differs from the reference '0 6 * * 1,3', which is a real error in scheduling syntax."
+},
+"442f8d19f370ad330fb51b535f42b31806901e44": {
+"verdict": "real_error",
+"reason": "The generated code uses a cron expression and lacks the volume capping logic, which differs from the reference's exact period and volume limit, constituting a real functional error."
+},
+"c0cb5d3f7933996ceacc2c47d512b4fac769faae": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device and logic with a zero period and wait statement, which differs fundamentally from the reference's period-based polling and variable-triggered approach, constituting a real functional error."
+},
+"81b7b31aded98db0ed198966abea6bd76958b1d4": {
+"verdict": "real_error",
+"reason": "The generated code uses a period of 0 instead of 100, which is a real error since differing period values are not valid alternatives."
+},
+"65f3b837878e7bc894f08d3bb5bbaab2176a5b7c": {
+"verdict": "real_error",
+"reason": "The generated code uses a fixed 3-second period instead of waiting for the humidity condition, which changes the logic and timing behavior from the reference."
+},
+"359f0bce4ce0bd3f7cfcf63f1811c3f5584acbfd": {
+"verdict": "real_error",
+"reason": "The generated cron expression and period differ from the reference, violating the exact-match requirement for cron and period values."
+},
+"ff038a23514bef45bbaa3a495d91b10781edff15": {
+"verdict": "real_error",
+"reason": "The generated code uses a cron expression and a different method without matching the required period=3600000 and explicit volume increase logic, which is a functional deviation from the reference."
+},
+"8874f100329904c1e852cb0f8f7d7fd7bd381a06": {
+"verdict": "real_error",
+"reason": "The generated code uses a different period value and a different trigger condition, which violates the exact-match requirement for cron or period values and changes the logic from the reference."
+},
+"cfaf5e2cf7361e21a41cc83077aabf11ca61494c": {
+"rules": [
+"Always set period to match event timing or polling interval precisely.",
+"Use exact service and receiver names as in the domain model.",
+"Write scripts with correct numeric units and logical conditions, not natural language."
+]
+},
+"fbcf21a2b6e6002bc199f41dad516778f143d2ac": {
+"verdict": "real_error",
+"reason": "The generated code uses different methods and does not match the exact command to set cooking parameters for 1800 seconds as in the reference."
+},
+"c04e679f7435aec9b0137e0324f070d768d4b4e1": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device/service (#Light #ColorControl vs #LivingRoom #Light) and changes the color setting method and parameters, which deviates from the exact reference command."
+},
+"3029b97fdf396377abc1605735ea2f78e300dd6c": {
+"verdict": "real_error",
+"reason": "The generated code omits the device reference (#AirPurifier) and uses delay(7200) instead of delay(2 HOUR), both of which are not valid alternatives to the exact-match style required."
+},
+"16f2f12c550f5f24cc8bff8f476485233263f4c4": {
+"verdict": "real_error",
+"reason": "The generated code uses fixed absolute timestamps instead of a relative 1-hour delay, which is a real functional error differing from the required schedule logic."
+},
+"bb269eaae767ee5a2e75c15c2ffb1a1f45237d74": {
+"verdict": "real_error",
+"reason": "The generated code uses a different cron expression and period value than the reference, which is a real error since cron and period must match exactly."
+},
+"ffafa89ce3ce76a9113ae66c56eecb455aace60e": {
+"verdict": "real_error",
+"reason": "The generated code uses an invalid cron expression and period=0 instead of the required exact cron and period values, which is a real functional error."
+},
+"d0c507a6a1dc06d26da1c92a00636dce522fb4a5": {
+"verdict": "real_error",
+"reason": "The generated cron expression and weekday specification are incorrect and do not match the required schedule, making it a real functional error rather than a valid alternative."
+},
+"92ea51c40b40b613042595e1c087636579e88d4a": {
+"verdict": "real_error",
+"reason": "The generated code uses waits and announces different messages rather than directly scheduling the announcement at 6 AM on Mondays and Wednesdays with the exact weather info, and it also has an empty cron and unspecified period, which differs from the reference."
+},
+"875763225b94b98836fe82bea904cb47186a785f": {
+"verdict": "real_error",
+"reason": "The generated code uses a cron schedule instead of the required period and lacks volume capping and correct scheduling, making it a functional error rather than a valid alternative."
+},
+"c777aec799bf7b05d9c9b75946cb43ac57ac0446": {
+"verdict": "real_error",
+"reason": "The generated code uses an invalid cron expression and incorrect device states ('closed' instead of 'locked'), both of which are functional errors compared to the reference."
+},
+"beb095b4cb3b696ea514c9fc6b2a5f4bc94d0513": {
+"verdict": "real_error",
+"reason": "The generated code uses a cron expression and period value that differ from the reference, which is a real error since cron or period values must match exactly."
+},
+"87f3b06e3b5607e4c6c36f332e9b7c00f043efaa": {
+"verdict": "real_error",
+"reason": "The generated cron expression and schedule differ from the reference by including the 15th hour and using a different syntax, causing a mismatch in timing and logic."
+},
+"6f7febaeee1b512254dee235bc6c382e7e531aef": {
+"verdict": "real_error",
+"reason": "The generated code uses a cron expression and period value that differ from the reference, and its logic does not correctly toggle modes every 30 minutes as required."
+},
+"319f6cf83d4e309f2aaf023f80d55d855304d8f2": {
+"verdict": "real_error",
+"reason": "The generated code uses a period of 60000 ms instead of the required 600000 ms, which is a real functional error as cron or period values must match exactly."
+},
+"e4e9fb7b5a0fe5e5872783e4a0d3640433b2638c": {
+"verdict": "real_error",
+"reason": "The generated code uses a wait statement and a different method to turn on the humidifier without the required period and trigger logic, which changes the scheduling and device command semantics from the reference."
+},
+"dcd6d09331e2730b5cf1df95ad2ff248a7f3efed": {
+"verdict": "real_error",
+"reason": "The generated code uses a different period value and a wait statement instead of the required period=100 and explicit triggered flag logic, which violates the exact-match style and timing requirements."
+},
+"d3bfa05ac25625b1aaaa95c36141949d3f26d2e4": {
+"verdict": "real_error",
+"reason": "The generated code uses a different period value and incorrect device method names, causing functional differences from the reference."
+},
+"19573aa996f1363d02f19410364f6c8ca879dac0": {
+"rules": [
+"Always prefix commands with correct receiver objects using exact device names.",
+"Use numeric values and standard units for parameters; avoid enums or color names.",
+"Structure scripts with direct method calls and explicit delays; avoid time comparisons or extra wrappers."
+]
+},
+"f56a7a88665773a4a28cb0f12e28905645f9bf05": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device/service (#Light #ColorControl) and a color string 'yellow' instead of the exact numeric color value '255,255,0' required by the reference."
+},
+"0b4fa7fc0bc07939cd7609ebb152709353b4fe57": {
+"verdict": "real_error",
+"reason": "The generated code uses a different cron expression with a different period and includes Sunday as '0' instead of '7', which is a real error since cron and period values must match exactly."
+},
+"e35def6d7f56f2278c1558342a90eb6fd6ba2358": {
+"verdict": "real_error",
+"reason": "The generated code uses an invalid cron expression and period=0 instead of the required exact cron and period values, which is a real functional error."
+},
+"3635f0db723a132c8bb638435e086237861ea863": {
+"verdict": "real_error",
+"reason": "The generated cron expression is invalid and does not match the required schedule, and the added wait and conditional logic is unnecessary and deviates from the exact hourly trigger specification."
+},
+"a19257e73ab1de72aac7f04be76ae25b0f264ef8": {
+"verdict": "real_error",
+"reason": "The generated cron expression and logic do not match the reference schedule of every 5 minutes between 13:00 and 14:59, instead using an incorrect cron and sequential waits that do not replicate the required 5-minute intervals."
+},
+"67bcd5017b7f300c29c6e27aa6f5582cf3a3243b": {
+"verdict": "real_error",
+"reason": "The generated code uses a cron expression and a wait loop with delay instead of the exact period=1800000 and no cron as in the reference, which is a real functional difference and not a valid alternative."
+},
+"70126851d9a31de56b472b69b58e1e028a761369": {
+"verdict": "real_error",
+"reason": "The generated code uses a cron expression and logic based on the hour, differing from the reference's period-based toggle every 30 minutes, which is a real functional difference."
+},
+"5b2f3dd85c09420b96bc6c232f34457e8978044d": {
+"verdict": "real_error",
+"reason": "The generated code uses a period of 1000 instead of the reference period of 100, which is a real error as cron or period differences are not valid alternatives."
+},
+"da82416ab924e27746feb1bc25fe3846d81a7206": {
+"verdict": "real_error",
+"reason": "The generated code uses a different period value and incorrect device method names, which are functional errors rather than valid alternatives."
+},
+"76a35db1e845b0b1ab4c1f0ebdc7691435074ca2": {
+"rules": [
+"Use exact service and receiver names matching the device and function.",
+"Generate concise cron and period values without redundant loops or waits.",
+"Express parameters in expected formats: numeric for colors, seconds for time, enums as strings."
+]
+},
+"ef9c1523ea7ada3b9bd246f14af7ce29b20002f4": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device selector and a color name instead of the exact RGB value required, which is a functional deviation from the reference."
+},
+"34af65d816de0e4b0900a5d9c4643009ddbe3e3a": {
+"verdict": "real_error",
+"reason": "The generated code splits the command into two separate calls with different method names, which changes the logic and is not an exact match to the single combined method in the reference."
+},
+"a89fd38bc856979c379d2eaca2539b0ffc339f27": {
+"verdict": "real_error",
+"reason": "The generated code uses a negative period and omits the device reference and correct delay syntax, which are functional errors compared to the reference."
+},
+"cc8c40c335bcf0f7d2940e65b8ea6269e1888b6c": {
+"verdict": "real_error",
+"reason": "The generated cron expression differs from the reference and includes Sunday as '0' instead of '7', and the period and schedule do not exactly match the reference, which is a real functional error per the instructions."
+},
+"fea77424f3022626f7853b474949d2fccf288bc6": {
+"verdict": "real_error",
+"reason": "The generated code uses an empty cron expression instead of the required '0 22 * * *', which is a real error as cron values must match exactly."
+},
+"6fb85fd884873b5df86d99b59c4aac6e91c84cb0": {
+"verdict": "real_error",
+"reason": "The generated cron expression and period values differ from the reference, and the generated code incorrectly schedules from 8 to 17 hours on days 0-23 instead of every hour from 8 to 23 on weekdays, causing a functional scheduling error."
+},
+"37f8eecea83815bbb8325e2e3926de01ffbad1e8": {
+"verdict": "real_error",
+"reason": "The generated code uses an empty cron and a negative period instead of the exact cron schedule '0 0 1 1 *', which is a real functional error as cron or period values must match exactly."
+},
+"e6cfd98797148c9007c0cdf0f904f46bbe30d651": {
+"verdict": "real_error",
+"reason": "The generated code uses an invalid cron expression with an extra zero and relies on runtime checks instead of the exact cron schedule, violating the exact-match requirement for cron values."
+},
+"700628f700d93f3649e5a01b484b32333ba1d41d": {
+"verdict": "real_error",
+"reason": "The generated code uses a different logic and method to increase volume only when playing and includes an explicit delay instead of relying on the period parameter, which differs from the exact period and direct volume increase in the reference."
+},
+"abf464946e8975ca5dbfbd27f0d107e550a32a7e": {
+"verdict": "real_error",
+"reason": "The generated code uses an incorrect cron and period schedule and does not implement the required repeated opening and closing logic between 1 PM and 3 PM as specified."
+},
+"a2cc56b98fc4cb21c7664b2037bf524f56cb9e92": {
+"verdict": "real_error",
+"reason": "The generated code uses fixed delays and does not toggle modes based on a state variable, failing to alternate between sleep and high modes every 30 minutes as required."
+},
+"14c25e40d01fe4721c54b0c61dd0ed5f1da8730e": {
+"verdict": "real_error",
+"reason": "The generated code uses a wait-until event instead of a periodic check with a triggered flag and also differs in the window property and message, which changes the logic and timing, constituting a real functional error."
+},
+"d1fc2e5589616875824581b15ddef843b1b8248f": {
+"verdict": "real_error",
+"reason": "The generated code decreases brightness when motion is detected again instead of only increasing it until max, which contradicts the reference logic and changes the intended behavior."
+},
+"33be58693ac7fa20e836d4fbcfcbee9cc62e6d44": {
+"rules": [
+"Always include all specified receivers explicitly with correct tags in the script.",
+"Use exact numeric values and formats as given; avoid enums or approximate strings.",
+"Generate cron and period fields exactly as specified, without approximations or substitutions."
+]
+}
+}

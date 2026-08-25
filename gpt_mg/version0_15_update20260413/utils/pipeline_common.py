@@ -1804,6 +1804,10 @@ def _mandatory_retrieval_categories(command_text: str) -> list[str]:
     )
     if has_outdoor and has_air_quality:
         categories.append("WeatherProvider")
+    if has_air_quality:
+        # indoor/outdoor dust readings are provided by different categories and
+        # commands rarely disambiguate; guarantee both sources in the shortlist
+        categories.extend(["AirQualitySensor", "WeatherProvider"])
 
     has_rain_recheck = (
         any(token in text for token in ("rain", "raining", "비"))
@@ -1834,6 +1838,19 @@ def _mandatory_retrieval_categories(command_text: str) -> list[str]:
         categories.append("Door")
     if any(token in text for token in ("camera", "photo", "picture", "image", "카메라", "사진")):
         categories.append("Camera")
+    if any(token in text for token in (
+        "every ", "minute", "hourly", " am", " pm", "a.m.", "p.m.", "midnight", "noon",
+        "weekday", "weekend", "o'clock", "매일", "매시간", "시마다", "분마다",
+    )):
+        # schedule/interval conditions read the Clock (hour/minute/weekday)
+        categories.append("Clock")
+    if any(token in text for token in (
+        "turn on", "turn off", "turn it on", "turn it off", "switch on", "switch off",
+        "power on", "power off", "켜", "꺼",
+    )) or re.search(r"for \d+ (?:second|minute|hour)", text):
+        # generic on/off actuation binds to the Switch capability; a bounded
+        # duration ("for 5 seconds") implies switching the device off afterwards
+        categories.append("Switch")
     return categories
 
 

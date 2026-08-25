@@ -1,0 +1,565 @@
+{
+ "round_idx": 5,
+ "population": null,
+ "rule_pool": [],
+ "adopted": {
+  "grammar": "compact",
+  "temporal": "full",
+  "caution": "on",
+  "few_shot": 0,
+  "rules": []
+ },
+ "history": [
+  {
+   "round": "R1",
+   "gen": 1,
+   "best": "5d6cda26b094",
+   "score": 100.0,
+   "fitness": 0.6266,
+   "det_score": 100.0,
+   "logic_pct": 0.0,
+   "tokens": 7022,
+   "latency": 0.01,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [],
+   "population": [
+    [
+     "5d6cda26b094",
+     100.0,
+     0.6266
+    ],
+    [
+     "e1eaeeccaba0",
+     66.7,
+     0.4116
+    ],
+    [
+     "32b8d2e15078",
+     50.0,
+     0.3218
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R1",
+   "gen": "adopt",
+   "score": 100.0,
+   "note": "adopted",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R2",
+   "gen": 1,
+   "best": "5d6cda26b094",
+   "score": 100.0,
+   "fitness": 0.7263,
+   "det_score": 100.0,
+   "logic_pct": 100.0,
+   "tokens": 7127,
+   "latency": 0.01,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [],
+   "population": [
+    [
+     "5d6cda26b094",
+     100.0,
+     0.7263
+    ],
+    [
+     "2e944017c4df",
+     83.3,
+     0.6329
+    ],
+    [
+     "e1eaeeccaba0",
+     66.7,
+     0.5123
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R2",
+   "gen": 2,
+   "best": "5d6cda26b094",
+   "score": 100.0,
+   "fitness": 0.7263,
+   "det_score": 100.0,
+   "logic_pct": 100.0,
+   "tokens": 7127,
+   "latency": 0.01,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [],
+   "population": [
+    [
+     "5d6cda26b094",
+     100.0,
+     0.7263
+    ],
+    [
+     "2e944017c4df",
+     83.3,
+     0.6329
+    ],
+    [
+     "ae183d361635",
+     83.3,
+     0.6247
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R2",
+   "gen": "adopt",
+   "score": 100.0,
+   "note": "adopted",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R3",
+   "gen": 1,
+   "best": "5d6cda26b094",
+   "score": 100.0,
+   "fitness": 0.7263,
+   "det_score": 100.0,
+   "logic_pct": 100.0,
+   "tokens": 7127,
+   "latency": 0.01,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [],
+   "population": [
+    [
+     "5d6cda26b094",
+     100.0,
+     0.7263
+    ],
+    [
+     "4f87f3009a74",
+     66.7,
+     0.534
+    ],
+    [
+     "e1eaeeccaba0",
+     66.7,
+     0.5123
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R3",
+   "gen": 2,
+   "best": "5d6cda26b094",
+   "score": 100.0,
+   "fitness": 0.7263,
+   "det_score": 100.0,
+   "logic_pct": 100.0,
+   "tokens": 7127,
+   "latency": 0.01,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [],
+   "population": [
+    [
+     "5d6cda26b094",
+     100.0,
+     0.7263
+    ],
+    [
+     "2e944017c4df",
+     83.3,
+     0.6329
+    ],
+    [
+     "4f87f3009a74",
+     66.7,
+     0.534
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R3",
+   "gen": "adopt",
+   "score": 100.0,
+   "note": "adopted (regression 0 <= 1)",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R4",
+   "gen": 1,
+   "best": "5d6cda26b094",
+   "score": 100.0,
+   "fitness": 0.7263,
+   "det_score": 100.0,
+   "logic_pct": 100.0,
+   "tokens": 7127,
+   "latency": 0.01,
+   "judge_adjusted": 100.0,
+   "judged_fails": 0,
+   "valid_alternative": 0,
+   "new_rules": [],
+   "population": [
+    [
+     "5d6cda26b094",
+     100.0,
+     0.7263
+    ],
+    [
+     "ae183d361635",
+     83.3,
+     0.6247
+    ],
+    [
+     "4f87f3009a74",
+     66.7,
+     0.534
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R4",
+   "gen": 2,
+   "best": "5d6cda26b094",
+   "score": 100.0,
+   "fitness": 0.7263,
+   "det_score": 100.0,
+   "logic_pct": 100.0,
+   "tokens": 7127,
+   "latency": 0.01,
+   "judge_adjusted": 100.0,
+   "judged_fails": 0,
+   "valid_alternative": 0,
+   "new_rules": [],
+   "population": [
+    [
+     "5d6cda26b094",
+     100.0,
+     0.7263
+    ],
+    [
+     "2e944017c4df",
+     83.3,
+     0.6329
+    ],
+    [
+     "ae183d361635",
+     83.3,
+     0.6247
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R4",
+   "gen": "adopt",
+   "score": 100.0,
+   "note": "adopted (regression 0 <= 1)",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R5",
+   "gen": 1,
+   "best": "5d6cda26b094",
+   "score": 100.0,
+   "fitness": 0.6263,
+   "det_score": 100.0,
+   "logic_pct": 0.0,
+   "tokens": 7108,
+   "latency": 0.01,
+   "judge_adjusted": 100.0,
+   "judged_fails": 0,
+   "valid_alternative": 0,
+   "new_rules": [],
+   "population": [
+    [
+     "5d6cda26b094",
+     100.0,
+     0.6263
+    ],
+    [
+     "2e944017c4df",
+     87.5,
+     0.5594
+    ],
+    [
+     "543db455cb28",
+     87.5,
+     0.5481
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R5",
+   "gen": 2,
+   "best": "5d6cda26b094",
+   "score": 100.0,
+   "fitness": 0.6263,
+   "det_score": 100.0,
+   "logic_pct": 0.0,
+   "tokens": 7108,
+   "latency": 0.01,
+   "judge_adjusted": 100.0,
+   "judged_fails": 0,
+   "valid_alternative": 0,
+   "new_rules": [],
+   "population": [
+    [
+     "5d6cda26b094",
+     100.0,
+     0.6263
+    ],
+    [
+     "2e944017c4df",
+     87.5,
+     0.5594
+    ],
+    [
+     "e1eaeeccaba0",
+     75.0,
+     0.4623
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R5",
+   "gen": "adopt",
+   "score": 100.0,
+   "note": "adopted (regression 0 <= 1)",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  }
+ ],
+ "lineage": [
+  {
+   "round": "R2",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "5d6cda26b094",
+     "parents": [
+      "5d6cda26b094"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "2e944017c4df",
+     "parents": [
+      "2e944017c4df"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "ae183d361635",
+     "parents": [
+      "5d6cda26b094",
+      "5d6cda26b094"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:0->2"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R3",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "5d6cda26b094",
+     "parents": [
+      "5d6cda26b094"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "4f87f3009a74",
+     "parents": [
+      "4f87f3009a74"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "2e944017c4df",
+     "parents": [
+      "5d6cda26b094",
+      "5d6cda26b094"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:on->off"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R4",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "5d6cda26b094",
+     "parents": [
+      "5d6cda26b094"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "ae183d361635",
+     "parents": [
+      "ae183d361635"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "2e944017c4df",
+     "parents": [
+      "5d6cda26b094",
+      "5d6cda26b094"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:on->off"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "5d6cda26b094",
+     "parents": [
+      "5d6cda26b094"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "2e944017c4df",
+     "parents": [
+      "2e944017c4df"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "e1eaeeccaba0",
+     "parents": [
+      "5d6cda26b094",
+      "5d6cda26b094"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full"
+     ]
+    }
+   ]
+  }
+ ],
+ "mode": "mock"
+}

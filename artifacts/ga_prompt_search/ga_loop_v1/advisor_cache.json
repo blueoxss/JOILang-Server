@@ -1,0 +1,98 @@
+{
+"d11409378c7fd198ae96c5f86819285459f7df6d": {
+"rules": [
+"Use exact device selectors matching all mentioned locations and types.",
+"Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+"Convert all numeric values to ground truth units and formats precisely."
+]
+},
+"f45e4185b7ffe01598bf417a5811cdbb39ad3e09": {
+"rules": [
+"Use exact service and method names as in ground truth without introducing unknown services.",
+"Represent time durations and colors with numeric values matching ground truth conventions.",
+"Implement periodic or repeated actions using state variables and control flow, not just conditional checks."
+]
+},
+"f97352b39391e3c150ca5ddfb7a66995c37c308c": {
+"rules": [
+"Use exact boolean or numeric comparisons as in ground truth, not string literals or inequalities.",
+"Avoid conditional guards unless explicitly shown; prefer direct commands and explicit delays.",
+"Use only services and properties exactly matching ground truth naming and coverage conventions."
+]
+},
+"ae260ce73db9c944079caafc22ac8800b058a32c": {
+"rules": [
+"Use only exact service and property names from the example ground truth.",
+"Express timing and conditions with explicit wait, delay, or simple triggers, not if-conditions.",
+"Avoid adding extra logic or variables not shown in the ground truth examples."
+]
+},
+"cbb420fdbd6800c70baa3a872009e7a0d4507091": {
+"rules": [
+"Use exact device and service names as in ground truth examples",
+"Avoid conditional wrappers unless shown in ground truth",
+"Express time delays in 'delay(X MIN)' format, not milliseconds"
+]
+},
+"4126e4b9e469f57717f49d6c83862fde54a64ff7": {
+"verdict": "real_error",
+"reason": "The generated code incorrectly adds a mode check that restricts setting the temperature only when the mode is 'auto', which changes the intended unconditional behavior of the reference command."
+},
+"a5f6a0d401707757d4aab8c7d5bf34b07c4ebb52": {
+"verdict": "real_error",
+"reason": "The generated code lacks the weekday condition and the hourly schedule, thus failing to fully implement the command's requirements."
+},
+"7ee1edbe61ad00764996c2486c75eca271b7e925": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device (#WindowCovering) and property (windowcovering_currentposition) with a string comparison instead of the correct device (#Window) and numeric property (armrobot_currentposition), causing functional mismatch."
+},
+"79530dc72a3f007ec7b2a61300d18bd1a89418ab": {
+"rules": [
+"Use exact service and property names as in ground truth examples.",
+"Express time durations with units in uppercase and numeric values as integers.",
+"Avoid conditional checks unless explicitly shown in ground truth examples."
+]
+},
+"f23ba6c781fe067320b2e83a884e3086df27258f": {
+"verdict": "valid_alternative",
+"reason": "The generated code sets the cooking mode and delays for 30 minutes, effectively matching the intended behavior despite using different methods."
+},
+"cb9f4f0365ba97092c1ed0ad7541e34c457d39c5": {
+"verdict": "real_error",
+"reason": "The generated code targets all lights instead of specifically the living room light and uses a different method not matching the reference command's device and function."
+},
+"ae18f2b1cf7973809a65a95936be91c9e1491d4f": {
+"verdict": "real_error",
+"reason": "The generated code uses a different condition value ('yes' instead of true) and a different device command that may not match the intended switch_on action, causing a functional mismatch."
+},
+"440e7aac2a3d7626778693110f049cf915ceb776": {
+"verdict": "real_error",
+"reason": "The generated code omits the device reference (#Television) and uses a numeric delay instead of the specified '1 HOUR' keyword, failing the exact-match style requirements."
+},
+"38ec7e67e72fc89efe6721db56b67642f9fa7c10": {
+"verdict": "valid_alternative",
+"reason": "The generated code implements the same logic with conditional checks and equivalent delay, representing a valid alternative approach."
+},
+"403ee9b183257b98825592d8f8825781e387c9d8": {
+"verdict": "real_error",
+"reason": "The generated code lacks the required 30-minute interval scheduling and afternoon time check, thus failing to implement the specified timing logic correctly."
+},
+"79097abc766328a3e2f88513453fa18b9b6e0cb6": {
+"rules": [
+"Use exact receiver names with correct casing and hashtags as in examples.",
+"Use precise service method names and parameters exactly as shown in ground truth.",
+"Express time and periodic conditions using provided idiomatic constructs and enums."
+]
+},
+"e4a61b8ff943e63df1f4cc5697fdf39a352d82e6": {
+"verdict": "real_error",
+"reason": "The generated code uses a fixed datetime range and a single open-close sequence with a delay, lacking the repeated toggling every 5 minutes and the state tracking present in the reference."
+},
+"bbe993941dfb5fbd48bdc902a7b16aa488bf2c43": {
+"rules": [
+"Use exact receiver tags with correct service names as in ground truth.",
+"Express recurring schedules with explicit cron or period conditions, not partial datetime checks.",
+"Implement stateful logic explicitly when toggling states, avoid implicit delays or incomplete loops."
+]
+}
+}

@@ -1,0 +1,46 @@
+{
+  "round_id": "R1",
+  "criteria_sha256": "2276a194cbe9e4bb",
+  "evaluated_at": "2026-08-25",
+  "gates": {
+    "G1_papers": {
+      "verdict": "PASS",
+      "evidence": "4개 파일 전수 분석 완료 — main.tex(산문 w0·τ·적합도), 교수님 PDF(식 3-7 형식화, 소스 .tex 부재 확인), main_revised.tex(구계보·mojibake·ReplayFit 15개소 전수 목록), 4번 PDF(내용=main.tex 컴파일 판명). docs/paper_source_of_truth.md + paper_four_way_comparison.md"
+    },
+    "G2_formula_class": {
+      "verdict": "PASS",
+      "evidence": "IV-4 전 수식·가중치·임계값·수치 분류 완료: DET 3구현체(전부 위치·공식 확정), 적합도 4구현체(식7 미구현 확정), τ=70 확인, 주표/교차전이/ReplayFit/민감도/ablation/seed 수치 전부 VERIFIED·UNVERIFIED·NOT_RUN·CONFLICT 등급 부여. docs/iv4_metric_provenance_audit.md §A-D"
+    },
+    "G3_import_paths": {
+      "verdict": "PASS",
+      "evidence": "ROOT strict_det_evaluate_row(utils/det_evaluator.py:196-210)·v15 evaluate_candidate(signature 확정, 별도 subprocess로 실제 import+실행)·root fitness.py:74-114·ga_metrics.score_main:296-312·run_ga_search legacy:2732 — 전 entrypoint 실행 또는 행번호 수준 확인"
+    },
+    "G4_copy_baseline": {
+      "verdict": "PASS",
+      "evidence": "390/390 SHA-256 일치, golden fixture 두 버전 profiles={legacy,strict} 동일 출력, 원본 무변경(git status), 69.9 cap 두 버전 diff-동일. docs/iv4_copy_baseline_verification.md"
+    },
+    "G5_no_false_verified": {
+      "verdict": "PASS_WITH_INCIDENT",
+      "evidence": "근거 없는 숫자의 VERIFIED 분류 0건. 단 역방향 오류 1건 발생·정정: '69.9 문자열 없음'(부재 주장 오류)을 감사에서 적발, 직접 grep 재검증(1547-1555행 실존) 후 당일 정정 기록. 주표 앵커(94.5/92.6/88.7/94.0)는 UNVERIFIED로, 민감도·교차전이·ablation·seed는 NOT_RUN으로 정직 분류."
+    }
+  },
+  "qualitative_gates": {
+    "professor_intent_preserved": {
+      "verdict": "PASS",
+      "evidence": "12개 수정 항목을 PRESERVED(0)/OMITTED(7)/REVERTED(3)/CONFLICTED(2)로 분류, 충돌 2건(참조 의미론·민감도 결론)에 해소 규칙 확정. docs/professor_revision_preservation.md"
+    }
+  },
+  "required_artifacts_check": {
+    "docs/paper_source_of_truth.md": true,
+    "docs/paper_four_way_comparison.md": true,
+    "docs/professor_revision_preservation.md": true,
+    "docs/iv4_metric_provenance_audit.md": true,
+    "docs/iv4_copy_baseline_verification.md": true
+  },
+  "round_verdict": "PASS",
+  "unresolved_carryover": [
+    "main-table 앵커 수치 재현 아티팩트 부재(UNVERIFIED) — 수치 재측정은 마스터 지시 범위 밖, R5 서술에서 provenance 정직성만 유지",
+    "교수님 PDF 소스 .tex 부재 — 수식 전사는 pdftotext+눈검증으로 대체(R5)",
+    "main_revised.tex mojibake — R5에서 한국어 본문 main.tex 재도입 필요(스코프 증가)"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "profile": "legacy_v1",
+  "description": "v15 utils/det_evaluator.py LEGACY_WEIGHTS(24-32행)의 기록 사본. 참조·문서화 목적 — v15 legacy 프로파일 자체는 내장 dict를 사용하며 이 파일을 읽지 않는다(동작 무변경).",
+  "scale": "0-1 (원 구현은 0-100)",
+  "threshold": 0.70,
+  "weights": {
+    "schema_ok": 0.15,
+    "service_match": 0.20,
+    "arg_type": 0.15,
+    "precondition": 0.05,
+    "semantic": 0.10,
+    "extraneous": 0.05,
+    "gt_similarity": 0.30
+  }
+}

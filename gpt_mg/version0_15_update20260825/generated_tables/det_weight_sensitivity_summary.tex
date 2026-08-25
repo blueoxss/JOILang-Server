@@ -1,0 +1,14 @@
+% source: GPT-4.1-mini 280-row suites v07/v12/v13/v14/v15 (/data model_suite_20260616_*) + Qwen2.5-Coder-14B 280-row (eval_pipeline_checks_20260623_111811_full); evaluator paper_v1 (w0, tau=0.70); rescoring only, no LLM calls; design frozen 136dfde4b17e0ac0
+\begin{tabular}{lrrrrl}
+\hline
+가중치 변형 & max$|\Delta$DETPass$|$(pp) & 평균 $\Delta$(pp) & Spearman $\rho$ & max flip & 판정 \\
+\hline
+균등 & 4.29 & 2.62 & 0.700 & 4.3\% & sensitive \\
+실행 강조 & 2.14 & 0.65 & 0.900 & 2.9\% & moderate \\
+구조 강조 & 4.64 & -2.68 & 0.600 & 6.4\% & sensitive \\
+코드 유사도 제외 & 5.00 & 1.85 & 0.400 & 5.0\% & sensitive \\
+\hline
+LOO 8종 최대(=service\_coverage) & 6.07 & -0.06 & 0.900 & 8.9\% & sensitive \\
+$\pm$20\% 16종 최대(=p20\_schedule) & 1.07 & 0.24 & 1.000 & 2.1\% & strong \\
+\hline
+\end{tabular}

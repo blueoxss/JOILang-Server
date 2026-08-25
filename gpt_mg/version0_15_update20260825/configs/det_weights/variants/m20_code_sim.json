@@ -1,0 +1,16 @@
+{
+ "profile": "m20_code_sim",
+ "scale": "0-1",
+ "threshold": 0.7,
+ "description": "R4 민감도 변형 (사전 등록 설계 136dfde4b17e0ac0): m20_code_sim",
+ "weights": {
+  "code_sim": 0.2553191489361702,
+  "schedule": 0.1595744680851064,
+  "service_coverage": 0.1595744680851064,
+  "service_precision": 0.10638297872340427,
+  "receiver_coverage": 0.10638297872340427,
+  "numeric_grounding": 0.10638297872340427,
+  "enum_grounding": 0.053191489361702135,
+  "dataflow": 0.053191489361702135
+ }
+}

@@ -1,0 +1,22 @@
+{
+  "round_id": "R3",
+  "criteria_sha256": "5affee069fc71683",
+  "evaluated_at": "2026-08-25",
+  "gates": {
+    "G1_boundary": {"verdict": "PASS", "evidence": "경계 테스트 16건(요구 ≥12): 스케줄 0.5/0.0/falsy-coercion, 서비스 Counter 다중도·잉여 정밀도·빈 생성, 수치 부호·소수, 빈 참조, gt_refs 전원 실패→hard gate, list 후보, enum 대소문자, dataflow 비율, τ 경계(e−1e-9 통과/e+1e-9 실패 + 원 정밀도 보존으로 e==τ 통과 성립), 0가중치, 극단 재가중"},
+    "G2_regression_expanded": {"verdict": "PASS", "evidence": "12행×2후보×2프로파일(strict 중간값 7건)을 원본 실측 동결, canonical 전 케이스 abs<1e-9 일치 — 파라미터라이즈 12건 통과"},
+    "G3_no_llm": {"verdict": "PASS", "evidence": "정적 검사(3파일, 금지 모듈 문자열 0) + 동적 subprocess(sys.modules 검사 NO_LLM_OK) + summary.llm_calls==0"},
+    "G4_schema": {"verdict": "PASS", "evidence": "rows.jsonl 필수 9키+components 8키, summary 필수 6키 스키마 테스트 통과"},
+    "G5_all_green": {"verdict": "PASS", "evidence": "canonical 전체 pytest 174 passed exit 0; canonical 밖 신규 변경 0건(추가 발견 M/??는 mtime 세션 전 — 기존 변경으로 분류·목록 완성)"}
+  },
+  "qualitative_gates": {
+    "boundary_behaviors_classified": {"verdict": "PASS", "evidence": "changes.md 표 — 7개 경계 동작 전부 의도/한계 분류, 결함 1건(출력 반올림)은 근본 수정+근거 기록"}
+  },
+  "fix_iterations_used": 1,
+  "fix_log": "τ 경계·period 테스트 2건 실패 → 원인 분석: (a) 반올림된 출력 e와 내부 원값 판정의 불일치(코드 결함, 반올림 제거로 수정), (b) period 0 falsy 동치는 ROOT 의도 동작(테스트 기대를 수정하고 동작을 문서 동결). 재실행 전부 통과.",
+  "round_verdict": "PASS",
+  "unresolved_carryover": [
+    "feedback loop det_profile 미전달(기존) — R4 full-GA 설계 시 --feedback-attempts 0",
+    "Q7/L8 DT 기준값 실측 부재 — R4 full-GA 포함 시 선행 실측 필요"
+  ]
+}

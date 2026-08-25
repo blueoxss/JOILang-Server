@@ -1,0 +1,172 @@
+{
+ "round_idx": 5,
+ "population": null,
+ "rule_pool": [
+  {
+   "target_block": "temporal",
+   "rule": "Always set period=0 for immediate commands without scheduling."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and receiver names as in the command, preserving order and casing."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Convert numeric parameters to correct units and formats as required by services."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and method names matching device capabilities."
+  }
+ ],
+ "adopted": {
+  "grammar": "full",
+  "temporal": "full",
+  "caution": "on",
+  "few_shot": 0,
+  "rules": [
+   {
+    "target_block": "schema",
+    "rule": "Convert numeric parameters to correct units and formats as required by services."
+   }
+  ]
+ },
+ "lineage": [
+  {
+   "round": "R1",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "280aadcbabda",
+     "parents": [
+      "280aadcbabda"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "cd0e0da70417",
+     "parents": [
+      "cd0e0da70417"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "4aa9be901144",
+     "parents": [
+      "280aadcbabda",
+      "280aadcbabda"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:full->compact",
+      "few_shot_count:0->1"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R3",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "09d850b9892d",
+     "parents": [
+      "09d850b9892d"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "751f92c68b47",
+     "parents": [
+      "751f92c68b47"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "fb728f9fbee2",
+     "parents": [
+      "09d850b9892d",
+      "09d850b9892d"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion",
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R4",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "09d850b9892d",
+     "parents": [
+      "09d850b9892d"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "280aadcbabda",
+     "parents": [
+      "280aadcbabda"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "cbcf4fb1681d",
+     "parents": [
+      "09d850b9892d",
+      "09d850b9892d"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "09d850b9892d",
+     "parents": [
+      "09d850b9892d"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "cbcf4fb1681d",
+     "parents": [
+      "cbcf4fb1681d"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "85165cfa1276",
+     "parents": [
+      "09d850b9892d",
+      "09d850b9892d"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:full->compact"
+     ]
+    }
+   ]
+  }
+ ],
+ "mode": "real",
+ "z3_errors": 0
+}

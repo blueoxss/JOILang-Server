@@ -1,0 +1,26 @@
+round_id: R3
+parent_criteria_sha256: a9891ddc65f1f536
+objective: "paper_v1 경계·회귀 테스트 확대 + no-LLM 재채점 보장 + 아티팩트 스키마 검증 (R2 feedback 강화안 이행)"
+allowed_change_scope: "canonical dir 내 tests/·scripts/run_paper_v1_eval.py(스키마 보강 한정)·docs만; 평가기·적합도 수식 로직 변경 금지(버그 수정은 근거 문서화 시 허용)"
+forbidden_changes:
+  - "원본·root 수정"
+  - "R2 동결 fixture 기대값 변경 (평가기 로직이 불변인 한)"
+  - "기존 legacy/strict 동작 변경"
+evidence_rules:
+  - "부재 주장은 실행 명령+출력 요지 병기"
+  - "수치 게이트는 명시된 오차 한계로 판정"
+quantitative_gates:
+  - {id: G1_boundary, desc: "신규 경계 테스트 ≥12: 스케줄 부분일치 0.5, 서비스 다중도(Counter), 수치 부호·소수, 빈 참조 코드, gt_refs 전원 파싱 실패→hard gate, 후보 list 입력, enum 대소문자, dataflow 비율, precision 빈 생성 규칙, τ 경계(e==τ 통과), 가중치 0 성분, 재가중 극단(단일 성분 1.0)"}
+  - {id: G2_regression_expanded, desc: "회귀 fixture ≥12케이스(카테고리 다양화: cron 스케줄, wait until 전이, all() 리시버, 다중 서비스 호출 포함)를 원본 20260413 실측으로 동결하고 canonical과 전 케이스 동일(abs<1e-9)"}
+  - {id: G3_no_llm, desc: "run_paper_v1_eval 실행 후 sys.modules에 LLM 클라이언트 모듈(utils.local_llm_client, openai, requests, urllib.request 사용 흔적) 부재를 동적 단언 + 소스 정적 검사; summary.llm_calls==0"}
+  - {id: G4_schema, desc: "rows.jsonl 레코드·summary.json 필수 키 스키마 테스트 (paper_v1: e/det_pass/components 8키/weights/threshold/hard_gate; summary: n/DETPass/S_DET/det_threshold/llm_calls)"}
+  - {id: G5_all_green, desc: "canonical 전체 pytest exit 0; git status로 canonical 밖 신규 변경 0건"}
+qualitative_gates:
+  - "발견된 모든 경계 동작(의도적이든 결함이든)을 문서에 분류 기록 — 결함이면 근본 원인 수정 또는 명시적 한계 기록"
+required_artifacts:
+  - tests/test_paper_v1_boundary.py
+  - tests/test_paper_v1_regression_expanded.py
+  - docs/iv4_five_round/round_03/{initial_evaluation.json,feedback.md,changes.md,manifest.json}
+pass_rule: "모든 정량 gate 통과 + 필수 산출물 존재; 게이트당 수정 반복 최대 3회"
+created_before_evaluation: true
+criteria_sha256: 5affee069fc71683

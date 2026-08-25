@@ -1,0 +1,35 @@
+{
+"e3c1dcfe1846c057bb8aeaa0499cb575054d82d2": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact service and method names matching device and action context.",
+"Represent numeric parameters as integers without decimals unless specified."
+]
+},
+"27e45954cf91c3956177ad5940951ae25409f15d": {
+"rules": [
+"Always set period to 0 unless specified otherwise.",
+"Combine multiple property changes into a single service call when possible.",
+"Use full receiver paths including all relevant tags for accurate targeting."
+]
+},
+"7c76ff491b781ce6158b5a20a8cc57bd2dd5f299": {
+"verdict": "real_error",
+"reason": "The generated code uses separate commands for hue and saturation and targets #Light instead of #LivingRoom #Light, and the period value differs from the reference, all of which constitute a real functional error."
+},
+"5e9d4877d47e2c5613558d850ac4a503b807f07e": {
+"verdict": "real_error",
+"reason": "The generated code uses different methods and a period value of -1 instead of 0, which changes the scheduling and logic, making it a real functional error."
+},
+"9894156d37f8815ecba6663fc1be0171f99da29f": {
+"verdict": "real_error",
+"reason": "The generated code uses an invalid period value (-1) and a different script target and color format, which do not match the exact reference requirements."
+},
+"660a1abce9add5efaf5f57b5985feb9b5a936a01": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact numeric or RGB values for parameters, not color names or units.",
+"Include all relevant receivers explicitly in the script's target list."
+]
+}
+}

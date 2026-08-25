@@ -1,0 +1,49 @@
+# version0_15_update20260413 File Checklist
+
+- `README.md` - usage guide, folder map, quick commands, and DET notes.
+- `FILE_CHECKLIST.md` - file inventory for the version0_15_update20260413 workspace.
+- `blocks/01_preamble.txt` - global deterministic JOILang rules.
+- `blocks/02_generator_prompt.txt` - main generator prompt with metadata and three exemplars.
+- `blocks/03_postprocessor.txt` - JSON-only output scrubber.
+- `blocks/04_reranker_prompt.txt` - minimal-change rerank/repair scaffold.
+- `blocks/05_repair_prompt.txt` - targeted repair prompt with three repair exemplars.
+- `blocks/06_det_helper.txt` - evaluator-aware helper rules.
+- `blocks/generated/` - auto-created block variants from prompt surgery.
+- `genomes/example_genome.json` - baseline genome schema and parameters.
+- `scripts/run_generate.py` - row selection + candidate generation runner.
+- `scripts/run_rerank.py` - DET scoring + repair runner.
+- `scripts/run_feedback_loop.py` - validation and prompt-surgery loop.
+- `scripts/run_ga_search.py` - GA orchestration with plateau handling.
+- `scripts/ga_metrics.py` - redesigned DETPass/token/category metric bundle, token penalty, compression gain, Pareto rows, and best tie-breaker.
+- `scripts/ga_selection.py` - archive state, quota-based elitism, group specialist archives, and regression gate helpers.
+- `scripts/ga_mutation.py` - phase-aware cloudless mutation proposal application and family scheduling.
+- `scripts/prompt_decompiler.py` - deterministic prompt-unit segmentation and duplicate/compression proposal extraction.
+- `scripts/mutation_proposals.py` - shared `MutationProposal` schema for cloudless and advisor-guided mutation.
+- `scripts/ga_stop_controller.py` - active phase/action controller for plateau diagnosis and next-action selection.
+- `utils/ga_block_model.py` - core/optional prompt-block genotype helpers and deterministic feedback-to-mutation mapping.
+- `utils/prompt_surgery_rules.py` - version0_13-derived DET failure to prompt-block surgery mapping.
+- `scripts/run_model_suite_benchmark.py` - fixed-prompt multi-model benchmark runner for row-level and dataset-level comparison.
+- `scripts/run_cloud_blocks_equivalence.py` - GPT-4.1-mini monolith-vs-block prompt equivalence checker.
+- `scripts/run_paper_full_study.py` - resumable final paper study orchestrator for B1/B2/B3/B4/B5/B6 scheduling and artifact export.
+- `scripts/export_paper_final_artifacts.py` - Figure 1, Figure 2, Table 3, Table 4, promotion, structured feedback, and manifest exporter.
+- `scripts/run_full_pipeline.sh` - end-to-end wrapper for quick/full runs.
+- `scripts/commit_results.py` - safe patch/instruction writer for git.
+- `utils/pipeline_common.py` - shared paths, prompt rendering, dataset helpers.
+- `utils/det_evaluator.py` - deterministic DET evaluator.
+- `utils/local_llm_client.py` - local worker and HTTP LLM adapter.
+- `results/` - generated candidate CSVs, genome JSON, summaries, and patch attempts.
+- `results/paper_study_<timestamp>/availability_summary.csv` - model runnable/blocked/failed/skipped status for the paper suite.
+- `results/paper_study_<timestamp>/structured_feedback.jsonl` - deterministic validation feedback records used for future mutation/repair guidance.
+- `results/ga_search_<timestamp>/advisor_mutation_proposals.jsonl` - optional LLM advisor prompt-block mutation proposals.
+- `results/ga_search_<timestamp>/mutation_proposals.jsonl` - canonical cloudless/advisor mutation proposals and accept/reject metadata.
+- `results/ga_search_<timestamp>/cloudless_prompt_units.jsonl` - prompt decompiler unit table when cloudless decompiler mode is enabled.
+- `results/ga_search_<timestamp>/pareto_archive.csv` - non-dominated DETPass/token candidates.
+- `results/ga_search_<timestamp>/mutation_operator_credit.csv` - mutation-family/operator credit table.
+- `results/ga_search_<timestamp>/ga_population_diagnostics.csv` - generation/category DET diagnostics used by feedback-guided mutation and advisor prompts.
+- `results/ga_search_<timestamp>/stage_status/` - staged GA execution status files for dry-run, smoke, category-smoke, advisor-smoke, or full-run.
+- `results/paper_study_<timestamp>/paper/figures/` - final paper Figure 1 and Figure 2 image/PDF outputs.
+- `results/paper_study_<timestamp>/paper/tables/` - final paper Table 3 and Table 4 CSV/JSON/TeX outputs.
+- `results/paper_study_<timestamp>/paper/promotion/` - regression-aware promotion decision artifacts.
+- `results/paper_study_<timestamp>/paper/final_artifacts_manifest.json` - manifest with command, git SHA, availability, figures, tables, and missing models.
+- `logs/` - prompt/response logs for reproducibility.
+- `checkpoints/` - GA generation snapshots.

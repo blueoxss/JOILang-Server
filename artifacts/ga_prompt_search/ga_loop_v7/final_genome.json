@@ -1,0 +1,20 @@
+{
+ "grammar": "compact",
+ "temporal": "full",
+ "caution": "off",
+ "few_shot": 1,
+ "rules": [
+  {
+   "target_block": "schema",
+   "rule": "Reference all devices and services with full hierarchical tags as in input"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Express delays with uppercase units and numeric values as in 'delay(X UNIT)'"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Always include all specified location and device qualifiers exactly as stated."
+  }
+ ]
+}

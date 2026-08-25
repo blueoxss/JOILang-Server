@@ -1,0 +1,40 @@
+{
+ "grammar": "compact",
+ "temporal": "compact",
+ "caution": "on",
+ "few_shot": 2,
+ "rules": [
+  {
+   "target_block": "schema",
+   "rule": "Always include all required parameters and numeric values in correct units and formats."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Fully qualify receivers and services with all relevant tags in parentheses."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Convert time units to seconds as integer arguments, not milliseconds or strings."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Invoke services and receivers exactly as named without extra variables or assignments"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use full receiver context with all relevant tags in parentheses."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact device and service identifiers with correct receiver syntax (#Device #Service)."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use numeric values grounded in seconds or milliseconds as required, not textual or approximate times."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Include all relevant receivers and services explicitly in the script call."
+  }
+ ]
+}

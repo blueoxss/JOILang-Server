@@ -1,0 +1,18 @@
+{
+  "profile": "paper_v1",
+  "description": "논문 IV-4 식(3)의 8항 가중치 w0. ROOT utils/det_evaluator.py(@463f092d) 의미론의 이식 — v15 strict의 재라벨이 아님. 탐색 전에 정한 설계값(예비 실험으로 학습한 값 아님), 모든 모델 동일 적용.",
+  "scale": "0-1",
+  "threshold": 0.70,
+  "weights": {
+    "code_sim": 0.30,
+    "schedule": 0.15,
+    "service_coverage": 0.15,
+    "service_precision": 0.10,
+    "receiver_coverage": 0.10,
+    "numeric_grounding": 0.10,
+    "enum_grounding": 0.05,
+    "dataflow": 0.05
+  },
+  "hard_gate_reasons": ["invalid_json", "missing_official_gt", "missing_generated_code"],
+  "reference_semantics": "gt_refs 리스트가 있으면 참조별 채점 후 최댓값, 없으면 단일 gt (단일 gt에서 두 정의 동치)"
+}

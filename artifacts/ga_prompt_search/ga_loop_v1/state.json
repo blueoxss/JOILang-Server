@@ -1,0 +1,453 @@
+{
+ "round_idx": 5,
+ "population": null,
+ "rule_pool": [
+  "Use exact device selectors matching all mentioned locations and types.",
+  "Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+  "Convert all numeric values to ground truth units and formats precisely.",
+  "Use exact service and method names as in ground truth without introducing unknown services.",
+  "Represent time durations and colors with numeric values matching ground truth conventions.",
+  "Implement periodic or repeated actions using state variables and control flow, not just conditional checks.",
+  "Use exact boolean or numeric comparisons as in ground truth, not string literals or inequalities.",
+  "Avoid conditional guards unless explicitly shown; prefer direct commands and explicit delays.",
+  "Use only services and properties exactly matching ground truth naming and coverage conventions.",
+  "Use only exact service and property names from the example ground truth.",
+  "Express timing and conditions with explicit wait, delay, or simple triggers, not if-conditions.",
+  "Avoid adding extra logic or variables not shown in the ground truth examples.",
+  "Use exact device and service names as in ground truth examples",
+  "Avoid conditional wrappers unless shown in ground truth",
+  "Express time delays in 'delay(X MIN)' format, not milliseconds",
+  "Use exact service and property names as in ground truth examples.",
+  "Express time durations with units in uppercase and numeric values as integers.",
+  "Avoid conditional checks unless explicitly shown in ground truth examples.",
+  "Use exact receiver names with correct casing and hashtags as in examples.",
+  "Use precise service method names and parameters exactly as shown in ground truth.",
+  "Express time and periodic conditions using provided idiomatic constructs and enums.",
+  "Use exact receiver tags with correct service names as in ground truth.",
+  "Express recurring schedules with explicit cron or period conditions, not partial datetime checks.",
+  "Implement stateful logic explicitly when toggling states, avoid implicit delays or incomplete loops."
+ ],
+ "adopted": {
+  "grammar": "compact",
+  "temporal": "full",
+  "caution": "off",
+  "few_shot": 1,
+  "rules": [
+   "Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+   "Use exact device selectors matching all mentioned locations and types.",
+   "Avoid conditional guards unless explicitly shown; prefer direct commands and explicit delays.",
+   "Convert all numeric values to ground truth units and formats precisely.",
+   "Use only exact service and property names from the example ground truth."
+  ]
+ },
+ "history": [
+  {
+   "round": "R1",
+   "gen": 1,
+   "best": "b4b25778e6c0",
+   "score": 66.7,
+   "fitness": 0.3931,
+   "det_score": 73.2,
+   "logic_pct": 90.0,
+   "tokens": 8374,
+   "latency": 3.77,
+   "judge_adjusted": null,
+   "new_rules": [
+    "Use exact device selectors matching all mentioned locations and types.",
+    "Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+    "Convert all numeric values to ground truth units and formats precisely."
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 1,
+    "rules": []
+   }
+  },
+  {
+   "round": "R1",
+   "gen": 2,
+   "best": "421217713883",
+   "score": 80.0,
+   "fitness": 0.4883,
+   "det_score": 78.5,
+   "logic_pct": 90.0,
+   "tokens": 4960,
+   "latency": 2.2,
+   "judge_adjusted": null,
+   "new_rules": [
+    "Use exact service and method names as in ground truth without introducing unknown services.",
+    "Represent time durations and colors with numeric values matching ground truth conventions.",
+    "Implement periodic or repeated actions using state variables and control flow, not just conditional checks."
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": []
+   }
+  },
+  {
+   "round": "R1",
+   "gen": 3,
+   "best": "421217713883",
+   "score": 80.0,
+   "fitness": 0.4883,
+   "det_score": 78.5,
+   "logic_pct": 90.0,
+   "tokens": 4960,
+   "latency": 2.2,
+   "judge_adjusted": null,
+   "new_rules": [],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": []
+   }
+  },
+  {
+   "round": "R1",
+   "gen": "adopt",
+   "score": 80.0,
+   "note": "adopted",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": []
+   }
+  },
+  {
+   "round": "R2",
+   "gen": 1,
+   "best": "9e90a3f7ee35",
+   "score": 86.7,
+   "fitness": 0.6222,
+   "det_score": 83.8,
+   "logic_pct": 93.3,
+   "tokens": 5021,
+   "latency": 2.3,
+   "judge_adjusted": null,
+   "new_rules": [
+    "Use exact boolean or numeric comparisons as in ground truth, not string literals or inequalities.",
+    "Avoid conditional guards unless explicitly shown; prefer direct commands and explicit delays.",
+    "Use only services and properties exactly matching ground truth naming and coverage conventions."
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches."
+    ]
+   }
+  },
+  {
+   "round": "R2",
+   "gen": 2,
+   "best": "9e90a3f7ee35",
+   "score": 86.7,
+   "fitness": 0.6222,
+   "det_score": 83.8,
+   "logic_pct": 93.3,
+   "tokens": 5021,
+   "latency": 2.3,
+   "judge_adjusted": null,
+   "new_rules": [],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches."
+    ]
+   }
+  },
+  {
+   "round": "R2",
+   "gen": 3,
+   "best": "9e90a3f7ee35",
+   "score": 86.7,
+   "fitness": 0.6222,
+   "det_score": 83.8,
+   "logic_pct": 93.3,
+   "tokens": 5021,
+   "latency": 2.3,
+   "judge_adjusted": null,
+   "new_rules": [],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches."
+    ]
+   }
+  },
+  {
+   "round": "R2",
+   "gen": "adopt",
+   "score": 86.7,
+   "note": "adopted",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches."
+    ]
+   }
+  },
+  {
+   "round": "R3",
+   "gen": 1,
+   "best": "9e90a3f7ee35",
+   "score": 86.7,
+   "fitness": 0.6222,
+   "det_score": 83.8,
+   "logic_pct": 93.3,
+   "tokens": 5021,
+   "latency": 2.3,
+   "judge_adjusted": null,
+   "new_rules": [],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches."
+    ]
+   }
+  },
+  {
+   "round": "R3",
+   "gen": 2,
+   "best": "eaa6fc1773d3",
+   "score": 86.7,
+   "fitness": 0.6224,
+   "det_score": 84.0,
+   "logic_pct": 93.3,
+   "tokens": 5039,
+   "latency": 2.31,
+   "judge_adjusted": null,
+   "new_rules": [
+    "Use only exact service and property names from the example ground truth.",
+    "Express timing and conditions with explicit wait, delay, or simple triggers, not if-conditions.",
+    "Avoid adding extra logic or variables not shown in the ground truth examples."
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+     "Use exact boolean or numeric comparisons as in ground truth, not string literals or inequalities."
+    ]
+   }
+  },
+  {
+   "round": "R3",
+   "gen": 3,
+   "best": "b17ed569dd69",
+   "score": 90.0,
+   "fitness": 0.6389,
+   "det_score": 84.0,
+   "logic_pct": 93.3,
+   "tokens": 5048,
+   "latency": 2.32,
+   "judge_adjusted": null,
+   "new_rules": [
+    "Use exact device and service names as in ground truth examples",
+    "Avoid conditional wrappers unless shown in ground truth",
+    "Express time delays in 'delay(X MIN)' format, not milliseconds"
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+     "Use exact device selectors matching all mentioned locations and types.",
+     "Avoid conditional guards unless explicitly shown; prefer direct commands and explicit delays."
+    ]
+   }
+  },
+  {
+   "round": "R3",
+   "gen": "adopt",
+   "score": 90.0,
+   "note": "adopted (regression 0 <= 1)",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+     "Use exact device selectors matching all mentioned locations and types.",
+     "Avoid conditional guards unless explicitly shown; prefer direct commands and explicit delays."
+    ]
+   }
+  },
+  {
+   "round": "R4",
+   "gen": 1,
+   "best": "03c4804acea9",
+   "score": 90.0,
+   "fitness": 0.6445,
+   "det_score": 85.8,
+   "logic_pct": 96.7,
+   "tokens": 5132,
+   "latency": 2.37,
+   "judge_adjusted": 90.0,
+   "new_rules": [
+    "Use exact service and property names as in ground truth examples.",
+    "Express time durations with units in uppercase and numeric values as integers.",
+    "Avoid conditional checks unless explicitly shown in ground truth examples."
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 2,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+     "Use exact device selectors matching all mentioned locations and types.",
+     "Avoid conditional guards unless explicitly shown; prefer direct commands and explicit delays."
+    ]
+   }
+  },
+  {
+   "round": "R4",
+   "gen": "adopt",
+   "score": 90.0,
+   "note": "adopted (regression 0 <= 1)",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+     "Use exact device selectors matching all mentioned locations and types.",
+     "Avoid conditional guards unless explicitly shown; prefer direct commands and explicit delays."
+    ]
+   }
+  },
+  {
+   "round": "R5",
+   "gen": 1,
+   "best": "b17ed569dd69",
+   "score": 81.7,
+   "fitness": 0.5901,
+   "det_score": 80.1,
+   "logic_pct": 91.7,
+   "tokens": 5029,
+   "latency": 2.27,
+   "judge_adjusted": 85.0,
+   "new_rules": [
+    "Use exact receiver names with correct casing and hashtags as in examples.",
+    "Use precise service method names and parameters exactly as shown in ground truth.",
+    "Express time and periodic conditions using provided idiomatic constructs and enums."
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+     "Use exact device selectors matching all mentioned locations and types.",
+     "Avoid conditional guards unless explicitly shown; prefer direct commands and explicit delays."
+    ]
+   }
+  },
+  {
+   "round": "R5",
+   "gen": 2,
+   "best": "b9d3306b908a",
+   "score": 83.3,
+   "fitness": 0.5985,
+   "det_score": 80.0,
+   "logic_pct": 91.7,
+   "tokens": 5056,
+   "latency": 2.23,
+   "judge_adjusted": 86.66666666666667,
+   "new_rules": [
+    "Use exact receiver tags with correct service names as in ground truth.",
+    "Express recurring schedules with explicit cron or period conditions, not partial datetime checks.",
+    "Implement stateful logic explicitly when toggling states, avoid implicit delays or incomplete loops."
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+     "Use exact device selectors matching all mentioned locations and types.",
+     "Avoid conditional guards unless explicitly shown; prefer direct commands and explicit delays.",
+     "Convert all numeric values to ground truth units and formats precisely.",
+     "Use only exact service and property names from the example ground truth."
+    ]
+   }
+  },
+  {
+   "round": "R5",
+   "gen": 3,
+   "best": "b9d3306b908a",
+   "score": 83.3,
+   "fitness": 0.5985,
+   "det_score": 80.0,
+   "logic_pct": 91.7,
+   "tokens": 5056,
+   "latency": 2.23,
+   "judge_adjusted": 86.66666666666667,
+   "new_rules": [],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+     "Use exact device selectors matching all mentioned locations and types.",
+     "Avoid conditional guards unless explicitly shown; prefer direct commands and explicit delays.",
+     "Convert all numeric values to ground truth units and formats precisely.",
+     "Use only exact service and property names from the example ground truth."
+    ]
+   }
+  },
+  {
+   "round": "R5",
+   "gen": "adopt",
+   "score": 83.3,
+   "note": "adopted (regression 1 <= 1)",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 1,
+    "rules": [
+     "Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+     "Use exact device selectors matching all mentioned locations and types.",
+     "Avoid conditional guards unless explicitly shown; prefer direct commands and explicit delays.",
+     "Convert all numeric values to ground truth units and formats precisely.",
+     "Use only exact service and property names from the example ground truth."
+    ]
+   }
+  }
+ ]
+}

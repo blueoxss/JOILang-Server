@@ -1,0 +1,23 @@
+# id: 03
+# role: postprocessor
+# params: temperature, few_shot_count, max_tokens, micro_rules
+# description: version0_13-derived gene variant: json_case_guard
+# placeholders: {command_eng}, {connected_devices}, {service_list_snippet}, {optional_cron}, {optional_period}, {candidate_strategy}
+
+Output contract:
+- Return exactly one raw JSON object and nothing else.
+- Required keys are exactly: name, cron, period, code.
+- For unscheduled commands, use cron "" and period 0.
+- `code` must be valid JOILang and JSON-escaped.
+- If schema-safe code cannot be produced, return an empty code string instead of inventing services.
+
+
+Case guard:
+
+- Receiver tags after # keep original case.
+
+- Member tokens after the dot must be lowercase.
+
+- Example: (#Speaker).Speaker_SetVolume(30) -> (#Speaker).speaker_setvolume(30)
+
+- Do not rewrite category tags such as #DoorLock, #AirQualitySensor, or #RobotVacuumCleaner.

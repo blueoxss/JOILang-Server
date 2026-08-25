@@ -1,0 +1,24 @@
+{
+ "grammar": "compact",
+ "temporal": "full",
+ "caution": "off",
+ "few_shot": 1,
+ "rules": [
+  {
+   "target_block": "temporal",
+   "rule": "Always use wait until(...) for event conditions, not if statements."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Always include all specified location and device tags in selectors exactly as given."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and method names with correct receiver syntax (#Device).method()."
+  },
+  {
+   "target_block": "output",
+   "rule": "Ground numeric values in standard units and formats matching the prompt's temporal or quantitative cues"
+  }
+ ]
+}

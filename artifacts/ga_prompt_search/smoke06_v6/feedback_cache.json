@@ -1,0 +1,24 @@
+{
+"27bb513f47a038387f6bff56c4a670cd0bc1cd9e": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact service and receiver names as a combined hashtag group in parentheses.",
+"Convert numeric parameters to expected formats, not natural language words."
+]
+},
+"1ce56315f53c9c71d5b4d2bf04fe40712a1daeff": {
+"verdict": "real_error",
+"reason": "The generated code uses a different method to set mode and time separately with a period of -1 instead of the exact single call with period=0 and 1800 seconds, which violates the exact-match requirement for period and command structure."
+},
+"a51ce8527ac36a16a4b604fd2b76ab8ff4ea7947": {
+"verdict": "real_error",
+"reason": "The generated code uses a different method and period value than the reference, which constitutes a functional difference rather than a valid alternative."
+},
+"8e5656ddfb461e754b9f2101b7cae1a4949931a6": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact service and method names matching the command domain.",
+"Convert numeric parameters to expected units and formats precisely."
+]
+}
+}

@@ -1,0 +1,24 @@
+{
+"27bb513f47a038387f6bff56c4a670cd0bc1cd9e": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact service and receiver names as in the command, preserving order and casing.",
+"Convert numeric parameters to correct units and formats as required by services."
+]
+},
+"a8ba2a25a2c9d098725fcab9c6d0a57b7a4c5b5c": {
+"verdict": "real_error",
+"reason": "The generated code uses different methods and a period value of -1 instead of 0, which changes the scheduling and timing logic from the reference."
+},
+"14f20e0a40d47792add4693da8c5953939bb1431": {
+"verdict": "real_error",
+"reason": "The generated code uses a different period value (-1 instead of 0) and a different method with a color name instead of RGB values, which violates the exact-match requirement for cron and period and changes the command logic."
+},
+"bd1bdd5b3bf7c5caae43eb3bb112a13aa9d93742": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact service and method names matching device capabilities.",
+"Convert numeric parameters to required units and formats precisely."
+]
+}
+}

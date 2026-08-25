@@ -1,0 +1,12 @@
+{
+ "grammar": "compact",
+ "temporal": "full",
+ "caution": "off",
+ "few_shot": 2,
+ "rules": [
+  {
+   "target_block": "schema",
+   "rule": "Specify all relevant receivers and use only documented service methods."
+  }
+ ]
+}

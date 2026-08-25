@@ -1,0 +1,12 @@
+% source: 3 manual 14B GA runs (/data .../results/manual_cloud_only_by_config_*), 50 candidate evaluations, 10 generation groups; DT normalization qwen25_coder_14b tokens_ref=34259.2 latency_ref=12.36s; rescore/rerank only (no new GA runs); design frozen 136dfde4b17e0ac0
+\begin{tabular}{llrrr}
+\hline
+계수 프로파일 & $(\alpha,\beta,\lambda_t,\lambda_l)$ & 우승자 변경률 & 평균 Kendall $\tau$ & 평균 적합도 \\
+\hline
+기본 (식 7) & (0.7, 0.2, 0.05, 0.05) & 0.0\% & 1.000 & 0.325 \\
+통과율 강조 & (0.85, 0.1, 0.025, 0.025) & 0.0\% & 1.000 & 0.398 \\
+점수 강조 & (0.45, 0.45, 0.05, 0.05) & 0.0\% & 0.940 & 0.323 \\
+비용 강조 & (0.5, 0.1, 0.2, 0.2) & 70.0\% & 0.320 & -0.105 \\
+품질 전용 & (0.78, 0.22, 0, 0) & 20.0\% & 0.760 & 0.468 \\
+\hline
+\end{tabular}

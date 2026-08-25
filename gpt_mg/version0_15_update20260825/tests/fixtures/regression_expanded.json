@@ -1,0 +1,391 @@
+{
+ "generated": "2026-08-25",
+ "source_version": "version0_15_update20260413 (무변경 원본, 별도 subprocess)",
+ "perturbation": "마지막 유효 줄 제거 + 첫 정수 리터럴 2배",
+ "rows": [
+  {
+   "row_index": 182,
+   "category": "7",
+   "candidates": {
+    "exact": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"0 0 * * *\", \"period\": 0, \"code\": \"\\n(#DoorLock).doorlock_lock()\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    },
+    "perturbed": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"0 0 * * *\", \"period\": 0, \"code\": \"\\n(#DoorLock).doorlock_lock()\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    }
+   }
+  },
+  {
+   "row_index": 183,
+   "category": "7",
+   "candidates": {
+    "exact": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"0 15 * * 6,7\", \"period\": 0, \"code\": \"\\nif ((#LeakSensor).leaksensor_leakage == true) {\\n\\n    (#Siren).siren_setsirenmode(\\\"emergency\\\")\\n}\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    },
+    "perturbed": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"0 15 * * 6,7\", \"period\": 0, \"code\": \"\\nif ((#LeakSensor).leaksensor_leakage == true) {\\n\\n    (#Siren).siren_setsirenmode(\\\"emergency\\\")\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 94.5858,
+       "det_gt_exact": false
+      },
+      "strict": {
+       "det_score": 94.6532,
+       "det_gt_exact": false
+      }
+     }
+    }
+   }
+  },
+  {
+   "row_index": 184,
+   "category": "7",
+   "candidates": {
+    "exact": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"0 7 * * *\", \"period\": 0, \"code\": \"\\n(#RiceCooker).ricecooker_setricecookermode(\\\"reheating\\\")\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    },
+    "perturbed": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"0 7 * * *\", \"period\": 0, \"code\": \"\\n(#RiceCooker).ricecooker_setricecookermode(\\\"reheating\\\")\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    }
+   }
+  },
+  {
+   "row_index": 90,
+   "category": "4",
+   "candidates": {
+    "exact": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"\\nwait until ((#ContactSensor).contactsensor_contact == true)\\n\\n(#Light).switch_on()\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    },
+    "perturbed": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"\\nwait until ((#ContactSensor).contactsensor_contact == true)\\n\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 90.2045,
+       "det_gt_exact": false
+      },
+      "strict": {
+       "det_score": 67.5341,
+       "det_gt_exact": false
+      }
+     }
+    }
+   }
+  },
+  {
+   "row_index": 91,
+   "category": "4",
+   "candidates": {
+    "exact": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"\\nwait until ((#PresenceSensor).presencesensor_presence == true)\\n\\n(#Television).switch_on()\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    },
+    "perturbed": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"\\nwait until ((#PresenceSensor).presencesensor_presence == true)\\n\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 89.6042,
+       "det_gt_exact": false
+      },
+      "strict": {
+       "det_score": 67.1959,
+       "det_gt_exact": false
+      }
+     }
+    }
+   }
+  },
+  {
+   "row_index": 92,
+   "category": "4",
+   "candidates": {
+    "exact": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"\\nwait until ((#SoundSensor).soundsensor_sound > 50)\\n\\n(#Speaker).speaker_stop()\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    },
+    "perturbed": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"\\nwait until ((#SoundSensor).soundsensor_sound > 100)\\n\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 86.3,
+       "det_gt_exact": false
+      },
+      "strict": {
+       "det_score": 59.55,
+       "det_gt_exact": false
+      }
+     }
+    }
+   }
+  },
+  {
+   "row_index": 33,
+   "category": "2",
+   "candidates": {
+    "exact": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"all(#Lab #Dehumidifier).dehumidifier_setdehumidifiermode(\\\"AIDrying\\\")\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    },
+    "perturbed": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"all(#Lab #Dehumidifier).dehumidifier_setdehumidifiermode(\\\"AIDrying\\\")\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    }
+   }
+  },
+  {
+   "row_index": 35,
+   "category": "2",
+   "candidates": {
+    "exact": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"all(#Even #RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\\\"auto\\\")\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    },
+    "perturbed": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"all(#Even #RobotVacuumCleaner).robotvacuumcleaner_setrobotvacuumcleanermodemode(\\\"auto\\\")\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    }
+   }
+  },
+  {
+   "row_index": 36,
+   "category": "2",
+   "candidates": {
+    "exact": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"all(#DoorLock).doorlock_lock()\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    },
+    "perturbed": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"all(#DoorLock).doorlock_lock()\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    }
+   }
+  },
+  {
+   "row_index": 60,
+   "category": "3",
+   "candidates": {
+    "exact": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"\\nif ((#AudioRecorder).recorderstatus == \\\"recording\\\") {\\n\\n    (#AudioRecorder).audiorecorder_recordstop(\\\"test.mp3\\\")\\n\\n} else {\\n\\n    (#AudioRecorder).audiorecorder_recordstart()\\n\\n}\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    },
+    "perturbed": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"\\nif ((#AudioRecorder).recorderstatus == \\\"recording\\\") {\\n\\n    (#AudioRecorder).audiorecorder_recordstop(\\\"test.mp3\\\")\\n\\n} else {\\n\\n    (#AudioRecorder).audiorecorder_recordstart()\\n\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 91.0391,
+       "det_gt_exact": false
+      },
+      "strict": {
+       "det_score": 94.4093,
+       "det_gt_exact": false
+      }
+     }
+    }
+   }
+  },
+  {
+   "row_index": 71,
+   "category": "3",
+   "candidates": {
+    "exact": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"\\nif ((#LaundryDryer).laundrydryer_spinspeed > 3) {\\n\\n    (#LaundryDryer).laundrydryer_setspinspeed((#LaundryDryer).laundrydryer_spinspeed - 1)\\n\\n} else {\\n\\n    (#LaundryDryer).laundrydryer_setspinspeed((#LaundryDryer).laundrydryer_spinspeed + 1)\\n\\n}\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    },
+    "perturbed": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"\\nif ((#LaundryDryer).laundrydryer_spinspeed > 6) {\\n\\n    (#LaundryDryer).laundrydryer_setspinspeed((#LaundryDryer).laundrydryer_spinspeed - 1)\\n\\n} else {\\n\\n    (#LaundryDryer).laundrydryer_setspinspeed((#LaundryDryer).laundrydryer_spinspeed + 1)\\n\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 94.3069,
+       "det_gt_exact": false
+      },
+      "strict": {
+       "det_score": 92.7178,
+       "det_gt_exact": false
+      }
+     }
+    }
+   }
+  },
+  {
+   "row_index": 89,
+   "category": "3",
+   "candidates": {
+    "exact": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"\\nif ((#Lab #HumiditySensor).humiditysensor_humidity >= 50) {\\n\\n    (#Lab #Dehumidifier).switch_on()\\n\\n} else {\\n\\n    (#Lab #Humidifier).switch_on()\\n\\n}\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      },
+      "strict": {
+       "det_score": 100.0,
+       "det_gt_exact": true
+      }
+     }
+    },
+    "perturbed": {
+     "candidate_json": "{\"name\": \"\", \"cron\": \"\", \"period\": 0, \"code\": \"\\nif ((#Lab #HumiditySensor).humiditysensor_humidity >= 100) {\\n\\n    (#Lab #Dehumidifier).switch_on()\\n\\n} else {\\n\\n    (#Lab #Humidifier).switch_on()\\n\"}",
+     "scores": {
+      "legacy": {
+       "det_score": 93.5823,
+       "det_gt_exact": false
+      },
+      "strict": {
+       "det_score": 69.9,
+       "det_gt_exact": false
+      }
+     }
+    }
+   }
+  }
+ ]
+}

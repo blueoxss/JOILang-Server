@@ -1,0 +1,16 @@
+{
+ "profile": "loo_numeric_grounding",
+ "scale": "0-1",
+ "threshold": 0.7,
+ "description": "R4 민감도 변형 (사전 등록 설계 136dfde4b17e0ac0): loo_numeric_grounding",
+ "weights": {
+  "code_sim": 0.3333333333333333,
+  "schedule": 0.16666666666666666,
+  "service_coverage": 0.16666666666666666,
+  "service_precision": 0.11111111111111112,
+  "receiver_coverage": 0.11111111111111112,
+  "numeric_grounding": 0.0,
+  "enum_grounding": 0.05555555555555556,
+  "dataflow": 0.05555555555555556
+ }
+}

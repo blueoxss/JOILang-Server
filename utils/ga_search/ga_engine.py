@@ -292,7 +292,7 @@ def run_search(
     best_eval_rows: list[dict[str, Any]] = []
     known_limitations = [
         "real engine evaluates genomes with strict DET and records selection/crossover/mutation artifacts",
-        "O(블록 순서)·V(블록 버전)·E(예제 수) 유전자는 연산·기록만 되고 렌더러 반영은 WI-09 범위",
+        "O(블록 순서)·V(블록 버전)·E(예제 수) 유전자는 rendered_prompt_with_genome에서 렌더에 반영된다(WI-09 완료)",
         "pareto archive and compression mutation policies are hooks, not full legacy parity",
     ]
     if feedback_guided_mutation:

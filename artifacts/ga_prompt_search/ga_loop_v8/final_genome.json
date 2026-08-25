@@ -1,0 +1,40 @@
+{
+ "grammar": "compact",
+ "temporal": "full",
+ "caution": "off",
+ "few_shot": 2,
+ "rules": [
+  {
+   "target_block": "schema",
+   "rule": "Use correct service and method names matching the device and action precisely."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact numeric values or standard numeric formats for parameters, avoid enums or color names."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact device group selectors including location tags when specified"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use canonical service and receiver names from the domain ontology"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact numeric units and convert units to base units when applicable"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and receiver names from input context without generic substitutions"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Fully qualify service calls with receiver and service names; do not simplify or omit numeric constants."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Include all relevant receivers and services explicitly in the script"
+  }
+ ]
+}

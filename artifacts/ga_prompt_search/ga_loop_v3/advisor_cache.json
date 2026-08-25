@@ -1,0 +1,81 @@
+{
+"5d9f86953f254c9b6d261be59176a729d47c5ead": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact numeric values in base units, not approximations or percentages.",
+"Reference all devices and services explicitly with full receiver and service names."
+]
+},
+"369e88a49d8f502d4238bcf16cccc16bfcaa79b5": {
+"rules": [
+"Always set period=0 for immediate commands without delay or repetition.",
+"Use exact numeric values in base units without decimals or units suffixes.",
+"Specify all relevant receivers and use only documented service methods."
+]
+},
+"63a760cf0c121c5c58f11577b278302cc04f4a62": {
+"rules": [
+"Always set period and cron fields precisely matching time expressions in the command.",
+"Use full qualified receiver and service names exactly as in the domain ontology.",
+"Convert all numeric time units to seconds or milliseconds as required by the spec."
+]
+},
+"a70f483cf85423ea89a11d8a2f1bb99b674f0d67": {
+"rules": [
+"Use exact device and service names as in the domain schema without synonyms or variants.",
+"Express time intervals and delays using period=0 or exact milliseconds, avoid negative or approximate values.",
+"Generate cron expressions precisely matching time and day constraints, avoid conditional time checks in scripts."
+]
+},
+"cdf654fe91fb1b20388a9a925cc44a17a5bbc29b": {
+"verdict": "real_error",
+"reason": "The generated code includes unnecessary mode checks and uses a negative period value, deviating from the exact reference logic and schedule, which is a real functional error."
+},
+"8e182b352bb414a6e6f9f926d41405c04fc9694b": {
+"verdict": "real_error",
+"reason": "The generated cron expression triggers only once at 8 AM instead of every hour from 8 AM to midnight, and the period value differs from the reference, making it a functional error."
+},
+"d10b7bd12072c7fc885e2c672e9d792b015f2d3f": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device (#WindowCovering vs #Window) and property (windowcovering_currentposition vs armrobot_currentposition), and the period value matches but the device and logic differ, constituting a real functional error."
+},
+"50111bebe5e2a37f09ef26a54c011ea2c558c0d3": {
+"verdict": "real_error",
+"reason": "The generated code uses a different period value and different method calls than the reference, which changes the timing and logic, constituting a real functional error."
+},
+"ef49061cc9ec58fbc79c9a8902f6763cee6317fd": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device (#ColorControl) and a color name instead of the exact reference device (#LivingRoom #Light) and RGB value, which is a functional error."
+},
+"ecf6cea00f8aea843c47a53d74004221bbb470f2": {
+"verdict": "real_error",
+"reason": "The generated code uses an invalid period value (-1) and incorrect delay units, which differ from the reference and indicate a functional error."
+},
+"df3ce7d96139547f7557f7aa36703bbc9beedac1": {
+"verdict": "real_error",
+"reason": "The generated cron expression '0 0,30 * * 6,7' differs from the reference '0 12 * * 6,7' and the period value is 0 instead of 1800000, which violates the exact-match requirement for cron and period values."
+},
+"7ac96c936fb083b2b75dbf043db25b314d90bd0d": {
+"verdict": "real_error",
+"reason": "The generated cron triggers only at midnight, missing the required hourly captures from 8 AM to 11 PM, which is a functional error."
+},
+"870c034836af5937989ceb72400dbc9c54704aaa": {
+"verdict": "real_error",
+"reason": "The generated code uses a period value and explicit datetime checks instead of the required cron expression and period=0, which is a real functional error per the instructions."
+},
+"a6f6031baa8356d578f33e7f373c40abb852aca4": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device selector and logic by reading the current mode instead of toggling a stored variable, which changes the intended behavior and is not an exact-match alternative."
+},
+"6355253d951706dd3b34f9209046e45bc52eb363": {
+"verdict": "real_error",
+"reason": "The generated code uses device state checking instead of the required mode variable toggle, which changes the logic and is not an allowed alternative; the period matches but the control flow differs from the reference."
+},
+"0579397315f1e92c0607fd394d450b81546960ab": {
+"rules": [
+"Always set period=0 unless scheduling is explicitly required",
+"Use exact device/service names and cover all mentioned devices",
+"Ground numeric values precisely as integers or specified units"
+]
+}
+}

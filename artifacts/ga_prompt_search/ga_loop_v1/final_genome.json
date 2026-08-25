@@ -1,0 +1,13 @@
+{
+ "grammar": "compact",
+ "temporal": "full",
+ "caution": "off",
+ "few_shot": 1,
+ "rules": [
+  "Use exact service methods and parameters as in ground truth, no synonyms or partial matches.",
+  "Use exact device selectors matching all mentioned locations and types.",
+  "Avoid conditional guards unless explicitly shown; prefer direct commands and explicit delays.",
+  "Convert all numeric values to ground truth units and formats precisely.",
+  "Use only exact service and property names from the example ground truth."
+ ]
+}

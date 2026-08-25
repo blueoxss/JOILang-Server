@@ -1,0 +1,24 @@
+{
+ "grammar": "compact",
+ "temporal": "compact",
+ "caution": "off",
+ "few_shot": 0,
+ "rules": [
+  {
+   "target_block": "schema",
+   "rule": "Always wrap service calls and parameters in parentheses and quotes as in (#[Receiver]).service_method(\"param\")"
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Always include all necessary conditional and control flow structures."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Convert numeric units precisely to expected formats (e.g., seconds to milliseconds)."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact numeric units and scale as implied by context, not raw input values."
+  }
+ ]
+}

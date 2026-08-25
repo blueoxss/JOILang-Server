@@ -1,0 +1,7 @@
+{
+ "grammar": "full",
+ "temporal": "off",
+ "caution": "off",
+ "few_shot": 0,
+ "rules": []
+}

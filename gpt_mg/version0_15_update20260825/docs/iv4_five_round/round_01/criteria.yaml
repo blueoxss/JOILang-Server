@@ -1,0 +1,22 @@
+round_id: R1
+parent_criteria_sha256: null
+objective: "논문 4종 역할 확정, 원본/신규 분리, import 경로 확인, provenance 분류, 코드-논문 불일치 목록"
+allowed_change_scope: "docs only (code 변경 없음)"
+forbidden_changes: "evaluator/fitness 코드 수정, 원본 폴더 접근 외 변경"
+quantitative_gates:
+  - {id: G1_papers, desc: "논문 4개 분석 완료율 100%"}
+  - {id: G2_formula_class, desc: "IV-4 수식·가중치·임계값·숫자 분류율 100%"}
+  - {id: G3_import_paths, desc: "evaluator/fitness entrypoint import 경로 확인율 100%"}
+  - {id: G4_copy_baseline, desc: "복사 기준선 비교 완료 (SHA 일치·fixture 동등)"}
+  - {id: G5_no_false_verified, desc: "근거 없는 숫자를 VERIFIED로 분류한 사례 0개"}
+qualitative_gates:
+  - "교수님 수정 의도가 문서에 보존 분류됨"
+required_artifacts:
+  - docs/paper_source_of_truth.md
+  - docs/paper_four_way_comparison.md
+  - docs/professor_revision_preservation.md
+  - docs/iv4_metric_provenance_audit.md
+  - docs/iv4_copy_baseline_verification.md
+pass_rule: "모든 정량 gate 통과 + 필수 산출물 존재"
+created_before_evaluation: true
+criteria_sha256: 2276a194cbe9e4bb

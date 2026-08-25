@@ -1,0 +1,160 @@
+{
+ "round_idx": 5,
+ "population": null,
+ "rule_pool": [
+  {
+   "target_block": "schema",
+   "rule": "mock rule: use exact service delay durations in seconds"
+  }
+ ],
+ "adopted": {
+  "grammar": "compact",
+  "temporal": "compact",
+  "caution": "on",
+  "few_shot": 0,
+  "rules": [
+   {
+    "target_block": "schema",
+    "rule": "mock rule: use exact service delay durations in seconds"
+   }
+  ]
+ },
+ "lineage": [
+  {
+   "round": "R1",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "54966e171b3e",
+     "parents": [
+      "54966e171b3e"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "cd0e0da70417",
+     "parents": [
+      "cd0e0da70417"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "55259c794afb",
+     "parents": [
+      "54966e171b3e",
+      "54966e171b3e"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:full->compact"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "55259c794afb",
+     "parents": [
+      "55259c794afb"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "571abfcce260",
+     "parents": [
+      "571abfcce260"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "71994cd09bc5",
+     "parents": [
+      "55259c794afb",
+      "55259c794afb"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R3",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "55259c794afb",
+     "parents": [
+      "55259c794afb"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "54966e171b3e",
+     "parents": [
+      "54966e171b3e"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "71994cd09bc5",
+     "parents": [
+      "55259c794afb",
+      "55259c794afb"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:compact->full",
+      "grammar_version:full->compact",
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R4",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "55259c794afb",
+     "parents": [
+      "55259c794afb"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "b703320e892d",
+     "parents": [
+      "b703320e892d"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "571abfcce260",
+     "parents": [
+      "55259c794afb",
+      "55259c794afb"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:on->off"
+     ]
+    }
+   ]
+  }
+ ],
+ "mode": "mock",
+ "z3_errors": 0
+}

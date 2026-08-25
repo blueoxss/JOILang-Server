@@ -1,0 +1,206 @@
+{
+"mode": "mock",
+"premap_tag": "v201_paper",
+"needed_sha": "1b0397f59ae1",
+"rows": {
+"0": [
+"Dishwasher",
+"LaundryDryer",
+"Switch",
+"Humidifier",
+"Dehumidifier",
+"RobotVacuumCleaner",
+"Light",
+"AirPurifier",
+"RiceCooker",
+"Oven",
+"Siren",
+"Pump"
+],
+"1": [
+"Clock",
+"Oven",
+"RiceCooker",
+"Light",
+"FaceRecognizer",
+"CloudServiceProvider",
+"Speaker",
+"AirConditioner",
+"LevelControl",
+"Pump",
+"LaundryDryer",
+"Television"
+],
+"2": [
+"Clock",
+"Switch",
+"RiceCooker",
+"Oven",
+"Pump",
+"Dishwasher",
+"Humidifier",
+"AirConditioner",
+"RobotVacuumCleaner",
+"LaundryDryer",
+"Dehumidifier",
+"Siren"
+],
+"3": [
+"Siren",
+"Pump",
+"Oven",
+"Dishwasher",
+"AirConditioner",
+"Humidifier",
+"Dehumidifier",
+"RiceCooker",
+"AirPurifier",
+"Light",
+"LaundryDryer",
+"RobotVacuumCleaner"
+],
+"4": [
+"Speaker",
+"CloudServiceProvider",
+"Oven",
+"AirConditioner",
+"Light",
+"Television",
+"RiceCooker",
+"LevelControl",
+"Pump",
+"Siren",
+"LaundryDryer",
+"Humidifier"
+],
+"5": [
+"Television",
+"WindowCovering",
+"Speaker",
+"Switch",
+"Camera",
+"Siren",
+"Dishwasher",
+"Dehumidifier",
+"LaundryDryer",
+"Door",
+"FaceRecognizer",
+"Valve"
+],
+"6": [
+"Television",
+"Switch",
+"Light",
+"CloudServiceProvider",
+"DimmerSwitch",
+"TapDialSwitch",
+"LevelControl",
+"Dishwasher",
+"Siren",
+"LaundryDryer",
+"Speaker",
+"Pump"
+],
+"7": [
+"TemperatureSensor",
+"Speaker",
+"AirConditioner",
+"WeatherProvider",
+"PresenceVitalSensor",
+"Light",
+"Oven",
+"AirQualitySensor",
+"Clock",
+"AudioRecorder",
+"CloudServiceProvider",
+"Dehumidifier"
+],
+"8": [
+"Speaker",
+"Door",
+"TemperatureSensor",
+"WeatherProvider",
+"AirQualitySensor",
+"PresenceVitalSensor",
+"SoundSensor",
+"AirConditioner",
+"HumiditySensor",
+"RainSensor",
+"Clock",
+"PresenceSensor"
+],
+"9": [
+"HumiditySensor",
+"Speaker",
+"AirQualitySensor",
+"WeatherProvider",
+"PresenceVitalSensor",
+"SoundSensor",
+"RainSensor",
+"TemperatureSensor",
+"CarbonDioxideSensor",
+"Light",
+"Charger",
+"Plug"
+],
+"10": [
+"HumiditySensor",
+"Speaker",
+"Door",
+"AirQualitySensor",
+"WeatherProvider",
+"PresenceVitalSensor",
+"SoundSensor",
+"RainSensor",
+"TemperatureSensor",
+"CarbonDioxideSensor",
+"PresenceSensor",
+"LeakSensor"
+],
+"30": [
+"ColorControl",
+"Light"
+],
+"31": [
+"Camera"
+],
+"32": [
+"Light"
+],
+"33": [
+"Dehumidifier",
+"HumiditySensor"
+],
+"34": [
+"Light"
+],
+"63": [
+"Clock",
+"Oven",
+"RiceCooker",
+"AirConditioner",
+"Dishwasher",
+"Speaker",
+"Pump",
+"PresenceVitalSensor",
+"Dehumidifier",
+"LaundryDryer",
+"Humidifier",
+"Siren"
+],
+"64": [
+"RiceCooker",
+"Oven",
+"Switch",
+"Pump",
+"Humidifier",
+"Dishwasher",
+"AirConditioner",
+"RobotVacuumCleaner",
+"LaundryDryer",
+"Dehumidifier",
+"Light",
+"Siren"
+]
+}
+}

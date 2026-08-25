@@ -1,0 +1,16 @@
+{
+ "grammar": "compact",
+ "temporal": "full",
+ "caution": "on",
+ "few_shot": 0,
+ "rules": [
+  {
+   "target_block": "schema",
+   "rule": "Represent numeric parameters as integers without decimals unless specified."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Include all relevant receivers explicitly in the script's target list."
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "profile": "m20_receiver_coverage",
+ "scale": "0-1",
+ "threshold": 0.7,
+ "description": "R4 민감도 변형 (사전 등록 설계 136dfde4b17e0ac0): m20_receiver_coverage",
+ "weights": {
+  "code_sim": 0.30612244897959184,
+  "schedule": 0.15306122448979592,
+  "service_coverage": 0.15306122448979592,
+  "service_precision": 0.10204081632653061,
+  "receiver_coverage": 0.08163265306122451,
+  "numeric_grounding": 0.10204081632653061,
+  "enum_grounding": 0.05102040816326531,
+  "dataflow": 0.05102040816326531
+ }
+}

@@ -1,0 +1,625 @@
+{
+ "round_idx": 5,
+ "population": null,
+ "rule_pool": [
+  {
+   "target_block": "temporal",
+   "rule": "Always set period=0 for immediate commands without scheduling."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and receiver names as a combined hashtag group in parentheses."
+  },
+  {
+   "target_block": "output",
+   "rule": "Convert numeric parameters to expected formats, not natural language words."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact service and method names matching the command domain."
+  },
+  {
+   "target_block": "output",
+   "rule": "Convert numeric parameters to expected units and formats precisely."
+  }
+ ],
+ "adopted": {
+  "grammar": "full",
+  "temporal": "off",
+  "caution": "off",
+  "few_shot": 0,
+  "rules": []
+ },
+ "history": [
+  {
+   "round": "R1",
+   "gen": 1,
+   "best": "c8ea04f3bd7c",
+   "score": 66.7,
+   "fitness": 0.3646,
+   "det_score": 63.1,
+   "logic_pct": 0.0,
+   "tokens": 11548,
+   "latency": 4.27,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [
+    {
+     "target_block": "temporal",
+     "rule": "Always set period=0 for immediate commands without scheduling."
+    },
+    {
+     "target_block": "schema",
+     "rule": "Use exact service and receiver names as a combined hashtag group in parentheses."
+    },
+    {
+     "target_block": "output",
+     "rule": "Convert numeric parameters to expected formats, not natural language words."
+    }
+   ],
+   "population": [
+    [
+     "c8ea04f3bd7c",
+     66.7,
+     0.3646
+    ],
+    [
+     "c4749f44f383",
+     50.0,
+     0.31
+    ],
+    [
+     "eb780ec8dd7c",
+     50.0,
+     0.3047
+    ]
+   ],
+   "genome": {
+    "grammar": "full",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R1",
+   "gen": 2,
+   "best": "c8ea04f3bd7c",
+   "score": 66.7,
+   "fitness": 0.3646,
+   "det_score": 63.1,
+   "logic_pct": 0.0,
+   "tokens": 11548,
+   "latency": 4.27,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [],
+   "population": [
+    [
+     "c8ea04f3bd7c",
+     66.7,
+     0.3646
+    ],
+    [
+     "c4749f44f383",
+     50.0,
+     0.31
+    ],
+    [
+     "740fbe6aed86",
+     50.0,
+     0.3093
+    ]
+   ],
+   "genome": {
+    "grammar": "full",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R1",
+   "gen": "adopt",
+   "score": 66.7,
+   "note": "kept incumbent (no improvement)",
+   "changed": false,
+   "prev_hash": "c8ea04f3bd7c",
+   "chosen_hash": "c8ea04f3bd7c",
+   "genome": {
+    "grammar": "full",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R2",
+   "gen": 1,
+   "best": "c8ea04f3bd7c",
+   "score": 100.0,
+   "fitness": 0.662,
+   "det_score": 86.6,
+   "logic_pct": 100.0,
+   "tokens": 11689,
+   "latency": 4.96,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [],
+   "population": [
+    [
+     "c8ea04f3bd7c",
+     100.0,
+     0.662
+    ],
+    [
+     "fdf59ad404fd",
+     100.0,
+     0.662
+    ],
+    [
+     "5ed7c721b5a2",
+     83.3,
+     0.5435
+    ]
+   ],
+   "genome": {
+    "grammar": "full",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R2",
+   "gen": 2,
+   "best": "c8ea04f3bd7c",
+   "score": 100.0,
+   "fitness": 0.662,
+   "det_score": 86.6,
+   "logic_pct": 100.0,
+   "tokens": 11689,
+   "latency": 4.96,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [],
+   "population": [
+    [
+     "c8ea04f3bd7c",
+     100.0,
+     0.662
+    ],
+    [
+     "fdf59ad404fd",
+     100.0,
+     0.662
+    ],
+    [
+     "547c96223b3b",
+     100.0,
+     0.6617
+    ]
+   ],
+   "genome": {
+    "grammar": "full",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R2",
+   "gen": "adopt",
+   "score": 100.0,
+   "note": "kept incumbent (no improvement)",
+   "changed": false,
+   "prev_hash": "c8ea04f3bd7c",
+   "chosen_hash": "c8ea04f3bd7c",
+   "genome": {
+    "grammar": "full",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R3",
+   "gen": 1,
+   "best": "40159ff3c551",
+   "score": 100.0,
+   "fitness": 0.6856,
+   "det_score": 86.5,
+   "logic_pct": 100.0,
+   "tokens": 7901,
+   "latency": 3.05,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [],
+   "population": [
+    [
+     "40159ff3c551",
+     100.0,
+     0.6856
+    ],
+    [
+     "c4749f44f383",
+     100.0,
+     0.6836
+    ],
+    [
+     "c8ea04f3bd7c",
+     100.0,
+     0.662
+    ]
+   ],
+   "genome": {
+    "grammar": "full",
+    "temporal": "off",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R3",
+   "gen": "adopt",
+   "score": 100.0,
+   "note": "adopted (changed) (regression 0 <= 1)",
+   "changed": true,
+   "prev_hash": "c8ea04f3bd7c",
+   "chosen_hash": "40159ff3c551",
+   "genome": {
+    "grammar": "full",
+    "temporal": "off",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R4",
+   "gen": 1,
+   "best": "40159ff3c551",
+   "score": 100.0,
+   "fitness": 0.6856,
+   "det_score": 86.5,
+   "logic_pct": 100.0,
+   "tokens": 7901,
+   "latency": 3.05,
+   "judge_adjusted": 100.0,
+   "judged_fails": 0,
+   "valid_alternative": 0,
+   "new_rules": [],
+   "population": [
+    [
+     "40159ff3c551",
+     100.0,
+     0.6856
+    ],
+    [
+     "e53eb166a2d3",
+     100.0,
+     0.6855
+    ],
+    [
+     "2b3bd129f381",
+     83.3,
+     0.5956
+    ]
+   ],
+   "genome": {
+    "grammar": "full",
+    "temporal": "off",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R4",
+   "gen": 2,
+   "best": "40159ff3c551",
+   "score": 100.0,
+   "fitness": 0.6856,
+   "det_score": 86.5,
+   "logic_pct": 100.0,
+   "tokens": 7901,
+   "latency": 3.05,
+   "judge_adjusted": 100.0,
+   "judged_fails": 0,
+   "valid_alternative": 0,
+   "new_rules": [],
+   "population": [
+    [
+     "40159ff3c551",
+     100.0,
+     0.6856
+    ],
+    [
+     "e53eb166a2d3",
+     100.0,
+     0.6855
+    ],
+    [
+     "0ba11f4c0883",
+     83.3,
+     0.5639
+    ]
+   ],
+   "genome": {
+    "grammar": "full",
+    "temporal": "off",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R4",
+   "gen": "adopt",
+   "score": 100.0,
+   "note": "kept incumbent (no improvement) (regression 0 <= 1)",
+   "changed": false,
+   "prev_hash": "40159ff3c551",
+   "chosen_hash": "40159ff3c551",
+   "genome": {
+    "grammar": "full",
+    "temporal": "off",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R5",
+   "gen": 1,
+   "best": "0ba11f4c0883",
+   "score": 75.0,
+   "fitness": 0.4607,
+   "det_score": 73.6,
+   "logic_pct": 0.0,
+   "tokens": 4450,
+   "latency": 1.7,
+   "judge_adjusted": 75.0,
+   "judged_fails": 2,
+   "valid_alternative": 0,
+   "new_rules": [
+    {
+     "target_block": "schema",
+     "rule": "Use exact service and method names matching the command domain."
+    },
+    {
+     "target_block": "output",
+     "rule": "Convert numeric parameters to expected units and formats precisely."
+    }
+   ],
+   "population": [
+    [
+     "0ba11f4c0883",
+     75.0,
+     0.4607
+    ],
+    [
+     "40159ff3c551",
+     62.5,
+     0.3796
+    ],
+    [
+     "e53eb166a2d3",
+     62.5,
+     0.3793
+    ]
+   ],
+   "genome": {
+    "grammar": "full",
+    "temporal": "off",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R5",
+   "gen": 2,
+   "best": "0ba11f4c0883",
+   "score": 75.0,
+   "fitness": 0.4607,
+   "det_score": 73.6,
+   "logic_pct": 0.0,
+   "tokens": 4450,
+   "latency": 1.7,
+   "judge_adjusted": 75.0,
+   "judged_fails": 2,
+   "valid_alternative": 0,
+   "new_rules": [],
+   "population": [
+    [
+     "0ba11f4c0883",
+     75.0,
+     0.4607
+    ],
+    [
+     "7a8578987083",
+     62.5,
+     0.3979
+    ],
+    [
+     "40159ff3c551",
+     62.5,
+     0.3796
+    ]
+   ],
+   "genome": {
+    "grammar": "full",
+    "temporal": "off",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R5",
+   "gen": "adopt",
+   "score": 75.0,
+   "note": "adopted (changed) (regression 0 <= 1)",
+   "changed": true,
+   "prev_hash": "40159ff3c551",
+   "chosen_hash": "0ba11f4c0883",
+   "genome": {
+    "grammar": "full",
+    "temporal": "off",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": []
+   }
+  }
+ ],
+ "lineage": [
+  {
+   "round": "R1",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "c8ea04f3bd7c",
+     "parents": [
+      "c8ea04f3bd7c"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "c4749f44f383",
+     "parents": [
+      "c4749f44f383"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "740fbe6aed86",
+     "parents": [
+      "c8ea04f3bd7c",
+      "c8ea04f3bd7c"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "grammar_version:full->compact",
+      "few_shot_count:0->1"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R2",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "c8ea04f3bd7c",
+     "parents": [
+      "c8ea04f3bd7c"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "fdf59ad404fd",
+     "parents": [
+      "fdf59ad404fd"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "547c96223b3b",
+     "parents": [
+      "c8ea04f3bd7c",
+      "c8ea04f3bd7c"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R4",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "40159ff3c551",
+     "parents": [
+      "40159ff3c551"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "e53eb166a2d3",
+     "parents": [
+      "e53eb166a2d3"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "0ba11f4c0883",
+     "parents": [
+      "40159ff3c551",
+      "40159ff3c551"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:on->off"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "0ba11f4c0883",
+     "parents": [
+      "0ba11f4c0883"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "40159ff3c551",
+     "parents": [
+      "40159ff3c551"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "7a8578987083",
+     "parents": [
+      "0ba11f4c0883",
+      "0ba11f4c0883"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  }
+ ],
+ "mode": "real",
+ "z3_errors": 0
+}

@@ -1,0 +1,993 @@
+{
+ "round_idx": 5,
+ "population": null,
+ "rule_pool": [
+  {
+   "target_block": "temporal",
+   "rule": "Always set period=0 for immediate commands without scheduling."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact numeric values in base units, not approximations or percentages."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Reference all devices and services explicitly with full receiver and service names."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Always set period=0 for immediate commands without delay or repetition."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact numeric values in base units without decimals or units suffixes."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Specify all relevant receivers and use only documented service methods."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Always set period and cron fields precisely matching time expressions in the command."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use full qualified receiver and service names exactly as in the domain ontology."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Convert all numeric time units to seconds or milliseconds as required by the spec."
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact device and service names as in the domain schema without synonyms or variants."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Express time intervals and delays using period=0 or exact milliseconds, avoid negative or approximate values."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Generate cron expressions precisely matching time and day constraints, avoid conditional time checks in scripts."
+  },
+  {
+   "target_block": "temporal",
+   "rule": "Always set period=0 unless scheduling is explicitly required"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Use exact device/service names and cover all mentioned devices"
+  },
+  {
+   "target_block": "schema",
+   "rule": "Ground numeric values precisely as integers or specified units"
+  }
+ ],
+ "adopted": {
+  "grammar": "compact",
+  "temporal": "full",
+  "caution": "off",
+  "few_shot": 2,
+  "rules": [
+   {
+    "target_block": "schema",
+    "rule": "Specify all relevant receivers and use only documented service methods."
+   }
+  ]
+ },
+ "history": [
+  {
+   "round": "R1",
+   "gen": 1,
+   "best": "cf45ddce3da7",
+   "score": 63.3,
+   "fitness": 0.3758,
+   "det_score": 72.3,
+   "logic_pct": 84.2,
+   "tokens": 8302,
+   "latency": 3.72,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [
+    {
+     "target_block": "temporal",
+     "rule": "Always set period=0 for immediate commands without scheduling."
+    },
+    {
+     "target_block": "schema",
+     "rule": "Use exact numeric values in base units, not approximations or percentages."
+    },
+    {
+     "target_block": "schema",
+     "rule": "Reference all devices and services explicitly with full receiver and service names."
+    }
+   ],
+   "population": [
+    [
+     "cf45ddce3da7",
+     63.3,
+     0.3758
+    ],
+    [
+     "3234474a39e3",
+     63.3,
+     0.3738
+    ],
+    [
+     "59dc507feeba",
+     60.0,
+     0.359
+    ],
+    [
+     "fd38dbfa46c4",
+     60.0,
+     0.3346
+    ],
+    [
+     "99d506c77279",
+     60.0,
+     0.3336
+    ],
+    [
+     "bd1e78424ff6",
+     53.3,
+     0.3265
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "on",
+    "few_shot": 0,
+    "rules": []
+   }
+  },
+  {
+   "round": "R1",
+   "gen": 2,
+   "best": "abe74afe2fe2",
+   "score": 70.0,
+   "fitness": 0.434,
+   "det_score": 75.4,
+   "logic_pct": 84.2,
+   "tokens": 4910,
+   "latency": 2.17,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [
+    {
+     "target_block": "temporal",
+     "rule": "Always set period=0 for immediate commands without delay or repetition."
+    },
+    {
+     "target_block": "schema",
+     "rule": "Use exact numeric values in base units without decimals or units suffixes."
+    },
+    {
+     "target_block": "schema",
+     "rule": "Specify all relevant receivers and use only documented service methods."
+    }
+   ],
+   "population": [
+    [
+     "abe74afe2fe2",
+     70.0,
+     0.434
+    ],
+    [
+     "85df3b399992",
+     66.7,
+     0.3946
+    ],
+    [
+     "cf45ddce3da7",
+     63.3,
+     0.3758
+    ],
+    [
+     "3234474a39e3",
+     63.3,
+     0.3738
+    ],
+    [
+     "59dc507feeba",
+     60.0,
+     0.359
+    ],
+    [
+     "fd38dbfa46c4",
+     60.0,
+     0.3346
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 0,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric values in base units, not approximations or percentages."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R1",
+   "gen": 3,
+   "best": "5c376d8855cb",
+   "score": 76.7,
+   "fitness": 0.471,
+   "det_score": 78.5,
+   "logic_pct": 84.2,
+   "tokens": 5064,
+   "latency": 2.27,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [
+    {
+     "target_block": "temporal",
+     "rule": "Always set period and cron fields precisely matching time expressions in the command."
+    },
+    {
+     "target_block": "schema",
+     "rule": "Use full qualified receiver and service names exactly as in the domain ontology."
+    },
+    {
+     "target_block": "temporal",
+     "rule": "Convert all numeric time units to seconds or milliseconds as required by the spec."
+    }
+   ],
+   "population": [
+    [
+     "5c376d8855cb",
+     76.7,
+     0.471
+    ],
+    [
+     "4bcfef77cc90",
+     70.0,
+     0.436
+    ],
+    [
+     "abe74afe2fe2",
+     70.0,
+     0.434
+    ],
+    [
+     "85df3b399992",
+     66.7,
+     0.3946
+    ],
+    [
+     "9730fc0789e7",
+     66.7,
+     0.3937
+    ],
+    [
+     "d3cc5576980a",
+     60.0,
+     0.359
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 2,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric values in base units, not approximations or percentages."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R1",
+   "gen": "adopt",
+   "score": 76.7,
+   "note": "adopted",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 2,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Use exact numeric values in base units, not approximations or percentages."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R2",
+   "gen": 1,
+   "best": "ad2d752c7544",
+   "score": 90.0,
+   "fitness": 0.6439,
+   "det_score": 86.3,
+   "logic_pct": 95.0,
+   "tokens": 5080,
+   "latency": 2.34,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [
+    {
+     "target_block": "schema",
+     "rule": "Use exact device and service names as in the domain schema without synonyms or variants."
+    },
+    {
+     "target_block": "temporal",
+     "rule": "Express time intervals and delays using period=0 or exact milliseconds, avoid negative or approximate values."
+    },
+    {
+     "target_block": "temporal",
+     "rule": "Generate cron expressions precisely matching time and day constraints, avoid conditional time checks in scripts."
+    }
+   ],
+   "population": [
+    [
+     "ad2d752c7544",
+     90.0,
+     0.6439
+    ],
+    [
+     "ba0d7f4b48fc",
+     83.3,
+     0.607
+    ],
+    [
+     "5c376d8855cb",
+     83.3,
+     0.6069
+    ],
+    [
+     "2fb18142a2a9",
+     80.0,
+     0.5896
+    ],
+    [
+     "6c6a2a9af57b",
+     83.3,
+     0.5856
+    ],
+    [
+     "abe74afe2fe2",
+     70.0,
+     0.5285
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 2,
+    "rules": []
+   }
+  },
+  {
+   "round": "R2",
+   "gen": "adopt",
+   "score": 90.0,
+   "note": "adopted",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 2,
+    "rules": []
+   }
+  },
+  {
+   "round": "R3",
+   "gen": 1,
+   "best": "ad2d752c7544",
+   "score": 90.0,
+   "fitness": 0.6439,
+   "det_score": 86.3,
+   "logic_pct": 95.0,
+   "tokens": 5080,
+   "latency": 2.34,
+   "judge_adjusted": null,
+   "judged_fails": null,
+   "valid_alternative": null,
+   "new_rules": [],
+   "population": [
+    [
+     "ad2d752c7544",
+     90.0,
+     0.6439
+    ],
+    [
+     "1b25a19c5ce7",
+     80.0,
+     0.5886
+    ],
+    [
+     "f0307dba1b5e",
+     83.3,
+     0.5856
+    ],
+    [
+     "ee2bea7f0e6f",
+     70.0,
+     0.5598
+    ],
+    [
+     "1cf375dec80f",
+     70.0,
+     0.5586
+    ],
+    [
+     "216e4871916c",
+     80.0,
+     0.5523
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 2,
+    "rules": []
+   }
+  },
+  {
+   "round": "R3",
+   "gen": "adopt",
+   "score": 90.0,
+   "note": "adopted (regression 0 <= 1)",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 2,
+    "rules": []
+   }
+  },
+  {
+   "round": "R4",
+   "gen": 1,
+   "best": "ad2d752c7544",
+   "score": 90.0,
+   "fitness": 0.6439,
+   "det_score": 86.3,
+   "logic_pct": 95.0,
+   "tokens": 5080,
+   "latency": 2.34,
+   "judge_adjusted": 90.0,
+   "judged_fails": 3,
+   "valid_alternative": 0,
+   "new_rules": [],
+   "population": [
+    [
+     "ad2d752c7544",
+     90.0,
+     0.6439
+    ],
+    [
+     "ea89b0766841",
+     90.0,
+     0.6422
+    ],
+    [
+     "dc1b34edb45e",
+     86.7,
+     0.6251
+    ],
+    [
+     "0ef931bad200",
+     83.3,
+     0.607
+    ],
+    [
+     "1b25a19c5ce7",
+     80.0,
+     0.5886
+    ],
+    [
+     "bd5c67dd2cfa",
+     70.0,
+     0.5308
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 2,
+    "rules": []
+   }
+  },
+  {
+   "round": "R4",
+   "gen": "adopt",
+   "score": 90.0,
+   "note": "adopted (regression 0 <= 1)",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 2,
+    "rules": []
+   }
+  },
+  {
+   "round": "R5",
+   "gen": 1,
+   "best": "2a72b929d2f7",
+   "score": 83.3,
+   "fitness": 0.6004,
+   "det_score": 82.8,
+   "logic_pct": 89.7,
+   "tokens": 5080,
+   "latency": 2.28,
+   "judge_adjusted": 83.33333333333333,
+   "judged_fails": 10,
+   "valid_alternative": 0,
+   "new_rules": [
+    {
+     "target_block": "temporal",
+     "rule": "Always set period=0 unless scheduling is explicitly required"
+    },
+    {
+     "target_block": "schema",
+     "rule": "Use exact device/service names and cover all mentioned devices"
+    },
+    {
+     "target_block": "schema",
+     "rule": "Ground numeric values precisely as integers or specified units"
+    }
+   ],
+   "population": [
+    [
+     "2a72b929d2f7",
+     83.3,
+     0.6004
+    ],
+    [
+     "dc1b34edb45e",
+     81.7,
+     0.5936
+    ],
+    [
+     "ad2d752c7544",
+     81.7,
+     0.5912
+    ],
+    [
+     "c933a8a716ac",
+     81.7,
+     0.5876
+    ],
+    [
+     "f0307dba1b5e",
+     75.0,
+     0.5331
+    ],
+    [
+     "216e4871916c",
+     75.0,
+     0.5239
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 2,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Specify all relevant receivers and use only documented service methods."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R5",
+   "gen": 2,
+   "best": "2a72b929d2f7",
+   "score": 83.3,
+   "fitness": 0.6004,
+   "det_score": 82.8,
+   "logic_pct": 89.7,
+   "tokens": 5080,
+   "latency": 2.28,
+   "judge_adjusted": 83.33333333333333,
+   "judged_fails": 10,
+   "valid_alternative": 0,
+   "new_rules": [],
+   "population": [
+    [
+     "2a72b929d2f7",
+     83.3,
+     0.6004
+    ],
+    [
+     "ff773696850e",
+     81.7,
+     0.5941
+    ],
+    [
+     "581924a678b8",
+     81.7,
+     0.594
+    ],
+    [
+     "dc1b34edb45e",
+     81.7,
+     0.5936
+    ],
+    [
+     "c933a8a716ac",
+     81.7,
+     0.5876
+    ],
+    [
+     "199fc6101ea4",
+     71.7,
+     0.5601
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 2,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Specify all relevant receivers and use only documented service methods."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R5",
+   "gen": 3,
+   "best": "2a72b929d2f7",
+   "score": 83.3,
+   "fitness": 0.6004,
+   "det_score": 82.8,
+   "logic_pct": 89.7,
+   "tokens": 5080,
+   "latency": 2.28,
+   "judge_adjusted": 83.33333333333333,
+   "judged_fails": 10,
+   "valid_alternative": 0,
+   "new_rules": [],
+   "population": [
+    [
+     "2a72b929d2f7",
+     83.3,
+     0.6004
+    ],
+    [
+     "ff773696850e",
+     81.7,
+     0.5941
+    ],
+    [
+     "b964efd6aac7",
+     81.7,
+     0.592
+    ],
+    [
+     "2575838d4559",
+     81.7,
+     0.5917
+    ],
+    [
+     "bc713f6fed71",
+     80.0,
+     0.5825
+    ],
+    [
+     "205d25649f43",
+     70.0,
+     0.5507
+    ]
+   ],
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 2,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Specify all relevant receivers and use only documented service methods."
+     }
+    ]
+   }
+  },
+  {
+   "round": "R5",
+   "gen": "adopt",
+   "score": 83.3,
+   "note": "adopted (regression 0 <= 1)",
+   "genome": {
+    "grammar": "compact",
+    "temporal": "full",
+    "caution": "off",
+    "few_shot": 2,
+    "rules": [
+     {
+      "target_block": "schema",
+      "rule": "Specify all relevant receivers and use only documented service methods."
+     }
+    ]
+   }
+  }
+ ],
+ "lineage": [
+  {
+   "round": "R1",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "cf45ddce3da7",
+     "parents": [
+      "cf45ddce3da7"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "3234474a39e3",
+     "parents": [
+      "3234474a39e3"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "59dc507feeba",
+     "parents": [
+      "cf45ddce3da7",
+      "cf45ddce3da7"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:0->1"
+     ]
+    },
+    {
+     "child": "85df3b399992",
+     "parents": [
+      "3234474a39e3",
+      "cf45ddce3da7"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "caution_toggle:off->on",
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "fd38dbfa46c4",
+     "parents": [
+      "cf45ddce3da7",
+      "3234474a39e3"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "abe74afe2fe2",
+     "parents": [
+      "cf45ddce3da7",
+      "cf45ddce3da7"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion",
+      "caution_toggle:on->off"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R1",
+   "after_gen": 2,
+   "children": [
+    {
+     "child": "abe74afe2fe2",
+     "parents": [
+      "abe74afe2fe2"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "85df3b399992",
+     "parents": [
+      "85df3b399992"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "4bcfef77cc90",
+     "parents": [
+      "cf45ddce3da7",
+      "abe74afe2fe2"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_version:full->compact"
+     ]
+    },
+    {
+     "child": "d3cc5576980a",
+     "parents": [
+      "cf45ddce3da7",
+      "85df3b399992"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:0->1"
+     ]
+    },
+    {
+     "child": "5c376d8855cb",
+     "parents": [
+      "85df3b399992",
+      "abe74afe2fe2"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "few_shot_count:0->2"
+     ]
+    },
+    {
+     "child": "9730fc0789e7",
+     "parents": [
+      "85df3b399992",
+      "85df3b399992"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 1,
+   "children": [
+    {
+     "child": "2a72b929d2f7",
+     "parents": [
+      "2a72b929d2f7"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "dc1b34edb45e",
+     "parents": [
+      "dc1b34edb45e"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "c933a8a716ac",
+     "parents": [
+      "c933a8a716ac",
+      "ad2d752c7544"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "ff773696850e",
+     "parents": [
+      "dc1b34edb45e",
+      "2a72b929d2f7"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    },
+    {
+     "child": "199fc6101ea4",
+     "parents": [
+      "dc1b34edb45e",
+      "dc1b34edb45e"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "581924a678b8",
+     "parents": [
+      "2a72b929d2f7",
+      "dc1b34edb45e"
+     ],
+     "op": "crossover",
+     "mutation_ops": []
+    }
+   ]
+  },
+  {
+   "round": "R5",
+   "after_gen": 2,
+   "children": [
+    {
+     "child": "2a72b929d2f7",
+     "parents": [
+      "2a72b929d2f7"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "ff773696850e",
+     "parents": [
+      "ff773696850e"
+     ],
+     "op": "elite",
+     "mutation_ops": []
+    },
+    {
+     "child": "205d25649f43",
+     "parents": [
+      "2a72b929d2f7",
+      "ff773696850e"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "temporal_toggle:full->off"
+     ]
+    },
+    {
+     "child": "b964efd6aac7",
+     "parents": [
+      "2a72b929d2f7",
+      "ff773696850e"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_drop",
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "2575838d4559",
+     "parents": [
+      "2a72b929d2f7",
+      "2a72b929d2f7"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    },
+    {
+     "child": "bc713f6fed71",
+     "parents": [
+      "ff773696850e",
+      "2a72b929d2f7"
+     ],
+     "op": "crossover+mutate",
+     "mutation_ops": [
+      "rule_insertion"
+     ]
+    }
+   ]
+  }
+ ],
+ "mode": "real"
+}

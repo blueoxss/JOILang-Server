@@ -1,0 +1,16 @@
+{
+ "profile": "p20_schedule",
+ "scale": "0-1",
+ "threshold": 0.7,
+ "description": "R4 민감도 변형 (사전 등록 설계 136dfde4b17e0ac0): p20_schedule",
+ "weights": {
+  "code_sim": 0.2912621359223301,
+  "schedule": 0.17475728155339804,
+  "service_coverage": 0.14563106796116504,
+  "service_precision": 0.0970873786407767,
+  "receiver_coverage": 0.0970873786407767,
+  "numeric_grounding": 0.0970873786407767,
+  "enum_grounding": 0.04854368932038835,
+  "dataflow": 0.04854368932038835
+ }
+}

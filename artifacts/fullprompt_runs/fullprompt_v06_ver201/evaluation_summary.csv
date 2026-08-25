@@ -1,0 +1,3 @@
+label,n,det_pass_pct,det_score_mean,logic_equiv_pct,ast_sim_mean,script_sim_mean,cron_eq_pct,period_eq_pct,prompt_tokens,latency_sec
+Qwen2.5-Coder-7B (DirectTransfer),280,26.79,58.96,90.36,0.68,0.67,94.29,16.07,30106.56,8.52
+gpt-4.1-mini (CloudRef),280,56.43,63.14,82.5,0.64,0.65,80.36,10.36,29622.99,2.2

@@ -1,0 +1,136 @@
+{
+"49bcdfd8d19087f6b49cce2e42fd1b1a8bbd8e45": {
+"rules": [
+"Always set period=0 for immediate commands unless specified otherwise",
+"Use exact numeric values in base units without scaling or conversion",
+"Reference all devices and services using full hierarchical tags as in examples"
+]
+},
+"3627ac9ffb63a2051e46d332ce8efb53d6c7d7e2": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact numeric values in base units, not approximations or percentages.",
+"Reference all devices explicitly with full location and type tags."
+]
+},
+"d546bfb99ebf74a74c8bca94d9092227dc3ed85f": {
+"rules": [
+"Always use wait until(...) for event conditions, not if statements.",
+"Use exact service and method names with correct receiver syntax (#Device).method().",
+"Set period=0 for event-driven commands; use delay() with MIN/SEC units for timing."
+]
+},
+"c1e3dd90f974a2c0898b60b057884be3a0abc66a": {
+"rules": [
+"Use exact service and receiver names from the domain ontology without alteration.",
+"Set cron and period fields precisely to match event timing semantics.",
+"Write scripts using canonical syntax and service method calls as per specification."
+]
+},
+"bfccbb124ba7f107f12768565755d111eef0525a": {
+"rules": [
+"Always include all specified location and device tags in selectors exactly as given.",
+"Use exact cron and period values matching time expressions without approximations.",
+"Invoke only documented service methods with correct names and parameters, no conditionals unless explicitly required."
+]
+},
+"0cf7488e739c73791039de06d8650b09d2d08f6d": {
+"rules": [
+"Use exact service and property names from the prompt context without inventing new ones",
+"Set period and cron values precisely as implied by timing instructions, avoid defaults or placeholders",
+"Ground numeric values in standard units and formats matching the prompt's temporal or quantitative cues"
+]
+},
+"9677a5ab18e902cd501dab5d6397881dd6d47c3c": {
+"verdict": "real_error",
+"reason": "The generated code targets all dehumidifiers globally instead of only those in the lab, which changes the device scope and is a functional error."
+},
+"cdf654fe91fb1b20388a9a925cc44a17a5bbc29b": {
+"verdict": "real_error",
+"reason": "The generated code includes conditional checks and a negative period value, deviating from the exact unconditional commands and zero period in the reference, which constitutes a real functional error."
+},
+"8e182b352bb414a6e6f9f926d41405c04fc9694b": {
+"verdict": "real_error",
+"reason": "The generated cron triggers only once daily at 8 AM instead of every hour from 8 AM to midnight, and the period value differs from the reference, making it a functional error."
+},
+"d10b7bd12072c7fc885e2c672e9d792b015f2d3f": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device and property (#WindowCovering.windowcovering_currentposition vs #Window.armrobot_currentposition) and a different period value, which constitutes a real functional error."
+},
+"7ff33e287c8ade18f5e8846f5fb7427742e22178": {
+"rules": [
+"Use exact device group selectors including location tags when specifying targets.",
+"Always use correct service and receiver names exactly as defined in the domain.",
+"Match cron and period formats precisely as per specification without adding extra conditions."
+]
+},
+"7ac96c936fb083b2b75dbf043db25b314d90bd0d": {
+"verdict": "real_error",
+"reason": "The generated cron triggers only at midnight instead of every hour from 8 AM to midnight, which is a functional error, and the period value differs from the reference."
+},
+"c10095b806449863e0ed8811aeaff2d212d3b1bb": {
+"rules": [
+"Use exact device group tags from the command context for all receivers.",
+"Set cron and period fields precisely as per temporal instructions without inference.",
+"Avoid adding conditions or modes not explicitly stated in the command."
+]
+},
+"9f40b7e2e12d91d71553dab88725cb30b4a8f4a1": {
+"verdict": "real_error",
+"reason": "The generated code uses a different method and separates the delay instead of setting the cooking parameters with a 1800-second period as in the reference, which is a functional difference."
+},
+"1201bfaa60ce56dcec85098a6c779f50a590edd6": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device selector and method with incorrect RGB values for yellow, which does not match the reference command's exact color and device specification."
+},
+"ecf6cea00f8aea843c47a53d74004221bbb470f2": {
+"verdict": "real_error",
+"reason": "The generated code uses an invalid period value (-1) and a delay in milliseconds instead of the required delay(1 HOUR) syntax, which violates the exact-match style requirement for cron or period values."
+},
+"62d0c627658c3cf7786c3d385ac1a840b41d17db": {
+"verdict": "real_error",
+"reason": "The generated code uses a negative period and a 600000 ms delay instead of the exact 10 MIN delay and period=0 as required, which violates the exact-match style for cron and period values."
+},
+"1e9c93b1ff15c48ff18ca4ca42e37fd243f613a3": {
+"verdict": "real_error",
+"reason": "The generated cron expression and period do not match the reference's exact schedule of every 30 minutes starting at 12:00 on weekends, which is a required constraint."
+},
+"04fd40b79cf3d108c98456e4b6fb008d3fa9a995": {
+"verdict": "real_error",
+"reason": "The generated code uses different device/service names and logic compared to the reference, indicating a functional mismatch rather than a stylistic variation."
+},
+"47b48856a0767a386c6a194e35fe88316c8a9305": {
+"verdict": "real_error",
+"reason": "The generated code uses a period value and a different scheduling approach instead of the exact cron expression, which violates the requirement that cron or period values must match exactly."
+},
+"3dedffe2fa0fad66c13003e91c5f6343f43efb04": {
+"verdict": "valid_alternative",
+"reason": "The generated code toggles the air purifier mode based on its current state rather than using an internal mode variable, which is a valid alternative implementation without changing the schedule or device."
+},
+"ca0b0a9144f05b4ce292a36c4a8b6ddee1eb3804": {
+"rules": [
+"Always set period=0 for immediate commands without recurring schedules.",
+"Use exact service and method names matching device and action context.",
+"Express all time delays using standard units and numeric literals only."
+]
+},
+"b362f5b2fcf796dd8dae83c852106b243c2aae05": {
+"verdict": "real_error",
+"reason": "The generated code uses a different method and device (#Light instead of #LivingRoom #Light) and a different function (light_movetorgb instead of colorcontrol_setcolor), which is a functional deviation from the reference."
+},
+"e7b915f80cdc9ae52311cf38783d549eaeeff7bd": {
+"verdict": "real_error",
+"reason": "The generated code uses different device property names and a different spoken message text, which constitutes a functional error rather than a valid alternative."
+},
+"eed939bad232b1f6bca5fe815f272451e7a16fc4": {
+"rules": [
+"Always set period=0 for immediate or scheduled commands unless explicitly recurring.",
+"Use exact service and method names as defined; avoid adding conditionals or unknown services.",
+"Convert all time durations to canonical units and formats matching period and delay parameters."
+]
+},
+"870c034836af5937989ceb72400dbc9c54704aaa": {
+"verdict": "real_error",
+"reason": "The generated code uses a fixed period and explicit datetime checks instead of the required cron expression and zero period, which is a real functional deviation from the reference scheduling."
+}
+}

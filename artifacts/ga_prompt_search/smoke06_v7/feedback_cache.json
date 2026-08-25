@@ -1,0 +1,24 @@
+{
+"27bb513f47a038387f6bff56c4a670cd0bc1cd9e": {
+"rules": [
+"Always set period=0 for immediate commands without scheduling.",
+"Use exact service and receiver names as a combined hashtag group in parentheses.",
+"Convert numeric parameters to expected formats, not natural language words."
+]
+},
+"c5ca97b5601a0ad02156ffda33d18719bc538346": {
+"verdict": "real_error",
+"reason": "The generated code uses different methods and splits the timing into a separate call instead of setting the cooking mode with a 1800-second period in a single command as required."
+},
+"1201bfaa60ce56dcec85098a6c779f50a590edd6": {
+"verdict": "real_error",
+"reason": "The generated code uses a different device selector and method with incorrect RGB values for yellow, which does not match the reference command's exact color and device specification."
+},
+"60c3cad6e82ba40a72916a81cd91f05f496d46fc": {
+"rules": [
+"Use exact service and method names as in the domain schema without inventing new ones.",
+"Include all relevant receivers explicitly as a combined set in the command.",
+"Convert numeric parameters to expected units and formats precisely, e.g., seconds or RGB strings."
+]
+}
+}
