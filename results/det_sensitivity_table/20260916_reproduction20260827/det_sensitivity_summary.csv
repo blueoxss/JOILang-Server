@@ -1,0 +1,7 @@
+condition_id,row_label,group,tau,weights,dt_models_available,dt_avg_pct,dt_passed_total,dt_status,gps_models_available,gps_avg_pct,gps_passed_total,gps_status,diff_pp,diagnostic_gps_avg_pct_incl_cross_applied,diagnostic_diff_pp_incl_cross_applied
+base_t085,τ=0.85,임계값 / 기준 가중치,0.85,base,3,33.095238095238095,278,computed,1,,,N/A (paper-table outputs for 1/3 models),,47.14285714285714,14.047619047619044
+base_t090,τ=0.90 (기준),임계값 / 기준 가중치,0.9,base,3,22.023809523809522,185,computed,1,,,N/A (paper-table outputs for 1/3 models),,38.333333333333336,16.309523809523814
+base_t095,τ=0.95,임계값 / 기준 가중치,0.95,base,3,1.5476190476190477,13,computed,1,,,N/A (paper-table outputs for 1/3 models),,27.857142857142858,26.30952380952381
+uniform_t090,균등,가중치 / τ=0.90,0.9,uniform,3,22.976190476190478,193,computed,1,,,N/A (paper-table outputs for 1/3 models),,37.857142857142854,14.880952380952376
+execution_t090,실행 의미 중심,가중치 / τ=0.90,0.9,execution,3,19.285714285714285,162,computed,1,,,N/A (paper-table outputs for 1/3 models),,38.452380952380956,19.16666666666667
+structure_t090,전체 구조 중심,가중치 / τ=0.90,0.9,structure,3,21.071428571428573,177,computed,1,,,N/A (paper-table outputs for 1/3 models),,38.333333333333336,17.261904761904763

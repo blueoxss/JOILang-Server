@@ -1,0 +1,21 @@
+{
+ "started": "2026-09-16T06:04:58",
+ "finished": "2026-09-16T06:04:59",
+ "git_head": "ebac3937c3f3000d9fc2426fe06f5b272db0f263",
+ "git_branch": "main",
+ "git_dirty": true,
+ "python": "3.12.2",
+ "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+ "command": "scripts/rescore_det_sensitivity_table.py --inputs configs/det_sensitivity_inputs_20260827_reproduction.json --out results/det_sensitivity_table/20260916_reproduction20260827",
+ "records_per_condition": 1680,
+ "aggregation": {
+  "score": "e = sum_k w_k * s_k (0-1), 반올림 없이 계산",
+  "pass": "D = 1[v = 1 and e >= tau]; v = 1 iff 파싱·정규화 성공 and code 가 빈 문자열이 아님; epsilon 없음",
+  "parse": "저장 출력에서 첫 JSON 객체를 잘라 json.loads(strict=False) — 원본 파이프라인(ga_multimodel_sweep.parse_candidate)과 동일; 실패 시 e=0, v=0",
+  "per_model": "P = 100 * passed / 280 (실패 포함 전체 분모), S = mean e",
+  "target_model_average": "세 모델 P 의 동일 가중 평균(반올림 전 값), diff = GPS avg - DT avg (반올림 전)",
+  "rounding": "표 출력 시에만 소수 첫째 자리(round half to even 아님: Python round 사용 후 표기), 모델별 반올림값을 다시 평균하지 않음",
+  "grid": "단일 run: 모델별 비율은 정수/280, 세 모델 평균은 정수/840 (간격 약 0.1190476 %p)"
+ },
+ "llm_calls": 0
+}

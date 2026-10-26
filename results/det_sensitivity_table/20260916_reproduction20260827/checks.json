@@ -1,0 +1,57 @@
+{
+ "sets": {
+  "qwen25_coder_7b/dt": {
+   "rows": 280,
+   "generation_errors_recorded": 0,
+   "parse_failures": 1,
+   "stored_component_mismatches": 0,
+   "stored_e_mismatch_rows": 0,
+   "records_sha256": "bf81d4a8f366222d1a3010f227e919a57e1c5b246e2e9e833c676a68e04c5898"
+  },
+  "qwen25_coder_7b/gps": {
+   "rows": 280,
+   "generation_errors_recorded": 0,
+   "parse_failures": 1,
+   "stored_component_mismatches": 0,
+   "stored_e_mismatch_rows": 0,
+   "records_sha256": "bf81d4a8f366222d1a3010f227e919a57e1c5b246e2e9e833c676a68e04c5898"
+  },
+  "llama31_8b/dt": {
+   "rows": 280,
+   "generation_errors_recorded": 0,
+   "parse_failures": 16,
+   "stored_component_mismatches": 0,
+   "stored_e_mismatch_rows": 0,
+   "records_sha256": "2e59bcd7c182aced90da6da87670765ea39c8ced951805b2d4f152be414b855d"
+  },
+  "llama31_8b/gps": {
+   "rows": 280,
+   "generation_errors_recorded": 0,
+   "parse_failures": 72,
+   "stored_component_mismatches": 0,
+   "stored_e_mismatch_rows": 29,
+   "records_sha256": "2e59bcd7c182aced90da6da87670765ea39c8ced951805b2d4f152be414b855d"
+  },
+  "qwen25_coder_14b/dt": {
+   "rows": 280,
+   "generation_errors_recorded": 0,
+   "parse_failures": 1,
+   "stored_component_mismatches": 0,
+   "stored_e_mismatch_rows": 0,
+   "records_sha256": "388a6acec9f72f185508f4894c3805623fde1dbc5f36d86399b73f96509ddb79"
+  },
+  "qwen25_coder_14b/gps": {
+   "rows": 280,
+   "generation_errors_recorded": 0,
+   "parse_failures": 0,
+   "stored_component_mismatches": 0,
+   "stored_e_mismatch_rows": 7,
+   "records_sha256": "388a6acec9f72f185508f4894c3805623fde1dbc5f36d86399b73f96509ddb79"
+  }
+ },
+ "stored_component_mismatches": 0,
+ "stored_e_mismatch_rows": 36,
+ "parse_failures": 91,
+ "monotonicity_ok": true,
+ "sdet_inequality_ok": true
+}

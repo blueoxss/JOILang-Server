@@ -1,0 +1,38 @@
+{
+  "description": "재채점 입력 manifest — 2026-08-27/09-01 논문 280 재현 실행(JOILang-Lab canonical gpt_mg/version0_15_paper_tau090_reproduction_20260827)의 고정 출력. 모델별 단일 run(repeat_id 0, seed 0). GPS 출력은 세 모델 모두 14B 용 GA 최종 지놈(GPS0)의 출력이며, 7B·L8 에는 '자기 모델용 최종 프롬프트'가 아니므로 논문 표에는 넣지 않고 진단용으로만 둔다.",
+  "dataset": "datasets/JOICommands-280.csv",
+  "record_format": "jsonl: model, method, row_uid(SHA256(category||norm command||norm gt)[:24]), output_text(원시 모델 출력), components(det_core), e, det_pass, hard_gate, prompt_sha256, genome_id, genome_hash, tokens_in/out",
+  "candidate_parser": "joilang-optimizer/ga_multimodel_sweep.parse_candidate (첫 JSON 객체, json.loads strict=False, list→첫 원소, script→code, period 문자열→int)",
+  "generation": {"decoding": "greedy (do_sample=False)", "max_new_tokens": 512, "note": "원고 본문의 max_new_tokens=256 과 다름 — 기록"},
+  "sets": [
+    {"model": "qwen25_coder_7b",  "model_label": "Qwen2.5-Coder-7B-Instruct",  "model_source": "Qwen/Qwen2.5-Coder-7B-Instruct",  "model_snapshot_revision": "c03e6d358207e414f1eca0bb1891e29f1db0e242",
+     "method": "dt", "role": "paper_dt", "run_id": "20260827T031704_paper280_qwen25_coder_7b",
+     "records": "/home/mgjeong/Desktop/llm/ModelMagementApp/gpt_mg/version0_15_paper_tau090_reproduction_20260827/results/20260827T031704_paper280_qwen25_coder_7b/raw/generation_rows.jsonl",
+     "prompt": "원 프롬프트(v13 자산, legacy monolith 조립; system prompt SHA-256 f4c259cbb7f5fff0…)", "seed": 0, "repeat_id": 0},
+    {"model": "qwen25_coder_7b",  "model_label": "Qwen2.5-Coder-7B-Instruct",  "model_source": "Qwen/Qwen2.5-Coder-7B-Instruct",  "model_snapshot_revision": "c03e6d358207e414f1eca0bb1891e29f1db0e242",
+     "method": "gps", "role": "diagnostic_gps_cross_applied", "run_id": "20260827T031704_paper280_qwen25_coder_7b",
+     "records": "/home/mgjeong/Desktop/llm/ModelMagementApp/gpt_mg/version0_15_paper_tau090_reproduction_20260827/results/20260827T031704_paper280_qwen25_coder_7b/raw/generation_rows.jsonl",
+     "prompt": "GPS0 지놈 gen-98838584-f7e6-51ea-8cb3-9153be830b60 (14B 용 GA best_genome, 2026-06-15 run manual_cloud_only_by_config_A6000_SET_A_cat3456_gens2_qwen25_coder_14b) 교차 적용", "seed": 0, "repeat_id": 0},
+    {"model": "llama31_8b",       "model_label": "Llama-3.1-8B-Instruct",       "model_source": "meta-llama/Llama-3.1-8B-Instruct",   "model_snapshot_revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+     "method": "dt", "role": "paper_dt", "run_id": "20260901T170319_paper280_llama31_8b",
+     "records": "/home/mgjeong/Desktop/llm/ModelMagementApp/gpt_mg/version0_15_paper_tau090_reproduction_20260827/results/20260901T170319_paper280_llama31_8b/raw/generation_rows.jsonl",
+     "prompt": "원 프롬프트(v13 자산, legacy monolith 조립; system prompt SHA-256 f4c259cbb7f5fff0…)", "seed": 0, "repeat_id": 0},
+    {"model": "llama31_8b",       "model_label": "Llama-3.1-8B-Instruct",       "model_source": "meta-llama/Llama-3.1-8B-Instruct",   "model_snapshot_revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+     "method": "gps", "role": "diagnostic_gps_cross_applied", "run_id": "20260901T170319_paper280_llama31_8b",
+     "records": "/home/mgjeong/Desktop/llm/ModelMagementApp/gpt_mg/version0_15_paper_tau090_reproduction_20260827/results/20260901T170319_paper280_llama31_8b/raw/generation_rows.jsonl",
+     "prompt": "GPS0 지놈(14B 용) 교차 적용", "seed": 0, "repeat_id": 0},
+    {"model": "qwen25_coder_14b", "model_label": "Qwen2.5-Coder-14B-Instruct", "model_source": "Qwen/Qwen2.5-Coder-14B-Instruct", "model_snapshot_revision": "aedcc2d42b622764e023cf882b6652e646b95671",
+     "method": "dt", "role": "paper_dt", "run_id": "20260827T031703_paper280_qwen25_coder_14b",
+     "records": "/home/mgjeong/Desktop/llm/ModelMagementApp/gpt_mg/version0_15_paper_tau090_reproduction_20260827/results/20260827T031703_paper280_qwen25_coder_14b/raw/generation_rows.jsonl",
+     "prompt": "원 프롬프트(v13 자산, legacy monolith 조립; system prompt SHA-256 f4c259cbb7f5fff0…)", "seed": 0, "repeat_id": 0},
+    {"model": "qwen25_coder_14b", "model_label": "Qwen2.5-Coder-14B-Instruct", "model_source": "Qwen/Qwen2.5-Coder-14B-Instruct", "model_snapshot_revision": "aedcc2d42b622764e023cf882b6652e646b95671",
+     "method": "gps", "role": "paper_gps", "run_id": "20260827T031703_paper280_qwen25_coder_14b",
+     "records": "/home/mgjeong/Desktop/llm/ModelMagementApp/gpt_mg/version0_15_paper_tau090_reproduction_20260827/results/20260827T031703_paper280_qwen25_coder_14b/raw/generation_rows.jsonl",
+     "prompt": "GPS0 지놈 gen-98838584-f7e6-51ea-8cb3-9153be830b60 = 14B 용 GA 실행(2026-06-15, 범주 3-6, 2세대, cloud advisor)의 best_genome.json — 그 실행에서 선택된 14B 최종 프롬프트. 원고 표 값을 만든 실행과의 대응은 미확인", "seed": 0, "repeat_id": 0}
+  ],
+  "missing_for_paper_table": [
+    "qwen25_coder_7b / GPS: 7B 를 대상으로 탐색해 선택한 최종 프롬프트의 280행 출력 없음(교차 적용 출력만 존재)",
+    "llama31_8b / GPS: L8 를 대상으로 탐색해 선택한 최종 프롬프트의 280행 출력 없음(교차 적용 출력만 존재)",
+    "원고 표(86.5/91.8 등)를 만든 원시 출력·run 기록: 저장소·로컬 어디에도 없음(ledger ANCHOR)"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "description": "IV-4 DET 민감도 표(대상 모델 평균 DETPass)의 여섯 조건과 계산 규칙. 고정 출력 재채점 전용 — LLM 호출·출력 수정·프롬프트 재선택·GA 재탐색 없음.",
+  "component_keys": ["code_similarity", "schedule_match", "required_service_recall", "service_precision",
+                     "receiver_coverage", "numeric_grounding", "string_enum_grounding", "declaration_count"],
+  "evaluator_component_map": {"code_similarity": "code_sim(gt_similarity)", "schedule_match": "schedule_score",
+                              "required_service_recall": "service_coverage", "service_precision": "service_precision",
+                              "receiver_coverage": "receiver_coverage", "numeric_grounding": "numeric_grounding",
+                              "string_enum_grounding": "enum_grounding", "declaration_count": "dataflow_score"},
+  "weight_profiles": {
+    "base":      [0.30, 0.15, 0.15, 0.10, 0.10, 0.10, 0.05, 0.05],
+    "uniform":   [0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125],
+    "execution": [0.15, 0.20, 0.20, 0.10, 0.15, 0.15, 0.03, 0.02],
+    "structure": [0.45, 0.15, 0.12, 0.08, 0.07, 0.06, 0.04, 0.03]
+  },
+  "conditions": [
+    {"id": "base_t085",      "row_label": "τ=0.85",        "group": "임계값 / 기준 가중치", "tau": 0.85, "weights": "base"},
+    {"id": "base_t090",      "row_label": "τ=0.90 (기준)", "group": "임계값 / 기준 가중치", "tau": 0.90, "weights": "base", "is_reference": true},
+    {"id": "base_t095",      "row_label": "τ=0.95",        "group": "임계값 / 기준 가중치", "tau": 0.95, "weights": "base"},
+    {"id": "uniform_t090",   "row_label": "균등",           "group": "가중치 / τ=0.90",     "tau": 0.90, "weights": "uniform"},
+    {"id": "execution_t090", "row_label": "실행 의미 중심",  "group": "가중치 / τ=0.90",     "tau": 0.90, "weights": "execution"},
+    {"id": "structure_t090", "row_label": "전체 구조 중심",  "group": "가중치 / τ=0.90",     "tau": 0.90, "weights": "structure"}
+  ],
+  "rules": {
+    "score": "e = sum_k w_k * s_k (0-1), 반올림 없이 계산",
+    "pass": "D = 1[v = 1 and e >= tau]; v = 1 iff 파싱·정규화 성공 and code 가 빈 문자열이 아님; epsilon 없음",
+    "parse": "저장 출력에서 첫 JSON 객체를 잘라 json.loads(strict=False) — 원본 파이프라인(ga_multimodel_sweep.parse_candidate)과 동일; 실패 시 e=0, v=0",
+    "per_model": "P = 100 * passed / 280 (실패 포함 전체 분모), S = mean e",
+    "target_model_average": "세 모델 P 의 동일 가중 평균(반올림 전 값), diff = GPS avg - DT avg (반올림 전)",
+    "rounding": "표 출력 시에만 소수 첫째 자리(round half to even 아님: Python round 사용 후 표기), 모델별 반올림값을 다시 평균하지 않음",
+    "grid": "단일 run: 모델별 비율은 정수/280, 세 모델 평균은 정수/840 (간격 약 0.1190476 %p)"
+  },
+  "row_uid": "SHA256(canonical JSON [category, command_eng, gt])[:24] (json.dumps ensure_ascii=False, separators=(',',':'))",
+  "original_table_reference_only": {
+    "note": "검증 대상인 기존 원문 표. 재채점 계산 로직에 쓰지 않으며 original_vs_recomputed.csv 의 비교 기준으로만 사용한다.",
+    "rows": {
+      "base_t085":      {"dt": 89.3, "gps": 94.2, "diff": 4.9},
+      "base_t090":      {"dt": 86.5, "gps": 91.8, "diff": 5.2},
+      "base_t095":      {"dt": 80.9, "gps": 86.4, "diff": 5.5},
+      "uniform_t090":   {"dt": 85.9, "gps": 91.1, "diff": 5.2},
+      "execution_t090": {"dt": 86.2, "gps": 91.6, "diff": 5.4},
+      "structure_t090": {"dt": 86.8, "gps": 91.4, "diff": 4.6}
+    }
+  }
+}
