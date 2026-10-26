@@ -255,3 +255,14 @@ artifacts/ga_search/
 artifacts/test_fixtures/
 artifacts/ga_search_checks_*/
 artifacts/eval_pipeline_checks_*/
+
+# --- 2026-10-26: model weights never enter git (GitHub 100 MB limit); keep locally or use HF Hub / Git LFS
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.gguf
+artifacts/premapping_pipeline_runs/*/models/
+# notebooks that still embed API keys (see revision_audit/qa/issues.jsonl ISSUE-001) — redact before tracking
+gpt_mg/version0_15_update20260825/notebooks/JOILang_PromptOps_Cloud_a6000.ipynb
+gpt_mg/version0_15_update20260413/notebooks/JOILang_PromptOps_Cloud_a6000.ipynb
